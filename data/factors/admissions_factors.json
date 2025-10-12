@@ -1,0 +1,330 @@
+{
+  "version": "1.0.0",
+  "description": "Comprehensive college admissions factors and weights",
+  "total_weight": 100.0,
+  "last_updated": "2025-10-12",
+  "factors": [
+    {
+      "id": "gpa_college_prep",
+      "name": "High-school grades in college-prep courses",
+      "weight": 25.0,
+      "category": "academic",
+      "description": "Overall GPA specifically in college preparatory courses (core academic subjects)",
+      "data_type": "numeric",
+      "range": {
+        "min": 0.0,
+        "max": 4.0,
+        "weighted_max": 5.0
+      },
+      "sub_factors": [
+        "unweighted_gpa",
+        "weighted_gpa",
+        "grade_trend",
+        "core_course_grades"
+      ]
+    },
+    {
+      "id": "curriculum_rigor",
+      "name": "Strength of curriculum (AP/IB/Honors rigor)",
+      "weight": 12.0,
+      "category": "academic",
+      "description": "Number and difficulty of advanced courses taken (AP, IB, Honors, Dual Enrollment)",
+      "data_type": "composite",
+      "sub_factors": [
+        "ap_course_count",
+        "ib_program",
+        "honors_courses",
+        "dual_enrollment",
+        "rigor_relative_to_school_offerings"
+      ]
+    },
+    {
+      "id": "standardized_tests",
+      "name": "Standardized tests (SAT/ACT) when used",
+      "weight": 8.0,
+      "category": "academic",
+      "description": "SAT or ACT scores when test-optional policies are not in effect",
+      "data_type": "numeric",
+      "range": {
+        "sat_total": {"min": 400, "max": 1600},
+        "act_composite": {"min": 1, "max": 36}
+      },
+      "sub_factors": [
+        "test_score",
+        "test_optional_choice",
+        "subject_tests",
+        "superscoring"
+      ]
+    },
+    {
+      "id": "essay_personal_statement",
+      "name": "College essay / personal statement",
+      "weight": 8.0,
+      "category": "qualitative",
+      "description": "Quality, authenticity, and impact of personal statement and supplemental essays",
+      "data_type": "scored",
+      "range": {"min": 1, "max": 10},
+      "sub_factors": [
+        "common_app_essay_quality",
+        "supplemental_essays_quality",
+        "authenticity_score",
+        "story_impact"
+      ]
+    },
+    {
+      "id": "extracurricular_activities",
+      "name": "Extracurricular depth & leadership",
+      "weight": 7.5,
+      "category": "co_curricular",
+      "description": "Quality, commitment, leadership, and impact in extracurricular activities",
+      "data_type": "composite",
+      "sub_factors": [
+        "leadership_positions",
+        "years_of_commitment",
+        "hours_per_week",
+        "impact_and_achievement",
+        "focus_and_depth"
+      ]
+    },
+    {
+      "id": "recommendation_letters",
+      "name": "Recommendation letters",
+      "weight": 4.0,
+      "category": "qualitative",
+      "description": "Strength and specificity of teacher and counselor recommendations",
+      "data_type": "scored",
+      "range": {"min": 1, "max": 10},
+      "sub_factors": [
+        "teacher_rec_quality",
+        "counselor_rec_quality",
+        "additional_rec_quality",
+        "relationship_depth"
+      ]
+    },
+    {
+      "id": "application_timing",
+      "name": "Application plan / timing (ED/EA)",
+      "weight": 4.0,
+      "category": "strategic",
+      "description": "Application strategy including Early Decision, Early Action, Regular Decision",
+      "data_type": "categorical",
+      "options": [
+        "ED1",
+        "ED2",
+        "EA",
+        "REA",
+        "RD",
+        "Rolling"
+      ],
+      "sub_factors": [
+        "application_type",
+        "binding_commitment",
+        "admission_rate_boost"
+      ]
+    },
+    {
+      "id": "athletic_recruitment",
+      "name": "Athletic recruitment (if applicable)",
+      "weight": 4.0,
+      "category": "special",
+      "description": "Recruited athlete status and level of coach support",
+      "data_type": "boolean_scaled",
+      "sub_factors": [
+        "recruited_status",
+        "division_level",
+        "coach_support_level",
+        "athletic_performance_stats"
+      ]
+    },
+    {
+      "id": "major_fit",
+      "name": "Major fit / departmental need",
+      "weight": 3.0,
+      "category": "strategic",
+      "description": "Alignment between student's intended major and institutional needs",
+      "data_type": "scored",
+      "sub_factors": [
+        "major_selectivity",
+        "demonstrated_interest_in_field",
+        "departmental_capacity",
+        "major_related_achievements"
+      ]
+    },
+    {
+      "id": "geographic_residency",
+      "name": "Geographic / residency considerations",
+      "weight": 3.0,
+      "category": "demographic",
+      "description": "Geographic diversity factors including state residency and underrepresented regions",
+      "data_type": "categorical",
+      "sub_factors": [
+        "in_state_vs_out_of_state",
+        "geographic_diversity_value",
+        "underrepresented_region"
+      ]
+    },
+    {
+      "id": "first_gen_diversity",
+      "name": "First-gen / diversity considerations",
+      "weight": 3.0,
+      "category": "demographic",
+      "description": "First-generation college student status and diversity factors",
+      "data_type": "composite",
+      "sub_factors": [
+        "first_generation_status",
+        "socioeconomic_background",
+        "underrepresented_minority",
+        "overcome_obstacles"
+      ]
+    },
+    {
+      "id": "ability_to_pay",
+      "name": "Ability to pay (when need-aware)",
+      "weight": 3.0,
+      "category": "financial",
+      "description": "Financial aid need in need-aware admissions (not applicable for need-blind schools)",
+      "data_type": "boolean_scaled",
+      "sub_factors": [
+        "financial_aid_request",
+        "full_pay_status",
+        "institution_need_aware_policy"
+      ]
+    },
+    {
+      "id": "special_awards",
+      "name": "Special awards / national competitions / publications",
+      "weight": 2.0,
+      "category": "achievement",
+      "description": "Prestigious awards, national/international competition results, research publications",
+      "data_type": "composite",
+      "sub_factors": [
+        "national_merit_scholar",
+        "olympiad_achievements",
+        "research_publications",
+        "significant_competitions",
+        "patents_or_innovations"
+      ]
+    },
+    {
+      "id": "portfolio_audition",
+      "name": "Portfolio / audition (arts/design applicants)",
+      "weight": 2.0,
+      "category": "special",
+      "description": "Quality of artistic portfolio or audition for arts programs",
+      "data_type": "scored",
+      "range": {"min": 1, "max": 10},
+      "sub_factors": [
+        "portfolio_quality",
+        "audition_performance",
+        "arts_program_specific_requirements"
+      ]
+    },
+    {
+      "id": "institutional_priorities",
+      "name": "Special institutional priorities (policy knob)",
+      "weight": 2.0,
+      "category": "institutional",
+      "description": "College-specific priorities that may vary by year (e.g., building specific programs, gender balance)",
+      "data_type": "variable",
+      "sub_factors": [
+        "program_building_needs",
+        "gender_balance",
+        "specific_talent_needs",
+        "campaign_priorities"
+      ]
+    },
+    {
+      "id": "demonstrated_interest",
+      "name": "Demonstrated interest (yield management)",
+      "weight": 1.5,
+      "category": "strategic",
+      "description": "Level of demonstrated interest through visits, communications, engagement",
+      "data_type": "scored",
+      "range": {"min": 0, "max": 10},
+      "sub_factors": [
+        "campus_visits",
+        "info_session_attendance",
+        "email_engagement",
+        "interview_completion",
+        "event_participation"
+      ]
+    },
+    {
+      "id": "legacy_status",
+      "name": "Legacy",
+      "weight": 1.5,
+      "category": "institutional",
+      "description": "Parent or sibling alumni status",
+      "data_type": "categorical",
+      "options": [
+        "no_legacy",
+        "sibling",
+        "parent_undergrad",
+        "parent_graduate",
+        "grandparent"
+      ],
+      "sub_factors": [
+        "immediate_family_alumni",
+        "alumni_engagement_level",
+        "multiple_generation_legacy"
+      ]
+    },
+    {
+      "id": "interview",
+      "name": "Interview",
+      "weight": 1.0,
+      "category": "qualitative",
+      "description": "Admissions or alumni interview performance",
+      "data_type": "scored",
+      "range": {"min": 1, "max": 10},
+      "sub_factors": [
+        "interview_quality",
+        "interviewer_rating",
+        "communication_skills",
+        "fit_assessment"
+      ]
+    },
+    {
+      "id": "disciplinary_record",
+      "name": "Disciplinary / conduct record (negative factor)",
+      "weight": 0.5,
+      "category": "negative",
+      "description": "Academic dishonesty, suspensions, or conduct issues",
+      "data_type": "boolean_negative",
+      "sub_factors": [
+        "suspensions",
+        "academic_dishonesty",
+        "criminal_record",
+        "explanation_quality"
+      ]
+    },
+    {
+      "id": "school_reputation",
+      "name": "School reputation (HS context/competitiveness)",
+      "weight": 2.0,
+      "category": "contextual",
+      "description": "High school's academic reputation and competitiveness",
+      "data_type": "scored",
+      "sub_factors": [
+        "high_school_ranking",
+        "school_profile_strength",
+        "historical_college_placement",
+        "course_offerings_available"
+      ]
+    }
+  ],
+  "category_weights": {
+    "academic": 45.0,
+    "qualitative": 13.0,
+    "co_curricular": 7.5,
+    "strategic": 9.5,
+    "special": 6.0,
+    "demographic": 6.0,
+    "financial": 3.0,
+    "achievement": 2.0,
+    "institutional": 3.5,
+    "negative": 0.5,
+    "contextual": 2.0
+  }
+}
+

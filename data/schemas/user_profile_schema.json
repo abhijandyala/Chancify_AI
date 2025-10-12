@@ -1,0 +1,537 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "User Profile Schema",
+  "description": "Complete schema for student profile data in Chancify AI",
+  "type": "object",
+  "required": ["user_id", "academic", "extracurriculars", "demographics"],
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "Unique identifier for the user"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "academic": {
+      "type": "object",
+      "description": "Academic performance data",
+      "required": ["gpa", "curriculum"],
+      "properties": {
+        "gpa": {
+          "type": "object",
+          "properties": {
+            "unweighted": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 4.0
+            },
+            "weighted": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 6.0
+            },
+            "scale": {
+              "type": "string",
+              "enum": ["4.0", "5.0", "100", "other"]
+            },
+            "grade_trend": {
+              "type": "string",
+              "enum": ["improving", "consistent", "declining"]
+            },
+            "class_rank": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "class_size": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "percentile": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            }
+          }
+        },
+        "curriculum": {
+          "type": "object",
+          "properties": {
+            "ap_courses": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "course_name": {"type": "string"},
+                  "year_taken": {"type": "integer"},
+                  "grade": {"type": "string"},
+                  "exam_score": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5
+                  }
+                }
+              }
+            },
+            "ap_courses_available": {
+              "type": "integer",
+              "description": "Total AP courses offered at the school"
+            },
+            "ib_program": {
+              "type": "object",
+              "properties": {
+                "enrolled": {"type": "boolean"},
+                "diploma_candidate": {"type": "boolean"},
+                "predicted_score": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 45
+                }
+              }
+            },
+            "honors_courses": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "course_name": {"type": "string"},
+                  "year_taken": {"type": "integer"},
+                  "grade": {"type": "string"}
+                }
+              }
+            },
+            "dual_enrollment": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "course_name": {"type": "string"},
+                  "institution": {"type": "string"},
+                  "credits": {"type": "number"},
+                  "grade": {"type": "string"}
+                }
+              }
+            }
+          }
+        },
+        "standardized_tests": {
+          "type": "object",
+          "properties": {
+            "sat": {
+              "type": "object",
+              "properties": {
+                "total": {
+                  "type": "integer",
+                  "minimum": 400,
+                  "maximum": 1600
+                },
+                "math": {
+                  "type": "integer",
+                  "minimum": 200,
+                  "maximum": 800
+                },
+                "reading_writing": {
+                  "type": "integer",
+                  "minimum": 200,
+                  "maximum": 800
+                },
+                "essay_optional": {
+                  "type": "object",
+                  "properties": {
+                    "reading": {"type": "integer", "minimum": 2, "maximum": 8},
+                    "analysis": {"type": "integer", "minimum": 2, "maximum": 8},
+                    "writing": {"type": "integer", "minimum": 2, "maximum": 8}
+                  }
+                },
+                "num_attempts": {"type": "integer"},
+                "superscore": {"type": "boolean"}
+              }
+            },
+            "act": {
+              "type": "object",
+              "properties": {
+                "composite": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 36
+                },
+                "english": {"type": "integer", "minimum": 1, "maximum": 36},
+                "math": {"type": "integer", "minimum": 1, "maximum": 36},
+                "reading": {"type": "integer", "minimum": 1, "maximum": 36},
+                "science": {"type": "integer", "minimum": 1, "maximum": 36},
+                "writing": {"type": "integer", "minimum": 2, "maximum": 12},
+                "num_attempts": {"type": "integer"},
+                "superscore": {"type": "boolean"}
+              }
+            },
+            "sat_subject_tests": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "subject": {"type": "string"},
+                  "score": {"type": "integer", "minimum": 200, "maximum": 800}
+                }
+              }
+            },
+            "test_optional_decision": {
+              "type": "boolean",
+              "description": "Whether student is choosing test-optional route"
+            }
+          }
+        },
+        "coursework": {
+          "type": "object",
+          "properties": {
+            "core_courses": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "subject": {
+                    "type": "string",
+                    "enum": ["English", "Math", "Science", "Social Studies", "Foreign Language"]
+                  },
+                  "course_name": {"type": "string"},
+                  "level": {
+                    "type": "string",
+                    "enum": ["Regular", "Honors", "AP", "IB", "Dual Enrollment"]
+                  },
+                  "year": {"type": "integer"},
+                  "grade": {"type": "string"}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "extracurriculars": {
+      "type": "array",
+      "description": "Extracurricular activities and leadership",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "properties": {
+          "activity_name": {"type": "string"},
+          "category": {
+            "type": "string",
+            "enum": [
+              "Academic",
+              "Arts/Music",
+              "Athletics",
+              "Community Service",
+              "Work/Employment",
+              "Research",
+              "Student Government",
+              "Cultural",
+              "Hobby",
+              "Other"
+            ]
+          },
+          "leadership_positions": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "years_participated": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 9,
+              "maximum": 12
+            }
+          },
+          "hours_per_week": {"type": "number", "minimum": 0},
+          "weeks_per_year": {"type": "integer", "minimum": 0, "maximum": 52},
+          "description": {"type": "string", "maxLength": 150},
+          "achievements": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "impact_metrics": {
+            "type": "object",
+            "description": "Quantifiable impact if applicable",
+            "properties": {
+              "people_reached": {"type": "integer"},
+              "funds_raised": {"type": "number"},
+              "events_organized": {"type": "integer"},
+              "other": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "awards_honors": {
+      "type": "array",
+      "description": "Special achievements and recognition",
+      "items": {
+        "type": "object",
+        "properties": {
+          "award_name": {"type": "string"},
+          "level": {
+            "type": "string",
+            "enum": ["School", "Regional", "State", "National", "International"]
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "Academic",
+              "Competition",
+              "Research",
+              "Arts",
+              "Athletics",
+              "Community Service",
+              "Leadership",
+              "Other"
+            ]
+          },
+          "year_received": {"type": "integer"},
+          "description": {"type": "string"}
+        }
+      }
+    },
+    "essays_writing": {
+      "type": "object",
+      "description": "Essay quality ratings (manually scored or AI-evaluated)",
+      "properties": {
+        "common_app_essay": {
+          "type": "object",
+          "properties": {
+            "prompt_number": {"type": "integer", "minimum": 1, "maximum": 7},
+            "word_count": {"type": "integer", "maximum": 650},
+            "quality_score": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 10,
+              "description": "Self-assessed or AI-evaluated quality"
+            },
+            "authenticity_score": {"type": "number", "minimum": 1, "maximum": 10},
+            "impact_score": {"type": "number", "minimum": 1, "maximum": 10}
+          }
+        },
+        "supplemental_essays_quality": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 10,
+          "description": "Average quality of supplemental essays"
+        }
+      }
+    },
+    "recommendations": {
+      "type": "object",
+      "properties": {
+        "teacher_recs": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "properties": {
+              "subject": {"type": "string"},
+              "relationship_years": {"type": "number"},
+              "estimated_strength": {
+                "type": "string",
+                "enum": ["Strong", "Very Strong", "Outstanding", "Unknown"]
+              },
+              "quality_score": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 10
+              }
+            }
+          }
+        },
+        "counselor_rec": {
+          "type": "object",
+          "properties": {
+            "relationship_quality": {
+              "type": "string",
+              "enum": ["Limited", "Good", "Strong", "Excellent"]
+            },
+            "estimated_strength": {
+              "type": "string",
+              "enum": ["Strong", "Very Strong", "Outstanding", "Unknown"]
+            },
+            "quality_score": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 10
+            }
+          }
+        },
+        "additional_recs": {
+          "type": "array",
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "properties": {
+              "recommender_type": {
+                "type": "string",
+                "enum": ["Coach", "Employer", "Mentor", "Research Supervisor", "Other"]
+              },
+              "quality_score": {"type": "number", "minimum": 1, "maximum": 10}
+            }
+          }
+        }
+      }
+    },
+    "demographics": {
+      "type": "object",
+      "required": ["state_residency"],
+      "properties": {
+        "state_residency": {"type": "string"},
+        "country": {"type": "string", "default": "USA"},
+        "first_generation": {
+          "type": "boolean",
+          "description": "Neither parent has a 4-year college degree"
+        },
+        "underrepresented_minority": {"type": "boolean"},
+        "gender": {
+          "type": "string",
+          "enum": ["Male", "Female", "Non-binary", "Prefer not to say"]
+        },
+        "socioeconomic_indicators": {
+          "type": "object",
+          "properties": {
+            "free_reduced_lunch": {"type": "boolean"},
+            "family_income_bracket": {
+              "type": "string",
+              "enum": ["<30k", "30k-75k", "75k-150k", "150k-250k", ">250k", "Prefer not to say"]
+            },
+            "pell_grant_eligible": {"type": "boolean"}
+          }
+        }
+      }
+    },
+    "special_circumstances": {
+      "type": "object",
+      "properties": {
+        "athletics": {
+          "type": "object",
+          "properties": {
+            "recruited_athlete": {"type": "boolean"},
+            "sport": {"type": "string"},
+            "division_level": {
+              "type": "string",
+              "enum": ["D1", "D2", "D3", "NAIA", "None"]
+            },
+            "coach_contact": {
+              "type": "string",
+              "enum": ["None", "Initial Contact", "Ongoing Communication", "Official Recruit", "Verbal Offer"]
+            },
+            "athletic_stats": {"type": "string"}
+          }
+        },
+        "arts_portfolio": {
+          "type": "object",
+          "properties": {
+            "portfolio_type": {
+              "type": "string",
+              "enum": ["Visual Arts", "Music", "Dance", "Theater", "Film", "Creative Writing", "Design", "None"]
+            },
+            "portfolio_quality_score": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 10
+            },
+            "audition_completed": {"type": "boolean"}
+          }
+        },
+        "legacy": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "college_name": {"type": "string"},
+              "relationship": {
+                "type": "string",
+                "enum": ["Parent", "Sibling", "Grandparent", "Other"]
+              },
+              "degree_type": {
+                "type": "string",
+                "enum": ["Undergraduate", "Graduate", "Professional"]
+              }
+            }
+          }
+        },
+        "disciplinary_record": {
+          "type": "object",
+          "properties": {
+            "has_issues": {"type": "boolean"},
+            "suspension": {"type": "boolean"},
+            "academic_dishonesty": {"type": "boolean"},
+            "explanation_provided": {"type": "boolean"},
+            "explanation_quality": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 10
+            }
+          }
+        }
+      }
+    },
+    "high_school": {
+      "type": "object",
+      "required": ["name", "state"],
+      "properties": {
+        "name": {"type": "string"},
+        "city": {"type": "string"},
+        "state": {"type": "string"},
+        "type": {
+          "type": "string",
+          "enum": ["Public", "Private", "Charter", "Magnet", "Boarding", "International"]
+        },
+        "size": {
+          "type": "string",
+          "enum": ["Small (<500)", "Medium (500-1500)", "Large (1500-2500)", "Very Large (>2500)"]
+        },
+        "competitiveness": {
+          "type": "string",
+          "enum": ["Not competitive", "Competitive", "Highly competitive", "Most competitive"],
+          "description": "Based on school profile and college placement history"
+        },
+        "ranking": {
+          "type": "integer",
+          "description": "National or state ranking if available"
+        },
+        "avg_sat_score": {"type": "integer"},
+        "college_counseling_quality": {
+          "type": "string",
+          "enum": ["Limited", "Adequate", "Good", "Excellent"]
+        }
+      }
+    },
+    "application_strategy": {
+      "type": "object",
+      "properties": {
+        "target_colleges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "college_name": {"type": "string"},
+              "application_round": {
+                "type": "string",
+                "enum": ["ED1", "ED2", "EA", "REA", "RD", "Rolling"]
+              },
+              "intended_major": {"type": "string"},
+              "demonstrated_interest_score": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 10
+              },
+              "campus_visit": {"type": "boolean"},
+              "interview_completed": {"type": "boolean"},
+              "interview_score": {"type": "number", "minimum": 1, "maximum": 10}
+            }
+          }
+        },
+        "financial_aid_needed": {"type": "boolean"}
+      }
+    }
+  }
+}
+

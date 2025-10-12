@@ -1,0 +1,373 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "College Data Schema",
+  "description": "Schema for college/university data in Chancify AI",
+  "type": "object",
+  "required": ["college_id", "name", "admissions_data", "academic_profile"],
+  "properties": {
+    "college_id": {
+      "type": "string",
+      "description": "Unique identifier for the college"
+    },
+    "name": {
+      "type": "string",
+      "description": "Official college/university name"
+    },
+    "also_known_as": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Common abbreviations or alternate names"
+    },
+    "basic_info": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "object",
+          "properties": {
+            "city": {"type": "string"},
+            "state": {"type": "string"},
+            "region": {
+              "type": "string",
+              "enum": ["Northeast", "Southeast", "Midwest", "Southwest", "West", "International"]
+            }
+          }
+        },
+        "type": {
+          "type": "string",
+          "enum": ["Public", "Private", "Liberal Arts", "Research University", "Technical", "Art/Music"]
+        },
+        "size": {
+          "type": "string",
+          "enum": ["Small (<2000)", "Medium (2000-10000)", "Large (10000-20000)", "Very Large (>20000)"]
+        },
+        "undergraduate_enrollment": {"type": "integer"},
+        "total_enrollment": {"type": "integer"},
+        "setting": {
+          "type": "string",
+          "enum": ["Urban", "Suburban", "Rural"]
+        },
+        "religious_affiliation": {"type": "string"},
+        "us_news_ranking": {"type": "integer"},
+        "website": {"type": "string", "format": "uri"}
+      }
+    },
+    "admissions_data": {
+      "type": "object",
+      "required": ["overall_acceptance_rate"],
+      "properties": {
+        "overall_acceptance_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Overall acceptance rate percentage"
+        },
+        "acceptance_rates_by_round": {
+          "type": "object",
+          "properties": {
+            "early_decision_1": {"type": "number", "minimum": 0, "maximum": 100},
+            "early_decision_2": {"type": "number", "minimum": 0, "maximum": 100},
+            "early_action": {"type": "number", "minimum": 0, "maximum": 100},
+            "regular_decision": {"type": "number", "minimum": 0, "maximum": 100}
+          }
+        },
+        "application_rounds_offered": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["ED1", "ED2", "EA", "REA", "RD", "Rolling"]
+          }
+        },
+        "application_deadlines": {
+          "type": "object",
+          "properties": {
+            "early_decision_1": {"type": "string", "format": "date"},
+            "early_decision_2": {"type": "string", "format": "date"},
+            "early_action": {"type": "string", "format": "date"},
+            "regular_decision": {"type": "string", "format": "date"}
+          }
+        },
+        "total_applicants": {"type": "integer"},
+        "total_admitted": {"type": "integer"},
+        "total_enrolled": {"type": "integer"},
+        "yield_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Percentage of admitted students who enroll"
+        },
+        "waitlist_stats": {
+          "type": "object",
+          "properties": {
+            "students_offered_waitlist": {"type": "integer"},
+            "students_accepting_waitlist": {"type": "integer"},
+            "students_admitted_from_waitlist": {"type": "integer"}
+          }
+        }
+      }
+    },
+    "academic_profile": {
+      "type": "object",
+      "description": "Academic statistics of admitted students",
+      "properties": {
+        "gpa": {
+          "type": "object",
+          "properties": {
+            "average": {"type": "number", "minimum": 0, "maximum": 4.0},
+            "25th_percentile": {"type": "number"},
+            "75th_percentile": {"type": "number"},
+            "scale": {"type": "string"}
+          }
+        },
+        "sat": {
+          "type": "object",
+          "properties": {
+            "middle_50_range": {
+              "type": "object",
+              "properties": {
+                "total_25th": {"type": "integer"},
+                "total_75th": {"type": "integer"},
+                "math_25th": {"type": "integer"},
+                "math_75th": {"type": "integer"},
+                "reading_writing_25th": {"type": "integer"},
+                "reading_writing_75th": {"type": "integer"}
+              }
+            },
+            "average": {"type": "integer"}
+          }
+        },
+        "act": {
+          "type": "object",
+          "properties": {
+            "middle_50_range": {
+              "type": "object",
+              "properties": {
+                "composite_25th": {"type": "integer"},
+                "composite_75th": {"type": "integer"}
+              }
+            },
+            "average": {"type": "integer"}
+          }
+        },
+        "class_rank": {
+          "type": "object",
+          "properties": {
+            "top_10_percent": {
+              "type": "number",
+              "description": "Percentage of students in top 10% of HS class"
+            },
+            "top_25_percent": {"type": "number"}
+          }
+        }
+      }
+    },
+    "admissions_policies": {
+      "type": "object",
+      "description": "Key policies affecting admissions",
+      "properties": {
+        "test_policy": {
+          "type": "string",
+          "enum": ["Test Required", "Test Optional", "Test Blind", "Test Flexible"]
+        },
+        "financial_aid_policy": {
+          "type": "string",
+          "enum": ["Need-Blind", "Need-Aware", "Need-Blind Domestic Only"]
+        },
+        "meets_full_need": {
+          "type": "boolean",
+          "description": "Whether college meets 100% of demonstrated need"
+        },
+        "need_based_aid_only": {
+          "type": "boolean",
+          "description": "No merit scholarships offered"
+        },
+        "common_app": {"type": "boolean"},
+        "coalition_app": {"type": "boolean"},
+        "requires_css_profile": {"type": "boolean"},
+        "supplemental_essays": {
+          "type": "object",
+          "properties": {
+            "count": {"type": "integer"},
+            "total_word_count": {"type": "integer"}
+          }
+        },
+        "interview": {
+          "type": "string",
+          "enum": ["Not Available", "Optional - Alumni", "Optional - Admissions Officer", "Required", "Evaluative", "Informational Only"]
+        },
+        "demonstrated_interest": {
+          "type": "string",
+          "enum": ["Not Tracked", "Considered", "Important", "Very Important"]
+        },
+        "legacy_preference": {
+          "type": "string",
+          "enum": ["No Consideration", "Considered", "Important Factor"]
+        }
+      }
+    },
+    "factor_weights": {
+      "type": "object",
+      "description": "College-specific factor weights (overrides default if available)",
+      "properties": {
+        "uses_custom_weights": {"type": "boolean"},
+        "custom_factors": {
+          "type": "object",
+          "description": "Custom weight adjustments from base model",
+          "patternProperties": {
+            "^[a-z_]+$": {
+              "type": "number",
+              "description": "Factor weight percentage"
+            }
+          }
+        },
+        "common_data_set_importance": {
+          "type": "object",
+          "description": "Importance ratings from Common Data Set",
+          "properties": {
+            "rigor": {"type": "string", "enum": ["Very Important", "Important", "Considered", "Not Considered"]},
+            "class_rank": {"type": "string", "enum": ["Very Important", "Important", "Considered", "Not Considered"]},
+            "gpa": {"type": "string", "enum": ["Very Important", "Important", "Considered", "Not Considered"]},
+            "test_scores": {"type": "string", "enum": ["Very Important", "Important", "Considered", "Not Considered"]},
+            "essay": {"type": "string", "enum": ["Very Important", "Important", "Considered", "Not Considered"]},
+            "recommendations": {"type": "string", "enum": ["Very Important", "Important", "Considered", "Not Considered"]},
+            "interview": {"type": "string", "enum": ["Very Important", "Important", "Considered", "Not Considered"]},
+            "extracurriculars": {"type": "string", "enum": ["Very Important", "Important", "Considered", "Not Considered"]},
+            "talent_ability": {"type": "string", "enum": ["Very Important", "Important", "Considered", "Not Considered"]},
+            "character": {"type": "string", "enum": ["Very Important", "Important", "Considered", "Not Considered"]},
+            "first_generation": {"type": "string", "enum": ["Very Important", "Important", "Considered", "Not Considered"]},
+            "legacy": {"type": "string", "enum": ["Very Important", "Important", "Considered", "Not Considered"]},
+            "geographic_residence": {"type": "string", "enum": ["Very Important", "Important", "Considered", "Not Considered"]},
+            "state_residency": {"type": "string", "enum": ["Very Important", "Important", "Considered", "Not Considered"]},
+            "religious_affiliation": {"type": "string", "enum": ["Very Important", "Important", "Considered", "Not Considered"]},
+            "volunteer_work": {"type": "string", "enum": ["Very Important", "Important", "Considered", "Not Considered"]},
+            "work_experience": {"type": "string", "enum": ["Very Important", "Important", "Considered", "Not Considered"]},
+            "demonstrated_interest": {"type": "string", "enum": ["Very Important", "Important", "Considered", "Not Considered"]}
+          }
+        }
+      }
+    },
+    "majors_programs": {
+      "type": "object",
+      "properties": {
+        "most_popular_majors": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "all_majors_offered": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "admit_by_major": {
+          "type": "boolean",
+          "description": "Whether admissions decisions are made by major/school"
+        },
+        "major_specific_acceptance_rates": {
+          "type": "object",
+          "description": "Acceptance rates by major if available",
+          "patternProperties": {
+            "^[A-Za-z ]+$": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            }
+          }
+        }
+      }
+    },
+    "student_body_demographics": {
+      "type": "object",
+      "properties": {
+        "geographic_diversity": {
+          "type": "object",
+          "properties": {
+            "in_state_percentage": {"type": "number"},
+            "international_percentage": {"type": "number"},
+            "states_represented": {"type": "integer"},
+            "countries_represented": {"type": "integer"}
+          }
+        },
+        "racial_ethnic_diversity": {
+          "type": "object",
+          "properties": {
+            "white": {"type": "number"},
+            "asian": {"type": "number"},
+            "hispanic_latino": {"type": "number"},
+            "black_african_american": {"type": "number"},
+            "native_american": {"type": "number"},
+            "pacific_islander": {"type": "number"},
+            "two_or_more_races": {"type": "number"}
+          }
+        },
+        "first_generation_percentage": {"type": "number"},
+        "pell_grant_recipients_percentage": {"type": "number"},
+        "gender_ratio": {
+          "type": "object",
+          "properties": {
+            "male": {"type": "number"},
+            "female": {"type": "number"}
+          }
+        }
+      }
+    },
+    "financial_info": {
+      "type": "object",
+      "properties": {
+        "tuition": {
+          "type": "object",
+          "properties": {
+            "in_state": {"type": "number"},
+            "out_of_state": {"type": "number"}
+          }
+        },
+        "total_cost_of_attendance": {"type": "number"},
+        "average_financial_aid_package": {"type": "number"},
+        "percentage_receiving_aid": {"type": "number"},
+        "average_debt_at_graduation": {"type": "number"}
+      }
+    },
+    "athletics": {
+      "type": "object",
+      "properties": {
+        "division": {
+          "type": "string",
+          "enum": ["D1", "D2", "D3", "NAIA", "None"]
+        },
+        "conference": {"type": "string"},
+        "recruited_athletes_percentage": {"type": "number"}
+      }
+    },
+    "special_programs": {
+      "type": "object",
+      "properties": {
+        "honors_programs": {"type": "boolean"},
+        "study_abroad_participation": {"type": "number"},
+        "research_opportunities": {"type": "string", "enum": ["Limited", "Available", "Extensive"]},
+        "internship_opportunities": {"type": "string", "enum": ["Limited", "Available", "Extensive"]}
+      }
+    },
+    "outcomes": {
+      "type": "object",
+      "properties": {
+        "four_year_graduation_rate": {"type": "number"},
+        "six_year_graduation_rate": {"type": "number"},
+        "median_starting_salary": {"type": "number"},
+        "career_outcomes_10_years": {"type": "number"}
+      }
+    },
+    "data_sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source_name": {"type": "string"},
+          "year": {"type": "integer"},
+          "url": {"type": "string", "format": "uri"}
+        }
+      }
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
+
