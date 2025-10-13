@@ -1,12 +1,10 @@
 {
-  "training_date": "2025-10-12T21:46:19.138856",
-  "num_samples": 1000,
+  "training_date": "2025-10-12T21:57:39.718429",
+  "version": "3.0_best",
+  "num_samples": 5000,
+  "num_train": 4000,
+  "num_test": 1000,
   "num_features": 60,
-  "test_size": 0.2,
-  "num_train": 800,
-  "num_test": 200,
-  "class_balance_train": 0.31125,
-  "class_balance_test": 0.31,
   "feature_names": [
     "grades_score",
     "rigor_score",
@@ -69,47 +67,31 @@
     "academic_strength",
     "holistic_strength"
   ],
+  "ensemble_weights": [
+    3,
+    1,
+    1
+  ],
   "metrics": {
     "logistic_regression": {
-      "accuracy": 0.765,
-      "precision": 0.7777777777777778,
-      "recall": 0.3387096774193548,
-      "f1_score": 0.47191011235955055,
-      "roc_auc": 0.7753623188405797,
-      "brier_score": 0.16802393577852862,
-      "log_loss": 0.5098400619658485
+      "accuracy": 0.77,
+      "roc_auc": 0.80790659275858,
+      "brier_score": 0.15587909877212638
     },
     "random_forest": {
-      "accuracy": 0.685,
-      "precision": 0.49333333333333335,
-      "recall": 0.5967741935483871,
-      "f1_score": 0.5401459854014599,
-      "roc_auc": 0.7696353436185134,
-      "brier_score": 0.1806762357501201,
-      "log_loss": 0.535215522978671
+      "accuracy": 0.733,
+      "roc_auc": 0.803089987026772,
+      "brier_score": 0.16839230002600697
     },
     "xgboost": {
-      "accuracy": 0.725,
-      "precision": 0.5614035087719298,
-      "recall": 0.5161290322580645,
-      "f1_score": 0.5378151260504201,
-      "roc_auc": 0.7667134174848059,
-      "brier_score": 0.18399128078408097,
-      "log_loss": 0.5655640403196992
+      "accuracy": 0.721,
+      "roc_auc": 0.7960089633211462,
+      "brier_score": 0.17547091326925365
     },
     "ensemble": {
-      "accuracy": 0.74,
-      "precision": 0.5892857142857143,
-      "recall": 0.532258064516129,
-      "f1_score": 0.559322033898305,
-      "roc_auc": 0.7812061711079944,
-      "brier_score": 0.17062308612785018,
-      "log_loss": 0.5098789410033175
-    },
-    "formula_baseline": {
-      "accuracy": 0.755,
-      "roc_auc": 0.810074801309023,
-      "brier_score": 0.1603057156976586
+      "accuracy": 0.76,
+      "roc_auc": 0.80785469984668,
+      "brier_score": 0.15795087811557623
     }
   }
 }
