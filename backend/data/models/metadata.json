@@ -1,21 +1,33 @@
 {
-  "training_date": "2025-10-12T22:36:03.763637",
-  "version": "6.0_advanced_stacking",
-  "data_source": "IPEDS 2023 (345 colleges)",
-  "num_colleges": 345,
-  "num_samples": 10620,
-  "num_features_selected": 45,
-  "selected_features": [
+  "training_date": "2025-10-12T23:30:12.474636",
+  "version": "7.0_real_reddit_outcomes",
+  "data_source": "Reddit (r/collegeresults + r/chanceme + r/ApplyingToCollege)",
+  "num_reddit_posts": 5244,
+  "num_decisions": 5244,
+  "num_train": 4195,
+  "num_test": 1049,
+  "num_features": 60,
+  "feature_names": [
     "grades_score",
     "rigor_score",
     "testing_score",
     "essay_score",
     "ecs_leadership_score",
     "recommendations_score",
+    "plan_timing_score",
+    "athletic_recruit_score",
     "major_fit_score",
     "geography_residency_score",
     "firstgen_diversity_score",
+    "ability_to_pay_score",
     "awards_publications_score",
+    "portfolio_audition_score",
+    "policy_knob_score",
+    "demonstrated_interest_score",
+    "legacy_score",
+    "interview_score",
+    "conduct_record_score",
+    "hs_reputation_score",
     "gpa_unweighted",
     "gpa_weighted",
     "sat_total",
@@ -25,6 +37,7 @@
     "ap_count",
     "honors_count",
     "class_rank_pct",
+    "class_size",
     "ec_count",
     "leadership_count",
     "years_commitment",
@@ -32,11 +45,14 @@
     "awards_count",
     "national_awards",
     "first_gen",
+    "urm",
     "geographic_diversity",
+    "legacy",
     "recruited_athlete",
     "sat_median",
     "act_median",
     "test_policy_numeric",
+    "need_policy_numeric",
     "gpa_vs_avg",
     "sat_vs_median",
     "act_vs_median",
@@ -47,17 +63,33 @@
     "selectivity_match",
     "test_advantage",
     "geographic_match",
+    "legacy_boost",
     "first_gen_boost",
     "athlete_boost",
     "academic_strength",
     "holistic_strength"
   ],
   "metrics": {
+    "logistic_regression": {
+      "accuracy": 0.7025738798856054,
+      "roc_auc": 0.6570819661039883,
+      "brier": 0.1993688651168253
+    },
+    "random_forest": {
+      "accuracy": 0.6939942802669209,
+      "roc_auc": 0.7060844524880755,
+      "brier": 0.19989932764163115
+    },
+    "xgboost": {
+      "accuracy": 0.680648236415634,
+      "roc_auc": 0.723133943371334,
+      "brier": 0.20346450406794558
+    },
     "ensemble": {
-      "accuracy": 0.7410546139359698,
-      "roc_auc": 0.8153595445171702,
-      "brier_score": 0.1742982267292612
+      "accuracy": 0.7283126787416587,
+      "roc_auc": 0.7025493893981936,
+      "brier": 0.19167125393744294
     }
   },
-  "best_roc_auc": 0.8153595445171702
+  "best_roc_auc": 0.7025493893981936
 }
