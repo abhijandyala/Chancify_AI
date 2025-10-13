@@ -61,10 +61,11 @@ async def health_check():
     }
 
 # Include API routes
-from api.routes import auth, calculations
+from api.routes import auth, calculations, ml_calculations
 
 app.include_router(auth.router, prefix="/api/auth", tags=["Authentication"])
 app.include_router(calculations.router, prefix="/api/calculations", tags=["Probability Calculations"])
+app.include_router(ml_calculations.router, prefix="/api/calculations", tags=["ML Predictions"])
 
 if __name__ == "__main__":
     import uvicorn

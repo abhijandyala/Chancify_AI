@@ -113,7 +113,7 @@ class FeatureExtractor:
     ]
     
     COLLEGE_FEATURES = [
-        'acceptance_rate', 'sat_median', 'act_median', 
+        'sat_median', 'act_median', 
         'test_policy_numeric', 'need_policy_numeric'
     ]
     
@@ -193,7 +193,7 @@ class FeatureExtractor:
         ])
         feature_names.extend(FeatureExtractor.DEMOGRAPHIC_FEATURES)
         
-        # 5. College characteristics (5 features)
+        # 5. College characteristics (4 features)
         sat_median = (college.sat_25th + college.sat_75th) / 2 if college.sat_25th and college.sat_75th else 1300
         act_median = (college.act_25th + college.act_75th) / 2 if college.act_25th and college.act_75th else 29
         
@@ -209,7 +209,6 @@ class FeatureExtractor:
         }.get(college.financial_aid_policy, 1.0)
         
         features.extend([
-            college.acceptance_rate,
             sat_median,
             act_median,
             test_policy_numeric,

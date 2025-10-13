@@ -1,6 +1,18 @@
 """
-ML models module - placeholder for now.
+ML models module.
 """
 
-# Will implement after data generation works
+from .predictor import (
+    AdmissionPredictor,
+    PredictionResult,
+    get_predictor,
+    model_available
+)
+
+__all__ = [
+    'AdmissionPredictor',
+    'PredictionResult',
+    'get_predictor',
+    'model_available',
+]
 
