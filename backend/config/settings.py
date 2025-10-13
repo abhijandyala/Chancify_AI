@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     supabase_service_key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3dnFmZWxscmh4em5lc2FpZndlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MDI3NTY2NCwiZXhwIjoyMDc1ODUxNjY0fQ.zVtdMf9Z5gklqfmkjUdMeALE3AGqVlGz1efoNHqSiK4"
     
     # Database
-    database_url: Optional[str] = None
+    database_url: str = "postgresql://postgres:Chanifcy123%23%40%21@db.vwvqfellrhxznesaifwe.supabase.co:5432/postgres"
     
     # API Configuration
     api_host: str = "0.0.0.0"

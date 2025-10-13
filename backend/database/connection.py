@@ -15,8 +15,7 @@ supabase: Client = create_client(
 )
 
 # SQLAlchemy engine and session
-# Note: In production, set DATABASE_URL environment variable with actual password
-database_url = settings.database_url or f"postgresql://postgres:[PASSWORD]@db.{settings.supabase_url.split('//')[1].split('.')[0]}.supabase.co:5432/postgres"
+database_url = settings.database_url
 
 engine = create_engine(
     database_url,
