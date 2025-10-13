@@ -24,6 +24,10 @@ from .audit import (
     identify_strengths_and_weaknesses,
     format_audit_for_display
 )
+from .pipeline import (
+    calculate_admission_probability,
+    batch_calculate_probabilities
+)
 
 __all__ = [
     # Weights
@@ -50,5 +54,9 @@ __all__ = [
     'build_audit',
     'identify_strengths_and_weaknesses',
     'format_audit_for_display',
+    
+    # Pipeline (main entry point)
+    'calculate_admission_probability',
+    'batch_calculate_probabilities',
 ]
 

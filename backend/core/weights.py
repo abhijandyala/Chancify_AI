@@ -11,20 +11,20 @@ FACTOR_WEIGHTS: Dict[str, float] = {
     "rigor": 12.0,
     "testing": 8.0,
     "essay": 8.0,
-    "ecs_leadership": 7.5,
+    "ecs_leadership": 8.5,  # Increased from 7.5 (very important)
     "recommendations": 4.0,
     "plan_timing": 4.0,
     "athletic_recruit": 4.0,
-    "major_fit": 3.0,
+    "major_fit": 3.5,  # Increased from 3.0 (important for fit)
     "geography_residency": 3.0,
     "firstgen_diversity": 3.0,
     "ability_to_pay": 3.0,  # used only if college is need-aware
-    "awards_publications": 2.0,
-    "portfolio_audition": 2.0,
+    "awards_publications": 2.5,  # Increased from 2.0 (demonstrates achievement)
+    "portfolio_audition": 2.5,  # Increased from 2.0 (crucial for arts applicants)
     "policy_knob": 2.0,  # special institutional priorities
     "demonstrated_interest": 1.5,
     "legacy": 1.5,
-    "interview": 1.0,
+    "interview": 1.5,  # Increased from 1.0 (can make a difference)
     "conduct_record": 0.5,  # negative if issues
     "hs_reputation": 2.0,
 }
