@@ -1,0 +1,12 @@
+name,location_city,location_state,acceptance_rate,acceptance_rate_ed,acceptance_rate_rd,sat_25th,sat_75th,act_25th,act_75th,gpa_average,test_policy,financial_aid_policy,selectivity_tier,region
+Harvard University,Cambridge,MA,0.0325,0.08,0.025,1460,1580,33,36,3.95,Required,Need-blind,Elite,Northeast
+Stanford University,Stanford,CA,0.0352,0.09,0.027,1450,1570,32,36,3.96,Required,Need-blind,Elite,West
+MIT,Cambridge,MA,0.0396,0.05,0.035,1520,1580,35,36,3.96,Required,Need-blind,Elite,Northeast
+Yale University,New Haven,CT,0.0465,0.10,0.038,1470,1580,33,36,3.95,Required,Need-blind,Elite,Northeast
+Princeton University,Princeton,NJ,0.0394,0.11,0.032,1460,1570,33,36,3.95,Required,Need-blind,Elite,Northeast
+Northwestern University,Evanston,IL,0.0713,0.19,0.055,1450,1560,33,35,3.92,Required,Need-blind,Highly Selective,Midwest
+University of Michigan,Ann Arbor,MI,0.1790,0.40,0.165,1340,1530,31,35,3.88,Test-optional,Need-aware,Selective,Midwest
+UC Berkeley,Berkeley,CA,0.1144,0.00,0.114,1330,1530,29,35,3.90,Test-blind,Need-blind,Selective,West
+University of Florida,Gainesville,FL,0.2300,0.00,0.230,1320,1490,29,34,4.40,Test-optional,Need-blind,Selective,Southeast
+Penn State,University Park,PA,0.4900,0.00,0.490,1180,1390,26,32,3.60,Test-optional,Need-aware,Less Selective,Northeast
+
