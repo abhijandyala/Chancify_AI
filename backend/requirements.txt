@@ -13,6 +13,10 @@ alembic==1.13.1
 psycopg2-binary==2.9.9
 asyncpg==0.29.0
 
+# Supabase
+supabase==2.3.0
+postgrest-py==0.13.0
+
 # Machine Learning
 scikit-learn==1.4.0
 pandas==2.2.0
