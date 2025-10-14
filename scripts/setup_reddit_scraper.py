@@ -21,8 +21,8 @@ def create_env_file():
     
     # Use the credentials provided
     env_content = """# Reddit API Credentials
-REDDIT_CLIENT_ID=YQrRqwyJaqiOt-9Jt7wfbBZw
-REDDIT_CLIENT_SECRET=Vcm3A-FiFJ4TLUvAeC9PVDEamL7idQ
+REDDIT_CLIENT_ID=o28Ahxhcj35zQgFuM_YUrQ
+REDDIT_CLIENT_SECRET=tbGJDi_y9_3u9wS0fbDyT9Cl_GKf2g
 REDDIT_USERNAME=Scraper_TestBot123
 REDDIT_PASSWORD=Abhi1104
 REDDIT_USER_AGENT=ChancifyAI/1.0 (by u/Scraper_TestBot123)

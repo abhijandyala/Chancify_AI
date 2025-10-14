@@ -1,0 +1,94 @@
+{
+  "best_model": "XGBoost",
+  "best_roc_auc": 0.8551187382695946,
+  "training_samples": 467040,
+  "test_samples": 116760,
+  "features": 27,
+  "selected_features": [
+    "college_acceptance_rate",
+    "GPA",
+    "Standardized_Tests",
+    "Course_Rigor",
+    "Extracurricular_Depth",
+    "Leadership",
+    "Awards",
+    "Recommendations",
+    "Personal_Statement",
+    "Passion_Projects",
+    "Business_Ventures",
+    "Volunteer_Work",
+    "Interview",
+    "Legacy_Status",
+    "Demonstrated_Interest",
+    "Intended_Major_Fit",
+    "School_Reputation",
+    "Portfolio_Quality",
+    "Research_Experience",
+    "Employment_Experience",
+    "Character_Traits",
+    "Cultural_Diversity",
+    "College_Specific_Factor",
+    "college_sat_25th",
+    "college_sat_75th",
+    "college_act_25th",
+    "college_act_75th"
+  ],
+  "all_results": {
+    "Logistic Regression": {
+      "Accuracy": 0.760688591983556,
+      "Precision": 0.8841777976074287,
+      "Recall": 0.7635761589403973,
+      "F1": 0.8194634688444938,
+      "ROC-AUC": 0.8362032082619917,
+      "Brier": 0.16611261748550565,
+      "LogLoss": 0.5076879410610838
+    },
+    "Random Forest": {
+      "Accuracy": 0.7793850633778692,
+      "Precision": 0.8922268015828461,
+      "Recall": 0.7846116797110174,
+      "F1": 0.8349660116732764,
+      "ROC-AUC": 0.8545972488007727,
+      "Brier": 0.15304989910686992,
+      "LogLoss": 0.4638676495046709
+    },
+    "XGBoost": {
+      "Accuracy": 0.7956748886605002,
+      "Precision": 0.842160024971387,
+      "Recall": 0.8771342564720048,
+      "F1": 0.8592914142814172,
+      "ROC-AUC": 0.8551187382695946,
+      "Brier": 0.13649865248382742,
+      "LogLoss": 0.4175374973892009
+    },
+    "LightGBM": {
+      "Accuracy": 0.7659815005138746,
+      "Precision": 0.9041278681866969,
+      "Recall": 0.750583985550873,
+      "F1": 0.8202321113713519,
+      "ROC-AUC": 0.8540868838953063,
+      "Brier": 0.15855414458667724,
+      "LogLoss": 0.47579810801698347
+    },
+    "Gradient Boosting": {
+      "Accuracy": 0.7954522096608427,
+      "Precision": 0.8407883975163866,
+      "Recall": 0.8788440698374473,
+      "F1": 0.8593951453852902,
+      "ROC-AUC": 0.8541284572827947,
+      "Brier": 0.13689638306496213,
+      "LogLoss": 0.41892365086202726
+    },
+    "Voting Ensemble": {
+      "Accuracy": 0.7892771497088044,
+      "ROC-AUC": 0.8546110285501707,
+      "Brier": 0.1437977421156353
+    },
+    "Stacking Ensemble": {
+      "Accuracy": 0.7966512504282288,
+      "ROC-AUC": 0.8550416044631843,
+      "Brier": 0.13727500680042293
+    }
+  },
+  "data_source": "583,800 samples from 1,946 REAL colleges (IPEDS 2023 + Scorecard 2023-24)"
+}

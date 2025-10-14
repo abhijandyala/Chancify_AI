@@ -1,0 +1,256 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light Mode */
+  --bg-light: 245 245 245;
+  --glass-light: 255 255 255;
+  --text-light: 0 0 0;
+  --text-muted-light: 100 100 100;
+  --accent-amber: 255 179 0;
+  --accent-blue: 0 123 255;
+  --border-light: 230 230 230;
+}
+
+.dark {
+  /* Dark Mode */
+  --bg-dark: 0 0 0;
+  --glass-dark: 20 20 20;
+  --text-dark: 255 255 255;
+  --text-muted-dark: 160 160 160;
+  --accent-amber: 255 179 0;
+  --accent-blue: 0 123 255;
+  --border-dark: 40 40 40;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 dark:bg-gray-600 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-500 dark:bg-gray-500;
+  }
+}
+
+@layer components {
+  /* Glassmorphism Card */
+  .glass-card {
+    @apply backdrop-blur-xl bg-white/70 dark:bg-black/70 
+           border border-gray-200/50 dark:border-white/10
+           rounded-2xl shadow-lg;
+  }
+  
+  /* Glassmorphism Panel (stronger) */
+  .glass-panel {
+    @apply backdrop-blur-2xl bg-white/80 dark:bg-black/80
+           border border-gray-200/60 dark:border-white/15
+           rounded-3xl shadow-xl;
+  }
+  
+  /* Accent Button */
+  .btn-accent {
+    @apply px-6 py-3 rounded-xl font-semibold
+           bg-gradient-to-r from-amber-500 to-amber-600
+           hover:from-amber-600 hover:to-amber-700
+           text-white shadow-lg hover:shadow-xl
+           transform transition-all duration-200
+           hover:scale-[1.02] active:scale-[0.98];
+  }
+  
+  /* Secondary Button */
+  .btn-secondary {
+    @apply px-6 py-3 rounded-xl font-semibold
+           bg-gradient-to-r from-blue-500 to-blue-600
+           hover:from-blue-600 hover:to-blue-700
+           text-white shadow-lg hover:shadow-xl
+           transform transition-all duration-200
+           hover:scale-[1.02] active:scale-[0.98];
+  }
+  
+  /* Ghost Button */
+  .btn-ghost {
+    @apply px-6 py-3 rounded-xl font-semibold
+           bg-transparent hover:bg-gray-100 dark:hover:bg-white/5
+           text-gray-700 dark:text-gray-300
+           border border-gray-300 dark:border-white/20
+           transition-all duration-200
+           hover:scale-[1.02] active:scale-[0.98];
+  }
+  
+  /* Input Field */
+  .input-glass {
+    @apply w-full px-4 py-3 rounded-xl
+           bg-white/50 dark:bg-black/50
+           backdrop-blur-xl
+           border border-gray-300 dark:border-white/20
+           text-gray-900 dark:text-white
+           placeholder:text-gray-500 dark:placeholder:text-gray-400
+           focus:outline-none focus:ring-2 
+           focus:ring-amber-500 dark:focus:ring-blue-500
+           transition-all duration-200;
+  }
+  
+  /* Label */
+  .label-text {
+    @apply text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 block;
+  }
+  
+  /* Section Heading */
+  .section-heading {
+    @apply text-3xl font-bold text-gray-900 dark:text-white mb-6;
+  }
+  
+  /* Subsection Heading */
+  .subsection-heading {
+    @apply text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4;
+  }
+  
+  /* Card Heading */
+  .card-heading {
+    @apply text-lg font-semibold text-gray-900 dark:text-white;
+  }
+  
+  /* Text Muted */
+  .text-muted {
+    @apply text-gray-600 dark:text-gray-400;
+  }
+  
+  /* Amber Accent */
+  .accent-amber {
+    @apply text-amber-600 dark:text-amber-500;
+  }
+  
+  /* Blue Accent */
+  .accent-blue {
+    @apply text-blue-600 dark:text-blue-500;
+  }
+  
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-amber-600 to-blue-600 
+           bg-clip-text text-transparent;
+  }
+}
+
+@layer utilities {
+  /* Fade in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  /* Spin animation */
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .animate-spin-slow {
+    animation: spin 1s ease-in-out;
+  }
+  
+  /* Slide in from right */
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  .animate-slide-in-right {
+    animation: slideInRight 0.3s ease-out;
+  }
+  
+  /* Blur backdrop */
+  .backdrop-blur-strong {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  
+  /* Shine animation for Home tab */
+  @keyframes shine {
+    0% {
+      transform: translateX(-100%) skewX(-15deg);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(200%) skewX(-15deg);
+      opacity: 0;
+    }
+  }
+  
+  .animate-shine {
+    animation: shine 0.8s ease-out;
+  }
+  
+  /* Home tab shine effect */
+  .home-shine {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .home-shine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 193, 7, 0.4), transparent);
+    transform: skewX(-15deg);
+    transition: left 0.6s ease-out;
+    opacity: 0;
+  }
+  
+  .home-shine:hover::before {
+    left: 100%;
+    opacity: 1;
+  }
+}
+
