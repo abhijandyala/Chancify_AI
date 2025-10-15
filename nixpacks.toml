@@ -1,9 +1,11 @@
 [phases.setup]
-nixPkgs = ["python311"]
+nixPkgs = ["python311", "python311Packages.pip", "curl"]
 
 [phases.install]
 cmds = [
     "python --version",
+    "python -c 'import sys; print(sys.executable)'",
+    "which pip || curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py",
     "python -m pip install --upgrade pip",
     "python -m pip install -r backend/requirements-essential.txt"
 ]
