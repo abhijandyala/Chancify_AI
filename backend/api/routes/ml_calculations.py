@@ -7,11 +7,11 @@ Provides endpoints for ML+Formula hybrid predictions.
 from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.orm import Session
-from database import get_db, College, UserProfile, AcademicData, Extracurricular
-from database.schemas import CalculationResponse
-from api.dependencies import get_current_user_profile
-from ml.models.predictor import get_predictor, model_available
-from ml.preprocessing.feature_extractor import StudentFeatures, CollegeFeatures
+from backend.database import get_db, College, UserProfile, AcademicData, Extracurricular
+from backend.database.schemas import CalculationResponse
+from backend.api.dependencies import get_current_user_profile
+from backend.ml.models.predictor import get_predictor, model_available
+from backend.ml.preprocessing.feature_extractor import StudentFeatures, CollegeFeatures
 
 router = APIRouter()
 

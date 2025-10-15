@@ -6,7 +6,7 @@ from typing import Generator
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 from supabase import create_client, Client
-from config import settings
+from backend.config import settings
 
 # Supabase client for authentication
 supabase: Client = create_client(

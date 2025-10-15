@@ -6,8 +6,8 @@ FastAPI application for college admissions probability calculations
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from config import settings
-from database import create_tables
+from backend.config import settings
+from backend.database import create_tables
 
 # Get environment
 ENV = os.getenv("ENVIRONMENT", "development")
@@ -74,7 +74,7 @@ async def health_check():
     }
 
 # Include API routes
-from api.routes import auth, calculations, ml_calculations
+from backend.api.routes import auth, calculations, ml_calculations
 
 app.include_router(auth.router, prefix="/api/auth", tags=["Authentication"])
 app.include_router(calculations.router, prefix="/api/calculations", tags=["Probability Calculations"])

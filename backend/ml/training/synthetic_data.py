@@ -10,12 +10,9 @@ Generates realistic applicant profiles and outcomes based on:
 import numpy as np
 import pandas as pd
 from typing import List, Dict, Tuple
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-from ml.preprocessing.feature_extractor import StudentFeatures, CollegeFeatures, FeatureExtractor
-from core import calculate_admission_probability
+from backend.ml.preprocessing.feature_extractor import StudentFeatures, CollegeFeatures, FeatureExtractor
+from backend.core import calculate_admission_probability
 
 
 class SyntheticDataGenerator:

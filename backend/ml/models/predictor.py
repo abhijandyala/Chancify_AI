@@ -8,12 +8,9 @@ import json
 from pathlib import Path
 from typing import Dict, Optional, Tuple
 from dataclasses import dataclass
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-from ml.preprocessing.feature_extractor import StudentFeatures, CollegeFeatures, FeatureExtractor
-from core import calculate_admission_probability
+from backend.ml.preprocessing.feature_extractor import StudentFeatures, CollegeFeatures, FeatureExtractor
+from backend.core import calculate_admission_probability
 
 
 @dataclass

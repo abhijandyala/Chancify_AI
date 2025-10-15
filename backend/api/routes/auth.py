@@ -5,8 +5,8 @@ Authentication routes for user signup, login, and profile management.
 from typing import Dict, Any
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from database import get_db, get_supabase, UserProfile, AcademicData, Extracurricular, SavedCollege
-from database.schemas import (
+from backend.database import get_db, get_supabase, UserProfile, AcademicData, Extracurricular, SavedCollege
+from backend.database.schemas import (
     UserProfileCreate,
     UserProfileResponse,
     AcademicDataResponse,
@@ -15,7 +15,7 @@ from database.schemas import (
     Token,
     CompleteProfileResponse
 )
-from api.dependencies import get_current_user_profile
+from backend.api.dependencies import get_current_user_profile
 
 router = APIRouter()
 
