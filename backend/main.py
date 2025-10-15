@@ -4,10 +4,18 @@ FastAPI application for college admissions probability calculations
 """
 
 import os
+import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.config import settings
 from backend.database import create_tables
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 # Get environment
 ENV = os.getenv("ENVIRONMENT", "development")
@@ -46,31 +54,54 @@ app.add_middleware(
 @app.on_event("startup")
 async def startup_event():
     """Initialize database tables."""
+    logger.info(f"Starting Chancify AI API in {ENV} mode")
+    logger.info(f"Python path: {os.environ.get('PYTHONPATH', 'not set')}")
+    logger.info(f"Working directory: {os.getcwd()}")
+    
     try:
         create_tables()
-        print("Database tables created successfully")
+        logger.info("✓ Database tables created/verified successfully")
     except Exception as e:
-        print(f"Database initialization warning: {e}")
-        print("   The API will still work without database connection.")
+        logger.warning(f"⚠ Database initialization failed: {e}")
+        logger.warning("  API will continue without database features")
+    
+    logger.info("✓ Chancify AI API started successfully")
 
 @app.get("/")
 async def root():
-    """Health check endpoint"""
+    """Root health check endpoint"""
     return {
         "status": "healthy",
         "message": "Chancify AI API is running",
         "version": "0.1.0",
-        "database": "connected"
+        "environment": ENV
     }
 
 @app.get("/api/health")
 async def health_check():
-    """Detailed health check"""
+    """Detailed health check for Railway"""
+    # Test database connection
+    db_status = "unknown"
+    try:
+        from backend.database.connection import engine
+        from sqlalchemy import text
+        if engine is not None:
+            # Try a simple query to verify connection
+            with engine.connect() as conn:
+                conn.execute(text("SELECT 1"))
+            db_status = "connected"
+        else:
+            db_status = "not_initialized"
+    except Exception as e:
+        logger.warning(f"Database health check failed: {e}")
+        db_status = "error"
+    
     return {
         "status": "healthy",
-        "database": "connected",
+        "database": db_status,
         "scoring_system": "loaded",
-        "supabase_url": settings.supabase_url
+        "environment": ENV,
+        "port": os.environ.get("PORT", "8000")
     }
 
 # Include API routes

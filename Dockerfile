@@ -27,10 +27,7 @@ ENV ENVIRONMENT=production
 # Expose port (Railway will set PORT env var)
 EXPOSE 8000
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:${PORT:-8000}/api/health')" || exit 1
-
 # Start the application
-CMD uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 1
+# Note: Railway handles healthchecks externally, no need for Docker HEALTHCHECK
+CMD uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 1 --log-level info
 
