@@ -1,0 +1,28 @@
+{
+    "python.defaultInterpreterPath": "C:\\Users\\abhij\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "python.terminal.activateEnvironment": true,
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "black",
+    "python.analysis.extraPaths": [
+        "./backend",
+        "./backend/config",
+        "./backend/database",
+        "./backend/api",
+        "./backend/core",
+        "./backend/ml"
+    ],
+    "python.analysis.autoSearchPaths": true,
+    "python.analysis.diagnosticMode": "workspace",
+    "python.analysis.stubPath": "./backend",
+    "python.analysis.include": [
+        "./backend/**"
+    ],
+    "python.analysis.exclude": [
+        "**/node_modules",
+        "**/__pycache__"
+    ]
+}
