@@ -1,0 +1,4 @@
+# Force Railway to recognize configuration changes
+# Version: 2.0 - Standalone pip configuration
+# Date: 2025-01-14
+# Changes: Use standalone pip commands instead of python -m pip

@@ -3,6 +3,7 @@ nixPkgs = ["python311", "python311Packages.pip"]
 
 [phases.install]
 cmds = [
+    "echo 'Starting installation phase - $(date)'",
     "python --version",
     "which pip && echo 'pip found at:' && which pip",
     "pip install --upgrade pip",
@@ -11,7 +12,7 @@ cmds = [
 
 [phases.build]
 cmds = [
-    "echo 'Build phase - backend dependencies installed'",
+    "echo 'Build phase - backend dependencies installed (v2.0 - standalone pip)'",
     "python -c 'import fastapi, uvicorn; print(\"Core dependencies verified\")'"
 ]
 
