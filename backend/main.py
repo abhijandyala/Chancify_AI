@@ -3,10 +3,14 @@ Chancify AI - Backend API
 FastAPI application for college admissions probability calculations
 """
 
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from config import settings
 from database import create_tables
+
+# Get environment
+ENV = os.getenv("ENVIRONMENT", "development")
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -18,13 +22,21 @@ app = FastAPI(
 )
 
 # CORS middleware configuration
+# Allow all origins in production (Railway deployment)
+allowed_origins = [
+    "http://localhost:3000",  # Local development
+    "http://localhost:3001",  # Local development (alt port)
+    "https://chancify-ai.vercel.app",  # Production frontend
+    settings.frontend_url
+]
+
+# In production, allow Railway domains
+if ENV == "production":
+    allowed_origins.append("*")  # Allow all origins for Railway
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",  # Frontend URL
-        "https://chancify-ai.vercel.app",  # Production frontend
-        settings.frontend_url
-    ],
+    allow_origins=allowed_origins if ENV == "development" else ["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

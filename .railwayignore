@@ -1,0 +1,43 @@
+# Frontend (not needed for backend deployment)
+frontend/
+*.md
+docs/
+
+# Data files (too large)
+backend/data/processed/*.csv
+backend/data/raw/
+Datasets/
+
+# Development files
+.vscode/
+.idea/
+*.log
+*.pyc
+__pycache__/
+.pytest_cache/
+
+# Environment files
+.env.local
+.env.development.local
+
+# Node modules
+node_modules/
+.next/
+
+# Git
+.git/
+.gitignore
+
+# Training files
+backend/models/*.pkl
+backend/models/*.joblib
+training_*.txt
+run_training.bat
+
+# Test files
+backend/test_*.py
+examples/
+scripts/reddit_*.py
+scripts/process_*.py
+scripts/build_*.py
+
