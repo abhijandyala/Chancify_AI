@@ -3,15 +3,17 @@ nixPkgs = ["python311"]
 
 [phases.install]
 cmds = [
+    "python --version",
     "python -m pip install --upgrade pip",
     "python -m pip install -r backend/requirements-essential.txt"
 ]
 
 [phases.build]
 cmds = [
-    "echo 'Build phase - backend dependencies installed'"
+    "echo 'Build phase - backend dependencies installed'",
+    "python -c 'import fastapi, uvicorn; print(\"Core dependencies verified\")'"
 ]
 
 [start]
-cmd = "cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT"
+cmd = "cd backend && python -m uvicorn main:app --host 0.0.0.0 --port $PORT --workers 1"
 

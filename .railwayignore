@@ -1,43 +1,29 @@
-# Frontend (not needed for backend deployment)
+# Ignore files that aren't needed for Railway deployment
 frontend/
-*.md
 docs/
-
-# Data files (too large)
-backend/data/processed/*.csv
-backend/data/raw/
+examples/
+scripts/
 Datasets/
-
-# Development files
+data/raw/
+*.md
+.git/
+.gitignore
 .vscode/
-.idea/
-*.log
+node_modules/
+.next/
 *.pyc
 __pycache__/
 .pytest_cache/
-
-# Environment files
-.env.local
-.env.development.local
-
-# Node modules
-node_modules/
-.next/
-
-# Git
-.git/
-.gitignore
-
-# Training files
+.venv/
+venv/
+env/
+ENV/
+*.log
+*.sqlite
+*.db
 backend/models/*.pkl
 backend/models/*.joblib
-training_*.txt
-run_training.bat
-
-# Test files
-backend/test_*.py
-examples/
-scripts/reddit_*.py
-scripts/process_*.py
-scripts/build_*.py
-
+backend/models/*.h5
+backend/models/*.pth
+backend/data/raw/
+backend/data/processed/
