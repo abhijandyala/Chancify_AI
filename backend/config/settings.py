@@ -32,11 +32,12 @@ class Settings(BaseSettings):
     frontend_url: str = "http://localhost:3000"
     
     # ML Model Path
-    model_path: str = "../models/trained/"
+    ml_model_path: str = "../models/trained/"
     
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
+        extra = "ignore"
 
 
 # Global settings instance

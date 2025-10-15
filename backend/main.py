@@ -48,9 +48,9 @@ async def startup_event():
     """Initialize database tables."""
     try:
         create_tables()
-        print("✅ Database tables created successfully")
+        print("Database tables created successfully")
     except Exception as e:
-        print(f"⚠️  Database initialization warning: {e}")
+        print(f"Database initialization warning: {e}")
         print("   The API will still work without database connection.")
 
 @app.get("/")
