@@ -1,0 +1,67 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+*.log
+
+# Node / Frontend
+node_modules/
+.next/
+out/
+build/
+.cache/
+.vercel
+*.tsbuildinfo
+
+# Environment
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing
+coverage/
+.coverage
+.pytest_cache/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+postgres_data/
+
+# ML Models (large files)
+*.pkl
+*.joblib
+*.h5
+*.pth
+models/trained/
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Scripts (not needed for runtime)
+scripts/
+Datasets/
+
+# OS
+Thumbs.db
+
