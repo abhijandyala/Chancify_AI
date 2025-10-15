@@ -26,7 +26,7 @@ app = FastAPI(
 allowed_origins = [
     "http://localhost:3000",  # Local development
     "http://localhost:3001",  # Local development (alt port)
-    "https://chancify-ai.vercel.app",  # Production frontend
+    "https://chancifyai.up.railway.app",  # Railway frontend
     settings.frontend_url
 ]
 
