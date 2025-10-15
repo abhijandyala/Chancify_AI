@@ -8,13 +8,12 @@ venv/
 env/
 ENV/
 .venv
-*.log
 
-# Node / Frontend
+# Node / Frontend - entire frontend not needed for backend
+frontend/
 node_modules/
 .next/
 out/
-build/
 .cache/
 .vercel
 *.tsbuildinfo
@@ -42,12 +41,20 @@ coverage/
 *.sqlite3
 postgres_data/
 
-# ML Models (large files)
-*.pkl
-*.joblib
-*.h5
-*.pth
-models/trained/
+# Backend - exclude training scripts (not needed at runtime)
+backend/train_*.py
+backend/test_*.py
+backend/generate_*.py
+backend/start_server.py
+
+# Backend - exclude large data files (not needed at runtime)
+backend/data/raw/
+backend/data/processed/
+backend/models/*.pkl
+backend/models/*.txt
+
+# Keep ML models for predictions
+!backend/data/models/
 
 # Git
 .git/
@@ -58,10 +65,16 @@ docs/
 *.md
 !README.md
 
-# Scripts (not needed for runtime)
+# Scripts and datasets (not needed for runtime)
 scripts/
 Datasets/
+examples/
 
 # OS
 Thumbs.db
+
+# Config files not needed
+.cursorignore
+railway.json
+nixpacks.toml
 

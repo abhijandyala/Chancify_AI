@@ -1,17 +1,19 @@
 [phases.setup]
-nixPkgs = ["python311", "python311Packages.pip"]
+nixPkgs = ["python311", "python311Packages.pip", "python311Packages.virtualenv"]
 
 [phases.install]
 cmds = [
-    "python -m pip install -r backend/requirements-essential.txt"
+    "python -m venv /opt/venv",
+    ". /opt/venv/bin/activate && pip install --upgrade pip",
+    ". /opt/venv/bin/activate && pip install -r backend/requirements-essential.txt"
 ]
 
 [phases.build]
 cmds = [
     "echo 'Backend dependencies installed'",
-    "python -c 'import fastapi, uvicorn; print(\"Core dependencies verified\")'"
+    ". /opt/venv/bin/activate && python -c 'import fastapi, uvicorn; print(\"Core dependencies verified\")'"
 ]
 
 [start]
-cmd = "cd backend && python -m uvicorn main:app --host 0.0.0.0 --port $PORT --workers 1"
+cmd = ". /opt/venv/bin/activate && cd backend && python -m uvicorn main:app --host 0.0.0.0 --port $PORT --workers 1"
 
