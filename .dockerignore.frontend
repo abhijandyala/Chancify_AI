@@ -1,0 +1,72 @@
+# Frontend-specific dockerignore
+# This file is used when building the frontend Docker image
+
+# Python / Backend (not needed for frontend)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+backend/
+
+# Node build artifacts
+node_modules/
+.next/
+out/
+.cache/
+.vercel
+*.tsbuildinfo
+
+# Keep frontend source
+!frontend/
+
+# Environment (will be set by Railway)
+.env
+.env.*
+!.env.template
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing
+coverage/
+.coverage
+.pytest_cache/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+postgres_data/
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Scripts and datasets (not needed for frontend)
+scripts/
+Datasets/
+examples/
+data/
+
+# OS
+Thumbs.db
+
+# Config files
+.cursorignore
+nixpacks.toml
+

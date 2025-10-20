@@ -1,4 +1,7 @@
-# Python
+# Shared dockerignore for both backend and frontend builds
+# Note: Each Dockerfile should selectively copy what it needs
+
+# Python cache
 __pycache__/
 *.py[cod]
 *$py.class
@@ -9,8 +12,7 @@ env/
 ENV/
 .venv
 
-# Node / Frontend - entire frontend not needed for backend
-frontend/
+# Node modules and build artifacts (will be installed fresh in Docker)
 node_modules/
 .next/
 out/
@@ -18,9 +20,10 @@ out/
 .vercel
 *.tsbuildinfo
 
-# Environment
+# Environment (set by Railway)
 .env
 .env.*
+!.env.template
 
 # IDE
 .vscode/
@@ -73,8 +76,7 @@ examples/
 # OS
 Thumbs.db
 
-# Config files not needed
+# Config files
 .cursorignore
 railway.json
 nixpacks.toml
-
