@@ -3,8 +3,10 @@
 import { GlassCard } from '@/components/ui/GlassCard'
 import { Input } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
+import { SearchableSelect } from '@/components/ui/SearchableSelect'
 import { Button } from '@/components/ui/Button'
 import { useState } from 'react'
+import { MAJORS } from '@/lib/majors'
 
 export const dynamic = 'force-dynamic'
 
@@ -33,7 +35,7 @@ export default function HomePage() {
     legacy_status: '5',
     geographic_diversity: '5',
     firstgen_diversity: '5',
-    major_fit: '5',
+    major: '',
     hs_reputation: '5',
   })
 
@@ -376,17 +378,12 @@ export default function HomePage() {
             ]}
           />
 
-          <Select
-            label="Major Fit"
-            value={profile.major_fit}
-            onChange={(e) => updateProfile('major_fit', e.target.value)}
-            options={[
-              { value: '10', label: '10 - Perfect alignment with major' },
-              { value: '8', label: '8 - Strong alignment with major' },
-              { value: '6', label: '6 - Good alignment with major' },
-              { value: '4', label: '4 - Some alignment with major' },
-              { value: '2', label: '2 - Limited alignment with major' },
-            ]}
+          <SearchableSelect
+            label="Intended Major"
+            value={profile.major}
+            onChange={(value) => updateProfile('major', value)}
+            options={MAJORS}
+            placeholder="Search for your major..."
           />
 
           <Select
