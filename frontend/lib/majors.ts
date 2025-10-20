@@ -316,5 +316,5 @@ export const MAJORS = [
   "Women's Studies",
   "Youth Ministries",
   "Zoology"
-] as const;
+];
 
