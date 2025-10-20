@@ -54,18 +54,18 @@ export const SearchableSelect = ({
       <div className="relative">
         <div
           className={cn(
-            'input-glass cursor-pointer flex items-center justify-between',
+            'input-glass cursor-pointer flex items-center justify-between min-h-[44px] px-4',
             error && 'border-red-500',
             className
           )}
           onClick={() => setIsOpen(!isOpen)}
         >
-          <span className={value ? 'text-foreground' : 'text-muted'}>
+          <span className={value ? 'text-white font-medium' : 'text-gray-400'}>
             {value || 'Select a major...'}
           </span>
           <svg
             className={cn(
-              'w-5 h-5 transition-transform text-muted',
+              'w-5 h-5 transition-transform text-gray-400',
               isOpen && 'rotate-180'
             )}
             fill="none"
@@ -82,11 +82,11 @@ export const SearchableSelect = ({
         </div>
 
         {isOpen && (
-          <div className="absolute z-50 w-full mt-2 glass-card rounded-xl border border-border shadow-xl max-h-[300px] overflow-hidden flex flex-col">
-            <div className="p-2 border-b border-border">
+          <div className="absolute z-50 w-full mt-2 bg-gray-900 rounded-xl border border-gray-700 shadow-2xl max-h-[300px] overflow-hidden flex flex-col backdrop-blur-sm">
+            <div className="p-3 border-b border-gray-700 bg-gray-800/90">
               <input
                 type="text"
-                className="w-full px-3 py-2 bg-background/50 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder={placeholder}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -95,16 +95,16 @@ export const SearchableSelect = ({
               />
             </div>
             
-            <div className="overflow-y-auto">
+            <div className="overflow-y-auto bg-gray-900">
               {filteredOptions.length === 0 ? (
-                <div className="px-4 py-3 text-sm text-muted">No majors found</div>
+                <div className="px-4 py-3 text-sm text-gray-400">No majors found</div>
               ) : (
                 filteredOptions.map((option) => (
                   <div
                     key={option}
                     className={cn(
-                      'px-4 py-2 cursor-pointer hover:bg-primary/10 text-sm transition-colors',
-                      value === option && 'bg-primary/20 text-primary font-medium'
+                      'px-4 py-3 cursor-pointer hover:bg-gray-800 text-gray-100 text-sm transition-colors border-b border-gray-800 last:border-b-0',
+                      value === option && 'bg-blue-600 text-white font-medium'
                     )}
                     onClick={() => handleSelect(option)}
                   >
