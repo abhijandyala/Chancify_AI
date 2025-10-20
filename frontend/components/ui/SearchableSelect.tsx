@@ -82,7 +82,7 @@ export const SearchableSelect = ({
         </div>
 
         {isOpen && (
-          <div className="absolute z-50 w-full mt-2 bg-gray-900 rounded-xl border border-gray-700 shadow-2xl max-h-[300px] overflow-hidden flex flex-col backdrop-blur-sm">
+          <div className="absolute z-[9999] w-full mt-2 bg-gray-900 rounded-xl border border-gray-700 shadow-2xl max-h-[300px] overflow-hidden flex flex-col backdrop-blur-sm">
             <div className="p-3 border-b border-gray-700 bg-gray-800/90">
               <input
                 type="text"
