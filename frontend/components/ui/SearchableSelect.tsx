@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { createPortal } from 'react-dom'
 import { cn } from '@/lib/utils'
 
 interface SearchableSelectProps {
@@ -26,7 +25,6 @@ export const SearchableSelect = ({
   const [isOpen, setIsOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const containerRef = useRef<HTMLDivElement>(null)
-  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0, width: 0 })
 
   const filteredOptions = options.filter((option) =>
     option.toLowerCase().includes(searchTerm.toLowerCase())
@@ -49,21 +47,6 @@ export const SearchableSelect = ({
     setSearchTerm('')
   }
 
-  const updateDropdownPosition = () => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect()
-      setDropdownPosition({
-        top: rect.bottom + window.scrollY + 8,
-        left: rect.left + window.scrollX,
-        width: rect.width
-      })
-    }
-  }
-
-  const handleOpen = () => {
-    updateDropdownPosition()
-    setIsOpen(true)
-  }
 
   return (
     <div className="w-full" ref={containerRef}>
@@ -76,7 +59,7 @@ export const SearchableSelect = ({
             error && 'border-red-500',
             className
           )}
-          onClick={handleOpen}
+          onClick={() => setIsOpen(!isOpen)}
         >
           <span className={value ? 'text-white font-medium' : 'text-gray-400'}>
             {value || 'Select a major...'}
@@ -99,15 +82,8 @@ export const SearchableSelect = ({
           </svg>
         </div>
 
-        {isOpen && createPortal(
-          <div 
-            className="fixed z-[9999] bg-gray-900 rounded-xl border border-gray-700 shadow-2xl max-h-[300px] overflow-hidden flex flex-col backdrop-blur-sm"
-            style={{
-              top: dropdownPosition.top,
-              left: dropdownPosition.left,
-              width: dropdownPosition.width
-            }}
-          >
+        {isOpen && (
+          <div className="absolute z-[99999] w-full mt-2 bg-gray-900 rounded-xl border border-gray-700 shadow-2xl max-h-[300px] overflow-hidden flex flex-col backdrop-blur-sm" style={{ zIndex: 99999 }}>
             <div className="p-3 border-b border-gray-700 bg-gray-800/90">
               <input
                 type="text"
@@ -138,8 +114,7 @@ export const SearchableSelect = ({
                 ))
               )}
             </div>
-          </div>,
-          document.body
+          </div>
         )}
       </div>
 
