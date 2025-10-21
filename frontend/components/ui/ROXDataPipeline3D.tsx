@@ -105,8 +105,8 @@ export default function ROXDataPipeline3D() {
     const ry = gsap.quickTo(stack, 'rotationY', { duration: 0.35, ease: 'power2.out' })
     const clamp = (n: number, min: number, max: number) => Math.max(min, Math.min(n, max))
     let scrolling = false
-    ScrollTrigger.addEventListener('scrollStart', () => scrolling = true)
-    ScrollTrigger.addEventListener('scrollEnd', () => scrolling = false)
+    ScrollTrigger.addEventListener('scrollStart', () => { scrolling = true })
+    ScrollTrigger.addEventListener('scrollEnd', () => { scrolling = false })
     
     const handleMouseMove = (e: MouseEvent) => {
       if (scrolling) return
