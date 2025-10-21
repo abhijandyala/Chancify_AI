@@ -38,13 +38,13 @@ export default function ROXDataPipeline3D() {
       zIndex: (i: number) => 10 - i
     })
 
-    // Create smooth timeline with better easing
+    // Create ultra-smooth timeline
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
         start: 'top top',
-        end: '+=3000',
-        scrub: 0.5, // Smoother scrub
+        end: '+=4000',
+        scrub: 0.1, // Ultra smooth scrub
         pin: true,
         anticipatePin: 1
       }
@@ -52,67 +52,70 @@ export default function ROXDataPipeline3D() {
 
     // Phase 1: Smooth fan out with zoom effect
     tl.to(cards, {
-      z: (i: number) => -i * 150,
-      y: (i: number) => (i - 2) * -40,
-      x: (i: number) => (i - 2) * 20,
-      rotationY: (i: number) => (i - 2) * 8,
-      rotationX: (i: number) => -3 + i * 1.5,
-      scale: 1.1, // Slight zoom out
-      duration: 1.5,
+      z: (i: number) => -i * 120,
+      y: (i: number) => (i - 2) * -30 + 50, // Move cards lower
+      x: (i: number) => (i - 2) * 15,
+      rotationY: (i: number) => (i - 2) * 6,
+      rotationX: (i: number) => -2 + i * 1,
+      scale: 0.9, // Make cards smaller
+      opacity: 1, // Keep fully opaque
+      duration: 2,
       ease: 'power2.out'
     })
 
     // Phase 2: Zoom into each card individually
     cards.forEach((card, i) => {
-      const startTime = 2 + i * 1.2
+      const startTime = 2.5 + i * 1.5
       
       // Zoom into this specific card
       tl.to(card, {
-        z: 200, // Bring to front
-        scale: 1.3, // Zoom in
+        z: 150, // Bring to front
+        scale: 1.1, // Smaller zoom in
         rotationY: 0,
         rotationX: 0,
         x: 0,
-        y: 0,
-        duration: 0.8,
+        y: 20, // Keep cards lower
+        opacity: 1, // Keep fully opaque
+        duration: 1,
         ease: 'power2.inOut'
       }, startTime)
       
-      // Move other cards back and dim
+      // Move other cards back but keep them visible
       tl.to(cards.filter((_, j) => j !== i), {
-        z: (j: number) => -j * 150 - 100,
-        scale: 0.8,
-        opacity: 0.3,
-        duration: 0.8,
+        z: (j: number) => -j * 120 - 80,
+        scale: 0.7,
+        opacity: 0.6, // Less dimming
+        duration: 1,
         ease: 'power2.inOut'
       }, startTime)
       
       // Hold the zoom for a moment
-      tl.to({}, { duration: 0.5 }, startTime + 0.8)
+      tl.to({}, { duration: 0.8 }, startTime + 1)
       
       // Reset all cards smoothly
       tl.to(cards, {
-        z: (j: number) => -j * 150,
-        scale: 1.1,
+        z: (j: number) => -j * 120,
+        scale: 0.9,
         opacity: 1,
-        duration: 0.6,
+        duration: 0.8,
         ease: 'power2.out'
-      }, startTime + 1.3)
+      }, startTime + 1.8)
     })
 
     // Phase 3: Final smooth settle
     tl.to(cards, {
-      z: (i: number) => -i * 100,
-      y: (i: number) => (i - 2) * -20,
-      x: (i: number) => (i - 2) * 10,
-      rotationY: (i: number) => (i - 2) * 5,
-      rotationX: (i: number) => -2 + i * 1,
-      scale: 1,
-      duration: 1,
+      z: (i: number) => -i * 80,
+      y: (i: number) => (i - 2) * -15 + 40, // Keep cards lower
+      x: (i: number) => (i - 2) * 8,
+      rotationY: (i: number) => (i - 2) * 4,
+      rotationX: (i: number) => -1 + i * 0.5,
+      scale: 0.85, // Keep cards smaller
+      opacity: 1, // Keep fully opaque
+      duration: 1.5,
       ease: 'power2.out'
     })
 
-    // Smooth mouse parallax
+    // Ultra-smooth mouse parallax
     const handleMouseMove = (e: MouseEvent) => {
       const centerX = window.innerWidth / 2
       const centerY = window.innerHeight / 2
@@ -120,9 +123,9 @@ export default function ROXDataPipeline3D() {
       const deltaY = (e.clientY - centerY) / centerY
       
       gsap.to(container, {
-        rotationY: deltaX * 3,
-        rotationX: -deltaY * 2,
-        duration: 0.8,
+        rotationY: deltaX * 2,
+        rotationX: -deltaY * 1.5,
+        duration: 1.2,
         ease: 'power2.out'
       })
     }
