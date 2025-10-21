@@ -5,18 +5,18 @@ import { motion } from 'framer-motion';
 
 // ROX-inspired logo data
 const LOGO_DATA = [
-  { name: 'Harvard', logo: '🎓' },
-  { name: 'MIT', logo: '🔬' },
-  { name: 'Stanford', logo: '🌲' },
-  { name: 'Yale', logo: '📚' },
-  { name: 'Princeton', logo: '🐅' },
-  { name: 'Columbia', logo: '🦁' },
-  { name: 'Caltech', logo: '🚀' },
-  { name: 'Duke', logo: '🏀' },
-  { name: 'Northwestern', logo: '💜' },
-  { name: 'Cornell', logo: '🌽' },
-  { name: 'Brown', logo: '🐻' },
-  { name: 'Dartmouth', logo: '🌿' }
+  { name: 'Harvard University' },
+  { name: 'Massachusetts Institute of Technology' },
+  { name: 'Stanford University' },
+  { name: 'Yale University' },
+  { name: 'Princeton University' },
+  { name: 'Columbia University' },
+  { name: 'California Institute of Technology' },
+  { name: 'Duke University' },
+  { name: 'Northwestern University' },
+  { name: 'Cornell University' },
+  { name: 'Brown University' },
+  { name: 'Dartmouth College' }
 ];
 
 // ROX-style logo marquee component
@@ -44,9 +44,8 @@ export default function ROXLogoMarquee() {
           {LOGO_DATA.map((logo, index) => (
             <div
               key={`first-${index}`}
-              className="flex items-center gap-4 text-gray-400 hover:text-yellow-400 transition-colors duration-300"
+              className="flex items-center text-gray-400 hover:text-yellow-400 transition-colors duration-300"
             >
-              <span className="text-2xl">{logo.logo}</span>
               <span className="text-lg font-semibold">{logo.name}</span>
             </div>
           ))}
@@ -68,9 +67,8 @@ export default function ROXLogoMarquee() {
           {LOGO_DATA.map((logo, index) => (
             <div
               key={`second-${index}`}
-              className="flex items-center gap-4 text-gray-400 hover:text-yellow-400 transition-colors duration-300"
+              className="flex items-center text-gray-400 hover:text-yellow-400 transition-colors duration-300"
             >
-              <span className="text-2xl">{logo.logo}</span>
               <span className="text-lg font-semibold">{logo.name}</span>
             </div>
           ))}
