@@ -99,66 +99,71 @@ const LayerPlate = ({ index, total, activeIndex, scrollProgress, data }: {
     const clock = state.clock.getElapsedTime();
     const isActive = activeIndex === index;
     
-    // Calculate which scroll part we're in (0-3) - MORE SENSITIVE
+    // IMPROVED: Better scroll calculation with more even distribution
     const scrollPart = Math.floor(scrollProgress * 4);
     const partProgress = (scrollProgress * 4) % 1;
     
-    // Make the animation more sensitive to scroll changes
-    const sensitivityMultiplier = 1.5;
+    // Base stacked position - CENTERED at beginning
+    const baseY = 0; // Start centered
+    const stackOffset = -index * 0.12; // Smaller stack spacing
     
-    // Base stacked position
-    const baseY = -index * 0.15;
-    
-    // Animation logic for each scroll part - IMPROVED
-    let targetY = baseY;
-    let targetRotationX = -Math.PI / 6;
+    // IMPROVED: Clean animation logic
+    let targetY = baseY + stackOffset;
+    let targetRotationX = -Math.PI / 4; // Show more flat side
     let targetRotationY = Math.PI / 4;
     let targetRotationZ = 0;
     
     if (scrollPart > index) {
-      // This card has been "activated" in a previous part - KEEP IT DOWN
-      targetY = baseY - 2.0; // Keep it further down
-      targetRotationX = -Math.PI / 6;
+      // This card has been activated - KEEP IT DOWN AND OUT OF THE WAY
+      targetY = baseY - 3.0; // Keep it way down
+      targetRotationX = -Math.PI / 4;
       targetRotationZ = 0;
     } else if (scrollPart === index) {
       // Current part - this card is being activated
-      if (partProgress < 0.2) {
-        // Phase 1: All cards fall down together
-        targetY = baseY - 2.0;
-      } else if (partProgress < 0.4) {
-        // Phase 2: Cards stay down
-        targetY = baseY - 2.0;
-      } else if (partProgress < 0.7) {
-        // Phase 3: This card raises up - MUCH MORE SENSITIVE
-        const raiseProgress = (partProgress - 0.4) / 0.3;
-        targetY = baseY - 2.0 + raiseProgress * 4.5; // MUCH HIGHER RAISE
-        targetRotationX = -Math.PI / 6 + raiseProgress * 0.5; // MORE TILT
-        targetRotationZ = raiseProgress * 0.25; // MORE ROTATION
+      if (partProgress < 0.15) {
+        // Phase 1: Deck smoothly goes down
+        const deckDownProgress = partProgress / 0.15;
+        targetY = baseY + stackOffset - deckDownProgress * 1.5;
+        targetRotationX = -Math.PI / 4;
+      } else if (partProgress < 0.25) {
+        // Phase 2: Deck stays down, card starts to rise
+        targetY = baseY + stackOffset - 1.5;
+        targetRotationX = -Math.PI / 4;
+      } else if (partProgress < 0.75) {
+        // Phase 3: This card rises up smoothly
+        const riseProgress = (partProgress - 0.25) / 0.5;
+        const smoothRise = Math.sin(riseProgress * Math.PI * 0.5); // Smooth curve
+        targetY = baseY + stackOffset - 1.5 + smoothRise * 3.5; // Smooth rise
+        targetRotationX = -Math.PI / 4 + smoothRise * 0.3; // Show more flat side
+        targetRotationZ = smoothRise * 0.2;
       } else {
-        // Phase 4: This card settles in its final raised position - MUCH HIGHER
-        targetY = baseY + 2.5; // MUCH HIGHER FINAL POSITION
-        targetRotationX = -Math.PI / 6 + 0.5; // MORE TILT
-        targetRotationZ = 0.25; // MORE ROTATION
+        // Phase 4: Card settles in final position
+        targetY = baseY + stackOffset + 2.0; // Final raised position
+        targetRotationX = -Math.PI / 4 + 0.3; // Show more flat side
+        targetRotationZ = 0.2;
       }
     } else {
       // This card hasn't been activated yet
       if (scrollPart > 0) {
-        // All cards fall down first
-        if (partProgress < 0.2) {
-          targetY = baseY - 2.0;
-        } else if (partProgress < 0.4) {
-          // Cards stay down
-          targetY = baseY - 2.0;
+        // Deck behavior - smooth down and up
+        if (partProgress < 0.15) {
+          // Deck goes down smoothly
+          const deckDownProgress = partProgress / 0.15;
+          targetY = baseY + stackOffset - deckDownProgress * 1.5;
+        } else if (partProgress < 0.25) {
+          // Deck stays down
+          targetY = baseY + stackOffset - 1.5;
         } else {
-          // Cards go back up to stacked position
-          const returnProgress = (partProgress - 0.4) / 0.6;
-          targetY = baseY - 2.0 + returnProgress * 2.0;
+          // Deck goes back up smoothly
+          const deckUpProgress = (partProgress - 0.25) / 0.75;
+          const smoothUp = Math.sin(deckUpProgress * Math.PI * 0.5); // Smooth curve
+          targetY = baseY + stackOffset - 1.5 + smoothUp * 1.5;
         }
       }
     }
     
-    // Smooth animation - MORE SENSITIVE
-    const lerpSpeed = 0.15 * sensitivityMultiplier; // FASTER RESPONSE
+    // IMPROVED: Smoother animation with better lerp
+    const lerpSpeed = 0.08; // Slower, smoother lerp
     
     meshRef.current.position.y = THREE.MathUtils.lerp(
       meshRef.current.position.y,
@@ -194,13 +199,13 @@ const LayerPlate = ({ index, total, activeIndex, scrollProgress, data }: {
   const accentColor = isActive ? '#D4AF37' : '#3a3f48';
 
   return (
-    <group ref={meshRef} position={[0, -index * 0.15, 0]}>
+    <group ref={meshRef} position={[0, -index * 0.12, 0]}>
       {/* Main plate body */}
       <mesh 
         geometry={plateGeometry} 
         castShadow 
         receiveShadow
-        rotation={[-Math.PI / 6, Math.PI / 4, 0]}
+        rotation={[-Math.PI / 4, Math.PI / 4, 0]}
       >
         <meshStandardMaterial
           color={data.color}
@@ -212,7 +217,7 @@ const LayerPlate = ({ index, total, activeIndex, scrollProgress, data }: {
       </mesh>
 
       {/* Edge highlights */}
-      <lineSegments ref={edgesRef} rotation={[-Math.PI / 6, Math.PI / 4, 0]}>
+      <lineSegments ref={edgesRef} rotation={[-Math.PI / 4, Math.PI / 4, 0]}>
         <edgesGeometry args={[plateGeometry]} />
         <lineBasicMaterial color={accentColor} linewidth={2} />
       </lineSegments>
@@ -221,7 +226,7 @@ const LayerPlate = ({ index, total, activeIndex, scrollProgress, data }: {
       {[
         [-1.2, 1.2], [1.2, 1.2], [-1.2, -1.2], [1.2, -1.2]
       ].map(([x, z], i) => (
-        <group key={i} position={[x, 0.08, z]} rotation={[-Math.PI / 6, Math.PI / 4, 0]}>
+        <group key={i} position={[x, 0.08, z]} rotation={[-Math.PI / 4, Math.PI / 4, 0]}>
           <mesh geometry={screwGeometry} rotation={[Math.PI / 2, 0, 0]}>
             <meshStandardMaterial color="#2a2e36" metalness={0.7} roughness={0.3} />
           </mesh>
@@ -229,7 +234,7 @@ const LayerPlate = ({ index, total, activeIndex, scrollProgress, data }: {
       ))}
 
       {/* Center logo ring */}
-      <mesh position={[0, 0.08, 0]} rotation={[-Math.PI / 2 - Math.PI / 6, Math.PI / 4, 0]}>
+      <mesh position={[0, 0.08, 0]} rotation={[-Math.PI / 2 - Math.PI / 4, Math.PI / 4, 0]}>
         <ringGeometry args={[0.35, 0.45, 64]} />
         <meshStandardMaterial
           color={isActive ? '#D4AF37' : '#2f343c'}
@@ -241,7 +246,7 @@ const LayerPlate = ({ index, total, activeIndex, scrollProgress, data }: {
       </mesh>
 
       {/* Inner logo circle */}
-      <mesh position={[0, 0.08, 0]} rotation={[-Math.PI / 2 - Math.PI / 6, Math.PI / 4, 0]}>
+      <mesh position={[0, 0.08, 0]} rotation={[-Math.PI / 2 - Math.PI / 4, Math.PI / 4, 0]}>
         <circleGeometry args={[0.3, 64]} />
         <meshStandardMaterial
           color={data.color}
@@ -251,7 +256,7 @@ const LayerPlate = ({ index, total, activeIndex, scrollProgress, data }: {
       </mesh>
 
       {/* Texture overlay lines */}
-      <mesh position={[0, 0.09, 0]} rotation={[-Math.PI / 2 - Math.PI / 6, Math.PI / 4, 0]}>
+      <mesh position={[0, 0.09, 0]} rotation={[-Math.PI / 2 - Math.PI / 4, Math.PI / 4, 0]}>
         <planeGeometry args={[2.5, 2.5]} />
         <meshBasicMaterial
           color="#D4AF37"
@@ -274,7 +279,7 @@ const Scene = ({ scrollProgress, onActiveLayerChange }: {
   const [activeLayer, setActiveLayer] = useState(0);
 
   useFrame(() => {
-    // Calculate which layer should be active based on scroll
+    // IMPROVED: Better active layer calculation
     const scrollPart = Math.floor(scrollProgress * 4);
     const newActive = Math.min(scrollPart, STACK_DATA.length - 1);
     
@@ -285,7 +290,7 @@ const Scene = ({ scrollProgress, onActiveLayerChange }: {
 
     // Gentle rotation of entire stack
     if (groupRef.current) {
-      groupRef.current.rotation.y = scrollProgress * Math.PI * 0.3;
+      groupRef.current.rotation.y = scrollProgress * Math.PI * 0.2; // Slower rotation
     }
   });
 
