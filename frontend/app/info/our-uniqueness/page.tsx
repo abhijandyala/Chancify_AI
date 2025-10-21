@@ -3,12 +3,17 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Star, Zap, Shield } from 'lucide-react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import SophisticatedBackground from '@/components/ui/SophisticatedBackground';
 
 export default function OurUniquenessPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+  const router = useRouter();
+
+  const handleBackClick = () => {
+    router.back();
+  };
 
   return (
     <div ref={containerRef} className="min-h-screen bg-black text-white relative">
@@ -21,9 +26,12 @@ export default function OurUniquenessPage() {
         className="border-b border-gray-800"
       >
         <div className="max-w-7xl mx-auto px-4 py-4">
-          <Link href="/" className="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors">
+          <button 
+            onClick={handleBackClick}
+            className="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors cursor-pointer"
+          >
             ← Back to Home
-          </Link>
+          </button>
         </div>
       </motion.nav>
 
