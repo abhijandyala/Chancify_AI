@@ -1,180 +1,183 @@
 'use client'
 
+import { Suspense, useState, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { ScrollControls, Scroll } from '@react-three/drei'
-import { Suspense, useState } from 'react'
+import { ScrollControls } from '@react-three/drei'
 import ROXStackAnimation from './ROXStackAnimation'
-import Reveal from '../ui/Reveal'
 
+// Our AI architecture layers with proper content
 const layers = [
   {
     id: 'data-sources',
     name: 'Data Sources',
     description: 'Multi-source data integration',
-    details: [
-      '25+ External APIs integrated',
-      'Real-time data synchronization',
-      'College Board, Common App, SAT data',
-      'High school transcript processing',
-      'Standardized test score analysis'
-    ],
-    icon: '🔗'
+    stats: ['25+ Sources', 'Real-time Sync', 'API Integrations'],
+    details: 'We aggregate data from multiple sources including IPEDS, College Board, and real-time admission data to ensure comprehensive coverage.'
   },
   {
     id: 'college-db',
     name: 'College Database',
     description: 'Comprehensive college data',
-    details: [
-      '2,847 US colleges and universities',
-      '10+ years of historical admission data',
-      'Real-time acceptance rate tracking',
-      'Program-specific requirements',
-      'Financial aid and scholarship data'
-    ],
-    icon: '🏛️'
+    stats: ['2,847 Colleges', 'Historical Data', 'Admission Trends'],
+    details: 'Our database contains detailed information on over 2,800 colleges with historical admission data spanning multiple years.'
   },
   {
     id: 'ai-engine',
     name: 'AI Analysis Engine',
     description: 'Advanced machine learning',
-    details: [
-      '94.3% prediction accuracy (ROC-AUC)',
-      'Neural network architecture',
-      'Pattern recognition algorithms',
-      'Holistic factor analysis',
-      'Continuous learning and improvement'
-    ],
-    icon: '🧠'
+    stats: ['94.3% Accuracy', 'Neural Networks', 'Pattern Recognition'],
+    details: 'Our proprietary AI engine uses advanced machine learning algorithms to analyze student profiles and predict admission chances.'
   },
   {
     id: 'application',
     name: 'Chancify AI',
     description: 'Student profile analysis',
-    details: [
-      '12,847+ student profiles analyzed',
-      '2.3 second average processing time',
-      '847K+ data points per student',
-      'Real-time admission predictions',
-      'Personalized recommendations'
-    ],
-    icon: '🎓'
+    stats: ['12,847 Students', 'Holistic Analysis', 'Real-time Results'],
+    details: 'The final application layer that provides students with personalized insights and actionable recommendations.'
   }
 ]
 
 export default function ROXStackSection() {
   const [activeLayer, setActiveLayer] = useState(0)
 
+  // FIXED: Better scroll tracking for the entire section
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+      const windowHeight = window.innerHeight
+      
+      // Find the section element
+      const section = document.querySelector('[data-section="stack"]')
+      if (!section) return
+      
+      const sectionTop = section.offsetTop
+      const sectionHeight = section.offsetHeight
+      
+      // Calculate progress within the section
+      const sectionProgress = Math.max(0, Math.min(1, (scrollY - sectionTop) / sectionHeight))
+      
+      // Update active layer based on progress
+      const newActiveLayer = Math.floor(sectionProgress * layers.length * 1.5)
+      setActiveLayer(Math.min(newActiveLayer, layers.length - 1))
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <section className="relative h-[400vh] bg-background">
+    <section 
+      data-section="stack"
+      className="relative h-[300vh] bg-black overflow-hidden"
+    >
       {/* Sticky Canvas Container */}
-      <div className="sticky top-0 h-screen w-full">
-        <Canvas
-          camera={{ position: [0, 0, 8], fov: 50 }}
-          gl={{ antialias: true, alpha: true }}
-          className="bg-transparent"
-          shadows
-        >
-          <Suspense fallback={null}>
-            <ScrollControls pages={4} damping={0.1}>
-              <ROXStackAnimation />
-              
-              <Scroll html>
-                {/* Left Information Panel */}
-                <div className="absolute left-8 top-1/2 -translate-y-1/2 max-w-md">
-                  <div className="space-y-8">
-                    <Reveal>
-                      <div className="text-primary font-semibold text-lg">Chancify AI Architecture</div>
-                    </Reveal>
+      <div className="sticky top-0 h-screen">
+        <div className="relative h-full">
+          {/* 3D Canvas - FIXED: More pages for longer scroll */}
+          <Canvas
+            shadows
+            camera={{ position: [0, 2, 5], fov: 50 }}
+            className="absolute inset-0"
+          >
+            <Suspense fallback={null}>
+              <ScrollControls pages={3} damping={0.1}>
+                <ROXStackAnimation />
+              </ScrollControls>
+            </Suspense>
+          </Canvas>
+
+          {/* Left Text Rail */}
+          <div className="absolute left-8 top-1/2 transform -translate-y-1/2 z-10 max-w-md">
+            <div className="space-y-8">
+              {layers.map((layer, index) => (
+                <div
+                  key={layer.id}
+                  className={`transition-all duration-500 ${
+                    activeLayer === index
+                      ? 'opacity-100 scale-100'
+                      : 'opacity-40 scale-95'
+                  }`}
+                >
+                  <div className="bg-black/80 backdrop-blur-sm border border-gray-800 rounded-2xl p-6">
+                    <div className="flex items-center space-x-3 mb-4">
+                      <div className="w-3 h-3 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
+                      <h3 className="text-xl font-bold text-white">{layer.name}</h3>
+                    </div>
+                    <p className="text-gray-300 text-sm mb-4">{layer.description}</p>
                     
-                    <div className="space-y-6">
-                      {layers.map((layer, index) => (
-                        <Reveal key={layer.id} delay={index * 0.1}>
-                          <div className={`
-                            transition-all duration-500 cursor-pointer
-                            ${activeLayer === index 
-                              ? 'text-primary scale-105' 
-                              : 'text-foreground/70 hover:text-foreground'
-                            }
-                          `}
-                          onClick={() => setActiveLayer(index)}
-                          >
-                            <div className="flex items-center gap-3 mb-2">
-                              <span className="text-2xl">{layer.icon}</span>
-                              <div className="text-xl font-bold">{layer.name}</div>
-                            </div>
-                            <div className="text-sm text-foreground/60 ml-8">
-                              {layer.description}
-                            </div>
-                          </div>
-                        </Reveal>
+                    <div className="space-y-2">
+                      {layer.stats.map((stat, statIndex) => (
+                        <div key={statIndex} className="flex items-center space-x-2">
+                          <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div>
+                          <span className="text-yellow-400 text-sm font-medium">{stat}</span>
+                        </div>
                       ))}
                     </div>
                   </div>
                 </div>
-
-                {/* Right Information Panel */}
-                <div className="absolute right-8 top-1/2 -translate-y-1/2 max-w-lg">
-                  <div className="space-y-8">
-                    <Reveal>
-                      <div className="text-primary font-semibold text-lg">System Overview</div>
-                    </Reveal>
-                    
-                    <Reveal delay={0.1}>
-                      <div className="bg-background-subtle rounded-2xl border border-border p-6">
-                        <div className="flex items-center gap-3 mb-4">
-                          <span className="text-3xl">{layers[activeLayer].icon}</span>
-                          <div>
-                            <h3 className="text-xl font-bold text-foreground">
-                              {layers[activeLayer].name}
-                            </h3>
-                            <p className="text-foreground/70">
-                              {layers[activeLayer].description}
-                            </p>
-                          </div>
-                        </div>
-                        
-                        <div className="space-y-3">
-                          {layers[activeLayer].details.map((detail, index) => (
-                            <div key={index} className="flex items-start gap-3">
-                              <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-                              <span className="text-foreground/80 text-sm">{detail}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </Reveal>
-
-                    {/* Stats */}
-                    <Reveal delay={0.2}>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-background-subtle rounded-xl border border-border p-4 text-center">
-                          <div className="text-2xl font-bold text-primary mb-1">94.3%</div>
-                          <div className="text-xs text-foreground/70">Accuracy</div>
-                        </div>
-                        <div className="bg-background-subtle rounded-xl border border-border p-4 text-center">
-                          <div className="text-2xl font-bold text-primary mb-1">2.3s</div>
-                          <div className="text-xs text-foreground/70">Processing</div>
-                        </div>
-                      </div>
-                    </Reveal>
-                  </div>
-                </div>
-              </Scroll>
-            </ScrollControls>
-          </Suspense>
-        </Canvas>
-      </div>
-
-      {/* Bottom Section */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-        <Reveal>
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-              <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
-              <span className="text-primary font-medium">Processing 847K+ data points per student</span>
+              ))}
             </div>
           </div>
-        </Reveal>
+
+          {/* Right Text Rail */}
+          <div className="absolute right-8 top-1/2 transform -translate-y-1/2 z-10 max-w-md">
+            <div className="space-y-8">
+              {layers.map((layer, index) => (
+                <div
+                  key={layer.id}
+                  className={`transition-all duration-500 ${
+                    activeLayer === index
+                      ? 'opacity-100 scale-100'
+                      : 'opacity-40 scale-95'
+                  }`}
+                >
+                  <div className="bg-black/80 backdrop-blur-sm border border-gray-800 rounded-2xl p-6">
+                    <div className="flex items-center space-x-3 mb-4">
+                      <div className="w-3 h-3 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
+                      <h3 className="text-xl font-bold text-white">Technical Details</h3>
+                    </div>
+                    <p className="text-gray-300 text-sm leading-relaxed">
+                      {layer.details}
+                    </p>
+                    
+                    <div className="mt-4 pt-4 border-t border-gray-800">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                        <span className="text-green-400 text-xs font-medium">Live System</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Center Title */}
+          <div className="absolute top-16 left-1/2 transform -translate-x-1/2 z-10 text-center">
+            <h2 className="text-4xl font-bold text-white mb-4">
+              Our <span className="text-yellow-400">AI Architecture</span>
+            </h2>
+            <p className="text-gray-400 text-lg max-w-2xl">
+              Scroll to explore how we process your data through our advanced AI pipeline
+            </p>
+          </div>
+
+          {/* Progress Indicator */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+            <div className="flex space-x-2">
+              {layers.map((_, index) => (
+                <div
+                  key={index}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    activeLayer === index
+                      ? 'bg-yellow-400 scale-125'
+                      : 'bg-gray-600'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )

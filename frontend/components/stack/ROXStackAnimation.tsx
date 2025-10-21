@@ -1,17 +1,16 @@
 'use client'
 
 import { useRef, useMemo, useState } from 'react'
-import { useFrame, useThree } from '@react-three/fiber'
+import { useFrame } from '@react-three/fiber'
 import { useScroll } from '@react-three/drei'
 import * as THREE from 'three'
-import Reveal from '../ui/Reveal'
 
-// Our AI architecture layers
+// Our AI architecture layers - smaller and more precise
 const layers = [
   {
     id: 'data-sources',
     name: 'Data Sources',
-    color: '#1C2230',
+    color: '#1A1F2E',
     description: 'Multi-source data integration',
     stats: ['25+ Sources', 'Real-time Sync', 'API Integrations'],
     icon: '🔗'
@@ -42,18 +41,18 @@ const layers = [
   }
 ]
 
-// 3D Layer Component
-function Layer({ layer, index, position, isActive }: any) {
+// 3D Layer Component - much smaller and more precise like ROX
+function Layer({ layer, index, position, isActive, scrollProgress }: any) {
   const meshRef = useRef<THREE.Group>(null)
-  const { viewport } = useThree()
+  const [hovered, setHovered] = useState(false)
 
-  // Create isometric 3D geometry
+  // Create much smaller, precise geometry like ROX
   const geometry = useMemo(() => {
     const shape = new THREE.Shape()
-    const size = 2.5
-    const radius = 0.2
+    const size = 0.6 // Much smaller - like ROX
+    const radius = 0.05
     
-    // Create rounded rectangle shape
+    // Create precise rounded rectangle
     shape.moveTo(-size + radius, -size)
     shape.lineTo(size - radius, -size)
     shape.quadraticCurveTo(size, -size, size, -size + radius)
@@ -65,81 +64,115 @@ function Layer({ layer, index, position, isActive }: any) {
     shape.quadraticCurveTo(-size, -size, -size + radius, -size)
 
     const extrudeSettings = {
-      depth: 0.15,
+      depth: 0.04, // Thinner
       bevelEnabled: true,
-      bevelThickness: 0.05,
-      bevelSize: 0.05,
-      bevelSegments: 3
+      bevelThickness: 0.01,
+      bevelSize: 0.01,
+      bevelSegments: 1
     }
 
     return new THREE.ExtrudeGeometry(shape, extrudeSettings)
   }, [])
 
   const material = useMemo(() => new THREE.MeshStandardMaterial({
-    color: layer.color,
+    color: isActive ? '#D4AF37' : layer.color,
     metalness: 0.1,
-    roughness: 0.8,
-    emissive: new THREE.Color('#000000'),
-    emissiveIntensity: 0.05
-  }), [layer.color])
+    roughness: 0.9,
+    emissive: isActive ? new THREE.Color('#D4AF37') : new THREE.Color('#000000'),
+    emissiveIntensity: isActive ? 0.15 : 0.02
+  }), [layer.color, isActive])
 
-  // Screw geometry
-  const screwGeometry = useMemo(() => new THREE.CylinderGeometry(0.08, 0.08, 0.12, 12), [])
+  // Smaller screw geometry
+  const screwGeometry = useMemo(() => new THREE.CylinderGeometry(0.02, 0.02, 0.03, 6), [])
   const screwMaterial = useMemo(() => new THREE.MeshStandardMaterial({
     color: '#2A2E36',
-    metalness: 0.6,
-    roughness: 0.4
+    metalness: 0.7,
+    roughness: 0.3
   }), [])
 
-  useFrame(() => {
+  useFrame((state) => {
     if (meshRef.current) {
-      // Isometric rotation
+      // Perfect isometric rotation like ROX
       meshRef.current.rotation.x = -Math.PI / 6
       meshRef.current.rotation.y = Math.PI / 4
       
+      // FIXED: Better scroll-based separation animation
+      const baseY = position[1]
+      const separationDistance = 0.2
+      const maxSeparation = 1.5
+      
+      // Calculate separation based on scroll progress
+      const separationProgress = Math.min(scrollProgress * 2, 1) // Extend scroll range
+      const targetY = baseY + (separationProgress * separationDistance * (index + 1))
+      
+      // Smooth lerp animation
+      meshRef.current.position.y = THREE.MathUtils.lerp(
+        meshRef.current.position.y, 
+        targetY, 
+        0.1
+      )
+      
       // Subtle hover animation
+      if (hovered) {
+        meshRef.current.scale.setScalar(1.02)
+        meshRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 3) * 0.005
+      } else {
+        meshRef.current.scale.setScalar(1.0)
+        meshRef.current.rotation.z = 0
+      }
+      
+      // Active layer glow
       if (isActive) {
-        meshRef.current.position.y = position[1] + Math.sin(Date.now() * 0.001) * 0.05
+        meshRef.current.position.y += Math.sin(state.clock.elapsedTime * 2) * 0.01
       }
     }
   })
 
   return (
-    <group ref={meshRef} position={position}>
+    <group 
+      ref={meshRef} 
+      position={position}
+      onPointerOver={() => setHovered(true)}
+      onPointerOut={() => setHovered(false)}
+    >
       {/* Main layer */}
-      <mesh geometry={geometry} material={material} castShadow receiveShadow>
-        {/* Edges for clean lines */}
-        <edgesGeometry args={[geometry]} />
-        <lineBasicMaterial color="#3a3f48" />
-      </mesh>
+      <mesh geometry={geometry} material={material} castShadow receiveShadow />
 
-      {/* Corner screws */}
-      {[[-1.1, 1.1], [1.1, 1.1], [-1.1, -1.1], [1.1, -1.1]].map(([x, z], i) => (
+      {/* Corner screws - smaller and more precise */}
+      {[[-0.45, 0.45], [0.45, 0.45], [-0.45, -0.45], [0.45, -0.45]].map(([x, z], i) => (
         <mesh
           key={i}
           geometry={screwGeometry}
           material={screwMaterial}
           rotation={[Math.PI / 2, 0, 0]}
-          position={[x, 0.08, z]}
+          position={[x, 0.02, z]}
         />
       ))}
 
-      {/* Center logo */}
-      <mesh position={[0, 0.08, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <ringGeometry args={[0.3, 0.5, 32]} />
-        <meshStandardMaterial color="#2F343C" metalness={0.3} roughness={0.5} />
+      {/* Center logo - smaller and more precise */}
+      <mesh position={[0, 0.025, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[0.08, 0.12, 12]} />
+        <meshStandardMaterial 
+          color={isActive ? '#D4AF37' : '#2F343C'} 
+          metalness={0.4} 
+          roughness={0.6} 
+        />
       </mesh>
 
-      {/* Layer icon */}
-      <mesh position={[0, 0.09, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[0.8, 0.8]} />
-        <meshBasicMaterial color="#D4AF37" transparent opacity={0.8} />
+      {/* Subtle texture overlay */}
+      <mesh position={[0, 0.025, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[0.4, 0.4]} />
+        <meshBasicMaterial 
+          color="#D4AF37" 
+          transparent 
+          opacity={isActive ? 0.3 : 0.1} 
+        />
       </mesh>
     </group>
   )
 }
 
-// Main Stack Scene
+// Main Stack Scene - FIXED scroll logic
 export default function ROXStackAnimation() {
   const groupRef = useRef<THREE.Group>(null)
   const [activeLayer, setActiveLayer] = useState(0)
@@ -151,52 +184,49 @@ export default function ROXStackAnimation() {
     const progress = scroll.offset
     const totalLayers = layers.length
     
-    // Calculate layer positions based on scroll
+    // FIXED: Better active layer calculation
+    const newActiveLayer = Math.floor(progress * totalLayers * 1.5) // Extend range
+    setActiveLayer(Math.min(newActiveLayer, totalLayers - 1))
+    
+    // FIXED: Continuous scroll animation throughout entire scroll
     layers.forEach((_, index) => {
       const child = groupRef.current?.children[index] as THREE.Group
       if (child) {
-        const quarter = Math.floor(progress * totalLayers)
-        const quarterProgress = (progress * totalLayers) % 1
+        // Calculate separation distance - works throughout entire scroll
+        const separationFactor = Math.max(0, progress - (index / (totalLayers * 1.5)))
+        const separationDistance = separationFactor * 1.2 // Increased separation
         
-        let targetY = index * 0.3
-        
-        if (index < quarter) {
-          targetY += 1.5 * (quarter / totalLayers)
-        } else if (index === quarter) {
-          targetY += 1.5 * quarterProgress * (quarter / totalLayers)
-        }
-        
+        // Smooth animation
+        const targetY = index * 0.1 + separationDistance
         child.position.y = THREE.MathUtils.lerp(child.position.y, targetY, 0.1)
-        
-        // Update active layer
-        if (index === quarter) {
-          setActiveLayer(index)
-        }
       }
     })
   })
 
   return (
     <group ref={groupRef}>
-      {/* Lighting */}
+      {/* Precise Lighting like ROX */}
       <ambientLight intensity={0.4} />
-      <directionalLight position={[10, 10, 5]} intensity={0.6} castShadow />
-      <pointLight position={[0, 5, 5]} intensity={0.3} color="#D4AF37" />
+      <directionalLight position={[5, 5, 5]} intensity={0.6} castShadow />
+      <pointLight position={[0, 3, 3]} intensity={0.3} color="#D4AF37" />
+      <pointLight position={[-3, 3, 3]} intensity={0.15} color="#D4AF37" />
+      <pointLight position={[3, 3, 3]} intensity={0.15} color="#D4AF37" />
 
-      {/* Layers */}
+      {/* Layers with proper spacing */}
       {layers.map((layer, index) => (
         <Layer
           key={layer.id}
           layer={layer}
           index={index}
-          position={[0, index * 0.3, 0]}
+          position={[0, index * 0.1, 0]}
           isActive={activeLayer === index}
+          scrollProgress={scroll.offset}
         />
       ))}
 
-      {/* Ground glow */}
-      <mesh position={[0, -1, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <ringGeometry args={[3, 5, 64]} />
+      {/* Subtle ground glow */}
+      <mesh position={[0, -0.3, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[1, 1.5, 32]} />
         <meshBasicMaterial color="#D4AF37" transparent opacity={0.1} />
       </mesh>
     </group>
