@@ -370,29 +370,6 @@ export default function WhyThisMattersPage() {
           </div>
         </motion.div>
 
-        {/* Call to Action Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, delay: 5.0 }}
-          className="text-center"
-        >
-          <h3 className="text-3xl font-bold text-white mb-6">
-            Join the <span className="text-yellow-400">Revolution</span>
-          </h3>
-          <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            Be part of the movement to make college admissions fair, transparent, and accessible for all students.
-          </p>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-block"
-          >
-            <Link href="/" className="bg-yellow-400 text-black px-8 py-4 rounded-xl font-semibold hover:bg-yellow-300 transition-colors">
-              Get Started Today
-            </Link>
-          </motion.div>
-        </motion.div>
       </div>
     </div>
   );

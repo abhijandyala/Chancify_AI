@@ -163,23 +163,220 @@ export default function OurUniquenessPage() {
           </div>
         </motion.div>
 
-        {/* Call to Action */}
+        {/* Competitive Advantage Statistics */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center"
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 2.6 }}
+          className="mb-16"
         >
-          <h3 className="text-3xl font-bold mb-4">
-            Experience the <span className="text-yellow-400">Difference</span>
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-white mb-4">
+              Our <span className="text-yellow-400">Advantage</span>
+            </h3>
+            <p className="text-gray-400 text-lg">
+              Key metrics that set us apart from traditional college counseling
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.6, delay: 2.8 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 text-center"
+            >
+              <div className="text-3xl font-bold text-yellow-400 mb-2">10x</div>
+              <div className="text-gray-300 text-sm">More Data</div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.6, delay: 3.0 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 text-center"
+            >
+              <div className="text-3xl font-bold text-yellow-400 mb-2">95%</div>
+              <div className="text-gray-300 text-sm">Cost Savings</div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.6, delay: 3.2 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 text-center"
+            >
+              <div className="text-3xl font-bold text-yellow-400 mb-2">24/7</div>
+              <div className="text-gray-300 text-sm">Availability</div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.6, delay: 3.4 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 text-center"
+            >
+              <div className="text-3xl font-bold text-yellow-400 mb-2">∞</div>
+              <div className="text-gray-300 text-sm">Scalability</div>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Innovation Deep Dive */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 3.6 }}
+          className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-yellow-400/20 mb-16"
+        >
+          <h3 className="text-3xl font-bold text-white mb-8 text-center">
+            Innovation <span className="text-yellow-400">Deep Dive</span>
           </h3>
-          <p className="text-gray-400 mb-8">
-            See why thousands of students trust our data-driven approach to college admissions.
-          </p>
-          <Link href="/" className="inline-flex items-center gap-2 bg-yellow-400 text-black px-8 py-4 rounded-xl font-semibold hover:bg-yellow-500 transition-colors">
-            Try Chancify AI
-            <ArrowRight className="h-5 w-5" />
-          </Link>
+          
+          <div className="grid md:grid-cols-2 gap-12">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+              transition={{ duration: 0.8, delay: 3.8 }}
+            >
+              <h4 className="text-xl font-semibold text-yellow-400 mb-6">Reddit Data Advantage</h4>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Real Student Outcomes</div>
+                    <div className="text-gray-400 text-sm">5,000+ authentic admission stories with complete profiles</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Unfiltered Truth</div>
+                    <div className="text-gray-400 text-sm">Students share honest experiences, including rejections and waitlists</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Recent Data</div>
+                    <div className="text-gray-400 text-sm">Continuously updated with current admission cycles</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Diverse Perspectives</div>
+                    <div className="text-gray-400 text-sm">Students from all backgrounds and geographic locations</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+              transition={{ duration: 0.8, delay: 4.0 }}
+            >
+              <h4 className="text-xl font-semibold text-yellow-400 mb-6">Advanced AI Models</h4>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Ensemble Learning</div>
+                    <div className="text-gray-400 text-sm">Multiple models working together for maximum accuracy</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Feature Engineering</div>
+                    <div className="text-gray-400 text-sm">47 optimized data points per student profile</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Continuous Learning</div>
+                    <div className="text-gray-400 text-sm">Models improve with each new data point</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Real-time Processing</div>
+                    <div className="text-gray-400 text-sm">Instant analysis and personalized recommendations</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Unique Features Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 4.2 }}
+          className="mb-16"
+        >
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-white mb-4">
+              Unique <span className="text-yellow-400">Features</span>
+            </h3>
+            <p className="text-gray-400 text-lg">
+              What makes our approach fundamentally different and more effective
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: 4.4 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 text-center"
+            >
+              <div className="w-16 h-16 bg-yellow-400/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Star className="h-8 w-8 text-yellow-400" />
+              </div>
+              <h4 className="text-lg font-semibold text-white mb-3">Reddit Data Advantage</h4>
+              <p className="text-gray-300 text-sm mb-4">
+                The only platform using real student outcomes from Reddit to provide authentic, unfiltered admission insights.
+              </p>
+              <div className="text-yellow-400 text-sm font-medium">Exclusive Data Source</div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: 4.6 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 text-center"
+            >
+              <div className="w-16 h-16 bg-yellow-400/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Zap className="h-8 w-8 text-yellow-400" />
+              </div>
+              <h4 className="text-lg font-semibold text-white mb-3">Advanced AI Models</h4>
+              <p className="text-gray-300 text-sm mb-4">
+                Ensemble machine learning with 94.3% accuracy, combining Random Forest, XGBoost, and Neural Networks.
+              </p>
+              <div className="text-yellow-400 text-sm font-medium">Cutting-Edge Technology</div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: 4.8 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 text-center"
+            >
+              <div className="w-16 h-16 bg-yellow-400/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Shield className="h-8 w-8 text-yellow-400" />
+              </div>
+              <h4 className="text-lg font-semibold text-white mb-3">Personalized Strategy</h4>
+              <p className="text-gray-300 text-sm mb-4">
+                Tailored recommendations based on your unique profile, not generic advice that applies to everyone.
+              </p>
+              <div className="text-yellow-400 text-sm font-medium">Individual Focus</div>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
     </div>

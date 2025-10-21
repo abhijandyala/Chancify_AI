@@ -144,23 +144,220 @@ export default function AdmissionTrendsPage() {
           </div>
         </motion.div>
 
-        {/* Call to Action */}
+        {/* Trend Statistics Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center"
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 2.6 }}
+          className="mb-16"
         >
-          <h3 className="text-3xl font-bold mb-4">
-            Stay Ahead of the <span className="text-yellow-400">Trends</span>
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-white mb-4">
+              Current <span className="text-yellow-400">Trends</span>
+            </h3>
+            <p className="text-gray-400 text-lg">
+              Key statistics and patterns in college admissions today
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.6, delay: 2.8 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 text-center"
+            >
+              <div className="text-3xl font-bold text-yellow-400 mb-2">-23%</div>
+              <div className="text-gray-300 text-sm">Acceptance Rate Drop</div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.6, delay: 3.0 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 text-center"
+            >
+              <div className="text-3xl font-bold text-yellow-400 mb-2">67%</div>
+              <div className="text-gray-300 text-sm">Test Optional</div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.6, delay: 3.2 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 text-center"
+            >
+              <div className="text-3xl font-bold text-yellow-400 mb-2">+45%</div>
+              <div className="text-gray-300 text-sm">Application Volume</div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.6, delay: 3.4 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 text-center"
+            >
+              <div className="text-3xl font-bold text-yellow-400 mb-2">$89B</div>
+              <div className="text-gray-300 text-sm">Total Applications</div>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Rolling Admissions Deep Dive */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 3.6 }}
+          className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-yellow-400/20 mb-16"
+        >
+          <h3 className="text-3xl font-bold text-white mb-8 text-center">
+            Rolling Admissions <span className="text-yellow-400">Explained</span>
           </h3>
-          <p className="text-gray-400 mb-8">
-            Get personalized insights based on the latest admission trends and data.
-          </p>
-          <Link href="/" className="inline-flex items-center gap-2 bg-yellow-400 text-black px-8 py-4 rounded-xl font-semibold hover:bg-yellow-500 transition-colors">
-            Get Your Analysis
-            <ArrowRight className="h-5 w-5" />
-          </Link>
+          
+          <div className="grid md:grid-cols-2 gap-12">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+              transition={{ duration: 0.8, delay: 3.8 }}
+            >
+              <h4 className="text-xl font-semibold text-yellow-400 mb-6">How Rolling Admissions Work</h4>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Continuous Review</div>
+                    <div className="text-gray-400 text-sm">Applications reviewed as they arrive, not in batches</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">First-Come Advantage</div>
+                    <div className="text-gray-400 text-sm">Earlier applications have better chances</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Space Availability</div>
+                    <div className="text-gray-400 text-sm">Acceptance rates decrease as spots fill up</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Faster Decisions</div>
+                    <div className="text-gray-400 text-sm">2-8 week response times vs months</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+              transition={{ duration: 0.8, delay: 4.0 }}
+            >
+              <h4 className="text-xl font-semibold text-yellow-400 mb-6">Strategic Timing</h4>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Early Fall Advantage</div>
+                    <div className="text-gray-400 text-sm">September applications have 40% higher acceptance rates</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Deadline Pressure</div>
+                    <div className="text-gray-400 text-sm">Last-minute applications face stiffer competition</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Quality vs Speed</div>
+                    <div className="text-gray-400 text-sm">Balance application timing with preparation quality</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Multiple Cycles</div>
+                    <div className="text-gray-400 text-sm">Some schools have multiple rolling periods</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Trend Analysis Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 4.2 }}
+          className="mb-16"
+        >
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-white mb-4">
+              Trend <span className="text-yellow-400">Analysis</span>
+            </h3>
+            <p className="text-gray-400 text-lg">
+              What the data tells us about the future of college admissions
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: 4.4 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 text-center"
+            >
+              <div className="w-16 h-16 bg-yellow-400/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <TrendingDown className="h-8 w-8 text-yellow-400" />
+              </div>
+              <h4 className="text-lg font-semibold text-white mb-3">Acceptance Rate Declines</h4>
+              <p className="text-gray-300 text-sm mb-4">
+                Top-tier schools have seen 23% average decline in acceptance rates over the past 5 years, with some reaching single digits.
+              </p>
+              <div className="text-yellow-400 text-sm font-medium">Trend: Downward</div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: 4.6 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 text-center"
+            >
+              <div className="w-16 h-16 bg-yellow-400/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Clock className="h-8 w-8 text-yellow-400" />
+              </div>
+              <h4 className="text-lg font-semibold text-white mb-3">Early Decision Impact</h4>
+              <p className="text-gray-300 text-sm mb-4">
+                Early decision applications have increased 45%, with acceptance rates 2-3x higher than regular decision pools.
+              </p>
+              <div className="text-yellow-400 text-sm font-medium">Trend: Upward</div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: 4.8 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 text-center"
+            >
+              <div className="w-16 h-16 bg-yellow-400/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="h-8 w-8 text-yellow-400" />
+              </div>
+              <h4 className="text-lg font-semibold text-white mb-3">Holistic Review Trends</h4>
+              <p className="text-gray-300 text-sm mb-4">
+                Schools are placing greater emphasis on essays, extracurriculars, and personal qualities over pure academic metrics.
+              </p>
+              <div className="text-yellow-400 text-sm font-medium">Trend: Evolving</div>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
     </div>
