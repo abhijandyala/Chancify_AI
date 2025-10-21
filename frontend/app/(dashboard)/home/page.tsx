@@ -410,26 +410,6 @@ export default function HomePage() {
         </div>
       </GlassCard>
 
-      {/* Quick Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <GlassCard className="p-6" hover>
-          <h3 className="card-heading mb-2">Colleges Watched</h3>
-          <p className="text-4xl font-bold gradient-text">0</p>
-          <p className="text-sm text-muted mt-2">Add colleges to your watchlist</p>
-        </GlassCard>
-        
-        <GlassCard className="p-6" hover>
-          <h3 className="card-heading mb-2">Goals Set</h3>
-          <p className="text-4xl font-bold gradient-text">0</p>
-          <p className="text-sm text-muted mt-2">Create goals to track progress</p>
-        </GlassCard>
-        
-        <GlassCard className="p-6" hover>
-          <h3 className="card-heading mb-2">Scholarships Found</h3>
-          <p className="text-4xl font-bold gradient-text">Coming Soon</p>
-          <p className="text-sm text-muted mt-2">Discover scholarships you qualify for</p>
-        </GlassCard>
-      </div>
     </div>
   )
 }
