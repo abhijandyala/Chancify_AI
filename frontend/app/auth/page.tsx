@@ -96,11 +96,11 @@ export default function AuthPage() {
         >
           {/* CAI Logo */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full mb-4">
-              <div className="text-black font-black text-2xl flex items-center">
-                <span className="text-black">C</span>
-                <span className="text-black">A</span>
-                <span className="text-yellow-500">I</span>
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-black rounded-full mb-4 border border-white/20">
+              <div className="text-white font-black text-2xl flex items-center">
+                <span className="text-white">C</span>
+                <span className="text-white">A</span>
+                <span className="text-yellow-400">I</span>
               </div>
             </div>
             <h1 className="text-3xl font-bold text-white mb-2">
