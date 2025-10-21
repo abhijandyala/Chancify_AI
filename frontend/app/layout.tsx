@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${montserrat.variable} font-sans antialiased`}>
+      <body className={`${montserrat.variable} font-sans antialiased bg-black dark:bg-black`}>
         <ThemeProvider>
           {children}
         </ThemeProvider>

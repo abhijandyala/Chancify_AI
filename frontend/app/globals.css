@@ -34,6 +34,10 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
   
+  .dark body {
+    @apply bg-black text-white;
+  }
+  
   /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
