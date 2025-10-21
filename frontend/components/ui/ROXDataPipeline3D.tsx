@@ -25,14 +25,15 @@ export default function ROXDataPipeline3D() {
     
     if (!container || cards.length === 0) return
 
-    // Set initial positions
+    // Set initial positions with proper z-index
     gsap.set(cards, {
       transformOrigin: 'center center',
       z: (i: number) => -i * 100,
       y: (i: number) => i * 20,
       rotationX: 0,
       rotationY: 0,
-      opacity: 0.8
+      opacity: 1,
+      zIndex: (i: number) => 10 - i
     })
 
     // Create the main timeline
@@ -53,7 +54,8 @@ export default function ROXDataPipeline3D() {
       y: (i: number) => i * -30,
       rotationY: (i: number) => (i - 2) * 10,
       rotationX: (i: number) => -5 + i * 2,
-      opacity: 0.9,
+      opacity: 1,
+      zIndex: (i: number) => 10 - i,
       duration: 1
     })
 
@@ -66,6 +68,7 @@ export default function ROXDataPipeline3D() {
         z: -i * 200 + 300,
         scale: 1.05,
         opacity: 1,
+        zIndex: 20,
         duration: 0.6
       }, startTime)
       
@@ -184,8 +187,13 @@ export default function ROXDataPipeline3D() {
             <div
               key={index}
               ref={el => cardsRef.current[index] = el}
-              className="absolute inset-0 bg-gray-800 border border-gray-600 rounded-2xl p-8 shadow-2xl transform-style-preserve-3d"
-              style={{ transformStyle: 'preserve-3d' }}
+              className="absolute inset-0 bg-gray-800 border border-gray-600 rounded-2xl p-8 shadow-2xl transform-style-preserve-3d opacity-100"
+              style={{ 
+                transformStyle: 'preserve-3d',
+                zIndex: 10 - index,
+                backgroundColor: '#1f2937',
+                opacity: 1
+              }}
             >
               <div className="h-full flex flex-col">
                 <div className="mb-4">
