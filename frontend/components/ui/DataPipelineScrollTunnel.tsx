@@ -16,14 +16,16 @@ function DataPipelineTunnel() {
     }
   })
   
-  const items = Array.from({ length: 14 })
+  // Reduce items for better mobile performance
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+  const items = Array.from({ length: isMobile ? 8 : 14 })
   
   return (
     <group ref={group}>
       {items.map((_, i) => (
         <Float key={i} speed={1.2} rotationIntensity={0.6} floatIntensity={0.8}>
           <mesh position={[Math.sin(i) * 2.2, Math.cos(i * 1.3) * 0.9, -i * 2.2]}>
-            <torusKnotGeometry args={[0.35, 0.12, 120, 16]} />
+            <torusKnotGeometry args={isMobile ? [0.35, 0.12, 60, 8] : [0.35, 0.12, 120, 16]} />
             <meshStandardMaterial 
               color={i % 3 === 0 ? '#fbbf24' : i % 3 === 1 ? '#ffffff' : '#f59e0b'} // Golden yellow and white colors
               metalness={0.65} 
@@ -39,16 +41,23 @@ function DataPipelineTunnel() {
 }
 
 export default function DataPipelineScrollTunnel() {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+  
   return (
     <div className="relative h-[220vh] bg-black text-white">
-      <Canvas className="sticky top-0 h-screen" camera={{ position: [0, 0, 4], fov: 62 }}>
+      <Canvas 
+        className="sticky top-0 h-screen" 
+        camera={{ position: [0, 0, 4], fov: 62 }}
+        performance={{ min: 0.5 }}
+        gl={{ antialias: !isMobile, alpha: true }}
+      >
         <color attach="background" args={["#000000"]} />
         <ambientLight intensity={0.4} />
         <directionalLight intensity={1.4} position={[4, 3, 5]} />
         <pointLight position={[-3, -2, 2]} color="#fbbf24" intensity={0.8} />
         <pointLight position={[3, 2, -2]} color="#ffffff" intensity={0.6} />
         <Environment preset="city" />
-        <Stars radius={60} depth={40} count={1500} factor={3} fade speed={1} />
+        <Stars radius={60} depth={40} count={isMobile ? 800 : 1500} factor={3} fade speed={1} />
 
         <ScrollControls pages={3} damping={0.18}>
           {/* 3D content follows the scroll */}
