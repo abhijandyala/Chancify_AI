@@ -52,11 +52,11 @@ export default function ROXDataPipeline3D() {
 
     // Phase 1: Smooth fan out with zoom effect
     tl.to(cards, {
-      z: (i: number) => -i * 120,
-      y: (i: number) => (i - 2) * -30 + 50, // Move cards lower
-      x: (i: number) => (i - 2) * 15,
-      rotationY: (i: number) => (i - 2) * 6,
-      rotationX: (i: number) => -2 + i * 1,
+      z: (i: number) => -i * 100,
+      y: (i: number) => (i - 2) * -25 + 50, // Move cards lower
+      x: (i: number) => (i - 2) * 12,
+      rotationY: (i: number) => (i - 2) * 5,
+      rotationX: (i: number) => -1.5 + i * 0.8,
       scale: 0.9, // Make cards smaller
       opacity: 1, // Keep fully opaque
       duration: 2,
@@ -82,9 +82,9 @@ export default function ROXDataPipeline3D() {
       
       // Move other cards back but keep them visible
       tl.to(cards.filter((_, j) => j !== i), {
-        z: (j: number) => -j * 120 - 80,
-        scale: 0.7,
-        opacity: 0.6, // Less dimming
+        z: (j: number) => -j * 120 - 50,
+        scale: 0.8,
+        opacity: 0.8, // Keep them more visible
         duration: 1,
         ease: 'power2.inOut'
       }, startTime)
@@ -94,7 +94,7 @@ export default function ROXDataPipeline3D() {
       
       // Reset all cards smoothly
       tl.to(cards, {
-        z: (j: number) => -j * 120,
+        z: (j: number) => -j * 100,
         scale: 0.9,
         opacity: 1,
         duration: 0.8,
