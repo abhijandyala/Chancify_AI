@@ -49,7 +49,7 @@ export const SearchableSelect = ({
 
 
   return (
-    <div className="w-full" ref={containerRef}>
+    <div className="w-full relative z-[99999]" ref={containerRef}>
       {label && <label className="label-text">{label}</label>}
       
       <div className="relative">
