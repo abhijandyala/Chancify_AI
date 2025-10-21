@@ -99,24 +99,83 @@ const LayerPlate = ({ index, total, activeIndex, scrollProgress, data }: {
     const clock = state.clock.getElapsedTime();
     const isActive = activeIndex === index;
     
-    // Calculate separation - layers separate as you scroll
-    const separationPerLayer = 0.8;
-    const maxSeparation = separationPerLayer * (total - 1);
-    const layerSeparation = scrollProgress * maxSeparation;
+    // Calculate which scroll part we're in (0-3)
+    const scrollPart = Math.floor(scrollProgress * 4);
+    const partProgress = (scrollProgress * 4) % 1;
     
-    // Each layer's position based on scroll
-    const baseY = -index * 0.15; // Initial stacked position
-    const targetY = baseY + (layerSeparation * (index / total));
+    // Base stacked position
+    const baseY = -index * 0.15;
     
+    // Animation logic for each scroll part
+    let targetY = baseY;
+    let targetRotationX = -Math.PI / 6;
+    let targetRotationY = Math.PI / 4;
+    let targetRotationZ = 0;
+    
+    if (scrollPart >= index) {
+      // This card has been "activated" in a previous part
+      if (scrollPart === index) {
+        // Current part - this card is being activated
+        if (partProgress < 0.3) {
+          // Phase 1: All cards fall down
+          targetY = baseY - 1.5;
+        } else if (partProgress < 0.6) {
+          // Phase 2: This card raises up
+          const raiseProgress = (partProgress - 0.3) / 0.3;
+          targetY = baseY + 0.8 + Math.sin(raiseProgress * Math.PI) * 0.3;
+          targetRotationX = -Math.PI / 6 + raiseProgress * 0.2;
+          targetRotationZ = raiseProgress * 0.1;
+        } else {
+          // Phase 3: This card settles in its final position
+          targetY = baseY + 0.8;
+          targetRotationX = -Math.PI / 6 + 0.2;
+          targetRotationZ = 0.1;
+        }
+      } else {
+        // This card is in its final raised position
+        targetY = baseY + 0.8;
+        targetRotationX = -Math.PI / 6 + 0.2;
+        targetRotationZ = 0.1;
+      }
+    } else {
+      // This card hasn't been activated yet
+      if (scrollPart > 0) {
+        // All cards fall down first
+        if (partProgress < 0.3) {
+          targetY = baseY - 1.5;
+        } else {
+          // Cards go back up to stacked position
+          const returnProgress = (partProgress - 0.3) / 0.7;
+          targetY = baseY - 1.5 + returnProgress * 1.5;
+        }
+      }
+    }
+    
+    // Smooth animation
     meshRef.current.position.y = THREE.MathUtils.lerp(
       meshRef.current.position.y,
       targetY,
       0.1
     );
-
-    // Subtle rotation on all layers
-    meshRef.current.rotation.y = Math.sin(clock * 0.3 + index) * 0.02;
     
+    meshRef.current.rotation.x = THREE.MathUtils.lerp(
+      meshRef.current.rotation.x,
+      targetRotationX,
+      0.1
+    );
+    
+    meshRef.current.rotation.y = THREE.MathUtils.lerp(
+      meshRef.current.rotation.y,
+      targetRotationY,
+      0.1
+    );
+    
+    meshRef.current.rotation.z = THREE.MathUtils.lerp(
+      meshRef.current.rotation.z,
+      targetRotationZ,
+      0.1
+    );
+
     // Active layer gets extra glow and slight float
     if (isActive) {
       meshRef.current.position.y += Math.sin(clock * 2) * 0.02;
@@ -208,10 +267,8 @@ const Scene = ({ scrollProgress, onActiveLayerChange }: {
 
   useFrame(() => {
     // Calculate which layer should be active based on scroll
-    const newActive = Math.min(
-      Math.floor(scrollProgress * STACK_DATA.length * 1.5),
-      STACK_DATA.length - 1
-    );
+    const scrollPart = Math.floor(scrollProgress * 4);
+    const newActive = Math.min(scrollPart, STACK_DATA.length - 1);
     
     if (newActive !== activeLayer) {
       setActiveLayer(newActive);
@@ -220,7 +277,7 @@ const Scene = ({ scrollProgress, onActiveLayerChange }: {
 
     // Gentle rotation of entire stack
     if (groupRef.current) {
-      groupRef.current.rotation.y = scrollProgress * Math.PI * 0.5;
+      groupRef.current.rotation.y = scrollProgress * Math.PI * 0.3;
     }
   });
 
@@ -298,6 +355,7 @@ export default function ROXStackAnimation() {
   }, []);
 
   const currentData = STACK_DATA[activeLayer];
+  const scrollPart = Math.floor(scrollProgress * 4);
 
   return (
     <div 
