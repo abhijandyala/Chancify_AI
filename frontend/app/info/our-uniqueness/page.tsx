@@ -4,13 +4,15 @@ import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Star, Zap, Shield, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import SophisticatedBackground from '@/components/ui/SophisticatedBackground';
 
 export default function OurUniquenessPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-black text-white">
+    <div ref={containerRef} className="min-h-screen bg-black text-white relative">
+      <SophisticatedBackground />
       {/* Navigation */}
       <motion.nav 
         initial={{ opacity: 0, y: -20 }}
