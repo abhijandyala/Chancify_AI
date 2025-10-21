@@ -4,7 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 // Force Node runtime (Edge can crash in v4)
 export const runtime = "nodejs";
 
-export const authOptions = {
+const authOptions = {
   debug: process.env.NEXTAUTH_DEBUG === "true",
   secret: process.env.NEXTAUTH_SECRET,
 
