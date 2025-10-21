@@ -8,12 +8,10 @@ import ROXTestimonial from '@/components/ui/ROXTestimonial'
 import ROXEnterprise from '@/components/ui/ROXEnterprise'
 import ROXMegaFooter from '@/components/ui/ROXMegaFooter'
 import SophisticatedBackground from '@/components/ui/SophisticatedBackground'
-import AuthRedirect from '@/components/ui/AuthRedirect'
 
 export default function ROXLandingPage() {
   return (
     <main className="bg-background text-foreground rox-bg-pattern relative">
-      <AuthRedirect />
       <SophisticatedBackground />
       <ROXNav />
       <ROXHero />

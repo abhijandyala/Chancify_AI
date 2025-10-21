@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { motion, AnimatePresence } from 'framer-motion'
+import SophisticatedBackground from '@/components/ui/SophisticatedBackground'
 
 export default function AuthPage() {
   const router = useRouter()
@@ -82,23 +83,8 @@ export default function AuthPage() {
 
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* ROX-style background with grid pattern */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `
-            radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0),
-            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
-            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: '20px 20px, 20px 20px, 20px 20px',
-          backgroundPosition: '0 0, 0 0, 0 0'
-        }} />
-        
-        {/* Subtle geometric shapes */}
-        <div className="absolute top-20 left-10 w-32 h-32 border border-yellow-400/20 rounded-full opacity-50" />
-        <div className="absolute bottom-20 right-10 w-24 h-24 border border-yellow-400/20 rounded-full opacity-30" />
-        <div className="absolute top-1/2 left-1/4 w-16 h-16 border border-yellow-400/20 rounded-full opacity-40" />
-      </div>
+      {/* Sophisticated background with intricate symbols and designs */}
+      <SophisticatedBackground />
 
       {/* Main content */}
       <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
@@ -111,10 +97,10 @@ export default function AuthPage() {
           {/* CAI Logo */}
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full mb-4">
-              <div className="text-black font-black text-2xl">
-                <span className="text-white">C</span>
-                <span className="text-white">A</span>
-                <span className="text-yellow-400">I</span>
+              <div className="text-black font-black text-2xl flex items-center">
+                <span className="text-black">C</span>
+                <span className="text-black">A</span>
+                <span className="text-yellow-500">I</span>
               </div>
             </div>
             <h1 className="text-3xl font-bold text-white mb-2">
@@ -176,7 +162,7 @@ export default function AuthPage() {
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-yellow-400 hover:bg-yellow-500 disabled:bg-yellow-400/50 text-black font-semibold py-3 rounded-xl transition-all duration-200"
+                className="w-full bg-white hover:bg-gray-100 disabled:bg-white/50 text-black font-semibold py-3 rounded-xl transition-all duration-200"
               >
                 {isLoading ? 'Please wait...' : 'Continue'}
               </Button>
@@ -210,7 +196,7 @@ export default function AuthPage() {
                 type="button"
                 onClick={handleGoogleAuth}
                 disabled={isLoading}
-                className="w-full bg-gray-800 hover:bg-gray-700 disabled:bg-gray-800/50 text-white font-semibold py-3 rounded-xl border border-gray-600 transition-all duration-200 flex items-center justify-center gap-3"
+                className="w-full bg-white hover:bg-gray-100 disabled:bg-white/50 text-black font-semibold py-3 rounded-xl border border-gray-300 transition-all duration-200 flex items-center justify-center gap-3"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
