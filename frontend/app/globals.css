@@ -3,44 +3,23 @@
 @tailwind utilities;
 
 :root {
-  /* Light Mode */
-  --bg-light: 245 245 245;
-  --glass-light: 255 255 255;
-  --text-light: 0 0 0;
-  --text-muted-light: 100 100 100;
-  --accent-amber: 255 179 0;
-  --accent-blue: 0 123 255;
-  --border-light: 230 230 230;
-}
-
-.dark {
-  /* Dark Mode */
-  --bg-dark: 0 0 0;
-  --glass-dark: 20 20 20;
-  --text-dark: 255 255 255;
-  --text-muted-dark: 160 160 160;
-  --accent-amber: 255 179 0;
-  --accent-blue: 0 123 255;
-  --border-dark: 40 40 40;
+  --radius: 16px;
+  scroll-behavior: smooth;
 }
 
 @layer base {
   * {
     @apply border-border;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  html, body {
+    height: 100%;
   }
   
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
-  }
-  
-  .dark body {
-    @apply bg-black text-white;
-  }
-  
-  /* Smooth scrolling */
-  html {
-    scroll-behavior: smooth;
   }
   
   /* Custom scrollbar */
@@ -62,18 +41,44 @@
 }
 
 @layer components {
-  /* Glassmorphism Card */
+  /* ROX-style Cards */
   .glass-card {
-    @apply backdrop-blur-xl bg-white/70 dark:bg-black/70 
-           border border-gray-200/50 dark:border-white/10
+    @apply backdrop-blur-xl bg-background-subtle/70 
+           border border-border/50
            rounded-2xl shadow-lg;
   }
   
-  /* Glassmorphism Panel (stronger) */
+  /* ROX-style Panel (stronger) */
   .glass-panel {
-    @apply backdrop-blur-2xl bg-white/80 dark:bg-black/80
-           border border-gray-200/60 dark:border-white/15
+    @apply backdrop-blur-2xl bg-background-subtle/80
+           border border-border/60
            rounded-3xl shadow-xl;
+  }
+  
+  /* Premium Button Styles */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground transition-transform will-change-transform 
+           hover:scale-[1.02] active:scale-[.98] 
+           shadow-[0_10px_30px_-10px_rgba(212,175,55,.35)];
+  }
+  
+  /* Link Underline Animation */
+  .link-underline {
+    @apply relative;
+  }
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -2px;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width .3s, left .3s;
+  }
+  .link-underline:hover::after {
+    left: 0;
+    width: 100%;
   }
   
   /* Accent Button */
@@ -255,6 +260,37 @@
   .home-shine:hover::before {
     left: 100%;
     opacity: 1;
+  }
+}
+
+/* Motion System */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ROX-style Animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes stagger {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

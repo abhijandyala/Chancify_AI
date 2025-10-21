@@ -7,6 +7,7 @@ import { SimpleSearchableSelect } from '@/components/ui/SimpleSearchableSelect'
 import { Button } from '@/components/ui/Button'
 import { useState } from 'react'
 import { MAJORS } from '@/lib/majors'
+import Reveal from '@/components/ui/Reveal'
 
 export const dynamic = 'force-dynamic'
 
@@ -45,30 +46,33 @@ export default function HomePage() {
 
   return (
     <div className="space-y-6 pb-8">
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold gradient-text mb-2">
-          Welcome to Chancify AI
-        </h1>
-        <p className="text-muted text-lg mb-2">
-          The only AI that considers your unique story - not just numbers
-        </p>
-        <p className="text-xs text-gray-400 mb-4">
-          *Predictions are based on statistical analysis and historical data. Results are estimates and may not reflect actual admission outcomes.
-        </p>
-        <div className="mt-4 p-4 glass-card rounded-xl border border-amber-500/20">
-          <p className="text-sm text-amber-200">
-            <strong>What makes us different:</strong> While others only look at GPA and test scores, 
-            we analyze your leadership, passion projects, research, awards, and the complete picture 
-            of who you are as a person.
+      <Reveal>
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold gradient-text mb-2">
+            Welcome to Chancify AI
+          </h1>
+          <p className="text-foreground-muted text-lg mb-2">
+            The only AI that considers your unique story - not just numbers
           </p>
+          <p className="text-xs text-foreground-dim mb-4">
+            *Predictions are based on statistical analysis and historical data. Results are estimates and may not reflect actual admission outcomes.
+          </p>
+          <div className="mt-4 p-4 glass-card rounded-xl border border-primary/20">
+            <p className="text-sm text-primary/90">
+              <strong>What makes us different:</strong> While others only look at GPA and test scores, 
+              we analyze your leadership, passion projects, research, awards, and the complete picture 
+              of who you are as a person.
+            </p>
+          </div>
         </div>
-      </div>
+      </Reveal>
 
       {/* Academic Basics */}
-      <GlassCard className="p-8">
-        <h2 className="subsection-heading mb-6">
-          Academic Foundation
-        </h2>
+      <Reveal delay={0.1}>
+        <GlassCard className="p-8 hover:border-primary/40 transition-colors">
+          <h2 className="text-2xl font-bold text-foreground mb-6">
+            Academic Foundation
+          </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           <Input
@@ -400,15 +404,16 @@ export default function HomePage() {
           />
         </div>
 
-        <div className="mt-8 flex gap-4">
-          <Button variant="accent" className="text-lg px-8 py-4">
-            Calculate My Chances
-          </Button>
-          <Button variant="ghost">
-            Save Profile
-          </Button>
-        </div>
-      </GlassCard>
+          <div className="mt-8 flex gap-4">
+            <Button className="btn-primary text-lg px-8 py-4">
+              Calculate My Chances
+            </Button>
+            <Button variant="ghost" className="text-lg px-8 py-4">
+              Save Profile
+            </Button>
+          </div>
+        </GlassCard>
+      </Reveal>
 
     </div>
   )

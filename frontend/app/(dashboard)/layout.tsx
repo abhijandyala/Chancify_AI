@@ -3,6 +3,7 @@
 import { useState, Suspense } from 'react'
 import { Sidebar } from '@/components/layout/Sidebar'
 import { SettingsPanel } from '@/components/layout/SettingsPanel'
+import ROXNav from '@/components/layout/ROXNav'
 
 export default function DashboardLayout({
   children,
@@ -12,7 +13,8 @@ export default function DashboardLayout({
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-black dark:to-gray-900">
+    <div className="min-h-screen bg-background text-foreground">
+      <ROXNav />
       <Sidebar />
       <div className="ml-64 p-6 pb-20">
         <div className="max-w-7xl mx-auto">

@@ -10,28 +10,52 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-montserrat)', 'sans-serif'],
+        sans: ['var(--font-montserrat)', 'Inter', 'sans-serif'],
       },
       colors: {
-        background: 'rgb(var(--bg-light) / <alpha-value>)',
-        foreground: 'rgb(var(--text-light) / <alpha-value>)',
-        glass: {
-          light: 'rgb(var(--glass-light) / <alpha-value>)',
-          dark: 'rgb(var(--glass-dark) / <alpha-value>)',
+        background: {
+          DEFAULT: '#0B0D10', // page
+          subtle: '#0E1116',  // cards
+          raised: '#12151C',  // popovers
         },
-        border: 'rgb(var(--border-light) / <alpha-value>)',
+        foreground: {
+          DEFAULT: '#E8EAED',
+          muted: '#AEB4BE',
+          dim: '#8B92A1',
+        },
+        primary: {
+          DEFAULT: '#D4AF37', // gold
+          foreground: '#0B0D10',
+        },
         accent: {
-          amber: 'rgb(var(--accent-amber) / <alpha-value>)',
-          blue: 'rgb(var(--accent-blue) / <alpha-value>)',
+          DEFAULT: '#7BDFFF', // for small hints only
+        },
+        border: {
+          DEFAULT: '#1C2230',
+        },
+        success: {
+          DEFAULT: '#16a34a',
+        },
+        warning: {
+          DEFAULT: '#f59e0b',
+        },
+        danger: {
+          DEFAULT: '#ef4444',
         },
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-out',
         'spin-slow': 'spin 1s ease-in-out',
         'slide-in-right': 'slideInRight 0.3s ease-out',
+        'fade-up': 'fadeUp 0.6s ease-out',
+        'stagger': 'stagger 0.08s ease-out',
       },
       backdropBlur: {
         strong: '20px',
+      },
+      borderRadius: {
+        'xl': '16px',
+        '2xl': '20px',
       },
     },
   },
