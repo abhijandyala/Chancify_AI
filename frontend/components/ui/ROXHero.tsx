@@ -32,10 +32,10 @@ export default function ROXHero() {
         <Reveal delay={0.2}>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <Button className="btn-primary text-lg px-8 py-4">
-              Start Now, Skip Demos
+              Sign In
             </Button>
             <Button variant="ghost" className="text-lg px-8 py-4 border border-border">
-              Contact Sales
+              Try for Now
             </Button>
           </div>
         </Reveal>
