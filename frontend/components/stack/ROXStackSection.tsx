@@ -47,7 +47,7 @@ export default function ROXStackSection() {
       const windowHeight = window.innerHeight
       
       // Find the section element
-      const section = document.querySelector('[data-section="stack"]')
+      const section = document.querySelector('[data-section="stack"]') as HTMLElement
       if (!section) return
       
       const sectionTop = section.offsetTop
