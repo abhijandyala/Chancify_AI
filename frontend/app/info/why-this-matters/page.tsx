@@ -47,9 +47,9 @@ export default function WhyThisMattersPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-xl text-gray-300 max-w-3xl mx-auto"
+            className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed"
           >
-            College admissions are broken. We're fixing it with data, transparency, and accessibility for all students.
+            College admissions have become increasingly opaque, expensive, and unfair. We're revolutionizing the system with data-driven transparency, making admission intelligence accessible to all students regardless of their background or financial resources.
           </motion.p>
         </motion.div>
 

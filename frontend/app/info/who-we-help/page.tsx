@@ -47,9 +47,9 @@ export default function WhoWeHelpPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-xl text-gray-300 max-w-3xl mx-auto"
+            className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed"
           >
-            Empowering students and families with data-driven insights to make informed college decisions and maximize admission chances.
+            We serve students, families, and counselors with comprehensive data-driven insights to make informed college decisions. Our platform democratizes access to admission intelligence that was previously only available to the privileged few.
           </motion.p>
         </motion.div>
 
@@ -69,9 +69,23 @@ export default function WhoWeHelpPage() {
               <h2 className="text-4xl font-bold mb-6">
                 Students and Families <span className="text-yellow-400 bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">Deserve Better</span>
               </h2>
-              <p className="text-lg text-gray-300 leading-relaxed">
+              <p className="text-lg text-gray-300 leading-relaxed mb-6">
                 We serve high school students, their families, and college counselors who need accurate, data-driven insights to navigate the complex college admission process. Our platform democratizes access to admission intelligence that was previously only available to the privileged few.
               </p>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <p className="text-gray-300">Students from all backgrounds seeking realistic college admission assessments</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <p className="text-gray-300">Families navigating the complex and expensive college application process</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <p className="text-gray-300">Counselors and advisors who need data-driven tools to better serve their students</p>
+                </div>
+              </div>
             </motion.div>
             <motion.div 
               initial={{ opacity: 0, x: 30 }}
@@ -133,9 +147,15 @@ export default function WhoWeHelpPage() {
               </motion.div>
               <div>
                 <h3 className="text-xl font-semibold mb-3 text-white">High School Students</h3>
-                <p className="text-gray-300 group-hover:text-gray-200 transition-colors">
+                <p className="text-gray-300 group-hover:text-gray-200 transition-colors mb-4">
                   Juniors and seniors who need realistic college lists, admission probability assessments, and strategic guidance for their applications. Our platform helps them understand their chances and make informed decisions about where to apply.
                 </p>
+                <div className="space-y-2 text-sm text-gray-400">
+                  <div>• Realistic college list building</div>
+                  <div>• Admission probability assessments</div>
+                  <div>• Strategic application guidance</div>
+                  <div>• Scholarship opportunity identification</div>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -156,9 +176,15 @@ export default function WhoWeHelpPage() {
               </motion.div>
               <div>
                 <h3 className="text-xl font-semibold mb-3 text-white">Parents and Families</h3>
-                <p className="text-gray-300 group-hover:text-gray-200 transition-colors">
+                <p className="text-gray-300 group-hover:text-gray-200 transition-colors mb-4">
                   Families navigating the college admission process for the first time or seeking better outcomes for subsequent children. We provide transparency and peace of mind during this stressful and expensive process.
                 </p>
+                <div className="space-y-2 text-sm text-gray-400">
+                  <div>• Financial planning and cost analysis</div>
+                  <div>• Timeline and deadline management</div>
+                  <div>• Application strategy optimization</div>
+                  <div>• Stress reduction through transparency</div>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -179,9 +205,15 @@ export default function WhoWeHelpPage() {
               </motion.div>
               <div>
                 <h3 className="text-xl font-semibold mb-3 text-white">College Counselors</h3>
-                <p className="text-gray-300 group-hover:text-gray-200 transition-colors">
+                <p className="text-gray-300 group-hover:text-gray-200 transition-colors mb-4">
                   High school counselors and independent college consultants who need data-driven tools to better serve their students. Our platform enhances their ability to provide accurate guidance and realistic expectations.
                 </p>
+                <div className="space-y-2 text-sm text-gray-400">
+                  <div>• Data-driven student assessments</div>
+                  <div>• College fit analysis tools</div>
+                  <div>• Trend analysis and reporting</div>
+                  <div>• Professional development resources</div>
+                </div>
               </div>
             </div>
           </motion.div>

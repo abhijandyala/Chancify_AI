@@ -54,9 +54,9 @@ export default function OurProcessPage() {
             <h2 className="text-4xl font-bold mb-6">
               Data-Driven <span className="text-yellow-400">Analysis</span>
             </h2>
-            <p className="text-lg text-gray-300 max-w-4xl mx-auto">
-              Our proprietary AI engine processes thousands of data points to provide accurate admission predictions. We combine traditional metrics with real-world outcomes to give you the most reliable assessment possible.
-            </p>
+          <p className="text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
+            Our proprietary AI engine processes thousands of data points to provide accurate admission predictions. We combine traditional metrics with real-world outcomes from Reddit, IPEDS data, and historical patterns to give you the most reliable assessment possible.
+          </p>
           </div>
         </motion.div>
 
