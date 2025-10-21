@@ -54,7 +54,7 @@ export default function DataPipelineScrollTunnel() {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
   
   return (
-    <div className="relative h-[200vh] bg-black text-white">
+    <div className="relative h-[240vh] bg-black text-white">
       <Canvas 
         className="sticky top-0 h-screen" 
         camera={{ position: [0, 0, 4], fov: 62 }}
@@ -69,7 +69,7 @@ export default function DataPipelineScrollTunnel() {
         <Environment preset="city" />
         <Stars radius={60} depth={40} count={isMobile ? 600 : 1000} factor={3} fade speed={1} />
 
-        <ScrollControls pages={4} damping={0.18}>
+        <ScrollControls pages={6} damping={0.18}>
           {/* 3D content follows the scroll */}
           <Scroll>
             <DataPipelineTunnel />
@@ -77,7 +77,8 @@ export default function DataPipelineScrollTunnel() {
 
           {/* HTML overlays per section */}
           <Scroll html>
-            <section className="h-screen grid place-items-center">
+            {/* Intro section - shorter */}
+            <section className="h-[50vh] grid place-items-center">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }} 
                 whileInView={{ opacity: 1, y: 0 }} 
@@ -93,12 +94,13 @@ export default function DataPipelineScrollTunnel() {
               </motion.div>
             </section>
             
-            <section className="h-screen grid place-items-center">
+            {/* Card 1 - Left side */}
+            <section className="h-[50vh] grid place-items-center">
               <motion.div 
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
+                initial={{ opacity: 0, x: -50 }} 
+                whileInView={{ opacity: 1, x: 0 }} 
                 viewport={{ amount: 0.6 }} 
-                className="backdrop-blur-md/30 border border-yellow-400/20 rounded-xl px-6 py-4 bg-black/60 max-w-2xl mx-auto"
+                className="backdrop-blur-md/30 border border-yellow-400/20 rounded-xl px-6 py-4 bg-black/60 max-w-sm mx-auto ml-8"
               >
                 <div className="flex items-center gap-4 mb-4">
                   <motion.div
@@ -130,12 +132,13 @@ export default function DataPipelineScrollTunnel() {
               </motion.div>
             </section>
 
-            <section className="h-screen grid place-items-center">
+            {/* Card 2 - Right side */}
+            <section className="h-[50vh] grid place-items-center">
               <motion.div 
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
+                initial={{ opacity: 0, x: 50 }} 
+                whileInView={{ opacity: 1, x: 0 }} 
                 viewport={{ amount: 0.6 }} 
-                className="backdrop-blur-md/30 border border-yellow-400/20 rounded-xl px-6 py-4 bg-black/60 max-w-2xl mx-auto"
+                className="backdrop-blur-md/30 border border-yellow-400/20 rounded-xl px-6 py-4 bg-black/60 max-w-sm mx-auto mr-8"
               >
                 <div className="flex items-center gap-4 mb-4">
                   <motion.div
@@ -167,12 +170,13 @@ export default function DataPipelineScrollTunnel() {
               </motion.div>
             </section>
 
-            <section className="h-screen grid place-items-center">
+            {/* Card 3 - Left side */}
+            <section className="h-[50vh] grid place-items-center">
               <motion.div 
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
+                initial={{ opacity: 0, x: -50 }} 
+                whileInView={{ opacity: 1, x: 0 }} 
                 viewport={{ amount: 0.6 }} 
-                className="backdrop-blur-md/30 border border-yellow-400/20 rounded-xl px-6 py-4 bg-black/60 max-w-2xl mx-auto"
+                className="backdrop-blur-md/30 border border-yellow-400/20 rounded-xl px-6 py-4 bg-black/60 max-w-sm mx-auto ml-8"
               >
                 <div className="flex items-center gap-4 mb-4">
                   <motion.div
@@ -199,6 +203,120 @@ export default function DataPipelineScrollTunnel() {
                   <div className="flex justify-between">
                     <span className="text-gray-400">94.3%</span>
                     <span className="text-yellow-400">Accuracy</span>
+                  </div>
+                </div>
+              </motion.div>
+            </section>
+
+            {/* Card 4 - Right side */}
+            <section className="h-[50vh] grid place-items-center">
+              <motion.div 
+                initial={{ opacity: 0, x: 50 }} 
+                whileInView={{ opacity: 1, x: 0 }} 
+                viewport={{ amount: 0.6 }} 
+                className="backdrop-blur-md/30 border border-yellow-400/20 rounded-xl px-6 py-4 bg-black/60 max-w-sm mx-auto mr-8"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <motion.div
+                    animate={{ rotate: [0, 5, -5, 0] }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                  >
+                    <Users className="h-8 w-8 text-yellow-400" />
+                  </motion.div>
+                  <h4 className="text-xl font-semibold text-white">Data Processing</h4>
+                </div>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">GPA Standardization</span>
+                    <span className="text-yellow-400">4.0 Scale</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Test Score Norm</span>
+                    <span className="text-yellow-400">Percentile</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">EC Categorization</span>
+                    <span className="text-yellow-400">15+ Types</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Feature Engineering</span>
+                    <span className="text-yellow-400">50+ Features</span>
+                  </div>
+                </div>
+              </motion.div>
+            </section>
+
+            {/* Card 5 - Left side */}
+            <section className="h-[50vh] grid place-items-center">
+              <motion.div 
+                initial={{ opacity: 0, x: -50 }} 
+                whileInView={{ opacity: 1, x: 0 }} 
+                viewport={{ amount: 0.6 }} 
+                className="backdrop-blur-md/30 border border-yellow-400/20 rounded-xl px-6 py-4 bg-black/60 max-w-sm mx-auto ml-8"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 2.5, repeat: Infinity, delay: 0.8 }}
+                  >
+                    <Database className="h-8 w-8 text-yellow-400" />
+                  </motion.div>
+                  <h4 className="text-xl font-semibold text-white">Data Sources</h4>
+                </div>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">IPEDS Database</span>
+                    <span className="text-yellow-400">2,847 Colleges</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">College Board</span>
+                    <span className="text-yellow-400">SAT/ACT Data</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Reddit Stories</span>
+                    <span className="text-yellow-400">5,000+ Posts</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Historical Rates</span>
+                    <span className="text-yellow-400">2018-2023</span>
+                  </div>
+                </div>
+              </motion.div>
+            </section>
+
+            {/* Card 6 - Right side */}
+            <section className="h-[50vh] grid place-items-center">
+              <motion.div 
+                initial={{ opacity: 0, x: 50 }} 
+                whileInView={{ opacity: 1, x: 0 }} 
+                viewport={{ amount: 0.6 }} 
+                className="backdrop-blur-md/30 border border-yellow-400/20 rounded-xl px-6 py-4 bg-black/60 max-w-sm mx-auto mr-8"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                  >
+                    <BarChart3 className="h-8 w-8 text-yellow-400" />
+                  </motion.div>
+                  <h4 className="text-xl font-semibold text-white">ML Pipeline</h4>
+                </div>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Feature Engineering</span>
+                    <span className="text-yellow-400">Automated</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Ensemble Methods</span>
+                    <span className="text-yellow-400">3 Models</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Cross-Validation</span>
+                    <span className="text-yellow-400">5-Fold</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Model Accuracy</span>
+                    <span className="text-yellow-400">94.3%</span>
                   </div>
                 </div>
               </motion.div>
