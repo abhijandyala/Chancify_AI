@@ -12,7 +12,7 @@ if (typeof window !== 'undefined') {
 export default function ROXDataPipeline3D() {
   const sectionRef = useRef<HTMLElement>(null)
   const stackRef = useRef<HTMLDivElement>(null)
-  const layersRef = useRef<HTMLDivElement[]>([])
+  const layersRef = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -158,7 +158,7 @@ export default function ROXDataPipeline3D() {
           >
             {/* Top layer - Database Architecture */}
             <article 
-              ref={el => el && (layersRef.current[0] = el)}
+              ref={el => el && (layersRef.current[0] = el as HTMLDivElement)}
               className="absolute inset-0 grid place-items-center p-6 rounded-3xl bg-gradient-to-b from-white/4 to-white/2 border border-white/8 shadow-2xl transform-style-preserve-3d will-change-transform"
               style={{
                 background: 'linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)), color-mix(in oklab, #0f1520, #0a0f18 30%)',
@@ -179,7 +179,7 @@ export default function ROXDataPipeline3D() {
 
             {/* Layer 2 - Reddit Scraper */}
             <article 
-              ref={el => el && (layersRef.current[1] = el)}
+              ref={el => el && (layersRef.current[1] = el as HTMLDivElement)}
               className="absolute inset-0 grid place-items-center p-6 rounded-3xl bg-gradient-to-b from-white/4 to-white/2 border border-white/8 shadow-2xl transform-style-preserve-3d will-change-transform"
               style={{
                 background: 'linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)), color-mix(in oklab, #0f1520, #0a0f18 30%)',
@@ -200,7 +200,7 @@ export default function ROXDataPipeline3D() {
 
             {/* Layer 3 - Probability Engine */}
             <article 
-              ref={el => el && (layersRef.current[2] = el)}
+              ref={el => el && (layersRef.current[2] = el as HTMLDivElement)}
               className="absolute inset-0 grid place-items-center p-6 rounded-3xl bg-gradient-to-b from-white/4 to-white/2 border border-white/8 shadow-2xl transform-style-preserve-3d will-change-transform"
               style={{
                 background: 'linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)), color-mix(in oklab, #0f1520, #0a0f18 30%)',
@@ -221,7 +221,7 @@ export default function ROXDataPipeline3D() {
 
             {/* Layer 4 - Real Data Sources */}
             <article 
-              ref={el => el && (layersRef.current[3] = el)}
+              ref={el => el && (layersRef.current[3] = el as HTMLDivElement)}
               className="absolute inset-0 grid place-items-center p-6 rounded-3xl bg-gradient-to-b from-white/4 to-white/2 border border-white/8 shadow-2xl transform-style-preserve-3d will-change-transform"
               style={{
                 background: 'linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)), color-mix(in oklab, #0f1520, #0a0f18 30%)',
@@ -245,7 +245,7 @@ export default function ROXDataPipeline3D() {
 
             {/* Layer 5 - ML Pipeline */}
             <article 
-              ref={el => el && (layersRef.current[4] = el)}
+              ref={el => el && (layersRef.current[4] = el as HTMLDivElement)}
               className="absolute inset-0 grid place-items-center p-6 rounded-3xl bg-gradient-to-b from-white/4 to-white/2 border border-white/8 shadow-2xl transform-style-preserve-3d will-change-transform"
               style={{
                 background: 'linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)), color-mix(in oklab, #0f1520, #0a0f18 30%)',
