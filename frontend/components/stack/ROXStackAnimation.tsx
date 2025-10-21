@@ -97,73 +97,76 @@ const LayerPlate = ({ index, total, activeIndex, scrollProgress, data }: {
     if (!meshRef.current) return;
 
     const clock = state.clock.getElapsedTime();
+    
+    // FIXED: Only the active card should be glowing
     const isActive = activeIndex === index;
     
-    // IMPROVED: Better scroll calculation with more even distribution
+    // IMPROVED: Better scroll calculation
     const scrollPart = Math.floor(scrollProgress * 4);
     const partProgress = (scrollProgress * 4) % 1;
     
-    // Base stacked position - CENTERED at beginning
-    const baseY = 0; // Start centered
-    const stackOffset = -index * 0.12; // Smaller stack spacing
+    // FIXED: Proper stacked positioning - cards should be stacked, not phasing
+    const baseY = 0;
+    const stackSpacing = 0.15; // Proper spacing between cards
+    const stackOffset = -index * stackSpacing;
     
-    // IMPROVED: Clean animation logic
+    // CLEAN ANIMATION LOGIC
     let targetY = baseY + stackOffset;
-    let targetRotationX = -Math.PI / 4; // Show more flat side
+    let targetRotationX = -Math.PI / 4;
     let targetRotationY = Math.PI / 4;
     let targetRotationZ = 0;
     
     if (scrollPart > index) {
-      // This card has been activated - KEEP IT DOWN AND OUT OF THE WAY
-      targetY = baseY - 3.0; // Keep it way down
+      // This card has been activated - KEEP IT DOWN
+      targetY = baseY - 3.0;
       targetRotationX = -Math.PI / 4;
       targetRotationZ = 0;
     } else if (scrollPart === index) {
       // Current part - this card is being activated
-      if (partProgress < 0.15) {
-        // Phase 1: Deck smoothly goes down
-        const deckDownProgress = partProgress / 0.15;
-        targetY = baseY + stackOffset - deckDownProgress * 1.5;
+      if (partProgress < 0.2) {
+        // Phase 1: OTHER cards go down smoothly (not this one)
+        targetY = baseY + stackOffset; // This card stays in place
         targetRotationX = -Math.PI / 4;
-      } else if (partProgress < 0.25) {
-        // Phase 2: Deck stays down, card starts to rise
-        targetY = baseY + stackOffset - 1.5;
+      } else if (partProgress < 0.3) {
+        // Phase 2: This card starts to rise
+        targetY = baseY + stackOffset;
         targetRotationX = -Math.PI / 4;
-      } else if (partProgress < 0.75) {
+      } else if (partProgress < 0.8) {
         // Phase 3: This card rises up smoothly
-        const riseProgress = (partProgress - 0.25) / 0.5;
-        const smoothRise = Math.sin(riseProgress * Math.PI * 0.5); // Smooth curve
-        targetY = baseY + stackOffset - 1.5 + smoothRise * 3.5; // Smooth rise
-        targetRotationX = -Math.PI / 4 + smoothRise * 0.3; // Show more flat side
+        const riseProgress = (partProgress - 0.3) / 0.5;
+        const smoothRise = Math.sin(riseProgress * Math.PI * 0.5);
+        targetY = baseY + stackOffset + smoothRise * 3.0;
+        targetRotationX = -Math.PI / 4 + smoothRise * 0.3;
         targetRotationZ = smoothRise * 0.2;
       } else {
-        // Phase 4: Card settles in final position
-        targetY = baseY + stackOffset + 2.0; // Final raised position
-        targetRotationX = -Math.PI / 4 + 0.3; // Show more flat side
+        // Phase 4: This card settles in final position
+        targetY = baseY + stackOffset + 3.0;
+        targetRotationX = -Math.PI / 4 + 0.3;
         targetRotationZ = 0.2;
       }
     } else {
       // This card hasn't been activated yet
       if (scrollPart > 0) {
-        // Deck behavior - smooth down and up
-        if (partProgress < 0.15) {
-          // Deck goes down smoothly
-          const deckDownProgress = partProgress / 0.15;
-          targetY = baseY + stackOffset - deckDownProgress * 1.5;
-        } else if (partProgress < 0.25) {
-          // Deck stays down
-          targetY = baseY + stackOffset - 1.5;
+        // FIXED: Only OTHER cards go down, not the active one
+        if (partProgress < 0.2) {
+          // OTHER cards go down smoothly
+          const deckDownProgress = partProgress / 0.2;
+          const smoothDown = Math.sin(deckDownProgress * Math.PI * 0.5);
+          targetY = baseY + stackOffset - smoothDown * 2.0;
+        } else if (partProgress < 0.3) {
+          // OTHER cards stay down
+          targetY = baseY + stackOffset - 2.0;
         } else {
-          // Deck goes back up smoothly
-          const deckUpProgress = (partProgress - 0.25) / 0.75;
-          const smoothUp = Math.sin(deckUpProgress * Math.PI * 0.5); // Smooth curve
-          targetY = baseY + stackOffset - 1.5 + smoothUp * 1.5;
+          // OTHER cards go back up smoothly
+          const deckUpProgress = (partProgress - 0.3) / 0.7;
+          const smoothUp = Math.sin(deckUpProgress * Math.PI * 0.5);
+          targetY = baseY + stackOffset - 2.0 + smoothUp * 2.0;
         }
       }
     }
     
-    // IMPROVED: Smoother animation with better lerp
-    const lerpSpeed = 0.08; // Slower, smoother lerp
+    // SMOOTH ANIMATION
+    const lerpSpeed = 0.06; // Slower for smoother animation
     
     meshRef.current.position.y = THREE.MathUtils.lerp(
       meshRef.current.position.y,
@@ -189,17 +192,18 @@ const LayerPlate = ({ index, total, activeIndex, scrollProgress, data }: {
       lerpSpeed
     );
 
-    // Active layer gets extra glow and slight float
+    // FIXED: Only active card gets glow and float
     if (isActive) {
       meshRef.current.position.y += Math.sin(clock * 2) * 0.02;
     }
   });
 
+  // FIXED: Only active card should be gold
   const isActive = activeIndex === index;
   const accentColor = isActive ? '#D4AF37' : '#3a3f48';
 
   return (
-    <group ref={meshRef} position={[0, -index * 0.12, 0]}>
+    <group ref={meshRef} position={[0, -index * 0.15, 0]}>
       {/* Main plate body */}
       <mesh 
         geometry={plateGeometry} 
@@ -288,9 +292,9 @@ const Scene = ({ scrollProgress, onActiveLayerChange }: {
       onActiveLayerChange(newActive);
     }
 
-    // Gentle rotation of entire stack
+    // FIXED: Only rotate when scrolling
     if (groupRef.current) {
-      groupRef.current.rotation.y = scrollProgress * Math.PI * 0.2; // Slower rotation
+      groupRef.current.rotation.y = scrollProgress * Math.PI * 0.1; // Slower rotation
     }
   });
 
