@@ -273,7 +273,7 @@ const Scene = ({ scrollProgress, onActiveLayerChange }: {
 export default function ROXStackAnimation() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeLayer, setActiveLayer] = useState(0);
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
