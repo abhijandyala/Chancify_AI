@@ -54,7 +54,7 @@ export default function DataPipelineScrollTunnel() {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
   
   return (
-    <div className="relative h-[240vh] bg-black text-white">
+    <div className="relative h-[220vh] bg-black text-white">
       <Canvas 
         className="sticky top-0 h-screen" 
         camera={{ position: [0, 0, 4], fov: 62 }}
@@ -69,7 +69,7 @@ export default function DataPipelineScrollTunnel() {
         <Environment preset="city" />
         <Stars radius={60} depth={40} count={isMobile ? 600 : 1000} factor={3} fade speed={1} />
 
-        <ScrollControls pages={6} damping={0.18}>
+        <ScrollControls pages={5.5} damping={0.18}>
           {/* 3D content follows the scroll */}
           <Scroll>
             <DataPipelineTunnel />
@@ -77,8 +77,8 @@ export default function DataPipelineScrollTunnel() {
 
           {/* HTML overlays per section */}
           <Scroll html>
-            {/* Intro section - shorter */}
-            <section className="h-[50vh] grid place-items-center">
+            {/* Intro section - much shorter */}
+            <section className="h-[30vh] grid place-items-center">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }} 
                 whileInView={{ opacity: 1, y: 0 }} 
