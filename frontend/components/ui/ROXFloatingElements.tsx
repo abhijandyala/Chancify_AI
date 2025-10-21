@@ -53,53 +53,8 @@ export default function ROXFloatingElements() {
       ref={containerRef}
       className="relative bg-black py-24 overflow-hidden"
     >
-      {/* Background pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/50 to-black" />
-      
-      {/* Floating elements */}
-      <div className="absolute inset-0">
-        {/* Geometric shapes */}
-        <FloatingElement 
-          speed={0.5} 
-          size="lg" 
-          className="top-20 left-10"
-        >
-          <div className="w-full h-full bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 rounded-full blur-sm" />
-        </FloatingElement>
-
-        <FloatingElement 
-          speed={0.8} 
-          size="md" 
-          className="top-40 right-20"
-        >
-          <div className="w-full h-full bg-gradient-to-br from-blue-400/20 to-blue-600/20 rounded-lg blur-sm" />
-        </FloatingElement>
-
-        <FloatingElement 
-          speed={0.3} 
-          size="sm" 
-          className="top-60 left-1/4"
-        >
-          <div className="w-full h-full bg-gradient-to-br from-purple-400/20 to-purple-600/20 rounded-full blur-sm" />
-        </FloatingElement>
-
-        <FloatingElement 
-          speed={0.6} 
-          size="md" 
-          className="top-80 right-1/3"
-        >
-          <div className="w-full h-full bg-gradient-to-br from-green-400/20 to-green-600/20 rounded-lg blur-sm" />
-        </FloatingElement>
-
-        <FloatingElement 
-          speed={0.4} 
-          size="lg" 
-          className="top-96 left-1/2"
-        >
-          <div className="w-full h-full bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 rounded-full blur-sm" />
-        </FloatingElement>
-
-      </div>
+      {/* Clean background */}
+      <div className="absolute inset-0 bg-black" />
 
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-8 text-center">
@@ -112,13 +67,13 @@ export default function ROXFloatingElements() {
           className="mb-16"
         >
           <div className="inline-block px-4 py-2 bg-yellow-900/20 border border-yellow-600/30 rounded-full mb-6">
-            <span className="text-yellow-400 text-sm font-medium">Hackathon Project</span>
+            <span className="text-yellow-400 text-sm font-medium">Data Pipeline</span>
           </div>
           <h2 className="text-4xl font-bold text-white mb-4">
             Our <span className="text-yellow-400">Data Pipeline</span>
           </h2>
           <p className="text-gray-400 text-lg">
-            Built for a hackathon - real data sources, machine learning, and probability calculations
+            Real data sources, machine learning, and probability calculations
           </p>
         </motion.div>
 

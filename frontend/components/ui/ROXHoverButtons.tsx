@@ -75,8 +75,8 @@ const HoverButton = ({
 export default function ROXHoverButtons() {
   return (
     <div className="relative bg-black py-16">
-      {/* Background pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/50 to-black" />
+      {/* Clean background */}
+      <div className="absolute inset-0 bg-black" />
       
       <div className="relative z-10 max-w-4xl mx-auto px-8 text-center">
         {/* Header */}

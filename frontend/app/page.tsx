@@ -4,7 +4,6 @@ import ROXClientMarquee from '@/components/ui/ROXClientMarquee'
 import ROXAgenticWorkflows from '@/components/ui/ROXAgenticWorkflows'
 import ROXLogoMarquee from '@/components/ui/ROXLogoMarquee'
 import ROXHoverButtons from '@/components/ui/ROXHoverButtons'
-import ROXGradientText from '@/components/ui/ROXGradientText'
 import ROXFloatingElements from '@/components/ui/ROXFloatingElements'
 import ROXTestimonial from '@/components/ui/ROXTestimonial'
 import ROXEnterprise from '@/components/ui/ROXEnterprise'
@@ -19,7 +18,6 @@ export default function ROXLandingPage() {
       <ROXAgenticWorkflows />
       <ROXLogoMarquee />
       <ROXHoverButtons />
-      <ROXGradientText />
       <ROXFloatingElements />
       <ROXTestimonial />
       <ROXEnterprise />
