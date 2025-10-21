@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/Button'
 import { motion, AnimatePresence } from 'framer-motion'
 import SophisticatedBackground from '@/components/ui/SophisticatedBackground'
 import NextAuthGoogleButton from '@/components/auth/NextAuthGoogleButton'
-import FallbackGoogleButton from '@/components/auth/FallbackGoogleButton'
+import CorrectedGoogleOAuth from '@/components/auth/CorrectedGoogleOAuth'
 
 export default function AuthPage() {
   const router = useRouter()
@@ -173,7 +173,7 @@ export default function AuthPage() {
               </div>
 
               {/* Google OAuth Button */}
-              <FallbackGoogleButton />
+              <CorrectedGoogleOAuth />
             </form>
           </div>
         </motion.div>
