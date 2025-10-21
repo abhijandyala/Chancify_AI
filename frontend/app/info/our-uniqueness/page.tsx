@@ -1,21 +1,29 @@
 'use client'
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { Star, Zap, Shield, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 export default function OurUniquenessPage() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div ref={containerRef} className="min-h-screen bg-black text-white">
       {/* Navigation */}
-      <nav className="border-b border-gray-800">
+      <motion.nav 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="border-b border-gray-800"
+      >
         <div className="max-w-7xl mx-auto px-4 py-4">
-          <Link href="/" className="text-yellow-400 font-semibold">
+          <Link href="/" className="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors">
             ← Back to Home
           </Link>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 py-16">

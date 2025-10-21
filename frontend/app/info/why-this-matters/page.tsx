@@ -1,21 +1,29 @@
 'use client'
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { TrendingUp, Shield, Zap, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 export default function WhyThisMattersPage() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div ref={containerRef} className="min-h-screen bg-black text-white">
       {/* Navigation */}
-      <nav className="border-b border-gray-800">
+      <motion.nav 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="border-b border-gray-800"
+      >
         <div className="max-w-7xl mx-auto px-4 py-4">
-          <Link href="/" className="text-yellow-400 font-semibold">
+          <Link href="/" className="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors">
             ← Back to Home
           </Link>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 py-16">
@@ -25,12 +33,22 @@ export default function WhyThisMattersPage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            Why This <span className="text-yellow-400">Matters</span>
-          </h1>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <motion.h1 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-5xl md:text-6xl font-bold mb-6"
+          >
+            Why This <span className="text-yellow-400 bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">Matters</span>
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="text-xl text-gray-300 max-w-3xl mx-auto"
+          >
             College admissions are broken. We're fixing it with data, transparency, and accessibility for all students.
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* Main Content - Layout 3 Style */}
