@@ -50,9 +50,15 @@ const STACK_DATA = [
 // ============================================
 // 3D LAYER PLATE COMPONENT
 // ============================================
-const LayerPlate = ({ index, total, activeIndex, scrollProgress, data }) => {
-  const meshRef = useRef();
-  const edgesRef = useRef();
+const LayerPlate = ({ index, total, activeIndex, scrollProgress, data }: {
+  index: number;
+  total: number;
+  activeIndex: number;
+  scrollProgress: number;
+  data: any;
+}) => {
+  const meshRef = useRef<THREE.Group>(null);
+  const edgesRef = useRef<THREE.LineSegments>(null);
   
   // Create rounded rectangle shape
   const plateGeometry = useMemo(() => {
@@ -193,8 +199,11 @@ const LayerPlate = ({ index, total, activeIndex, scrollProgress, data }) => {
 // ============================================
 // 3D SCENE COMPONENT
 // ============================================
-const Scene = ({ scrollProgress, onActiveLayerChange }) => {
-  const groupRef = useRef();
+const Scene = ({ scrollProgress, onActiveLayerChange }: {
+  scrollProgress: number;
+  onActiveLayerChange: (index: number) => void;
+}) => {
+  const groupRef = useRef<THREE.Group>(null);
   const [activeLayer, setActiveLayer] = useState(0);
 
   useFrame(() => {
