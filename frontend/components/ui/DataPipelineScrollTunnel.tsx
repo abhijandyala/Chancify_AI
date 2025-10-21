@@ -5,6 +5,7 @@ import { ScrollControls, Scroll, Float, Stars, Environment } from '@react-three/
 import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import * as THREE from 'three'
+import { Database, Code, BarChart3, Users } from 'lucide-react'
 
 function DataPipelineTunnel() {
   const group = useRef<THREE.Group>(null)
@@ -53,7 +54,7 @@ export default function DataPipelineScrollTunnel() {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
   
   return (
-    <div className="relative h-[120vh] bg-black text-white">
+    <div className="relative h-[200vh] bg-black text-white">
       <Canvas 
         className="sticky top-0 h-screen" 
         camera={{ position: [0, 0, 4], fov: 62 }}
@@ -68,7 +69,7 @@ export default function DataPipelineScrollTunnel() {
         <Environment preset="city" />
         <Stars radius={60} depth={40} count={isMobile ? 600 : 1000} factor={3} fade speed={1} />
 
-        <ScrollControls pages={2} damping={0.18}>
+        <ScrollControls pages={4} damping={0.18}>
           {/* 3D content follows the scroll */}
           <Scroll>
             <DataPipelineTunnel />
@@ -91,31 +92,113 @@ export default function DataPipelineScrollTunnel() {
                 </p>
               </motion.div>
             </section>
+            
             <section className="h-screen grid place-items-center">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }} 
                 whileInView={{ opacity: 1, y: 0 }} 
                 viewport={{ amount: 0.6 }} 
-                className="text-center backdrop-blur-md/30 border border-yellow-400/20 rounded-xl px-8 py-6 bg-black/60 max-w-4xl mx-auto"
+                className="backdrop-blur-md/30 border border-yellow-400/20 rounded-xl px-6 py-4 bg-black/60 max-w-2xl mx-auto"
               >
-                <h2 className="text-3xl md:text-5xl font-semibold text-white mb-4">
-                  <span className="text-yellow-400">5,000+</span> Real Stories
-                </h2>
-                <p className="text-gray-300 text-lg max-w-3xl mx-auto mb-6">
-                  Authentic admission experiences from Reddit, processed through custom Python scrapers and machine learning models.
-                </p>
-                <div className="grid grid-cols-3 gap-6 text-center">
-                  <div>
-                    <div className="text-2xl font-bold text-yellow-400">2,847</div>
-                    <div className="text-gray-400 text-sm">Colleges</div>
+                <div className="flex items-center gap-4 mb-4">
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                  >
+                    <Database className="h-8 w-8 text-yellow-400" />
+                  </motion.div>
+                  <h4 className="text-xl font-semibold text-white">Database Architecture</h4>
+                </div>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">PostgreSQL</span>
+                    <span className="text-yellow-400">Primary DB</span>
                   </div>
-                  <div>
-                    <div className="text-2xl font-bold text-yellow-400">12,847</div>
-                    <div className="text-gray-400 text-sm">Profiles</div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">2,847 colleges</span>
+                    <span className="text-yellow-400">Records</span>
                   </div>
-                  <div>
-                    <div className="text-2xl font-bold text-yellow-400">94.3%</div>
-                    <div className="text-gray-400 text-sm">Accuracy</div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">12,847 profiles</span>
+                    <span className="text-yellow-400">Students</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">5+ years</span>
+                    <span className="text-yellow-400">History</span>
+                  </div>
+                </div>
+              </motion.div>
+            </section>
+
+            <section className="h-screen grid place-items-center">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                viewport={{ amount: 0.6 }} 
+                className="backdrop-blur-md/30 border border-yellow-400/20 rounded-xl px-6 py-4 bg-black/60 max-w-2xl mx-auto"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <motion.div
+                    animate={{ scale: [1, 1.1, 1] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                  >
+                    <Code className="h-8 w-8 text-yellow-400" />
+                  </motion.div>
+                  <h4 className="text-xl font-semibold text-white">Reddit Scraper</h4>
+                </div>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Python</span>
+                    <span className="text-yellow-400">Language</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">BeautifulSoup</span>
+                    <span className="text-yellow-400">Parsing</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Selenium</span>
+                    <span className="text-yellow-400">Dynamic Content</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">1000+ daily</span>
+                    <span className="text-yellow-400">Posts</span>
+                  </div>
+                </div>
+              </motion.div>
+            </section>
+
+            <section className="h-screen grid place-items-center">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                viewport={{ amount: 0.6 }} 
+                className="backdrop-blur-md/30 border border-yellow-400/20 rounded-xl px-6 py-4 bg-black/60 max-w-2xl mx-auto"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <motion.div
+                    animate={{ y: [0, -3, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                  >
+                    <BarChart3 className="h-8 w-8 text-yellow-400" />
+                  </motion.div>
+                  <h4 className="text-xl font-semibold text-white">Probability Engine</h4>
+                </div>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Random Forest</span>
+                    <span className="text-yellow-400">Model 1</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">XGBoost</span>
+                    <span className="text-yellow-400">Model 2</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Neural Networks</span>
+                    <span className="text-yellow-400">Model 3</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">94.3%</span>
+                    <span className="text-yellow-400">Accuracy</span>
                   </div>
                 </div>
               </motion.div>
