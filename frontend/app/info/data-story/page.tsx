@@ -142,12 +142,7 @@ export default function DataStoryPage() {
             whileHover={{ scale: 1.05, y: -5 }}
             className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300 group"
           >
-            <motion.div
-              animate={{ rotate: [0, 10, -10, 0] }}
-              transition={{ duration: 2, repeat: Infinity, delay: 0 }}
-            >
-              <Code className="h-8 w-8 text-yellow-400 mb-4 group-hover:text-yellow-300 transition-colors" />
-            </motion.div>
+            <Code className="h-8 w-8 text-yellow-400 mb-4 group-hover:text-yellow-300 transition-colors" />
             <h3 className="text-xl font-semibold mb-3 text-white">Custom Python Scraper</h3>
             <p className="text-gray-300 group-hover:text-gray-200 transition-colors">
               Built with BeautifulSoup and Selenium to extract structured data from Reddit posts, including GPA, test scores, extracurriculars, and admission outcomes.
@@ -161,12 +156,7 @@ export default function DataStoryPage() {
             whileHover={{ scale: 1.05, y: -5 }}
             className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300 group"
           >
-            <motion.div
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-            >
-              <BarChart3 className="h-8 w-8 text-yellow-400 mb-4 group-hover:text-yellow-300 transition-colors" />
-            </motion.div>
+            <BarChart3 className="h-8 w-8 text-yellow-400 mb-4 group-hover:text-yellow-300 transition-colors" />
             <h3 className="text-xl font-semibold mb-3 text-white">Data Processing Pipeline</h3>
             <p className="text-gray-300 group-hover:text-gray-200 transition-colors">
               Automated cleaning, normalization, and feature engineering to transform raw Reddit posts into structured data for machine learning models.
@@ -180,12 +170,7 @@ export default function DataStoryPage() {
             whileHover={{ scale: 1.05, y: -5 }}
             className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300 group"
           >
-            <motion.div
-              animate={{ y: [0, -5, 0] }}
-              transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-            >
-              <Users className="h-8 w-8 text-yellow-400 mb-4 group-hover:text-yellow-300 transition-colors" />
-            </motion.div>
+            <Users className="h-8 w-8 text-yellow-400 mb-4 group-hover:text-yellow-300 transition-colors" />
             <h3 className="text-xl font-semibold mb-3 text-white">Real Student Stories</h3>
             <p className="text-gray-300 group-hover:text-gray-200 transition-colors">
               Capturing authentic experiences from students who share their complete application journey, including rejections, waitlists, and acceptances.
