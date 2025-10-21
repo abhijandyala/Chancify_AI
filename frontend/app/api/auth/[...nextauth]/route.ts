@@ -35,6 +35,11 @@ const authOptions: NextAuthOptions = {
       return session;
     },
   },
+
+  // Remove custom error page to use default NextAuth error handling
+  // pages: {
+  //   error: '/auth/error',
+  // },
 };
 
 const handler = NextAuth(authOptions);

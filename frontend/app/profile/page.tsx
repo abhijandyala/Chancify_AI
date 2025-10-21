@@ -2,33 +2,35 @@
 
 import { useEffect, useState, Suspense } from 'react'
 import { useRouter } from 'next/navigation'
-import { useSession, signOut } from 'next-auth/react'
 
 function ProfileContent() {
   const router = useRouter()
-  const { data: session, status } = useSession()
   const [userData, setUserData] = useState<any>(null)
 
   useEffect(() => {
-    if (status === 'loading') return // Still loading
-    
-    if (status === 'unauthenticated') {
-      router.push('/auth')
-      return
+    // Check for stored user data
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('auth_token')
+      const storedUserData = localStorage.getItem('user_data')
+      
+      if (!token) {
+        router.push('/auth')
+        return
+      }
+      
+      if (storedUserData) {
+        setUserData(JSON.parse(storedUserData))
+      }
     }
-    
-    if (session?.user) {
-      setUserData({
-        email: session.user.email,
-        name: session.user.name,
-        picture: session.user.image,
-        provider: (session as any).provider || 'google'
-      })
-    }
-  }, [session, status, router])
+  }, [router])
 
   const handleLogout = () => {
-    signOut({ callbackUrl: '/auth' })
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('auth_token')
+      localStorage.removeItem('user_data')
+      localStorage.removeItem('provider')
+    }
+    router.push('/auth')
   }
 
   return (
