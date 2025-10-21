@@ -1,14 +1,27 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 
+// Check if required environment variables are set
+const googleClientId = process.env.GOOGLE_CLIENT_ID
+const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET
+const nextAuthSecret = process.env.NEXTAUTH_SECRET
+
+if (!googleClientId || !googleClientSecret) {
+  console.error('Missing Google OAuth credentials. Please set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in your environment variables.')
+}
+
+if (!nextAuthSecret) {
+  console.error('Missing NEXTAUTH_SECRET. Please set this in your environment variables.')
+}
+
 const handler = NextAuth({
-  providers: [
+  providers: googleClientId && googleClientSecret ? [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: googleClientId,
+      clientSecret: googleClientSecret,
       // default scopes already include openid email profile
     }),
-  ],
+  ] : [],
   session: { strategy: "jwt" },
   callbacks: {
     async jwt({ token, account }) {
@@ -19,6 +32,9 @@ const handler = NextAuth({
       (session as any).provider = token.provider;
       return session;
     },
+  },
+  pages: {
+    error: '/auth/error', // Custom error page
   },
 })
 
