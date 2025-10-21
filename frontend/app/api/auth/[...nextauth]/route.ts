@@ -1,49 +1,40 @@
-import NextAuth from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
 
-// Check if required environment variables are set
-const googleClientId = process.env.GOOGLE_CLIENT_ID
-const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET
-const nextAuthSecret = process.env.NEXTAUTH_SECRET || 'fallback-secret-for-build'
-const nextAuthUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000'
+// Force Node runtime (Edge can crash in v4)
+export const runtime = "nodejs";
 
-console.log('NextAuth Configuration:', {
-  hasGoogleClientId: !!googleClientId,
-  hasGoogleClientSecret: !!googleClientSecret,
-  hasNextAuthSecret: !!nextAuthSecret,
-  nextAuthUrl
-})
+export const authOptions = {
+  debug: process.env.NEXTAUTH_DEBUG === "true",
+  secret: process.env.NEXTAUTH_SECRET,
 
-const handler = NextAuth({
-  providers: googleClientId && googleClientSecret ? [
+  session: { strategy: "jwt" },
+
+  providers: [
     GoogleProvider({
-      clientId: googleClientId,
-      clientSecret: googleClientSecret,
-      // default scopes already include openid email profile
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      // default scopes: openid email profile
     }),
-  ] : [],
-  session: { 
-    strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-  },
-  jwt: {
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-  },
+  ],
+
   callbacks: {
-    async jwt({ token, account }) {
-      if (account) token.provider = account.provider;
+    async jwt({ token, account, profile }) {
+      if (account) {
+        token.provider = account.provider;
+      }
+      if (profile?.email) token.email = profile.email as string;
       return token;
     },
     async session({ session, token }) {
-      (session as any).provider = token.provider;
+      // surface provider + email in session
+      // @ts-ignore
+      session.provider = token.provider;
+      if (token.email) session.user.email = token.email as string;
       return session;
     },
   },
-  pages: {
-    error: '/auth/error', // Custom error page
-  },
-  debug: process.env.NODE_ENV === 'development',
-  secret: nextAuthSecret,
-})
+};
 
-export { handler as GET, handler as POST }
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };

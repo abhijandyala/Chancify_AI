@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
-// import { SessionProvider } from '@/components/providers/SessionProvider'
+import Providers from './providers'
 
 const montserrat = Montserrat({ 
   subsets: ['latin'],
@@ -23,9 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${montserrat.variable} font-sans antialiased bg-background text-foreground`}>
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        <Providers>
+          <ThemeProvider>
+            {children}
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   )

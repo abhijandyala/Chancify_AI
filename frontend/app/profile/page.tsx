@@ -1,46 +1,34 @@
 'use client'
 
 import { useEffect, useState, Suspense } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+import { useSession, signOut } from 'next-auth/react'
 
 function ProfileContent() {
   const router = useRouter()
-  const searchParams = useSearchParams()
+  const { data: session, status } = useSession()
   const [userData, setUserData] = useState<any>(null)
 
   useEffect(() => {
-    // Check if this is an OAuth callback success
-    const authSuccess = searchParams.get('auth')
-    if (authSuccess === 'success') {
-      // Store OAuth success data
-      const oauthUserData = {
-        email: 'abhijandyala@gmail.com',
-        name: 'Abhi Jandyala',
-        picture: 'https://lh3.googleusercontent.com/a/default-user',
-        google_id: 'demo_google_id',
-        provider: 'google'
-      }
-      
-      localStorage.setItem('auth_token', 'oauth_success_token')
-      localStorage.setItem('user_data', JSON.stringify(oauthUserData))
-      localStorage.setItem('provider', 'google')
-      setUserData(oauthUserData)
-    } else {
-      // Simple authentication check - redirect to auth if no token
-      const token = localStorage.getItem('auth_token')
-      const storedUserData = localStorage.getItem('user_data')
-      
-      if (!token) {
-        router.push('/auth')
-      } else if (storedUserData) {
-        setUserData(JSON.parse(storedUserData))
-      }
+    if (status === 'loading') return // Still loading
+    
+    if (status === 'unauthenticated') {
+      router.push('/auth')
+      return
     }
-  }, [router, searchParams])
+    
+    if (session?.user) {
+      setUserData({
+        email: session.user.email,
+        name: session.user.name,
+        picture: session.user.image,
+        provider: session.provider || 'google'
+      })
+    }
+  }, [session, status, router])
 
   const handleLogout = () => {
-    localStorage.removeItem('auth_token')
-    router.push('/auth')
+    signOut({ callbackUrl: '/auth' })
   }
 
   return (
