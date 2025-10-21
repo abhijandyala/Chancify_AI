@@ -3,7 +3,7 @@ import ROXHero from '@/components/ui/ROXHero'
 import ROXClientMarquee from '@/components/ui/ROXClientMarquee'
 import ROXAgenticWorkflows from '@/components/ui/ROXAgenticWorkflows'
 import ROXLogoMarquee from '@/components/ui/ROXLogoMarquee'
-import ROXFloatingElements from '@/components/ui/ROXFloatingElements'
+import ROXDataPipeline3D from '@/components/ui/ROXDataPipeline3D'
 import ROXTestimonial from '@/components/ui/ROXTestimonial'
 import ROXEnterprise from '@/components/ui/ROXEnterprise'
 import ROXMegaFooter from '@/components/ui/ROXMegaFooter'
@@ -18,7 +18,7 @@ export default function ROXLandingPage() {
       <ROXClientMarquee />
       <ROXAgenticWorkflows />
       <ROXLogoMarquee />
-      <ROXFloatingElements />
+      <ROXDataPipeline3D />
       <ROXTestimonial />
       <ROXEnterprise />
       <ROXMegaFooter />

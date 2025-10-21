@@ -329,3 +329,19 @@
   transform: rotateY(180deg);
 }
 
+.perspective-1200 {
+  perspective: 1200px;
+}
+
+.rotate-x-55 {
+  transform: rotateX(55deg);
+}
+
+.rotate-z-neg-35 {
+  transform: rotateZ(-35deg);
+}
+
+.translate-z-0 {
+  transform: translateZ(0);
+}
+
