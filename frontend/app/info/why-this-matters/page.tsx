@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { TrendingUp, Shield, Zap, ArrowRight, Users, FileText } from 'lucide-react';
+import { TrendingUp, Shield, Zap, Users, FileText } from 'lucide-react';
 import Link from 'next/link';
 import SophisticatedBackground from '@/components/ui/SophisticatedBackground';
 
@@ -135,24 +135,6 @@ export default function WhyThisMattersPage() {
           </div>
         </motion.div>
 
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-center mt-16"
-        >
-          <h3 className="text-3xl font-bold mb-4">
-            Join the <span className="text-yellow-400">Revolution</span>
-          </h3>
-          <p className="text-gray-400 mb-8">
-            Be part of the movement to make college admissions fair, transparent, and accessible for everyone.
-          </p>
-          <Link href="/" className="inline-flex items-center gap-2 bg-yellow-400 text-black px-8 py-4 rounded-xl font-semibold hover:bg-yellow-500 transition-colors">
-            Get Started
-            <ArrowRight className="h-5 w-5" />
-          </Link>
-        </motion.div>
 
         {/* Problem Statistics Section */}
         <motion.div

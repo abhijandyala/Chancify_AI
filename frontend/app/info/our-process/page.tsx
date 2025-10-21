@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Brain, Database, Target, ArrowRight } from 'lucide-react';
+import { Brain, Database, Target } from 'lucide-react';
 import Link from 'next/link';
 import SophisticatedBackground from '@/components/ui/SophisticatedBackground';
 

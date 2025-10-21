@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Star, Zap, Shield, ArrowRight } from 'lucide-react';
+import { Star, Zap, Shield } from 'lucide-react';
 import Link from 'next/link';
 import SophisticatedBackground from '@/components/ui/SophisticatedBackground';
 
