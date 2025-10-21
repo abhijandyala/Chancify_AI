@@ -142,7 +142,7 @@ export default function ROXFloatingElements() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="mb-16"
         >
           <div className="inline-block px-4 py-2 bg-yellow-900/20 border border-yellow-600/30 rounded-full mb-6">
@@ -161,7 +161,7 @@ export default function ROXFloatingElements() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
           <div className="p-6 border border-gray-800/50 rounded-xl backdrop-blur-sm bg-gray-900/20">
@@ -188,7 +188,7 @@ export default function ROXFloatingElements() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="mt-16 p-8 border border-gray-800/50 rounded-xl backdrop-blur-sm bg-gray-900/20"
         >
           <h4 className="text-white font-semibold mb-4">Interactive Demo</h4>

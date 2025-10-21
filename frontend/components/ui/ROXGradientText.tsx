@@ -60,7 +60,7 @@ export default function ROXGradientText() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="mb-16"
         >
           <div className="inline-block px-4 py-2 bg-yellow-900/20 border border-yellow-600/30 rounded-full mb-6">
@@ -81,7 +81,7 @@ export default function ROXGradientText() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="space-y-12"
         >
           {/* Large heading */}
@@ -126,7 +126,7 @@ export default function ROXGradientText() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8"
         >
           <div className="text-center p-6 border border-gray-800 rounded-xl">
@@ -149,7 +149,7 @@ export default function ROXGradientText() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
         >
           <div className="text-center">

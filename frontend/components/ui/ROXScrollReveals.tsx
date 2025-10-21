@@ -42,7 +42,7 @@ const SCROLL_REVEAL_DATA = [
 // ROX-style scroll reveal component
 const ScrollRevealItem = ({ data, index }: { data: any; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <motion.div
@@ -114,7 +114,7 @@ const ScrollRevealItem = ({ data, index }: { data: any; index: number }) => {
 // Main component
 export default function ROXScrollReveals() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+  const isInView = useInView(containerRef, { once: false, margin: "-100px" });
 
   return (
     <div 
