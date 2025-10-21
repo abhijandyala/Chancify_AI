@@ -12,30 +12,39 @@ function DataPipelineTunnel() {
   useFrame((state) => {
     const t = state.clock.getElapsedTime()
     if (group.current) {
-      group.current.rotation.y = t * 0.2
+      // Much slower rotation for subtle movement
+      group.current.rotation.y = t * 0.05
     }
   })
   
-  // Reduce items for better performance and professionalism
+  // More items spread diagonally
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
-  const items = Array.from({ length: isMobile ? 4 : 6 })
+  const items = Array.from({ length: isMobile ? 6 : 10 })
   
   return (
     <group ref={group}>
-      {items.map((_, i) => (
-        <Float key={i} speed={0.8} rotationIntensity={0.3} floatIntensity={0.4}>
-          <mesh position={[Math.sin(i) * 2.2, Math.cos(i * 1.3) * 0.9, -i * 2.2]}>
-            <torusKnotGeometry args={isMobile ? [0.35, 0.12, 60, 8] : [0.35, 0.12, 120, 16]} />
-            <meshStandardMaterial 
-              color={i % 3 === 0 ? '#fbbf24' : i % 3 === 1 ? '#ffffff' : '#f59e0b'} // Golden yellow and white colors
-              metalness={0.65} 
-              roughness={0.25} 
-              emissive={i % 3 === 0 ? '#3d2914' : i % 3 === 1 ? '#1a1a1a' : '#3d2914'} 
-              emissiveIntensity={0.35} 
-            />
-          </mesh>
-        </Float>
-      ))}
+      {items.map((_, i) => {
+        // Create diagonal spread as you scroll down
+        const diagonalOffset = i * 0.8
+        const xOffset = Math.sin(i * 0.8) * (2.5 + diagonalOffset * 0.3)
+        const yOffset = Math.cos(i * 0.6) * (1.2 + diagonalOffset * 0.2)
+        const zOffset = -i * 1.8 - diagonalOffset * 0.5
+        
+        return (
+          <Float key={i} speed={0.3} rotationIntensity={0.2} floatIntensity={0.3}>
+            <mesh position={[xOffset, yOffset, zOffset]}>
+              <torusKnotGeometry args={isMobile ? [0.35, 0.12, 60, 8] : [0.35, 0.12, 120, 16]} />
+              <meshStandardMaterial 
+                color={i % 3 === 0 ? '#fbbf24' : i % 3 === 1 ? '#ffffff' : '#f59e0b'} // Golden yellow and white colors
+                metalness={0.65} 
+                roughness={0.25} 
+                emissive={i % 3 === 0 ? '#3d2914' : i % 3 === 1 ? '#1a1a1a' : '#3d2914'} 
+                emissiveIntensity={0.35} 
+              />
+            </mesh>
+          </Float>
+        )
+      })}
     </group>
   )
 }

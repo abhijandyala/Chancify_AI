@@ -160,6 +160,241 @@ export default function DataStoryPage() {
         >
           <DataPipelineScrollTunnel />
         </motion.div>
+
+        {/* Additional Data Cards Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 2.0 }}
+          className="mb-16"
+        >
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-white mb-4">
+              Technical <span className="text-yellow-400">Architecture</span>
+            </h3>
+            <p className="text-gray-400 text-lg">
+              How we built a scalable, accurate, and comprehensive data processing system
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: 2.2 }}
+              whileHover={{ scale: 1.05, y: -5 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                >
+                  <Database className="h-8 w-8 text-yellow-400" />
+                </motion.div>
+                <h4 className="text-xl font-semibold text-white">Database Architecture</h4>
+              </div>
+              <div className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-gray-400">PostgreSQL</span>
+                  <span className="text-yellow-400">Primary DB</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">2,847 colleges</span>
+                  <span className="text-yellow-400">Records</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">12,847 profiles</span>
+                  <span className="text-yellow-400">Students</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">5+ years</span>
+                  <span className="text-yellow-400">History</span>
+                </div>
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: 2.4 }}
+              whileHover={{ scale: 1.05, y: -5 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <motion.div
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                >
+                  <Code className="h-8 w-8 text-yellow-400" />
+                </motion.div>
+                <h4 className="text-xl font-semibold text-white">Reddit Scraper</h4>
+              </div>
+              <div className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Python</span>
+                  <span className="text-yellow-400">Language</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">BeautifulSoup</span>
+                  <span className="text-yellow-400">Parsing</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Selenium</span>
+                  <span className="text-yellow-400">Dynamic Content</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">1000+ daily</span>
+                  <span className="text-yellow-400">Posts</span>
+                </div>
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: 2.6 }}
+              whileHover={{ scale: 1.05, y: -5 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <motion.div
+                  animate={{ y: [0, -3, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                >
+                  <BarChart3 className="h-8 w-8 text-yellow-400" />
+                </motion.div>
+                <h4 className="text-xl font-semibold text-white">Probability Engine</h4>
+              </div>
+              <div className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Random Forest</span>
+                  <span className="text-yellow-400">Model 1</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">XGBoost</span>
+                  <span className="text-yellow-400">Model 2</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Neural Networks</span>
+                  <span className="text-yellow-400">Model 3</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">94.3%</span>
+                  <span className="text-yellow-400">Accuracy</span>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: 2.8 }}
+              whileHover={{ scale: 1.05, y: -5 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <motion.div
+                  animate={{ rotate: [0, 5, -5, 0] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                >
+                  <Users className="h-8 w-8 text-yellow-400" />
+                </motion.div>
+                <h4 className="text-xl font-semibold text-white">Data Processing</h4>
+              </div>
+              <div className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-gray-400">GPA Standardization</span>
+                  <span className="text-yellow-400">4.0 Scale</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Test Score Norm</span>
+                  <span className="text-yellow-400">Percentile</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">EC Categorization</span>
+                  <span className="text-yellow-400">15+ Types</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Feature Engineering</span>
+                  <span className="text-yellow-400">50+ Features</span>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: 3.0 }}
+              whileHover={{ scale: 1.05, y: -5 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <motion.div
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2.5, repeat: Infinity, delay: 0.8 }}
+                >
+                  <Database className="h-8 w-8 text-yellow-400" />
+                </motion.div>
+                <h4 className="text-xl font-semibold text-white">Data Sources</h4>
+              </div>
+              <div className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-gray-400">IPEDS Database</span>
+                  <span className="text-yellow-400">2,847 Colleges</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">College Board</span>
+                  <span className="text-yellow-400">SAT/ACT Data</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Reddit Stories</span>
+                  <span className="text-yellow-400">5,000+ Posts</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Historical Rates</span>
+                  <span className="text-yellow-400">2018-2023</span>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: 3.2 }}
+              whileHover={{ scale: 1.05, y: -5 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 hover:border-yellow-400/40 transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                >
+                  <BarChart3 className="h-8 w-8 text-yellow-400" />
+                </motion.div>
+                <h4 className="text-xl font-semibold text-white">ML Pipeline</h4>
+              </div>
+              <div className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Feature Engineering</span>
+                  <span className="text-yellow-400">Automated</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Ensemble Methods</span>
+                  <span className="text-yellow-400">3 Models</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Cross-Validation</span>
+                  <span className="text-yellow-400">5-Fold</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Model Accuracy</span>
+                  <span className="text-yellow-400">94.3%</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
