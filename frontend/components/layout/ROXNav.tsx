@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 import { useState } from 'react'
+import MobileMenu from '@/components/ui/MobileMenu'
 
 export default function ROXNav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -27,12 +28,15 @@ export default function ROXNav() {
         </nav>
         
         <div className="flex items-center gap-2">
-          <Button variant="ghost" asChild>
-            <Link href="/login">Log in</Link>
-          </Button>
-          <Button className="btn-primary">
-            <Link href="/signup">Get Started</Link>
-          </Button>
+          <MobileMenu />
+          <div className="hidden md:flex items-center gap-2">
+          <Link href="/login">
+            <Button variant="ghost">Log in</Button>
+          </Link>
+          <Link href="/signup">
+            <Button className="btn-primary">Get Started</Button>
+          </Link>
+          </div>
         </div>
       </div>
     </header>
