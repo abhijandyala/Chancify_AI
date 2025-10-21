@@ -106,47 +106,50 @@ const LayerPlate = ({ index, total, activeIndex, scrollProgress, data }: {
     // Base stacked position
     const baseY = -index * 0.15;
     
-    // Animation logic for each scroll part
+    // Animation logic for each scroll part - IMPROVED
     let targetY = baseY;
     let targetRotationX = -Math.PI / 6;
     let targetRotationY = Math.PI / 4;
     let targetRotationZ = 0;
     
-    if (scrollPart >= index) {
-      // This card has been "activated" in a previous part
-      if (scrollPart === index) {
-        // Current part - this card is being activated
-        if (partProgress < 0.3) {
-          // Phase 1: All cards fall down
-          targetY = baseY - 1.5;
-        } else if (partProgress < 0.6) {
-          // Phase 2: This card raises up
-          const raiseProgress = (partProgress - 0.3) / 0.3;
-          targetY = baseY + 0.8 + Math.sin(raiseProgress * Math.PI) * 0.3;
-          targetRotationX = -Math.PI / 6 + raiseProgress * 0.2;
-          targetRotationZ = raiseProgress * 0.1;
-        } else {
-          // Phase 3: This card settles in its final position
-          targetY = baseY + 0.8;
-          targetRotationX = -Math.PI / 6 + 0.2;
-          targetRotationZ = 0.1;
-        }
+    if (scrollPart > index) {
+      // This card has been "activated" in a previous part - KEEP IT DOWN
+      targetY = baseY - 2.0; // Keep it further down
+      targetRotationX = -Math.PI / 6;
+      targetRotationZ = 0;
+    } else if (scrollPart === index) {
+      // Current part - this card is being activated
+      if (partProgress < 0.2) {
+        // Phase 1: All cards fall down together
+        targetY = baseY - 2.0;
+      } else if (partProgress < 0.4) {
+        // Phase 2: Cards stay down
+        targetY = baseY - 2.0;
+      } else if (partProgress < 0.7) {
+        // Phase 3: This card raises up
+        const raiseProgress = (partProgress - 0.4) / 0.3;
+        targetY = baseY - 2.0 + raiseProgress * 2.8; // Raise higher
+        targetRotationX = -Math.PI / 6 + raiseProgress * 0.3;
+        targetRotationZ = raiseProgress * 0.15;
       } else {
-        // This card is in its final raised position
+        // Phase 4: This card settles in its final raised position
         targetY = baseY + 0.8;
-        targetRotationX = -Math.PI / 6 + 0.2;
-        targetRotationZ = 0.1;
+        targetRotationX = -Math.PI / 6 + 0.3;
+        targetRotationZ = 0.15;
       }
     } else {
       // This card hasn't been activated yet
       if (scrollPart > 0) {
         // All cards fall down first
-        if (partProgress < 0.3) {
-          targetY = baseY - 1.5;
+        if (partProgress < 0.2) {
+          targetY = baseY - 2.0;
+        } else if (partProgress < 0.4) {
+          // Cards stay down
+          targetY = baseY - 2.0;
         } else {
           // Cards go back up to stacked position
-          const returnProgress = (partProgress - 0.3) / 0.7;
-          targetY = baseY - 1.5 + returnProgress * 1.5;
+          const returnProgress = (partProgress - 0.4) / 0.6;
+          targetY = baseY - 2.0 + returnProgress * 2.0;
         }
       }
     }
@@ -361,7 +364,7 @@ export default function ROXStackAnimation() {
     <div 
       ref={containerRef}
       className="relative bg-black"
-      style={{ height: '400vh' }}
+      style={{ height: '600vh' }}
     >
       {/* Sticky container */}
       <div className="sticky top-0 h-screen overflow-hidden">
