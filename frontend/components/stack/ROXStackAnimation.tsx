@@ -99,9 +99,12 @@ const LayerPlate = ({ index, total, activeIndex, scrollProgress, data }: {
     const clock = state.clock.getElapsedTime();
     const isActive = activeIndex === index;
     
-    // Calculate which scroll part we're in (0-3)
+    // Calculate which scroll part we're in (0-3) - MORE SENSITIVE
     const scrollPart = Math.floor(scrollProgress * 4);
     const partProgress = (scrollProgress * 4) % 1;
+    
+    // Make the animation more sensitive to scroll changes
+    const sensitivityMultiplier = 1.5;
     
     // Base stacked position
     const baseY = -index * 0.15;
@@ -126,16 +129,16 @@ const LayerPlate = ({ index, total, activeIndex, scrollProgress, data }: {
         // Phase 2: Cards stay down
         targetY = baseY - 2.0;
       } else if (partProgress < 0.7) {
-        // Phase 3: This card raises up
+        // Phase 3: This card raises up - MUCH MORE SENSITIVE
         const raiseProgress = (partProgress - 0.4) / 0.3;
-        targetY = baseY - 2.0 + raiseProgress * 2.8; // Raise higher
-        targetRotationX = -Math.PI / 6 + raiseProgress * 0.3;
-        targetRotationZ = raiseProgress * 0.15;
+        targetY = baseY - 2.0 + raiseProgress * 4.5; // MUCH HIGHER RAISE
+        targetRotationX = -Math.PI / 6 + raiseProgress * 0.5; // MORE TILT
+        targetRotationZ = raiseProgress * 0.25; // MORE ROTATION
       } else {
-        // Phase 4: This card settles in its final raised position
-        targetY = baseY + 0.8;
-        targetRotationX = -Math.PI / 6 + 0.3;
-        targetRotationZ = 0.15;
+        // Phase 4: This card settles in its final raised position - MUCH HIGHER
+        targetY = baseY + 2.5; // MUCH HIGHER FINAL POSITION
+        targetRotationX = -Math.PI / 6 + 0.5; // MORE TILT
+        targetRotationZ = 0.25; // MORE ROTATION
       }
     } else {
       // This card hasn't been activated yet
@@ -154,29 +157,31 @@ const LayerPlate = ({ index, total, activeIndex, scrollProgress, data }: {
       }
     }
     
-    // Smooth animation
+    // Smooth animation - MORE SENSITIVE
+    const lerpSpeed = 0.15 * sensitivityMultiplier; // FASTER RESPONSE
+    
     meshRef.current.position.y = THREE.MathUtils.lerp(
       meshRef.current.position.y,
       targetY,
-      0.1
+      lerpSpeed
     );
     
     meshRef.current.rotation.x = THREE.MathUtils.lerp(
       meshRef.current.rotation.x,
       targetRotationX,
-      0.1
+      lerpSpeed
     );
     
     meshRef.current.rotation.y = THREE.MathUtils.lerp(
       meshRef.current.rotation.y,
       targetRotationY,
-      0.1
+      lerpSpeed
     );
     
     meshRef.current.rotation.z = THREE.MathUtils.lerp(
       meshRef.current.rotation.z,
       targetRotationZ,
-      0.1
+      lerpSpeed
     );
 
     // Active layer gets extra glow and slight float
