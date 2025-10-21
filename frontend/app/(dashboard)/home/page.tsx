@@ -3,7 +3,7 @@
 import { GlassCard } from '@/components/ui/GlassCard'
 import { Input } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
-import { SearchableSelect } from '@/components/ui/SearchableSelect'
+import { SimpleSearchableSelect } from '@/components/ui/SimpleSearchableSelect'
 import { Button } from '@/components/ui/Button'
 import { useState } from 'react'
 import { MAJORS } from '@/lib/majors'
@@ -378,7 +378,7 @@ export default function HomePage() {
             ]}
           />
 
-          <SearchableSelect
+          <SimpleSearchableSelect
             label="Intended Major"
             value={profile.major}
             onChange={(value) => updateProfile('major', value)}

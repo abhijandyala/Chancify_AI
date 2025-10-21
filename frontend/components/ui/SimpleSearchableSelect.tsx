@@ -1,10 +1,9 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { createPortal } from 'react-dom'
 import { cn } from '@/lib/utils'
 
-interface SearchableSelectProps {
+interface SimpleSearchableSelectProps {
   label?: string
   value: string
   onChange: (value: string) => void
@@ -14,7 +13,7 @@ interface SearchableSelectProps {
   className?: string
 }
 
-export const SearchableSelect = ({
+export const SimpleSearchableSelect = ({
   label,
   value,
   onChange,
@@ -22,20 +21,14 @@ export const SearchableSelect = ({
   placeholder = 'Search...',
   error,
   className,
-}: SearchableSelectProps) => {
+}: SimpleSearchableSelectProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
-  const [mounted, setMounted] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
-  const [position, setPosition] = useState({ top: 0, left: 0, width: 0 })
 
   const filteredOptions = options.filter((option) =>
     option.toLowerCase().includes(searchTerm.toLowerCase())
   )
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -56,20 +49,8 @@ export const SearchableSelect = ({
     setSearchTerm('')
   }
 
-  const updatePosition = () => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect()
-      setPosition({
-        top: rect.bottom + 8,
-        left: rect.left,
-        width: rect.width
-      })
-    }
-  }
-
-
   return (
-    <div className="w-full" ref={containerRef}>
+    <div className="w-full relative" ref={containerRef} style={{ zIndex: 999999 }}>
       {label && <label className="label-text">{label}</label>}
       
       <div className="relative">
@@ -80,9 +61,7 @@ export const SearchableSelect = ({
             className
           )}
           onClick={() => {
-            console.log('Dropdown clicked, isOpen:', isOpen)
-            updatePosition()
-            console.log('Position updated:', position)
+            console.log('Simple dropdown clicked, isOpen:', isOpen)
             setIsOpen(!isOpen)
             console.log('Setting isOpen to:', !isOpen)
           }}
@@ -108,15 +87,15 @@ export const SearchableSelect = ({
           </svg>
         </div>
 
-        {mounted && isOpen && createPortal(
+        {isOpen && (
           <div 
-            className="fixed bg-gray-900 rounded-xl border border-gray-700 shadow-2xl max-h-[300px] overflow-hidden flex flex-col backdrop-blur-sm"
-            style={{
-              top: position.top,
-              left: position.left,
-              width: position.width,
+            className="absolute w-full mt-2 bg-gray-900 rounded-xl border border-gray-700 shadow-2xl max-h-[300px] overflow-hidden flex flex-col"
+            style={{ 
               zIndex: 999999,
-              position: 'fixed'
+              position: 'absolute',
+              top: '100%',
+              left: 0,
+              right: 0
             }}
           >
             <div className="p-3 border-b border-gray-700 bg-gray-800/90">
@@ -149,8 +128,7 @@ export const SearchableSelect = ({
                 ))
               )}
             </div>
-          </div>,
-          document.body
+          </div>
         )}
       </div>
 
@@ -160,4 +138,3 @@ export const SearchableSelect = ({
     </div>
   )
 }
-
