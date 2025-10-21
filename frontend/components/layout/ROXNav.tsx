@@ -31,10 +31,10 @@ export default function ROXNav() {
           <MobileMenu />
           <div className="hidden md:flex items-center gap-2">
           <Link href="/login">
-            <Button variant="ghost">Log in</Button>
+            <Button className="btn-primary">Sign In</Button>
           </Link>
           <Link href="/signup">
-            <Button className="btn-primary">Get Started</Button>
+            <Button variant="ghost">Try for now</Button>
           </Link>
           </div>
         </div>
