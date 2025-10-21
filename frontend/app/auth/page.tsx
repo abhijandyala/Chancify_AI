@@ -30,8 +30,10 @@ export default function AuthPage() {
           await new Promise(resolve => setTimeout(resolve, 1000))
           
           // Store auth token
-          localStorage.setItem('auth_token', 'demo_token_' + Date.now())
-          localStorage.setItem('user_email', email)
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('auth_token', 'demo_token_' + Date.now())
+            localStorage.setItem('user_email', email)
+          }
           
           // Redirect to profile
           router.push('/profile')
@@ -45,8 +47,10 @@ export default function AuthPage() {
           await new Promise(resolve => setTimeout(resolve, 1000))
           
           // Store auth token
-          localStorage.setItem('auth_token', 'demo_token_' + Date.now())
-          localStorage.setItem('user_email', email)
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('auth_token', 'demo_token_' + Date.now())
+            localStorage.setItem('user_email', email)
+          }
           
           // Redirect to profile
           router.push('/profile')
