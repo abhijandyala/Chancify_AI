@@ -184,16 +184,16 @@ export default function ROXDataPipeline3D() {
             <div
               key={index}
               ref={el => cardsRef.current[index] = el}
-              className="absolute inset-0 bg-gradient-to-b from-white/5 to-white/2 border border-white/10 rounded-2xl p-8 shadow-2xl transform-style-preserve-3d"
+              className="absolute inset-0 bg-gradient-to-b from-white/15 to-white/8 border border-white/20 rounded-2xl p-8 shadow-2xl transform-style-preserve-3d backdrop-blur-sm"
               style={{ transformStyle: 'preserve-3d' }}
             >
               <div className="h-full flex flex-col">
                 <div className="mb-4">
-                  <span className="inline-block px-3 py-1.5 bg-yellow-400/12 text-yellow-300 text-xs font-bold tracking-widest uppercase rounded-full border border-white/8">
+                  <span className="inline-block px-3 py-1.5 bg-yellow-400/20 text-yellow-300 text-xs font-bold tracking-widest uppercase rounded-full border border-yellow-400/30">
                     {card.title}
                   </span>
                 </div>
-                <div className="flex-1 text-gray-300 text-base leading-relaxed">
+                <div className="flex-1 text-gray-200 text-base leading-relaxed">
                   {card.content}
                 </div>
               </div>
