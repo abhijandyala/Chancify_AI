@@ -25,77 +25,94 @@ export default function ROXDataPipeline3D() {
     
     if (!container || cards.length === 0) return
 
-    // Set initial positions with proper z-index
+    // Set initial positions - all cards stacked in center
     gsap.set(cards, {
       transformOrigin: 'center center',
-      z: (i: number) => -i * 100,
-      y: (i: number) => i * 20,
+      x: 0,
+      y: 0,
+      z: 0,
+      scale: 1,
       rotationX: 0,
       rotationY: 0,
       opacity: 1,
       zIndex: (i: number) => 10 - i
     })
 
-    // Create the main timeline
+    // Create smooth timeline with better easing
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
         start: 'top top',
-        end: '+=2000',
-        scrub: 1,
+        end: '+=3000',
+        scrub: 0.5, // Smoother scrub
         pin: true,
         anticipatePin: 1
       }
     })
 
-    // Phase 1: Fan out the cards
+    // Phase 1: Smooth fan out with zoom effect
     tl.to(cards, {
-      z: (i: number) => -i * 200,
-      y: (i: number) => i * -30,
-      rotationY: (i: number) => (i - 2) * 10,
-      rotationX: (i: number) => -5 + i * 2,
-      opacity: 1,
-      zIndex: (i: number) => 10 - i,
-      duration: 1
+      z: (i: number) => -i * 150,
+      y: (i: number) => (i - 2) * -40,
+      x: (i: number) => (i - 2) * 20,
+      rotationY: (i: number) => (i - 2) * 8,
+      rotationX: (i: number) => -3 + i * 1.5,
+      scale: 1.1, // Slight zoom out
+      duration: 1.5,
+      ease: 'power2.out'
     })
 
-    // Phase 2: Spotlight each card
+    // Phase 2: Zoom into each card individually
     cards.forEach((card, i) => {
-      const startTime = 1.2 + i * 0.8
+      const startTime = 2 + i * 1.2
       
-      // Bring this card forward
+      // Zoom into this specific card
       tl.to(card, {
-        z: -i * 200 + 300,
-        scale: 1.05,
-        opacity: 1,
-        zIndex: 20,
-        duration: 0.6
+        z: 200, // Bring to front
+        scale: 1.3, // Zoom in
+        rotationY: 0,
+        rotationX: 0,
+        x: 0,
+        y: 0,
+        duration: 0.8,
+        ease: 'power2.inOut'
       }, startTime)
       
-      // Dim other cards
+      // Move other cards back and dim
       tl.to(cards.filter((_, j) => j !== i), {
-        opacity: 0.4,
-        duration: 0.6
+        z: (j: number) => -j * 150 - 100,
+        scale: 0.8,
+        opacity: 0.3,
+        duration: 0.8,
+        ease: 'power2.inOut'
       }, startTime)
       
-      // Reset all cards
+      // Hold the zoom for a moment
+      tl.to({}, { duration: 0.5 }, startTime + 0.8)
+      
+      // Reset all cards smoothly
       tl.to(cards, {
-        z: (j: number) => -j * 200,
-        scale: 1,
-        opacity: 0.9,
-        duration: 0.4
-      }, startTime + 0.6)
+        z: (j: number) => -j * 150,
+        scale: 1.1,
+        opacity: 1,
+        duration: 0.6,
+        ease: 'power2.out'
+      }, startTime + 1.3)
     })
 
-    // Phase 3: Final settle
+    // Phase 3: Final smooth settle
     tl.to(cards, {
-      y: (i: number) => i * -15,
-      rotationY: 0,
-      rotationX: -2,
-      duration: 0.5
+      z: (i: number) => -i * 100,
+      y: (i: number) => (i - 2) * -20,
+      x: (i: number) => (i - 2) * 10,
+      rotationY: (i: number) => (i - 2) * 5,
+      rotationX: (i: number) => -2 + i * 1,
+      scale: 1,
+      duration: 1,
+      ease: 'power2.out'
     })
 
-    // Mouse parallax
+    // Smooth mouse parallax
     const handleMouseMove = (e: MouseEvent) => {
       const centerX = window.innerWidth / 2
       const centerY = window.innerHeight / 2
@@ -103,9 +120,9 @@ export default function ROXDataPipeline3D() {
       const deltaY = (e.clientY - centerY) / centerY
       
       gsap.to(container, {
-        rotationY: deltaX * 5,
-        rotationX: -deltaY * 3,
-        duration: 0.3,
+        rotationY: deltaX * 3,
+        rotationX: -deltaY * 2,
+        duration: 0.8,
         ease: 'power2.out'
       })
     }
@@ -158,7 +175,7 @@ export default function ROXDataPipeline3D() {
   return (
     <section 
       ref={sectionRef}
-      className="relative h-[200vh] bg-black"
+      className="relative h-[300vh] bg-black"
     >
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         {/* Background gradient */}
