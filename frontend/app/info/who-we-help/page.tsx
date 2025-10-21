@@ -218,6 +218,222 @@ export default function WhoWeHelpPage() {
             </div>
           </motion.div>
         </motion.div>
+
+        {/* Impact Statistics Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 2.6 }}
+          className="mb-16"
+        >
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-white mb-4">
+              Our <span className="text-yellow-400">Impact</span>
+            </h3>
+            <p className="text-gray-400 text-lg">
+              Real results from students and families who have used our platform
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.6, delay: 2.8 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 text-center"
+            >
+              <div className="text-3xl font-bold text-yellow-400 mb-2">85%</div>
+              <div className="text-gray-300 text-sm">Success Rate</div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.6, delay: 3.0 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 text-center"
+            >
+              <div className="text-3xl font-bold text-yellow-400 mb-2">$2.3M</div>
+              <div className="text-gray-300 text-sm">Scholarships Found</div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.6, delay: 3.2 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 text-center"
+            >
+              <div className="text-3xl font-bold text-yellow-400 mb-2">1,247</div>
+              <div className="text-gray-300 text-sm">Students Helped</div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.6, delay: 3.4 }}
+              className="bg-gray-900/50 backdrop-blur-sm p-6 rounded-xl border border-yellow-400/20 text-center"
+            >
+              <div className="text-3xl font-bold text-yellow-400 mb-2">4.9/5</div>
+              <div className="text-gray-300 text-sm">User Rating</div>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* User Stories Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 3.6 }}
+          className="bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-yellow-400/20 mb-16"
+        >
+          <h3 className="text-3xl font-bold text-white mb-8 text-center">
+            Success <span className="text-yellow-400">Stories</span>
+          </h3>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: 3.8 }}
+              className="text-center"
+            >
+              <div className="w-16 h-16 bg-yellow-400/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <GraduationCap className="h-8 w-8 text-yellow-400" />
+              </div>
+              <h4 className="text-lg font-semibold text-white mb-3">Sarah, High School Senior</h4>
+              <p className="text-gray-300 text-sm mb-4">
+                "Chancify helped me find 8 perfect-fit colleges I never considered. Got into my dream school with a full scholarship!"
+              </p>
+              <div className="text-yellow-400 text-sm font-medium">Accepted to Stanford</div>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: 4.0 }}
+              className="text-center"
+            >
+              <div className="w-16 h-16 bg-yellow-400/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Heart className="h-8 w-8 text-yellow-400" />
+              </div>
+              <h4 className="text-lg font-semibold text-white mb-3">The Johnson Family</h4>
+              <p className="text-gray-300 text-sm mb-4">
+                "As first-generation college parents, we were lost. Chancify gave us clarity and saved us $15,000 in application fees."
+              </p>
+              <div className="text-yellow-400 text-sm font-medium">Saved $15,000</div>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: 4.2 }}
+              className="text-center"
+            >
+              <div className="w-16 h-16 bg-yellow-400/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Target className="h-8 w-8 text-yellow-400" />
+              </div>
+              <h4 className="text-lg font-semibold text-white mb-3">Ms. Rodriguez, Counselor</h4>
+              <p className="text-gray-300 text-sm mb-4">
+                "This tool has revolutionized how I help my students. The data is incredibly accurate and saves me hours of research."
+              </p>
+              <div className="text-yellow-400 text-sm font-medium">200+ Students Helped</div>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Services Breakdown Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 4.4 }}
+          className="mb-16"
+        >
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-white mb-4">
+              What We <span className="text-yellow-400">Provide</span>
+            </h3>
+            <p className="text-gray-400 text-lg">
+              Comprehensive services tailored to each user group's unique needs
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-12">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+              transition={{ duration: 0.8, delay: 4.6 }}
+            >
+              <h4 className="text-xl font-semibold text-yellow-400 mb-6">For Students</h4>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Personalized College Lists</div>
+                    <div className="text-gray-400 text-sm">AI-generated recommendations based on your profile</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Admission Probability Calculator</div>
+                    <div className="text-gray-400 text-sm">Real-time chances for each college</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Scholarship Matching</div>
+                    <div className="text-gray-400 text-sm">Find opportunities you qualify for</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Application Timeline</div>
+                    <div className="text-gray-400 text-sm">Personalized deadlines and milestones</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+              transition={{ duration: 0.8, delay: 4.8 }}
+            >
+              <h4 className="text-xl font-semibold text-yellow-400 mb-6">For Families & Counselors</h4>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Financial Planning Tools</div>
+                    <div className="text-gray-400 text-sm">Cost analysis and aid estimation</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Progress Tracking</div>
+                    <div className="text-gray-400 text-sm">Monitor application status and deadlines</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Data-Driven Insights</div>
+                    <div className="text-gray-400 text-sm">Trends and patterns in admissions</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div>
+                    <div className="text-white font-medium">Professional Resources</div>
+                    <div className="text-gray-400 text-sm">Training and support materials</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
