@@ -22,7 +22,7 @@ function ProfileContent() {
         email: session.user.email,
         name: session.user.name,
         picture: session.user.image,
-        provider: session.provider || 'google'
+        provider: (session as any).provider || 'google'
       })
     }
   }, [session, status, router])
