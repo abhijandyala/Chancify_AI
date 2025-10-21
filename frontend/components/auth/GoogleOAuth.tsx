@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 declare global {
@@ -12,6 +12,7 @@ declare global {
 
 export default function GoogleOAuth() {
   const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     // Load Google OAuth script
@@ -23,22 +24,33 @@ export default function GoogleOAuth() {
       script.async = true
       script.defer = true
       script.onload = initializeGoogleAuth
+      script.onerror = () => {
+        console.error('Failed to load Google OAuth script')
+      }
       document.head.appendChild(script)
     }
 
     const initializeGoogleAuth = () => {
       if (!window.google) return
 
-      window.google.accounts.id.initialize({
-        client_id: '117818010137-4fmntjdknmm16c9eef296196isok6620.apps.googleusercontent.com',
-        callback: handleCredentialResponse,
-        auto_select: false,
-        cancel_on_tap_outside: true
-      })
+      try {
+        window.google.accounts.id.initialize({
+          client_id: '117818010137-4fmntjdknmm16c9eef296196isok6620.apps.googleusercontent.com',
+          callback: handleCredentialResponse,
+          auto_select: false,
+          cancel_on_tap_outside: true,
+          use_fedcm_for_prompt: false, // Disable FedCM to avoid errors
+          ux_mode: 'popup'
+        })
+      } catch (error) {
+        console.error('Error initializing Google OAuth:', error)
+      }
     }
 
     const handleCredentialResponse = async (response: any) => {
       try {
+        setIsLoading(true)
+        
         // Decode the JWT token to get user info
         const payload = JSON.parse(atob(response.credential.split('.')[1]))
         
@@ -64,6 +76,8 @@ export default function GoogleOAuth() {
       } catch (error) {
         console.error('Google OAuth Error:', error)
         alert('Authentication failed. Please try again.')
+      } finally {
+        setIsLoading(false)
       }
     }
 
@@ -71,17 +85,48 @@ export default function GoogleOAuth() {
   }, [router])
 
   const handleGoogleSignIn = () => {
-    if (window.google && window.google.accounts) {
-      window.google.accounts.id.prompt()
-    } else {
-      console.error('Google OAuth not loaded')
+    if (isLoading) return
+    
+    try {
+      if (window.google && window.google.accounts) {
+        setIsLoading(true)
+        window.google.accounts.id.prompt((notification: any) => {
+          setIsLoading(false)
+          if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+            // Fallback to popup
+            const popup = window.open(
+              `https://accounts.google.com/oauth/authorize?client_id=117818010137-4fmntjdknmm16c9eef296196isok6620.apps.googleusercontent.com&redirect_uri=${encodeURIComponent(window.location.origin)}&response_type=code&scope=openid%20email%20profile`,
+              'google-auth',
+              'width=500,height=600,scrollbars=yes,resizable=yes'
+            )
+            
+            // Listen for popup messages
+            const messageListener = (event: MessageEvent) => {
+              if (event.origin !== window.location.origin) return
+              if (event.data.type === 'GOOGLE_AUTH_SUCCESS') {
+                window.removeEventListener('message', messageListener)
+                popup?.close()
+                router.push('/profile')
+              }
+            }
+            window.addEventListener('message', messageListener)
+          }
+        })
+      } else {
+        console.error('Google OAuth not loaded')
+        alert('Google OAuth is not available. Please refresh the page and try again.')
+      }
+    } catch (error) {
+      console.error('Error during Google sign in:', error)
+      setIsLoading(false)
     }
   }
 
   return (
     <button
       onClick={handleGoogleSignIn}
-      className="w-full bg-white hover:bg-gray-100 text-black font-semibold py-3 rounded-xl border border-gray-300 transition-all duration-200 flex items-center justify-center gap-3"
+      disabled={isLoading}
+      className="w-full bg-white hover:bg-gray-100 disabled:bg-white/50 text-black font-semibold py-3 rounded-xl border border-gray-300 transition-all duration-200 flex items-center justify-center gap-3"
     >
       <svg className="w-5 h-5" viewBox="0 0 24 24">
         <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -89,7 +134,7 @@ export default function GoogleOAuth() {
         <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
         <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
       </svg>
-      Continue with Google
+      {isLoading ? 'Please wait...' : 'Continue with Google'}
     </button>
   )
 }

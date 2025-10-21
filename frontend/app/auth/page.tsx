@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { motion, AnimatePresence } from 'framer-motion'
 import SophisticatedBackground from '@/components/ui/SophisticatedBackground'
-import GoogleOAuth from '@/components/auth/GoogleOAuth'
+import SimpleGoogleOAuth from '@/components/auth/SimpleGoogleOAuth'
 
 export default function AuthPage() {
   const router = useRouter()
@@ -172,7 +172,7 @@ export default function AuthPage() {
               </div>
 
               {/* Google OAuth Button */}
-              <GoogleOAuth />
+              <SimpleGoogleOAuth />
             </form>
           </div>
         </motion.div>
