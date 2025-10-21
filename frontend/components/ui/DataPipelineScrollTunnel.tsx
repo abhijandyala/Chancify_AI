@@ -16,14 +16,14 @@ function DataPipelineTunnel() {
     }
   })
   
-  // Reduce items for better mobile performance
+  // Reduce items for better performance and professionalism
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
-  const items = Array.from({ length: isMobile ? 8 : 14 })
+  const items = Array.from({ length: isMobile ? 4 : 6 })
   
   return (
     <group ref={group}>
       {items.map((_, i) => (
-        <Float key={i} speed={1.2} rotationIntensity={0.6} floatIntensity={0.8}>
+        <Float key={i} speed={0.8} rotationIntensity={0.3} floatIntensity={0.4}>
           <mesh position={[Math.sin(i) * 2.2, Math.cos(i * 1.3) * 0.9, -i * 2.2]}>
             <torusKnotGeometry args={isMobile ? [0.35, 0.12, 60, 8] : [0.35, 0.12, 120, 16]} />
             <meshStandardMaterial 
@@ -44,7 +44,7 @@ export default function DataPipelineScrollTunnel() {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
   
   return (
-    <div className="relative h-[220vh] bg-black text-white">
+    <div className="relative h-[120vh] bg-black text-white">
       <Canvas 
         className="sticky top-0 h-screen" 
         camera={{ position: [0, 0, 4], fov: 62 }}
@@ -57,9 +57,9 @@ export default function DataPipelineScrollTunnel() {
         <pointLight position={[-3, -2, 2]} color="#fbbf24" intensity={0.8} />
         <pointLight position={[3, 2, -2]} color="#ffffff" intensity={0.6} />
         <Environment preset="city" />
-        <Stars radius={60} depth={40} count={isMobile ? 800 : 1500} factor={3} fade speed={1} />
+        <Stars radius={60} depth={40} count={isMobile ? 600 : 1000} factor={3} fade speed={1} />
 
-        <ScrollControls pages={3} damping={0.18}>
+        <ScrollControls pages={2} damping={0.18}>
           {/* 3D content follows the scroll */}
           <Scroll>
             <DataPipelineTunnel />
@@ -72,26 +72,13 @@ export default function DataPipelineScrollTunnel() {
                 initial={{ opacity: 0, y: 20 }} 
                 whileInView={{ opacity: 1, y: 0 }} 
                 viewport={{ amount: 0.6 }} 
-                className="backdrop-blur-md/30 border border-yellow-400/20 rounded-2xl px-6 py-4 bg-black/50"
+                className="backdrop-blur-md/30 border border-yellow-400/20 rounded-xl px-8 py-6 bg-black/60 max-w-4xl mx-auto"
               >
-                <h1 className="text-4xl md:text-6xl font-semibold tracking-tight">
+                <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-center mb-4">
                   Our <span className="text-yellow-400">Data Pipeline</span>
                 </h1>
-                <p className="text-gray-300 mt-2">Scroll to explore our comprehensive data collection and processing system.</p>
-              </motion.div>
-            </section>
-            <section className="h-screen grid place-items-center">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                viewport={{ amount: 0.6 }} 
-                className="text-center backdrop-blur-md/30 border border-yellow-400/20 rounded-2xl px-6 py-4 bg-black/50"
-              >
-                <h2 className="text-3xl md:text-5xl font-semibold text-white mb-4">
-                  <span className="text-yellow-400">Reddit Scraper</span> Revolution
-                </h2>
-                <p className="text-gray-300 mt-2 max-w-2xl mx-auto">
-                  5,000+ authentic admission stories from r/ApplyingToCollege and r/chanceme, processed through our custom Python scraper with BeautifulSoup and Selenium.
+                <p className="text-gray-300 text-center text-lg max-w-3xl mx-auto">
+                  Comprehensive data collection from Reddit, IPEDS, and machine learning processing for accurate college admission predictions.
                 </p>
               </motion.div>
             </section>
@@ -100,14 +87,28 @@ export default function DataPipelineScrollTunnel() {
                 initial={{ opacity: 0, y: 20 }} 
                 whileInView={{ opacity: 1, y: 0 }} 
                 viewport={{ amount: 0.6 }} 
-                className="text-center backdrop-blur-md/30 border border-yellow-400/20 rounded-2xl px-6 py-4 bg-black/50"
+                className="text-center backdrop-blur-md/30 border border-yellow-400/20 rounded-xl px-8 py-6 bg-black/60 max-w-4xl mx-auto"
               >
                 <h2 className="text-3xl md:text-5xl font-semibold text-white mb-4">
-                  <span className="text-yellow-400">94.3%</span> ML Accuracy
+                  <span className="text-yellow-400">5,000+</span> Real Stories
                 </h2>
-                <p className="text-gray-300 mt-2 max-w-2xl mx-auto">
-                  Machine learning models using Random Forest, XGBoost, and neural networks processing 12,847 student profiles across 2,847 colleges.
+                <p className="text-gray-300 text-lg max-w-3xl mx-auto mb-6">
+                  Authentic admission experiences from Reddit, processed through custom Python scrapers and machine learning models.
                 </p>
+                <div className="grid grid-cols-3 gap-6 text-center">
+                  <div>
+                    <div className="text-2xl font-bold text-yellow-400">2,847</div>
+                    <div className="text-gray-400 text-sm">Colleges</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-yellow-400">12,847</div>
+                    <div className="text-gray-400 text-sm">Profiles</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-yellow-400">94.3%</div>
+                    <div className="text-gray-400 text-sm">Accuracy</div>
+                  </div>
+                </div>
               </motion.div>
             </section>
           </Scroll>
