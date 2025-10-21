@@ -1,10 +1,11 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import type { NextAuthOptions } from "next-auth";
 
 // Force Node runtime (Edge can crash in v4)
 export const runtime = "nodejs";
 
-const authOptions = {
+const authOptions: NextAuthOptions = {
   debug: process.env.NEXTAUTH_DEBUG === "true",
   secret: process.env.NEXTAUTH_SECRET,
 
@@ -19,14 +20,14 @@ const authOptions = {
   ],
 
   callbacks: {
-    async jwt({ token, account, profile }) {
+    async jwt({ token, account, profile }: any) {
       if (account) {
         token.provider = account.provider;
       }
       if (profile?.email) token.email = profile.email as string;
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }: any) {
       // surface provider + email in session
       // @ts-ignore
       session.provider = token.provider;
