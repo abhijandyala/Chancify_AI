@@ -16,13 +16,40 @@ from sqlalchemy.orm import relationship
 Base = declarative_base()
 
 
+class User(Base):
+    """User authentication table."""
+    
+    __tablename__ = "users"
+    
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    email = Column(String(255), unique=True, nullable=False)
+    password_hash = Column(String(255))  # Nullable for OAuth users
+    first_name = Column(String(100))
+    last_name = Column(String(100))
+    
+    # OAuth fields
+    google_id = Column(String(255), unique=True)
+    provider = Column(String(20), default="local")  # "local", "google"
+    
+    # Account status
+    is_active = Column(Boolean, default=True)
+    email_verified = Column(Boolean, default=False)
+    
+    # Timestamps
+    created_at = Column(DateTime(timezone=True), default=datetime.utcnow)
+    last_login = Column(DateTime(timezone=True))
+    
+    # Relationships
+    profile = relationship("UserProfile", back_populates="user", uselist=False)
+
+
 class UserProfile(Base):
     """User profile information."""
     
     __tablename__ = "user_profiles"
     
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    user_id = Column(UUID(as_uuid=True), unique=True, nullable=False)  # References auth.users
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), unique=True, nullable=False)
     
     # Personal Information
     first_name = Column(String(100))
@@ -37,6 +64,7 @@ class UserProfile(Base):
     created_at = Column(DateTime(timezone=True), default=datetime.utcnow)
     
     # Relationships
+    user = relationship("User", back_populates="profile")
     academic_data = relationship("AcademicData", back_populates="profile", uselist=False)
     extracurriculars = relationship("Extracurricular", back_populates="profile")
     saved_colleges = relationship("SavedCollege", back_populates="profile")

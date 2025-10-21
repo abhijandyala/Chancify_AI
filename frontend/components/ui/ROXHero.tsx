@@ -2,6 +2,7 @@
 
 import Reveal from './Reveal'
 import { Button } from '@/components/ui/Button'
+import Link from 'next/link'
 
 export default function ROXHero() {
   return (
@@ -31,12 +32,16 @@ export default function ROXHero() {
         
         <Reveal delay={0.2}>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="btn-primary text-lg px-8 py-4">
-              Sign In
-            </Button>
-            <Button variant="ghost" className="text-lg px-8 py-4 border border-border">
-              Try for Now
-            </Button>
+            <Link href="/auth">
+              <Button className="btn-primary text-lg px-8 py-4">
+                Log In
+              </Button>
+            </Link>
+            <Link href="/auth">
+              <Button variant="ghost" className="text-lg px-8 py-4 border border-border">
+                Try for Now
+              </Button>
+            </Link>
           </div>
         </Reveal>
       </div>

@@ -46,10 +46,10 @@ export default function MobileMenu() {
             </nav>
             
             <div className="space-y-3">
-              <Link href="/login" onClick={() => setIsOpen(false)}>
-                <Button className="btn-primary w-full">Sign In</Button>
+              <Link href="/auth" onClick={() => setIsOpen(false)}>
+                <Button className="btn-primary w-full">Log In</Button>
               </Link>
-              <Link href="/signup" onClick={() => setIsOpen(false)}>
+              <Link href="/auth" onClick={() => setIsOpen(false)}>
                 <Button variant="ghost" className="w-full">Try for now</Button>
               </Link>
             </div>
