@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/Button'
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false)
-  const items = ['Discover', 'Watchlist', 'SAT Prep']
+  const items: string[] = []
 
   return (
     <>

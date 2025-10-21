@@ -15,17 +15,6 @@ export default function ROXNav() {
           Chancify AI
         </Link>
         
-        <nav className="hidden md:flex items-center gap-6 text-foreground/80">
-          <Link href="/discover" className="link-underline hover:text-foreground transition-colors">
-            Discover
-          </Link>
-          <Link href="/watchlist" className="link-underline hover:text-foreground transition-colors">
-            Watchlist
-          </Link>
-          <Link href="/sat" className="link-underline hover:text-foreground transition-colors">
-            SAT Prep
-          </Link>
-        </nav>
         
         <div className="flex items-center gap-2">
           <MobileMenu />
