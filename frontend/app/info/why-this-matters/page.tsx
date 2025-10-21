@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { TrendingUp, Shield, Zap, ArrowRight } from 'lucide-react';
+import { TrendingUp, Shield, Zap, ArrowRight, Users, FileText } from 'lucide-react';
 import Link from 'next/link';
 import SophisticatedBackground from '@/components/ui/SophisticatedBackground';
 
