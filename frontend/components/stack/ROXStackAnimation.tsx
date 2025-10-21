@@ -123,44 +123,34 @@ const LayerPlate = ({ index, total, activeIndex, scrollProgress, data }: {
       targetRotationZ = 0;
     } else if (scrollPart === index) {
       // Current part - this card is being activated
-      if (partProgress < 0.2) {
-        // Phase 1: OTHER cards go down smoothly (not this one)
-        targetY = baseY + stackOffset; // This card stays in place
+      if (partProgress < 0.5) {
+        // Phase 1: This card goes down slightly with the deck
+        const downProgress = partProgress / 0.5;
+        const smoothDown = Math.sin(downProgress * Math.PI * 0.5);
+        targetY = baseY + stackOffset - smoothDown * 0.5; // Slight down movement
         targetRotationX = -Math.PI / 4;
-      } else if (partProgress < 0.3) {
-        // Phase 2: This card starts to rise
-        targetY = baseY + stackOffset;
-        targetRotationX = -Math.PI / 4;
-      } else if (partProgress < 0.8) {
-        // Phase 3: This card rises up smoothly
-        const riseProgress = (partProgress - 0.3) / 0.5;
+      } else {
+        // Phase 2: This card rises up smoothly
+        const riseProgress = (partProgress - 0.5) / 0.5;
         const smoothRise = Math.sin(riseProgress * Math.PI * 0.5);
-        targetY = baseY + stackOffset + smoothRise * 3.0;
+        targetY = baseY + stackOffset - 0.5 + smoothRise * 3.5; // Rise from down position
         targetRotationX = -Math.PI / 4 + smoothRise * 0.3;
         targetRotationZ = smoothRise * 0.2;
-      } else {
-        // Phase 4: This card settles in final position
-        targetY = baseY + stackOffset + 3.0;
-        targetRotationX = -Math.PI / 4 + 0.3;
-        targetRotationZ = 0.2;
       }
     } else {
       // This card hasn't been activated yet
       if (scrollPart > 0) {
-        // FIXED: Only OTHER cards go down, not the active one
-        if (partProgress < 0.2) {
-          // OTHER cards go down smoothly
-          const deckDownProgress = partProgress / 0.2;
-          const smoothDown = Math.sin(deckDownProgress * Math.PI * 0.5);
-          targetY = baseY + stackOffset - smoothDown * 2.0;
-        } else if (partProgress < 0.3) {
-          // OTHER cards stay down
-          targetY = baseY + stackOffset - 2.0;
+        // OTHER cards go down slightly
+        if (partProgress < 0.5) {
+          // OTHER cards go down slightly
+          const downProgress = partProgress / 0.5;
+          const smoothDown = Math.sin(downProgress * Math.PI * 0.5);
+          targetY = baseY + stackOffset - smoothDown * 0.5; // Slight down movement
         } else {
-          // OTHER cards go back up smoothly
-          const deckUpProgress = (partProgress - 0.3) / 0.7;
-          const smoothUp = Math.sin(deckUpProgress * Math.PI * 0.5);
-          targetY = baseY + stackOffset - 2.0 + smoothUp * 2.0;
+          // OTHER cards go back up slightly
+          const upProgress = (partProgress - 0.5) / 0.5;
+          const smoothUp = Math.sin(upProgress * Math.PI * 0.5);
+          targetY = baseY + stackOffset - 0.5 + smoothUp * 0.5; // Back to original position
         }
       }
     }
