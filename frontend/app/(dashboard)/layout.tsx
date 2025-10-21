@@ -4,6 +4,7 @@ import { useState, Suspense } from 'react'
 import { Sidebar } from '@/components/layout/Sidebar'
 import { SettingsPanel } from '@/components/layout/SettingsPanel'
 import ROXNav from '@/components/layout/ROXNav'
+import SophisticatedBackground from '@/components/ui/SophisticatedBackground'
 
 export default function DashboardLayout({
   children,
@@ -13,10 +14,11 @@ export default function DashboardLayout({
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground relative">
+      <SophisticatedBackground />
       <ROXNav />
       <Sidebar />
-      <div className="ml-64 p-6 pb-20">
+      <div className="ml-64 p-6 pb-20 relative z-10">
         <div className="max-w-7xl mx-auto">
           <Suspense fallback={<div>Loading...</div>}>
             {children}
