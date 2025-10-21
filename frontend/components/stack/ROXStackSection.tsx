@@ -40,7 +40,7 @@ const layers = [
 export default function ROXStackSection() {
   const [activeLayer, setActiveLayer] = useState(0)
 
-  // FIXED: Better scroll tracking for the entire section
+  // EXTREME FIX: Much better scroll tracking
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY
@@ -56,8 +56,8 @@ export default function ROXStackSection() {
       // Calculate progress within the section
       const sectionProgress = Math.max(0, Math.min(1, (scrollY - sectionTop) / sectionHeight))
       
-      // Update active layer based on progress
-      const newActiveLayer = Math.floor(sectionProgress * layers.length * 1.5)
+      // EXTREME FIX: Much better active layer calculation
+      const newActiveLayer = Math.floor(sectionProgress * layers.length * 2)
       setActiveLayer(Math.min(newActiveLayer, layers.length - 1))
     }
 
@@ -68,19 +68,19 @@ export default function ROXStackSection() {
   return (
     <section 
       data-section="stack"
-      className="relative h-[300vh] bg-black overflow-hidden"
+      className="relative h-[400vh] bg-black overflow-hidden"
     >
       {/* Sticky Canvas Container */}
       <div className="sticky top-0 h-screen">
         <div className="relative h-full">
-          {/* 3D Canvas - FIXED: More pages for longer scroll */}
+          {/* 3D Canvas - EXTREME FIX: More pages for much longer scroll */}
           <Canvas
             shadows
-            camera={{ position: [0, 2, 5], fov: 50 }}
+            camera={{ position: [0, 1.5, 4], fov: 60 }}
             className="absolute inset-0"
           >
             <Suspense fallback={null}>
-              <ScrollControls pages={3} damping={0.1}>
+              <ScrollControls pages={4} damping={0.05}>
                 <ROXStackAnimation />
               </ScrollControls>
             </Suspense>
@@ -92,13 +92,13 @@ export default function ROXStackSection() {
               {layers.map((layer, index) => (
                 <div
                   key={layer.id}
-                  className={`transition-all duration-500 ${
+                  className={`transition-all duration-700 ${
                     activeLayer === index
                       ? 'opacity-100 scale-100'
-                      : 'opacity-40 scale-95'
+                      : 'opacity-30 scale-90'
                   }`}
                 >
-                  <div className="bg-black/80 backdrop-blur-sm border border-gray-800 rounded-2xl p-6">
+                  <div className="bg-black/90 backdrop-blur-sm border border-gray-800 rounded-2xl p-6">
                     <div className="flex items-center space-x-3 mb-4">
                       <div className="w-3 h-3 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
                       <h3 className="text-xl font-bold text-white">{layer.name}</h3>
@@ -125,13 +125,13 @@ export default function ROXStackSection() {
               {layers.map((layer, index) => (
                 <div
                   key={layer.id}
-                  className={`transition-all duration-500 ${
+                  className={`transition-all duration-700 ${
                     activeLayer === index
                       ? 'opacity-100 scale-100'
-                      : 'opacity-40 scale-95'
+                      : 'opacity-30 scale-90'
                   }`}
                 >
-                  <div className="bg-black/80 backdrop-blur-sm border border-gray-800 rounded-2xl p-6">
+                  <div className="bg-black/90 backdrop-blur-sm border border-gray-800 rounded-2xl p-6">
                     <div className="flex items-center space-x-3 mb-4">
                       <div className="w-3 h-3 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
                       <h3 className="text-xl font-bold text-white">Technical Details</h3>
