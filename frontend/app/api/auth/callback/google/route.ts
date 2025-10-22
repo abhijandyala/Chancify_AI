@@ -46,8 +46,8 @@ export async function GET(request: NextRequest) {
 
     const userInfo = await userResponse.json()
 
-    // Create success URL with user data
-    const successUrl = new URL('/profile', request.url)
+    // Create success URL with user data - redirect to profile.html
+    const successUrl = new URL('/profile.html', request.url)
     successUrl.searchParams.set('google_auth', 'success')
     successUrl.searchParams.set('email', userInfo.email)
     successUrl.searchParams.set('name', userInfo.name)
