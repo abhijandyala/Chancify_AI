@@ -55,6 +55,12 @@ export default function HomePage() {
     setProfile(prev => ({ ...prev, [field]: value }))
   }
 
+  // Validation function to check if all required fields are filled
+  const isProfileComplete = () => {
+    const requiredFields = ['gpa_unweighted', 'gpa_weighted']
+    return requiredFields.every(field => profile[field as keyof typeof profile] && profile[field as keyof typeof profile].trim() !== '')
+  }
+
   const openInfoModal = (factor: string) => {
     setModalInfo({ isOpen: true, factor })
   }
@@ -399,17 +405,35 @@ export default function HomePage() {
         <div className="rox-card">
           <div className="text-center space-y-6">
             <div className="space-y-2">
-              <h2 className="text-2xl font-bold text-white">Ready to Explore?</h2>
-              <p className="text-gray-400">Your profile is complete. Let's discover colleges that match your unique story.</p>
+              <h2 className="text-2xl font-bold text-white">
+                {isProfileComplete() ? 'Ready to Explore?' : 'Complete Your Profile'}
+              </h2>
+              <p className="text-gray-400">
+                {isProfileComplete() 
+                  ? 'Your profile is complete. Let\'s discover colleges that match your unique story.'
+                  : 'Please fill in your GPA information to continue to college discovery.'
+                }
+              </p>
             </div>
             
             <Button 
               onClick={() => router.push('/college-details')}
-              className="rox-button text-lg px-8 py-4 flex items-center gap-3 mx-auto"
+              disabled={!isProfileComplete()}
+              className={`text-lg px-8 py-4 flex items-center gap-3 mx-auto transition-all duration-300 ${
+                isProfileComplete() 
+                  ? 'rox-button' 
+                  : 'bg-gray-600 text-gray-400 cursor-not-allowed opacity-50'
+              }`}
             >
               <span>Next</span>
               <ChevronRight className="w-5 h-5" />
             </Button>
+            
+            {!isProfileComplete() && (
+              <p className="text-sm text-gray-500 mt-2">
+                Required: Unweighted GPA and Weighted GPA
+              </p>
+            )}
           </div>
         </div>
       </motion.section>
