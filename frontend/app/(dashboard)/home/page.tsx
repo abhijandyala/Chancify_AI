@@ -8,7 +8,7 @@ import { InfoIcon } from '@/components/ui/InfoIcon'
 import { InfoModal } from '@/components/ui/InfoModal'
 import CollegeCombobox from '@/components/CollegeCombobox'
 import { Button } from '@/components/ui/Button'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { COLLEGES } from '@/lib/colleges'
 import { FACTOR_DESCRIPTIONS } from '@/lib/factorDescriptions'
 import { motion } from 'framer-motion'
@@ -54,6 +54,34 @@ export default function HomePage() {
   const updateProfile = (field: string, value: string) => {
     setProfile(prev => ({ ...prev, [field]: value }))
   }
+
+  // Handle Google OAuth success
+  useEffect(() => {
+    const handleGoogleAuthSuccess = () => {
+      if (typeof window !== 'undefined') {
+        const urlParams = new URLSearchParams(window.location.search)
+        const googleAuth = urlParams.get('google_auth')
+        const email = urlParams.get('email')
+        const name = urlParams.get('name')
+        
+        if (googleAuth === 'success' && email) {
+          // Set auth token and user info
+          localStorage.setItem('auth_token', 'google_oauth_' + Date.now())
+          localStorage.setItem('user_email', email)
+          if (name) localStorage.setItem('user_name', name)
+          
+          // Clean up URL parameters
+          const newUrl = window.location.pathname
+          window.history.replaceState({}, document.title, newUrl)
+          
+          // Trigger a custom event to notify header of auth change
+          window.dispatchEvent(new CustomEvent('authStateChanged'))
+        }
+      }
+    }
+    
+    handleGoogleAuthSuccess()
+  }, [])
 
   // Validation function to check if all required fields are filled
   const isProfileComplete = () => {

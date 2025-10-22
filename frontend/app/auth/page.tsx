@@ -35,8 +35,8 @@ export default function AuthPage() {
             localStorage.setItem('user_email', email)
           }
           
-          // Redirect to profile.html
-          window.location.href = '/profile.html'
+          // Redirect to home page
+          window.location.href = '/home'
         } else {
           setError('Please fill in all fields')
         }
@@ -52,8 +52,8 @@ export default function AuthPage() {
             localStorage.setItem('user_email', email)
           }
           
-          // Redirect to profile.html
-          window.location.href = '/profile.html'
+          // Redirect to home page
+          window.location.href = '/home'
         } else {
           setError('Please enter your email')
         }
