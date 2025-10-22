@@ -88,14 +88,14 @@ export default function FullScreenGoogleModal({ isOpen, onClose, onAccountSelect
         onClick={onClose}
       >
         <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.9, opacity: 0 }}
-          transition={{ type: "spring", duration: 0.5 }}
-          className="fixed inset-0 flex items-center justify-center p-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="fixed inset-0 flex items-center justify-center"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="w-full max-w-4xl h-[80vh] bg-gray-900 rounded-2xl border border-gray-700 overflow-hidden">
+          <div className="w-full h-full bg-gray-900 overflow-hidden">
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-700">
               <div className="flex items-center gap-3">
@@ -119,9 +119,9 @@ export default function FullScreenGoogleModal({ isOpen, onClose, onAccountSelect
 
             <div className="flex h-full">
               {/* Left Panel - Branding */}
-              <div className="w-1/2 bg-black flex flex-col items-center justify-center p-12">
-                <div className="w-24 h-24 bg-black border-2 border-white rounded-2xl flex items-center justify-center mb-8">
-                  <span className="text-4xl font-bold text-white">CAI</span>
+              <div className="w-1/2 bg-gray-800 flex flex-col items-center justify-center p-12">
+                <div className="w-24 h-24 bg-white border-2 border-white rounded-2xl flex items-center justify-center mb-8">
+                  <span className="text-4xl font-bold text-black">CAI</span>
                 </div>
                 <h2 className="text-4xl font-bold text-white mb-4">Choose an account</h2>
                 <p className="text-gray-400 text-lg">
@@ -130,7 +130,7 @@ export default function FullScreenGoogleModal({ isOpen, onClose, onAccountSelect
               </div>
 
               {/* Right Panel - Account List */}
-              <div className="w-1/2 p-6 overflow-y-auto">
+              <div className="w-1/2 p-6 overflow-y-auto bg-gray-900">
                 <div className="space-y-2">
                   {accounts.map((account, index) => (
                     <motion.button
@@ -139,7 +139,7 @@ export default function FullScreenGoogleModal({ isOpen, onClose, onAccountSelect
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
                       onClick={() => handleAccountClick(account)}
-                      className="w-full p-4 hover:bg-gray-800 rounded-xl transition-colors text-left border border-transparent hover:border-gray-600"
+                      className="w-full p-4 hover:bg-gray-700 rounded-xl transition-colors text-left border border-transparent hover:border-gray-500"
                     >
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-lg">
@@ -167,7 +167,7 @@ export default function FullScreenGoogleModal({ isOpen, onClose, onAccountSelect
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: accounts.length * 0.1 }}
                     onClick={handleUseAnotherAccount}
-                    className="w-full p-4 hover:bg-gray-800 rounded-xl transition-colors text-left border border-transparent hover:border-gray-600"
+                    className="w-full p-4 hover:bg-gray-700 rounded-xl transition-colors text-left border border-transparent hover:border-gray-500"
                   >
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center">
