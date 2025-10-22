@@ -55,7 +55,7 @@ export default function HomePage() {
     setProfile(prev => ({ ...prev, [field]: value }))
   }
 
-  // Handle Google OAuth success
+  // Handle Google OAuth success and trial mode
   useEffect(() => {
     const handleGoogleAuthSuccess = () => {
       if (typeof window !== 'undefined') {
@@ -69,6 +69,7 @@ export default function HomePage() {
           localStorage.setItem('auth_token', 'google_oauth_' + Date.now())
           localStorage.setItem('user_email', email)
           if (name) localStorage.setItem('user_name', name)
+          localStorage.removeItem('trial_mode') // Clear trial mode when signing in
           
           // Clean up URL parameters
           const newUrl = window.location.pathname
@@ -80,7 +81,18 @@ export default function HomePage() {
       }
     }
     
+    const handleTrialMode = () => {
+      if (typeof window !== 'undefined') {
+        const trialMode = localStorage.getItem('trial_mode')
+        if (trialMode === 'true') {
+          // Trigger a custom event to notify header of trial mode
+          window.dispatchEvent(new CustomEvent('trialModeChanged'))
+        }
+      }
+    }
+    
     handleGoogleAuthSuccess()
+    handleTrialMode()
   }, [])
 
   // Validation function to check if all required fields are filled

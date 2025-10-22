@@ -33,6 +33,9 @@ export default function AuthPage() {
           if (typeof window !== 'undefined') {
             localStorage.setItem('auth_token', 'demo_token_' + Date.now())
             localStorage.setItem('user_email', email)
+            localStorage.removeItem('trial_mode') // Clear trial mode when signing in
+            // Trigger a custom event to notify header of auth change
+            window.dispatchEvent(new CustomEvent('authStateChanged'))
           }
           
           // Redirect to home page
@@ -50,6 +53,9 @@ export default function AuthPage() {
           if (typeof window !== 'undefined') {
             localStorage.setItem('auth_token', 'demo_token_' + Date.now())
             localStorage.setItem('user_email', email)
+            localStorage.removeItem('trial_mode') // Clear trial mode when signing in
+            // Trigger a custom event to notify header of auth change
+            window.dispatchEvent(new CustomEvent('authStateChanged'))
           }
           
           // Redirect to home page

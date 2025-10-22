@@ -41,7 +41,19 @@ export default function ROXHero() {
               </Button>
             </Link>
             <Link href="/home" className="w-full sm:w-auto">
-              <Button variant="ghost" className="text-sm sm:text-base md:text-lg px-6 sm:px-8 py-3 sm:py-4 border border-border w-full sm:w-auto">
+              <Button 
+                variant="ghost" 
+                className="text-sm sm:text-base md:text-lg px-6 sm:px-8 py-3 sm:py-4 border border-border w-full sm:w-auto"
+                onClick={() => {
+                  // Set trial mode flag when clicking "Try for Now"
+                  if (typeof window !== 'undefined') {
+                    localStorage.setItem('trial_mode', 'true')
+                    localStorage.removeItem('auth_token') // Remove any existing auth token
+                    // Trigger a custom event to notify header of trial mode change
+                    window.dispatchEvent(new CustomEvent('trialModeChanged'))
+                  }
+                }}
+              >
                 <span className="hidden sm:inline">Try for Now</span>
                 <span className="sm:hidden">Try Now</span>
               </Button>

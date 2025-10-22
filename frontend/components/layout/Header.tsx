@@ -9,13 +9,16 @@ export function Header() {
   const pathname = usePathname()
   const router = useRouter()
   const [isSignedIn, setIsSignedIn] = useState(false)
+  const [isTrialMode, setIsTrialMode] = useState(false)
   
   // Check authentication status on component mount
   useEffect(() => {
     const checkAuthStatus = () => {
       if (typeof window !== 'undefined') {
         const authToken = localStorage.getItem('auth_token')
+        const trialMode = localStorage.getItem('trial_mode')
         setIsSignedIn(!!authToken)
+        setIsTrialMode(trialMode === 'true')
       }
     }
     
@@ -30,11 +33,17 @@ export function Header() {
       checkAuthStatus()
     }
     
+    const handleTrialModeChange = () => {
+      checkAuthStatus()
+    }
+    
     window.addEventListener('storage', handleStorageChange)
     window.addEventListener('authStateChanged', handleAuthStateChange)
+    window.addEventListener('trialModeChanged', handleTrialModeChange)
     return () => {
       window.removeEventListener('storage', handleStorageChange)
       window.removeEventListener('authStateChanged', handleAuthStateChange)
+      window.removeEventListener('trialModeChanged', handleTrialModeChange)
     }
   }, [])
   
@@ -87,7 +96,7 @@ export function Header() {
 
       <div className="flex items-center gap-3">
         {isSignedIn ? (
-          // Show notification, profile, and settings buttons when signed in
+          // Show home, profile, and settings buttons when signed in
           <>
             <motion.button
               onClick={handleHomeClick}
@@ -116,8 +125,18 @@ export function Header() {
               <SettingsIcon className="w-5 h-5 text-gray-400 hover:text-yellow-400 transition-colors" />
             </motion.button>
           </>
+        ) : isTrialMode ? (
+          // Show "Sign in" button when in trial mode
+          <motion.button
+            onClick={handleSignUpClick}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-6 py-3 rounded-xl bg-yellow-400 hover:bg-yellow-500 text-black font-semibold transition-all duration-300 shadow-lg hover:shadow-yellow-400/25"
+          >
+            Sign in
+          </motion.button>
         ) : (
-          // Show "Sign up now" button when not signed in
+          // Show "Sign up now" button when not signed in and not in trial mode
           <motion.button
             onClick={handleSignUpClick}
             whileHover={{ scale: 1.05 }}
