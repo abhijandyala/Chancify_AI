@@ -164,6 +164,17 @@ export const FACTOR_DESCRIPTIONS = {
       "Has faced and overcome significant obstacles"
     ]
   },
+  major: {
+    title: "Intended Major",
+    description: "This is the field of study you plan to pursue in college. It helps colleges understand your academic interests and career goals.",
+    examples: [
+      "Computer Science - for students interested in programming and technology",
+      "Biology - for students planning to study medicine or life sciences",
+      "Business - for students interested in entrepreneurship or management",
+      "Engineering - for students who want to solve technical problems",
+      "Psychology - for students interested in understanding human behavior"
+    ]
+  },
   hs_reputation: {
     title: "High School Reputation",
     description: "This measures the academic reputation and rigor of your high school. It helps colleges understand the context of your achievements.",

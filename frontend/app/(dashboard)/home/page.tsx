@@ -303,192 +303,208 @@ export default function HomePage() {
               />
             </FormFieldWithInfo>
             
-            <ROXSelect
-              label="Awards & Publications"
-              value={profile.awards_publications}
+            <FormFieldWithInfo label="Awards & Publications" factor="awards_publications">
+              <ROXSelect
+                value={profile.awards_publications}
                 onChange={(value) => updateProfile('awards_publications', value)}
-              options={[
-                { value: '10', label: '10 - National/International awards/publications' },
-                { value: '8', label: '8 - State/Regional awards/publications' },
-                { value: '6', label: '6 - School/Local awards/publications' },
-                { value: '4', label: '4 - Minor recognition' },
-                { value: '2', label: '2 - No significant awards/publications' },
-              ]}
-            />
+                options={[
+                  { value: '10', label: '10 - National/International awards/publications' },
+                  { value: '8', label: '8 - State/Regional awards/publications' },
+                  { value: '6', label: '6 - School/Local awards/publications' },
+                  { value: '4', label: '4 - Minor recognition' },
+                  { value: '2', label: '2 - No significant awards/publications' },
+                ]}
+              />
+            </FormFieldWithInfo>
             
-            <ROXSelect
-              label="Passion Projects"
-              value={profile.passion_projects}
+            <FormFieldWithInfo label="Passion Projects" factor="passion_projects">
+              <ROXSelect
+                value={profile.passion_projects}
                 onChange={(value) => updateProfile('passion_projects', value)}
-              options={[
-                { value: '10', label: '10 - Multiple, highly innovative projects' },
-                { value: '8', label: '8 - 1-2 significant, well-developed projects' },
-                { value: '6', label: '6 - Some developed projects' },
-                { value: '4', label: '4 - Basic projects' },
-                { value: '2', label: '2 - No significant projects' },
-              ]}
-            />
+                options={[
+                  { value: '10', label: '10 - Multiple, highly innovative projects' },
+                  { value: '8', label: '8 - 1-2 significant, well-developed projects' },
+                  { value: '6', label: '6 - Some developed projects' },
+                  { value: '4', label: '4 - Basic projects' },
+                  { value: '2', label: '2 - No significant projects' },
+                ]}
+              />
+            </FormFieldWithInfo>
             
-            <ROXSelect
-              label="Business Ventures"
-              value={profile.business_ventures}
+            <FormFieldWithInfo label="Business Ventures" factor="business_ventures">
+              <ROXSelect
+                value={profile.business_ventures}
                 onChange={(value) => updateProfile('business_ventures', value)}
-              options={[
-                { value: '10', label: '10 - Successful, revenue-generating venture' },
-                { value: '8', label: '8 - Developed venture with traction' },
-                { value: '6', label: '6 - Business idea with some execution' },
-                { value: '4', label: '4 - Basic business idea' },
-                { value: '2', label: '2 - No business ventures' },
-              ]}
-            />
+                options={[
+                  { value: '10', label: '10 - Successful, revenue-generating venture' },
+                  { value: '8', label: '8 - Developed venture with traction' },
+                  { value: '6', label: '6 - Business idea with some execution' },
+                  { value: '4', label: '4 - Basic business idea' },
+                  { value: '2', label: '2 - No business ventures' },
+                ]}
+              />
+            </FormFieldWithInfo>
             
-            <ROXSelect
-              label="Volunteer Work"
-              value={profile.volunteer_work}
+            <FormFieldWithInfo label="Volunteer Work" factor="volunteer_work">
+              <ROXSelect
+                value={profile.volunteer_work}
                 onChange={(value) => updateProfile('volunteer_work', value)}
-              options={[
-                { value: '10', label: '10 - 200+ hours, significant impact' },
-                { value: '8', label: '8 - 100+ hours, good impact' },
-                { value: '6', label: '6 - 50+ hours, some impact' },
-                { value: '4', label: '4 - 25+ hours, limited impact' },
-                { value: '2', label: '2 - Less than 25 hours' },
-              ]}
-            />
+                options={[
+                  { value: '10', label: '10 - 200+ hours, significant impact' },
+                  { value: '8', label: '8 - 100+ hours, good impact' },
+                  { value: '6', label: '6 - 50+ hours, some impact' },
+                  { value: '4', label: '4 - 25+ hours, limited impact' },
+                  { value: '2', label: '2 - Less than 25 hours' },
+                ]}
+              />
+            </FormFieldWithInfo>
             
-            <ROXSelect
-              label="Research Experience"
-              value={profile.research_experience}
+            <FormFieldWithInfo label="Research Experience" factor="research_experience">
+              <ROXSelect
+                value={profile.research_experience}
                 onChange={(value) => updateProfile('research_experience', value)}
-              options={[
-                { value: '10', label: '10 - Published/presented research' },
-                { value: '8', label: '8 - Significant research project' },
-                { value: '6', label: '6 - Some research involvement' },
-                { value: '4', label: '4 - Minor research exposure' },
-                { value: '2', label: '2 - No research experience' },
-              ]}
-            />
+                options={[
+                  { value: '10', label: '10 - Published/presented research' },
+                  { value: '8', label: '8 - Significant research project' },
+                  { value: '6', label: '6 - Some research involvement' },
+                  { value: '4', label: '4 - Minor research exposure' },
+                  { value: '2', label: '2 - No research experience' },
+                ]}
+              />
+            </FormFieldWithInfo>
             
-            <ROXSelect
-              label="Portfolio/Audition"
-              value={profile.portfolio_audition}
+            <FormFieldWithInfo label="Portfolio/Audition" factor="portfolio_audition">
+              <ROXSelect
+                value={profile.portfolio_audition}
                 onChange={(value) => updateProfile('portfolio_audition', value)}
-              options={[
-                { value: '10', label: '10 - Exceptional portfolio/audition' },
-                { value: '8', label: '8 - Strong portfolio/audition' },
-                { value: '6', label: '6 - Good portfolio/audition' },
-                { value: '4', label: '4 - Decent portfolio/audition' },
-                { value: '2', label: '2 - No portfolio/audition' },
-              ]}
-            />
+                options={[
+                  { value: '10', label: '10 - Exceptional portfolio/audition' },
+                  { value: '8', label: '8 - Strong portfolio/audition' },
+                  { value: '6', label: '6 - Good portfolio/audition' },
+                  { value: '4', label: '4 - Decent portfolio/audition' },
+                  { value: '2', label: '2 - No portfolio/audition' },
+                ]}
+              />
+            </FormFieldWithInfo>
             
-            <ROXSelect
-              label="Essay Quality"
-              value={profile.essay_quality}
+            <FormFieldWithInfo label="Essay Quality" factor="essay_quality">
+              <ROXSelect
+                value={profile.essay_quality}
                 onChange={(value) => updateProfile('essay_quality', value)}
-              options={[
-                { value: '10', label: '10 - Outstanding, unique essays' },
-                { value: '8', label: '8 - Strong, compelling essays' },
-                { value: '6', label: '6 - Good, well-written essays' },
-                { value: '4', label: '4 - Decent essays' },
-                { value: '2', label: '2 - Weak essays' },
-              ]}
-            />
+                options={[
+                  { value: '10', label: '10 - Outstanding, unique essays' },
+                  { value: '8', label: '8 - Strong, compelling essays' },
+                  { value: '6', label: '6 - Good, well-written essays' },
+                  { value: '4', label: '4 - Decent essays' },
+                  { value: '2', label: '2 - Weak essays' },
+                ]}
+              />
+            </FormFieldWithInfo>
 
-            <ROXSelect
-              label="Recommendations"
-              value={profile.recommendations}
+            <FormFieldWithInfo label="Recommendations" factor="recommendations">
+              <ROXSelect
+                value={profile.recommendations}
                 onChange={(value) => updateProfile('recommendations', value)}
-              options={[
-                { value: '10', label: '10 - Exceptional recommendations' },
-                { value: '8', label: '8 - Strong recommendations' },
-                { value: '6', label: '6 - Good recommendations' },
-                { value: '4', label: '4 - Average recommendations' },
-                { value: '2', label: '2 - Weak recommendations' },
-              ]}
-            />
+                options={[
+                  { value: '10', label: '10 - Exceptional recommendations' },
+                  { value: '8', label: '8 - Strong recommendations' },
+                  { value: '6', label: '6 - Good recommendations' },
+                  { value: '4', label: '4 - Average recommendations' },
+                  { value: '2', label: '2 - Weak recommendations' },
+                ]}
+              />
+            </FormFieldWithInfo>
 
-            <ROXSelect
-              label="Interview"
-              value={profile.interview}
+            <FormFieldWithInfo label="Interview" factor="interview">
+              <ROXSelect
+                value={profile.interview}
                 onChange={(value) => updateProfile('interview', value)}
-              options={[
-                { value: '10', label: '10 - Outstanding interview skills' },
-                { value: '8', label: '8 - Strong interview performance' },
-                { value: '6', label: '6 - Good interview abilities' },
-                { value: '4', label: '4 - Decent interview skills' },
-                { value: '2', label: '2 - Interview skills need work' },
-              ]}
-            />
+                options={[
+                  { value: '10', label: '10 - Outstanding interview skills' },
+                  { value: '8', label: '8 - Strong interview performance' },
+                  { value: '6', label: '6 - Good interview abilities' },
+                  { value: '4', label: '4 - Decent interview skills' },
+                  { value: '2', label: '2 - Interview skills need work' },
+                ]}
+              />
+            </FormFieldWithInfo>
 
-            <ROXSelect
-              label="Demonstrated Interest"
-              value={profile.demonstrated_interest}
+            <FormFieldWithInfo label="Demonstrated Interest" factor="demonstrated_interest">
+              <ROXSelect
+                value={profile.demonstrated_interest}
                 onChange={(value) => updateProfile('demonstrated_interest', value)}
-              options={[
-                { value: '10', label: '10 - Extensive demonstrated interest' },
-                { value: '8', label: '8 - Strong interest shown' },
-                { value: '6', label: '6 - Good interest demonstrated' },
-                { value: '4', label: '4 - Some interest shown' },
-                { value: '2', label: '2 - Limited interest demonstrated' },
-              ]}
-            />
+                options={[
+                  { value: '10', label: '10 - Extensive demonstrated interest' },
+                  { value: '8', label: '8 - Strong interest shown' },
+                  { value: '6', label: '6 - Good interest demonstrated' },
+                  { value: '4', label: '4 - Some interest shown' },
+                  { value: '2', label: '2 - Limited interest demonstrated' },
+                ]}
+              />
+            </FormFieldWithInfo>
 
-            <ROXSelect
-              label="Legacy Status"
-              value={profile.legacy_status}
+            <FormFieldWithInfo label="Legacy Status" factor="legacy_status">
+              <ROXSelect
+                value={profile.legacy_status}
                 onChange={(value) => updateProfile('legacy_status', value)}
-              options={[
-                { value: '10', label: '10 - Strong legacy connection' },
-                { value: '8', label: '8 - Good legacy connection' },
-                { value: '6', label: '6 - Some legacy connection' },
-                { value: '4', label: '4 - Minor legacy connection' },
-                { value: '2', label: '2 - No legacy connection' },
-              ]}
-            />
+                options={[
+                  { value: '10', label: '10 - Strong legacy connection' },
+                  { value: '8', label: '8 - Good legacy connection' },
+                  { value: '6', label: '6 - Some legacy connection' },
+                  { value: '4', label: '4 - Minor legacy connection' },
+                  { value: '2', label: '2 - No legacy connection' },
+                ]}
+              />
+            </FormFieldWithInfo>
 
-            <ROXSelect
-              label="Geographic Diversity"
-              value={profile.geographic_diversity}
+            <FormFieldWithInfo label="Geographic Diversity" factor="geographic_diversity">
+              <ROXSelect
+                value={profile.geographic_diversity}
                 onChange={(value) => updateProfile('geographic_diversity', value)}
-              options={[
-                { value: '10', label: '10 - Highly underrepresented region' },
-                { value: '8', label: '8 - Underrepresented region' },
-                { value: '6', label: '6 - Some geographic diversity' },
-                { value: '4', label: '4 - Limited geographic diversity' },
-                { value: '2', label: '2 - No geographic diversity' },
-              ]}
-            />
+                options={[
+                  { value: '10', label: '10 - Highly underrepresented region' },
+                  { value: '8', label: '8 - Underrepresented region' },
+                  { value: '6', label: '6 - Some geographic diversity' },
+                  { value: '4', label: '4 - Limited geographic diversity' },
+                  { value: '2', label: '2 - No geographic diversity' },
+                ]}
+              />
+            </FormFieldWithInfo>
 
-            <ROXSelect
-              label="First-Gen/Diversity"
-              value={profile.firstgen_diversity}
+            <FormFieldWithInfo label="First-Gen/Diversity" factor="firstgen_diversity">
+              <ROXSelect
+                value={profile.firstgen_diversity}
                 onChange={(value) => updateProfile('firstgen_diversity', value)}
-              options={[
-                { value: '10', label: '10 - First-gen + diverse background' },
-                { value: '8', label: '8 - First-gen OR diverse background' },
-                { value: '6', label: '6 - Some diversity factors' },
-                { value: '4', label: '4 - Limited diversity factors' },
-                { value: '2', label: '2 - No diversity factors' },
-              ]}
-            />
+                options={[
+                  { value: '10', label: '10 - First-gen + diverse background' },
+                  { value: '8', label: '8 - First-gen OR diverse background' },
+                  { value: '6', label: '6 - Some diversity factors' },
+                  { value: '4', label: '4 - Limited diversity factors' },
+                  { value: '2', label: '2 - No diversity factors' },
+                ]}
+              />
+            </FormFieldWithInfo>
 
-            <MajorAutocomplete
-              value={profile.major}
-              onChange={(value) => updateProfile('major', value)}
-            />
+            <FormFieldWithInfo label="Intended Major" factor="major">
+              <MajorAutocomplete
+                value={profile.major}
+                onChange={(value) => updateProfile('major', value)}
+              />
+            </FormFieldWithInfo>
 
-            <ROXSelect
-              label="High School Reputation"
-              value={profile.hs_reputation}
+            <FormFieldWithInfo label="High School Reputation" factor="hs_reputation">
+              <ROXSelect
+                value={profile.hs_reputation}
                 onChange={(value) => updateProfile('hs_reputation', value)}
-              options={[
-                { value: '10', label: '10 - Elite high school' },
-                { value: '8', label: '8 - Very strong high school' },
-                { value: '6', label: '6 - Good high school' },
-                { value: '4', label: '4 - Average high school' },
-                { value: '2', label: '2 - Below average high school' },
-              ]}
-            />
+                options={[
+                  { value: '10', label: '10 - Elite high school' },
+                  { value: '8', label: '8 - Very strong high school' },
+                  { value: '6', label: '6 - Good high school' },
+                  { value: '4', label: '4 - Average high school' },
+                  { value: '2', label: '2 - Below average high school' },
+                ]}
+              />
+            </FormFieldWithInfo>
           </div>
         </motion.div>
 
