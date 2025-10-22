@@ -115,7 +115,7 @@ export default function HomePage() {
         college: profile.college,
       })
       
-      router.push(`/dashboard/results?${params.toString()}`)
+      router.push(`/results?${params.toString()}`)
       
     } catch (error) {
       console.error('Error calculating chances:', error)
