@@ -76,6 +76,19 @@ export default function FullScreenGoogleModal({ isOpen, onClose, onAccountSelect
     console.log('Use another account clicked')
   }
 
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
+
   if (!isOpen) return null
 
   return (
@@ -84,18 +97,33 @@ export default function FullScreenGoogleModal({ isOpen, onClose, onAccountSelect
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm"
+        className="fixed inset-0 z-50 bg-gray-900"
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          width: '100vw',
+          height: '100vh',
+          margin: 0,
+          padding: 0,
+          borderRadius: 0,
+          border: 'none'
+        }}
         onClick={onClose}
       >
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="fixed inset-0 flex items-center justify-center"
-          onClick={(e) => e.stopPropagation()}
+        <div 
+          className="w-full h-full bg-gray-900 overflow-hidden"
+          style={{
+            width: '100vw',
+            height: '100vh',
+            margin: 0,
+            padding: 0,
+            borderRadius: 0,
+            border: 'none'
+          }}
         >
-          <div className="w-full h-full bg-gray-900 overflow-hidden">
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-700">
               <div className="flex items-center gap-3">
@@ -194,8 +222,7 @@ export default function FullScreenGoogleModal({ isOpen, onClose, onAccountSelect
                 <span className="text-blue-400 hover:underline cursor-pointer">terms of service</span>.
               </p>
             </div>
-          </div>
-        </motion.div>
+        </div>
       </motion.div>
     </AnimatePresence>
   )
