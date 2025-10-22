@@ -69,6 +69,7 @@ export default function CollegeCombobox({
         'relative mx-auto w-full max-w-2xl',
         className
       )}
+      style={{ zIndex: 9999999 }}
       aria-expanded={open}
       aria-haspopup="listbox"
     >
@@ -131,11 +132,12 @@ export default function CollegeCombobox({
       {open && (
         <div
           className={clsx(
-            'absolute left-0 right-0 z-50 mt-2',
+            'absolute left-0 right-0 mt-2',
             'rounded-xl border border-gray-800/50',
             'bg-black/80 backdrop-blur-xl',
             'shadow-2xl'
           )}
+          style={{ zIndex: 9999999 }}
         >
           <ul
             id="college-listbox"
