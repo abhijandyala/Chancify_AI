@@ -7,15 +7,27 @@ export async function GET(request: NextRequest) {
   const error = searchParams.get('error')
 
   if (error) {
-    // Handle OAuth error
-    return NextResponse.redirect(new URL(`/auth?error=${error}`, request.url))
+    // Handle OAuth error - redirect to home page with error
+    return NextResponse.redirect(new URL(`/home?error=${error}`, request.url))
   }
 
   if (!code) {
-    return NextResponse.redirect(new URL('/auth?error=no_code', request.url))
+    return NextResponse.redirect(new URL('/home?error=no_code', request.url))
   }
 
   try {
+    // Check if environment variables are set
+    if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+      console.error('Missing Google OAuth environment variables')
+      return NextResponse.redirect(new URL('/home?error=missing_config', request.url))
+    }
+
+    // Get the correct base URL
+    const baseUrl = process.env.NEXTAUTH_URL || 
+                   process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
+                   process.env.RAILWAY_STATIC_URL ? `https://${process.env.RAILWAY_STATIC_URL}` :
+                   'http://localhost:3000'
+
     // Exchange code for tokens
     const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
       method: 'POST',
@@ -23,11 +35,11 @@ export async function GET(request: NextRequest) {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams({
-        client_id: process.env.GOOGLE_CLIENT_ID!,
-        client_secret: process.env.GOOGLE_CLIENT_SECRET!,
+        client_id: process.env.GOOGLE_CLIENT_ID,
+        client_secret: process.env.GOOGLE_CLIENT_SECRET,
         code,
         grant_type: 'authorization_code',
-        redirect_uri: `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/auth/callback/google`,
+        redirect_uri: `${baseUrl}/api/auth/callback/google`,
       }),
     })
 
@@ -46,8 +58,8 @@ export async function GET(request: NextRequest) {
 
     const userInfo = await userResponse.json()
 
-    // Create success URL with user data - redirect to profile.html
-    const successUrl = new URL('/profile.html', request.url)
+    // Create success URL with user data - redirect to home page
+    const successUrl = new URL('/home', request.url)
     successUrl.searchParams.set('google_auth', 'success')
     successUrl.searchParams.set('email', userInfo.email)
     successUrl.searchParams.set('name', userInfo.name)
@@ -57,6 +69,6 @@ export async function GET(request: NextRequest) {
 
   } catch (error) {
     console.error('Google OAuth error:', error)
-    return NextResponse.redirect(new URL('/auth?error=oauth_failed', request.url))
+    return NextResponse.redirect(new URL('/home?error=oauth_failed', request.url))
   }
 }

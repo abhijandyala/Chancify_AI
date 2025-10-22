@@ -15,6 +15,7 @@ export default function SimpleGoogleOAuth() {
     // This redirects to the official Google account selection page
     // Using the correct Google Client ID as specified
     const GOOGLE_CLIENT_ID = '117818010137-4fmntjdknmm16c9eef296l96isok6620.apps.googleusercontent.com'
+    // Use the correct redirect URI for the current environment
     const REDIRECT_URI = `${window.location.origin}/api/auth/callback/google`
     const SCOPE = 'email profile'
     const STATE = 'google_oauth_state_' + Date.now()

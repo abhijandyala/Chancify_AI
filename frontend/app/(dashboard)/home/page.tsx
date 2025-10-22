@@ -2,14 +2,17 @@
 
 import { GlassCard } from '@/components/ui/GlassCard'
 import { Input } from '@/components/ui/Input'
-import { Select } from '@/components/ui/Select'
+import { ROXSelect } from '@/components/ui/ROXSelect'
 import { SimpleSearchableSelect } from '@/components/ui/SimpleSearchableSelect'
 import { MajorAutocomplete } from '@/components/ui/MajorAutocomplete'
+import { InfoIcon } from '@/components/ui/InfoIcon'
+import { InfoModal } from '@/components/ui/InfoModal'
 import CollegeCombobox from '@/components/CollegeCombobox'
 import { Button } from '@/components/ui/Button'
 import { useState } from 'react'
 import { MAJORS } from '@/lib/majors'
 import { COLLEGES } from '@/lib/colleges'
+import { FACTOR_DESCRIPTIONS } from '@/lib/factorDescriptions'
 import Reveal from '@/components/ui/Reveal'
 import { motion } from 'framer-motion'
 import { GraduationCap, Target, Star, TrendingUp, Award, Users, Building2, Calculator } from 'lucide-react'
@@ -20,6 +23,10 @@ export const dynamic = 'force-dynamic'
 export default function HomePage() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
+  const [modalInfo, setModalInfo] = useState<{ isOpen: boolean; factor: string }>({
+    isOpen: false,
+    factor: ''
+  })
   
   const [profile, setProfile] = useState({
     // Academic Basics
@@ -54,6 +61,14 @@ export default function HomePage() {
 
   const updateProfile = (field: string, value: string) => {
     setProfile({ ...profile, [field]: value })
+  }
+
+  const openInfoModal = (factor: string) => {
+    setModalInfo({ isOpen: true, factor })
+  }
+
+  const closeInfoModal = () => {
+    setModalInfo({ isOpen: false, factor: '' })
   }
 
   const handleCalculateChances = async (e: React.FormEvent) => {
@@ -124,6 +139,26 @@ export default function HomePage() {
       setIsLoading(false)
     }
   }
+
+  const FormFieldWithInfo = ({ 
+    label, 
+    factor, 
+    children 
+  }: { 
+    label: string
+    factor: string
+    children: React.ReactNode 
+  }) => (
+    <div className="space-y-2">
+      <div className="flex items-center justify-between">
+        <label className="block text-sm font-semibold text-gray-300">
+          {label}
+        </label>
+        <InfoIcon onClick={() => openInfoModal(factor)} />
+      </div>
+      {children}
+    </div>
+  )
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6">
@@ -206,10 +241,10 @@ export default function HomePage() {
               helperText="ACT composite (optional)"
             />
             
-            <Select
+            <ROXSelect
               label="Course Rigor"
               value={profile.rigor}
-              onChange={(e) => updateProfile('rigor', e.target.value)}
+                onChange={(value) => updateProfile('rigor', value)}
               options={[
                 { value: '10', label: '10 - Most Rigorous (Many AP/IB)' },
                 { value: '8', label: '8 - Very Rigorous (Several AP/IB)' },
@@ -240,36 +275,38 @@ export default function HomePage() {
           </p>
         
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-visible">
-            <Select
-              label="Extracurricular Depth"
-              value={profile.extracurricular_depth}
-              onChange={(e) => updateProfile('extracurricular_depth', e.target.value)}
-              options={[
-                { value: '10', label: '10 - Exceptional depth & impact' },
-                { value: '8', label: '8 - Strong depth & impact' },
-                { value: '6', label: '6 - Good depth & impact' },
-                { value: '4', label: '4 - Moderate depth & impact' },
-                { value: '2', label: '2 - Limited depth & impact' },
-              ]}
-            />
+            <FormFieldWithInfo label="Extracurricular Depth" factor="extracurricular_depth">
+              <ROXSelect
+                value={profile.extracurricular_depth}
+                onChange={(value) => updateProfile('extracurricular_depth', value)}
+                options={[
+                  { value: '10', label: '10 - Exceptional depth & impact' },
+                  { value: '8', label: '8 - Strong depth & impact' },
+                  { value: '6', label: '6 - Good depth & impact' },
+                  { value: '4', label: '4 - Moderate depth & impact' },
+                  { value: '2', label: '2 - Limited depth & impact' },
+                ]}
+              />
+            </FormFieldWithInfo>
             
-            <Select
-              label="Leadership Positions"
-              value={profile.leadership_positions}
-              onChange={(e) => updateProfile('leadership_positions', e.target.value)}
-              options={[
-                { value: '10', label: '10 - Multiple significant leadership roles' },
-                { value: '8', label: '8 - Strong leadership in 1-2 roles' },
-                { value: '6', label: '6 - Some leadership experience' },
-                { value: '4', label: '4 - Minor leadership roles' },
-                { value: '2', label: '2 - No leadership roles' },
-              ]}
-            />
+            <FormFieldWithInfo label="Leadership Positions" factor="leadership_positions">
+              <ROXSelect
+                value={profile.leadership_positions}
+                onChange={(value) => updateProfile('leadership_positions', value)}
+                options={[
+                  { value: '10', label: '10 - Multiple significant leadership roles' },
+                  { value: '8', label: '8 - Strong leadership in 1-2 roles' },
+                  { value: '6', label: '6 - Some leadership experience' },
+                  { value: '4', label: '4 - Minor leadership roles' },
+                  { value: '2', label: '2 - No leadership roles' },
+                ]}
+              />
+            </FormFieldWithInfo>
             
-            <Select
+            <ROXSelect
               label="Awards & Publications"
               value={profile.awards_publications}
-              onChange={(e) => updateProfile('awards_publications', e.target.value)}
+                onChange={(value) => updateProfile('awards_publications', value)}
               options={[
                 { value: '10', label: '10 - National/International awards/publications' },
                 { value: '8', label: '8 - State/Regional awards/publications' },
@@ -279,10 +316,10 @@ export default function HomePage() {
               ]}
             />
             
-            <Select
+            <ROXSelect
               label="Passion Projects"
               value={profile.passion_projects}
-              onChange={(e) => updateProfile('passion_projects', e.target.value)}
+                onChange={(value) => updateProfile('passion_projects', value)}
               options={[
                 { value: '10', label: '10 - Multiple, highly innovative projects' },
                 { value: '8', label: '8 - 1-2 significant, well-developed projects' },
@@ -292,10 +329,10 @@ export default function HomePage() {
               ]}
             />
             
-            <Select
+            <ROXSelect
               label="Business Ventures"
               value={profile.business_ventures}
-              onChange={(e) => updateProfile('business_ventures', e.target.value)}
+                onChange={(value) => updateProfile('business_ventures', value)}
               options={[
                 { value: '10', label: '10 - Successful, revenue-generating venture' },
                 { value: '8', label: '8 - Developed venture with traction' },
@@ -305,10 +342,10 @@ export default function HomePage() {
               ]}
             />
             
-            <Select
+            <ROXSelect
               label="Volunteer Work"
               value={profile.volunteer_work}
-              onChange={(e) => updateProfile('volunteer_work', e.target.value)}
+                onChange={(value) => updateProfile('volunteer_work', value)}
               options={[
                 { value: '10', label: '10 - 200+ hours, significant impact' },
                 { value: '8', label: '8 - 100+ hours, good impact' },
@@ -318,10 +355,10 @@ export default function HomePage() {
               ]}
             />
             
-            <Select
+            <ROXSelect
               label="Research Experience"
               value={profile.research_experience}
-              onChange={(e) => updateProfile('research_experience', e.target.value)}
+                onChange={(value) => updateProfile('research_experience', value)}
               options={[
                 { value: '10', label: '10 - Published/presented research' },
                 { value: '8', label: '8 - Significant research project' },
@@ -331,10 +368,10 @@ export default function HomePage() {
               ]}
             />
             
-            <Select
+            <ROXSelect
               label="Portfolio/Audition"
               value={profile.portfolio_audition}
-              onChange={(e) => updateProfile('portfolio_audition', e.target.value)}
+                onChange={(value) => updateProfile('portfolio_audition', value)}
               options={[
                 { value: '10', label: '10 - Exceptional portfolio/audition' },
                 { value: '8', label: '8 - Strong portfolio/audition' },
@@ -344,10 +381,10 @@ export default function HomePage() {
               ]}
             />
             
-            <Select
+            <ROXSelect
               label="Essay Quality"
               value={profile.essay_quality}
-              onChange={(e) => updateProfile('essay_quality', e.target.value)}
+                onChange={(value) => updateProfile('essay_quality', value)}
               options={[
                 { value: '10', label: '10 - Outstanding, unique essays' },
                 { value: '8', label: '8 - Strong, compelling essays' },
@@ -357,10 +394,10 @@ export default function HomePage() {
               ]}
             />
 
-            <Select
+            <ROXSelect
               label="Recommendations"
               value={profile.recommendations}
-              onChange={(e) => updateProfile('recommendations', e.target.value)}
+                onChange={(value) => updateProfile('recommendations', value)}
               options={[
                 { value: '10', label: '10 - Exceptional recommendations' },
                 { value: '8', label: '8 - Strong recommendations' },
@@ -370,10 +407,10 @@ export default function HomePage() {
               ]}
             />
 
-            <Select
+            <ROXSelect
               label="Interview"
               value={profile.interview}
-              onChange={(e) => updateProfile('interview', e.target.value)}
+                onChange={(value) => updateProfile('interview', value)}
               options={[
                 { value: '10', label: '10 - Outstanding interview skills' },
                 { value: '8', label: '8 - Strong interview performance' },
@@ -383,10 +420,10 @@ export default function HomePage() {
               ]}
             />
 
-            <Select
+            <ROXSelect
               label="Demonstrated Interest"
               value={profile.demonstrated_interest}
-              onChange={(e) => updateProfile('demonstrated_interest', e.target.value)}
+                onChange={(value) => updateProfile('demonstrated_interest', value)}
               options={[
                 { value: '10', label: '10 - Extensive demonstrated interest' },
                 { value: '8', label: '8 - Strong interest shown' },
@@ -396,10 +433,10 @@ export default function HomePage() {
               ]}
             />
 
-            <Select
+            <ROXSelect
               label="Legacy Status"
               value={profile.legacy_status}
-              onChange={(e) => updateProfile('legacy_status', e.target.value)}
+                onChange={(value) => updateProfile('legacy_status', value)}
               options={[
                 { value: '10', label: '10 - Strong legacy connection' },
                 { value: '8', label: '8 - Good legacy connection' },
@@ -409,10 +446,10 @@ export default function HomePage() {
               ]}
             />
 
-            <Select
+            <ROXSelect
               label="Geographic Diversity"
               value={profile.geographic_diversity}
-              onChange={(e) => updateProfile('geographic_diversity', e.target.value)}
+                onChange={(value) => updateProfile('geographic_diversity', value)}
               options={[
                 { value: '10', label: '10 - Highly underrepresented region' },
                 { value: '8', label: '8 - Underrepresented region' },
@@ -422,10 +459,10 @@ export default function HomePage() {
               ]}
             />
 
-            <Select
+            <ROXSelect
               label="First-Gen/Diversity"
               value={profile.firstgen_diversity}
-              onChange={(e) => updateProfile('firstgen_diversity', e.target.value)}
+                onChange={(value) => updateProfile('firstgen_diversity', value)}
               options={[
                 { value: '10', label: '10 - First-gen + diverse background' },
                 { value: '8', label: '8 - First-gen OR diverse background' },
@@ -440,10 +477,10 @@ export default function HomePage() {
               onChange={(value) => updateProfile('major', value)}
             />
 
-            <Select
+            <ROXSelect
               label="High School Reputation"
               value={profile.hs_reputation}
-              onChange={(e) => updateProfile('hs_reputation', e.target.value)}
+                onChange={(value) => updateProfile('hs_reputation', value)}
               options={[
                 { value: '10', label: '10 - Elite high school' },
                 { value: '8', label: '8 - Very strong high school' },
@@ -510,6 +547,15 @@ export default function HomePage() {
         </motion.div>
 
       </div>
+
+      {/* Info Modal */}
+      <InfoModal
+        isOpen={modalInfo.isOpen}
+        onClose={closeInfoModal}
+        title={modalInfo.factor ? FACTOR_DESCRIPTIONS[modalInfo.factor as keyof typeof FACTOR_DESCRIPTIONS]?.title || '' : ''}
+        description={modalInfo.factor ? FACTOR_DESCRIPTIONS[modalInfo.factor as keyof typeof FACTOR_DESCRIPTIONS]?.description || '' : ''}
+        examples={modalInfo.factor ? FACTOR_DESCRIPTIONS[modalInfo.factor as keyof typeof FACTOR_DESCRIPTIONS]?.examples || [] : []}
+      />
     </div>
   )
 }
