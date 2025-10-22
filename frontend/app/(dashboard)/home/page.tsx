@@ -161,7 +161,7 @@ export default function HomePage() {
           <Brain className="w-4 h-4" />
           <span className="text-sm font-semibold">AI Assessment</span>
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight gradient-text mb-6">
+        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-yellow-400 mb-6">
           Chancify AI
         </h1>
         <p className="text-gray-300 text-lg max-w-2xl mx-auto">

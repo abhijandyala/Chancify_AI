@@ -25,7 +25,7 @@ export function Tabs({ tabs, defaultIndex = 0 }: TabsProps) {
                 className={cn(
                   'flex-1 px-6 py-3 rounded-xl font-semibold transition-all duration-200',
                   selected
-                    ? 'bg-gradient-to-r from-amber-500 to-blue-500 text-white shadow-lg'
+                    ? 'bg-yellow-400 text-black shadow-lg'
                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/5'
                 )}
               >

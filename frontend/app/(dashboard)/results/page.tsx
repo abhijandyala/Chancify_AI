@@ -140,7 +140,7 @@ function ResultsContent() {
         <motion.div {...enter}>
           <GlassCard className="p-6">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-3 rounded-xl border border-white/10 bg-gradient-to-br from-blue-400/15 to-cyan-600/15 text-blue-400 shadow-[0_0_40px_rgba(59,130,246,0.15)]">
+              <div className="p-3 rounded-xl border border-white/10 bg-blue-400/15 text-blue-400 shadow-[0_0_40px_rgba(59,130,246,0.15)]">
                 <BarChart3 className="w-6 h-6" />
               </div>
               <div>
@@ -173,7 +173,7 @@ function ResultsContent() {
         <motion.div {...enter}>
           <GlassCard className="p-6">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-3 rounded-xl border border-white/10 bg-gradient-to-br from-green-400/15 to-emerald-600/15 text-green-400 shadow-[0_0_40px_rgba(34,197,94,0.15)]">
+              <div className="p-3 rounded-xl border border-white/10 bg-green-400/15 text-green-400 shadow-[0_0_40px_rgba(34,197,94,0.15)]">
                 <Zap className="w-6 h-6" />
               </div>
               <div>
@@ -216,7 +216,7 @@ function ResultsContent() {
       <motion.div {...enter} className="flex flex-col sm:flex-row gap-4 justify-center">
         <Button
           onClick={() => router.back()}
-          className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-semibold text-lg px-8 py-4 rounded-xl transition-all shadow-lg hover:shadow-yellow-400/25 flex items-center gap-2"
+          className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold text-lg px-8 py-4 rounded-xl transition-all shadow-lg hover:shadow-yellow-400/25 flex items-center gap-2"
         >
           <ArrowLeft className="w-5 h-5" />
           Back to Home
