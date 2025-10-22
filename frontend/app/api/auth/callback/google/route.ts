@@ -8,18 +8,18 @@ export async function GET(request: NextRequest) {
 
   if (error) {
     // Handle OAuth error - redirect to home page with error
-    return NextResponse.redirect(new URL(`/home?error=${error}`, request.url))
+    return NextResponse.redirect(new URL(`/home?error=${error}`, 'https://chancifyai.up.railway.app'))
   }
 
   if (!code) {
-    return NextResponse.redirect(new URL('/home?error=no_code', request.url))
+    return NextResponse.redirect(new URL('/home?error=no_code', 'https://chancifyai.up.railway.app'))
   }
 
   try {
     // Check if environment variables are set
     if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
       console.error('Missing Google OAuth environment variables')
-      return NextResponse.redirect(new URL('/home?error=missing_config', request.url))
+      return NextResponse.redirect(new URL('/home?error=missing_config', 'https://chancifyai.up.railway.app'))
     }
 
     // ALWAYS use Railway URL - NO localhost fallbacks
@@ -70,16 +70,18 @@ export async function GET(request: NextRequest) {
     const userInfo = await userResponse.json()
 
     // Create success URL with user data - redirect to home page
-    const successUrl = new URL('/home', request.url)
+    // CRITICAL: Use Railway URL for redirect, not request.url which might be localhost
+    const successUrl = new URL('/home', 'https://chancifyai.up.railway.app')
     successUrl.searchParams.set('google_auth', 'success')
     successUrl.searchParams.set('email', userInfo.email)
     successUrl.searchParams.set('name', userInfo.name)
     successUrl.searchParams.set('picture', userInfo.picture)
 
+    console.log('Success redirect URL:', successUrl.toString())
     return NextResponse.redirect(successUrl)
 
   } catch (error) {
     console.error('Google OAuth error:', error)
-    return NextResponse.redirect(new URL('/home?error=oauth_failed', request.url))
+    return NextResponse.redirect(new URL('/home?error=oauth_failed', 'https://chancifyai.up.railway.app'))
   }
 }
