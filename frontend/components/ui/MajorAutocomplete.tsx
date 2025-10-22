@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MAJORS } from '@/lib/majors'
 
@@ -20,11 +20,17 @@ export const MajorAutocomplete = ({
   className
 }: MajorAutocompleteProps) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [localValue, setLocalValue] = useState(value)
   const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  // Use value prop directly instead of separate searchTerm state
-  const searchTerm = value
+  // Sync local value with prop value
+  useEffect(() => {
+    setLocalValue(value)
+  }, [value])
+
+  // Use local value for search
+  const searchTerm = localValue
 
   // Filter majors based on search term - prioritize exact matches and popular majors
   const filteredMajors = MAJORS.filter(major =>
@@ -55,20 +61,22 @@ export const MajorAutocomplete = ({
     }
   }, [isOpen])
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value
+    setLocalValue(newValue)
     onChange(newValue)
     setIsOpen(newValue.length > 0)
-  }
+  }, [onChange])
 
   // Prevent re-renders from causing focus loss
-  const handleInputFocus = () => {
-    if (value.length > 0) {
+  const handleInputFocus = useCallback(() => {
+    if (localValue.length > 0) {
       setIsOpen(true)
     }
-  }
+  }, [localValue])
 
   const handleSuggestionClick = (major: string) => {
+    setLocalValue(major)
     onChange(major)
     setIsOpen(false)
     inputRef.current?.focus()
@@ -88,9 +96,10 @@ export const MajorAutocomplete = ({
       
       <div className="relative">
         <input
+          key="major-input"
           ref={inputRef}
           type="text"
-          value={value}
+          value={localValue}
           onChange={handleInputChange}
           onFocus={handleInputFocus}
           onKeyDown={handleKeyDown}
