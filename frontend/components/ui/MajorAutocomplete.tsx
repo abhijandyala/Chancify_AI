@@ -26,10 +26,21 @@ export const MajorAutocomplete = ({
   // Use value prop directly instead of separate searchTerm state
   const searchTerm = value
 
-  // Filter majors based on search term
+  // Filter majors based on search term - prioritize exact matches and popular majors
   const filteredMajors = MAJORS.filter(major =>
     major.toLowerCase().includes(searchTerm.toLowerCase())
-  ).slice(0, 8) // Limit to 8 suggestions to prevent overflow
+  ).sort((a, b) => {
+    // Prioritize exact matches
+    if (a.toLowerCase() === searchTerm.toLowerCase()) return -1
+    if (b.toLowerCase() === searchTerm.toLowerCase()) return 1
+    // Prioritize popular majors
+    const popularMajors = ['Computer Science', 'Business', 'Engineering', 'Medicine', 'Law', 'Arts', 'Psychology', 'Biology', 'Mathematics', 'Economics']
+    const aIsPopular = popularMajors.includes(a)
+    const bIsPopular = popularMajors.includes(b)
+    if (aIsPopular && !bIsPopular) return -1
+    if (!aIsPopular && bIsPopular) return 1
+    return 0
+  }).slice(0, 12) // Show more suggestions
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -48,6 +59,13 @@ export const MajorAutocomplete = ({
     const newValue = e.target.value
     onChange(newValue)
     setIsOpen(newValue.length > 0)
+  }
+
+  // Prevent re-renders from causing focus loss
+  const handleInputFocus = () => {
+    if (value.length > 0) {
+      setIsOpen(true)
+    }
   }
 
   const handleSuggestionClick = (major: string) => {
@@ -74,7 +92,7 @@ export const MajorAutocomplete = ({
           type="text"
           value={value}
           onChange={handleInputChange}
-          onFocus={() => setIsOpen(value.length > 0)}
+          onFocus={handleInputFocus}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           className="w-full px-4 py-3 bg-black/50 backdrop-blur border border-gray-800/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400/50 focus:ring-2 focus:ring-yellow-400/20 transition-all duration-300"
@@ -83,7 +101,8 @@ export const MajorAutocomplete = ({
         <AnimatePresence>
           {isOpen && filteredMajors.length > 0 && (
             <motion.div
-              className="absolute w-full mt-2 bg-gradient-to-br from-black/90 to-gray-900/90 backdrop-blur-xl rounded-2xl border border-yellow-400/20 shadow-2xl shadow-yellow-400/10 max-h-[240px] overflow-y-auto z-50"
+              className="absolute w-full mt-2 bg-gradient-to-br from-black/90 to-gray-900/90 backdrop-blur-xl rounded-2xl border border-yellow-400/20 shadow-2xl shadow-yellow-400/10 max-h-[240px] overflow-y-auto"
+              style={{ zIndex: 999999 }}
               initial={{ opacity: 0, y: -10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
