@@ -124,6 +124,7 @@ export default function CollegeCombobox({
           }}
           role="combobox"
           aria-controls="college-listbox"
+          aria-expanded={open}
           aria-autocomplete="list"
         />
       </div>

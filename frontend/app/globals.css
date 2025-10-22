@@ -5,6 +5,34 @@
 :root {
   --radius: 16px;
   scroll-behavior: smooth;
+  
+  /* ROX Design Tokens */
+  --rox-gold: #f5c84b;
+  --rox-gold-light: #facc15;
+  --rox-gold-dark: #d97706;
+  --rox-amber: #fbbf24;
+  --rox-amber-light: #fde047;
+  --rox-amber-dark: #b45309;
+  
+  /* Dark Theme Colors */
+  --rox-bg-primary: #000000;
+  --rox-bg-secondary: #0a0a0a;
+  --rox-bg-tertiary: #111111;
+  --rox-surface: rgba(255, 255, 255, 0.05);
+  --rox-surface-hover: rgba(255, 255, 255, 0.08);
+  --rox-border: rgba(255, 255, 255, 0.1);
+  --rox-border-hover: rgba(255, 255, 255, 0.15);
+  
+  /* Text Colors */
+  --rox-text-primary: #ffffff;
+  --rox-text-secondary: #e5e7eb;
+  --rox-text-muted: #9ca3af;
+  --rox-text-accent: var(--rox-gold);
+  
+  /* Shadows */
+  --rox-shadow-glow: 0 0 40px rgba(245, 200, 75, 0.15);
+  --rox-shadow-card: 0 10px 40px rgba(0, 0, 0, 0.45);
+  --rox-shadow-button: 0 10px 30px -10px rgba(245, 200, 75, 0.35);
 }
 
 @layer base {
@@ -41,18 +69,53 @@
 }
 
 @layer components {
-  /* ROX-style Cards */
-  .glass-card {
-    @apply backdrop-blur-xl bg-background-subtle/70 
-           border border-border/50
-           rounded-2xl shadow-lg;
+  /* ROX-style Glass Components */
+  .glass {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl;
+    box-shadow: var(--rox-shadow-card);
   }
   
-  /* ROX-style Panel (stronger) */
-  .glass-panel {
-    @apply backdrop-blur-2xl bg-background-subtle/80
-           border border-border/60
-           rounded-3xl shadow-xl;
+  .glass-ring {
+    @apply border border-white/10;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06) inset, var(--rox-shadow-glow);
+  }
+  
+  .input-glass {
+    @apply bg-black/50 backdrop-blur border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:border-yellow-400/50 focus:ring-1 focus:ring-yellow-400/20 transition-all duration-300;
+  }
+  
+  /* ROX Typography */
+  .gradient-text {
+    @apply bg-gradient-to-r from-yellow-400 via-amber-200 to-white bg-clip-text text-transparent;
+  }
+  
+  .subsection-heading {
+    @apply text-xl font-bold text-white mb-4;
+  }
+  
+  .card-heading {
+    @apply text-lg font-bold text-white;
+  }
+  
+  /* ROX Layout Utilities */
+  .rox-container {
+    @apply max-w-7xl mx-auto px-6;
+  }
+  
+  .rox-section {
+    @apply space-y-8;
+  }
+  
+  .rox-card {
+    @apply glass p-6 md:p-8;
+  }
+  
+  .rox-button {
+    @apply bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-semibold px-6 py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-yellow-400/25;
+  }
+  
+  .rox-button-ghost {
+    @apply border border-white/10 hover:border-yellow-400/50 hover:text-yellow-400 px-6 py-3 rounded-xl transition-all duration-300;
   }
   
   /* Premium Button Styles */

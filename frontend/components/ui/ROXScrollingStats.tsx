@@ -75,6 +75,17 @@ function useCount(to: string, duration = 2000) {
 export default function ROXScrollingStats() {
   const [activeIndex, setActiveIndex] = useState(0)
   
+  // Call hooks at component level for each stat
+  const count0 = useCount(stats[0].value)
+  const count1 = useCount(stats[1].value)
+  const count2 = useCount(stats[2].value)
+  const count3 = useCount(stats[3].value)
+  const count4 = useCount(stats[4].value)
+  const count5 = useCount(stats[5].value)
+  
+  const statCounts = [count0, count1, count2, count3, count4, count5]
+  const activeCount = statCounts[activeIndex]
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % stats.length)
@@ -105,7 +116,7 @@ export default function ROXScrollingStats() {
             <div className="bg-background-subtle rounded-2xl border border-border p-8 min-h-[400px] flex items-center justify-center">
               <div className="text-center">
                 <div className="text-6xl md:text-7xl font-black text-primary mb-4">
-                  {useCount(stats[activeIndex].value)}
+                  {activeCount}
                 </div>
                 <div className="text-xl font-semibold text-foreground mb-2">
                   {stats[activeIndex].label}
@@ -140,7 +151,7 @@ export default function ROXScrollingStats() {
                     <div className="text-sm text-foreground/70">{stat.description}</div>
                   </div>
                   <div className="text-2xl font-bold text-primary">
-                    {useCount(stat.value)}
+                    {statCounts[index]}
                   </div>
                 </div>
               </div>

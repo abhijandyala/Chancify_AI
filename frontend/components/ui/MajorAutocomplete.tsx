@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect, useCallback, startTransition } from 'react'
+import { useState, useRef, useEffect, useCallback, useMemo, startTransition } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MAJORS } from '@/lib/majors'
 
@@ -190,6 +190,7 @@ export const MajorAutocomplete = ({
                   <div
                     key={major}
                     role="option"
+                    aria-selected={false}
                     tabIndex={-1}
                     className="px-3 sm:px-4 py-2 sm:py-3 cursor-pointer rounded-lg sm:rounded-xl text-gray-100 hover:bg-gradient-to-r hover:from-yellow-400/15 hover:to-yellow-600/10 hover:text-yellow-200 transition-all duration-300 border border-transparent hover:border-yellow-400/30 hover:shadow-lg hover:shadow-yellow-400/10 mb-1"
                     onMouseDown={(e) => e.preventDefault()} // Prevent blur before click handler fires

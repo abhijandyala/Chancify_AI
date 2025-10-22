@@ -1,10 +1,9 @@
 'use client'
 
-import { useState, Suspense } from 'react'
+import { useState, Suspense, useEffect } from 'react'
 import { Sidebar } from '@/components/layout/Sidebar'
+import { Header } from '@/components/layout/Header'
 import { SettingsPanel } from '@/components/layout/SettingsPanel'
-import ROXNav from '@/components/layout/ROXNav'
-import SophisticatedBackground from '@/components/ui/SophisticatedBackground'
 
 export default function DashboardLayout({
   children,
@@ -13,39 +12,50 @@ export default function DashboardLayout({
 }) {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
+  useEffect(() => {
+    const handleSettingsEvent = () => {
+      setIsSettingsOpen(true)
+    }
+
+    window.addEventListener('open-settings', handleSettingsEvent)
+    return () => window.removeEventListener('open-settings', handleSettingsEvent)
+  }, [])
+
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      <SophisticatedBackground />
-      <ROXNav />
+    <div className="min-h-screen bg-black text-white relative overflow-x-hidden">
+      {/* ROX-style ambient background gradients */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[620px] w-[980px] rounded-full blur-3xl opacity-20 bg-[radial-gradient(closest-side,rgba(245,200,75,.35),transparent_70%)]" />
+        <div className="absolute bottom-0 right-0 h-[420px] w-[420px] rounded-full blur-2xl opacity-15 bg-[radial-gradient(closest-side,rgba(103,232,249,.25),transparent_70%)]" />
+      </div>
+
       <Sidebar />
-      <div className="ml-64 p-8 pb-20 relative z-10">
-        <div className="max-w-7xl mx-auto">
-          <Suspense fallback={
-            <div className="flex items-center justify-center min-h-[400px]">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-400"></div>
-            </div>
-          }>
-            {children}
-          </Suspense>
+      
+      <div className="ml-64 relative z-10">
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <Header />
+          
+          <main className="space-y-8">
+            <Suspense fallback={
+              <div className="flex items-center justify-center min-h-[400px]">
+                <div className="text-center">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-400 mx-auto mb-4"></div>
+                  <p className="text-gray-400">Loading...</p>
+                </div>
+              </div>
+            }>
+              {children}
+            </Suspense>
+          </main>
         </div>
       </div>
+
       <Suspense fallback={null}>
         <SettingsPanel 
           isOpen={isSettingsOpen} 
           onClose={() => setIsSettingsOpen(false)} 
         />
       </Suspense>
-      
-      {/* Settings Button (Fixed) */}
-      <button
-        onClick={() => setIsSettingsOpen(true)}
-        className="fixed top-6 right-6 p-3 glass-card rounded-xl hover:scale-105 transition-transform z-30"
-      >
-        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-        </svg>
-      </button>
     </div>
   )
 }
