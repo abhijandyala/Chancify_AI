@@ -226,7 +226,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 rounded-2xl p-6"
+          className="bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 rounded-2xl p-6 overflow-visible"
         >
           <div className="flex items-center gap-3 mb-6">
             <div className="p-2 rounded-xl bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 border border-yellow-400/30">
@@ -238,7 +238,7 @@ export default function HomePage() {
             These factors set Chancify AI apart from other college predictors.
           </p>
         
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-visible">
             <Select
               label="Extracurricular Depth"
               value={profile.extracurricular_depth}

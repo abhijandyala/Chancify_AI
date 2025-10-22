@@ -104,11 +104,7 @@ export const SimpleSelect = ({
             <motion.div 
               className="absolute w-full mt-2 bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-xl rounded-xl border border-gray-800/50 shadow-2xl max-h-[500px] overflow-hidden flex flex-col"
               style={{ 
-                zIndex: 9999999,
-                position: 'fixed',
-                top: containerRef.current ? containerRef.current.getBoundingClientRect().bottom + 8 : 'auto',
-                left: containerRef.current ? containerRef.current.getBoundingClientRect().left : 'auto',
-                width: containerRef.current ? containerRef.current.getBoundingClientRect().width : 'auto'
+                zIndex: 9999999
               }}
               initial={{ opacity: 0, y: -10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
