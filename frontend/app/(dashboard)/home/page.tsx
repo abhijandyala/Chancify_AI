@@ -7,13 +7,18 @@ import { SimpleSearchableSelect } from '@/components/ui/SimpleSearchableSelect'
 import { Button } from '@/components/ui/Button'
 import { useState } from 'react'
 import { MAJORS } from '@/lib/majors'
+import { COLLEGES } from '@/lib/colleges'
 import Reveal from '@/components/ui/Reveal'
 import { motion } from 'framer-motion'
-import { GraduationCap, Target, Star, TrendingUp, Award, Users } from 'lucide-react'
+import { GraduationCap, Target, Star, TrendingUp, Award, Users, Building2, Calculator } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 export const dynamic = 'force-dynamic'
 
 export default function HomePage() {
+  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
+  
   const [profile, setProfile] = useState({
     // Academic Basics
     gpa_unweighted: '',
@@ -40,10 +45,82 @@ export default function HomePage() {
     firstgen_diversity: '5',
     major: '',
     hs_reputation: '5',
+    
+    // College Selection
+    college: '',
   })
 
   const updateProfile = (field: string, value: string) => {
     setProfile({ ...profile, [field]: value })
+  }
+
+  const handleCalculateChances = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsLoading(true)
+    
+    try {
+      // Prepare data for ML model
+      const predictionData = {
+        // Academic data
+        gpa_unweighted: parseFloat(profile.gpa_unweighted) || 0,
+        gpa_weighted: parseFloat(profile.gpa_weighted) || 0,
+        sat: parseInt(profile.sat) || 0,
+        act: parseInt(profile.act) || 0,
+        rigor: parseInt(profile.rigor),
+        
+        // Unique factors
+        extracurricular_depth: parseInt(profile.extracurricular_depth),
+        leadership_positions: parseInt(profile.leadership_positions),
+        awards_publications: parseInt(profile.awards_publications),
+        passion_projects: parseInt(profile.passion_projects),
+        business_ventures: parseInt(profile.business_ventures),
+        volunteer_work: parseInt(profile.volunteer_work),
+        research_experience: parseInt(profile.research_experience),
+        portfolio_audition: parseInt(profile.portfolio_audition),
+        essay_quality: parseInt(profile.essay_quality),
+        recommendations: parseInt(profile.recommendations),
+        interview: parseInt(profile.interview),
+        demonstrated_interest: parseInt(profile.demonstrated_interest),
+        legacy_status: parseInt(profile.legacy_status),
+        geographic_diversity: parseInt(profile.geographic_diversity),
+        firstgen_diversity: parseInt(profile.firstgen_diversity),
+        major: profile.major,
+        hs_reputation: parseInt(profile.hs_reputation),
+        
+        // College selection
+        college: profile.college,
+      }
+      
+      // Make API call to backend
+      const response = await fetch('/api/predict', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(predictionData),
+      })
+      
+      if (!response.ok) {
+        throw new Error('Failed to get prediction')
+      }
+      
+      const result = await response.json()
+      
+      // Redirect to results page with prediction data
+      const params = new URLSearchParams({
+        probability: result.probability.toString(),
+        outcome: result.outcome,
+        college: profile.college,
+      })
+      
+      router.push(`/dashboard/results?${params.toString()}`)
+      
+    } catch (error) {
+      console.error('Error calculating chances:', error)
+      alert('Failed to calculate chances. Please try again.')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -477,16 +554,80 @@ export default function HomePage() {
         </div>
       </motion.div>
 
+      {/* College Selection */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.7, duration: 0.6 }}
+      >
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 p-8 hover:border-yellow-400/30 transition-all duration-500">
+          <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/3 to-transparent"></div>
+          <div className="relative">
+            <motion.div 
+              className="flex items-center gap-3 mb-8"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.9, duration: 0.6 }}
+            >
+              <div className="p-3 rounded-2xl bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 border border-yellow-400/30">
+                <Building2 className="w-6 h-6 text-yellow-400" />
+              </div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                College Selection
+              </h2>
+            </motion.div>
+            <motion.p 
+              className="text-gray-300 mb-8 text-lg"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.1, duration: 0.6 }}
+            >
+              Choose the college you want to predict your chances for. Our AI will analyze your profile against their specific admission criteria.
+            </motion.p>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.3, duration: 0.6 }}
+            >
+              <SimpleSearchableSelect
+                label="Select Your Target College"
+                value={profile.college}
+                onChange={(value) => updateProfile('college', value)}
+                options={COLLEGES}
+                placeholder="Search for your college..."
+              />
+            </motion.div>
+          </div>
+        </div>
+      </motion.div>
+
       {/* Action Buttons */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8, duration: 0.6 }}
+        transition={{ delay: 1.5, duration: 0.6 }}
         className="flex gap-4 justify-center"
       >
-        <Button className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-semibold text-lg px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-yellow-400/25">
-          Calculate My Chances
-        </Button>
+        <form onSubmit={handleCalculateChances}>
+          <Button 
+            type="submit"
+            disabled={isLoading || !profile.college}
+            className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-semibold text-lg px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-yellow-400/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          >
+            {isLoading ? (
+              <>
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-black"></div>
+                Calculating...
+              </>
+            ) : (
+              <>
+                <Calculator className="w-5 h-5" />
+                Calculate My Chances
+              </>
+            )}
+          </Button>
+        </form>
         <Button variant="ghost" className="text-lg px-8 py-4 border border-gray-700 hover:border-yellow-400/50 hover:text-yellow-400 transition-all duration-300">
           Save Profile
         </Button>

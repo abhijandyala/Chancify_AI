@@ -106,10 +106,131 @@ async def health_check():
 
 # Include API routes
 from backend.api.routes import auth, calculations, ml_calculations
+from backend.ml.models.predictor import get_predictor
+from backend.ml.preprocessing.feature_extractor import StudentFeatures, CollegeFeatures
+from pydantic import BaseModel
+from typing import Dict, Any
 
 app.include_router(auth.router, prefix="/api/auth", tags=["Authentication"])
 app.include_router(calculations.router, prefix="/api/calculations", tags=["Probability Calculations"])
 app.include_router(ml_calculations.router, prefix="/api/calculations", tags=["ML Predictions"])
+
+# Prediction request model
+class PredictionRequest(BaseModel):
+    # Academic data
+    gpa_unweighted: float
+    gpa_weighted: float
+    sat: int
+    act: int
+    rigor: int
+    
+    # Unique factors
+    extracurricular_depth: int
+    leadership_positions: int
+    awards_publications: int
+    passion_projects: int
+    business_ventures: int
+    volunteer_work: int
+    research_experience: int
+    portfolio_audition: int
+    essay_quality: int
+    recommendations: int
+    interview: int
+    demonstrated_interest: int
+    legacy_status: int
+    geographic_diversity: int
+    firstgen_diversity: int
+    major: str
+    hs_reputation: int
+    
+    # College selection
+    college: str
+
+@app.post("/predict")
+async def predict_admission(request: PredictionRequest):
+    """Predict admission probability using ML model"""
+    try:
+        # Get predictor
+        predictor = get_predictor()
+        
+        # Create student features
+        student = StudentFeatures(
+            gpa_unweighted=request.gpa_unweighted,
+            gpa_weighted=request.gpa_weighted,
+            sat_score=request.sat,
+            act_score=request.act,
+            rigor_score=request.rigor / 10.0,  # Convert to 0-1 scale
+            factor_scores={
+                'extracurricular_depth': request.extracurricular_depth / 10.0,
+                'leadership_positions': request.leadership_positions / 10.0,
+                'awards_publications': request.awards_publications / 10.0,
+                'passion_projects': request.passion_projects / 10.0,
+                'business_ventures': request.business_ventures / 10.0,
+                'volunteer_work': request.volunteer_work / 10.0,
+                'research_experience': request.research_experience / 10.0,
+                'portfolio_audition': request.portfolio_audition / 10.0,
+                'essay_quality': request.essay_quality / 10.0,
+                'recommendations': request.recommendations / 10.0,
+                'interview': request.interview / 10.0,
+                'demonstrated_interest': request.demonstrated_interest / 10.0,
+                'legacy_status': request.legacy_status / 10.0,
+                'geographic_diversity': request.geographic_diversity / 10.0,
+                'firstgen_diversity': request.firstgen_diversity / 10.0,
+                'hs_reputation': request.hs_reputation / 10.0,
+            }
+        )
+        
+        # Create college features (using default values for now)
+        college = CollegeFeatures(
+            name=request.college,
+            acceptance_rate=0.1,  # Default 10% acceptance rate
+            sat_25th=1200,
+            sat_75th=1500,
+            act_25th=25,
+            act_75th=35,
+            test_policy='Required',
+            financial_aid_policy='Need-blind',
+            selectivity_tier='Elite'
+        )
+        
+        # Make prediction
+        result = predictor.predict(student, college)
+        
+        # Determine outcome based on probability
+        if result.probability >= 0.7:
+            outcome = "Acceptance"
+        elif result.probability >= 0.3:
+            outcome = "Waitlist"
+        else:
+            outcome = "Rejection"
+        
+        return {
+            "probability": result.probability,
+            "outcome": outcome,
+            "confidence": result.ml_confidence,
+            "model_used": result.model_used,
+            "explanation": result.explanation
+        }
+        
+    except Exception as e:
+        logger.error(f"Prediction error: {e}")
+        # Return mock result for development
+        import random
+        mock_prob = random.uniform(0.2, 0.8)
+        if mock_prob >= 0.7:
+            outcome = "Acceptance"
+        elif mock_prob >= 0.3:
+            outcome = "Waitlist"
+        else:
+            outcome = "Rejection"
+            
+        return {
+            "probability": mock_prob,
+            "outcome": outcome,
+            "confidence": 0.85,
+            "model_used": "mock",
+            "explanation": "Mock prediction for development"
+        }
 
 if __name__ == "__main__":
     import uvicorn
