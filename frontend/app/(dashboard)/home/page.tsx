@@ -161,40 +161,40 @@ export default function HomePage() {
   )
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6">
+    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-center mb-8 w-full max-w-4xl"
+        className="text-center mb-6 sm:mb-8 w-full max-w-xs sm:max-w-2xl md:max-w-4xl lg:max-w-6xl"
       >
-        <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-yellow-400 via-yellow-300 to-white bg-clip-text text-transparent">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-yellow-400 via-yellow-300 to-white bg-clip-text text-transparent">
           Chancify AI
         </h1>
-        <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-xs sm:max-w-lg md:max-w-2xl mx-auto px-2">
           The only AI that considers your unique story - not just numbers
         </p>
       </motion.div>
 
       {/* Main Form Container */}
-      <div className="w-full max-w-4xl space-y-6">
+      <div className="w-full max-w-xs sm:max-w-2xl md:max-w-4xl lg:max-w-6xl space-y-4 sm:space-y-6">
 
         {/* Academic Foundation */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 rounded-2xl p-6"
+          className="bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 rounded-xl sm:rounded-2xl p-4 sm:p-6"
         >
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 rounded-xl bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 border border-yellow-400/30">
-              <GraduationCap className="w-5 h-5 text-yellow-400" />
+          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 border border-yellow-400/30">
+              <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400" />
             </div>
-            <h2 className="text-2xl font-bold text-white">Academic Foundation</h2>
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white">Academic Foundation</h2>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             <Input
               label="Unweighted GPA (4.0 scale)"
               type="number"
@@ -248,20 +248,20 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 rounded-2xl p-6 overflow-visible"
+          className="bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 rounded-xl sm:rounded-2xl p-4 sm:p-6 overflow-visible"
           style={{ zIndex: 2 }}
         >
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 rounded-xl bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 border border-yellow-400/30">
-              <Star className="w-5 h-5 text-yellow-400" />
+          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 border border-yellow-400/30">
+              <Star className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400" />
             </div>
-            <h2 className="text-2xl font-bold text-white">Your Unique Story</h2>
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white">Your Unique Story</h2>
           </div>
-          <p className="text-gray-300 mb-6">
+          <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6 px-1">
             These factors set Chancify AI apart from other college predictors.
           </p>
         
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-visible">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 overflow-visible">
             <FormFieldWithInfo label="Extracurricular Depth" factor="extracurricular_depth">
               <ROXSelect
                 value={profile.extracurricular_depth}
@@ -501,50 +501,53 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
-          className="bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 rounded-2xl p-6"
+          className="bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 rounded-xl sm:rounded-2xl p-4 sm:p-6"
           style={{ zIndex: 1 }}
         >
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 rounded-xl bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 border border-yellow-400/30">
-              <Building2 className="w-5 h-5 text-yellow-400" />
+          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 border border-yellow-400/30">
+              <Building2 className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400" />
             </div>
-            <h2 className="text-2xl font-bold text-white">College Selection</h2>
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white">College Selection</h2>
           </div>
           
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             <CollegeCombobox
               value={profile.college}
               onChange={(v) => updateProfile('college', v)}
               options={COLLEGES}
-              className="max-w-3xl"
+              className="w-full max-w-full"
               placeholder="Search for your college…"
             />
 
-            <div className="flex flex-col sm:flex-row gap-4 max-w-3xl mx-auto">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full">
               <form onSubmit={handleCalculateChances} className="flex-1">
                 <Button 
                   type="submit"
                   disabled={isLoading || !profile.college}
-                  className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-semibold text-lg px-6 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-yellow-400/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-semibold text-sm sm:text-base md:text-lg px-4 sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl transition-all duration-300 shadow-lg hover:shadow-yellow-400/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {isLoading ? (
                     <>
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-black"></div>
-                      Calculating...
+                      <div className="animate-spin rounded-full h-4 w-4 sm:h-5 sm:w-5 border-b-2 border-black"></div>
+                      <span className="hidden sm:inline">Calculating...</span>
+                      <span className="sm:hidden">Calculating</span>
                     </>
                   ) : (
                     <>
-                      <Calculator className="w-5 h-5" />
-                      Calculate My Chances
+                      <Calculator className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <span className="hidden sm:inline">Calculate My Chances</span>
+                      <span className="sm:hidden">Calculate</span>
                     </>
                   )}
                 </Button>
               </form>
               <Button 
                 variant="ghost" 
-                className="flex-1 text-lg px-6 py-4 border border-gray-700 hover:border-yellow-400/50 hover:text-yellow-400 transition-all duration-300"
+                className="flex-1 text-sm sm:text-base md:text-lg px-4 sm:px-6 py-3 sm:py-4 border border-gray-700 hover:border-yellow-400/50 hover:text-yellow-400 transition-all duration-300 rounded-lg sm:rounded-xl"
               >
-                Save Profile
+                <span className="hidden sm:inline">Save Profile</span>
+                <span className="sm:hidden">Save</span>
               </Button>
             </div>
           </div>

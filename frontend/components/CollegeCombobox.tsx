@@ -66,7 +66,7 @@ export default function CollegeCombobox({
     <div
       ref={rootRef}
       className={clsx(
-        'relative mx-auto w-full max-w-2xl',
+        'relative mx-auto w-full',
         className
       )}
       style={{ zIndex: 9999999 }}
@@ -74,7 +74,7 @@ export default function CollegeCombobox({
       aria-haspopup="listbox"
     >
       {label && (
-        <label className="mb-2 block text-sm font-medium text-gray-300">
+        <label className="mb-1 sm:mb-2 block text-xs sm:text-sm font-medium text-gray-300">
           {label}
         </label>
       )}
@@ -82,17 +82,17 @@ export default function CollegeCombobox({
       {/* Input */}
       <div
         className={clsx(
-          'group flex items-center gap-3 rounded-xl border px-4 py-3',
+          'group flex items-center gap-2 sm:gap-3 rounded-lg sm:rounded-xl border px-3 sm:px-4 py-2 sm:py-3',
           'bg-black/50 backdrop-blur',
           'border-yellow-500/40 focus-within:border-yellow-400',
           'shadow-[0_0_0_1px_rgba(234,179,8,0.15)]'
         )}
       >
-        <Search className="h-5 w-5 text-yellow-400/80" />
+        <Search className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400/80 flex-shrink-0" />
         <input
           className={clsx(
             'w-full bg-transparent outline-none',
-            'text-base text-gray-100 placeholder:text-gray-500'
+            'text-sm sm:text-base text-gray-100 placeholder:text-gray-500'
           )}
           placeholder={placeholder}
           value={query || value}
@@ -132,8 +132,8 @@ export default function CollegeCombobox({
       {open && (
         <div
           className={clsx(
-            'absolute left-0 right-0 mt-2',
-            'rounded-xl border border-gray-800/50',
+            'absolute left-0 right-0 mt-1 sm:mt-2',
+            'rounded-lg sm:rounded-xl border border-gray-800/50',
             'bg-black/80 backdrop-blur-xl',
             'shadow-2xl'
           )}
@@ -143,10 +143,10 @@ export default function CollegeCombobox({
             id="college-listbox"
             ref={listRef}
             role="listbox"
-            className="max-h-72 overflow-y-auto p-2"
+            className="max-h-60 sm:max-h-72 overflow-y-auto p-1 sm:p-2"
           >
             {items.length === 0 && (
-              <li className="px-3 py-2 text-sm text-gray-400">No matches.</li>
+              <li className="px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-400">No matches.</li>
             )}
 
             {items.map((o, i) => (
@@ -164,13 +164,13 @@ export default function CollegeCombobox({
                   setOpen(false);
                 }}
                 className={clsx(
-                  'cursor-pointer rounded-lg px-3 py-2',
+                  'cursor-pointer rounded-md sm:rounded-lg px-2 sm:px-3 py-1.5 sm:py-2',
                   i === active
                     ? 'bg-yellow-500/15 text-yellow-200'
                     : 'hover:bg-white/5 text-gray-200'
                 )}
               >
-                <div className="text-sm font-medium">{o.label}</div>
+                <div className="text-xs sm:text-sm font-medium">{o.label}</div>
                 <div className="text-xs text-gray-400">{o.value}</div>
               </li>
             ))}

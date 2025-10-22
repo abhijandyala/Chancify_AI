@@ -7,39 +7,43 @@ import Link from 'next/link'
 export default function ROXHero() {
   return (
     <section className="relative overflow-hidden bg-background">
-      <div className="mx-auto max-w-7xl px-4 py-24">
+      <div className="mx-auto max-w-7xl px-3 sm:px-4 py-16 sm:py-20 md:py-24">
         <Reveal>
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
-              <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
-              Chancify AI is now generally available!
+          <div className="text-center mb-6 sm:mb-8">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-primary animate-pulse"></div>
+              <span className="hidden sm:inline">Chancify AI is now generally available!</span>
+              <span className="sm:hidden">Now Available!</span>
             </div>
           </div>
         </Reveal>
 
         <Reveal>
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-foreground text-center leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-foreground text-center leading-tight px-2">
             College Admissions<br />
             <span className="text-primary">AI Predictor</span>
           </h1>
         </Reveal>
         
         <Reveal delay={0.1}>
-          <p className="mt-6 text-foreground/70 max-w-3xl text-xl text-center mx-auto leading-relaxed">
-            Fastest time-to-insight | Holistic analysis | Full-service deployment
+          <p className="mt-4 sm:mt-6 text-foreground/70 max-w-xs sm:max-w-2xl md:max-w-3xl text-sm sm:text-base md:text-lg lg:text-xl text-center mx-auto leading-relaxed px-2">
+            <span className="hidden sm:inline">Fastest time-to-insight | Holistic analysis | Full-service deployment</span>
+            <span className="sm:hidden">Fastest insights | Holistic analysis | Full deployment</span>
           </p>
         </Reveal>
         
         <Reveal delay={0.2}>
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/auth">
-              <Button className="btn-primary text-lg px-8 py-4">
-                Log In
+          <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
+            <Link href="/auth" className="w-full sm:w-auto">
+              <Button className="btn-primary text-sm sm:text-base md:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto">
+                <span className="hidden sm:inline">Log In</span>
+                <span className="sm:hidden">Login</span>
               </Button>
             </Link>
-            <Link href="/home">
-              <Button variant="ghost" className="text-lg px-8 py-4 border border-border">
-                Try for Now
+            <Link href="/home" className="w-full sm:w-auto">
+              <Button variant="ghost" className="text-sm sm:text-base md:text-lg px-6 sm:px-8 py-3 sm:py-4 border border-border w-full sm:w-auto">
+                <span className="hidden sm:inline">Try for Now</span>
+                <span className="sm:hidden">Try Now</span>
               </Button>
             </Link>
           </div>

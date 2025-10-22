@@ -110,8 +110,8 @@ export const MajorAutocomplete = ({
   }
 
   return (
-    <div className={`space-y-2 ${className}`} ref={containerRef}>
-      <label className="block text-sm font-semibold text-gray-300">
+    <div className={`space-y-1 sm:space-y-2 ${className}`} ref={containerRef}>
+      <label className="block text-xs sm:text-sm font-semibold text-gray-300">
         {label}
       </label>
       
@@ -125,29 +125,29 @@ export const MajorAutocomplete = ({
           onFocus={handleInputFocus}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          className="w-full px-4 py-3 bg-black/50 backdrop-blur border border-gray-800/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400/50 focus:ring-2 focus:ring-yellow-400/20 transition-all duration-300"
+          className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-black/50 backdrop-blur border border-gray-800/30 rounded-lg sm:rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400/50 focus:ring-2 focus:ring-yellow-400/20 transition-all duration-300 text-sm sm:text-base"
         />
 
         <AnimatePresence>
           {isOpen && filteredMajors.length > 0 && (
             <motion.div
-              className="absolute w-full mt-2 bg-gradient-to-br from-black/90 to-gray-900/90 backdrop-blur-xl rounded-2xl border border-yellow-400/20 shadow-2xl shadow-yellow-400/10 max-h-[240px] overflow-y-auto"
+              className="absolute w-full mt-1 sm:mt-2 bg-gradient-to-br from-black/90 to-gray-900/90 backdrop-blur-xl rounded-lg sm:rounded-2xl border border-yellow-400/20 shadow-2xl shadow-yellow-400/10 max-h-[200px] sm:max-h-[240px] overflow-y-auto"
               style={{ zIndex: 999999 }}
               initial={{ opacity: 0, y: -10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
-              <div className="p-3">
+              <div className="p-2 sm:p-3">
                 {filteredMajors.map((major) => (
                   <div
                     key={major}
-                    className="px-4 py-3 cursor-pointer rounded-xl text-gray-100 hover:bg-gradient-to-r hover:from-yellow-400/15 hover:to-yellow-600/10 hover:text-yellow-200 transition-all duration-300 border border-transparent hover:border-yellow-400/30 hover:shadow-lg hover:shadow-yellow-400/10 mb-1"
+                    className="px-3 sm:px-4 py-2 sm:py-3 cursor-pointer rounded-lg sm:rounded-xl text-gray-100 hover:bg-gradient-to-r hover:from-yellow-400/15 hover:to-yellow-600/10 hover:text-yellow-200 transition-all duration-300 border border-transparent hover:border-yellow-400/30 hover:shadow-lg hover:shadow-yellow-400/10 mb-1"
                     onClick={() => handleSuggestionClick(major)}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-semibold text-base">{major}</span>
-                      <div className="w-2 h-2 rounded-full bg-yellow-400/60 opacity-0 hover:opacity-100 transition-opacity duration-200" />
+                      <span className="font-semibold text-sm sm:text-base">{major}</span>
+                      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-yellow-400/60 opacity-0 hover:opacity-100 transition-opacity duration-200" />
                     </div>
                   </div>
                 ))}
