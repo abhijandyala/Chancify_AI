@@ -381,16 +381,6 @@ export default function HomePage() {
               </FormFieldWithInfo>
             ))}
             
-            {/* Intended Major */}
-            <FormFieldWithInfo label="Intended Major" factor="major">
-              <input
-                type="text"
-                value={profile.major}
-                onChange={(e) => updateProfile('major', e.target.value)}
-                placeholder="e.g., Computer Science, Business, Medicine..."
-                className="input-glass w-full"
-              />
-            </FormFieldWithInfo>
             
             {/* High School Reputation */}
             <FormFieldWithInfo label="High School Reputation" factor="hs_reputation">
@@ -403,6 +393,24 @@ export default function HomePage() {
           </div>
         </div>
       </motion.section>
+
+      {/* Intended Major - ISOLATED TEST */}
+      <div className="rox-card">
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <label className="block text-xs md:text-sm font-semibold text-gray-300">Intended Major</label>
+            <InfoIcon onClick={() => openInfoModal('major')} />
+          </div>
+          <input
+            type="text"
+            value={profile.major}
+            onChange={(e) => updateProfile('major', e.target.value)}
+            placeholder="e.g., Computer Science, Business, Medicine..."
+            className="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-gray-400 focus:border-yellow-400 focus:outline-none"
+            style={{ minHeight: '44px' }}
+          />
+        </div>
+      </div>
 
       {/* College & Actions */}
       <motion.section {...enter}>
