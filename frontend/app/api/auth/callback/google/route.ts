@@ -28,7 +28,20 @@ export async function GET(request: NextRequest) {
                    process.env.RAILWAY_STATIC_URL ? `https://${process.env.RAILWAY_STATIC_URL}` :
                    'http://localhost:3000'
 
+    // DEBUG: Log all environment variables and URL construction
+    console.log('=== OAUTH CALLBACK DEBUG ===')
+    console.log('NEXTAUTH_URL:', process.env.NEXTAUTH_URL)
+    console.log('VERCEL_URL:', process.env.VERCEL_URL)
+    console.log('RAILWAY_STATIC_URL:', process.env.RAILWAY_STATIC_URL)
+    console.log('request.url:', request.url)
+    console.log('Calculated baseUrl:', baseUrl)
+    console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID)
+    console.log('GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET ? 'SET' : 'NOT SET')
+
     // Exchange code for tokens
+    const redirectUri = `${baseUrl}/api/auth/callback/google`
+    console.log('Redirect URI being sent to Google:', redirectUri)
+    
     const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
       method: 'POST',
       headers: {
@@ -39,14 +52,17 @@ export async function GET(request: NextRequest) {
         client_secret: process.env.GOOGLE_CLIENT_SECRET,
         code,
         grant_type: 'authorization_code',
-        redirect_uri: `${baseUrl}/api/auth/callback/google`,
+        redirect_uri: redirectUri,
       }),
     })
 
     const tokens = await tokenResponse.json()
+    console.log('Google token response status:', tokenResponse.status)
+    console.log('Google token response:', tokens)
 
     if (!tokens.access_token) {
-      throw new Error('No access token received')
+      console.error('No access token received from Google:', tokens)
+      throw new Error(`No access token received: ${JSON.stringify(tokens)}`)
     }
 
     // Get user info from Google
