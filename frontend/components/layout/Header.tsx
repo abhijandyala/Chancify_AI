@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname, useRouter } from 'next/navigation'
-import { Settings as SettingsIcon, Bell, User } from 'lucide-react'
+import { Settings as SettingsIcon, Home, User } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 
@@ -60,6 +60,11 @@ export function Header() {
     router.push('/auth')
   }
 
+  const handleHomeClick = () => {
+    // Navigate to the starting page (landing page)
+    router.push('/')
+  }
+
   return (
     <header className="glass px-6 py-4 flex items-center justify-between mb-8 border border-white/10">
       <div className="flex items-center gap-4">
@@ -85,11 +90,12 @@ export function Header() {
           // Show notification, profile, and settings buttons when signed in
           <>
             <motion.button
+              onClick={handleHomeClick}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="p-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300"
             >
-              <Bell className="w-5 h-5 text-gray-400 hover:text-yellow-400 transition-colors" />
+              <Home className="w-5 h-5 text-gray-400 hover:text-yellow-400 transition-colors" />
             </motion.button>
             
             <motion.button
