@@ -71,33 +71,35 @@ export default function ROXAgenticWorkflows() {
         </h3>
       </Reveal>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {infoSections.map((section, i) => (
-          <Reveal key={section.title} delay={0.1 + (i * 0.05)}>
-            <Link href={section.href}>
-              <GlassCard className="p-6 hover:border-primary/40 transition-all duration-300 hover:scale-[1.02] group cursor-pointer">
-                <div className="flex flex-col items-start h-full">
-                  <div className="p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors mb-4">
-                    <section.icon className="h-6 w-6 text-primary" />
+      <div className="bg-black/80 backdrop-blur-sm rounded-3xl p-8 border border-white/10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {infoSections.map((section, i) => (
+            <Reveal key={section.title} delay={0.1 + (i * 0.05)}>
+              <Link href={section.href}>
+                <GlassCard className="p-6 hover:border-primary/40 transition-all duration-300 hover:scale-[1.02] group cursor-pointer">
+                  <div className="flex flex-col items-start h-full">
+                    <div className="p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors mb-4">
+                      <section.icon className="h-6 w-6 text-primary" />
+                    </div>
+                    
+                    <div className="flex-1">
+                      <h4 className="text-lg font-semibold text-foreground mb-2">
+                        {section.title}
+                      </h4>
+                      <p className="text-foreground/70 text-sm leading-relaxed mb-4">
+                        {section.desc}
+                      </p>
+                    </div>
+                    
+                    <span className="text-primary text-sm font-medium hover:text-primary/80 transition-colors group-hover:underline">
+                      {section.action}
+                    </span>
                   </div>
-                  
-                  <div className="flex-1">
-                    <h4 className="text-lg font-semibold text-foreground mb-2">
-                      {section.title}
-                    </h4>
-                    <p className="text-foreground/70 text-sm leading-relaxed mb-4">
-                      {section.desc}
-                    </p>
-                  </div>
-                  
-                  <span className="text-primary text-sm font-medium hover:text-primary/80 transition-colors group-hover:underline">
-                    {section.action}
-                  </span>
-                </div>
-              </GlassCard>
-            </Link>
-          </Reveal>
-        ))}
+                </GlassCard>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   )

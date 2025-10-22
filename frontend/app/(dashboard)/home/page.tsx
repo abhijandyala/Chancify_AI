@@ -52,7 +52,7 @@ export default function HomePage() {
   })
 
   const updateProfile = (field: string, value: string) => {
-    setProfile({ ...profile, [field]: value })
+    setProfile(prev => ({ ...prev, [field]: value }))
   }
 
   const openInfoModal = (factor: string) => {
@@ -61,6 +61,132 @@ export default function HomePage() {
 
   const closeInfoModal = () => {
     setModalInfo({ isOpen: false, factor: '' })
+  }
+
+  const getFactorOptions = (factor: string) => {
+    const factorDescriptions: { [key: string]: { [value: string]: string } } = {
+      extracurricular_depth: {
+        '10': '10 - Deep involvement in 2-3 activities',
+        '8': '8 - Strong involvement in 1-2 activities',
+        '6': '6 - Moderate involvement in multiple activities',
+        '4': '4 - Light involvement in several activities',
+        '2': '2 - Minimal or no extracurricular involvement'
+      },
+      leadership_positions: {
+        '10': '10 - Multiple significant leadership roles',
+        '8': '8 - Strong leadership in 1-2 roles',
+        '6': '6 - Some leadership experience',
+        '4': '4 - Minor leadership roles',
+        '2': '2 - No leadership roles'
+      },
+      awards_publications: {
+        '10': '10 - National/international recognition',
+        '8': '8 - State/regional awards',
+        '6': '6 - Local awards or publications',
+        '4': '4 - School-level recognition',
+        '2': '2 - No significant awards'
+      },
+      passion_projects: {
+        '10': '10 - Exceptional personal projects',
+        '8': '8 - Strong personal initiatives',
+        '6': '6 - Some personal projects',
+        '4': '4 - Basic personal projects',
+        '2': '2 - No significant personal projects'
+      },
+      business_ventures: {
+        '10': '10 - Successful business ventures',
+        '8': '8 - Strong entrepreneurial experience',
+        '6': '6 - Some business experience',
+        '4': '4 - Basic business involvement',
+        '2': '2 - No business experience'
+      },
+      volunteer_work: {
+        '10': '10 - Extensive volunteer commitment',
+        '8': '8 - Strong volunteer involvement',
+        '6': '6 - Regular volunteer work',
+        '4': '4 - Occasional volunteer work',
+        '2': '2 - Minimal volunteer experience'
+      },
+      research_experience: {
+        '10': '10 - Published research or significant projects',
+        '8': '8 - Strong research involvement',
+        '6': '6 - Some research experience',
+        '4': '4 - Basic research exposure',
+        '2': '2 - No research experience'
+      },
+      portfolio_audition: {
+        '10': '10 - Exceptional portfolio/audition',
+        '8': '8 - Strong portfolio/audition',
+        '6': '6 - Good portfolio/audition',
+        '4': '4 - Basic portfolio/audition',
+        '2': '2 - No portfolio/audition required'
+      },
+      essay_quality: {
+        '10': '10 - Exceptional writing quality',
+        '8': '8 - Strong writing skills',
+        '6': '6 - Good writing ability',
+        '4': '4 - Basic writing skills',
+        '2': '2 - Weak writing skills'
+      },
+      recommendations: {
+        '10': '10 - Outstanding recommendations',
+        '8': '8 - Strong recommendations',
+        '6': '6 - Good recommendations',
+        '4': '4 - Average recommendations',
+        '2': '2 - Weak recommendations'
+      },
+      interview: {
+        '10': '10 - Exceptional interview performance',
+        '8': '8 - Strong interview skills',
+        '6': '6 - Good interview performance',
+        '4': '4 - Average interview',
+        '2': '2 - Poor interview performance'
+      },
+      demonstrated_interest: {
+        '10': '10 - High demonstrated interest',
+        '8': '8 - Strong demonstrated interest',
+        '6': '6 - Moderate demonstrated interest',
+        '4': '4 - Basic demonstrated interest',
+        '2': '2 - No demonstrated interest'
+      },
+      legacy_status: {
+        '10': '10 - Strong legacy connection',
+        '8': '8 - Moderate legacy connection',
+        '6': '6 - Some legacy connection',
+        '4': '4 - Weak legacy connection',
+        '2': '2 - No legacy connection'
+      },
+      geographic_diversity: {
+        '10': '10 - Highly underrepresented region',
+        '8': '8 - Moderately underrepresented',
+        '6': '6 - Somewhat underrepresented',
+        '4': '4 - Slightly underrepresented',
+        '2': '2 - Well-represented region'
+      },
+      firstgen_diversity: {
+        '10': '10 - First-generation college student',
+        '8': '8 - Strong diversity factors',
+        '6': '6 - Some diversity factors',
+        '4': '4 - Basic diversity factors',
+        '2': '2 - No significant diversity factors'
+      },
+      hs_reputation: {
+        '10': '10 - Highly prestigious high school',
+        '8': '8 - Strong high school reputation',
+        '6': '6 - Good high school reputation',
+        '4': '4 - Average high school',
+        '2': '2 - Weak high school reputation'
+      }
+    }
+
+    const descriptions = factorDescriptions[factor] || {}
+    return [
+      { value: '10', label: descriptions['10'] || '10' },
+      { value: '8', label: descriptions['8'] || '8' },
+      { value: '6', label: descriptions['6'] || '6' },
+      { value: '4', label: descriptions['4'] || '4' },
+      { value: '2', label: descriptions['2'] || '2' },
+    ]
   }
 
   const handleCalculateChances = async (e: React.FormEvent) => {
@@ -132,8 +258,8 @@ export default function HomePage() {
       <div>
         <h2 className="text-xl md:text-2xl font-bold">{title}</h2>
         {subtitle && <p className="text-sm text-gray-400">{subtitle}</p>}
+        </div>
       </div>
-    </div>
   )
 
   const FormFieldWithInfo = ({ label, factor, children }:{ label: string; factor: string; children: React.ReactNode }) => (
@@ -174,48 +300,48 @@ export default function HomePage() {
         <div className="rox-card">
           <SectionHeader icon={<GraduationCap className="w-5 h-5" />} title="Academic Foundation" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Input
+          <Input
               label="Unweighted GPA (4.0)"
-              type="number"
-              step="0.01"
-              min="0"
-              max="4"
-              placeholder="3.85"
-              value={profile.gpa_unweighted}
-              onChange={(e) => updateProfile('gpa_unweighted', e.target.value)}
-              helperText="GPA without honors/AP weighting"
-            />
-            <Input
+            type="number"
+            step="0.01"
+            min="0"
+            max="4"
+            placeholder="3.85"
+            value={profile.gpa_unweighted}
+            onChange={(e) => updateProfile('gpa_unweighted', e.target.value)}
+            helperText="GPA without honors/AP weighting"
+          />
+          <Input
               label="Weighted GPA (5.0)"
-              type="number"
-              step="0.01"
-              min="0"
-              max="5"
-              placeholder="4.25"
-              value={profile.gpa_weighted}
-              onChange={(e) => updateProfile('gpa_weighted', e.target.value)}
-              helperText="GPA with honors/AP weighting"
-            />
-            <Input
-              label="SAT Score"
-              type="number"
-              min="400"
-              max="1600"
-              placeholder="1450"
-              value={profile.sat}
-              onChange={(e) => updateProfile('sat', e.target.value)}
-              helperText="Total SAT score (optional)"
-            />
-            <Input
-              label="ACT Score"
-              type="number"
-              min="1"
-              max="36"
-              placeholder="32"
-              value={profile.act}
-              onChange={(e) => updateProfile('act', e.target.value)}
-              helperText="ACT composite (optional)"
-            />
+            type="number"
+            step="0.01"
+            min="0"
+            max="5"
+            placeholder="4.25"
+            value={profile.gpa_weighted}
+            onChange={(e) => updateProfile('gpa_weighted', e.target.value)}
+            helperText="GPA with honors/AP weighting"
+          />
+          <Input
+            label="SAT Score"
+            type="number"
+            min="400"
+            max="1600"
+            placeholder="1450"
+            value={profile.sat}
+            onChange={(e) => updateProfile('sat', e.target.value)}
+            helperText="Total SAT score (optional)"
+          />
+          <Input
+            label="ACT Score"
+            type="number"
+            min="1"
+            max="36"
+            placeholder="32"
+            value={profile.act}
+            onChange={(e) => updateProfile('act', e.target.value)}
+            helperText="ACT composite (optional)"
+          />
           </div>
         </div>
       </motion.section>
@@ -228,7 +354,7 @@ export default function HomePage() {
             title="Your Unique Story" 
             subtitle="The holistic factors most other predictors ignore." 
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               ['Extracurricular Depth', 'extracurricular_depth'],
               ['Leadership Positions', 'leadership_positions'],
@@ -250,13 +376,7 @@ export default function HomePage() {
                 <ROXSelect 
                   value={(profile as any)[key]} 
                   onChange={(v) => updateProfile(key, v)} 
-                  options={[
-                    { value: '10', label: '10' },
-                    { value: '8', label: '8' },
-                    { value: '6', label: '6' },
-                    { value: '4', label: '4' },
-                    { value: '2', label: '2' },
-                  ]} 
+                  options={getFactorOptions(key)} 
                 />
               </FormFieldWithInfo>
             ))}
@@ -275,15 +395,9 @@ export default function HomePage() {
             {/* High School Reputation */}
             <FormFieldWithInfo label="High School Reputation" factor="hs_reputation">
               <ROXSelect 
-                value={profile.hs_reputation} 
+            value={profile.hs_reputation}
                 onChange={(v) => updateProfile('hs_reputation', v)} 
-                options={[
-                  { value: '10', label: '10' },
-                  { value: '8', label: '8' },
-                  { value: '6', label: '6' },
-                  { value: '4', label: '4' },
-                  { value: '2', label: '2' },
-                ]} 
+                options={getFactorOptions('hs_reputation')} 
               />
             </FormFieldWithInfo>
           </div>
@@ -301,6 +415,7 @@ export default function HomePage() {
               options={COLLEGES} 
               className="w-full" 
               placeholder="Search for your college…" 
+              autoFocus={false}
             />
             <div className="flex flex-col sm:flex-row gap-3">
               <form onSubmit={handleCalculateChances} className="flex-1">
@@ -317,19 +432,19 @@ export default function HomePage() {
                   ) : (
                     <>
                       <Calculator className="w-5 h-5" />
-                      Calculate My Chances
+            Calculate My Chances
                     </>
                   )}
-                </Button>
+          </Button>
               </form>
               <Button 
                 variant="ghost" 
                 className="flex-1 rox-button-ghost"
               >
-                Save Profile
-              </Button>
-            </div>
-          </div>
+            Save Profile
+          </Button>
+        </div>
+      </div>
         </div>
       </motion.section>
 

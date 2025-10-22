@@ -18,6 +18,7 @@ export default function CollegeCombobox({
   options,
   className,
   maxItems = 200, // prevent super long lists
+  autoFocus = false,
 }: {
   label?: string;
   placeholder?: string;
@@ -26,12 +27,15 @@ export default function CollegeCombobox({
   options: Option[];
   className?: string;
   maxItems?: number;
+  autoFocus?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(0);
   const rootRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const didMount = useRef(false);
 
   const items = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -62,6 +66,14 @@ export default function CollegeCombobox({
     el?.scrollIntoView({ block: 'nearest' });
   }, [active]);
 
+  // Guarded auto-focus to prevent focus-steal on re-render
+  useEffect(() => {
+    if (!didMount.current && autoFocus) {
+      inputRef.current?.focus();
+    }
+    didMount.current = true;
+  }, [autoFocus]);
+
   return (
     <div
       ref={rootRef}
@@ -90,6 +102,7 @@ export default function CollegeCombobox({
       >
         <Search className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400/80 flex-shrink-0" />
         <input
+          ref={inputRef}
           className={clsx(
             'w-full bg-transparent outline-none',
             'text-sm sm:text-base text-gray-100 placeholder:text-gray-500'
