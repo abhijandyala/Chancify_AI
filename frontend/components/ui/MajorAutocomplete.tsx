@@ -23,10 +23,13 @@ export const MajorAutocomplete = ({
   const [localValue, setLocalValue] = useState(value)
   const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const timeoutRef = useRef<NodeJS.Timeout>()
 
-  // Sync local value with prop value
+  // Sync local value with prop value only when not focused
   useEffect(() => {
-    setLocalValue(value)
+    if (document.activeElement !== inputRef.current) {
+      setLocalValue(value)
+    }
   }, [value])
 
   // Use local value for search
@@ -61,11 +64,29 @@ export const MajorAutocomplete = ({
     }
   }, [isOpen])
 
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+    }
+  }, [])
+
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value
     setLocalValue(newValue)
-    onChange(newValue)
     setIsOpen(newValue.length > 0)
+    
+    // Clear previous timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+    }
+    
+    // Debounce the onChange call to parent
+    timeoutRef.current = setTimeout(() => {
+      onChange(newValue)
+    }, 100)
   }, [onChange])
 
   // Prevent re-renders from causing focus loss
