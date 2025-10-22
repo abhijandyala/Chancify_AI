@@ -217,10 +217,8 @@ export default function HomePage() {
               { value: '2', label: '2 - Standard (Regular courses)' },
             ]}
           />
-            </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
 
         {/* Your Unique Story */}
         <motion.div
