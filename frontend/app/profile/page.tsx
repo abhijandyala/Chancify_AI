@@ -8,8 +8,33 @@ function ProfileContent() {
   const [userData, setUserData] = useState<any>(null)
 
   useEffect(() => {
-    // Check for stored user data
+    // Check for Google OAuth callback
     if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search)
+      const googleAuth = urlParams.get('google_auth')
+      
+      if (googleAuth === 'success') {
+        // Handle Google OAuth success
+        const userData = {
+          email: urlParams.get('email') || '',
+          name: urlParams.get('name') || '',
+          picture: urlParams.get('picture') || '',
+          provider: 'google'
+        }
+        
+        // Store user data
+        localStorage.setItem('auth_token', 'google_oauth_' + Date.now())
+        localStorage.setItem('user_data', JSON.stringify(userData))
+        localStorage.setItem('provider', 'google')
+        
+        // Clean URL
+        window.history.replaceState({}, document.title, window.location.pathname)
+        
+        setUserData(userData)
+        return
+      }
+      
+      // Check for stored user data
       const token = localStorage.getItem('auth_token')
       const storedUserData = localStorage.getItem('user_data')
       

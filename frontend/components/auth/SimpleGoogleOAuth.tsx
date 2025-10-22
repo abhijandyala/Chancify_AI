@@ -10,8 +10,25 @@ export default function SimpleGoogleOAuth() {
 
   const handleGoogleSignIn = () => {
     setIsLoading(true)
-    // Redirect to the separate Google auth page
-    router.push('/google-auth')
+    
+    // Use real Google OAuth flow like ROX
+    const GOOGLE_CLIENT_ID = '117818010137-4fmntjdknmm16c9eef296196isok6620.apps.googleusercontent.com'
+    const REDIRECT_URI = `${window.location.origin}/api/auth/callback/google`
+    const SCOPE = 'email profile'
+    const STATE = 'google_oauth_state_' + Date.now()
+    
+    // Create the real Google OAuth URL
+    const authUrl = new URL('https://accounts.google.com/o/oauth2/v2/auth')
+    authUrl.searchParams.set('client_id', GOOGLE_CLIENT_ID)
+    authUrl.searchParams.set('redirect_uri', REDIRECT_URI)
+    authUrl.searchParams.set('response_type', 'code')
+    authUrl.searchParams.set('scope', SCOPE)
+    authUrl.searchParams.set('state', STATE)
+    authUrl.searchParams.set('access_type', 'offline')
+    authUrl.searchParams.set('prompt', 'select_account')
+    
+    // Redirect to real Google OAuth
+    window.location.href = authUrl.toString()
   }
 
 
