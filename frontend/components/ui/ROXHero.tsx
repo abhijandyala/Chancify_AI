@@ -37,7 +37,7 @@ export default function ROXHero() {
                 Log In
               </Button>
             </Link>
-            <Link href="/auth">
+            <Link href="/home">
               <Button variant="ghost" className="text-lg px-8 py-4 border border-border">
                 Try for Now
               </Button>
