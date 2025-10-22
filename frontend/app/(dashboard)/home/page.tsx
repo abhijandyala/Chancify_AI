@@ -125,13 +125,13 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white p-6">
+    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-center mb-8"
+        className="text-center mb-8 w-full max-w-4xl"
       >
         <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-yellow-400 via-yellow-300 to-white bg-clip-text text-transparent">
           Chancify AI
@@ -142,7 +142,7 @@ export default function HomePage() {
       </motion.div>
 
       {/* Main Form Container */}
-      <div className="max-w-6xl mx-auto space-y-6">
+      <div className="w-full max-w-4xl space-y-6">
 
         {/* Academic Foundation */}
         <motion.div
@@ -470,8 +470,8 @@ export default function HomePage() {
             <h2 className="text-2xl font-bold text-white">College Selection</h2>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div>
+          <div className="space-y-6">
+            <div className="max-w-md mx-auto">
               <SimpleSearchableSelect
                 label="Select Your Target College"
                 value={profile.college}
@@ -481,8 +481,8 @@ export default function HomePage() {
               />
             </div>
             
-            <div className="flex flex-col justify-center gap-4">
-              <form onSubmit={handleCalculateChances}>
+            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+              <form onSubmit={handleCalculateChances} className="flex-1">
                 <Button 
                   type="submit"
                   disabled={isLoading || !profile.college}
@@ -503,7 +503,7 @@ export default function HomePage() {
               </form>
               <Button 
                 variant="ghost" 
-                className="w-full text-lg px-6 py-4 border border-gray-700 hover:border-yellow-400/50 hover:text-yellow-400 transition-all duration-300"
+                className="flex-1 text-lg px-6 py-4 border border-gray-700 hover:border-yellow-400/50 hover:text-yellow-400 transition-all duration-300"
               >
                 Save Profile
               </Button>
