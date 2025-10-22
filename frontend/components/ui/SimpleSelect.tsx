@@ -51,7 +51,7 @@ export const SimpleSelect = ({
   }
 
   return (
-    <div className="w-full relative" ref={containerRef} style={{ zIndex: 9999999, overflow: 'visible' }}>
+    <div className="w-full relative" ref={containerRef} style={{ zIndex: 99999999, overflow: 'visible' }}>
       {label && (
         <motion.label 
           className="block text-sm font-semibold text-gray-300 mb-2"
@@ -104,7 +104,7 @@ export const SimpleSelect = ({
             <motion.div 
               className="absolute w-full mt-2 bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-xl rounded-xl border border-gray-800/50 shadow-2xl max-h-[500px] overflow-hidden flex flex-col"
               style={{ 
-                zIndex: 9999999
+                zIndex: 99999999
               }}
               initial={{ opacity: 0, y: -10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
