@@ -27,11 +27,11 @@ export function Header() {
   return (
     <header className="glass px-6 py-4 flex items-center justify-between mb-8 border border-white/10">
       <div className="flex items-center gap-4">
-        <div className="p-2 rounded-xl border border-white/10 bg-gradient-to-br from-yellow-400/15 to-amber-600/15 text-yellow-400 shadow-[0_0_40px_rgba(245,200,75,0.15)]">
+            <div className="p-2 rounded-xl border border-white/10 bg-yellow-400/15 text-yellow-400 shadow-[0_0_40px_rgba(245,200,75,0.15)]">
           <div className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
         </div>
         <div>
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-yellow-400 via-amber-200 to-white bg-clip-text text-transparent">
+          <h1 className="text-2xl font-bold text-yellow-400">
             {getTitle()}
           </h1>
           <p className="text-sm text-gray-400">

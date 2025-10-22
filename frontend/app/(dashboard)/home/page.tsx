@@ -125,10 +125,10 @@ export default function HomePage() {
   }
 
   const SectionHeader: React.FC<{ icon: React.ReactNode; title: string; subtitle?: string }> = ({ icon, title, subtitle }) => (
-    <div className="flex items-start gap-3 mb-6">
-      <div className="p-2 rounded-xl border border-white/10 bg-gradient-to-br from-yellow-400/15 to-amber-600/15 text-yellow-400 shadow-[0_0_40px_rgba(245,200,75,0.15)]">
-        {icon}
-      </div>
+      <div className="flex items-start gap-3 mb-6">
+        <div className="p-2 rounded-xl border border-white/10 bg-yellow-400/15 text-yellow-400 shadow-[0_0_40px_rgba(245,200,75,0.15)]">
+          {icon}
+        </div>
       <div>
         <h2 className="text-xl md:text-2xl font-bold">{title}</h2>
         {subtitle && <p className="text-sm text-gray-400">{subtitle}</p>}

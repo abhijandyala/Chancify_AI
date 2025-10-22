@@ -78,7 +78,7 @@ export const ROXSelect = ({
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              className="absolute w-full mt-1 sm:mt-2 bg-gradient-to-br from-black/90 to-gray-900/90 backdrop-blur-xl rounded-lg sm:rounded-2xl border border-yellow-400/20 shadow-2xl shadow-yellow-400/10 max-h-[200px] sm:max-h-[240px] overflow-y-auto z-[9999]"
+              className="absolute w-full mt-1 sm:mt-2 bg-black/90 backdrop-blur-xl rounded-lg sm:rounded-2xl border border-yellow-400/20 shadow-2xl shadow-yellow-400/10 max-h-[200px] sm:max-h-[240px] overflow-y-auto z-[9999]"
               initial={{ opacity: 0, y: -10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
@@ -90,8 +90,8 @@ export const ROXSelect = ({
                     key={option.value}
                     className={`px-3 sm:px-4 py-2 sm:py-3 cursor-pointer rounded-lg sm:rounded-xl transition-all duration-300 border border-transparent mb-1 ${
                       value === option.value
-                        ? 'bg-gradient-to-r from-yellow-400/20 to-yellow-600/15 text-yellow-200 border-yellow-400/30'
-                        : 'text-gray-100 hover:bg-gradient-to-r hover:from-yellow-400/15 hover:to-yellow-600/10 hover:text-yellow-200 hover:border-yellow-400/30 hover:shadow-lg hover:shadow-yellow-400/10'
+                        ? 'bg-yellow-400/20 text-yellow-200 border-yellow-400/30'
+                        : 'text-gray-100 hover:bg-yellow-400/15 hover:text-yellow-200 hover:border-yellow-400/30 hover:shadow-lg hover:shadow-yellow-400/10'
                     }`}
                     onClick={() => handleSelect(option.value)}
                     initial={{ opacity: 0, x: -20 }}

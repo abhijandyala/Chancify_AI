@@ -103,7 +103,7 @@ export default function DiscoverPage() {
           <Search className="w-4 h-4" />
           <span className="text-sm font-semibold">College Discovery</span>
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-yellow-400 via-amber-200 to-white bg-clip-text text-transparent mb-4">
+        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-yellow-400 mb-4">
           Discover Your Perfect Match
         </h1>
         <p className="text-gray-300 text-lg max-w-2xl mx-auto">
@@ -145,7 +145,7 @@ export default function DiscoverPage() {
                           key={filter.name}
                           className={`px-3 py-1 rounded-full text-sm font-medium transition-all duration-300 ${
                             filter.active
-                              ? 'bg-gradient-to-r from-yellow-400/20 to-amber-600/20 border border-yellow-400/30 text-yellow-400'
+                              ? 'bg-yellow-400/20 border border-yellow-400/30 text-yellow-400'
                               : 'bg-white/5 border border-white/10 text-gray-400 hover:bg-white/10 hover:text-white'
                           }`}
                         >
@@ -257,7 +257,7 @@ export default function DiscoverPage() {
             content: (
               <motion.div {...enter}>
                 <GlassCard className="p-12 text-center">
-                  <div className="p-4 rounded-full border border-white/10 bg-gradient-to-br from-blue-400/15 to-cyan-600/15 text-blue-400 shadow-[0_0_40px_rgba(59,130,246,0.15)] w-fit mx-auto mb-6">
+                  <div className="p-4 rounded-full border border-white/10 bg-blue-400/15 text-blue-400 shadow-[0_0_40px_rgba(59,130,246,0.15)] w-fit mx-auto mb-6">
                     <Star className="w-8 h-8" />
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-4">

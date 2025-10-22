@@ -26,11 +26,11 @@ export function Sidebar() {
         transition={{ duration: 0.6, type: "spring", stiffness: 120 }}
       >
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-gradient-to-br from-yellow-400/20 to-amber-600/20 text-yellow-400">
+          <div className="p-2 rounded-lg bg-yellow-400/20 text-yellow-400">
             <Brain className="w-5 h-5" />
           </div>
           <div>
-            <h1 className="text-lg font-bold bg-gradient-to-r from-yellow-400 via-amber-200 to-white bg-clip-text text-transparent">
+            <h1 className="text-lg font-bold text-yellow-400">
               Chancify AI
             </h1>
             <p className="text-xs text-gray-500">
@@ -73,7 +73,7 @@ export function Sidebar() {
                     'group relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300',
                     'hover:bg-white/5 border border-transparent',
                     isActive
-                      ? 'bg-gradient-to-r from-yellow-400/10 to-amber-600/10 border-yellow-400/20 text-yellow-400'
+                      ? 'bg-yellow-400/10 border-yellow-400/20 text-yellow-400'
                       : 'text-gray-400 hover:text-white hover:border-white/10'
                   )}
                 >

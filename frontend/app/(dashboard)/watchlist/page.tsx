@@ -53,7 +53,7 @@ export default function WatchlistPage() {
           <Bookmark className="w-4 h-4" />
           <span className="text-sm font-semibold">Your College Watchlist</span>
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-yellow-400 via-amber-200 to-white bg-clip-text text-transparent mb-4">
+        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-yellow-400 mb-4">
           Track Your Progress
         </h1>
         <p className="text-gray-300 text-lg max-w-2xl mx-auto">
@@ -73,7 +73,7 @@ export default function WatchlistPage() {
                     <motion.div {...enter}>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                         <GlassCard className="p-6 text-center">
-                          <div className="p-3 rounded-xl border border-white/10 bg-gradient-to-br from-yellow-400/15 to-amber-600/15 text-yellow-400 shadow-[0_0_40px_rgba(245,200,75,0.15)] w-fit mx-auto mb-4">
+                          <div className="p-3 rounded-xl border border-white/10 bg-yellow-400/15 text-yellow-400 shadow-[0_0_40px_rgba(245,200,75,0.15)] w-fit mx-auto mb-4">
                             <Target className="w-6 h-6" />
                           </div>
                           <div className="text-2xl font-bold text-white mb-1">{mockColleges.length}</div>
@@ -81,7 +81,7 @@ export default function WatchlistPage() {
                         </GlassCard>
                         
                         <GlassCard className="p-6 text-center">
-                          <div className="p-3 rounded-xl border border-white/10 bg-gradient-to-br from-green-400/15 to-emerald-600/15 text-green-400 shadow-[0_0_40px_rgba(34,197,94,0.15)] w-fit mx-auto mb-4">
+                          <div className="p-3 rounded-xl border border-white/10 bg-green-400/15 text-green-400 shadow-[0_0_40px_rgba(34,197,94,0.15)] w-fit mx-auto mb-4">
                             <TrendingUp className="w-6 h-6" />
                           </div>
                           <div className="text-2xl font-bold text-white mb-1">24%</div>
@@ -89,7 +89,7 @@ export default function WatchlistPage() {
                         </GlassCard>
                         
                         <GlassCard className="p-6 text-center">
-                          <div className="p-3 rounded-xl border border-white/10 bg-gradient-to-br from-blue-400/15 to-cyan-600/15 text-blue-400 shadow-[0_0_40px_rgba(59,130,246,0.15)] w-fit mx-auto mb-4">
+                          <div className="p-3 rounded-xl border border-white/10 bg-blue-400/15 text-blue-400 shadow-[0_0_40px_rgba(59,130,246,0.15)] w-fit mx-auto mb-4">
                             <Star className="w-6 h-6" />
                           </div>
                           <div className="text-2xl font-bold text-white mb-1">1</div>
@@ -148,7 +148,7 @@ export default function WatchlistPage() {
                 ) : (
                   <motion.div {...enter}>
                     <GlassCard className="p-12 text-center">
-                      <div className="p-4 rounded-full border border-white/10 bg-gradient-to-br from-yellow-400/15 to-amber-600/15 text-yellow-400 shadow-[0_0_40px_rgba(245,200,75,0.15)] w-fit mx-auto mb-6">
+                      <div className="p-4 rounded-full border border-white/10 bg-yellow-400/15 text-yellow-400 shadow-[0_0_40px_rgba(245,200,75,0.15)] w-fit mx-auto mb-6">
                         <Bookmark className="w-8 h-8" />
                       </div>
                       <h3 className="text-2xl font-bold text-white mb-4">
@@ -157,7 +157,7 @@ export default function WatchlistPage() {
                       <p className="text-gray-400 mb-6 max-w-md mx-auto">
                         Start adding colleges from the Discover page to track your admission chances and monitor your progress
                       </p>
-                      <Button className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-semibold">
+                      <Button className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">
                         <Plus className="w-4 h-4 mr-2" />
                         Discover Colleges
                       </Button>
@@ -172,7 +172,7 @@ export default function WatchlistPage() {
             content: (
               <motion.div {...enter}>
                 <GlassCard className="p-12 text-center">
-                  <div className="p-4 rounded-full border border-white/10 bg-gradient-to-br from-blue-400/15 to-cyan-600/15 text-blue-400 shadow-[0_0_40px_rgba(59,130,246,0.15)] w-fit mx-auto mb-6">
+                  <div className="p-4 rounded-full border border-white/10 bg-blue-400/15 text-blue-400 shadow-[0_0_40px_rgba(59,130,246,0.15)] w-fit mx-auto mb-6">
                     <Star className="w-8 h-8" />
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-4">

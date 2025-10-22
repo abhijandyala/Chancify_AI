@@ -37,13 +37,13 @@ function ResultsContent() {
   const getOutcomeColor = () => {
     switch (outcome) {
       case 'Acceptance':
-        return 'from-green-400/20 to-green-600/20 border-green-400/30'
+        return 'bg-green-400/20 border-green-400/30'
       case 'Rejection':
-        return 'from-red-400/20 to-red-600/20 border-red-400/30'
+        return 'bg-red-400/20 border-red-400/30'
       case 'Waitlist':
-        return 'from-yellow-400/20 to-yellow-600/20 border-yellow-400/30'
+        return 'bg-yellow-400/20 border-yellow-400/30'
       default:
-        return 'from-gray-400/20 to-gray-600/20 border-gray-400/30'
+        return 'bg-gray-400/20 border-gray-400/30'
     }
   }
   
@@ -75,7 +75,7 @@ function ResultsContent() {
           <Brain className="w-4 h-4" />
           <span className="text-sm font-semibold">AI Prediction Results</span>
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-yellow-400 via-amber-200 to-white bg-clip-text text-transparent mb-4">
+        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-yellow-400 mb-4">
           Your Admission Analysis
         </h1>
         <p className="text-gray-300 text-lg max-w-2xl mx-auto">
@@ -86,7 +86,7 @@ function ResultsContent() {
       {/* Main Results Card */}
       <motion.div
         {...enter}
-        className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${getOutcomeColor()} backdrop-blur-xl border p-8 md:p-12`}
+        className={`relative overflow-hidden rounded-3xl ${getOutcomeColor()} backdrop-blur-xl border p-8 md:p-12`}
       >
         <div className="text-center">
           {/* Outcome Icon */}

@@ -61,7 +61,7 @@ export default function SATPage() {
           <Timer className="w-4 h-4" />
           <span className="text-sm font-semibold">SAT Preparation</span>
         </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-yellow-400 via-amber-200 to-white bg-clip-text text-transparent mb-4">
+        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-yellow-400 mb-4">
           Practice • Analyze • Improve
         </h1>
         <p className="text-gray-300 text-lg max-w-2xl mx-auto">
@@ -81,7 +81,7 @@ export default function SATPage() {
             >
               <GlassCard className="p-6 h-full hover:shadow-2xl transition-all duration-300">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className={`p-3 rounded-xl border border-white/10 bg-gradient-to-br from-${module.color}-400/15 to-${module.color}-600/15 text-${module.color}-400 shadow-[0_0_40px_rgba(245,200,75,0.15)]`}>
+                  <div className={`p-3 rounded-xl border border-white/10 bg-${module.color}-400/15 text-${module.color}-400 shadow-[0_0_40px_rgba(245,200,75,0.15)]`}>
                     <Icon className="w-6 h-6" />
                   </div>
                   <div className="flex-1">
@@ -104,7 +104,7 @@ export default function SATPage() {
                 </div>
                 
                 <div className="flex gap-3">
-                  <Button className="flex-1 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-semibold">
+                  <Button className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold">
                     <Play className="w-4 h-4 mr-2" />
                     Start
                   </Button>
@@ -122,7 +122,7 @@ export default function SATPage() {
       <motion.div {...enter}>
         <GlassCard className="p-6">
           <div className="flex items-center gap-3 mb-6">
-            <div className="p-3 rounded-xl border border-white/10 bg-gradient-to-br from-green-400/15 to-emerald-600/15 text-green-400 shadow-[0_0_40px_rgba(34,197,94,0.15)]">
+            <div className="p-3 rounded-xl border border-white/10 bg-green-400/15 text-green-400 shadow-[0_0_40px_rgba(34,197,94,0.15)]">
               <BarChart3 className="w-6 h-6" />
             </div>
             <div>
@@ -140,7 +140,7 @@ export default function SATPage() {
                 </div>
                 <div className="w-full bg-gray-800/50 rounded-full h-2">
                   <motion.div
-                    className="bg-gradient-to-r from-yellow-400 to-yellow-500 h-2 rounded-full"
+                        className="bg-yellow-400 h-2 rounded-full"
                     initial={{ width: 0 }}
                     whileInView={{ width: `${area.progress}%` }}
                     transition={{ delay: index * 0.1, duration: 0.8 }}
@@ -160,7 +160,7 @@ export default function SATPage() {
       <motion.div {...enter}>
         <GlassCard className="p-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <div className="p-3 rounded-xl border border-white/10 bg-gradient-to-br from-purple-400/15 to-pink-600/15 text-purple-400 shadow-[0_0_40px_rgba(168,85,247,0.15)]">
+            <div className="p-3 rounded-xl border border-white/10 bg-purple-400/15 text-purple-400 shadow-[0_0_40px_rgba(168,85,247,0.15)]">
               <Zap className="w-6 h-6" />
             </div>
             <div>
@@ -168,7 +168,7 @@ export default function SATPage() {
               <p className="text-sm text-gray-400">Get a personalized study schedule based on your profile and target score</p>
             </div>
           </div>
-          <Button className="bg-gradient-to-r from-purple-400 to-pink-500 hover:from-purple-500 hover:to-pink-600 text-white font-semibold">
+          <Button className="bg-purple-400 hover:bg-purple-500 text-white font-semibold">
             <Award className="w-4 h-4 mr-2" />
             Generate Plan
           </Button>
