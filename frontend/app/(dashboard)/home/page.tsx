@@ -12,7 +12,7 @@ import { useState } from 'react'
 import { COLLEGES } from '@/lib/colleges'
 import { FACTOR_DESCRIPTIONS } from '@/lib/factorDescriptions'
 import { motion } from 'framer-motion'
-import { GraduationCap, Star, Building2, Calculator, Brain, Zap, Target } from 'lucide-react'
+import { GraduationCap, Star, Building2, Calculator, Brain, Zap, Target, ChevronRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 export const dynamic = 'force-dynamic'
@@ -394,65 +394,23 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-      {/* Intended Major - ISOLATED TEST */}
-      <div className="rox-card">
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <label className="block text-xs md:text-sm font-semibold text-gray-300">Intended Major</label>
-            <InfoIcon onClick={() => openInfoModal('major')} />
-          </div>
-          <input
-            type="text"
-            value={profile.major}
-            onChange={(e) => updateProfile('major', e.target.value)}
-            placeholder="e.g., Computer Science, Business, Medicine..."
-            className="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-gray-400 focus:border-yellow-400 focus:outline-none"
-            style={{ minHeight: '44px' }}
-          />
-        </div>
-      </div>
-
-      {/* College & Actions */}
+      {/* Next Button */}
       <motion.section {...enter}>
         <div className="rox-card">
-          <SectionHeader icon={<Building2 className="w-5 h-5" />} title="College Selection" />
-          <div className="space-y-4">
-            <CollegeCombobox 
-              value={profile.college} 
-              onChange={(v) => updateProfile('college', v)} 
-              options={COLLEGES} 
-              className="w-full" 
-              placeholder="Search for your college…" 
-              autoFocus={false}
-            />
-            <div className="flex flex-col sm:flex-row gap-3">
-              <form onSubmit={handleCalculateChances} className="flex-1">
-                <Button 
-                  type="submit" 
-                  disabled={isLoading || !profile.college} 
-                  className="w-full rox-button disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                >
-                  {isLoading ? (
-                    <>
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-black" />
-                      Calculating…
-                    </>
-                  ) : (
-                    <>
-                      <Calculator className="w-5 h-5" />
-            Calculate My Chances
-                    </>
-                  )}
-          </Button>
-              </form>
-              <Button 
-                variant="ghost" 
-                className="flex-1 rox-button-ghost"
-              >
-            Save Profile
-          </Button>
-        </div>
-      </div>
+          <div className="text-center space-y-6">
+            <div className="space-y-2">
+              <h2 className="text-2xl font-bold text-white">Ready to Explore?</h2>
+              <p className="text-gray-400">Your profile is complete. Let's discover colleges that match your unique story.</p>
+            </div>
+            
+            <Button 
+              onClick={() => router.push('/college-details')}
+              className="rox-button text-lg px-8 py-4 flex items-center gap-3 mx-auto"
+            >
+              <span>Next</span>
+              <ChevronRight className="w-5 h-5" />
+            </Button>
+          </div>
         </div>
       </motion.section>
 
