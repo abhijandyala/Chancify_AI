@@ -1,63 +1,102 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+
+declare global {
+  interface Window {
+    google: any
+  }
+}
 
 export default function SimpleGoogleOAuth() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
+  const [isGoogleLoaded, setIsGoogleLoaded] = useState(false)
 
-  const handleGoogleSignIn = () => {
-    if (isLoading) return
-    
-    setIsLoading(true)
-    
-    // Direct popup approach - this should definitely show the account selection
-    const popup = window.open(
-      `https://accounts.google.com/oauth/authorize?` +
-      `client_id=117818010137-4fmntjdknmm16c9eef296196isok6620.apps.googleusercontent.com&` +
-      `redirect_uri=${encodeURIComponent(window.location.origin)}&` +
-      `response_type=code&` +
-      `scope=openid%20email%20profile&` +
-      `access_type=offline&` +
-      `prompt=select_account`,
-      'google-auth',
-      'width=500,height=600,scrollbars=yes,resizable=yes'
-    )
-
-    // Check if popup was blocked
-    if (!popup || popup.closed || typeof popup.closed === 'undefined') {
-      setIsLoading(false)
-      alert('Popup was blocked. Please allow popups for this site and try again.')
-      return
+  useEffect(() => {
+    // Load Google Identity Services
+    const script = document.createElement('script')
+    script.src = 'https://accounts.google.com/gsi/client'
+    script.async = true
+    script.defer = true
+    script.onload = () => {
+      setIsGoogleLoaded(true)
+      initializeGoogleSignIn()
     }
+    document.head.appendChild(script)
 
-    // Simulate successful auth for now (since we don't have backend handling)
-    setTimeout(() => {
-      // Store mock user data
+    return () => {
+      // Cleanup
+      const existingScript = document.querySelector('script[src="https://accounts.google.com/gsi/client"]')
+      if (existingScript) {
+        document.head.removeChild(existingScript)
+      }
+    }
+  }, [])
+
+  const initializeGoogleSignIn = () => {
+    if (!window.google) return
+
+    window.google.accounts.id.initialize({
+      client_id: '117818010137-4fmntjdknmm16c9eef296196isok6620.apps.googleusercontent.com',
+      callback: handleCredentialResponse,
+      auto_select: false,
+      cancel_on_tap_outside: true
+    })
+  }
+
+  const handleCredentialResponse = (response: any) => {
+    setIsLoading(false)
+    
+    // Decode the JWT token to get user info
+    try {
+      const payload = JSON.parse(atob(response.credential.split('.')[1]))
+      
       const userData = {
-        email: 'abhijandyala@gmail.com',
-        name: 'Abhi Jandyala',
-        picture: 'https://lh3.googleusercontent.com/a/default-user',
-        google_id: 'mock_google_id',
+        email: payload.email,
+        name: payload.name,
+        picture: payload.picture,
+        google_id: payload.sub,
         provider: 'google'
       }
       
-      localStorage.setItem('auth_token', 'mock_token')
+      // Store user data
+      localStorage.setItem('auth_token', 'google_jwt_' + Date.now())
       localStorage.setItem('user_data', JSON.stringify(userData))
       localStorage.setItem('provider', 'google')
       
-      popup.close()
-      setIsLoading(false)
+      // Redirect to profile
       router.push('/profile')
-    }, 2000)
+      
+    } catch (error) {
+      console.error('Error processing Google response:', error)
+      setIsLoading(false)
+    }
+  }
+
+  const handleGoogleSignIn = () => {
+    if (!isGoogleLoaded || !window.google) {
+      alert('Google Sign-In is still loading. Please wait a moment and try again.')
+      return
+    }
+    
+    setIsLoading(true)
+    
+    // Trigger Google Sign-In popup
+    window.google.accounts.id.prompt((notification: any) => {
+      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+        setIsLoading(false)
+        alert('Google Sign-In popup was blocked or skipped. Please allow popups and try again.')
+      }
+    })
   }
 
   return (
     <button
       onClick={handleGoogleSignIn}
-      disabled={isLoading}
-      className="w-full bg-white hover:bg-gray-100 disabled:bg-white/50 text-black font-semibold py-3 rounded-xl border border-gray-300 transition-all duration-200 flex items-center justify-center gap-3"
+      disabled={isLoading || !isGoogleLoaded}
+      className="w-full bg-white hover:bg-gray-100 disabled:opacity-60 text-black font-semibold py-3 rounded-xl border border-gray-300 shadow-sm transition-all duration-200 flex items-center justify-center gap-3"
     >
       <svg className="w-5 h-5" viewBox="0 0 24 24">
         <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
