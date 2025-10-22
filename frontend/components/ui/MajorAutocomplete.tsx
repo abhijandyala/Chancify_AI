@@ -77,7 +77,7 @@ export const MajorAutocomplete = ({
           onFocus={() => setIsOpen(value.length > 0)}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          className="w-full px-4 py-3 bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400/50 focus:ring-2 focus:ring-yellow-400/20 transition-all duration-300"
+          className="w-full px-4 py-3 bg-black/50 backdrop-blur border border-gray-800/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-yellow-400/50 focus:ring-2 focus:ring-yellow-400/20 transition-all duration-300"
         />
 
         <AnimatePresence>
