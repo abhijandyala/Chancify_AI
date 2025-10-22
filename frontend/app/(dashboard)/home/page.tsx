@@ -240,19 +240,6 @@ export default function HomePage() {
               onChange={(e) => updateProfile('act', e.target.value)}
               helperText="ACT composite (optional)"
             />
-            
-            <ROXSelect
-              label="Course Rigor"
-              value={profile.rigor}
-                onChange={(value) => updateProfile('rigor', value)}
-              options={[
-                { value: '10', label: '10 - Most Rigorous (Many AP/IB)' },
-                { value: '8', label: '8 - Very Rigorous (Several AP/IB)' },
-                { value: '6', label: '6 - Rigorous (Some AP/Honors)' },
-                { value: '4', label: '4 - Moderate (Few AP/Honors)' },
-                { value: '2', label: '2 - Standard (Regular courses)' },
-              ]}
-            />
           </div>
         </motion.div>
 
