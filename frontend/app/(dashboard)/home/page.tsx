@@ -159,64 +159,64 @@ export default function HomePage() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-          <Input
-            label="Unweighted GPA (4.0 scale)"
-            type="number"
-            step="0.01"
-            min="0"
-            max="4"
-            placeholder="3.85"
-            value={profile.gpa_unweighted}
-            onChange={(e) => updateProfile('gpa_unweighted', e.target.value)}
-            helperText="GPA without honors/AP weighting"
-          />
-          
-          <Input
-            label="Weighted GPA (5.0 scale)"
-            type="number"
-            step="0.01"
-            min="0"
-            max="5"
-            placeholder="4.25"
-            value={profile.gpa_weighted}
-            onChange={(e) => updateProfile('gpa_weighted', e.target.value)}
-            helperText="GPA with honors/AP weighting"
-          />
-          
-          <Input
-            label="SAT Score"
-            type="number"
-            min="400"
-            max="1600"
-            placeholder="1450"
-            value={profile.sat}
-            onChange={(e) => updateProfile('sat', e.target.value)}
-            helperText="Total SAT score (optional)"
-          />
-          
-          <Input
-            label="ACT Score"
-            type="number"
-            min="1"
-            max="36"
-            placeholder="32"
-            value={profile.act}
-            onChange={(e) => updateProfile('act', e.target.value)}
-            helperText="ACT composite (optional)"
-          />
-          
-          <Select
-            label="Course Rigor"
-            value={profile.rigor}
-            onChange={(e) => updateProfile('rigor', e.target.value)}
-            options={[
-              { value: '10', label: '10 - Most Rigorous (Many AP/IB)' },
-              { value: '8', label: '8 - Very Rigorous (Several AP/IB)' },
-              { value: '6', label: '6 - Rigorous (Some AP/Honors)' },
-              { value: '4', label: '4 - Moderate (Few AP/Honors)' },
-              { value: '2', label: '2 - Standard (Regular courses)' },
-            ]}
-          />
+            <Input
+              label="Unweighted GPA (4.0 scale)"
+              type="number"
+              step="0.01"
+              min="0"
+              max="4"
+              placeholder="3.85"
+              value={profile.gpa_unweighted}
+              onChange={(e) => updateProfile('gpa_unweighted', e.target.value)}
+              helperText="GPA without honors/AP weighting"
+            />
+            
+            <Input
+              label="Weighted GPA (5.0 scale)"
+              type="number"
+              step="0.01"
+              min="0"
+              max="5"
+              placeholder="4.25"
+              value={profile.gpa_weighted}
+              onChange={(e) => updateProfile('gpa_weighted', e.target.value)}
+              helperText="GPA with honors/AP weighting"
+            />
+            
+            <Input
+              label="SAT Score"
+              type="number"
+              min="400"
+              max="1600"
+              placeholder="1450"
+              value={profile.sat}
+              onChange={(e) => updateProfile('sat', e.target.value)}
+              helperText="Total SAT score (optional)"
+            />
+            
+            <Input
+              label="ACT Score"
+              type="number"
+              min="1"
+              max="36"
+              placeholder="32"
+              value={profile.act}
+              onChange={(e) => updateProfile('act', e.target.value)}
+              helperText="ACT composite (optional)"
+            />
+            
+            <Select
+              label="Course Rigor"
+              value={profile.rigor}
+              onChange={(e) => updateProfile('rigor', e.target.value)}
+              options={[
+                { value: '10', label: '10 - Most Rigorous (Many AP/IB)' },
+                { value: '8', label: '8 - Very Rigorous (Several AP/IB)' },
+                { value: '6', label: '6 - Rigorous (Some AP/Honors)' },
+                { value: '4', label: '4 - Moderate (Few AP/Honors)' },
+                { value: '2', label: '2 - Standard (Regular courses)' },
+              ]}
+            />
           </div>
         </motion.div>
 
@@ -238,265 +238,223 @@ export default function HomePage() {
           </p>
         
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Select
-            label="Extracurricular Depth"
-            value={profile.extracurricular_depth}
-            onChange={(e) => updateProfile('extracurricular_depth', e.target.value)}
-            options={[
-              { value: '10', label: '3+ years, leadership roles, national recognition, measurable impact' },
-              { value: '9', label: '3+ years, officer positions, regional recognition, clear achievements' },
-              { value: '8', label: '2+ years, significant involvement, local recognition, organized events' },
-              { value: '7', label: '2+ years, active member, some leadership, regular participation' },
-              { value: '6', label: '1-2 years, committed member, consistent attendance, some contribution' },
-              { value: '5', label: '1+ years, regular member, occasional participation, basic involvement' },
-              { value: '4', label: 'Less than 1 year, irregular attendance, minimal contribution' },
-              { value: '3', label: 'Joined recently, very limited involvement, just getting started' },
-              { value: '2', label: 'Minimal participation, mostly inactive, very little time commitment' },
-              { value: '1', label: 'No real involvement, just signed up, no meaningful participation' },
-            ]}
-          />
+            <Select
+              label="Extracurricular Depth"
+              value={profile.extracurricular_depth}
+              onChange={(e) => updateProfile('extracurricular_depth', e.target.value)}
+              options={[
+                { value: '10', label: '10 - Exceptional depth & impact' },
+                { value: '8', label: '8 - Strong depth & impact' },
+                { value: '6', label: '6 - Good depth & impact' },
+                { value: '4', label: '4 - Moderate depth & impact' },
+                { value: '2', label: '2 - Limited depth & impact' },
+              ]}
+            />
+            
+            <Select
+              label="Leadership Positions"
+              value={profile.leadership_positions}
+              onChange={(e) => updateProfile('leadership_positions', e.target.value)}
+              options={[
+                { value: '10', label: '10 - Multiple significant leadership roles' },
+                { value: '8', label: '8 - Strong leadership in 1-2 roles' },
+                { value: '6', label: '6 - Some leadership experience' },
+                { value: '4', label: '4 - Minor leadership roles' },
+                { value: '2', label: '2 - No leadership roles' },
+              ]}
+            />
+            
+            <Select
+              label="Awards & Publications"
+              value={profile.awards_publications}
+              onChange={(e) => updateProfile('awards_publications', e.target.value)}
+              options={[
+                { value: '10', label: '10 - National/International awards/publications' },
+                { value: '8', label: '8 - State/Regional awards/publications' },
+                { value: '6', label: '6 - School/Local awards/publications' },
+                { value: '4', label: '4 - Minor recognition' },
+                { value: '2', label: '2 - No significant awards/publications' },
+              ]}
+            />
+            
+            <Select
+              label="Passion Projects"
+              value={profile.passion_projects}
+              onChange={(e) => updateProfile('passion_projects', e.target.value)}
+              options={[
+                { value: '10', label: '10 - Multiple, highly innovative projects' },
+                { value: '8', label: '8 - 1-2 significant, well-developed projects' },
+                { value: '6', label: '6 - Some developed projects' },
+                { value: '4', label: '4 - Basic projects' },
+                { value: '2', label: '2 - No significant projects' },
+              ]}
+            />
+            
+            <Select
+              label="Business Ventures"
+              value={profile.business_ventures}
+              onChange={(e) => updateProfile('business_ventures', e.target.value)}
+              options={[
+                { value: '10', label: '10 - Successful, revenue-generating venture' },
+                { value: '8', label: '8 - Developed venture with traction' },
+                { value: '6', label: '6 - Business idea with some execution' },
+                { value: '4', label: '4 - Basic business idea' },
+                { value: '2', label: '2 - No business ventures' },
+              ]}
+            />
+            
+            <Select
+              label="Volunteer Work"
+              value={profile.volunteer_work}
+              onChange={(e) => updateProfile('volunteer_work', e.target.value)}
+              options={[
+                { value: '10', label: '10 - 200+ hours, significant impact' },
+                { value: '8', label: '8 - 100+ hours, good impact' },
+                { value: '6', label: '6 - 50+ hours, some impact' },
+                { value: '4', label: '4 - 25+ hours, limited impact' },
+                { value: '2', label: '2 - Less than 25 hours' },
+              ]}
+            />
+            
+            <Select
+              label="Research Experience"
+              value={profile.research_experience}
+              onChange={(e) => updateProfile('research_experience', e.target.value)}
+              options={[
+                { value: '10', label: '10 - Published/presented research' },
+                { value: '8', label: '8 - Significant research project' },
+                { value: '6', label: '6 - Some research involvement' },
+                { value: '4', label: '4 - Minor research exposure' },
+                { value: '2', label: '2 - No research experience' },
+              ]}
+            />
+            
+            <Select
+              label="Portfolio/Audition"
+              value={profile.portfolio_audition}
+              onChange={(e) => updateProfile('portfolio_audition', e.target.value)}
+              options={[
+                { value: '10', label: '10 - Exceptional portfolio/audition' },
+                { value: '8', label: '8 - Strong portfolio/audition' },
+                { value: '6', label: '6 - Good portfolio/audition' },
+                { value: '4', label: '4 - Decent portfolio/audition' },
+                { value: '2', label: '2 - No portfolio/audition' },
+              ]}
+            />
+            
+            <Select
+              label="Essay Quality"
+              value={profile.essay_quality}
+              onChange={(e) => updateProfile('essay_quality', e.target.value)}
+              options={[
+                { value: '10', label: '10 - Outstanding, unique essays' },
+                { value: '8', label: '8 - Strong, compelling essays' },
+                { value: '6', label: '6 - Good, well-written essays' },
+                { value: '4', label: '4 - Decent essays' },
+                { value: '2', label: '2 - Weak essays' },
+              ]}
+            />
 
-          <Select
-            label="Leadership Positions"
-            value={profile.leadership_positions}
-            onChange={(e) => updateProfile('leadership_positions', e.target.value)}
-            options={[
-              { value: '10', label: 'President/Founder of 3+ organizations, board positions, executive roles' },
-              { value: '9', label: 'President/VP of major clubs, team captain, committee chair' },
-              { value: '8', label: 'Vice President/Secretary of 2+ clubs, section leader, project manager' },
-              { value: '7', label: 'Officer in 1-2 clubs, team leader, event coordinator' },
-              { value: '6', label: 'Treasurer/Historian, small group leader, mentor role' },
-              { value: '5', label: 'Committee member, peer tutor, occasional leadership tasks' },
-              { value: '4', label: 'Helped organize 1-2 events, led small projects, informal leader' },
-              { value: '3', label: 'Minimal leadership, mostly follower, occasional initiative' },
-              { value: '2', label: 'Very little leadership experience, mostly passive participation' },
-              { value: '1', label: 'No leadership roles, always follows others, no initiative shown' },
-            ]}
-          />
+            <Select
+              label="Recommendations"
+              value={profile.recommendations}
+              onChange={(e) => updateProfile('recommendations', e.target.value)}
+              options={[
+                { value: '10', label: '10 - Exceptional recommendations' },
+                { value: '8', label: '8 - Strong recommendations' },
+                { value: '6', label: '6 - Good recommendations' },
+                { value: '4', label: '4 - Average recommendations' },
+                { value: '2', label: '2 - Weak recommendations' },
+              ]}
+            />
 
-          <Select
-            label="Awards & Publications"
-            value={profile.awards_publications}
-            onChange={(e) => updateProfile('awards_publications', e.target.value)}
-            options={[
-              { value: '10', label: 'National/international awards, published research, major competitions (ISEF, Regeneron)' },
-              { value: '9', label: 'National honors, published work, top 1% in competitions, academic journals' },
-              { value: '8', label: 'State/regional awards, published articles, top 5% competitions, conference presentations' },
-              { value: '7', label: 'State recognition, local publications, regional competitions, academic honors' },
-              { value: '6', label: 'Local awards, school publications, county/district competitions, honor roll' },
-              { value: '5', label: 'School-level awards, club recognition, participation certificates, good grades' },
-              { value: '4', label: 'Minor school recognition, attendance awards, basic academic achievement' },
-              { value: '3', label: 'Very limited recognition, mostly participation, few achievements' },
-              { value: '2', label: 'Minimal awards, mostly just showing up, very little recognition' },
-              { value: '1', label: 'No significant awards or publications, no notable recognition' },
-            ]}
-          />
+            <Select
+              label="Interview"
+              value={profile.interview}
+              onChange={(e) => updateProfile('interview', e.target.value)}
+              options={[
+                { value: '10', label: '10 - Outstanding interview skills' },
+                { value: '8', label: '8 - Strong interview performance' },
+                { value: '6', label: '6 - Good interview abilities' },
+                { value: '4', label: '4 - Decent interview skills' },
+                { value: '2', label: '2 - Interview skills need work' },
+              ]}
+            />
 
-          <Select
-            label="Passion Projects"
-            value={profile.passion_projects}
-            onChange={(e) => updateProfile('passion_projects', e.target.value)}
-            options={[
-              { value: '10', label: 'Revolutionary impact, thousands of users, media coverage, funding received' },
-              { value: '9', label: 'Major impact, hundreds of users, significant outcomes, partnerships formed' },
-              { value: '8', label: 'Substantial impact, dozens of users, measurable results, recognition gained' },
-              { value: '7', label: 'Good impact, clear outcomes, active users, regular progress made' },
-              { value: '6', label: 'Meaningful progress, some users, consistent work, clear goals achieved' },
-              { value: '5', label: 'Decent progress, basic functionality, occasional users, steady development' },
-              { value: '4', label: 'Some progress, early stages, limited users, working on features' },
-              { value: '3', label: 'Minimal progress, mostly planning, very few users, basic prototype' },
-              { value: '2', label: 'Little progress, mostly ideas, no real users, struggling to start' },
-              { value: '1', label: 'No real projects, just ideas, no execution, no meaningful progress' },
-            ]}
-          />
+            <Select
+              label="Demonstrated Interest"
+              value={profile.demonstrated_interest}
+              onChange={(e) => updateProfile('demonstrated_interest', e.target.value)}
+              options={[
+                { value: '10', label: '10 - Extensive demonstrated interest' },
+                { value: '8', label: '8 - Strong interest shown' },
+                { value: '6', label: '6 - Good interest demonstrated' },
+                { value: '4', label: '4 - Some interest shown' },
+                { value: '2', label: '2 - Limited interest demonstrated' },
+              ]}
+            />
 
-          <Select
-            label="Business Ventures"
-            value={profile.business_ventures}
-            onChange={(e) => updateProfile('business_ventures', e.target.value)}
-            options={[
-              { value: '10', label: 'Successful startup, $10K+ revenue, multiple customers, business registered' },
-              { value: '9', label: 'Profitable business, $5K+ revenue, growing customer base, clear business model' },
-              { value: '8', label: 'Active business, $1K+ revenue, regular customers, ongoing operations' },
-              { value: '7', label: 'Business with sales, some revenue, customer base building, operational' },
-              { value: '6', label: 'Business venture started, first sales made, early customers, learning' },
-              { value: '5', label: 'Business idea developed, prototype created, testing market, planning launch' },
-              { value: '4', label: 'Business concept formed, researching market, early planning stages' },
-              { value: '3', label: 'Some business ideas, minimal execution, mostly theoretical' },
-              { value: '2', label: 'Very basic business thinking, no real execution, mostly ideas' },
-              { value: '1', label: 'No business ventures, no entrepreneurial experience, no business ideas' },
-            ]}
-          />
+            <Select
+              label="Legacy Status"
+              value={profile.legacy_status}
+              onChange={(e) => updateProfile('legacy_status', e.target.value)}
+              options={[
+                { value: '10', label: '10 - Strong legacy connection' },
+                { value: '8', label: '8 - Good legacy connection' },
+                { value: '6', label: '6 - Some legacy connection' },
+                { value: '4', label: '4 - Minor legacy connection' },
+                { value: '2', label: '2 - No legacy connection' },
+              ]}
+            />
 
-          <Select
-            label="Volunteer Work"
-            value={profile.volunteer_work}
-            onChange={(e) => updateProfile('volunteer_work', e.target.value)}
-            options={[
-              { value: '10', label: '500+ hours, founded organization, major community impact, leadership role' },
-              { value: '9', label: '300+ hours, organized major events, significant community contribution' },
-              { value: '8', label: '200+ hours, regular volunteer, organized events, clear community impact' },
-              { value: '7', label: '100+ hours, consistent volunteer, helped organize activities, good impact' },
-              { value: '6', label: '50+ hours, regular participation, helped with events, meaningful contribution' },
-              { value: '5', label: '25+ hours, occasional volunteer, participated in activities, some contribution' },
-              { value: '4', label: '10+ hours, minimal volunteering, mostly just showing up, limited impact' },
-              { value: '3', label: '5+ hours, very occasional volunteer, very limited involvement' },
-              { value: '2', label: 'Less than 5 hours, mostly one-time events, minimal commitment' },
-              { value: '1', label: 'No volunteer work, no community service, no meaningful contribution' },
-            ]}
-          />
+            <Select
+              label="Geographic Diversity"
+              value={profile.geographic_diversity}
+              onChange={(e) => updateProfile('geographic_diversity', e.target.value)}
+              options={[
+                { value: '10', label: '10 - Highly underrepresented region' },
+                { value: '8', label: '8 - Underrepresented region' },
+                { value: '6', label: '6 - Some geographic diversity' },
+                { value: '4', label: '4 - Limited geographic diversity' },
+                { value: '2', label: '2 - No geographic diversity' },
+              ]}
+            />
 
-          <Select
-            label="Research Experience"
-            value={profile.research_experience}
-            onChange={(e) => updateProfile('research_experience', e.target.value)}
-            options={[
-              { value: '10', label: 'Published research, conference presentations, peer-reviewed journals, ISEF/Regeneron' },
-              { value: '9', label: 'Research submitted for publication, conference presentations, significant findings' },
-              { value: '8', label: 'Substantial research project, presented findings, university collaboration' },
-              { value: '7', label: 'Independent research project, data collection, analysis completed, report written' },
-              { value: '6', label: 'Research assistant role, helped with data collection, learned research methods' },
-              { value: '5', label: 'Classroom research project, basic data analysis, learned research basics' },
-              { value: '4', label: 'Limited research experience, mostly reading papers, minimal hands-on work' },
-              { value: '3', label: 'Very basic research exposure, mostly theoretical, no practical experience' },
-              { value: '2', label: 'Minimal research knowledge, very limited exposure to research methods' },
-              { value: '1', label: 'No research experience, no understanding of research process' },
-            ]}
-          />
+            <Select
+              label="First-Gen/Diversity"
+              value={profile.firstgen_diversity}
+              onChange={(e) => updateProfile('firstgen_diversity', e.target.value)}
+              options={[
+                { value: '10', label: '10 - First-gen + diverse background' },
+                { value: '8', label: '8 - First-gen OR diverse background' },
+                { value: '6', label: '6 - Some diversity factors' },
+                { value: '4', label: '4 - Limited diversity factors' },
+                { value: '2', label: '2 - No diversity factors' },
+              ]}
+            />
 
-          <Select
-            label="Portfolio/Audition"
-            value={profile.portfolio_audition}
-            onChange={(e) => updateProfile('portfolio_audition', e.target.value)}
-            options={[
-              { value: '10', label: '10 - Professional-level portfolio' },
-              { value: '8', label: '8 - Strong creative work' },
-              { value: '6', label: '6 - Good creative projects' },
-              { value: '4', label: '4 - Some creative work' },
-              { value: '2', label: '2 - Limited creative portfolio' },
-            ]}
-          />
+            <SimpleSelect
+              label="Intended Major"
+              value={profile.major}
+              onChange={(value) => updateProfile('major', value)}
+              options={MAJORS}
+              placeholder="Search for your major..."
+            />
 
-          <Select
-            label="Essay Quality"
-            value={profile.essay_quality}
-            onChange={(e) => updateProfile('essay_quality', e.target.value)}
-            options={[
-              { value: '10', label: 'Award-winning essays, published writing, exceptional storytelling, unique voice' },
-              { value: '9', label: 'Exceptional writing, compelling narratives, strong personal voice, well-crafted' },
-              { value: '8', label: 'Very strong essays, clear personal story, engaging writing, good structure' },
-              { value: '7', label: 'Strong essays, personal anecdotes, good writing skills, clear message' },
-              { value: '6', label: 'Good essays, some personal elements, decent writing, clear communication' },
-              { value: '5', label: 'Decent essays, basic personal story, adequate writing, room for improvement' },
-              { value: '4', label: 'Average essays, limited personal insight, basic writing skills, generic content' },
-              { value: '3', label: 'Weak essays, little personal voice, poor structure, unclear message' },
-              { value: '2', label: 'Poor essays, no personal insight, significant writing issues, needs major work' },
-              { value: '1', label: 'Very poor essays, no voice, major writing problems, not college-ready' },
-            ]}
-          />
-
-          <Select
-            label="Recommendations"
-            value={profile.recommendations}
-            onChange={(e) => updateProfile('recommendations', e.target.value)}
-            options={[
-              { value: '10', label: '10 - Glowing recommendations' },
-              { value: '8', label: '8 - Very strong recommendations' },
-              { value: '6', label: '6 - Good recommendations' },
-              { value: '4', label: '4 - Decent recommendations' },
-              { value: '2', label: '2 - Weak recommendations' },
-            ]}
-          />
-
-          <Select
-            label="Interview Performance"
-            value={profile.interview}
-            onChange={(e) => updateProfile('interview', e.target.value)}
-            options={[
-              { value: '10', label: '10 - Outstanding interview skills' },
-              { value: '8', label: '8 - Strong interview performance' },
-              { value: '6', label: '6 - Good interview abilities' },
-              { value: '4', label: '4 - Decent interview skills' },
-              { value: '2', label: '2 - Interview skills need work' },
-            ]}
-          />
-
-          <Select
-            label="Demonstrated Interest"
-            value={profile.demonstrated_interest}
-            onChange={(e) => updateProfile('demonstrated_interest', e.target.value)}
-            options={[
-              { value: '10', label: '10 - Extensive demonstrated interest' },
-              { value: '8', label: '8 - Strong interest shown' },
-              { value: '6', label: '6 - Good interest demonstrated' },
-              { value: '4', label: '4 - Some interest shown' },
-              { value: '2', label: '2 - Limited interest demonstrated' },
-            ]}
-          />
-
-          <Select
-            label="Legacy Status"
-            value={profile.legacy_status}
-            onChange={(e) => updateProfile('legacy_status', e.target.value)}
-            options={[
-              { value: '10', label: '10 - Strong legacy connection' },
-              { value: '8', label: '8 - Good legacy connection' },
-              { value: '6', label: '6 - Some legacy connection' },
-              { value: '4', label: '4 - Limited legacy connection' },
-              { value: '2', label: '2 - No legacy connection' },
-            ]}
-          />
-
-          <Select
-            label="Geographic Diversity"
-            value={profile.geographic_diversity}
-            onChange={(e) => updateProfile('geographic_diversity', e.target.value)}
-            options={[
-              { value: '10', label: '10 - Highly diverse geographic background' },
-              { value: '8', label: '8 - Good geographic diversity' },
-              { value: '6', label: '6 - Some geographic diversity' },
-              { value: '4', label: '4 - Limited geographic diversity' },
-              { value: '2', label: '2 - No geographic diversity factor' },
-            ]}
-          />
-
-          <Select
-            label="First-Gen/Diversity"
-            value={profile.firstgen_diversity}
-            onChange={(e) => updateProfile('firstgen_diversity', e.target.value)}
-            options={[
-              { value: '10', label: '10 - First-gen + diverse background' },
-              { value: '8', label: '8 - First-gen OR diverse background' },
-              { value: '6', label: '6 - Some diversity factors' },
-              { value: '4', label: '4 - Limited diversity factors' },
-              { value: '2', label: '2 - No diversity factors' },
-            ]}
-          />
-
-          <SimpleSelect
-            label="Intended Major"
-            value={profile.major}
-            onChange={(value) => updateProfile('major', value)}
-            options={MAJORS}
-            placeholder="Search for your major..."
-          />
-
-          <Select
-            label="High School Reputation"
-            value={profile.hs_reputation}
-            onChange={(e) => updateProfile('hs_reputation', e.target.value)}
-            options={[
-              { value: '10', label: '10 - Elite high school' },
-              { value: '8', label: '8 - Very strong high school' },
-              { value: '6', label: '6 - Good high school' },
-              { value: '4', label: '4 - Average high school' },
-              { value: '2', label: '2 - Below average high school' },
-            ]}
-          />
-            </div>
+            <Select
+              label="High School Reputation"
+              value={profile.hs_reputation}
+              onChange={(e) => updateProfile('hs_reputation', e.target.value)}
+              options={[
+                { value: '10', label: '10 - Elite high school' },
+                { value: '8', label: '8 - Very strong high school' },
+                { value: '6', label: '6 - Good high school' },
+                { value: '4', label: '4 - Average high school' },
+                { value: '2', label: '2 - Below average high school' },
+              ]}
+            />
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
 
         {/* College Selection & Actions */}
         <motion.div
