@@ -472,18 +472,25 @@ export default function HomePage() {
               { value: '2', label: '2 - Below average high school' },
             ]}
           />
-        </div>
-
-          <div className="mt-8 flex gap-4">
-            <Button className="btn-primary text-lg px-8 py-4">
-              Calculate My Chances
-            </Button>
-            <Button variant="ghost" className="text-lg px-8 py-4">
-              Save Profile
-            </Button>
+            </div>
           </div>
-        </GlassCard>
-      </Reveal>
+        </div>
+      </motion.div>
+
+      {/* Action Buttons */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.6 }}
+        className="flex gap-4 justify-center"
+      >
+        <Button className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-semibold text-lg px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-yellow-400/25">
+          Calculate My Chances
+        </Button>
+        <Button variant="ghost" className="text-lg px-8 py-4 border border-gray-700 hover:border-yellow-400/50 hover:text-yellow-400 transition-all duration-300">
+          Save Profile
+        </Button>
+      </motion.div>
 
     </div>
   )
