@@ -13,7 +13,8 @@ export default function SimpleGoogleOAuth() {
     
     // Use real Google OAuth flow like ROX
     // This redirects to the official Google account selection page
-    const GOOGLE_CLIENT_ID = '117818010137-4fmntjdknmm16c9eef296196isok6620.apps.googleusercontent.com'
+    // Using the correct Google Client ID as specified
+    const GOOGLE_CLIENT_ID = '117818010137-4fmntjdknmm16c9eef296l96isok6620.apps.googleusercontent.com'
     const REDIRECT_URI = `${window.location.origin}/api/auth/callback/google`
     const SCOPE = 'email profile'
     const STATE = 'google_oauth_state_' + Date.now()
