@@ -102,7 +102,7 @@ export const SimpleSelect = ({
         <AnimatePresence>
           {isOpen && (
             <motion.div 
-              className="absolute w-full mt-2 bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-xl rounded-xl border border-gray-800/50 shadow-2xl max-h-[400px] overflow-hidden flex flex-col z-50"
+              className="absolute w-full mt-2 bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-xl rounded-xl border border-gray-800/50 shadow-2xl max-h-[500px] overflow-hidden flex flex-col z-50"
               style={{ 
                 zIndex: 999999,
                 position: 'absolute',
@@ -130,7 +130,7 @@ export const SimpleSelect = ({
                 />
               </div>
               
-              <div className="overflow-y-auto bg-transparent">
+              <div className="overflow-y-auto bg-transparent max-h-[400px]">
                 {filteredOptions.length === 0 ? (
                   <motion.div 
                     className="px-4 py-6 text-center text-gray-400"
@@ -144,7 +144,7 @@ export const SimpleSelect = ({
                   </motion.div>
                 ) : (
                   <div className="p-2">
-                    {filteredOptions.map((option, index) => (
+                    {filteredOptions.slice(0, 20).map((option, index) => (
                       <motion.div
                         key={option}
                         className={cn(
