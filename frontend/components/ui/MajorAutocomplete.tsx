@@ -83,25 +83,32 @@ export const MajorAutocomplete = ({
         <AnimatePresence>
           {isOpen && filteredMajors.length > 0 && (
             <motion.div
-              className="absolute w-full mt-2 bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-xl rounded-xl border border-gray-800/50 shadow-2xl max-h-[200px] overflow-y-auto z-50"
+              className="absolute w-full mt-2 bg-gradient-to-br from-black/90 to-gray-900/90 backdrop-blur-xl rounded-2xl border border-yellow-400/20 shadow-2xl shadow-yellow-400/10 max-h-[240px] overflow-y-auto z-50"
               initial={{ opacity: 0, y: -10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
             >
-              <div className="p-2">
+              <div className="p-3">
                 {filteredMajors.map((major, index) => (
                   <motion.div
                     key={major}
-                    className="px-3 py-2 cursor-pointer rounded-lg text-gray-100 hover:bg-yellow-400/10 hover:text-yellow-200 transition-all duration-200 border border-transparent hover:border-yellow-400/20"
+                    className="px-4 py-3 cursor-pointer rounded-xl text-gray-100 hover:bg-gradient-to-r hover:from-yellow-400/15 hover:to-yellow-600/10 hover:text-yellow-200 transition-all duration-300 border border-transparent hover:border-yellow-400/30 hover:shadow-lg hover:shadow-yellow-400/10 mb-1"
                     onClick={() => handleSuggestionClick(major)}
-                    initial={{ opacity: 0, x: -10 }}
+                    initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.02, duration: 0.2 }}
-                    whileHover={{ scale: 1.02, x: 4 }}
+                    transition={{ delay: index * 0.03, duration: 0.3 }}
+                    whileHover={{ scale: 1.02, x: 6 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <span className="font-medium">{major}</span>
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold text-base">{major}</span>
+                      <motion.div
+                        className="w-2 h-2 rounded-full bg-yellow-400/60 opacity-0"
+                        whileHover={{ opacity: 1, scale: 1.2 }}
+                        transition={{ duration: 0.2 }}
+                      />
+                    </div>
                   </motion.div>
                 ))}
               </div>
