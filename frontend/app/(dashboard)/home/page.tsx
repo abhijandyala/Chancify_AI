@@ -263,10 +263,12 @@ export default function HomePage() {
             
             {/* Intended Major */}
             <FormFieldWithInfo label="Intended Major" factor="major">
-              <MajorAutocomplete 
-                label="" 
-                value={profile.major} 
-                onChange={(v) => updateProfile('major', v)} 
+              <input
+                type="text"
+                value={profile.major}
+                onChange={(e) => updateProfile('major', e.target.value)}
+                placeholder="e.g., Computer Science, Business, Medicine..."
+                className="input-glass w-full"
               />
             </FormFieldWithInfo>
             
