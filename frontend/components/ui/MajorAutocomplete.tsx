@@ -20,9 +20,11 @@ export const MajorAutocomplete = ({
   className
 }: MajorAutocompleteProps) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [searchTerm, setSearchTerm] = useState('')
   const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+
+  // Use value prop directly instead of separate searchTerm state
+  const searchTerm = value
 
   // Filter majors based on search term
   const filteredMajors = MAJORS.filter(major =>
@@ -44,14 +46,12 @@ export const MajorAutocomplete = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value
-    setSearchTerm(newValue)
     onChange(newValue)
     setIsOpen(newValue.length > 0)
   }
 
   const handleSuggestionClick = (major: string) => {
     onChange(major)
-    setSearchTerm(major)
     setIsOpen(false)
     inputRef.current?.focus()
   }
@@ -90,26 +90,17 @@ export const MajorAutocomplete = ({
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
               <div className="p-3">
-                {filteredMajors.map((major, index) => (
-                  <motion.div
+                {filteredMajors.map((major) => (
+                  <div
                     key={major}
                     className="px-4 py-3 cursor-pointer rounded-xl text-gray-100 hover:bg-gradient-to-r hover:from-yellow-400/15 hover:to-yellow-600/10 hover:text-yellow-200 transition-all duration-300 border border-transparent hover:border-yellow-400/30 hover:shadow-lg hover:shadow-yellow-400/10 mb-1"
                     onClick={() => handleSuggestionClick(major)}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.03, duration: 0.3 }}
-                    whileHover={{ scale: 1.02, x: 6 }}
-                    whileTap={{ scale: 0.98 }}
                   >
                     <div className="flex items-center justify-between">
                       <span className="font-semibold text-base">{major}</span>
-                      <motion.div
-                        className="w-2 h-2 rounded-full bg-yellow-400/60 opacity-0"
-                        whileHover={{ opacity: 1, scale: 1.2 }}
-                        transition={{ duration: 0.2 }}
-                      />
+                      <div className="w-2 h-2 rounded-full bg-yellow-400/60 opacity-0 hover:opacity-100 transition-opacity duration-200" />
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </motion.div>
