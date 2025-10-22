@@ -487,6 +487,7 @@ export default function HomePage() {
 
             <FormFieldWithInfo label="Intended Major" factor="major">
               <MajorAutocomplete
+                label=""
                 value={profile.major}
                 onChange={(value) => updateProfile('major', value)}
               />
