@@ -15,17 +15,9 @@ export default function SimpleGoogleOAuth() {
     // This redirects to the official Google account selection page
     // Using the correct Google Client ID as specified
     const GOOGLE_CLIENT_ID = '117818010137-4fmntjdknmm16c9eef296l96isok6620.apps.googleusercontent.com'
-    // Use the correct redirect URI for the current environment
-    // CRITICAL: Always use the Railway URL for OAuth, even in local development
-    // This is because Google Console only has the Railway URL configured
+    // ALWAYS use Railway URL for OAuth - NO localhost references
+    // This prevents any 0.0.0.0:8080 or localhost errors
     const REDIRECT_URI = 'https://chancifyai.up.railway.app/api/auth/callback/google'
-    
-    // Alternative: If you want to support local development, you need to add
-    // http://localhost:3000/api/auth/callback/google to your Google Console
-    // const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1'
-    // const REDIRECT_URI = isProduction 
-    //   ? 'https://chancifyai.up.railway.app/api/auth/callback/google'
-    //   : 'http://localhost:3000/api/auth/callback/google'
     const SCOPE = 'email profile'
     const STATE = 'google_oauth_state_' + Date.now()
     
@@ -44,7 +36,7 @@ export default function SimpleGoogleOAuth() {
     console.log('Current origin:', window.location.origin)
     console.log('Current hostname:', window.location.hostname)
     console.log('Current URL:', window.location.href)
-    console.log('Redirect URI (ALWAYS Railway):', REDIRECT_URI)
+    console.log('ALWAYS using Railway redirect URI:', REDIRECT_URI)
     console.log('Full OAuth URL:', authUrl.toString())
     console.log('========================')
     

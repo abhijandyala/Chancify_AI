@@ -22,21 +22,16 @@ export async function GET(request: NextRequest) {
       return NextResponse.redirect(new URL('/home?error=missing_config', request.url))
     }
 
-    // Get the correct base URL
-    const baseUrl = process.env.NEXTAUTH_URL || 
-                   process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
-                   process.env.RAILWAY_STATIC_URL ? `https://${process.env.RAILWAY_STATIC_URL}` :
-                   'http://localhost:3000'
+    // ALWAYS use Railway URL - NO localhost fallbacks
+    const baseUrl = 'https://chancifyai.up.railway.app'
 
-    // DEBUG: Log all environment variables and URL construction
+    // DEBUG: Log OAuth callback information
     console.log('=== OAUTH CALLBACK DEBUG ===')
-    console.log('NEXTAUTH_URL:', process.env.NEXTAUTH_URL)
-    console.log('VERCEL_URL:', process.env.VERCEL_URL)
-    console.log('RAILWAY_STATIC_URL:', process.env.RAILWAY_STATIC_URL)
+    console.log('ALWAYS using Railway URL:', baseUrl)
     console.log('request.url:', request.url)
-    console.log('Calculated baseUrl:', baseUrl)
     console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID)
     console.log('GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET ? 'SET' : 'NOT SET')
+    console.log('============================')
 
     // Exchange code for tokens
     const redirectUri = `${baseUrl}/api/auth/callback/google`
