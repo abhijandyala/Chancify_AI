@@ -416,18 +416,31 @@ export default function HomePage() {
               </p>
             </div>
             
-            <Button 
-              onClick={() => router.push('/college-details')}
-              disabled={!isProfileComplete()}
-              className={`text-lg px-8 py-4 flex items-center gap-3 mx-auto transition-all duration-300 ${
-                isProfileComplete() 
-                  ? 'rox-button' 
-                  : 'bg-gray-600 text-gray-400 cursor-not-allowed opacity-50'
-              }`}
-            >
-              <span>Next</span>
-              <ChevronRight className="w-5 h-5" />
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button 
+                onClick={() => {
+                  // Save logic will be added later
+                  console.log('Save profile clicked')
+                }}
+                variant="ghost"
+                className="rox-button-ghost text-lg px-8 py-4 flex items-center gap-3 border-2 border-white/20 hover:border-yellow-400/50 hover:text-yellow-400 transition-all duration-300"
+              >
+                <span>Save</span>
+              </Button>
+              
+              <Button 
+                onClick={() => router.push('/college-details')}
+                disabled={!isProfileComplete()}
+                className={`text-lg px-8 py-4 flex items-center gap-3 transition-all duration-300 ${
+                  isProfileComplete() 
+                    ? 'rox-button' 
+                    : 'bg-gray-600 text-gray-400 cursor-not-allowed opacity-50'
+                }`}
+              >
+                <span>Next</span>
+                <ChevronRight className="w-5 h-5" />
+              </Button>
+            </div>
             
             {!isProfileComplete() && (
               <p className="text-sm text-gray-500 mt-2">
