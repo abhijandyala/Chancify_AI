@@ -17,16 +17,21 @@ export function Sidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 glass-panel border-r border-gray-200/50 dark:border-white/10 p-6 flex flex-col">
+    <aside className="fixed left-0 top-0 h-screen w-64 bg-gradient-to-b from-gray-900/95 to-black/95 backdrop-blur-xl border-r border-gray-800/50 p-6 flex flex-col z-20">
       {/* Logo */}
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold gradient-text">
+      <motion.div 
+        className="mb-8"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <h1 className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-white bg-clip-text text-transparent">
           Chancify AI
         </h1>
-        <p className="text-sm text-muted mt-1">
+        <p className="text-sm text-gray-400 mt-1">
           Your Path to College
         </p>
-      </div>
+      </motion.div>
 
       {/* Navigation */}
       <nav className="flex-1 space-y-2">
@@ -38,38 +43,55 @@ export function Sidebar() {
           const isHome = item.href === '/home'
           
           return (
-            <Link
+            <motion.div
               key={item.href}
-              href={item.href}
-              className={cn(
-                'relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 overflow-hidden',
-                isActive
-                  ? 'bg-gradient-to-r from-amber-500 to-blue-500 text-white shadow-lg'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/5',
-                isHome && !isActive && 'hover:shadow-lg hover:shadow-amber-500/20 home-shine'
-              )}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.1 * navItems.indexOf(item), duration: 0.5 }}
             >
-              <Icon className="w-5 h-5 relative z-10" />
-              <span className="font-semibold relative z-10">{item.label}</span>
-              {isActive && (
-                <motion.div
-                  layoutId="activeNav"
-                  className="ml-auto w-2 h-2 rounded-full bg-white"
-                />
-              )}
-            </Link>
+              <Link
+                href={item.href}
+                className={cn(
+                  'relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 overflow-hidden group',
+                  isActive
+                    ? 'bg-gradient-to-r from-yellow-400/20 to-yellow-600/20 border border-yellow-400/30 text-yellow-400 shadow-lg shadow-yellow-400/20'
+                    : 'text-gray-300 hover:bg-gray-800/50 hover:text-white hover:border-gray-700/50 border border-transparent',
+                  isHome && !isActive && 'hover:shadow-lg hover:shadow-yellow-400/20'
+                )}
+              >
+                <Icon className={cn(
+                  "w-5 h-5 relative z-10 transition-colors duration-300",
+                  isActive ? "text-yellow-400" : "text-gray-400 group-hover:text-white"
+                )} />
+                <span className="font-semibold relative z-10">{item.label}</span>
+                {isActive && (
+                  <motion.div
+                    layoutId="activeNav"
+                    className="ml-auto w-2 h-2 rounded-full bg-yellow-400"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  />
+                )}
+              </Link>
+            </motion.div>
           )
         })}
       </nav>
 
       {/* Footer */}
-      <div className="mt-auto pt-6 border-t border-gray-200 dark:border-white/10">
-        <p className="text-xs text-muted text-center">
+      <motion.div 
+        className="mt-auto pt-6 border-t border-gray-800/50"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.6 }}
+      >
+        <p className="text-xs text-gray-500 text-center">
           Powered by AI
           <br />
-          85.51% ROC-AUC
+          <span className="text-yellow-400 font-semibold">85.51% ROC-AUC</span>
         </p>
-      </div>
+      </motion.div>
     </aside>
   )
 }

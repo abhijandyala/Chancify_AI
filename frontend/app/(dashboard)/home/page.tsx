@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/Button'
 import { useState } from 'react'
 import { MAJORS } from '@/lib/majors'
 import Reveal from '@/components/ui/Reveal'
+import { motion } from 'framer-motion'
+import { GraduationCap, Target, Star, TrendingUp, Award, Users } from 'lucide-react'
 
 export const dynamic = 'force-dynamic'
 
@@ -46,33 +48,77 @@ export default function HomePage() {
 
   return (
     <div className="space-y-6 pb-8">
-      <Reveal>
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold gradient-text mb-2">
-            Welcome to Chancify AI
-          </h1>
-          <p className="text-foreground-muted text-lg mb-2">
-            The only AI that considers your unique story - not just numbers
-          </p>
-          <p className="text-xs text-foreground-dim mb-4">
-            *Predictions are based on statistical analysis and historical data. Results are estimates and may not reflect actual admission outcomes.
-          </p>
-          <div className="mt-4 p-4 glass-card rounded-xl border border-primary/20">
-            <p className="text-sm text-primary/90">
-              <strong>What makes us different:</strong> While others only look at GPA and test scores, 
-              we analyze your leadership, passion projects, research, awards, and the complete picture 
-              of who you are as a person.
-            </p>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900/50 to-black/80 backdrop-blur-xl border border-gray-800/50 p-8 mb-8">
+          <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/5 to-transparent"></div>
+          <div className="relative text-center">
+            <motion.h1 
+              className="text-5xl font-bold mb-6 bg-gradient-to-r from-yellow-400 via-yellow-300 to-white bg-clip-text text-transparent"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+            >
+              Welcome to Chancify AI
+            </motion.h1>
+            <motion.p 
+              className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
+              The only AI that considers your unique story - not just numbers
+            </motion.p>
+            <motion.div 
+              className="bg-gradient-to-r from-yellow-400/10 to-yellow-600/10 border border-yellow-400/20 p-6 rounded-2xl backdrop-blur-sm"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+            >
+              <p className="text-yellow-200 font-medium">
+                <span className="text-yellow-400 font-bold">What makes us different:</span> While others only look at GPA and test scores, 
+                we analyze your leadership, passion projects, research, awards, and the complete picture 
+                of who you are as a person.
+              </p>
+            </motion.div>
+            <motion.p 
+              className="text-xs text-gray-500 mt-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8, duration: 0.6 }}
+            >
+              *Predictions are based on statistical analysis and historical data. 
+              Results are estimates and may not reflect actual admission outcomes.
+            </motion.p>
           </div>
         </div>
-      </Reveal>
+      </motion.div>
 
-      {/* Academic Basics */}
-      <Reveal delay={0.1}>
-        <GlassCard className="p-8 hover:border-primary/40 transition-colors">
-          <h2 className="text-2xl font-bold text-foreground mb-6">
-            Academic Foundation
-          </h2>
+      {/* Academic Foundation */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.6 }}
+      >
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 p-8 hover:border-yellow-400/30 transition-all duration-500">
+          <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/3 to-transparent"></div>
+          <div className="relative">
+            <motion.div 
+              className="flex items-center gap-3 mb-8"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+            >
+              <div className="p-3 rounded-2xl bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 border border-yellow-400/30">
+                <GraduationCap className="w-6 h-6 text-yellow-400" />
+              </div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                Academic Foundation
+              </h2>
+            </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           <Input
@@ -133,18 +179,42 @@ export default function HomePage() {
               { value: '2', label: '2 - Standard (Regular courses)' },
             ]}
           />
+            </div>
+          </div>
         </div>
-      </GlassCard>
+      </motion.div>
 
-      {/* UNIQUE FACTORS - What sets us apart! */}
-      <GlassCard className="p-8">
-        <h2 className="subsection-heading mb-6">
-          Your Unique Story - What Makes You Special
-        </h2>
-        <p className="text-muted mb-6">
-          These are the factors that set Chancify AI apart from other college predictors. 
-          We understand that you're more than just numbers!
-        </p>
+      {/* Your Unique Story */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 0.6 }}
+      >
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 p-8 hover:border-yellow-400/30 transition-all duration-500">
+          <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/3 to-transparent"></div>
+          <div className="relative">
+            <motion.div 
+              className="flex items-center gap-3 mb-8"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.7, duration: 0.6 }}
+            >
+              <div className="p-3 rounded-2xl bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 border border-yellow-400/30">
+                <Star className="w-6 h-6 text-yellow-400" />
+              </div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                Your Unique Story - What Makes You Special
+              </h2>
+            </motion.div>
+            <motion.p 
+              className="text-gray-300 mb-8 text-lg"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9, duration: 0.6 }}
+            >
+              These are the factors that set Chancify AI apart from other college predictors. 
+              We understand that you're more than just numbers!
+            </motion.p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <Select

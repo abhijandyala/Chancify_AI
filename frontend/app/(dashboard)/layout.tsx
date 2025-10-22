@@ -14,13 +14,17 @@ export default function DashboardLayout({
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-background text-foreground relative">
+    <div className="min-h-screen bg-black text-white relative overflow-hidden">
       <SophisticatedBackground />
       <ROXNav />
       <Sidebar />
-      <div className="ml-64 p-6 pb-20 relative z-10">
+      <div className="ml-64 p-8 pb-20 relative z-10">
         <div className="max-w-7xl mx-auto">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={
+            <div className="flex items-center justify-center min-h-[400px]">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-400"></div>
+            </div>
+          }>
             {children}
           </Suspense>
         </div>
