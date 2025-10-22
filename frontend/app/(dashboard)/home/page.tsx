@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
 import { SimpleSearchableSelect } from '@/components/ui/SimpleSearchableSelect'
 import { SimpleSelect } from '@/components/ui/SimpleSelect'
+import CollegeCombobox from '@/components/CollegeCombobox'
 import { Button } from '@/components/ui/Button'
 import { useState } from 'react'
 import { MAJORS } from '@/lib/majors'
@@ -471,17 +472,15 @@ export default function HomePage() {
           </div>
           
           <div className="space-y-6">
-            <div className="max-w-md mx-auto">
-              <SimpleSearchableSelect
-                label="Select Your Target College"
-                value={profile.college}
-                onChange={(value) => updateProfile('college', value)}
-                options={COLLEGES}
-                placeholder="Search for your college..."
-              />
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <CollegeCombobox
+              value={profile.college}
+              onChange={(v) => updateProfile('college', v)}
+              options={COLLEGES}
+              className="max-w-3xl"
+              placeholder="Search for your college…"
+            />
+
+            <div className="flex flex-col sm:flex-row gap-4 max-w-3xl mx-auto">
               <form onSubmit={handleCalculateChances} className="flex-1">
                 <Button 
                   type="submit"
