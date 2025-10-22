@@ -2,8 +2,8 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Compass, Bookmark, FileText, Brain, Zap, ChevronRight } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { Home, Compass, Bookmark, FileText, Brain, Zap, ChevronRight, ChevronLeft } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 const navItems = [
@@ -13,11 +13,47 @@ const navItems = [
   { href: '/sat', label: 'SAT Prep', icon: FileText },
 ]
 
-export function Sidebar() {
+interface SidebarProps {
+  isCollapsed: boolean
+  onToggle: () => void
+}
+
+export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
   const pathname = usePathname()
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 glass border-r border-white/10 flex flex-col z-20">
+    <>
+      {/* Collapsed Sidebar - Just the arrow button */}
+      <AnimatePresence>
+        {isCollapsed && (
+          <motion.div
+            initial={{ x: -64, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -64, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="fixed left-0 top-1/2 -translate-y-1/2 z-30"
+          >
+            <motion.button
+              onClick={onToggle}
+              className="p-3 rounded-r-xl bg-black/80 backdrop-blur border border-white/10 border-l-0 hover:bg-black/90 transition-all duration-300 group"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <ChevronRight className="w-5 h-5 text-yellow-400 group-hover:text-yellow-300 transition-colors" />
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Main Sidebar */}
+      <motion.aside 
+        className="fixed left-0 top-0 h-screen w-64 glass border-r border-white/10 flex flex-col z-20"
+        animate={{ 
+          x: isCollapsed ? -256 : 0,
+          opacity: isCollapsed ? 0 : 1
+        }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+      >
       {/* Brand Section - Minimal */}
       <motion.div 
         className="p-6 pb-8"
@@ -42,6 +78,23 @@ export function Sidebar() {
 
       {/* Spacer */}
       <div className="flex-1" />
+
+      {/* Collapse Button - Middle of Sidebar */}
+      <motion.div 
+        className="flex justify-center py-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: 0.6, type: "spring" }}
+      >
+        <motion.button
+          onClick={onToggle}
+          className="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-yellow-400/30 transition-all duration-300 group"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <ChevronLeft className="w-4 h-4 text-gray-400 group-hover:text-yellow-400 transition-colors" />
+        </motion.button>
+      </motion.div>
 
       {/* Clean Navigation - Bottom */}
       <motion.nav 
@@ -122,7 +175,8 @@ export function Sidebar() {
           <div className="text-xs font-semibold text-green-400">94.3%</div>
         </div>
       </motion.div>
-    </aside>
+      </motion.aside>
+    </>
   )
 }
 

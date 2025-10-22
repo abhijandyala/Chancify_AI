@@ -11,6 +11,7 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
 
   useEffect(() => {
     const handleSettingsEvent = () => {
@@ -29,9 +30,14 @@ export default function DashboardLayout({
         <div className="absolute bottom-0 right-0 h-[420px] w-[420px] rounded-full blur-2xl opacity-15 bg-[radial-gradient(closest-side,rgba(103,232,249,.25),transparent_70%)]" />
       </div>
 
-      <Sidebar />
+      <Sidebar 
+        isCollapsed={isSidebarCollapsed} 
+        onToggle={() => setIsSidebarCollapsed(!isSidebarCollapsed)} 
+      />
       
-      <div className="ml-64 relative z-10">
+      <div className={`relative z-10 transition-all duration-300 ease-in-out ${
+        isSidebarCollapsed ? 'ml-0' : 'ml-64'
+      }`}>
         <div className="max-w-7xl mx-auto px-6 py-8">
           <Header />
           
