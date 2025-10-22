@@ -268,7 +268,7 @@ export default function HomePage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.6 }}
       >
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 p-8 hover:border-yellow-400/30 transition-all duration-500">
+        <div className="relative overflow-visible rounded-3xl bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 p-8 hover:border-yellow-400/30 transition-all duration-500">
           <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/3 to-transparent"></div>
           <div className="relative">
             <motion.div 
@@ -561,7 +561,7 @@ export default function HomePage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7, duration: 0.6 }}
       >
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 p-8 hover:border-yellow-400/30 transition-all duration-500">
+        <div className="relative overflow-visible rounded-3xl bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 p-8 hover:border-yellow-400/30 transition-all duration-500">
           <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/3 to-transparent"></div>
           <div className="relative">
             <motion.div 
