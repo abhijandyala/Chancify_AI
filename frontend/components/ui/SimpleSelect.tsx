@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import { motion, AnimatePresence } from 'framer-motion'
+import { createPortal } from 'react-dom'
 
 interface SimpleSelectProps {
   label?: string
@@ -100,11 +101,14 @@ export const SimpleSelect = ({
         </motion.div>
 
         <AnimatePresence>
-          {isOpen && (
+          {isOpen && createPortal(
             <motion.div 
-              className="absolute w-full mt-2 bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-xl rounded-xl border border-gray-800/50 shadow-2xl max-h-[500px] overflow-hidden flex flex-col"
+              className="fixed bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-xl rounded-xl border border-gray-800/50 shadow-2xl max-h-[500px] overflow-hidden flex flex-col"
               style={{ 
-                zIndex: 99999999
+                zIndex: 99999999,
+                top: containerRef.current ? containerRef.current.getBoundingClientRect().bottom + 8 : 0,
+                left: containerRef.current ? containerRef.current.getBoundingClientRect().left : 0,
+                width: containerRef.current ? containerRef.current.getBoundingClientRect().width : 'auto'
               }}
               initial={{ opacity: 0, y: -10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -174,7 +178,8 @@ export const SimpleSelect = ({
                   </div>
                 )}
               </div>
-            </motion.div>
+            </motion.div>,
+            document.body
           )}
         </AnimatePresence>
       </div>
