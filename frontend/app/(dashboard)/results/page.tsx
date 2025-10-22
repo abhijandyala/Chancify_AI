@@ -4,6 +4,7 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { CheckCircle, XCircle, Clock, ArrowLeft, TrendingUp, Target } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
+import { COLLEGES } from '@/lib/colleges'
 
 export default function ResultsPage() {
   const searchParams = useSearchParams()
@@ -11,7 +12,11 @@ export default function ResultsPage() {
   
   const probability = parseFloat(searchParams.get('probability') || '0')
   const outcome = searchParams.get('outcome') || 'Unknown'
-  const college = searchParams.get('college') || 'Selected College'
+  const collegeId = searchParams.get('college') || ''
+  
+  // Find the college name from the college ID
+  const selectedCollege = COLLEGES.find(college => college.value === collegeId)
+  const collegeName = selectedCollege?.label || 'Selected College'
   
   const getOutcomeIcon = () => {
     switch (outcome) {
@@ -69,7 +74,7 @@ export default function ResultsPage() {
               Your Prediction Results
             </h1>
             <p className="text-xl text-gray-300">
-              AI-powered analysis for <span className="text-yellow-400 font-semibold">{college}</span>
+              AI-powered analysis for <span className="text-yellow-400 font-semibold">{collegeName}</span>
             </p>
           </motion.div>
 

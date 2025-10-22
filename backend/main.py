@@ -110,10 +110,55 @@ from backend.ml.models.predictor import get_predictor
 from backend.ml.preprocessing.feature_extractor import StudentFeatures, CollegeFeatures
 from pydantic import BaseModel
 from typing import Dict, Any
+import pandas as pd
 
 app.include_router(auth.router, prefix="/api/auth", tags=["Authentication"])
 app.include_router(calculations.router, prefix="/api/calculations", tags=["Probability Calculations"])
 app.include_router(ml_calculations.router, prefix="/api/calculations", tags=["ML Predictions"])
+
+# College data mapping based on training data
+def get_college_data(college_id: str) -> Dict[str, Any]:
+    """Get college data based on the college ID from training data."""
+    
+    # Load the real college data
+    try:
+        df = pd.read_csv('data/raw/real_colleges_100.csv')
+        
+        # Extract UNITID from college_id (format: college_166027)
+        if college_id.startswith('college_'):
+            unitid = int(college_id.replace('college_', ''))
+        else:
+            unitid = int(college_id)
+        
+        # Find the college in the data
+        college_row = df[df['unitid'] == unitid]
+        
+        if not college_row.empty:
+            row = college_row.iloc[0]
+            return {
+                'acceptance_rate': float(row['acceptance_rate']),
+                'sat_25th': int(row['sat_total_25']) if pd.notna(row['sat_total_25']) else 1200,
+                'sat_75th': int(row['sat_total_75']) if pd.notna(row['sat_total_75']) else 1500,
+                'act_25th': int(row['act_composite_25']) if pd.notna(row['act_composite_25']) else 25,
+                'act_75th': int(row['act_composite_75']) if pd.notna(row['act_composite_75']) else 35,
+                'test_policy': row['test_policy'],
+                'financial_aid_policy': row['financial_aid_policy'],
+                'selectivity_tier': row['selectivity_tier']
+            }
+    except Exception as e:
+        logger.warning(f"Could not load college data: {e}")
+    
+    # Default fallback data
+    return {
+        'acceptance_rate': 0.1,
+        'sat_25th': 1200,
+        'sat_75th': 1500,
+        'act_25th': 25,
+        'act_75th': 35,
+        'test_policy': 'Required',
+        'financial_aid_policy': 'Need-blind',
+        'selectivity_tier': 'Elite'
+    }
 
 # Prediction request model
 class PredictionRequest(BaseModel):
@@ -180,17 +225,19 @@ async def predict_admission(request: PredictionRequest):
             }
         )
         
-        # Create college features (using default values for now)
+        # Create college features based on the selected college
+        # Map college selection to actual training data
+        college_data = get_college_data(request.college)
         college = CollegeFeatures(
             name=request.college,
-            acceptance_rate=0.1,  # Default 10% acceptance rate
-            sat_25th=1200,
-            sat_75th=1500,
-            act_25th=25,
-            act_75th=35,
-            test_policy='Required',
-            financial_aid_policy='Need-blind',
-            selectivity_tier='Elite'
+            acceptance_rate=college_data['acceptance_rate'],
+            sat_25th=college_data.get('sat_25th', 1200),
+            sat_75th=college_data.get('sat_75th', 1500),
+            act_25th=college_data.get('act_25th', 25),
+            act_75th=college_data.get('act_75th', 35),
+            test_policy=college_data.get('test_policy', 'Required'),
+            financial_aid_policy=college_data.get('financial_aid_policy', 'Need-blind'),
+            selectivity_tier=college_data.get('selectivity_tier', 'Elite')
         )
         
         # Make prediction
