@@ -125,80 +125,40 @@ export default function HomePage() {
   }
 
   return (
-    <div className="space-y-6 pb-8">
+    <div className="min-h-screen bg-black text-white p-6">
+      {/* Header */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
+        className="text-center mb-8"
       >
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900/50 to-black/80 backdrop-blur-xl border border-gray-800/50 p-8 mb-8">
-          <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/5 to-transparent"></div>
-          <div className="relative text-center">
-            <motion.h1 
-              className="text-5xl font-bold mb-6 bg-gradient-to-r from-yellow-400 via-yellow-300 to-white bg-clip-text text-transparent"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-            >
-              Welcome to Chancify AI
-            </motion.h1>
-            <motion.p 
-              className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-            >
-              The only AI that considers your unique story - not just numbers
-            </motion.p>
-            <motion.div 
-              className="bg-gradient-to-r from-yellow-400/10 to-yellow-600/10 border border-yellow-400/20 p-6 rounded-2xl backdrop-blur-sm"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-            >
-              <p className="text-yellow-200 font-medium">
-                <span className="text-yellow-400 font-bold">What makes us different:</span> While others only look at GPA and test scores, 
-                we analyze your leadership, passion projects, research, awards, and the complete picture 
-                of who you are as a person.
-              </p>
-            </motion.div>
-            <motion.p 
-              className="text-xs text-gray-500 mt-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
-            >
-              *Predictions are based on statistical analysis and historical data. 
-              Results are estimates and may not reflect actual admission outcomes.
-            </motion.p>
-          </div>
-        </div>
+        <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-yellow-400 via-yellow-300 to-white bg-clip-text text-transparent">
+          Chancify AI
+        </h1>
+        <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+          The only AI that considers your unique story - not just numbers
+        </p>
       </motion.div>
 
-      {/* Academic Foundation */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.6 }}
-      >
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 p-8 hover:border-yellow-400/30 transition-all duration-500">
-          <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/3 to-transparent"></div>
-          <div className="relative">
-            <motion.div 
-              className="flex items-center gap-3 mb-8"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-            >
-              <div className="p-3 rounded-2xl bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 border border-yellow-400/30">
-                <GraduationCap className="w-6 h-6 text-yellow-400" />
-              </div>
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                Academic Foundation
-              </h2>
-            </motion.div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+      {/* Main Form Container */}
+      <div className="max-w-6xl mx-auto space-y-6">
+
+        {/* Academic Foundation */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className="bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 rounded-2xl p-6"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 border border-yellow-400/30">
+              <GraduationCap className="w-5 h-5 text-yellow-400" />
+            </div>
+            <h2 className="text-2xl font-bold text-white">Academic Foundation</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
           <Input
             label="Unweighted GPA (4.0 scale)"
             type="number"
@@ -262,39 +222,24 @@ export default function HomePage() {
         </div>
       </motion.div>
 
-      {/* Your Unique Story */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.6 }}
-      >
-        <div className="relative overflow-visible rounded-3xl bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 p-8 hover:border-yellow-400/30 transition-all duration-500">
-          <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/3 to-transparent"></div>
-          <div className="relative">
-            <motion.div 
-              className="flex items-center gap-3 mb-8"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.7, duration: 0.6 }}
-            >
-              <div className="p-3 rounded-2xl bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 border border-yellow-400/30">
-                <Star className="w-6 h-6 text-yellow-400" />
-              </div>
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                Your Unique Story - What Makes You Special
-              </h2>
-            </motion.div>
-            <motion.p 
-              className="text-gray-300 mb-8 text-lg"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9, duration: 0.6 }}
-            >
-              These are the factors that set Chancify AI apart from other college predictors. 
-              We understand that you're more than just numbers!
-            </motion.p>
+        {/* Your Unique Story */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          className="bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 rounded-2xl p-6"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 border border-yellow-400/30">
+              <Star className="w-5 h-5 text-yellow-400" />
+            </div>
+            <h2 className="text-2xl font-bold text-white">Your Unique Story</h2>
+          </div>
+          <p className="text-gray-300 mb-6">
+            These factors set Chancify AI apart from other college predictors.
+          </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <Select
             label="Extracurricular Depth"
             value={profile.extracurricular_depth}
@@ -555,42 +500,22 @@ export default function HomePage() {
         </div>
       </motion.div>
 
-      {/* College Selection */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7, duration: 0.6 }}
-      >
-        <div className="relative overflow-visible rounded-3xl bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 p-8 hover:border-yellow-400/30 transition-all duration-500">
-          <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/3 to-transparent"></div>
-          <div className="relative">
-            <motion.div 
-              className="flex items-center gap-3 mb-8"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.9, duration: 0.6 }}
-            >
-              <div className="p-3 rounded-2xl bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 border border-yellow-400/30">
-                <Building2 className="w-6 h-6 text-yellow-400" />
-              </div>
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                College Selection
-              </h2>
-            </motion.div>
-            <motion.p 
-              className="text-gray-300 mb-8 text-lg"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.1, duration: 0.6 }}
-            >
-              Choose the college you want to predict your chances for. Our AI will analyze your profile against their specific admission criteria.
-            </motion.p>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.3, duration: 0.6 }}
-            >
+        {/* College Selection & Actions */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+          className="bg-gradient-to-br from-gray-900/40 to-black/60 backdrop-blur-xl border border-gray-800/30 rounded-2xl p-6"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 border border-yellow-400/30">
+              <Building2 className="w-5 h-5 text-yellow-400" />
+            </div>
+            <h2 className="text-2xl font-bold text-white">College Selection</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div>
               <SimpleSearchableSelect
                 label="Select Your Target College"
                 value={profile.college}
@@ -598,42 +523,39 @@ export default function HomePage() {
                 options={COLLEGES}
                 placeholder="Search for your college..."
               />
-            </motion.div>
+            </div>
+            
+            <div className="flex flex-col justify-center gap-4">
+              <form onSubmit={handleCalculateChances}>
+                <Button 
+                  type="submit"
+                  disabled={isLoading || !profile.college}
+                  className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-semibold text-lg px-6 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-yellow-400/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {isLoading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-black"></div>
+                      Calculating...
+                    </>
+                  ) : (
+                    <>
+                      <Calculator className="w-5 h-5" />
+                      Calculate My Chances
+                    </>
+                  )}
+                </Button>
+              </form>
+              <Button 
+                variant="ghost" 
+                className="w-full text-lg px-6 py-4 border border-gray-700 hover:border-yellow-400/50 hover:text-yellow-400 transition-all duration-300"
+              >
+                Save Profile
+              </Button>
+            </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
 
-      {/* Action Buttons */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.6 }}
-        className="flex gap-4 justify-center"
-      >
-        <form onSubmit={handleCalculateChances}>
-          <Button 
-            type="submit"
-            disabled={isLoading || !profile.college}
-            className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-semibold text-lg px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-yellow-400/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-          >
-            {isLoading ? (
-              <>
-                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-black"></div>
-                Calculating...
-              </>
-            ) : (
-              <>
-                <Calculator className="w-5 h-5" />
-                Calculate My Chances
-              </>
-            )}
-          </Button>
-        </form>
-        <Button variant="ghost" className="text-lg px-8 py-4 border border-gray-700 hover:border-yellow-400/50 hover:text-yellow-400 transition-all duration-300">
-          Save Profile
-        </Button>
-      </motion.div>
-
+      </div>
     </div>
   )
 }
