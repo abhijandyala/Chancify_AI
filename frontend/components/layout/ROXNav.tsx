@@ -22,7 +22,7 @@ export default function ROXNav() {
           <Link href="/auth">
             <Button className="btn-primary">Log In</Button>
           </Link>
-          <Link href="/auth">
+          <Link href="/home">
             <Button variant="ghost">Try for now</Button>
           </Link>
           </div>
