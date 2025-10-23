@@ -683,23 +683,50 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
         # Sort all predictions by probability to understand the distribution
         all_college_predictions.sort(key=lambda x: x['probability'], reverse=True)
         
-        # Use realistic probability-based categorization
+        # Use realistic probability-based categorization with acceptance rate consideration
         safety_colleges = []
         target_colleges = []
         reach_colleges = []
         
         for college in all_college_predictions:
             prob = college['probability']
-            if prob >= 0.75:  # 75%+ chance
-                college['category'] = 'safety'
-                safety_colleges.append(college)
-            elif prob >= 0.25:  # 25-75% chance
-                college['category'] = 'target'
-                target_colleges.append(college)
-            elif prob >= 0.10:  # 10-25% chance (no lower than 10%)
-                college['category'] = 'reach'
-                reach_colleges.append(college)
-            # Skip colleges with less than 10% chance
+            acceptance_rate = college['acceptance_rate']
+            
+            # Adjust categorization based on both probability and acceptance rate
+            # A college with 90% acceptance rate should rarely be a "reach" school
+            if acceptance_rate >= 0.7:  # 70%+ acceptance rate
+                # High acceptance rate colleges are more likely to be safety/target
+                if prob >= 0.6:  # 60%+ chance
+                    college['category'] = 'safety'
+                    safety_colleges.append(college)
+                elif prob >= 0.3:  # 30-60% chance
+                    college['category'] = 'target'
+                    target_colleges.append(college)
+                else:
+                    college['category'] = 'reach'
+                    reach_colleges.append(college)
+            elif acceptance_rate >= 0.3:  # 30-70% acceptance rate
+                # Medium acceptance rate colleges
+                if prob >= 0.7:  # 70%+ chance
+                    college['category'] = 'safety'
+                    safety_colleges.append(college)
+                elif prob >= 0.25:  # 25-70% chance
+                    college['category'] = 'target'
+                    target_colleges.append(college)
+                else:
+                    college['category'] = 'reach'
+                    reach_colleges.append(college)
+            else:  # <30% acceptance rate (highly selective)
+                # Highly selective colleges are more likely to be reach/target
+                if prob >= 0.8:  # 80%+ chance
+                    college['category'] = 'safety'
+                    safety_colleges.append(college)
+                elif prob >= 0.3:  # 30-80% chance
+                    college['category'] = 'target'
+                    target_colleges.append(college)
+                else:
+                    college['category'] = 'reach'
+                    reach_colleges.append(college)
         
         logger.info(f"Found {len(safety_colleges)} safety, {len(target_colleges)} target, {len(reach_colleges)} reach colleges")
         

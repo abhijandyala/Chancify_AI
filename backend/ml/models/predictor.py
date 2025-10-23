@@ -131,6 +131,17 @@ class AdmissionPredictor:
         )
         formula_prob = formula_result.probability
         
+        # Apply calibration to formula predictions to make them more realistic
+        # Formula tends to overestimate, so we apply a calibration curve
+        if formula_prob > 0.5:
+            # For high probabilities, apply a compression factor
+            formula_prob = 0.5 + (formula_prob - 0.5) * 0.7  # Compress high probabilities
+        else:
+            # For low probabilities, apply a slight expansion
+            formula_prob = formula_prob * 1.1  # Slightly expand low probabilities
+        
+        formula_prob = np.clip(formula_prob, 0.02, 0.98)  # Reasonable bounds
+        
         # If ML not available or not requested, return formula only
         if not self.is_available() or not use_formula:
             return PredictionResult(
@@ -195,6 +206,16 @@ class AdmissionPredictor:
         
         # Blend predictions
         final_prob = ml_weight * ml_prob + formula_weight * formula_prob
+        
+        # Apply calibration to make probabilities more realistic
+        # The ML model tends to overestimate probabilities, so we apply a calibration curve
+        if final_prob > 0.5:
+            # For high probabilities, apply a compression factor
+            final_prob = 0.5 + (final_prob - 0.5) * 0.6  # Compress high probabilities
+        else:
+            # For low probabilities, apply a slight expansion
+            final_prob = final_prob * 1.2  # Slightly expand low probabilities
+        
         final_prob = np.clip(final_prob, 0.02, 0.98)  # Reasonable bounds
         
         # Confidence interval (wider if ML is uncertain)
