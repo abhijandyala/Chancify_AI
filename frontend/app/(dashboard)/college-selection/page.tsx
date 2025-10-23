@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Search, Building2, Users, DollarSign, GraduationCap, ChevronRight } from 'lucide-react'
+import { Search, Building2, Users, DollarSign, GraduationCap, ChevronRight, Star, MapPin } from 'lucide-react'
 import { COLLEGES } from '@/lib/colleges'
 import { Button } from '@/components/ui/Button'
 import { useRouter } from 'next/navigation'
@@ -98,223 +98,269 @@ export default function CollegeSelectionPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background p-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <motion.div {...enter} className="mb-8">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 rounded-xl bg-primary/15 text-primary">
-              <Building2 className="w-6 h-6" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold text-yellow-400">College Selection</h1>
-              <p className="text-gray-400">Search and select colleges for your application</p>
-            </div>
+    <div className="min-h-screen bg-black relative overflow-hidden">
+      {/* Complex Square Star Pattern Background */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+            linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)
+          `,
+          backgroundSize: '100px 100px, 100px 100px, 20px 20px, 20px 20px',
+          backgroundPosition: '-1px -1px, -1px -1px, -1px -1px, -1px -1px'
+        }} />
+        {/* Star pattern overlay */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            radial-gradient(circle at 25% 25%, rgba(255,255,255,0.02) 1px, transparent 1px),
+            radial-gradient(circle at 75% 75%, rgba(255,255,255,0.02) 1px, transparent 1px),
+            radial-gradient(circle at 50% 50%, rgba(255,255,255,0.01) 1px, transparent 1px)
+          `,
+          backgroundSize: '200px 200px, 200px 200px, 100px 100px'
+        }} />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
+        {/* Header - Rox Style */}
+        <motion.div {...enter} className="mb-16">
+          <div className="text-center">
+            <h1 className="text-5xl font-light text-white mb-4 tracking-tight">
+              College Selection
+            </h1>
+            <p className="text-xl text-gray-400 font-light max-w-2xl mx-auto">
+              Search and select colleges for your application
+            </p>
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Left Side - Search and Results */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Search Bar */}
-            <motion.div {...enter} className="rox-card">
-              <div className="p-6">
-                <h2 className="text-xl font-semibold text-white mb-4">Search Colleges</h2>
-                <div className="relative">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/50" />
-                  <input
-                    type="text"
-                    placeholder="Search for colleges..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20"
-                  />
-                </div>
+          <div className="lg:col-span-2 space-y-8">
+            {/* Search Bar - Rox Style */}
+            <motion.div {...enter}>
+              <div className="relative">
+                <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Search for colleges..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-16 pr-6 py-5 bg-transparent border border-gray-800 rounded-none text-white placeholder-gray-500 focus:outline-none focus:border-gray-600 text-lg font-light tracking-wide"
+                />
+                <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent" />
               </div>
             </motion.div>
 
-            {/* Search Results */}
-            <motion.div {...enter} className="rox-card">
-              <div className="p-6">
-                <h3 className="text-lg font-semibold text-white mb-4">
+            {/* Search Results - Rox Style */}
+            <motion.div {...enter}>
+              <div className="mb-6">
+                <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider">
                   Search Results ({filteredColleges.length})
                 </h3>
-                <div className="space-y-3 max-h-96 overflow-y-auto">
-                  {filteredColleges.map((college, index) => (
-                    <motion.div
-                      key={college.value}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                      className={`p-4 rounded-xl border transition-all duration-200 cursor-pointer ${
-                        selectedColleges.includes(college.value)
-                          ? 'bg-primary/20 border-primary/50 text-primary'
-                          : 'bg-white/5 border-white/10 hover:bg-white/10 text-white'
-                      }`}
-                      onClick={() => handleCollegeSelect(college.value)}
-                    >
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <h4 className="font-semibold">{college.label}</h4>
-                          <div className="flex items-center gap-4 mt-2 text-sm text-white/60">
-                            <span className={`px-2 py-1 rounded-full text-xs border ${getTierColor(college.tier)}`}>
-                              {college.tier}
-                            </span>
-                            <span>Acceptance: {college.acceptance_rate}%</span>
-                          </div>
+              </div>
+              <div className="space-y-1 max-h-96 overflow-y-auto">
+                {filteredColleges.map((college, index) => (
+                  <motion.div
+                    key={college.value}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.02 }}
+                    className={`group relative py-4 px-0 border-b border-gray-900 transition-all duration-300 cursor-pointer ${
+                      selectedColleges.includes(college.value)
+                        ? 'text-white'
+                        : 'text-gray-400 hover:text-white'
+                    }`}
+                    onClick={() => handleCollegeSelect(college.value)}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex-1">
+                        <h4 className="text-lg font-light tracking-wide mb-1">
+                          {college.label}
+                        </h4>
+                        <div className="flex items-center gap-6 text-sm">
+                          <span className="text-gray-500">
+                            {college.acceptance_rate}% acceptance
+                          </span>
+                          <span className={`px-2 py-1 text-xs font-medium ${
+                            college.tier === 'Elite' ? 'text-red-400' :
+                            college.tier === 'Highly Selective' ? 'text-orange-400' :
+                            'text-yellow-400'
+                          }`}>
+                            {college.tier}
+                          </span>
                         </div>
-                        <motion.div
-                          whileHover={{ scale: 1.1 }}
-                          className={`w-6 h-6 rounded-full border-2 ${
-                            selectedColleges.includes(college.value)
-                              ? 'bg-primary border-primary'
-                              : 'border-white/30'
-                          }`}
-                        >
-                          {selectedColleges.includes(college.value) && (
-                            <motion.div
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                              className="w-full h-full rounded-full bg-primary"
-                            />
-                          )}
-                        </motion.div>
                       </div>
-                    </motion.div>
-                  ))}
-                </div>
+                      <div className={`w-5 h-5 border-2 transition-all duration-200 ${
+                        selectedColleges.includes(college.value)
+                          ? 'border-white bg-white'
+                          : 'border-gray-600 group-hover:border-gray-400'
+                      }`}>
+                        {selectedColleges.includes(college.value) && (
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            className="w-full h-full bg-white"
+                          />
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           </div>
 
-          {/* Right Side - AI Suggestions */}
-          <div className="space-y-6">
-            <motion.div {...enter} className="rox-card">
-              <div className="p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 rounded-xl bg-primary/15 text-primary">
-                    <GraduationCap className="w-5 h-5" />
-                  </div>
-                  <h2 className="text-xl font-semibold text-white">AI Suggestions</h2>
-                </div>
-                <p className="text-sm text-white/60 mb-6">
+          {/* Right Side - AI Suggestions - Rox Style */}
+          <div className="space-y-8">
+            <motion.div {...enter}>
+              <div className="mb-8">
+                <h2 className="text-2xl font-light text-white mb-2 tracking-tight">
+                  AI Suggestions
+                </h2>
+                <p className="text-gray-400 font-light">
                   Based on your profile and intended major
                 </p>
+              </div>
 
-                <div className="space-y-4">
-                  {suggestedColleges.map((college, index) => (
-                    <motion.div
-                      key={college.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      className={`p-4 rounded-xl border transition-all duration-200 cursor-pointer ${
-                        selectedColleges.includes(college.id)
-                          ? 'bg-primary/20 border-primary/50'
-                          : 'bg-white/5 border-white/10 hover:bg-white/10'
-                      }`}
-                      onClick={() => handleSuggestedCollegeSelect(college)}
-                    >
-                      <div className="space-y-3">
-                        <div className="flex items-start justify-between">
-                          <div>
-                            <h3 className="font-semibold text-white">{college.name}</h3>
-                            <span className={`px-2 py-1 rounded-full text-xs border ${getTierColor(college.tier)}`}>
+              <div className="space-y-6">
+                {suggestedColleges.map((college, index) => (
+                  <motion.div
+                    key={college.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className={`group relative border border-gray-900 transition-all duration-300 cursor-pointer ${
+                      selectedColleges.includes(college.id)
+                        ? 'border-gray-600'
+                        : 'hover:border-gray-700'
+                    }`}
+                    onClick={() => handleSuggestedCollegeSelect(college)}
+                  >
+                    <div className="p-6">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex-1">
+                          <h3 className="text-xl font-light text-white mb-2 tracking-wide">
+                            {college.name}
+                          </h3>
+                          <div className="flex items-center gap-4 mb-3">
+                            <span className={`text-sm font-medium ${
+                              college.tier === 'Elite' ? 'text-red-400' :
+                              college.tier === 'Highly Selective' ? 'text-orange-400' :
+                              'text-yellow-400'
+                            }`}>
                               {college.tier}
                             </span>
-                          </div>
-                          <motion.div
-                            whileHover={{ scale: 1.1 }}
-                            className={`w-5 h-5 rounded-full border-2 ${
-                              selectedColleges.includes(college.id)
-                                ? 'bg-primary border-primary'
-                                : 'border-white/30'
-                            }`}
-                          >
-                            {selectedColleges.includes(college.id) && (
-                              <motion.div
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                className="w-full h-full rounded-full bg-primary"
-                              />
-                            )}
-                          </motion.div>
-                        </div>
-
-                        <p className="text-sm text-white/60">{college.description}</p>
-
-                        <div className="grid grid-cols-2 gap-3 text-xs">
-                          <div className="flex items-center gap-2">
-                            <DollarSign className="w-3 h-3 text-green-400" />
-                            <span className="text-white/70">${college.tuition.toLocaleString()}</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Users className="w-3 h-3 text-blue-400" />
-                            <span className="text-white/70">{college.enrollment.toLocaleString()}</span>
-                          </div>
-                        </div>
-
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs text-white/60">Difficulty:</span>
-                            <span className={`text-xs font-medium ${getDifficultyColor(college.difficulty)}`}>
-                              {college.difficulty}
+                            <span className="text-sm text-gray-500">
+                              {college.acceptance_rate}% acceptance
                             </span>
                           </div>
+                        </div>
+                        <div className={`w-5 h-5 border-2 transition-all duration-200 ${
+                          selectedColleges.includes(college.id)
+                            ? 'border-white bg-white'
+                            : 'border-gray-600 group-hover:border-gray-400'
+                        }`}>
+                          {selectedColleges.includes(college.id) && (
+                            <motion.div
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              className="w-full h-full bg-white"
+                            />
+                          )}
+                        </div>
+                      </div>
+
+                      <p className="text-gray-400 font-light mb-6 leading-relaxed">
+                        {college.description}
+                      </p>
+
+                      <div className="grid grid-cols-2 gap-6 mb-6">
+                        <div className="flex items-center gap-3">
+                          <DollarSign className="w-4 h-4 text-gray-500" />
                           <div>
-                            <span className="text-xs text-white/60">Popular Majors:</span>
-                            <div className="flex flex-wrap gap-1 mt-1">
-                              {college.popularMajors.slice(0, 3).map((major: string) => (
-                                <span key={major} className="px-2 py-1 bg-white/10 rounded text-xs text-white/70">
-                                  {major}
-                                </span>
-                              ))}
-                            </div>
+                            <div className="text-white font-light">${college.tuition.toLocaleString()}</div>
+                            <div className="text-xs text-gray-500">Tuition</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <Users className="w-4 h-4 text-gray-500" />
+                          <div>
+                            <div className="text-white font-light">{college.enrollment.toLocaleString()}</div>
+                            <div className="text-xs text-gray-500">Students</div>
                           </div>
                         </div>
                       </div>
-                    </motion.div>
-                  ))}
-                </div>
+
+                      <div className="space-y-4">
+                        <div>
+                          <div className="text-xs text-gray-500 uppercase tracking-wider mb-2">Difficulty</div>
+                          <div className={`text-sm font-medium ${
+                            college.difficulty === 'Extremely High' ? 'text-red-400' :
+                            college.difficulty === 'Very High' ? 'text-orange-400' :
+                            college.difficulty === 'High' ? 'text-yellow-400' :
+                            'text-green-400'
+                          }`}>
+                            {college.difficulty}
+                          </div>
+                        </div>
+                        <div>
+                          <div className="text-xs text-gray-500 uppercase tracking-wider mb-2">Popular Majors</div>
+                          <div className="flex flex-wrap gap-2">
+                            {college.popularMajors.slice(0, 3).map((major: string) => (
+                              <span key={major} className="px-3 py-1 bg-gray-900 text-xs text-gray-300 font-light">
+                                {major}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           </div>
         </div>
 
-        {/* Bottom - Calculate Button */}
-        <motion.div {...enter} className="mt-8">
-          <div className="rox-card">
-            <div className="p-6 text-center">
-              <div className="space-y-4">
-                <div>
-                  <h2 className="text-xl font-semibold text-white mb-2">
-                    {selectedColleges.length > 0 
-                      ? `Selected ${selectedColleges.length} College${selectedColleges.length !== 1 ? 's' : ''}`
-                      : 'No Colleges Selected'
-                    }
-                  </h2>
-                  <p className="text-white/60">
-                    {selectedColleges.length > 0 
-                      ? 'Ready to calculate your admission probabilities'
-                      : 'Select colleges to continue'
-                    }
-                  </p>
-                </div>
-                
-                <Button
-                  onClick={() => router.push('/calculate')}
-                  disabled={selectedColleges.length === 0}
-                  className={`text-lg px-8 py-4 flex items-center gap-3 transition-all duration-300 ${
-                    selectedColleges.length > 0 
-                      ? 'rox-button' 
-                      : 'bg-gray-600 text-gray-400 cursor-not-allowed opacity-50'
-                  }`}
-                >
-                  <span>Calculate Probability</span>
-                  <ChevronRight className="w-5 h-5" />
-                </Button>
-              </div>
+        {/* Bottom - Calculate Button - Rox Style */}
+        <motion.div {...enter} className="mt-16">
+          <div className="text-center">
+            <div className="mb-8">
+              <h2 className="text-2xl font-light text-white mb-2 tracking-tight">
+                {selectedColleges.length > 0 
+                  ? `${selectedColleges.length} College${selectedColleges.length !== 1 ? 's' : ''} Selected`
+                  : 'No Colleges Selected'
+                }
+              </h2>
+              <p className="text-gray-400 font-light">
+                {selectedColleges.length > 0 
+                  ? 'Ready to calculate your admission probabilities'
+                  : 'Select colleges to continue'
+                }
+              </p>
             </div>
+            
+            <motion.button
+              onClick={() => router.push('/calculate')}
+              disabled={selectedColleges.length === 0}
+              className={`group relative px-8 py-4 text-lg font-light tracking-wide transition-all duration-300 ${
+                selectedColleges.length > 0 
+                  ? 'text-black bg-white hover:bg-gray-100' 
+                  : 'text-gray-500 bg-gray-900 border border-gray-800 cursor-not-allowed'
+              }`}
+              whileHover={selectedColleges.length > 0 ? { scale: 1.02 } : {}}
+              whileTap={selectedColleges.length > 0 ? { scale: 0.98 } : {}}
+            >
+              <span className="relative z-10 flex items-center gap-3">
+                Calculate Probability
+                <ChevronRight className="w-5 h-5" />
+              </span>
+              {selectedColleges.length > 0 && (
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              )}
+            </motion.button>
           </div>
         </motion.div>
       </div>
