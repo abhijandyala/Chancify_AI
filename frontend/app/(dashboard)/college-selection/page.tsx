@@ -359,15 +359,15 @@ export default function CollegeSelectionPage() {
                 <span className="ml-3 text-gray-400">Loading AI suggestions...</span>
               </div>
             ) : (
-              <div className="space-y-6">
+              <div className="space-y-8">
                 {/* Safety Schools (75%+ chance) */}
                 {suggestedColleges.filter(c => c.category === 'safety').length > 0 && (
                   <div>
-                    <h3 className="text-lg font-semibold text-green-400 mb-3 flex items-center gap-2">
+                    <h3 className="text-lg font-semibold text-green-400 mb-4 flex items-center gap-2">
                       <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                      Safety Schools (Top Tier)
+                      Safety Schools (75%+ chance)
                     </h3>
-                    <div className="space-y-3">
+                    <div className="grid grid-cols-1 gap-3">
                       {suggestedColleges.filter(c => c.category === 'safety').map((college, index) => (
                         <motion.div
                           key={college.college_id}
@@ -439,11 +439,11 @@ export default function CollegeSelectionPage() {
                 {/* Target Schools (25-75% chance) */}
                 {suggestedColleges.filter(c => c.category === 'target').length > 0 && (
                   <div>
-                    <h3 className="text-lg font-semibold text-yellow-400 mb-3 flex items-center gap-2">
+                    <h3 className="text-lg font-semibold text-yellow-400 mb-4 flex items-center gap-2">
                       <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                      Target Schools (Middle Tier)
+                      Target Schools (25-75% chance)
                     </h3>
-                    <div className="space-y-3">
+                    <div className="grid grid-cols-1 gap-3">
                       {suggestedColleges.filter(c => c.category === 'target').map((college, index) => (
                         <motion.div
                           key={college.college_id}
@@ -515,11 +515,11 @@ export default function CollegeSelectionPage() {
                 {/* Reach Schools (10-25% chance) */}
                 {suggestedColleges.filter(c => c.category === 'reach').length > 0 && (
                   <div>
-                    <h3 className="text-lg font-semibold text-red-400 mb-3 flex items-center gap-2">
+                    <h3 className="text-lg font-semibold text-red-400 mb-4 flex items-center gap-2">
                       <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                      Reach Schools (Challenging Tier)
+                      Reach Schools (10-25% chance)
                     </h3>
-                    <div className="space-y-3">
+                    <div className="grid grid-cols-1 gap-3">
                       {suggestedColleges.filter(c => c.category === 'reach').map((college, index) => (
                         <motion.div
                           key={college.college_id}

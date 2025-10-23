@@ -679,24 +679,29 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
                 logger.error(f"Error processing college {i}: {e}")
                 continue
         
-        # Categorize colleges by probability ranges
-        # Note: ML model probabilities are typically lower, so we adjust the ranges
+        # Categorize colleges by realistic probability ranges
         # Sort all predictions by probability to understand the distribution
         all_college_predictions.sort(key=lambda x: x['probability'], reverse=True)
         
-        # Use percentile-based categorization to ensure balanced distribution
-        total_colleges = len(all_college_predictions)
-        safety_colleges = all_college_predictions[:total_colleges//3]  # Top third
-        target_colleges = all_college_predictions[total_colleges//3:2*total_colleges//3]  # Middle third
-        reach_colleges = all_college_predictions[2*total_colleges//3:]  # Bottom third
+        # Use realistic probability-based categorization
+        safety_colleges = []
+        target_colleges = []
+        reach_colleges = []
         
-        # Assign categories
-        for college in safety_colleges:
-            college['category'] = 'safety'
-        for college in target_colleges:
-            college['category'] = 'target'
-        for college in reach_colleges:
-            college['category'] = 'reach'
+        for college in all_college_predictions:
+            prob = college['probability']
+            if prob >= 0.75:  # 75%+ chance
+                college['category'] = 'safety'
+                safety_colleges.append(college)
+            elif prob >= 0.25:  # 25-75% chance
+                college['category'] = 'target'
+                target_colleges.append(college)
+            elif prob >= 0.10:  # 10-25% chance (no lower than 10%)
+                college['category'] = 'reach'
+                reach_colleges.append(college)
+            # Skip colleges with less than 10% chance
+        
+        logger.info(f"Found {len(safety_colleges)} safety, {len(target_colleges)} target, {len(reach_colleges)} reach colleges")
         
         # Sort each category by probability (highest first for safety, balanced for target, highest for reach)
         safety_colleges.sort(key=lambda x: x['probability'], reverse=True)
