@@ -42,7 +42,7 @@ class AdmissionPredictor:
     Intelligently blends ML model predictions with formula-based calculations.
     """
     
-    def __init__(self, model_dir: str = 'data/models'):
+    def __init__(self, model_dir: str = 'backend/data/models'):
         """
         Initialize predictor by loading trained models.
         
@@ -52,6 +52,7 @@ class AdmissionPredictor:
         self.model_dir = Path(model_dir)
         self.models = {}
         self.scaler = None
+        self.feature_selector = None
         self.metadata = {}
         self.feature_names = []
         
@@ -73,6 +74,11 @@ class AdmissionPredictor:
             scaler_file = self.model_dir / 'scaler.joblib'
             if scaler_file.exists():
                 self.scaler = joblib.load(scaler_file)
+            
+            # Load feature selector
+            selector_file = self.model_dir / 'feature_selector.joblib'
+            if selector_file.exists():
+                self.feature_selector = joblib.load(selector_file)
             
             # Load models
             model_files = {
@@ -142,8 +148,14 @@ class AdmissionPredictor:
         # Extract features for ML
         features, _ = FeatureExtractor.extract_features(student, college)
         
+        # Apply feature selection if available
+        if self.feature_selector is not None:
+            features = self.feature_selector.transform(features.reshape(1, -1))
+        else:
+            features = features.reshape(1, -1)
+        
         # Scale features
-        features_scaled = self.scaler.transform(features.reshape(1, -1))
+        features_scaled = self.scaler.transform(features)
         
         # Get ML model
         model = self.models.get(model_name, self.models.get('ensemble'))
@@ -250,7 +262,7 @@ class AdmissionPredictor:
 _predictor: Optional[AdmissionPredictor] = None
 
 
-def get_predictor(model_dir: str = 'data/models') -> AdmissionPredictor:
+def get_predictor(model_dir: str = 'backend/data/models') -> AdmissionPredictor:
     """
     Get global predictor instance (singleton pattern).
     

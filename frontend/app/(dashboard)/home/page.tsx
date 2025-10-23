@@ -30,11 +30,20 @@ export default function HomePage() {
   const [isMajorModalOpen, setIsMajorModalOpen] = useState(false)
   
   const [profile, setProfile] = useState({
+    // Academic metrics
     gpa_unweighted: '',
     gpa_weighted: '',
     sat: '',
     act: '',
+    
+    // Course rigor and class info
     rigor: '5',
+    ap_count: '0',
+    honors_count: '0',
+    class_rank_percentile: '',
+    class_size: '',
+    
+    // Extracurriculars and activities
     extracurricular_depth: '5',
     leadership_positions: '5',
     awards_publications: '5',
@@ -43,16 +52,35 @@ export default function HomePage() {
     volunteer_work: '5',
     research_experience: '5',
     portfolio_audition: '5',
+    
+    // Application quality
     essay_quality: '5',
     recommendations: '5',
     interview: '5',
     demonstrated_interest: '5',
+    
+    // Context factors
     legacy_status: '5',
-    geographic_diversity: '5',
-    firstgen_diversity: '5',
-    major: '',
     hs_reputation: '5',
+    major: '',
     college: '',
+    
+    // Additional ML model fields
+    ec_count: '5',
+    years_commitment: '2',
+    hours_per_week: '5',
+    national_awards: '0',
+    first_generation: '0',
+    underrepresented_minority: '0',
+    geographic_diversity: '5',
+    recruited_athlete: '0',
+    plan_timing: '5',
+    athletic_recruit: '0',
+    geography_residency: '5',
+    firstgen_diversity: '5',
+    ability_to_pay: '5',
+    policy_knob: '5',
+    conduct_record: '9'
   })
 
   const updateProfile = (field: string, value: string) => {
@@ -60,6 +88,8 @@ export default function HomePage() {
       const updatedProfile = { ...prev, [field]: value }
       // Save to localStorage for college selection page
       localStorage.setItem('userProfile', JSON.stringify(updatedProfile))
+      // Dispatch custom event to notify college selection page
+      window.dispatchEvent(new CustomEvent('profileUpdated'))
       return updatedProfile
     })
   }
@@ -351,25 +381,31 @@ export default function HomePage() {
   }
 
   return (
-    <div className="rox-section">
-      {/* Header */}
-      <motion.div {...enter} className="text-center">
-        <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-yellow-300 mb-6">
-          <Brain className="w-4 h-4" />
-          <span className="text-sm font-semibold">AI Assessment</span>
-        </div>
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-yellow-400 mb-6">
-          Chancify AI
-        </h1>
-        <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-          The only AI that considers your unique story — not just numbers
-        </p>
-      </motion.div>
+    <div className="rox-container">
+      <div className="rox-section">
+        {/* Header */}
+        <motion.div {...enter} className="text-center mb-16">
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-gray-200 bg-gray-50 text-gray-700 mb-6">
+            <Brain className="w-4 h-4" />
+            <span className="text-sm font-medium">AI Assessment</span>
+          </div>
+          <h1 className="rox-heading-1 mb-6">
+            Chancify AI
+          </h1>
+          <p className="rox-text-large max-w-3xl mx-auto">
+            The only AI that considers your unique story — not just numbers
+          </p>
+        </motion.div>
 
-      {/* Academic Foundation */}
-      <motion.section {...enter}>
-        <div className="rox-card">
-          <SectionHeader icon={<GraduationCap className="w-5 h-5" />} title="Academic Foundation" />
+        {/* Academic Foundation */}
+        <motion.section {...enter} className="mb-12">
+          <div className="rox-card p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 rounded-lg bg-blue-50 text-blue-600">
+                <GraduationCap className="w-5 h-5" />
+              </div>
+              <h2 className="rox-heading-3">Academic Foundation</h2>
+            </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Input
               label="Unweighted GPA (4.0)"
@@ -417,14 +453,72 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-      {/* Your Unique Story */}
-      <motion.section {...enter}>
-        <div className="rox-card">
-          <SectionHeader 
-            icon={<Star className="w-5 h-5" />} 
-            title="Your Unique Story" 
-            subtitle="The holistic factors most other predictors ignore." 
-          />
+        {/* Course Rigor and Class Info */}
+        <motion.section {...enter} className="mb-12">
+          <div className="rox-card p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 rounded-lg bg-amber-50 text-amber-600">
+                <Star className="w-5 h-5" />
+              </div>
+              <h2 className="rox-heading-3">Course Rigor & Class Info</h2>
+            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Input
+              label="AP Courses Taken"
+              type="number"
+              min="0"
+              max="20"
+              placeholder="5"
+              value={profile.ap_count}
+              onChange={(e) => updateProfile('ap_count', e.target.value)}
+              helperText="Number of AP courses completed"
+            />
+            <Input
+              label="Honors Courses"
+              type="number"
+              min="0"
+              max="20"
+              placeholder="8"
+              value={profile.honors_count}
+              onChange={(e) => updateProfile('honors_count', e.target.value)}
+              helperText="Number of honors courses"
+            />
+            <Input
+              label="Class Rank %"
+              type="number"
+              min="1"
+              max="100"
+              placeholder="15"
+              value={profile.class_rank_percentile}
+              onChange={(e) => updateProfile('class_rank_percentile', e.target.value)}
+              helperText="Your percentile rank (1-100)"
+            />
+            <Input
+              label="Class Size"
+              type="number"
+              min="1"
+              max="2000"
+              placeholder="300"
+              value={profile.class_size}
+              onChange={(e) => updateProfile('class_size', e.target.value)}
+              helperText="Total students in your graduating class"
+            />
+          </div>
+        </div>
+      </motion.section>
+
+        {/* Your Unique Story */}
+        <motion.section {...enter} className="mb-12">
+          <div className="rox-card p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 rounded-lg bg-purple-50 text-purple-600">
+                <Star className="w-5 h-5" />
+              </div>
+              <div>
+                <h2 className="rox-heading-3">Your Unique Story</h2>
+                <p className="rox-text-muted">The holistic factors most other predictors ignore.</p>
+              </div>
+            </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               ['Extracurricular Depth', 'extracurricular_depth'],
@@ -465,82 +559,187 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-      {/* Intended Major */}
-      <motion.section {...enter}>
-        <div className="rox-card">
-          <SectionHeader 
-            icon={<GraduationCap className="w-5 h-5" />} 
-            title="Intended Major" 
-            subtitle="Select your field of study"
-          />
+        {/* Intended Major */}
+        <motion.section {...enter} className="mb-12">
+          <div className="rox-card p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 rounded-lg bg-green-50 text-green-600">
+                <GraduationCap className="w-5 h-5" />
+              </div>
+              <div>
+                <h2 className="rox-heading-3">Intended Major</h2>
+                <p className="rox-text-muted">Select your field of study</p>
+              </div>
+            </div>
           
-          <motion.button
-            onClick={handleOpenMajorModal}
-            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-left flex items-center justify-between hover:bg-white/10 transition-all duration-300"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <span className={profile.major ? 'text-white' : 'text-white/50'}>
-              {profile.major || 'Choose your major...'}
-            </span>
-            <motion.div
-              whileHover={{ rotate: 180 }}
-              transition={{ duration: 0.3 }}
+            <button
+              onClick={handleOpenMajorModal}
+              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-left flex items-center justify-between hover:bg-gray-100 transition-all duration-200"
             >
-              <ChevronRight className="w-4 h-4 text-white/50" />
-            </motion.div>
-          </motion.button>
+              <span className={profile.major ? 'text-gray-900' : 'text-gray-500'}>
+                {profile.major || 'Choose your major...'}
+              </span>
+              <ChevronRight className="w-4 h-4 text-gray-500" />
+            </button>
         </div>
       </motion.section>
 
-      {/* Next Button */}
-      <motion.section {...enter}>
-        <div className="rox-card">
-          <div className="text-center space-y-6">
-            <div className="space-y-2">
-              <h2 className="text-2xl font-bold text-white">
-                {isProfileComplete() ? 'Ready to Explore?' : 'Complete Your Profile'}
-              </h2>
-              <p className="text-gray-400">
-                {isProfileComplete() 
-                  ? 'Your profile is complete. Let\'s discover colleges that match your unique story.'
-                  : 'Please fill in your GPA information to continue to college discovery.'
-                }
-              </p>
+        {/* Additional ML Model Fields */}
+        <motion.section {...enter} className="mb-12">
+          <div className="rox-card p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 rounded-lg bg-indigo-50 text-indigo-600">
+                <Brain className="w-5 h-5" />
+              </div>
+              <h2 className="rox-heading-3">Additional Profile Details</h2>
             </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button 
-                onClick={() => {
-                  // Save logic will be added later
-                  console.log('Save profile clicked')
-                }}
-                variant="ghost"
-                className="rox-button-ghost text-lg px-8 py-4 flex items-center gap-3 border-2 border-white/20 hover:border-yellow-400/50 hover:text-yellow-400 transition-all duration-300"
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Input
+              label="Extracurricular Count"
+              type="number"
+              min="0"
+              max="20"
+              placeholder="8"
+              value={profile.ec_count}
+              onChange={(e) => updateProfile('ec_count', e.target.value)}
+              helperText="Number of extracurricular activities"
+            />
+            <Input
+              label="Years of Commitment"
+              type="number"
+              min="0"
+              max="10"
+              placeholder="3"
+              value={profile.years_commitment}
+              onChange={(e) => updateProfile('years_commitment', e.target.value)}
+              helperText="Average years committed to activities"
+            />
+            <Input
+              label="Hours per Week"
+              type="number"
+              min="0"
+              max="50"
+              placeholder="15"
+              value={profile.hours_per_week}
+              onChange={(e) => updateProfile('hours_per_week', e.target.value)}
+              helperText="Hours spent on activities weekly"
+            />
+            <Input
+              label="National Awards"
+              type="number"
+              min="0"
+              max="10"
+              placeholder="2"
+              value={profile.national_awards}
+              onChange={(e) => updateProfile('national_awards', e.target.value)}
+              helperText="Number of national/international awards"
+            />
+            <div className="flex items-center space-x-4">
+              <label className="text-sm font-medium text-gray-300">First Generation</label>
+              <select
+                value={profile.first_generation}
+                onChange={(e) => updateProfile('first_generation', e.target.value)}
+                className="px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-yellow-400 focus:outline-none"
               >
-                <span>Save</span>
-              </Button>
-              
-              <Button 
-                onClick={() => router.push('/college-selection')}
-                disabled={!isProfileComplete()}
-                className={`text-lg px-8 py-4 flex items-center gap-3 transition-all duration-300 ${
-                  isProfileComplete() 
-                    ? 'rox-button' 
-                    : 'bg-gray-600 text-gray-400 cursor-not-allowed opacity-50'
-                }`}
-              >
-                <span>Next</span>
-                <ChevronRight className="w-5 h-5" />
-              </Button>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+              </select>
             </div>
-            
-            {!isProfileComplete() && (
-              <p className="text-sm text-gray-500 mt-2">
-                Required: Unweighted GPA and Weighted GPA
-              </p>
-            )}
+            <div className="flex items-center space-x-4">
+              <label className="text-sm font-medium text-gray-300">Underrepresented Minority</label>
+              <select
+                value={profile.underrepresented_minority}
+                onChange={(e) => updateProfile('underrepresented_minority', e.target.value)}
+                className="px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-yellow-400 focus:outline-none"
+              >
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+              </select>
+            </div>
+            <div className="flex items-center space-x-4">
+              <label className="text-sm font-medium text-gray-300">Recruited Athlete</label>
+              <select
+                value={profile.recruited_athlete}
+                onChange={(e) => updateProfile('recruited_athlete', e.target.value)}
+                className="px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-yellow-400 focus:outline-none"
+              >
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+              </select>
+            </div>
+            <div className="flex items-center space-x-4">
+              <label className="text-sm font-medium text-gray-300">Geographic Diversity</label>
+              <select
+                value={profile.geographic_diversity}
+                onChange={(e) => updateProfile('geographic_diversity', e.target.value)}
+                className="px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-yellow-400 focus:outline-none"
+              >
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+              </select>
+            </div>
+            <div className="flex items-center space-x-4">
+              <label className="text-sm font-medium text-gray-300">Athletic Recruit</label>
+              <select
+                value={profile.athletic_recruit}
+                onChange={(e) => updateProfile('athletic_recruit', e.target.value)}
+                className="px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-yellow-400 focus:outline-none"
+              >
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+              </select>
+            </div>
           </div>
+        </div>
+      </motion.section>
+
+        {/* Action Buttons */}
+        <motion.section {...enter} className="mb-12">
+          <div className="rox-card p-8">
+            <div className="text-center space-y-8">
+              <div className="space-y-4">
+                <h2 className="rox-heading-3">
+                  {isProfileComplete() ? 'Ready to Explore?' : 'Complete Your Profile'}
+                </h2>
+                <p className="rox-text-body">
+                  {isProfileComplete() 
+                    ? 'Your profile is complete. Let\'s discover colleges that match your unique story.'
+                    : 'Please fill in your GPA information to continue to college discovery.'
+                  }
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <button 
+                  onClick={() => {
+                    // Save logic will be added later
+                    console.log('Save profile clicked')
+                  }}
+                  className="rox-button-secondary text-lg px-8 py-4 flex items-center gap-3"
+                >
+                  <span>Save</span>
+                </button>
+                
+                <button 
+                  onClick={() => router.push('/college-selection')}
+                  disabled={!isProfileComplete()}
+                  className={`text-lg px-8 py-4 flex items-center gap-3 transition-all duration-200 ${
+                    isProfileComplete() 
+                      ? 'rox-button-primary' 
+                      : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  }`}
+                >
+                  <span>Next</span>
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+            
+              {!isProfileComplete() && (
+                <p className="rox-text-muted mt-4">
+                  Required: Unweighted GPA and Weighted GPA
+                </p>
+              )}
+      </div>
         </div>
       </motion.section>
 
@@ -553,13 +752,14 @@ export default function HomePage() {
         examples={modalInfo.factor ? FACTOR_DESCRIPTIONS[modalInfo.factor as keyof typeof FACTOR_DESCRIPTIONS]?.examples || [] : []}
       />
 
-      {/* Major Selection Modal */}
-      <MajorSelectionModal
-        isOpen={isMajorModalOpen}
-        onClose={handleCloseMajorModal}
-        selectedMajor={profile.major}
-        onSelectMajor={handleSelectMajor}
-      />
+        {/* Major Selection Modal */}
+        <MajorSelectionModal
+          isOpen={isMajorModalOpen}
+          onClose={handleCloseMajorModal}
+          selectedMajor={profile.major}
+          onSelectMajor={handleSelectMajor}
+        />
+      </div>
     </div>
   )
 }

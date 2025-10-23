@@ -3,36 +3,50 @@
 @tailwind utilities;
 
 :root {
-  --radius: 16px;
+  --radius: 12px;
   scroll-behavior: smooth;
   
-  /* ROX Design Tokens */
-  --rox-gold: #f5c84b;
-  --rox-gold-light: #facc15;
-  --rox-gold-dark: #d97706;
-  --rox-amber: #fbbf24;
-  --rox-amber-light: #fde047;
-  --rox-amber-dark: #b45309;
+  /* ROX Professional Design System */
+  --rox-primary: #ffffff;
+  --rox-secondary: #f8f9fa;
+  --rox-accent: #007bff;
+  --rox-accent-hover: #0056b3;
   
-  /* Dark Theme Colors */
-  --rox-bg-primary: #000000;
-  --rox-bg-secondary: #0a0a0a;
-  --rox-bg-tertiary: #111111;
-  --rox-surface: rgba(255, 255, 255, 0.05);
-  --rox-surface-hover: rgba(255, 255, 255, 0.08);
-  --rox-border: rgba(255, 255, 255, 0.1);
-  --rox-border-hover: rgba(255, 255, 255, 0.15);
+  /* Neutral Palette */
+  --rox-gray-50: #f8f9fa;
+  --rox-gray-100: #e9ecef;
+  --rox-gray-200: #dee2e6;
+  --rox-gray-300: #ced4da;
+  --rox-gray-400: #adb5bd;
+  --rox-gray-500: #6c757d;
+  --rox-gray-600: #495057;
+  --rox-gray-700: #343a40;
+  --rox-gray-800: #212529;
+  --rox-gray-900: #000000;
+  
+  /* Surface Colors */
+  --rox-surface: #ffffff;
+  --rox-surface-elevated: #ffffff;
+  --rox-surface-subtle: #f8f9fa;
+  --rox-surface-muted: #e9ecef;
+  
+  /* Border Colors */
+  --rox-border: #e9ecef;
+  --rox-border-subtle: #f1f3f4;
+  --rox-border-strong: #dee2e6;
   
   /* Text Colors */
-  --rox-text-primary: #ffffff;
-  --rox-text-secondary: #e5e7eb;
-  --rox-text-muted: #9ca3af;
-  --rox-text-accent: var(--rox-gold);
+  --rox-text-primary: #000000;
+  --rox-text-secondary: #495057;
+  --rox-text-muted: #6c757d;
+  --rox-text-inverse: #ffffff;
   
   /* Shadows */
-  --rox-shadow-glow: 0 0 40px rgba(245, 200, 75, 0.15);
-  --rox-shadow-card: 0 10px 40px rgba(0, 0, 0, 0.45);
-  --rox-shadow-button: 0 10px 30px -10px rgba(245, 200, 75, 0.35);
+  --rox-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --rox-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --rox-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --rox-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --rox-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 @layer base {
@@ -69,53 +83,87 @@
 }
 
 @layer components {
-  /* ROX-style Glass Components */
-  .glass {
-    @apply backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl;
-    box-shadow: var(--rox-shadow-card);
+  /* ROX Professional Components */
+  .rox-card {
+    @apply bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200;
   }
   
-  .glass-ring {
-    @apply border border-white/10;
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06) inset, var(--rox-shadow-glow);
+  .rox-card-elevated {
+    @apply bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200;
   }
   
-  .input-glass {
-    @apply bg-black/50 backdrop-blur border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:border-yellow-400/50 focus:ring-1 focus:ring-yellow-400/20 transition-all duration-300;
+  .rox-input {
+    @apply w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 
+           focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none
+           transition-all duration-200;
   }
   
   /* ROX Typography */
-  .gradient-text {
-    @apply text-yellow-400;
+  .rox-heading-1 {
+    @apply text-4xl font-bold text-gray-900 leading-tight;
   }
   
-  .subsection-heading {
-    @apply text-xl font-bold text-white mb-4;
+  .rox-heading-2 {
+    @apply text-3xl font-bold text-gray-900 leading-tight;
   }
   
-  .card-heading {
-    @apply text-lg font-bold text-white;
+  .rox-heading-3 {
+    @apply text-2xl font-semibold text-gray-900 leading-tight;
+  }
+  
+  .rox-heading-4 {
+    @apply text-xl font-semibold text-gray-900 leading-tight;
+  }
+  
+  .rox-text-large {
+    @apply text-lg text-gray-700 leading-relaxed;
+  }
+  
+  .rox-text-body {
+    @apply text-base text-gray-700 leading-relaxed;
+  }
+  
+  .rox-text-small {
+    @apply text-sm text-gray-600 leading-relaxed;
+  }
+  
+  .rox-text-muted {
+    @apply text-sm text-gray-500 leading-relaxed;
   }
   
   /* ROX Layout Utilities */
   .rox-container {
-    @apply max-w-7xl mx-auto px-6;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
   
   .rox-section {
-    @apply space-y-8;
+    @apply py-16 lg:py-24;
   }
   
-  .rox-card {
-    @apply glass p-6 md:p-8;
+  .rox-section-sm {
+    @apply py-8 lg:py-12;
   }
   
-  .rox-button {
-    @apply bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-yellow-400/25;
+  /* ROX Buttons */
+  .rox-button-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent 
+           text-base font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 
+           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+           transition-colors duration-200;
+  }
+  
+  .rox-button-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 border border-gray-300 
+           text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 
+           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+           transition-colors duration-200;
   }
   
   .rox-button-ghost {
-    @apply border border-white/10 hover:border-yellow-400/50 hover:text-yellow-400 px-6 py-3 rounded-xl transition-all duration-300;
+    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent 
+           text-base font-medium rounded-lg text-gray-700 hover:text-gray-900 
+           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+           transition-colors duration-200;
   }
   
   /* Premium Button Styles */

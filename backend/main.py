@@ -122,7 +122,7 @@ def get_college_data(college_id: str) -> Dict[str, Any]:
     
     # Load the real college data
     try:
-        df = pd.read_csv('data/raw/real_colleges_100.csv')
+        df = pd.read_csv('backend/data/raw/real_colleges_100.csv')
         
         # Extract UNITID from college_id (format: college_166027)
         if college_id.startswith('college_'):
@@ -136,6 +136,7 @@ def get_college_data(college_id: str) -> Dict[str, Any]:
         if not college_row.empty:
             row = college_row.iloc[0]
             return {
+                'name': f"College_{unitid}",  # Add name for ML model
                 'acceptance_rate': float(row['acceptance_rate']),
                 'sat_25th': int(row['sat_total_25']) if pd.notna(row['sat_total_25']) else 1200,
                 'sat_75th': int(row['sat_total_75']) if pd.notna(row['sat_total_75']) else 1500,
@@ -143,13 +144,15 @@ def get_college_data(college_id: str) -> Dict[str, Any]:
                 'act_75th': int(row['act_composite_75']) if pd.notna(row['act_composite_75']) else 35,
                 'test_policy': row['test_policy'],
                 'financial_aid_policy': row['financial_aid_policy'],
-                'selectivity_tier': row['selectivity_tier']
+                'selectivity_tier': row['selectivity_tier'],
+                'gpa_average': float(row['gpa_average']) if pd.notna(row['gpa_average']) else 3.7
             }
     except Exception as e:
         logger.warning(f"Could not load college data: {e}")
     
     # Default fallback data
     return {
+        'name': f"College_{college_id}",
         'acceptance_rate': 0.1,
         'sat_25th': 1200,
         'sat_75th': 1500,
@@ -157,10 +160,63 @@ def get_college_data(college_id: str) -> Dict[str, Any]:
         'act_75th': 35,
         'test_policy': 'Required',
         'financial_aid_policy': 'Need-blind',
-        'selectivity_tier': 'Elite'
+        'selectivity_tier': 'Elite',
+        'gpa_average': 3.7
     }
 
-# Prediction request model
+# Frontend profile request model (matches frontend format)
+class FrontendProfileRequest(BaseModel):
+    # Academic data
+    gpa_unweighted: str
+    gpa_weighted: str
+    sat: str
+    act: str
+    
+    # Course rigor and class info
+    rigor: str
+    ap_count: str
+    honors_count: str
+    class_rank_percentile: str
+    class_size: str
+    
+    # Factor scores (1-10 scale from frontend dropdowns)
+    extracurricular_depth: str
+    leadership_positions: str
+    awards_publications: str
+    passion_projects: str
+    business_ventures: str
+    volunteer_work: str
+    research_experience: str
+    portfolio_audition: str
+    essay_quality: str
+    recommendations: str
+    interview: str
+    demonstrated_interest: str
+    legacy_status: str
+    hs_reputation: str
+    
+    # Additional ML model fields
+    ec_count: str
+    years_commitment: str
+    hours_per_week: str
+    national_awards: str
+    first_generation: str
+    underrepresented_minority: str
+    geographic_diversity: str
+    recruited_athlete: str
+    plan_timing: str
+    athletic_recruit: str
+    geography_residency: str
+    firstgen_diversity: str
+    ability_to_pay: str
+    policy_knob: str
+    conduct_record: str
+    
+    # Major and college
+    major: str
+    college: str
+
+# Legacy prediction request model (for backward compatibility)
 class PredictionRequest(BaseModel):
     # Academic data
     gpa_unweighted: float
@@ -190,6 +246,496 @@ class PredictionRequest(BaseModel):
     
     # College selection
     college: str
+
+@app.post("/api/predict/frontend")
+async def predict_admission_frontend(request: FrontendProfileRequest):
+    """Predict admission probability using hybrid ML+Formula system for frontend"""
+    try:
+        # Get predictor
+        predictor = get_predictor()
+        
+        # Convert frontend string values to appropriate types
+        def safe_float(value: str) -> float:
+            try:
+                return float(value) if value and value.strip() else 0.0
+            except (ValueError, TypeError):
+                return 0.0
+        
+        def safe_int(value: str) -> int:
+            try:
+                return int(value) if value and value.strip() else 0
+            except (ValueError, TypeError):
+                return 0
+        
+        # Calculate derived factor scores from real data
+        gpa_unweighted = safe_float(request.gpa_unweighted)
+        gpa_weighted = safe_float(request.gpa_weighted)
+        sat_score = safe_int(request.sat)
+        act_score = safe_int(request.act)
+        
+        # Calculate grades score from GPA (0-10 scale)
+        def calculate_grades_score(gpa_unweighted, gpa_weighted):
+            if gpa_unweighted > 0:
+                # Convert 4.0 scale to 10.0 scale
+                return min(10.0, (gpa_unweighted / 4.0) * 10.0)
+            elif gpa_weighted > 0:
+                # Convert 5.0 scale to 10.0 scale
+                return min(10.0, (gpa_weighted / 5.0) * 10.0)
+            return 5.0  # Default neutral
+        
+        # Calculate testing score from SAT/ACT (0-10 scale)
+        def calculate_testing_score(sat, act):
+            if sat > 0:
+                # Convert SAT to 10.0 scale (1200-1600 range)
+                return min(10.0, max(0.0, ((sat - 1200) / 400) * 10.0))
+            elif act > 0:
+                # Convert ACT to 10.0 scale (20-36 range)
+                return min(10.0, max(0.0, ((act - 20) / 16) * 10.0))
+            return 5.0  # Default neutral
+        
+        # Calculate major fit score based on major relevance
+        def calculate_major_fit_score(major, college_name):
+            # This would ideally use a major-college relevance database
+            # For now, use a simple heuristic based on major popularity
+            popular_majors = ['Computer Science', 'Business', 'Engineering', 'Biology', 'Psychology']
+            if major in popular_majors:
+                return 7.0  # Good fit for popular majors
+            return 6.0  # Neutral fit
+        
+        # Create student features from frontend data
+        student = StudentFeatures(
+            # Academic metrics
+            gpa_unweighted=gpa_unweighted,
+            gpa_weighted=gpa_weighted,
+            sat_total=sat_score,
+            act_composite=act_score,
+            
+            # Course rigor and class info
+            ap_count=safe_int(request.ap_count),
+            honors_count=safe_int(request.honors_count),
+            class_rank_percentile=safe_float(request.class_rank_percentile),
+            class_size=safe_int(request.class_size),
+            
+            # Extracurricular counts and commitment
+            ec_count=safe_int(request.ec_count),
+            leadership_positions_count=safe_int(request.leadership_positions),
+            years_commitment=safe_int(request.years_commitment),
+            hours_per_week=safe_float(request.hours_per_week),
+            awards_count=safe_int(request.awards_publications),
+            national_awards=safe_int(request.national_awards),
+            
+            # Demographics and diversity
+            first_generation=bool(safe_int(request.first_generation)),
+            underrepresented_minority=bool(safe_int(request.underrepresented_minority)),
+            geographic_diversity=safe_float(request.geographic_diversity),
+            legacy_status=bool(safe_int(request.legacy_status)),
+            recruited_athlete=bool(safe_int(request.recruited_athlete)),
+            
+            # Factor scores (calculated from real data, not defaults)
+            factor_scores={
+                'grades': calculate_grades_score(gpa_unweighted, gpa_weighted),
+                'rigor': safe_float(request.rigor),
+                'testing': calculate_testing_score(sat_score, act_score),
+                'essay': safe_float(request.essay_quality),
+                'ecs_leadership': safe_float(request.extracurricular_depth),
+                'recommendations': safe_float(request.recommendations),
+                'plan_timing': safe_float(request.plan_timing),
+                'athletic_recruit': safe_float(request.athletic_recruit),
+                'major_fit': calculate_major_fit_score(request.major, request.college),
+                'geography_residency': safe_float(request.geography_residency),
+                'firstgen_diversity': safe_float(request.firstgen_diversity),
+                'ability_to_pay': safe_float(request.ability_to_pay),
+                'awards_publications': safe_float(request.awards_publications),
+                'portfolio_audition': safe_float(request.portfolio_audition),
+                'policy_knob': safe_float(request.policy_knob),
+                'demonstrated_interest': safe_float(request.demonstrated_interest),
+                'legacy': safe_float(request.legacy_status),
+                'interview': safe_float(request.interview),
+                'conduct_record': safe_float(request.conduct_record),
+                'hs_reputation': safe_float(request.hs_reputation)
+            },
+            
+            # Additional features (defaults for now)
+            ap_count=0,
+            honors_count=0,
+            class_rank_percentile=50.0,
+            class_size=300,
+            ec_count=3,  # Default
+            leadership_positions_count=safe_int(request.leadership_positions),
+            years_commitment=4,  # Default
+            hours_per_week=10.0,  # Default
+            awards_count=safe_int(request.awards_publications),
+            national_awards=0,
+            first_generation=False,
+            underrepresented_minority=False,
+            geographic_diversity=5.0,
+            legacy_status=safe_float(request.legacy_status) > 5.0,
+            recruited_athlete=False
+        )
+        
+        # Get college data
+        college_data = get_college_data(request.college)
+        college = CollegeFeatures(
+            name=college_data['name'],
+            acceptance_rate=college_data['acceptance_rate'],
+            sat_25th=college_data['sat_25th'],
+            sat_75th=college_data['sat_75th'],
+            act_25th=college_data['act_25th'],
+            act_75th=college_data['act_75th'],
+            test_policy=college_data['test_policy'],
+            financial_aid_policy=college_data['financial_aid_policy'],
+            selectivity_tier=college_data['selectivity_tier'],
+            gpa_average=college_data['gpa_average']
+        )
+        
+        # Make hybrid prediction
+        result = predictor.predict(student, college, model_name='ensemble', use_formula=True)
+        
+        # Determine category based on final probability
+        prob = result.probability
+        if prob < 0.15:
+            category = "reach"
+        elif prob < 0.40:
+            category = "target"
+        else:
+            category = "safety"
+        
+        return {
+            "success": True,
+            "college_id": request.college,
+            "college_name": college_data['name'],
+            "probability": round(result.probability, 4),
+            "confidence_interval": {
+                "lower": round(result.confidence_interval[0], 4),
+                "upper": round(result.confidence_interval[1], 4)
+            },
+            "ml_probability": round(result.ml_probability, 4),
+            "formula_probability": round(result.formula_probability, 4),
+            "ml_confidence": round(result.ml_confidence, 4),
+            "blend_weights": result.blend_weights,
+            "model_used": result.model_used,
+            "prediction_method": "hybrid_ml_formula",
+            "explanation": result.explanation,
+            "category": category,
+            "acceptance_rate": college_data['acceptance_rate'],
+            "selectivity_tier": college_data['selectivity_tier']
+        }
+        
+    except Exception as e:
+        logger.error(f"Frontend prediction error: {e}")
+        return {
+            "success": False,
+            "error": str(e),
+            "message": "Prediction failed. Please try again."
+        }
+
+@app.post("/api/suggest/colleges")
+async def suggest_colleges(request: FrontendProfileRequest):
+    """Get AI-suggested colleges based on user profile using hybrid ML system"""
+    try:
+        # Get predictor
+        predictor = get_predictor()
+        
+        # Convert frontend string values to appropriate types
+        def safe_float(value: str) -> float:
+            try:
+                return float(value) if value and value.strip() else 0.0
+            except (ValueError, TypeError):
+                return 0.0
+        
+        def safe_int(value: str) -> int:
+            try:
+                return int(value) if value and value.strip() else 0
+            except (ValueError, TypeError):
+                return 0
+        
+        # Calculate derived factor scores from real data
+        gpa_unweighted = safe_float(request.gpa_unweighted)
+        gpa_weighted = safe_float(request.gpa_weighted)
+        sat_score = safe_int(request.sat)
+        act_score = safe_int(request.act)
+        
+        # Calculate grades score from GPA (0-10 scale)
+        def calculate_grades_score(gpa_unweighted, gpa_weighted):
+            if gpa_unweighted > 0:
+                return min(10.0, (gpa_unweighted / 4.0) * 10.0)
+            elif gpa_weighted > 0:
+                return min(10.0, (gpa_weighted / 5.0) * 10.0)
+            return 5.0
+        
+        # Calculate testing score from SAT/ACT (0-10 scale)
+        def calculate_testing_score(sat, act):
+            if sat > 0:
+                return min(10.0, max(0.0, ((sat - 1200) / 400) * 10.0))
+            elif act > 0:
+                return min(10.0, max(0.0, ((act - 20) / 16) * 10.0))
+            return 5.0
+        
+        # Calculate major fit score based on major relevance
+        def calculate_major_fit_score(major, college_name):
+            popular_majors = ['Computer Science', 'Business', 'Engineering', 'Biology', 'Psychology']
+            if major in popular_majors:
+                return 7.0
+            return 6.0
+        
+        # Create student features from frontend data
+        student = StudentFeatures(
+            # Academic metrics
+            gpa_unweighted=gpa_unweighted,
+            gpa_weighted=gpa_weighted,
+            sat_total=sat_score,
+            act_composite=act_score,
+            
+            # Course rigor and class info
+            ap_count=safe_int(request.ap_count),
+            honors_count=safe_int(request.honors_count),
+            class_rank_percentile=safe_float(request.class_rank_percentile),
+            class_size=safe_int(request.class_size),
+            
+            # Extracurricular counts and commitment
+            ec_count=safe_int(request.ec_count),
+            leadership_positions_count=safe_int(request.leadership_positions),
+            years_commitment=safe_int(request.years_commitment),
+            hours_per_week=safe_float(request.hours_per_week),
+            awards_count=safe_int(request.awards_publications),
+            national_awards=safe_int(request.national_awards),
+            
+            # Demographics and diversity
+            first_generation=bool(safe_int(request.first_generation)),
+            underrepresented_minority=bool(safe_int(request.underrepresented_minority)),
+            geographic_diversity=safe_float(request.geographic_diversity),
+            legacy_status=bool(safe_int(request.legacy_status)),
+            recruited_athlete=bool(safe_int(request.recruited_athlete)),
+            
+            # Factor scores (calculated from real data, not defaults)
+            factor_scores={
+                'grades': calculate_grades_score(gpa_unweighted, gpa_weighted),
+                'rigor': safe_float(request.rigor),
+                'testing': calculate_testing_score(sat_score, act_score),
+                'essay': safe_float(request.essay_quality),
+                'ecs_leadership': safe_float(request.extracurricular_depth),
+                'recommendations': safe_float(request.recommendations),
+                'plan_timing': safe_float(request.plan_timing),
+                'athletic_recruit': safe_float(request.athletic_recruit),
+                'major_fit': calculate_major_fit_score(request.major, request.college),
+                'geography_residency': safe_float(request.geography_residency),
+                'firstgen_diversity': safe_float(request.firstgen_diversity),
+                'ability_to_pay': safe_float(request.ability_to_pay),
+                'awards_publications': safe_float(request.awards_publications),
+                'portfolio_audition': safe_float(request.portfolio_audition),
+                'policy_knob': safe_float(request.policy_knob),
+                'demonstrated_interest': safe_float(request.demonstrated_interest),
+                'legacy': safe_float(request.legacy_status),
+                'interview': safe_float(request.interview),
+                'conduct_record': safe_float(request.conduct_record),
+                'hs_reputation': safe_float(request.hs_reputation)
+            },
+            
+            # Additional features (defaults for now)
+            ap_count=0,
+            honors_count=0,
+            class_rank_percentile=50.0,
+            class_size=300,
+            ec_count=3,  # Default
+            leadership_positions_count=safe_int(request.leadership_positions),
+            years_commitment=4,  # Default
+            hours_per_week=10.0,  # Default
+            awards_count=safe_int(request.awards_publications),
+            national_awards=0,
+            first_generation=False,
+            underrepresented_minority=False,
+            geographic_diversity=5.0,
+            legacy_status=safe_float(request.legacy_status) > 5.0,
+            recruited_athlete=False
+        )
+        
+        # Load college data to get suggestions
+        df = pd.read_csv('backend/data/raw/real_colleges_100.csv')
+        
+        # Calculate academic strength to determine target tier
+        gpa = safe_float(request.gpa_unweighted)
+        sat = safe_int(request.sat)
+        act = safe_int(request.act)
+        
+        # Calculate composite academic score
+        academic_score = 0
+        if gpa > 0:
+            academic_score += (gpa / 4.0) * 40
+        if sat > 0:
+            academic_score += (sat / 1600) * 40
+        elif act > 0:
+            academic_score += (act / 36) * 40
+        
+        # Add factor scores
+        factor_score = (
+            safe_float(request.rigor) + 
+            safe_float(request.extracurricular_depth) + 
+            safe_float(request.leadership_positions) + 
+            safe_float(request.awards_publications) + 
+            safe_float(request.essay_quality) + 
+            safe_float(request.recommendations)
+        ) / 6.0
+        
+        academic_score += factor_score * 20
+        
+        # Determine target tier based on academic strength
+        if academic_score >= 80:
+            target_tiers = ['Elite', 'Highly Selective']
+        elif academic_score >= 60:
+            target_tiers = ['Highly Selective', 'Selective']
+        elif academic_score >= 40:
+            target_tiers = ['Selective', 'Moderately Selective']
+        else:
+            target_tiers = ['Moderately Selective', 'Less Selective']
+        
+        # Get predictions for all colleges to find balanced suggestions
+        all_college_predictions = []
+        
+        for i, row in df.iterrows():
+            try:
+                college_data = {
+                    'unitid': row['unitid'],
+                    'name': f"College_{row['unitid']}",
+                    'acceptance_rate': float(row['acceptance_rate']),
+                    'selectivity_tier': row['selectivity_tier'],
+                    'sat_25th': int(row['sat_total_25']) if pd.notna(row['sat_total_25']) else 1200,
+                    'sat_75th': int(row['sat_total_75']) if pd.notna(row['sat_total_75']) else 1500,
+                    'act_25th': int(row['act_composite_25']) if pd.notna(row['act_composite_25']) else 25,
+                    'act_75th': int(row['act_composite_75']) if pd.notna(row['act_composite_75']) else 35,
+                    'test_policy': row['test_policy'],
+                    'financial_aid_policy': row['financial_aid_policy'],
+                    'gpa_average': float(row['gpa_average']) if pd.notna(row['gpa_average']) else 3.7
+                }
+                
+                # Create college features and get prediction
+                college = CollegeFeatures(
+                    name=college_data['name'],
+                    acceptance_rate=college_data['acceptance_rate'],
+                    sat_25th=college_data['sat_25th'],
+                    sat_75th=college_data['sat_75th'],
+                    act_25th=college_data['act_25th'],
+                    act_75th=college_data['act_75th'],
+                    test_policy=college_data['test_policy'],
+                    financial_aid_policy=college_data['financial_aid_policy'],
+                    selectivity_tier=college_data['selectivity_tier'],
+                    gpa_average=college_data['gpa_average']
+                )
+                
+                # Get prediction
+                result = predictor.predict(student, college, model_name='ensemble', use_formula=True)
+                
+                all_college_predictions.append({
+                    'college_id': f"college_{row['unitid']}",
+                    'name': college_data['name'],
+                    'probability': round(result.probability, 4),
+                    'confidence_interval': {
+                        "lower": round(result.confidence_interval[0], 4),
+                        "upper": round(result.confidence_interval[1], 4)
+                    },
+                    'acceptance_rate': college_data['acceptance_rate'],
+                    'selectivity_tier': college_data['selectivity_tier'],
+                    'tier': college_data['selectivity_tier'],
+                    'tuition': f"${int(row.get('tuition', 50000)):,}",
+                    'enrollment': f"{int(row.get('enrollment', 10000)):,}",
+                    'difficulty': college_data['selectivity_tier'],
+                    'popularMajors': [request.major, 'Business', 'Engineering', 'Liberal Arts'],
+                    'description': f"Strong {college_data['selectivity_tier'].lower()} institution with {college_data['acceptance_rate']:.1f}% acceptance rate"
+                })
+                
+                # Log progress every 10 colleges
+                if (i + 1) % 10 == 0:
+                    logger.info(f"Processed {i + 1} colleges, current count: {len(all_college_predictions)}")
+                    
+            except Exception as e:
+                logger.error(f"Error processing college {i}: {e}")
+                continue
+        
+        # Categorize colleges by probability ranges
+        # Note: ML model probabilities are typically lower, so we adjust the ranges
+        # Sort all predictions by probability to understand the distribution
+        all_college_predictions.sort(key=lambda x: x['probability'], reverse=True)
+        
+        # Use percentile-based categorization to ensure balanced distribution
+        total_colleges = len(all_college_predictions)
+        safety_colleges = all_college_predictions[:total_colleges//3]  # Top third
+        target_colleges = all_college_predictions[total_colleges//3:2*total_colleges//3]  # Middle third
+        reach_colleges = all_college_predictions[2*total_colleges//3:]  # Bottom third
+        
+        # Assign categories
+        for college in safety_colleges:
+            college['category'] = 'safety'
+        for college in target_colleges:
+            college['category'] = 'target'
+        for college in reach_colleges:
+            college['category'] = 'reach'
+        
+        # Sort each category by probability (highest first for safety, balanced for target, highest for reach)
+        safety_colleges.sort(key=lambda x: x['probability'], reverse=True)
+        target_colleges.sort(key=lambda x: x['probability'], reverse=True)
+        reach_colleges.sort(key=lambda x: x['probability'], reverse=True)
+        
+        # Select balanced suggestions: 3 safety, 3 target, 3 reach
+        balanced_suggestions = []
+        
+        # Add 3 safety colleges (75%+ chance)
+        for college in safety_colleges[:3]:
+            college['category'] = 'safety'
+            balanced_suggestions.append(college)
+        
+        # Add 3 target colleges (25-75% chance)
+        for college in target_colleges[:3]:
+            college['category'] = 'target'
+            balanced_suggestions.append(college)
+        
+        # Add 3 reach colleges (10-25% chance)
+        for college in reach_colleges[:3]:
+            college['category'] = 'reach'
+            balanced_suggestions.append(college)
+        
+        # If we don't have enough in any category, fill with the best available
+        if len(balanced_suggestions) < 9:
+            remaining_colleges = [c for c in all_college_predictions if c not in balanced_suggestions]
+            remaining_colleges.sort(key=lambda x: x['probability'], reverse=True)
+            
+            while len(balanced_suggestions) < 9 and remaining_colleges:
+                college = remaining_colleges.pop(0)
+                # Determine category based on probability
+                if college['probability'] >= 0.75:
+                    college['category'] = 'safety'
+                elif college['probability'] >= 0.25:
+                    college['category'] = 'target'
+                else:
+                    college['category'] = 'reach'
+                balanced_suggestions.append(college)
+        
+        # Debug: Log the distribution
+        logger.info(f"Total colleges processed: {len(all_college_predictions)}")
+        logger.info(f"Found {len(safety_colleges)} safety, {len(target_colleges)} target, {len(reach_colleges)} reach colleges")
+        logger.info(f"Total balanced suggestions: {len(balanced_suggestions)}")
+        
+        # Log some sample probabilities
+        if all_college_predictions:
+            sample_probs = [c['probability'] for c in all_college_predictions[:5]]
+            logger.info(f"Sample probabilities: {sample_probs}")
+        
+        # Return top 9 balanced suggestions
+        top_suggestions = balanced_suggestions[:9]
+        
+        return {
+            "success": True,
+            "suggestions": top_suggestions,
+            "academic_score": round(academic_score, 2),
+            "target_tiers": target_tiers,
+            "prediction_method": "hybrid_ml_formula"
+        }
+        
+    except Exception as e:
+        logger.error(f"College suggestion error: {e}")
+        return {
+            "success": False,
+            "error": str(e),
+            "message": "College suggestions failed. Please try again."
+        }
 
 @app.post("/predict")
 async def predict_admission(request: PredictionRequest):
