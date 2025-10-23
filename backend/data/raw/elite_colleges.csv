@@ -1,0 +1,20 @@
+name,state,acceptance_rate,applications,admitted,enrolled,tuition_in_state_usd,tuition_out_of_state_usd,control,student_body_size,unitid,acceptance_rate_percent,selectivity_tier,city,gpa_average,test_policy,financial_aid_policy,data_completeness
+Harvard University,MA,0.0401,,,,55587.0,55587.0,2,7938.0,166027,4.01,Elite,,3.9,Required,Need-blind,1
+Massachusetts Institute of Technology,MA,0.0411,,,,55878.0,55878.0,2,4629.0,166683,4.109999999999999,Elite,,3.9,Required,Need-blind,1
+Stanford University,CA,0.0395,,,,56169.0,56169.0,2,7645.0,243744,3.95,Elite,,3.9,Required,Need-blind,1
+Yale University,CT,0.0531,,,,59950.0,59950.0,2,6535.0,130794,5.3100000000000005,Elite,,3.9,Required,Need-blind,1
+Princeton University,NJ,0.0438,,,,56010.0,56010.0,2,5236.0,186131,4.38,Elite,,3.9,Required,Need-blind,1
+Columbia University in the City of New York,NY,0.0413,,,,63530.0,63530.0,2,8833.0,190150,4.130000000000001,Elite,,3.9,Required,Need-blind,1
+University of Pennsylvania,PA,0.0587,,,,61710.0,61710.0,2,10644.0,215062,5.87,Elite,,3.9,Required,Need-blind,1
+Dartmouth College,NH,0.0617,,,,60870.0,60870.0,2,4533.0,182670,6.17,Elite,,3.9,Required,Need-blind,1
+Brown University,RI,0.0551,,,,62304.0,62304.0,2,7125.0,217156,5.510000000000001,Elite,,3.9,Required,Need-blind,1
+Cornell University,NY,0.0869,,,,61015.0,61015.0,2,15451.0,190415,8.690000000000001,Elite,,3.9,Required,Need-blind,1
+Duke University,NC,0.0589,,,,60244.0,60244.0,2,6815.0,198419,5.89,Elite,,3.9,Required,Need-blind,1
+Northwestern University,IL,0.0697,,,,60768.0,60768.0,2,8691.0,147767,6.97,Elite,,3.9,Required,Need-blind,1
+Vanderbilt University,TN,0.0714,,,,56966.0,56966.0,2,7104.0,221999,7.140000000000001,Elite,,3.9,Required,Need-blind,1
+Rice University,TX,0.0948,,,,52895.0,52895.0,2,4240.0,227757,9.48,Elite,,3.9,Required,Need-blind,1
+Emory University,GA,0.1305,,,,55468.0,55468.0,2,7050.0,139658,13.05,Highly Selective,,3.9,Required,Need-blind,1
+Georgetown University,DC,0.1198,,,,59957.0,59957.0,2,7395.0,131496,11.98,Highly Selective,,3.9,Required,Need-blind,1
+Carnegie Mellon University,PA,0.1354,,,,58924.0,58924.0,2,6880.0,211440,13.54,Highly Selective,,3.9,Required,Need-blind,1
+New York University,NY,0.1296,,,,56500.0,56500.0,2,28556.0,193900,12.959999999999999,Highly Selective,,3.9,Required,Need-blind,1
+University of Chicago,IL,0.0648,,,,62241.0,62241.0,2,7558.0,144050,6.4799999999999995,Elite,,3.9,Required,Need-blind,1
