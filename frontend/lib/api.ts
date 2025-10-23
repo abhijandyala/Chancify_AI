@@ -2,8 +2,10 @@
  * API service for communicating with the ML backend
  */
 
+// Backend URL configuration
+// TODO: Deploy backend to Railway and update this URL
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://chancifyai.up.railway.app' 
+  ? 'https://chancifyai-backend.up.railway.app'  // Backend needs to be deployed separately
   : 'http://localhost:8000';
 
 export interface PredictionRequest {
@@ -140,6 +142,9 @@ export async function getCollegeSuggestions(
     });
 
     if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error('Backend not deployed. Please deploy the backend to Railway or run it locally.');
+      }
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
@@ -154,7 +159,7 @@ export async function getCollegeSuggestions(
       target_tiers: [],
       prediction_method: 'error',
       error: error instanceof Error ? error.message : 'Unknown error',
-      message: 'Failed to get college suggestions'
+      message: 'Failed to get college suggestions. Backend may not be deployed.'
     };
   }
 }
