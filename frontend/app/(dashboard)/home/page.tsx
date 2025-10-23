@@ -8,13 +8,13 @@ import { InfoIcon } from '@/components/ui/InfoIcon'
 import { InfoModal } from '@/components/ui/InfoModal'
 import CollegeCombobox from '@/components/CollegeCombobox'
 import { Button } from '@/components/ui/Button'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { COLLEGES } from '@/lib/colleges'
 import { FACTOR_DESCRIPTIONS } from '@/lib/factorDescriptions'
-import { MAJORS } from '@/lib/majors'
-import { motion, AnimatePresence } from 'framer-motion'
-import { GraduationCap, Star, Building2, Calculator, Brain, Zap, Target, ChevronRight, ChevronDown, Search } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { GraduationCap, Star, Building2, Calculator, Brain, Zap, Target, ChevronRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { MajorSelectionModal } from '@/components/ui/MajorSelectionModal'
 
 export const dynamic = 'force-dynamic'
 
@@ -26,10 +26,8 @@ export default function HomePage() {
     factor: ''
   })
   
-  // Major dropdown state
-  const [isMajorDropdownOpen, setIsMajorDropdownOpen] = useState(false)
-  const [majorSearchQuery, setMajorSearchQuery] = useState('')
-  const majorDropdownRef = useRef<HTMLDivElement>(null)
+  // Major modal state
+  const [isMajorModalOpen, setIsMajorModalOpen] = useState(false)
   
   const [profile, setProfile] = useState({
     gpa_unweighted: '',
@@ -61,22 +59,18 @@ export default function HomePage() {
     setProfile(prev => ({ ...prev, [field]: value }))
   }
 
-  // Filter majors based on search query
-  const filteredMajors = MAJORS.filter(major =>
-    major.toLowerCase().includes(majorSearchQuery.toLowerCase())
-  ).slice(0, 50) // Limit to 50 results for performance
+  // Major modal handlers
+  const handleOpenMajorModal = () => {
+    setIsMajorModalOpen(true)
+  }
 
-  // Close major dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (majorDropdownRef.current && !majorDropdownRef.current.contains(event.target as Node)) {
-        setIsMajorDropdownOpen(false)
-      }
-    }
+  const handleCloseMajorModal = () => {
+    setIsMajorModalOpen(false)
+  }
 
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
+  const handleSelectMajor = (major: string) => {
+    updateProfile('major', major)
+  }
 
   // Handle Google OAuth success and trial mode
   useEffect(() => {
@@ -472,77 +466,22 @@ export default function HomePage() {
             subtitle="Select your field of study"
           />
           
-          <div className="relative" ref={majorDropdownRef}>
-            <motion.button
-              onClick={() => setIsMajorDropdownOpen(!isMajorDropdownOpen)}
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-left flex items-center justify-between hover:bg-white/10 transition-all duration-300"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+          <motion.button
+            onClick={handleOpenMajorModal}
+            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-left flex items-center justify-between hover:bg-white/10 transition-all duration-300"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <span className={profile.major ? 'text-white' : 'text-white/50'}>
+              {profile.major || 'Choose your major...'}
+            </span>
+            <motion.div
+              whileHover={{ rotate: 180 }}
+              transition={{ duration: 0.3 }}
             >
-              <span className={profile.major ? 'text-white' : 'text-white/50'}>
-                {profile.major || 'Choose your major...'}
-              </span>
-              <motion.div
-                animate={{ rotate: isMajorDropdownOpen ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <ChevronDown className="w-4 h-4 text-white/50" />
-              </motion.div>
-            </motion.button>
-
-            <AnimatePresence>
-              {isMajorDropdownOpen && (
-                <motion.div
-                  className="absolute top-full left-0 right-0 mt-2 bg-black/90 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl z-[9999] max-h-80 overflow-hidden"
-                  initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                >
-                  {/* Search Bar */}
-                  <div className="p-3 border-b border-white/10">
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white/50" />
-                      <input
-                        type="text"
-                        placeholder="Search majors..."
-                        value={majorSearchQuery}
-                        onChange={(e) => setMajorSearchQuery(e.target.value)}
-                        className="w-full pl-10 pr-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Majors List */}
-                  <div className="max-h-60 overflow-y-auto">
-                    {filteredMajors.length > 0 ? (
-                      filteredMajors.map((major, index) => (
-                        <motion.button
-                          key={major}
-                          onClick={() => {
-                            updateProfile('major', major)
-                            setIsMajorDropdownOpen(false)
-                            setMajorSearchQuery('')
-                          }}
-                          className="w-full px-4 py-3 text-left hover:bg-white/10 transition-colors duration-200 border-b border-white/5 last:border-b-0"
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.02 }}
-                          whileHover={{ x: 4 }}
-                        >
-                          <span className="text-white text-sm">{major}</span>
-                        </motion.button>
-                      ))
-                    ) : (
-                      <div className="px-4 py-8 text-center text-white/50">
-                        <p>No majors found</p>
-                      </div>
-                    )}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+              <ChevronRight className="w-4 h-4 text-white/50" />
+            </motion.div>
+          </motion.button>
         </div>
       </motion.section>
 
@@ -604,6 +543,14 @@ export default function HomePage() {
         title={modalInfo.factor ? FACTOR_DESCRIPTIONS[modalInfo.factor as keyof typeof FACTOR_DESCRIPTIONS]?.title || '' : ''}
         description={modalInfo.factor ? FACTOR_DESCRIPTIONS[modalInfo.factor as keyof typeof FACTOR_DESCRIPTIONS]?.description || '' : ''}
         examples={modalInfo.factor ? FACTOR_DESCRIPTIONS[modalInfo.factor as keyof typeof FACTOR_DESCRIPTIONS]?.examples || [] : []}
+      />
+
+      {/* Major Selection Modal */}
+      <MajorSelectionModal
+        isOpen={isMajorModalOpen}
+        onClose={handleCloseMajorModal}
+        selectedMajor={profile.major}
+        onSelectMajor={handleSelectMajor}
       />
     </div>
   )
