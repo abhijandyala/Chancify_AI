@@ -6,7 +6,7 @@
 // TODO: Deploy backend to Railway and update this URL
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
   ? 'https://chancifyai-backend.up.railway.app'  // Backend needs to be deployed separately
-  : 'http://localhost:8000';
+  : 'https://unsmug-untensely-elroy.ngrok-free.dev';
 
 export interface PredictionRequest {
   gpa_unweighted: string;
