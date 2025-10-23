@@ -56,7 +56,12 @@ export default function HomePage() {
   })
 
   const updateProfile = (field: string, value: string) => {
-    setProfile(prev => ({ ...prev, [field]: value }))
+    setProfile(prev => {
+      const updatedProfile = { ...prev, [field]: value }
+      // Save to localStorage for college selection page
+      localStorage.setItem('userProfile', JSON.stringify(updatedProfile))
+      return updatedProfile
+    })
   }
 
   // Major modal handlers
@@ -110,7 +115,10 @@ export default function HomePage() {
     
     handleGoogleAuthSuccess()
     handleTrialMode()
-  }, [])
+    
+    // Save initial profile to localStorage
+    localStorage.setItem('userProfile', JSON.stringify(profile))
+  }, [profile])
 
   // Validation function to check if all required fields are filled
   const isProfileComplete = () => {
