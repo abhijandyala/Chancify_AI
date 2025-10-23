@@ -134,7 +134,7 @@ export const SimpleSearchableSelect = ({
             stroke="currentColor"
             viewBox="0 0 24 24"
             animate={{ rotate: isOpen ? 180 : 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.3 }}
           >
             <path
               strokeLinecap="round"
@@ -159,7 +159,7 @@ export const SimpleSearchableSelect = ({
               initial={{ opacity: 0, y: -10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
+              transition={{ duration: 0.2 }}
             >
               <div className="p-4 border-b border-gray-800/50 bg-gradient-to-r from-yellow-400/5 to-transparent">
                 <motion.input

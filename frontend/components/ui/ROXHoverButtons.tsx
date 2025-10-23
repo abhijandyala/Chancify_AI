@@ -65,7 +65,7 @@ const HoverButton = ({
         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
         initial={{ x: '-100%' }}
         whileHover={{ x: '100%' }}
-        transition={{ duration: 0.6, ease: "easeInOut" }}
+        transition={{ duration: 0.6 }}
       />
     </motion.button>
   );

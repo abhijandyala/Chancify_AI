@@ -30,7 +30,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
             initial={{ x: -64, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -64, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.3 }}
             className="fixed left-0 top-1/2 -translate-y-1/2 z-30"
           >
             <motion.button
@@ -52,7 +52,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
           x: isCollapsed ? -256 : 0,
           opacity: isCollapsed ? 0 : 1
         }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
+        transition={{ duration: 0.3 }}
       >
       {/* Brand Section - Minimal */}
       <motion.div 

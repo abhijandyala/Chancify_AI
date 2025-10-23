@@ -106,7 +106,7 @@ const HoverCard = ({ data, index }: { data: any; index: number }) => {
             y: isHovered ? -8 : 0,
             scale: isHovered ? 1.02 : 1,
           }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
+          transition={{ duration: 0.3 }}
           className={`
             relative p-8 rounded-2xl border backdrop-blur-md
             bg-gradient-to-br ${data.color}
