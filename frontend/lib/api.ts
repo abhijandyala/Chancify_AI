@@ -103,6 +103,18 @@ export interface CollegeSuggestion {
   student_body_size: number;
 }
 
+export interface CollegeSearchResult {
+  college_id: string;
+  name: string;
+  acceptance_rate: number;
+  selectivity_tier: string;
+  city: string;
+  state: string;
+  tuition_in_state: number;
+  tuition_out_of_state: number;
+  student_body_size: number;
+}
+
 export interface CollegeSuggestionsResponse {
   success: boolean;
   suggestions: CollegeSuggestion[];
@@ -192,6 +204,42 @@ export async function getCollegeSuggestions(
       prediction_method: 'error',
       error: error instanceof Error ? error.message : 'Unknown error',
       message: 'Failed to get college suggestions. Backend may not be deployed.'
+    };
+  }
+}
+
+/**
+ * Search colleges by name
+ */
+export async function searchColleges(query: string, limit: number = 20): Promise<{
+  success: boolean;
+  colleges: CollegeSearchResult[];
+  total: number;
+  error?: string;
+  message?: string;
+}> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/search/colleges?q=${encodeURIComponent(query)}&limit=${limit}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error searching colleges:', error);
+    return {
+      success: false,
+      colleges: [],
+      total: 0,
+      error: error instanceof Error ? error.message : 'Unknown error',
+      message: 'Failed to search colleges. Please try again.'
     };
   }
 }

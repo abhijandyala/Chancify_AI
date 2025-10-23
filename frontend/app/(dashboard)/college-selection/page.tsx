@@ -3,26 +3,51 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Search, Building2, Users, DollarSign, GraduationCap, ChevronRight, Star, MapPin, Loader2 } from 'lucide-react'
-import { COLLEGES } from '@/lib/colleges'
 import { Button } from '@/components/ui/Button'
 import { useRouter } from 'next/navigation'
-import { getCollegeSuggestions, getAdmissionProbability, type PredictionRequest, type CollegeSuggestionsRequest, type CollegeSuggestion } from '@/lib/api'
+import { getCollegeSuggestions, getAdmissionProbability, searchColleges, type PredictionRequest, type CollegeSuggestionsRequest, type CollegeSuggestion, type CollegeSearchResult } from '@/lib/api'
 
 export default function CollegeSelectionPage() {
   const router = useRouter()
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedColleges, setSelectedColleges] = useState<string[]>([])
   const [suggestedColleges, setSuggestedColleges] = useState<CollegeSuggestion[]>([])
+  const [searchResults, setSearchResults] = useState<CollegeSearchResult[]>([])
   const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false)
+  const [isLoadingSearch, setIsLoadingSearch] = useState(false)
   const [isLoadingPrediction, setIsLoadingPrediction] = useState(false)
   const [predictionResults, setPredictionResults] = useState<Record<string, any>>({})
   const [error, setError] = useState<string | null>(null)
   const searchRef = useRef<HTMLDivElement>(null)
 
-  // Filter colleges based on search query
-  const filteredColleges = COLLEGES.filter(college =>
-    college.label.toLowerCase().includes(searchQuery.toLowerCase())
-  ).slice(0, 20) // Limit to 20 results for performance
+  // Search colleges using real data from backend
+  useEffect(() => {
+    const performSearch = async () => {
+      if (searchQuery.trim().length < 2) {
+        setSearchResults([])
+        return
+      }
+
+      setIsLoadingSearch(true)
+      try {
+        const response = await searchColleges(searchQuery, 20)
+        if (response.success) {
+          setSearchResults(response.colleges)
+        } else {
+          console.error('Search failed:', response.error)
+          setSearchResults([])
+        }
+      } catch (error) {
+        console.error('Search error:', error)
+        setSearchResults([])
+      } finally {
+        setIsLoadingSearch(false)
+      }
+    }
+
+    const timeoutId = setTimeout(performSearch, 300) // Debounce search
+    return () => clearTimeout(timeoutId)
+  }, [searchQuery])
 
   // Get AI suggestions from real ML backend
   useEffect(() => {
@@ -34,12 +59,12 @@ export default function CollegeSelectionPage() {
         // Get user profile from localStorage
         const userProfile = JSON.parse(localStorage.getItem('userProfile') || '{}')
         
-        // Create college suggestions request
+        // Create college suggestions request - only include fields that backend expects
         const collegeSuggestionsRequest: CollegeSuggestionsRequest = {
-          gpa_unweighted: userProfile.gpa_unweighted || '',
-          gpa_weighted: userProfile.gpa_weighted || '',
-          sat: userProfile.sat || '',
-          act: userProfile.act || '',
+          gpa_unweighted: userProfile.gpa_unweighted || '3.5',
+          gpa_weighted: userProfile.gpa_weighted || '3.8',
+          sat: userProfile.sat || '1200',
+          act: userProfile.act || '25',
           major: userProfile.major || 'Computer Science',
           extracurricular_depth: userProfile.extracurricular_depth || '5',
           leadership_positions: userProfile.leadership_positions || '5',
@@ -95,10 +120,10 @@ export default function CollegeSelectionPage() {
           const userProfile = JSON.parse(localStorage.getItem('userProfile') || '{}')
           
           const collegeSuggestionsRequest: CollegeSuggestionsRequest = {
-            gpa_unweighted: userProfile.gpa_unweighted || '',
-            gpa_weighted: userProfile.gpa_weighted || '',
-            sat: userProfile.sat || '',
-            act: userProfile.act || '',
+            gpa_unweighted: userProfile.gpa_unweighted || '3.5',
+            gpa_weighted: userProfile.gpa_weighted || '3.8',
+            sat: userProfile.sat || '1200',
+            act: userProfile.act || '25',
             major: userProfile.major || 'Computer Science',
             extracurricular_depth: userProfile.extracurricular_depth || '5',
             leadership_positions: userProfile.leadership_positions || '5',
@@ -268,38 +293,58 @@ export default function CollegeSelectionPage() {
           <div className="rox-card p-6">
             <h3 className="text-lg font-semibold text-white mb-4">Search Results</h3>
             <div className="space-y-3 max-h-96 overflow-y-auto">
-              {filteredColleges.map((college) => (
-                <motion.div
-                  key={college.value}
-                  whileHover={{ scale: 1.02 }}
-                  className="flex items-center justify-between p-3 border border-gray-600 rounded-lg hover:border-yellow-400/50 transition-colors"
-                >
-                  <div className="flex items-center gap-3">
-                    <input
-                      type="checkbox"
-                      checked={selectedColleges.includes(college.value)}
-                      onChange={() => handleCollegeSelect(college.value)}
-                      className="w-4 h-4 text-yellow-400 bg-transparent border-gray-600 rounded focus:ring-yellow-400"
-                    />
-                    <div>
-                      <p className="text-white font-medium">{college.label}</p>
-                      <p className="text-gray-400 text-sm">{college.tier} • {college.acceptance_rate}% acceptance</p>
-                    </div>
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => handleGetPrediction(college.value)}
-                    disabled={isLoadingPrediction}
+              {isLoadingSearch ? (
+                <div className="flex items-center justify-center py-8">
+                  <Loader2 className="w-6 h-6 animate-spin text-yellow-400" />
+                  <span className="ml-2 text-gray-400">Searching colleges...</span>
+                </div>
+              ) : searchResults.length > 0 ? (
+                searchResults.map((college) => (
+                  <motion.div
+                    key={college.college_id}
+                    whileHover={{ scale: 1.02 }}
+                    className="flex items-center justify-between p-3 border border-gray-600 rounded-lg hover:border-yellow-400/50 transition-colors"
                   >
-                    {isLoadingPrediction ? (
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                    ) : (
-                      'Predict'
-                    )}
-                  </Button>
-                </motion.div>
-              ))}
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="checkbox"
+                        checked={selectedColleges.includes(college.college_id)}
+                        onChange={() => handleCollegeSelect(college.college_id)}
+                        className="w-4 h-4 text-yellow-400 bg-transparent border-gray-600 rounded focus:ring-yellow-400"
+                      />
+                      <div>
+                        <p className="text-white font-medium">{college.name}</p>
+                        <p className="text-gray-400 text-sm">
+                          {college.selectivity_tier} • {(college.acceptance_rate * 100).toFixed(1)}% acceptance
+                        </p>
+                        <p className="text-gray-500 text-xs">
+                          {college.city}, {college.state} • ${college.tuition_in_state?.toLocaleString() || 'N/A'} tuition
+                        </p>
+                      </div>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleGetPrediction(college.college_id)}
+                      disabled={isLoadingPrediction}
+                    >
+                      {isLoadingPrediction ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        'Predict'
+                      )}
+                    </Button>
+                  </motion.div>
+                ))
+              ) : searchQuery.length >= 2 ? (
+                <div className="text-center py-8 text-gray-400">
+                  No colleges found matching "{searchQuery}"
+                </div>
+              ) : (
+                <div className="text-center py-8 text-gray-400">
+                  Start typing to search for colleges...
+                </div>
+              )}
             </div>
           </div>
         </motion.div>

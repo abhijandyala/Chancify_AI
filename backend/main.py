@@ -766,6 +766,66 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
             "message": "College suggestions failed. Please try again."
         }
 
+@app.get("/api/search/colleges")
+async def search_colleges(q: str = "", limit: int = 20):
+    """Search colleges by name using real college data"""
+    try:
+        # Load integrated college data
+        df = pd.read_csv('backend/data/raw/integrated_colleges.csv')
+        
+        # Filter colleges by name if query provided
+        if q:
+            df = df[df['name'].str.contains(q, case=False, na=False)]
+        
+        # Limit results
+        df = df.head(limit)
+        
+        # Format results
+        colleges = []
+        for _, row in df.iterrows():
+            # Handle acceptance rate
+            if pd.notna(row.get('acceptance_rate')):
+                acceptance_rate = float(row['acceptance_rate'])
+            elif pd.notna(row.get('acceptance_rate_percent')):
+                acceptance_rate = float(row['acceptance_rate_percent']) / 100
+            else:
+                # Default based on selectivity tier
+                tier = row['selectivity_tier']
+                if tier == 'Elite':
+                    acceptance_rate = 0.1
+                elif tier == 'Highly Selective':
+                    acceptance_rate = 0.3
+                elif tier == 'Moderately Selective':
+                    acceptance_rate = 0.6
+                else:
+                    acceptance_rate = 0.8
+            
+            colleges.append({
+                'college_id': f"college_{row['unitid']}",
+                'name': str(row['name']) if pd.notna(row['name']) else f"College_{row['unitid']}",
+                'acceptance_rate': acceptance_rate,
+                'selectivity_tier': row['selectivity_tier'],
+                'city': str(row['city']) if pd.notna(row['city']) else "Unknown",
+                'state': str(row['state']) if pd.notna(row['state']) else "Unknown",
+                'tuition_in_state': int(row['tuition_in_state_usd']) if pd.notna(row['tuition_in_state_usd']) else 20000,
+                'tuition_out_of_state': int(row['tuition_out_of_state_usd']) if pd.notna(row['tuition_out_of_state_usd']) else 40000,
+                'student_body_size': int(row['student_body_size']) if pd.notna(row['student_body_size']) else 5000
+            })
+        
+        return {
+            "success": True,
+            "colleges": colleges,
+            "total": len(colleges)
+        }
+        
+    except Exception as e:
+        logger.error(f"College search error: {e}")
+        return {
+            "success": False,
+            "error": str(e),
+            "message": "College search failed. Please try again."
+        }
+
 @app.post("/predict")
 async def predict_admission(request: PredictionRequest):
     """Predict admission probability using ML model"""
