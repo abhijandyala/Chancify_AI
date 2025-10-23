@@ -37,7 +37,7 @@ export default function WatchlistPage() {
             <Bookmark className="w-4 h-4" />
             <span className="text-sm font-medium">College Watchlist</span>
           </div>
-          <h1 className="rox-heading-1 mb-4 gradient-text">Your College Watchlist</h1>
+          <h1 className="rox-heading-1 mb-4 text-white">Your College Watchlist</h1>
           <p className="rox-text-large">Track your favorite colleges and monitor your application progress</p>
         </motion.div>
 

@@ -62,7 +62,7 @@ export default function SATPage() {
             <Timer className="w-4 h-4" />
             <span className="text-sm font-medium">SAT Preparation</span>
           </div>
-          <h1 className="rox-heading-1 mb-6 gradient-text">
+          <h1 className="rox-heading-1 mb-6 text-white">
             Practice • Analyze • Improve
           </h1>
           <p className="rox-text-large max-w-3xl mx-auto">

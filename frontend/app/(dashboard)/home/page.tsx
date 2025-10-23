@@ -389,7 +389,7 @@ export default function HomePage() {
             <Brain className="w-4 h-4" />
             <span className="text-sm font-medium">AI Assessment</span>
           </div>
-          <h1 className="rox-heading-1 mb-6 gradient-text">
+          <h1 className="rox-heading-1 mb-6 text-white">
             Chancify AI
           </h1>
           <p className="rox-text-large max-w-3xl mx-auto">
@@ -574,12 +574,12 @@ export default function HomePage() {
           
             <button
               onClick={handleOpenMajorModal}
-              className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-left flex items-center justify-between hover:bg-gray-100 transition-all duration-200"
+              className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-left flex items-center justify-between hover:bg-white/10 transition-all duration-200 backdrop-blur-sm"
             >
-              <span className={profile.major ? 'text-gray-900' : 'text-gray-500'}>
+              <span className={profile.major ? 'text-white' : 'text-gray-400'}>
                 {profile.major || 'Choose your major...'}
               </span>
-              <ChevronRight className="w-4 h-4 text-gray-500" />
+              <ChevronRight className="w-4 h-4 text-gray-400" />
             </button>
         </div>
       </motion.section>

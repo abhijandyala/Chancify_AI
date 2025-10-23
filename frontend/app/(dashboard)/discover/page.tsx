@@ -43,7 +43,7 @@ export default function DiscoverPage() {
             <Search className="w-4 h-4" />
             <span className="text-sm font-medium">College Discovery</span>
           </div>
-          <h1 className="rox-heading-1 mb-4 gradient-text">Discover Your Perfect College</h1>
+          <h1 className="rox-heading-1 mb-4 text-white">Discover Your Perfect College</h1>
           <p className="rox-text-large">Find colleges that match your academic profile and career goals</p>
         </motion.div>
 
