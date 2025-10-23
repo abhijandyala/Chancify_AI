@@ -39,11 +39,11 @@ export default function DiscoverPage() {
       <div className="rox-section">
         {/* Header Section */}
         <motion.div {...enter} className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-gray-200 bg-gray-50 text-gray-700 mb-6">
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/20 bg-white/10 text-white mb-6 backdrop-blur-sm">
             <Search className="w-4 h-4" />
             <span className="text-sm font-medium">College Discovery</span>
           </div>
-          <h1 className="rox-heading-1 mb-4">Discover Your Perfect College</h1>
+          <h1 className="rox-heading-1 mb-4 gradient-text">Discover Your Perfect College</h1>
           <p className="rox-text-large">Find colleges that match your academic profile and career goals</p>
         </motion.div>
 
@@ -174,7 +174,7 @@ export default function DiscoverPage() {
               content: (
                 <motion.div {...enter}>
                   <div className="rox-card p-12 text-center">
-                    <div className="p-4 rounded-lg bg-blue-50 text-blue-600 w-fit mx-auto mb-6">
+                    <div className="p-4 rounded-lg bg-yellow-400/20 text-yellow-400 w-fit mx-auto mb-6">
                       <Star className="w-8 h-8" />
                     </div>
                     <h3 className="rox-heading-3 mb-4">Scholarship Search</h3>

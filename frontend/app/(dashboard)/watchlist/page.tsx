@@ -33,11 +33,11 @@ export default function WatchlistPage() {
       <div className="rox-section">
         {/* Header Section */}
         <motion.div {...enter} className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-gray-200 bg-gray-50 text-gray-700 mb-6">
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/20 bg-white/10 text-white mb-6 backdrop-blur-sm">
             <Bookmark className="w-4 h-4" />
             <span className="text-sm font-medium">College Watchlist</span>
           </div>
-          <h1 className="rox-heading-1 mb-4">Your College Watchlist</h1>
+          <h1 className="rox-heading-1 mb-4 gradient-text">Your College Watchlist</h1>
           <p className="rox-text-large">Track your favorite colleges and monitor your application progress</p>
         </motion.div>
 
@@ -45,28 +45,28 @@ export default function WatchlistPage() {
         <motion.div {...enter} className="mb-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div className="rox-card p-6 text-center">
-              <div className="p-3 rounded-lg bg-blue-50 text-blue-600 w-fit mx-auto mb-4">
+              <div className="p-3 rounded-lg bg-yellow-400/20 text-yellow-400 w-fit mx-auto mb-4">
                 <Bookmark className="w-6 h-6" />
               </div>
               <h3 className="rox-heading-3 mb-2">12</h3>
               <p className="rox-text-muted">Colleges Saved</p>
             </div>
             <div className="rox-card p-6 text-center">
-              <div className="p-3 rounded-lg bg-green-50 text-green-600 w-fit mx-auto mb-4">
+              <div className="p-3 rounded-lg bg-yellow-400/20 text-yellow-400 w-fit mx-auto mb-4">
                 <TrendingUp className="w-6 h-6" />
               </div>
               <h3 className="rox-heading-3 mb-2">8</h3>
               <p className="rox-text-muted">Applications Sent</p>
             </div>
             <div className="rox-card p-6 text-center">
-              <div className="p-3 rounded-lg bg-yellow-50 text-yellow-600 w-fit mx-auto mb-4">
+              <div className="p-3 rounded-lg bg-yellow-400/20 text-yellow-400 w-fit mx-auto mb-4">
                 <Target className="w-6 h-6" />
               </div>
               <h3 className="rox-heading-3 mb-2">4</h3>
               <p className="rox-text-muted">Responses Received</p>
             </div>
             <div className="rox-card p-6 text-center">
-              <div className="p-3 rounded-lg bg-purple-50 text-purple-600 w-fit mx-auto mb-4">
+              <div className="p-3 rounded-lg bg-yellow-400/20 text-yellow-400 w-fit mx-auto mb-4">
                 <Star className="w-6 h-6" />
               </div>
               <h3 className="rox-heading-3 mb-2">2</h3>
@@ -122,7 +122,7 @@ export default function WatchlistPage() {
                   ) : (
                     <motion.div {...enter}>
                       <div className="rox-card p-12 text-center">
-                        <div className="p-4 rounded-lg bg-blue-50 text-blue-600 w-fit mx-auto mb-6">
+                        <div className="p-4 rounded-lg bg-yellow-400/20 text-yellow-400 w-fit mx-auto mb-6">
                           <Bookmark className="w-8 h-8" />
                         </div>
                         <h3 className="rox-heading-3 mb-4">No Colleges in Watchlist</h3>
@@ -144,7 +144,7 @@ export default function WatchlistPage() {
               content: (
                 <motion.div {...enter}>
                   <div className="rox-card p-12 text-center">
-                    <div className="p-4 rounded-lg bg-blue-50 text-blue-600 w-fit mx-auto mb-6">
+                    <div className="p-4 rounded-lg bg-yellow-400/20 text-yellow-400 w-fit mx-auto mb-6">
                       <Star className="w-8 h-8" />
                     </div>
                     <h3 className="rox-heading-3 mb-4">Scholarship Tracking</h3>

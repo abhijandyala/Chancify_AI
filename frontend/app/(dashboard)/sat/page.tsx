@@ -58,11 +58,11 @@ export default function SATPage() {
       <div className="rox-section">
         {/* Header Section */}
         <motion.div {...enter} className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-gray-200 bg-gray-50 text-gray-700 mb-6">
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/20 bg-white/10 text-white mb-6 backdrop-blur-sm">
             <Timer className="w-4 h-4" />
             <span className="text-sm font-medium">SAT Preparation</span>
           </div>
-          <h1 className="rox-heading-1 mb-6">
+          <h1 className="rox-heading-1 mb-6 gradient-text">
             Practice • Analyze • Improve
           </h1>
           <p className="rox-text-large max-w-3xl mx-auto">
@@ -82,7 +82,7 @@ export default function SATPage() {
             >
               <div className="rox-card p-6 h-full hover:shadow-lg transition-all duration-200">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className={`p-3 rounded-lg bg-${module.color}-50 text-${module.color}-600`}>
+                  <div className="p-3 rounded-lg bg-yellow-400/20 text-yellow-400">
                     <Icon className="w-6 h-6" />
                   </div>
                   <div className="flex-1">
@@ -123,7 +123,7 @@ export default function SATPage() {
       <motion.div {...enter} className="mb-8">
         <div className="rox-card p-6">
           <div className="flex items-center gap-3 mb-6">
-            <div className="p-3 rounded-lg bg-green-50 text-green-600">
+            <div className="p-3 rounded-lg bg-yellow-400/20 text-yellow-400">
               <BarChart3 className="w-6 h-6" />
             </div>
             <div>
@@ -161,7 +161,7 @@ export default function SATPage() {
       <motion.div {...enter} className="mb-8">
         <div className="rox-card p-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <div className="p-3 rounded-lg bg-purple-50 text-purple-600">
+            <div className="p-3 rounded-lg bg-yellow-400/20 text-yellow-400">
               <Zap className="w-6 h-6" />
             </div>
             <div>

@@ -4,6 +4,7 @@ import { GlassCard } from '@/components/ui/GlassCard'
 import { Database, Users, TrendingUp, FileText, BarChart3, Lightbulb } from 'lucide-react'
 import Reveal from './Reveal'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 
 const infoSections = [
   {
@@ -71,7 +72,22 @@ export default function ROXAgenticWorkflows() {
         </h3>
       </Reveal>
 
-      <div className="bg-black/80 backdrop-blur-sm rounded-3xl p-8 border border-white/10">
+      <motion.div 
+        className="bg-black/80 backdrop-blur-sm rounded-3xl p-8 border border-white/10"
+        initial={{ opacity: 0, y: 30, scale: 0.95 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ 
+          duration: 0.8, 
+          type: "spring", 
+          damping: 20, 
+          stiffness: 100 
+        }}
+        whileHover={{ 
+          scale: 1.02,
+          transition: { duration: 0.3 }
+        }}
+      >
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {infoSections.map((section, i) => (
             <Reveal key={section.title} delay={0.1 + (i * 0.05)}>
@@ -100,7 +116,7 @@ export default function ROXAgenticWorkflows() {
             </Reveal>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

@@ -385,11 +385,11 @@ export default function HomePage() {
       <div className="rox-section">
         {/* Header */}
         <motion.div {...enter} className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-gray-200 bg-gray-50 text-gray-700 mb-6">
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/20 bg-white/10 text-white mb-6 backdrop-blur-sm">
             <Brain className="w-4 h-4" />
             <span className="text-sm font-medium">AI Assessment</span>
           </div>
-          <h1 className="rox-heading-1 mb-6">
+          <h1 className="rox-heading-1 mb-6 gradient-text">
             Chancify AI
           </h1>
           <p className="rox-text-large max-w-3xl mx-auto">
@@ -401,7 +401,7 @@ export default function HomePage() {
         <motion.section {...enter} className="mb-12">
           <div className="rox-card p-8">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 rounded-lg bg-blue-50 text-blue-600">
+              <div className="p-2 rounded-lg bg-yellow-400/20 text-yellow-400">
                 <GraduationCap className="w-5 h-5" />
               </div>
               <h2 className="rox-heading-3">Academic Foundation</h2>
@@ -457,7 +457,7 @@ export default function HomePage() {
         <motion.section {...enter} className="mb-12">
           <div className="rox-card p-8">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 rounded-lg bg-amber-50 text-amber-600">
+              <div className="p-2 rounded-lg bg-yellow-400/20 text-yellow-400">
                 <Star className="w-5 h-5" />
               </div>
               <h2 className="rox-heading-3">Course Rigor & Class Info</h2>
@@ -511,7 +511,7 @@ export default function HomePage() {
         <motion.section {...enter} className="mb-12">
           <div className="rox-card p-8">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 rounded-lg bg-purple-50 text-purple-600">
+              <div className="p-2 rounded-lg bg-yellow-400/20 text-yellow-400">
                 <Star className="w-5 h-5" />
               </div>
               <div>
@@ -563,7 +563,7 @@ export default function HomePage() {
         <motion.section {...enter} className="mb-12">
           <div className="rox-card p-8">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 rounded-lg bg-green-50 text-green-600">
+              <div className="p-2 rounded-lg bg-yellow-400/20 text-yellow-400">
                 <GraduationCap className="w-5 h-5" />
               </div>
               <div>
@@ -588,7 +588,7 @@ export default function HomePage() {
         <motion.section {...enter} className="mb-12">
           <div className="rox-card p-8">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 rounded-lg bg-indigo-50 text-indigo-600">
+              <div className="p-2 rounded-lg bg-yellow-400/20 text-yellow-400">
                 <Brain className="w-5 h-5" />
               </div>
               <h2 className="rox-heading-3">Additional Profile Details</h2>
@@ -726,7 +726,7 @@ export default function HomePage() {
                   className={`text-lg px-8 py-4 flex items-center gap-3 transition-all duration-200 ${
                     isProfileComplete() 
                       ? 'rox-button-primary' 
-                      : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : 'bg-gray-700/50 text-gray-500 cursor-not-allowed'
                   }`}
                 >
                   <span>Next</span>
