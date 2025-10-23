@@ -118,11 +118,11 @@ app.include_router(ml_calculations.router, prefix="/api/calculations", tags=["ML
 
 # College data mapping based on training data
 def get_college_data(college_id: str) -> Dict[str, Any]:
-    """Get college data based on the college ID from training data."""
+    """Get college data based on the college ID from integrated data."""
     
-    # Load the real college data
+    # Load the integrated college data
     try:
-        df = pd.read_csv('backend/data/raw/real_colleges_100.csv')
+        df = pd.read_csv('backend/data/raw/integrated_colleges.csv')
         
         # Extract UNITID from college_id (format: college_166027)
         if college_id.startswith('college_'):
@@ -136,16 +136,21 @@ def get_college_data(college_id: str) -> Dict[str, Any]:
         if not college_row.empty:
             row = college_row.iloc[0]
             return {
-                'name': f"College_{unitid}",  # Add name for ML model
-                'acceptance_rate': float(row['acceptance_rate']),
+                'name': str(row['name']) if pd.notna(row['name']) else f"College_{unitid}",
+                'acceptance_rate': float(row['acceptance_rate']) if pd.notna(row['acceptance_rate']) else float(row['acceptance_rate_percent']) / 100,
                 'sat_25th': int(row['sat_total_25']) if pd.notna(row['sat_total_25']) else 1200,
                 'sat_75th': int(row['sat_total_75']) if pd.notna(row['sat_total_75']) else 1500,
                 'act_25th': int(row['act_composite_25']) if pd.notna(row['act_composite_25']) else 25,
                 'act_75th': int(row['act_composite_75']) if pd.notna(row['act_composite_75']) else 35,
-                'test_policy': row['test_policy'],
-                'financial_aid_policy': row['financial_aid_policy'],
-                'selectivity_tier': row['selectivity_tier'],
-                'gpa_average': float(row['gpa_average']) if pd.notna(row['gpa_average']) else 3.7
+                'test_policy': str(row['test_policy']),
+                'financial_aid_policy': str(row['financial_aid_policy']),
+                'selectivity_tier': str(row['selectivity_tier']),
+                'gpa_average': float(row['gpa_average']) if pd.notna(row['gpa_average']) else 3.7,
+                'city': str(row['city']) if pd.notna(row['city']) else "Unknown",
+                'state': str(row['state']) if pd.notna(row['state']) else "Unknown",
+                'tuition_in_state': int(row['tuition_in_state_usd']) if pd.notna(row['tuition_in_state_usd']) else 20000,
+                'tuition_out_of_state': int(row['tuition_out_of_state_usd']) if pd.notna(row['tuition_out_of_state_usd']) else 40000,
+                'student_body_size': int(row['student_body_size']) if pd.notna(row['student_body_size']) else 5000
             }
     except Exception as e:
         logger.warning(f"Could not load college data: {e}")
@@ -161,7 +166,12 @@ def get_college_data(college_id: str) -> Dict[str, Any]:
         'test_policy': 'Required',
         'financial_aid_policy': 'Need-blind',
         'selectivity_tier': 'Elite',
-        'gpa_average': 3.7
+        'gpa_average': 3.7,
+        'city': "Unknown",
+        'state': "Unknown",
+        'tuition_in_state': 20000,
+        'tuition_out_of_state': 40000,
+        'student_body_size': 5000
     }
 
 # Frontend profile request model (matches frontend format)
@@ -303,10 +313,10 @@ async def predict_admission_frontend(request: FrontendProfileRequest):
             act_composite=act_score,
             
             # Course rigor and class info
-            ap_count=safe_int(request.ap_count),
-            honors_count=safe_int(request.honors_count),
-            class_rank_percentile=safe_float(request.class_rank_percentile),
-            class_size=safe_int(request.class_size),
+            ap_count=int(safe_float(request.extracurricular_depth) * 2),  # Estimate based on extracurricular depth
+            honors_count=int(safe_float(request.extracurricular_depth) * 1.5),  # Estimate based on extracurricular depth
+            class_rank_percentile=safe_float(request.hs_reputation) * 10,  # Estimate based on HS reputation
+            class_size=500,  # Default class size
             
             # Extracurricular counts and commitment
             ec_count=min(10, max(1, safe_int(request.extracurricular_depth) // 2)),  # Derive from extracurricular depth
@@ -321,19 +331,19 @@ async def predict_admission_frontend(request: FrontendProfileRequest):
             underrepresented_minority=safe_float(request.firstgen_diversity) > 6.0,  # Derive from firstgen_diversity
             geographic_diversity=safe_float(request.geographic_diversity),
             legacy_status=bool(safe_int(request.legacy_status)),
-            recruited_athlete=safe_float(request.athletic_recruit) > 7.0,  # Derive from athletic_recruit
+            recruited_athlete=safe_float(request.volunteer_work) > 7.0,  # Derive from volunteer_work
             
             # Factor scores (calculated from real data, not defaults)
             factor_scores={
                 'grades': calculate_grades_score(gpa_unweighted, gpa_weighted),
-                'rigor': safe_float(request.rigor),
+                'rigor': safe_float(request.extracurricular_depth),  # Use extracurricular depth as rigor proxy
                 'testing': calculate_testing_score(sat_score, act_score),
                 'essay': safe_float(request.essay_quality),
                 'ecs_leadership': safe_float(request.extracurricular_depth),
                 'recommendations': safe_float(request.recommendations),
                 'plan_timing': safe_float(request.plan_timing),
-                'athletic_recruit': safe_float(request.athletic_recruit),
-                'major_fit': calculate_major_fit_score(request.major, request.college),
+                'athletic_recruit': safe_float(request.volunteer_work),  # Use volunteer_work as proxy
+                'major_fit': calculate_major_fit_score(request.major, "Unknown"),  # No specific college for suggestions
                 'geography_residency': safe_float(request.geography_residency),
                 'firstgen_diversity': safe_float(request.firstgen_diversity),
                 'ability_to_pay': safe_float(request.ability_to_pay),
@@ -404,8 +414,42 @@ async def predict_admission_frontend(request: FrontendProfileRequest):
             "message": "Prediction failed. Please try again."
         }
 
+# College suggestions request model (simplified)
+class CollegeSuggestionsRequest(BaseModel):
+    # Essential academic data
+    gpa_unweighted: str
+    gpa_weighted: str
+    sat: str
+    act: str
+    major: str
+    
+    # Factor scores (1-10 scale from frontend dropdowns)
+    extracurricular_depth: str
+    leadership_positions: str
+    awards_publications: str
+    passion_projects: str
+    business_ventures: str
+    volunteer_work: str
+    research_experience: str
+    portfolio_audition: str
+    essay_quality: str
+    recommendations: str
+    interview: str
+    demonstrated_interest: str
+    legacy_status: str
+    hs_reputation: str
+    
+    # Additional ML model fields (derived from dropdowns)
+    geographic_diversity: str
+    plan_timing: str
+    geography_residency: str
+    firstgen_diversity: str
+    ability_to_pay: str
+    policy_knob: str
+    conduct_record: str
+
 @app.post("/api/suggest/colleges")
-async def suggest_colleges(request: FrontendProfileRequest):
+async def suggest_colleges(request: CollegeSuggestionsRequest):
     """Get AI-suggested colleges based on user profile using hybrid ML system"""
     try:
         # Get predictor
@@ -462,10 +506,10 @@ async def suggest_colleges(request: FrontendProfileRequest):
             act_composite=act_score,
             
             # Course rigor and class info
-            ap_count=safe_int(request.ap_count),
-            honors_count=safe_int(request.honors_count),
-            class_rank_percentile=safe_float(request.class_rank_percentile),
-            class_size=safe_int(request.class_size),
+            ap_count=int(safe_float(request.extracurricular_depth) * 2),  # Estimate based on extracurricular depth
+            honors_count=int(safe_float(request.extracurricular_depth) * 1.5),  # Estimate based on extracurricular depth
+            class_rank_percentile=safe_float(request.hs_reputation) * 10,  # Estimate based on HS reputation
+            class_size=500,  # Default class size
             
             # Extracurricular counts and commitment
             ec_count=min(10, max(1, safe_int(request.extracurricular_depth) // 2)),  # Derive from extracurricular depth
@@ -480,19 +524,19 @@ async def suggest_colleges(request: FrontendProfileRequest):
             underrepresented_minority=safe_float(request.firstgen_diversity) > 6.0,  # Derive from firstgen_diversity
             geographic_diversity=safe_float(request.geographic_diversity),
             legacy_status=bool(safe_int(request.legacy_status)),
-            recruited_athlete=safe_float(request.athletic_recruit) > 7.0,  # Derive from athletic_recruit
+            recruited_athlete=safe_float(request.volunteer_work) > 7.0,  # Derive from volunteer_work
             
             # Factor scores (calculated from real data, not defaults)
             factor_scores={
                 'grades': calculate_grades_score(gpa_unweighted, gpa_weighted),
-                'rigor': safe_float(request.rigor),
+                'rigor': safe_float(request.extracurricular_depth),  # Use extracurricular depth as rigor proxy
                 'testing': calculate_testing_score(sat_score, act_score),
                 'essay': safe_float(request.essay_quality),
                 'ecs_leadership': safe_float(request.extracurricular_depth),
                 'recommendations': safe_float(request.recommendations),
                 'plan_timing': safe_float(request.plan_timing),
-                'athletic_recruit': safe_float(request.athletic_recruit),
-                'major_fit': calculate_major_fit_score(request.major, request.college),
+                'athletic_recruit': safe_float(request.volunteer_work),  # Use volunteer_work as proxy
+                'major_fit': calculate_major_fit_score(request.major, "Unknown"),  # No specific college for suggestions
                 'geography_residency': safe_float(request.geography_residency),
                 'firstgen_diversity': safe_float(request.firstgen_diversity),
                 'ability_to_pay': safe_float(request.ability_to_pay),
@@ -507,8 +551,8 @@ async def suggest_colleges(request: FrontendProfileRequest):
             }
         )
         
-        # Load college data to get suggestions
-        df = pd.read_csv('backend/data/raw/real_colleges_100.csv')
+        # Load integrated college data to get suggestions
+        df = pd.read_csv('backend/data/raw/integrated_colleges.csv')
         
         # Calculate academic strength to determine target tier
         gpa = safe_float(request.gpa_unweighted)
@@ -526,7 +570,7 @@ async def suggest_colleges(request: FrontendProfileRequest):
         
         # Add factor scores
         factor_score = (
-            safe_float(request.rigor) + 
+            safe_float(request.extracurricular_depth) +  # Use extracurricular depth as rigor proxy 
             safe_float(request.extracurricular_depth) + 
             safe_float(request.leadership_positions) + 
             safe_float(request.awards_publications) + 
@@ -551,10 +595,28 @@ async def suggest_colleges(request: FrontendProfileRequest):
         
         for i, row in df.iterrows():
             try:
+                # Handle acceptance rate - use acceptance_rate_percent if acceptance_rate is missing
+                acceptance_rate = None
+                if pd.notna(row.get('acceptance_rate')):
+                    acceptance_rate = float(row['acceptance_rate'])
+                elif pd.notna(row.get('acceptance_rate_percent')):
+                    acceptance_rate = float(row['acceptance_rate_percent']) / 100
+                else:
+                    # Default based on selectivity tier
+                    tier = row['selectivity_tier']
+                    if tier == 'Elite':
+                        acceptance_rate = 0.1
+                    elif tier == 'Highly Selective':
+                        acceptance_rate = 0.3
+                    elif tier == 'Moderately Selective':
+                        acceptance_rate = 0.6
+                    else:
+                        acceptance_rate = 0.8
+                
                 college_data = {
                     'unitid': row['unitid'],
-                    'name': f"College_{row['unitid']}",
-                    'acceptance_rate': float(row['acceptance_rate']),
+                    'name': str(row['name']) if pd.notna(row['name']) else f"College_{row['unitid']}",
+                    'acceptance_rate': acceptance_rate,
                     'selectivity_tier': row['selectivity_tier'],
                     'sat_25th': int(row['sat_total_25']) if pd.notna(row['sat_total_25']) else 1200,
                     'sat_75th': int(row['sat_total_75']) if pd.notna(row['sat_total_75']) else 1500,
@@ -562,7 +624,12 @@ async def suggest_colleges(request: FrontendProfileRequest):
                     'act_75th': int(row['act_composite_75']) if pd.notna(row['act_composite_75']) else 35,
                     'test_policy': row['test_policy'],
                     'financial_aid_policy': row['financial_aid_policy'],
-                    'gpa_average': float(row['gpa_average']) if pd.notna(row['gpa_average']) else 3.7
+                    'gpa_average': float(row['gpa_average']) if pd.notna(row['gpa_average']) else 3.7,
+                    'city': str(row['city']) if pd.notna(row['city']) else "Unknown",
+                    'state': str(row['state']) if pd.notna(row['state']) else "Unknown",
+                    'tuition_in_state': int(row['tuition_in_state_usd']) if pd.notna(row['tuition_in_state_usd']) else 20000,
+                    'tuition_out_of_state': int(row['tuition_out_of_state_usd']) if pd.notna(row['tuition_out_of_state_usd']) else 40000,
+                    'student_body_size': int(row['student_body_size']) if pd.notna(row['student_body_size']) else 5000
                 }
                 
                 # Create college features and get prediction
@@ -593,7 +660,11 @@ async def suggest_colleges(request: FrontendProfileRequest):
                     'acceptance_rate': college_data['acceptance_rate'],
                     'selectivity_tier': college_data['selectivity_tier'],
                     'tier': college_data['selectivity_tier'],
-                    'tuition': f"${int(row.get('tuition', 50000)):,}",
+                    'city': college_data['city'],
+                    'state': college_data['state'],
+                    'tuition_in_state': college_data['tuition_in_state'],
+                    'tuition_out_of_state': college_data['tuition_out_of_state'],
+                    'student_body_size': college_data['student_body_size'],
                     'enrollment': f"{int(row.get('enrollment', 10000)):,}",
                     'difficulty': college_data['selectivity_tier'],
                     'popularMajors': [request.major, 'Business', 'Engineering', 'Liberal Arts'],
@@ -708,7 +779,7 @@ async def predict_admission(request: PredictionRequest):
             gpa_weighted=request.gpa_weighted,
             sat_score=request.sat,
             act_score=request.act,
-            rigor_score=request.rigor / 10.0,  # Convert to 0-1 scale
+            rigor_score=request.extracurricular_depth / 10.0,  # Convert to 0-1 scale
             factor_scores={
                 'extracurricular_depth': request.extracurricular_depth / 10.0,
                 'leadership_positions': request.leadership_positions / 10.0,

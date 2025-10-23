@@ -1,0 +1,20 @@
+Integrated College Dataset Summary
+========================================
+
+Total Colleges: 458
+Elite: 27
+Highly Selective: 51
+Moderately Selective: 151
+Less Selective: 229
+
+Sample Elite Colleges:
+- nan (nan): nan% acceptance
+- California Institute of Technology (CA): 3.1% acceptance
+- Alliant International University-San Diego (CA): 0.0% acceptance
+- University of California-Berkeley (CA): 11.7% acceptance
+- University of California-Los Angeles (CA): 8.7% acceptance
+- University of California-San Diego (CA): 24.5% acceptance
+- Claremont McKenna College (CA): 11.1% acceptance
+- Harvey Mudd College (CA): 13.1% acceptance
+- Pacific Oaks College (CA): 10.0% acceptance
+- Pitzer College (CA): 16.7% acceptance

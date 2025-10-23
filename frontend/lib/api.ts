@@ -30,6 +30,35 @@ export interface PredictionRequest {
   college: string;
 }
 
+export interface CollegeSuggestionsRequest {
+  gpa_unweighted: string;
+  gpa_weighted: string;
+  sat: string;
+  act: string;
+  major: string;
+  extracurricular_depth: string;
+  leadership_positions: string;
+  awards_publications: string;
+  passion_projects: string;
+  business_ventures: string;
+  volunteer_work: string;
+  research_experience: string;
+  portfolio_audition: string;
+  essay_quality: string;
+  recommendations: string;
+  interview: string;
+  demonstrated_interest: string;
+  legacy_status: string;
+  hs_reputation: string;
+  geographic_diversity: string;
+  plan_timing: string;
+  geography_residency: string;
+  firstgen_diversity: string;
+  ability_to_pay: string;
+  policy_knob: string;
+  conduct_record: string;
+}
+
 export interface PredictionResponse {
   success: boolean;
   college_id: string;
@@ -67,6 +96,11 @@ export interface CollegeSuggestion {
   acceptance_rate: number;
   selectivity_tier: string;
   category: 'reach' | 'target' | 'safety';
+  city: string;
+  state: string;
+  tuition_in_state: number;
+  tuition_out_of_state: number;
+  student_body_size: number;
 }
 
 export interface CollegeSuggestionsResponse {
@@ -128,7 +162,7 @@ export async function getAdmissionProbability(
  * Get AI-suggested colleges based on user profile
  */
 export async function getCollegeSuggestions(
-  profile: PredictionRequest
+  profile: CollegeSuggestionsRequest
 ): Promise<CollegeSuggestionsResponse> {
   try {
     const response = await fetch(`${API_BASE_URL}/api/suggest/colleges`, {

@@ -6,7 +6,7 @@ import { Search, Building2, Users, DollarSign, GraduationCap, ChevronRight, Star
 import { COLLEGES } from '@/lib/colleges'
 import { Button } from '@/components/ui/Button'
 import { useRouter } from 'next/navigation'
-import { getCollegeSuggestions, getAdmissionProbability, type PredictionRequest, type CollegeSuggestion } from '@/lib/api'
+import { getCollegeSuggestions, getAdmissionProbability, type PredictionRequest, type CollegeSuggestionsRequest, type CollegeSuggestion } from '@/lib/api'
 
 export default function CollegeSelectionPage() {
   const router = useRouter()
@@ -34,13 +34,13 @@ export default function CollegeSelectionPage() {
         // Get user profile from localStorage
         const userProfile = JSON.parse(localStorage.getItem('userProfile') || '{}')
         
-        // Create prediction request
-        const predictionRequest: PredictionRequest = {
+        // Create college suggestions request
+        const collegeSuggestionsRequest: CollegeSuggestionsRequest = {
           gpa_unweighted: userProfile.gpa_unweighted || '',
           gpa_weighted: userProfile.gpa_weighted || '',
           sat: userProfile.sat || '',
           act: userProfile.act || '',
-          rigor: userProfile.rigor || '5',
+          major: userProfile.major || 'Computer Science',
           extracurricular_depth: userProfile.extracurricular_depth || '5',
           leadership_positions: userProfile.leadership_positions || '5',
           awards_publications: userProfile.awards_publications || '5',
@@ -55,12 +55,17 @@ export default function CollegeSelectionPage() {
           demonstrated_interest: userProfile.demonstrated_interest || '5',
           legacy_status: userProfile.legacy_status || '5',
           hs_reputation: userProfile.hs_reputation || '5',
-          major: userProfile.major || 'Computer Science',
-          college: 'college_166027' // Dummy college for suggestions
+          geographic_diversity: userProfile.geographic_diversity || '5',
+          plan_timing: userProfile.plan_timing || '5',
+          geography_residency: userProfile.geography_residency || '5',
+          firstgen_diversity: userProfile.firstgen_diversity || '5',
+          ability_to_pay: userProfile.ability_to_pay || '5',
+          policy_knob: userProfile.policy_knob || '5',
+          conduct_record: userProfile.conduct_record || '5'
         }
         
         // Get AI suggestions from backend
-        const response = await getCollegeSuggestions(predictionRequest)
+        const response = await getCollegeSuggestions(collegeSuggestionsRequest)
         
         if (response.success) {
           setSuggestedColleges(response.suggestions)
@@ -89,12 +94,12 @@ export default function CollegeSelectionPage() {
         try {
           const userProfile = JSON.parse(localStorage.getItem('userProfile') || '{}')
           
-          const predictionRequest: PredictionRequest = {
+          const collegeSuggestionsRequest: CollegeSuggestionsRequest = {
             gpa_unweighted: userProfile.gpa_unweighted || '',
             gpa_weighted: userProfile.gpa_weighted || '',
             sat: userProfile.sat || '',
             act: userProfile.act || '',
-            rigor: userProfile.rigor || '5',
+            major: userProfile.major || 'Computer Science',
             extracurricular_depth: userProfile.extracurricular_depth || '5',
             leadership_positions: userProfile.leadership_positions || '5',
             awards_publications: userProfile.awards_publications || '5',
@@ -109,11 +114,16 @@ export default function CollegeSelectionPage() {
             demonstrated_interest: userProfile.demonstrated_interest || '5',
             legacy_status: userProfile.legacy_status || '5',
             hs_reputation: userProfile.hs_reputation || '5',
-            major: userProfile.major || 'Computer Science',
-            college: 'college_166027'
+            geographic_diversity: userProfile.geographic_diversity || '5',
+            plan_timing: userProfile.plan_timing || '5',
+            geography_residency: userProfile.geography_residency || '5',
+            firstgen_diversity: userProfile.firstgen_diversity || '5',
+            ability_to_pay: userProfile.ability_to_pay || '5',
+            policy_knob: userProfile.policy_knob || '5',
+            conduct_record: userProfile.conduct_record || '5'
           }
           
-          const response = await getCollegeSuggestions(predictionRequest)
+          const response = await getCollegeSuggestions(collegeSuggestionsRequest)
           
           if (response.success) {
             setSuggestedColleges(response.suggestions)
@@ -336,13 +346,21 @@ export default function CollegeSelectionPage() {
                             </div>
                           </div>
                           
-                          <div className="grid grid-cols-2 gap-4 text-sm">
+                          <div className="grid grid-cols-2 gap-3 text-sm">
                             <div className="flex items-center gap-2 text-gray-300">
-                              <Users className="w-4 h-4" />
-                              <span>{college.acceptance_rate.toFixed(1)}% acceptance</span>
+                              <Users className="w-4 h-4 text-green-400" />
+                              <span>{(college.acceptance_rate * 100).toFixed(1)}% acceptance</span>
                             </div>
                             <div className="flex items-center gap-2 text-gray-300">
-                              <Star className="w-4 h-4" />
+                              <MapPin className="w-4 h-4 text-blue-400" />
+                              <span>{college.city}, {college.state}</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-gray-300">
+                              <DollarSign className="w-4 h-4 text-yellow-400" />
+                              <span>${college.tuition_in_state?.toLocaleString() || 'N/A'}</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-gray-300">
+                              <Star className="w-4 h-4 text-green-400" />
                               <span>High confidence</span>
                             </div>
                           </div>
@@ -404,13 +422,21 @@ export default function CollegeSelectionPage() {
                             </div>
                           </div>
                           
-                          <div className="grid grid-cols-2 gap-4 text-sm">
+                          <div className="grid grid-cols-2 gap-3 text-sm">
                             <div className="flex items-center gap-2 text-gray-300">
-                              <Users className="w-4 h-4" />
-                              <span>{college.acceptance_rate.toFixed(1)}% acceptance</span>
+                              <Users className="w-4 h-4 text-yellow-400" />
+                              <span>{(college.acceptance_rate * 100).toFixed(1)}% acceptance</span>
                             </div>
                             <div className="flex items-center gap-2 text-gray-300">
-                              <Star className="w-4 h-4" />
+                              <MapPin className="w-4 h-4 text-blue-400" />
+                              <span>{college.city}, {college.state}</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-gray-300">
+                              <DollarSign className="w-4 h-4 text-yellow-400" />
+                              <span>${college.tuition_in_state?.toLocaleString() || 'N/A'}</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-gray-300">
+                              <Star className="w-4 h-4 text-yellow-400" />
                               <span>Good match</span>
                             </div>
                           </div>
@@ -472,13 +498,21 @@ export default function CollegeSelectionPage() {
                             </div>
                           </div>
                           
-                          <div className="grid grid-cols-2 gap-4 text-sm">
+                          <div className="grid grid-cols-2 gap-3 text-sm">
                             <div className="flex items-center gap-2 text-gray-300">
-                              <Users className="w-4 h-4" />
-                              <span>{college.acceptance_rate.toFixed(1)}% acceptance</span>
+                              <Users className="w-4 h-4 text-red-400" />
+                              <span>{(college.acceptance_rate * 100).toFixed(1)}% acceptance</span>
                             </div>
                             <div className="flex items-center gap-2 text-gray-300">
-                              <Star className="w-4 h-4" />
+                              <MapPin className="w-4 h-4 text-blue-400" />
+                              <span>{college.city}, {college.state}</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-gray-300">
+                              <DollarSign className="w-4 h-4 text-yellow-400" />
+                              <span>${college.tuition_in_state?.toLocaleString() || 'N/A'}</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-gray-300">
+                              <Star className="w-4 h-4 text-red-400" />
                               <span>Challenging</span>
                             </div>
                           </div>
