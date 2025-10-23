@@ -514,7 +514,7 @@ export default function HomePage() {
               </Button>
               
               <Button 
-                onClick={() => router.push('/college-details')}
+                onClick={() => router.push('/college-selection')}
                 disabled={!isProfileComplete()}
                 className={`text-lg px-8 py-4 flex items-center gap-3 transition-all duration-300 ${
                   isProfileComplete() 
