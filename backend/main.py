@@ -688,9 +688,37 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
         target_colleges = []
         reach_colleges = []
         
+        # First, identify elite universities and ensure they appear in reach category
+        # Use exact matches to avoid false positives
+        elite_universities = [
+            "harvard university",
+            "massachusetts institute of technology", 
+            "stanford university",
+            "yale university",
+            "princeton university",
+            "columbia university in the city of new york",
+            "university of pennsylvania",
+            "dartmouth college",
+            "brown university",
+            "cornell university",
+            "duke university",
+            "northwestern university",
+            "vanderbilt university",
+            "rice university",
+            "emory university",
+            "georgetown university",
+            "carnegie mellon university",
+            "new york university",
+            "university of chicago"
+        ]
+        
         for college in all_college_predictions:
             prob = college['probability']
             acceptance_rate = college['acceptance_rate']
+            college_name = college['name'].lower()
+            
+            # Check if this is an elite university (exact match)
+            is_elite = college_name in elite_universities
             
             # Adjust categorization based on both probability and acceptance rate
             # A college with 90% acceptance rate should rarely be a "reach" school
@@ -725,6 +753,17 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
                     college['category'] = 'target'
                     target_colleges.append(college)
                 else:
+                    college['category'] = 'reach'
+                    reach_colleges.append(college)
+            
+            # Special handling for elite universities - ensure they appear in reach category
+            if is_elite and prob > 0.005:  # Only if probability > 0.5%
+                # Remove from other categories if already added
+                if college in safety_colleges:
+                    safety_colleges.remove(college)
+                if college in target_colleges:
+                    target_colleges.remove(college)
+                if college not in reach_colleges:
                     college['category'] = 'reach'
                     reach_colleges.append(college)
         
