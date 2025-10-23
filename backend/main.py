@@ -415,42 +415,63 @@ async def predict_admission_frontend(request: FrontendProfileRequest):
         }
 
 # College suggestions request model (simplified)
+# This model receives user profile data from the frontend and generates
+# AI-powered college suggestions based on academic strength and preferences
+# Updated with elite universities integration - 19 elite universities now included
 class CollegeSuggestionsRequest(BaseModel):
-    # Essential academic data
-    gpa_unweighted: str
-    gpa_weighted: str
-    sat: str
-    act: str
-    major: str
+    # Essential academic data - core metrics for college admissions
+    gpa_unweighted: str      # Unweighted GPA (0.0-4.0 scale)
+    gpa_weighted: str        # Weighted GPA (0.0-5.0+ scale)
+    sat: str                 # SAT total score (400-1600)
+    act: str                 # ACT composite score (1-36)
+    major: str               # Intended major of study
     
     # Factor scores (1-10 scale from frontend dropdowns)
-    extracurricular_depth: str
-    leadership_positions: str
-    awards_publications: str
-    passion_projects: str
-    business_ventures: str
-    volunteer_work: str
-    research_experience: str
-    portfolio_audition: str
-    essay_quality: str
-    recommendations: str
-    interview: str
-    demonstrated_interest: str
-    legacy_status: str
-    hs_reputation: str
+    # These represent the user's strength in various admission factors
+    extracurricular_depth: str      # Depth and commitment to activities
+    leadership_positions: str       # Leadership roles and responsibilities
+    awards_publications: str        # Awards, honors, and publications
+    passion_projects: str           # Personal projects and initiatives
+    business_ventures: str          # Entrepreneurial activities
+    volunteer_work: str             # Community service and volunteering
+    research_experience: str        # Academic research involvement
+    portfolio_audition: str         # Creative portfolio or audition quality
+    essay_quality: str              # Personal statement and essay quality
+    recommendations: str            # Letter of recommendation strength
+    interview: str                  # Interview performance
+    demonstrated_interest: str      # Show of interest in specific colleges
+    legacy_status: str              # Legacy status (family alumni)
+    hs_reputation: str              # High school reputation and rigor
     
     # Additional ML model fields (derived from dropdowns)
-    geographic_diversity: str
-    plan_timing: str
-    geography_residency: str
-    firstgen_diversity: str
-    ability_to_pay: str
-    policy_knob: str
-    conduct_record: str
+    # These provide additional context for the ML model
+    geographic_diversity: str       # Geographic diversity factor
+    plan_timing: str                # Application timing (early/regular)
+    geography_residency: str        # In-state vs out-of-state status
+    firstgen_diversity: str         # First-generation college student status
+    ability_to_pay: str             # Financial need and ability to pay
+    policy_knob: str                # Policy-related factors
+    conduct_record: str             # Disciplinary record status
 
 @app.post("/api/suggest/colleges")
 async def suggest_colleges(request: CollegeSuggestionsRequest):
-    """Get AI-suggested colleges based on user profile using hybrid ML system"""
+    """
+    Get AI-suggested colleges based on user profile using hybrid ML system.
+    
+    This endpoint:
+    1. Processes user profile data from frontend
+    2. Calculates academic strength score
+    3. Runs ML predictions on all 477 colleges in dataset
+    4. Categorizes colleges into Safety/Target/Reach based on realistic probability ranges
+    5. Ensures elite universities appear in reach category when appropriate
+    6. Returns balanced suggestions (3 safety, 3 target, 3 reach)
+    
+    Args:
+        request: CollegeSuggestionsRequest containing user profile data
+        
+    Returns:
+        JSON response with 9 balanced college suggestions and metadata
+    """
     try:
         # Get predictor
         predictor = get_predictor()
@@ -688,28 +709,29 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
         target_colleges = []
         reach_colleges = []
         
-        # First, identify elite universities and ensure they appear in reach category
-        # Use exact matches to avoid false positives
+        # Elite universities list - these are the most selective institutions
+        # We ensure they appear in the reach category when appropriate
+        # Using exact name matches to avoid false positives (e.g., "Northwestern College" vs "Northwestern University")
         elite_universities = [
-            "harvard university",
-            "massachusetts institute of technology", 
-            "stanford university",
-            "yale university",
-            "princeton university",
-            "columbia university in the city of new york",
-            "university of pennsylvania",
-            "dartmouth college",
-            "brown university",
-            "cornell university",
-            "duke university",
-            "northwestern university",
-            "vanderbilt university",
-            "rice university",
-            "emory university",
-            "georgetown university",
-            "carnegie mellon university",
-            "new york university",
-            "university of chicago"
+            "harvard university",                    # 4.0% acceptance rate
+            "massachusetts institute of technology", # 4.1% acceptance rate
+            "stanford university",                   # 4.0% acceptance rate
+            "yale university",                       # 5.3% acceptance rate
+            "princeton university",                  # 4.4% acceptance rate
+            "columbia university in the city of new york", # 4.1% acceptance rate
+            "university of pennsylvania",            # 5.9% acceptance rate
+            "dartmouth college",                     # 6.2% acceptance rate
+            "brown university",                      # 5.5% acceptance rate
+            "cornell university",                    # 8.7% acceptance rate
+            "duke university",                       # 5.9% acceptance rate
+            "northwestern university",               # 7.0% acceptance rate
+            "vanderbilt university",                 # 7.1% acceptance rate
+            "rice university",                       # 9.5% acceptance rate
+            "emory university",                      # 13.1% acceptance rate
+            "georgetown university",                 # 12.0% acceptance rate
+            "carnegie mellon university",            # 13.5% acceptance rate
+            "new york university",                   # 13.0% acceptance rate
+            "university of chicago"                  # 6.5% acceptance rate
         ]
         
         for college in all_college_predictions:
