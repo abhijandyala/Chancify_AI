@@ -195,17 +195,9 @@ class FrontendProfileRequest(BaseModel):
     legacy_status: str
     hs_reputation: str
     
-    # Additional ML model fields
-    ec_count: str
-    years_commitment: str
-    hours_per_week: str
-    national_awards: str
-    first_generation: str
-    underrepresented_minority: str
+    # Additional ML model fields (derived from dropdowns)
     geographic_diversity: str
-    recruited_athlete: str
     plan_timing: str
-    athletic_recruit: str
     geography_residency: str
     firstgen_diversity: str
     ability_to_pay: str
@@ -317,19 +309,19 @@ async def predict_admission_frontend(request: FrontendProfileRequest):
             class_size=safe_int(request.class_size),
             
             # Extracurricular counts and commitment
-            ec_count=safe_int(request.ec_count),
+            ec_count=min(10, max(1, safe_int(request.extracurricular_depth) // 2)),  # Derive from extracurricular depth
             leadership_positions_count=safe_int(request.leadership_positions),
-            years_commitment=safe_int(request.years_commitment),
-            hours_per_week=safe_float(request.hours_per_week),
+            years_commitment=min(6, max(1, safe_int(request.extracurricular_depth) // 2)),  # Derive from extracurricular depth
+            hours_per_week=min(20.0, max(2.0, safe_float(request.extracurricular_depth) * 1.5)),  # Derive from extracurricular depth
             awards_count=safe_int(request.awards_publications),
-            national_awards=safe_int(request.national_awards),
+            national_awards=min(5, max(0, safe_int(request.awards_publications) // 2)),  # Derive from awards/publications
             
             # Demographics and diversity
-            first_generation=bool(safe_int(request.first_generation)),
-            underrepresented_minority=bool(safe_int(request.underrepresented_minority)),
+            first_generation=safe_float(request.firstgen_diversity) > 7.0,  # Derive from firstgen_diversity
+            underrepresented_minority=safe_float(request.firstgen_diversity) > 6.0,  # Derive from firstgen_diversity
             geographic_diversity=safe_float(request.geographic_diversity),
             legacy_status=bool(safe_int(request.legacy_status)),
-            recruited_athlete=bool(safe_int(request.recruited_athlete)),
+            recruited_athlete=safe_float(request.athletic_recruit) > 7.0,  # Derive from athletic_recruit
             
             # Factor scores (calculated from real data, not defaults)
             factor_scores={
@@ -353,24 +345,7 @@ async def predict_admission_frontend(request: FrontendProfileRequest):
                 'interview': safe_float(request.interview),
                 'conduct_record': safe_float(request.conduct_record),
                 'hs_reputation': safe_float(request.hs_reputation)
-            },
-            
-            # Additional features (defaults for now)
-            ap_count=0,
-            honors_count=0,
-            class_rank_percentile=50.0,
-            class_size=300,
-            ec_count=3,  # Default
-            leadership_positions_count=safe_int(request.leadership_positions),
-            years_commitment=4,  # Default
-            hours_per_week=10.0,  # Default
-            awards_count=safe_int(request.awards_publications),
-            national_awards=0,
-            first_generation=False,
-            underrepresented_minority=False,
-            geographic_diversity=5.0,
-            legacy_status=safe_float(request.legacy_status) > 5.0,
-            recruited_athlete=False
+            }
         )
         
         # Get college data
@@ -493,19 +468,19 @@ async def suggest_colleges(request: FrontendProfileRequest):
             class_size=safe_int(request.class_size),
             
             # Extracurricular counts and commitment
-            ec_count=safe_int(request.ec_count),
+            ec_count=min(10, max(1, safe_int(request.extracurricular_depth) // 2)),  # Derive from extracurricular depth
             leadership_positions_count=safe_int(request.leadership_positions),
-            years_commitment=safe_int(request.years_commitment),
-            hours_per_week=safe_float(request.hours_per_week),
+            years_commitment=min(6, max(1, safe_int(request.extracurricular_depth) // 2)),  # Derive from extracurricular depth
+            hours_per_week=min(20.0, max(2.0, safe_float(request.extracurricular_depth) * 1.5)),  # Derive from extracurricular depth
             awards_count=safe_int(request.awards_publications),
-            national_awards=safe_int(request.national_awards),
+            national_awards=min(5, max(0, safe_int(request.awards_publications) // 2)),  # Derive from awards/publications
             
             # Demographics and diversity
-            first_generation=bool(safe_int(request.first_generation)),
-            underrepresented_minority=bool(safe_int(request.underrepresented_minority)),
+            first_generation=safe_float(request.firstgen_diversity) > 7.0,  # Derive from firstgen_diversity
+            underrepresented_minority=safe_float(request.firstgen_diversity) > 6.0,  # Derive from firstgen_diversity
             geographic_diversity=safe_float(request.geographic_diversity),
             legacy_status=bool(safe_int(request.legacy_status)),
-            recruited_athlete=bool(safe_int(request.recruited_athlete)),
+            recruited_athlete=safe_float(request.athletic_recruit) > 7.0,  # Derive from athletic_recruit
             
             # Factor scores (calculated from real data, not defaults)
             factor_scores={
@@ -529,24 +504,7 @@ async def suggest_colleges(request: FrontendProfileRequest):
                 'interview': safe_float(request.interview),
                 'conduct_record': safe_float(request.conduct_record),
                 'hs_reputation': safe_float(request.hs_reputation)
-            },
-            
-            # Additional features (defaults for now)
-            ap_count=0,
-            honors_count=0,
-            class_rank_percentile=50.0,
-            class_size=300,
-            ec_count=3,  # Default
-            leadership_positions_count=safe_int(request.leadership_positions),
-            years_commitment=4,  # Default
-            hours_per_week=10.0,  # Default
-            awards_count=safe_int(request.awards_publications),
-            national_awards=0,
-            first_generation=False,
-            underrepresented_minority=False,
-            geographic_diversity=5.0,
-            legacy_status=safe_float(request.legacy_status) > 5.0,
-            recruited_athlete=False
+            }
         )
         
         # Load college data to get suggestions

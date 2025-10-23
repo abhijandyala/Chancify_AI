@@ -65,17 +65,9 @@ export default function HomePage() {
     major: '',
     college: '',
     
-    // Additional ML model fields
-    ec_count: '5',
-    years_commitment: '2',
-    hours_per_week: '5',
-    national_awards: '0',
-    first_generation: '0',
-    underrepresented_minority: '0',
+    // Additional ML model fields (kept only those used in dropdowns)
     geographic_diversity: '5',
-    recruited_athlete: '0',
     plan_timing: '5',
-    athletic_recruit: '0',
     geography_residency: '5',
     firstgen_diversity: '5',
     ability_to_pay: '5',
@@ -584,114 +576,6 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-        {/* Additional ML Model Fields */}
-        <motion.section {...enter} className="mb-12">
-          <div className="rox-card p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 rounded-lg bg-yellow-400/20 text-yellow-400">
-                <Brain className="w-5 h-5" />
-              </div>
-              <h2 className="rox-heading-3">Additional Profile Details</h2>
-            </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Input
-              label="Extracurricular Count"
-              type="number"
-              min="0"
-              max="20"
-              placeholder="8"
-              value={profile.ec_count}
-              onChange={(e) => updateProfile('ec_count', e.target.value)}
-              helperText="Number of extracurricular activities"
-            />
-            <Input
-              label="Years of Commitment"
-              type="number"
-              min="0"
-              max="10"
-              placeholder="3"
-              value={profile.years_commitment}
-              onChange={(e) => updateProfile('years_commitment', e.target.value)}
-              helperText="Average years committed to activities"
-            />
-            <Input
-              label="Hours per Week"
-              type="number"
-              min="0"
-              max="50"
-              placeholder="15"
-              value={profile.hours_per_week}
-              onChange={(e) => updateProfile('hours_per_week', e.target.value)}
-              helperText="Hours spent on activities weekly"
-            />
-            <Input
-              label="National Awards"
-              type="number"
-              min="0"
-              max="10"
-              placeholder="2"
-              value={profile.national_awards}
-              onChange={(e) => updateProfile('national_awards', e.target.value)}
-              helperText="Number of national/international awards"
-            />
-            <div className="flex items-center space-x-4">
-              <label className="text-sm font-medium text-gray-300">First Generation</label>
-              <select
-                value={profile.first_generation}
-                onChange={(e) => updateProfile('first_generation', e.target.value)}
-                className="px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-yellow-400 focus:outline-none"
-              >
-                <option value="0">No</option>
-                <option value="1">Yes</option>
-              </select>
-            </div>
-            <div className="flex items-center space-x-4">
-              <label className="text-sm font-medium text-gray-300">Underrepresented Minority</label>
-              <select
-                value={profile.underrepresented_minority}
-                onChange={(e) => updateProfile('underrepresented_minority', e.target.value)}
-                className="px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-yellow-400 focus:outline-none"
-              >
-                <option value="0">No</option>
-                <option value="1">Yes</option>
-              </select>
-            </div>
-            <div className="flex items-center space-x-4">
-              <label className="text-sm font-medium text-gray-300">Recruited Athlete</label>
-              <select
-                value={profile.recruited_athlete}
-                onChange={(e) => updateProfile('recruited_athlete', e.target.value)}
-                className="px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-yellow-400 focus:outline-none"
-              >
-                <option value="0">No</option>
-                <option value="1">Yes</option>
-              </select>
-            </div>
-            <div className="flex items-center space-x-4">
-              <label className="text-sm font-medium text-gray-300">Geographic Diversity</label>
-              <select
-                value={profile.geographic_diversity}
-                onChange={(e) => updateProfile('geographic_diversity', e.target.value)}
-                className="px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-yellow-400 focus:outline-none"
-              >
-                <option value="0">No</option>
-                <option value="1">Yes</option>
-              </select>
-            </div>
-            <div className="flex items-center space-x-4">
-              <label className="text-sm font-medium text-gray-300">Athletic Recruit</label>
-              <select
-                value={profile.athletic_recruit}
-                onChange={(e) => updateProfile('athletic_recruit', e.target.value)}
-                className="px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-yellow-400 focus:outline-none"
-              >
-                <option value="0">No</option>
-                <option value="1">Yes</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </motion.section>
 
         {/* Action Buttons */}
         <motion.section {...enter} className="mb-12">
