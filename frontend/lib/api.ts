@@ -4,7 +4,7 @@
 
 // Backend URL configuration
 // TODO: Deploy backend to Railway and update this URL
-const API_BASE_URL = 'https://unsmug-untensely-elroy.ngrok-free.dev';
+const API_BASE_URL = 'http://localhost:8000';
 
 export interface PredictionRequest {
   gpa_unweighted: string;

@@ -367,7 +367,7 @@ export default function CollegeSelectionPage() {
                       <div className="w-3 h-3 bg-green-400 rounded-full"></div>
                       Safety Schools (75%+ chance)
                     </h3>
-                    <div className="grid grid-cols-1 gap-3">
+                    <div className="grid grid-cols-3 gap-3">
                       {suggestedColleges.filter(c => c.category === 'safety').map((college, index) => (
                         <motion.div
                           key={college.college_id}
@@ -443,7 +443,7 @@ export default function CollegeSelectionPage() {
                       <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
                       Target Schools (25-75% chance)
                     </h3>
-                    <div className="grid grid-cols-1 gap-3">
+                    <div className="grid grid-cols-3 gap-3">
                       {suggestedColleges.filter(c => c.category === 'target').map((college, index) => (
                         <motion.div
                           key={college.college_id}
@@ -519,7 +519,7 @@ export default function CollegeSelectionPage() {
                       <div className="w-3 h-3 bg-red-400 rounded-full"></div>
                       Reach Schools (10-25% chance)
                     </h3>
-                    <div className="grid grid-cols-1 gap-3">
+                    <div className="grid grid-cols-3 gap-3">
                       {suggestedColleges.filter(c => c.category === 'reach').map((college, index) => (
                         <motion.div
                           key={college.college_id}
