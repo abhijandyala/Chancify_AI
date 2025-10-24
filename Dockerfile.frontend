@@ -1,6 +1,6 @@
 # Frontend-only Dockerfile for Railway deployment
 # Build context should be the repository root
-# Force rebuild trigger
+# Force rebuild trigger - fixed syntax errors
 
 FROM node:18-alpine AS base
 
