@@ -517,40 +517,6 @@ export default function CollegeSelectionPage() {
           </div>
         </motion.div>
 
-      {/* Prediction Results */}
-      {Object.keys(predictionResults).length > 0 && (
-        <motion.div {...enter} className="mt-8">
-          <div className="rox-card p-6">
-            <h2 className="text-xl font-semibold text-white mb-4">Prediction Results</h2>
-            <div className="space-y-4">
-              {Object.entries(predictionResults).map(([collegeId, result]) => (
-                <div key={collegeId} className="p-4 border border-gray-600 rounded-xl">
-                  <h3 className="text-white font-semibold mb-2">{result.college_name}</h3>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                    <div>
-                      <p className="text-gray-400">Probability</p>
-                      <p className="text-yellow-400 font-bold">{(result.probability * 100).toFixed(1)}%</p>
-                    </div>
-                    <div>
-                      <p className="text-gray-400">Category</p>
-                      <p className="text-white capitalize">{result.category}</p>
-                    </div>
-                    <div>
-                      <p className="text-gray-400">ML Model</p>
-                      <p className="text-white">{result.model_used}</p>
-                    </div>
-                    <div>
-                      <p className="text-gray-400">Confidence</p>
-                      <p className="text-white">{((result.confidence_interval.upper - result.confidence_interval.lower) * 100).toFixed(0)}%</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-400 text-sm mt-2">{result.explanation}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-      )}
 
       {/* Navigation */}
       <motion.div {...enter} className="mt-8 flex justify-between">
