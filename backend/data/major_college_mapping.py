@@ -178,7 +178,31 @@ def get_major_strength_score(college_name: str, major: str):
     elif college_name in major_data.get("moderately_selective", []):
         return 0.4
     else:
-        return 0.3  # Default score for colleges not specifically known for this major
+        # For colleges not specifically listed, give them a reasonable default score
+        # based on the type of college and major
+        college_name_lower = college_name.lower()
+        
+        # Engineering/STEM schools get higher scores for STEM majors
+        if any(keyword in college_name_lower for keyword in ['tech', 'institute', 'polytechnic', 'engineering']):
+            if major in ['Computer Science', 'Engineering', 'Mathematics', 'Physics']:
+                return 0.6
+            else:
+                return 0.4
+        
+        # State universities generally offer most majors
+        elif any(keyword in college_name_lower for keyword in ['university', 'state', 'college']):
+            return 0.5
+        
+        # Liberal arts colleges
+        elif 'college' in college_name_lower and 'university' not in college_name_lower:
+            if major in ['English', 'History', 'Psychology', 'Political Science', 'Sociology']:
+                return 0.6
+            else:
+                return 0.4
+        
+        # Default for other colleges
+        else:
+            return 0.4
 
 def get_all_majors():
     """Get list of all available majors"""

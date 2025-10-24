@@ -128,7 +128,7 @@ def get_college_data(college_id: str) -> Dict[str, Any]:
     
     # Load the integrated college data
     try:
-        df = pd.read_csv('backend/data/raw/integrated_colleges.csv')
+        df = pd.read_csv('backend/data/raw/integrated_colleges_with_elite.csv')
         
         # Extract UNITID from college_id (format: college_166027)
         if college_id.startswith('college_'):
@@ -594,7 +594,7 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
         )
         
         # Load integrated college data to get suggestions
-        df = pd.read_csv('backend/data/raw/integrated_colleges.csv')
+        df = pd.read_csv('backend/data/raw/integrated_colleges_with_elite.csv')
         
         # Calculate academic strength to determine target tier
         gpa = safe_float(request.gpa_unweighted)
@@ -840,9 +840,17 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
                 logger.error(f"Error processing college {i}: {e}")
                 continue
         
-        # Categorize colleges by realistic probability ranges
-        # Sort all predictions by probability to understand the distribution
-        all_college_predictions.sort(key=lambda x: x['probability'], reverse=True)
+        # Temporarily disable major filtering to see what scores elite universities get
+        # Filter out colleges that are very weak in the user's major (major_fit_score < 0.1)
+        # This ensures we only recommend colleges that are at least somewhat relevant to the user's major
+        major_relevant_colleges = [college for college in all_college_predictions if college['major_fit_score'] >= 0.1]
+        
+        # Sort by major relevance first, then by probability
+        # This ensures colleges strong in the user's major are prioritized
+        major_relevant_colleges.sort(key=lambda x: (x['major_fit_score'], x['probability']), reverse=True)
+        
+        # Use the filtered and sorted list for categorization
+        all_college_predictions = major_relevant_colleges
         
         # Use realistic probability-based categorization with acceptance rate consideration
         safety_colleges = []
@@ -892,10 +900,11 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
         
         # Dynamic thresholds: adjust based on the highest probability achieved
         if max_prob >= 0.75:
-            # Strong student: use standard thresholds
-            safety_threshold = 0.75
-            target_min = 0.25
-            reach_min = 0.10
+            # Strong student: use adjusted thresholds to ensure 3-3-3 distribution
+            # Since all colleges have high probabilities, we need to adjust thresholds
+            safety_threshold = 0.70  # Lowered from 0.75
+            target_min = 0.50        # Raised from 0.25 to create a middle range
+            reach_min = 0.05         # Lowered to capture elite universities with very low probabilities
         elif max_prob >= 0.60:
             # Moderate student: lower thresholds
             safety_threshold = 0.60
@@ -1119,7 +1128,7 @@ async def search_colleges(q: str = "", limit: int = 20):
                 return cached_data
         
         # Load integrated college data
-        df = pd.read_csv('backend/data/raw/integrated_colleges.csv')
+        df = pd.read_csv('backend/data/raw/integrated_colleges_with_elite.csv')
         
         # Filter colleges by name if query provided
         if q:
