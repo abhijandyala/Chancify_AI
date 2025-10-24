@@ -589,7 +589,6 @@ export default function CollegeSelectionPage() {
             )}
           </div>
         </motion.div>
-      </div>
 
       {/* Prediction Results */}
       {Object.keys(predictionResults).length > 0 && (
