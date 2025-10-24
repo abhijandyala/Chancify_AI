@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Search, Building2, Users, DollarSign, GraduationCap, ChevronRight, Star, MapPin } from 'lucide-react'
+import { Search, Building2, Users, DollarSign, GraduationCap, ChevronRight, Star, MapPin, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { useRouter } from 'next/navigation'
 import { getCollegeSuggestions, searchColleges, type CollegeSuggestionsRequest, type CollegeSuggestion, type CollegeSearchResult } from '@/lib/api'
