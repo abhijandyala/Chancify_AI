@@ -4,7 +4,10 @@
     "builder": "DOCKERFILE",
     "dockerfilePath": "Dockerfile.frontend",
     "watchPatterns": [
-      "frontend/**"
+      "frontend/**",
+      "railway.json",
+      "Dockerfile.frontend",
+      ".github/**"
     ]
   },
   "deploy": {
