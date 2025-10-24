@@ -874,8 +874,8 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
             logger.info(f"Number of colleges with prob > 0.25: {len([p for p in all_probs if p > 0.25])}")
             logger.info(f"Number of colleges with prob > 0.75: {len([p for p in all_probs if p > 0.75])}")
         
-        # Return all processed suggestions (up to 90)
-        top_suggestions = all_college_predictions[:90]
+        # Return balanced suggestions: 3 safety + 3 target + 3 reach = 9 total
+        top_suggestions = balanced_suggestions[:9]
         
         response_data = {
             "success": True,
