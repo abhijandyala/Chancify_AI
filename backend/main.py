@@ -677,21 +677,62 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
                     major_moderately_selective.append(row)
         
         # If we don't have enough major-specific colleges, fill with general colleges
+        # But prioritize colleges that are at least somewhat relevant to the major
         if len(major_elite) < 5:
-            general_elite = df[df['selectivity_tier'] == 'Elite'].head(15 - len(major_elite))
-            major_elite.extend([row for _, row in general_elite.iterrows()])
+            # Get all elite colleges and sort by major strength
+            all_elite = df[df['selectivity_tier'] == 'Elite']
+            elite_with_scores = []
+            for _, row in all_elite.iterrows():
+                college_name = str(row['name']) if pd.notna(row['name']) else f"College_{row['unitid']}"
+                strength = get_major_strength_score(college_name, major)
+                elite_with_scores.append((row, strength))
+            
+            # Sort by major strength (descending) and take the best ones
+            elite_with_scores.sort(key=lambda x: x[1], reverse=True)
+            for row, _ in elite_with_scores[:15 - len(major_elite)]:
+                major_elite.append(row)
         
         if len(major_highly_selective) < 10:
-            general_highly = df[df['selectivity_tier'] == 'Highly Selective'].head(25 - len(major_highly_selective))
-            major_highly_selective.extend([row for _, row in general_highly.iterrows()])
+            # Get all highly selective colleges and sort by major strength
+            all_highly = df[df['selectivity_tier'] == 'Highly Selective']
+            highly_with_scores = []
+            for _, row in all_highly.iterrows():
+                college_name = str(row['name']) if pd.notna(row['name']) else f"College_{row['unitid']}"
+                strength = get_major_strength_score(college_name, major)
+                highly_with_scores.append((row, strength))
+            
+            # Sort by major strength (descending) and take the best ones
+            highly_with_scores.sort(key=lambda x: x[1], reverse=True)
+            for row, _ in highly_with_scores[:25 - len(major_highly_selective)]:
+                major_highly_selective.append(row)
         
         if len(major_selective) < 15:
-            general_selective = df[df['selectivity_tier'] == 'Moderately Selective'].head(30 - len(major_selective))
-            major_selective.extend([row for _, row in general_selective.iterrows()])
+            # Get all moderately selective colleges and sort by major strength
+            all_selective = df[df['selectivity_tier'] == 'Moderately Selective']
+            selective_with_scores = []
+            for _, row in all_selective.iterrows():
+                college_name = str(row['name']) if pd.notna(row['name']) else f"College_{row['unitid']}"
+                strength = get_major_strength_score(college_name, major)
+                selective_with_scores.append((row, strength))
+            
+            # Sort by major strength (descending) and take the best ones
+            selective_with_scores.sort(key=lambda x: x[1], reverse=True)
+            for row, _ in selective_with_scores[:30 - len(major_selective)]:
+                major_selective.append(row)
         
         if len(major_moderately_selective) < 10:
-            general_less = df[df['selectivity_tier'] == 'Less Selective'].head(20 - len(major_moderately_selective))
-            major_moderately_selective.extend([row for _, row in general_less.iterrows()])
+            # Get all less selective colleges and sort by major strength
+            all_less = df[df['selectivity_tier'] == 'Less Selective']
+            less_with_scores = []
+            for _, row in all_less.iterrows():
+                college_name = str(row['name']) if pd.notna(row['name']) else f"College_{row['unitid']}"
+                strength = get_major_strength_score(college_name, major)
+                less_with_scores.append((row, strength))
+            
+            # Sort by major strength (descending) and take the best ones
+            less_with_scores.sort(key=lambda x: x[1], reverse=True)
+            for row, _ in less_with_scores[:20 - len(major_moderately_selective)]:
+                major_moderately_selective.append(row)
         
         # Combine for processing (prioritizing major-specific colleges)
         df_subset = pd.concat([
@@ -763,14 +804,9 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
                 # Calculate major fit score for this college
                 major_fit_score = get_major_strength_score(college_data['name'], request.major)
                 
-                # Adjust probability based on major fit (boost colleges strong in user's major)
+                # Use the calibrated probability from the predictor (elite calibration already applied)
+                # Don't adjust probabilities further - the ML predictor handles calibration
                 adjusted_probability = result.probability
-                if major_fit_score >= 0.8:  # Elite in this major
-                    adjusted_probability = min(0.95, adjusted_probability * 1.1)
-                elif major_fit_score >= 0.6:  # Strong in this major
-                    adjusted_probability = min(0.95, adjusted_probability * 1.05)
-                elif major_fit_score < 0.3:  # Weak in this major
-                    adjusted_probability = max(0.05, adjusted_probability * 0.9)
                 
                 all_college_predictions.append({
                     'college_id': f"college_{row['unitid']}",

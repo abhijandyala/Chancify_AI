@@ -78,7 +78,32 @@ class AdmissionPredictor:
                 # Convert to the format expected by the calibration method
                 elite_calibration = {}
                 for college, data in enhanced_data.items():
-                    elite_calibration[college.lower()] = {
+                    # Map short names to full names for better matching
+                    name_mapping = {
+                        'MIT': 'massachusetts institute of technology',
+                        'Harvard': 'harvard university',
+                        'Stanford': 'stanford university',
+                        'Yale': 'yale university',
+                        'Princeton': 'princeton university',
+                        'Columbia': 'columbia university',
+                        'UPenn': 'university of pennsylvania',
+                        'Dartmouth': 'dartmouth college',
+                        'Brown': 'brown university',
+                        'Cornell': 'cornell university',
+                        'Duke': 'duke university',
+                        'Northwestern': 'northwestern university',
+                        'Vanderbilt': 'vanderbilt university',
+                        'Rice': 'rice university',
+                        'Emory': 'emory university',
+                        'Georgetown': 'georgetown university',
+                        'CMU': 'carnegie mellon university',
+                        'NYU': 'new york university',
+                        'UChicago': 'university of chicago'
+                    }
+                    
+                    # Use mapped name if available, otherwise use original
+                    mapped_name = name_mapping.get(college, college.lower())
+                    elite_calibration[mapped_name] = {
                         'factor': data['calibration_factor'],
                         'max_prob': data['max_probability'],
                         'acceptance_rate': data['acceptance_rate'],
