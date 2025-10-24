@@ -383,13 +383,16 @@ async def predict_admission_frontend(request: FrontendProfileRequest):
         result = predictor.predict(student, college, model_name='ensemble', use_formula=True)
         
         # Determine category based on final probability
+        # Use same thresholds as suggestions endpoint: Safety: 75%+, Target: 25-75%, Reach: 10-25%
         prob = result.probability
-        if prob < 0.15:
-            category = "reach"
-        elif prob < 0.40:
-            category = "target"
-        else:
+        if prob >= 0.75:
             category = "safety"
+        elif prob >= 0.25:
+            category = "target"
+        elif prob >= 0.10:
+            category = "reach"
+        else:
+            category = "reach"  # Default to reach for very low probabilities
         
         return {
             "success": True,
@@ -843,29 +846,31 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
             # Check if this is an elite university (exact match)
             is_elite = college_name in elite_universities
             
+            # Debug logging for elite universities
+            if is_elite:
+                logger.info(f"ELITE DEBUG: {college['name']} - prob: {prob:.3f}, is_elite: {is_elite}")
+            
             # Use correct probability thresholds for categorization
             # Safety: 75%+ chance, Target: 25-75% chance, Reach: 10-25% chance
             if prob >= 0.75:  # 75%+ chance = Safety
                 college['category'] = 'safety'
                 safety_colleges.append(college)
+                if is_elite:
+                    logger.info(f"ELITE DEBUG: {college['name']} -> SAFETY (prob: {prob:.3f})")
             elif prob >= 0.25:  # 25-75% chance = Target
                 college['category'] = 'target'
                 target_colleges.append(college)
+                if is_elite:
+                    logger.info(f"ELITE DEBUG: {college['name']} -> TARGET (prob: {prob:.3f})")
             elif prob >= 0.10:  # 10-25% chance = Reach
                 college['category'] = 'reach'
                 reach_colleges.append(college)
+                if is_elite:
+                    logger.info(f"ELITE DEBUG: {college['name']} -> REACH (prob: {prob:.3f})")
             # Skip colleges with <10% chance
             
-            # Special handling for elite universities - ensure they appear in reach category
-            if is_elite and prob > 0.005:  # Only if probability > 0.5%
-                # Remove from other categories if already added
-                if college in safety_colleges:
-                    safety_colleges.remove(college)
-                if college in target_colleges:
-                    target_colleges.remove(college)
-                if college not in reach_colleges:
-                    college['category'] = 'reach'
-                    reach_colleges.append(college)
+            # Note: Elite universities are now categorized based on actual probability
+            # No special override - they follow the same thresholds as other colleges
         
         logger.info(f"Found {len(safety_colleges)} safety, {len(target_colleges)} target, {len(reach_colleges)} reach colleges")
         
@@ -874,23 +879,31 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
         target_colleges.sort(key=lambda x: x['probability'], reverse=True)
         reach_colleges.sort(key=lambda x: x['probability'], reverse=True)
         
-        # Select balanced suggestions: 3 safety, 3 target, 3 reach
+        # Select balanced suggestions: prioritize correct categorization over exact counts
         balanced_suggestions = []
         
-        # Add 3 safety colleges (75%+ chance)
-        for college in safety_colleges[:3]:
-            college['category'] = 'safety'
-            balanced_suggestions.append(college)
+        # Add safety colleges (75%+ chance) - take as many as we have
+        for college in safety_colleges:
+            if college['probability'] >= 0.75:
+                college['category'] = 'safety'
+                balanced_suggestions.append(college)
         
-        # Add 3 target colleges (25-75% chance)
-        for college in target_colleges[:3]:
-            college['category'] = 'target'
-            balanced_suggestions.append(college)
+        # Add target colleges (25-75% chance) - take as many as we have
+        for college in target_colleges:
+            if 0.25 <= college['probability'] < 0.75:
+                college['category'] = 'target'
+                balanced_suggestions.append(college)
         
-        # Add 3 reach colleges (10-25% chance)
-        for college in reach_colleges[:3]:
-            college['category'] = 'reach'
-            balanced_suggestions.append(college)
+        # Add reach colleges (10-25% chance) - take as many as we have
+        for college in reach_colleges:
+            if 0.10 <= college['probability'] < 0.25:
+                college['category'] = 'reach'
+                balanced_suggestions.append(college)
+        
+        # If we have more than 9 suggestions, prioritize the highest probabilities
+        if len(balanced_suggestions) > 9:
+            balanced_suggestions.sort(key=lambda x: x['probability'], reverse=True)
+            balanced_suggestions = balanced_suggestions[:9]
         
         # If we don't have enough in any category, fill with the best available
         if len(balanced_suggestions) < 9:
