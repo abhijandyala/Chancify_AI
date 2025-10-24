@@ -886,24 +886,44 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
             if is_elite:
                 logger.info(f"ELITE DEBUG: {college['name']} - prob: {prob:.3f}, is_elite: {is_elite}")
             
-            # Use correct probability thresholds for categorization
-            # Safety: 75%+ chance, Target: 25-75% chance, Reach: 10-25% chance
-            if prob >= 0.75:  # 75%+ chance = Safety
-                college['category'] = 'safety'
-                safety_colleges.append(college)
-                if is_elite:
-                    logger.info(f"ELITE DEBUG: {college['name']} -> SAFETY (prob: {prob:.3f})")
-            elif prob >= 0.25:  # 25-75% chance = Target
-                college['category'] = 'target'
-                target_colleges.append(college)
-                if is_elite:
-                    logger.info(f"ELITE DEBUG: {college['name']} -> TARGET (prob: {prob:.3f})")
-            elif prob >= 0.10:  # 10-25% chance = Reach
-                college['category'] = 'reach'
-                reach_colleges.append(college)
-                if is_elite:
-                    logger.info(f"ELITE DEBUG: {college['name']} -> REACH (prob: {prob:.3f})")
-            # Skip colleges with <10% chance
+        # Calculate dynamic thresholds based on student profile strength
+        # For weaker students, use lower thresholds to ensure adequate recommendations
+        max_prob = max([c['probability'] for c in all_college_predictions]) if all_college_predictions else 0.8
+        
+        # Dynamic thresholds: adjust based on the highest probability achieved
+        if max_prob >= 0.75:
+            # Strong student: use standard thresholds
+            safety_threshold = 0.75
+            target_min = 0.25
+            reach_min = 0.10
+        elif max_prob >= 0.50:
+            # Moderate student: lower thresholds
+            safety_threshold = 0.60
+            target_min = 0.20
+            reach_min = 0.05
+        else:
+            # Weak student: even lower thresholds
+            safety_threshold = 0.45
+            target_min = 0.15
+            reach_min = 0.02
+        
+        # Use dynamic thresholds for categorization
+        if prob >= safety_threshold:  # Safety schools
+            college['category'] = 'safety'
+            safety_colleges.append(college)
+            if is_elite:
+                logger.info(f"ELITE DEBUG: {college['name']} -> SAFETY (prob: {prob:.3f}, threshold: {safety_threshold:.3f})")
+        elif prob >= target_min:  # Target schools
+            college['category'] = 'target'
+            target_colleges.append(college)
+            if is_elite:
+                logger.info(f"ELITE DEBUG: {college['name']} -> TARGET (prob: {prob:.3f}, threshold: {target_min:.3f})")
+        elif prob >= reach_min:  # Reach schools
+            college['category'] = 'reach'
+            reach_colleges.append(college)
+            if is_elite:
+                logger.info(f"ELITE DEBUG: {college['name']} -> REACH (prob: {prob:.3f}, threshold: {reach_min:.3f})")
+        # Skip colleges with very low chance
             
             # Note: Elite universities are now categorized based on actual probability
             # No special override - they follow the same thresholds as other colleges
@@ -918,21 +938,21 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
         # Select balanced suggestions: 3 safety + 3 target + 3 reach = 9 total
         balanced_suggestions = []
         
-        # Add 3 safety colleges (75%+ chance) - only if they actually meet the threshold
+        # Add 3 safety colleges - only if they actually meet the dynamic threshold
         for college in safety_colleges[:3]:
-            if college['probability'] >= 0.75:
+            if college['probability'] >= safety_threshold:
                 college['category'] = 'safety'
                 balanced_suggestions.append(college)
         
-        # Add 3 target colleges (25-75% chance) - only if they actually meet the threshold
+        # Add 3 target colleges - only if they actually meet the dynamic threshold
         for college in target_colleges[:3]:
-            if 0.25 <= college['probability'] < 0.75:
+            if target_min <= college['probability'] < safety_threshold:
                 college['category'] = 'target'
                 balanced_suggestions.append(college)
         
-        # Add 3 reach colleges (10-25% chance) - only if they actually meet the threshold
+        # Add 3 reach colleges - only if they actually meet the dynamic threshold
         for college in reach_colleges[:3]:
-            if 0.10 <= college['probability'] < 0.25:
+            if reach_min <= college['probability'] < target_min:
                 college['category'] = 'reach'
                 balanced_suggestions.append(college)
         
@@ -952,7 +972,7 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
         remaining_colleges = [c for c in all_college_predictions if id(c) not in used_colleges]
         remaining_colleges.sort(key=lambda x: x['probability'], reverse=True)
         
-        # Fill missing safety schools (need 3 total)
+        # Fill missing safety schools (need 3 total) - only if they meet 75%+ threshold
         while current_safety < 3:
             if len(safety_colleges) > current_safety:
                 college = safety_colleges[current_safety]
@@ -960,15 +980,24 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
                 balanced_suggestions.append(college)
                 current_safety += 1
             elif remaining_colleges:
-                # Use the highest probability remaining college as safety
-                college = remaining_colleges.pop(0)
-                college['category'] = 'safety'
-                balanced_suggestions.append(college)
-                current_safety += 1
+                # Find a remaining college that meets safety threshold
+                safety_candidate = None
+                for i, college in enumerate(remaining_colleges):
+                    if college['probability'] >= safety_threshold:
+                        safety_candidate = remaining_colleges.pop(i)
+                        break
+                
+                if safety_candidate:
+                    safety_candidate['category'] = 'safety'
+                    balanced_suggestions.append(safety_candidate)
+                    current_safety += 1
+                else:
+                    # No more colleges meet safety threshold
+                    break
             else:
                 break
         
-        # Fill missing target schools (need 3 total)
+        # Fill missing target schools (need 3 total) - only if they meet 25-75% threshold
         while current_target < 3:
             if len(target_colleges) > current_target:
                 college = target_colleges[current_target]
@@ -976,15 +1005,24 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
                 balanced_suggestions.append(college)
                 current_target += 1
             elif remaining_colleges:
-                # Use the highest probability remaining college as target
-                college = remaining_colleges.pop(0)
-                college['category'] = 'target'
-                balanced_suggestions.append(college)
-                current_target += 1
+                # Find a remaining college that meets target threshold
+                target_candidate = None
+                for i, college in enumerate(remaining_colleges):
+                    if target_min <= college['probability'] < safety_threshold:
+                        target_candidate = remaining_colleges.pop(i)
+                        break
+                
+                if target_candidate:
+                    target_candidate['category'] = 'target'
+                    balanced_suggestions.append(target_candidate)
+                    current_target += 1
+                else:
+                    # No more colleges meet target threshold
+                    break
             else:
                 break
         
-        # Fill missing reach schools (need 3 total)
+        # Fill missing reach schools (need 3 total) - only if they meet 10-25% threshold
         while current_reach < 3:
             if len(reach_colleges) > current_reach:
                 college = reach_colleges[current_reach]
@@ -992,11 +1030,20 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
                 balanced_suggestions.append(college)
                 current_reach += 1
             elif remaining_colleges:
-                # Use the highest probability remaining college as reach
-                college = remaining_colleges.pop(0)
-                college['category'] = 'reach'
-                balanced_suggestions.append(college)
-                current_reach += 1
+                # Find a remaining college that meets reach threshold
+                reach_candidate = None
+                for i, college in enumerate(remaining_colleges):
+                    if reach_min <= college['probability'] < target_min:
+                        reach_candidate = remaining_colleges.pop(i)
+                        break
+                
+                if reach_candidate:
+                    reach_candidate['category'] = 'reach'
+                    balanced_suggestions.append(reach_candidate)
+                    current_reach += 1
+                else:
+                    # No more colleges meet reach threshold
+                    break
             else:
                 break
         
@@ -1017,8 +1064,17 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
             logger.info(f"Number of colleges with prob > 0.25: {len([p for p in all_probs if p > 0.25])}")
             logger.info(f"Number of colleges with prob > 0.75: {len([p for p in all_probs if p > 0.75])}")
         
+        # Remove duplicates by college name
+        seen_colleges = set()
+        deduplicated_suggestions = []
+        for college in balanced_suggestions:
+            college_name = college.get('name', '')
+            if college_name not in seen_colleges:
+                seen_colleges.add(college_name)
+                deduplicated_suggestions.append(college)
+        
         # Return balanced suggestions: 3 safety + 3 target + 3 reach = 9 total
-        top_suggestions = balanced_suggestions[:9]
+        top_suggestions = deduplicated_suggestions[:9]
         
         response_data = {
             "success": True,
