@@ -5,6 +5,7 @@ FastAPI application for college admissions probability calculations
 
 import os
 import logging
+import time
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.config import settings
@@ -865,6 +866,13 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
         if all_college_predictions:
             sample_probs = [c['probability'] for c in all_college_predictions[:5]]
             logger.info(f"Sample probabilities: {sample_probs}")
+            
+            # Log all probabilities for debugging
+            all_probs = [c['probability'] for c in all_college_predictions]
+            logger.info(f"All probabilities range: {min(all_probs):.4f} - {max(all_probs):.4f}")
+            logger.info(f"Number of colleges with prob > 0.1: {len([p for p in all_probs if p > 0.1])}")
+            logger.info(f"Number of colleges with prob > 0.25: {len([p for p in all_probs if p > 0.25])}")
+            logger.info(f"Number of colleges with prob > 0.75: {len([p for p in all_probs if p > 0.75])}")
         
         # Return top 9 balanced suggestions
         top_suggestions = balanced_suggestions[:9]
