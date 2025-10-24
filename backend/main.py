@@ -10,7 +10,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.config import settings
 from backend.database import create_tables
-from backend.data.major_college_mapping import get_colleges_for_major, get_major_strength_score
+from backend.data.comprehensive_major_college_mapping import get_colleges_for_major, get_major_strength_score, get_major_relevance_info
 
 # Configure logging
 logging.basicConfig(
