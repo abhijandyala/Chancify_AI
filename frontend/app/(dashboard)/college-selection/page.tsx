@@ -2,10 +2,10 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Search, Building2, Users, DollarSign, GraduationCap, ChevronRight, Star, MapPin, Loader2 } from 'lucide-react'
+import { Search, Building2, Users, DollarSign, GraduationCap, ChevronRight, Star, MapPin } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { useRouter } from 'next/navigation'
-import { getCollegeSuggestions, getAdmissionProbability, searchColleges, type PredictionRequest, type CollegeSuggestionsRequest, type CollegeSuggestion, type CollegeSearchResult } from '@/lib/api'
+import { getCollegeSuggestions, searchColleges, type CollegeSuggestionsRequest, type CollegeSuggestion, type CollegeSearchResult } from '@/lib/api'
 
 export default function CollegeSelectionPage() {
   const router = useRouter()
@@ -15,8 +15,6 @@ export default function CollegeSelectionPage() {
   const [searchResults, setSearchResults] = useState<CollegeSearchResult[]>([])
   const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false)
   const [isLoadingSearch, setIsLoadingSearch] = useState(false)
-  const [isLoadingPrediction, setIsLoadingPrediction] = useState(false)
-  const [predictionResults, setPredictionResults] = useState<Record<string, any>>({})
   const [error, setError] = useState<string | null>(null)
   const searchRef = useRef<HTMLDivElement>(null)
 
@@ -185,60 +183,9 @@ export default function CollegeSelectionPage() {
     )
   }
 
-  // Get prediction for a specific college
-  const handleGetPrediction = async (collegeId: string) => {
-    setIsLoadingPrediction(true)
-    
-    try {
-      // Find the college name from the collegeId
-      const college = suggestedColleges.find(c => c.college_id === collegeId)
-      if (college) {
-        // Auto-fill the search box with the college name
-        setSearchQuery(college.name)
-      }
-      
-      const userProfile = JSON.parse(localStorage.getItem('userProfile') || '{}')
-      
-      const predictionRequest: PredictionRequest = {
-        gpa_unweighted: userProfile.gpa_unweighted || '',
-        gpa_weighted: userProfile.gpa_weighted || '',
-        sat: userProfile.sat || '',
-        act: userProfile.act || '',
-        rigor: userProfile.rigor || '5',
-        extracurricular_depth: userProfile.extracurricular_depth || '5',
-        leadership_positions: userProfile.leadership_positions || '5',
-        awards_publications: userProfile.awards_publications || '5',
-        passion_projects: userProfile.passion_projects || '5',
-        business_ventures: userProfile.business_ventures || '5',
-        volunteer_work: userProfile.volunteer_work || '5',
-        research_experience: userProfile.research_experience || '5',
-        portfolio_audition: userProfile.portfolio_audition || '5',
-        essay_quality: userProfile.essay_quality || '5',
-        recommendations: userProfile.recommendations || '5',
-        interview: userProfile.interview || '5',
-        demonstrated_interest: userProfile.demonstrated_interest || '5',
-        legacy_status: userProfile.legacy_status || '5',
-        hs_reputation: userProfile.hs_reputation || '5',
-        major: userProfile.major || 'Computer Science',
-        college: collegeId
-      }
-      
-      const response = await getAdmissionProbability(predictionRequest)
-      
-      if (response.success) {
-        setPredictionResults(prev => ({
-          ...prev,
-          [collegeId]: response
-        }))
-      } else {
-        setError(response.message || 'Failed to get prediction')
-      }
-    } catch (err) {
-      console.error('Error getting prediction:', err)
-      setError('Failed to get prediction. Please try again.')
-    } finally {
-      setIsLoadingPrediction(false)
-    }
+  // Auto-fill search box with college name
+  const handleAutoFillSearch = (collegeName: string) => {
+    setSearchQuery(collegeName)
   }
 
   // Animation variants
@@ -330,18 +277,6 @@ export default function CollegeSelectionPage() {
                         </p>
                       </div>
                     </div>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => handleGetPrediction(college.college_id)}
-                      disabled={isLoadingPrediction}
-                    >
-                      {isLoadingPrediction ? (
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                      ) : (
-                        'Predict'
-                      )}
-                    </Button>
                   </motion.div>
                 ))
               ) : (
@@ -425,14 +360,9 @@ export default function CollegeSelectionPage() {
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => handleGetPrediction(college.college_id)}
-                              disabled={isLoadingPrediction}
+                              onClick={() => handleAutoFillSearch(college.name)}
                             >
-                              {isLoadingPrediction ? (
-                                <Loader2 className="w-4 h-4 animate-spin" />
-                              ) : (
-                                'Get Detailed Prediction'
-                              )}
+                              Auto-fill Search
                             </Button>
                           </div>
                         </motion.div>
@@ -501,14 +431,9 @@ export default function CollegeSelectionPage() {
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => handleGetPrediction(college.college_id)}
-                              disabled={isLoadingPrediction}
+                              onClick={() => handleAutoFillSearch(college.name)}
                             >
-                              {isLoadingPrediction ? (
-                                <Loader2 className="w-4 h-4 animate-spin" />
-                              ) : (
-                                'Get Detailed Prediction'
-                              )}
+                              Auto-fill Search
                             </Button>
                           </div>
                         </motion.div>
@@ -577,14 +502,9 @@ export default function CollegeSelectionPage() {
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => handleGetPrediction(college.college_id)}
-                              disabled={isLoadingPrediction}
+                              onClick={() => handleAutoFillSearch(college.name)}
                             >
-                              {isLoadingPrediction ? (
-                                <Loader2 className="w-4 h-4 animate-spin" />
-                              ) : (
-                                'Get Detailed Prediction'
-                              )}
+                              Auto-fill Search
                             </Button>
                           </div>
                         </motion.div>
