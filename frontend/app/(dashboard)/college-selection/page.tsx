@@ -41,6 +41,24 @@ export default function CollegeSelectionPage() {
   const [isLoadingSearch, setIsLoadingSearch] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const searchRef = useRef<HTMLDivElement>(null)
+  
+  // Get user profile from localStorage
+  const [userProfile, setUserProfile] = useState<any>(null)
+  
+  useEffect(() => {
+    // Load user profile from localStorage
+    const profileData = localStorage.getItem('userProfile')
+    if (profileData) {
+      try {
+        setUserProfile(JSON.parse(profileData))
+      } catch (error) {
+        console.error('Error parsing user profile:', error)
+        setUserProfile({ major: 'Computer Science' }) // Default fallback
+      }
+    } else {
+      setUserProfile({ major: 'Computer Science' }) // Default fallback
+    }
+  }, [])
 
   // Search colleges using real data from backend
   useEffect(() => {
