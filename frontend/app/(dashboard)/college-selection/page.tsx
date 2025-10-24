@@ -2,10 +2,79 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Search, Building2, Users, DollarSign, GraduationCap, ChevronRight, Star, MapPin, Loader2 } from 'lucide-react'
+import { Search, Building2, Users, DollarSign, GraduationCap, ChevronRight, Star, MapPin, Loader2, BookOpen } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { useRouter } from 'next/navigation'
 import { getCollegeSuggestions, searchColleges, type CollegeSuggestionsRequest, type CollegeSuggestion, type CollegeSearchResult } from '@/lib/api'
+
+// Function to get popular majors for a college
+const getPopularMajors = (collegeName: string): string[] => {
+  const collegeMajors: { [key: string]: string[] } = {
+    // Elite Universities
+    'Massachusetts Institute of Technology': ['Computer Science', 'Engineering', 'Mathematics', 'Physics'],
+    'Carnegie Mellon University': ['Computer Science', 'Engineering', 'Business', 'Design'],
+    'Cornell University': ['Engineering', 'Business', 'Agriculture', 'Hotel Management'],
+    'Harvard University': ['Economics', 'Political Science', 'Psychology', 'Biology'],
+    'Stanford University': ['Computer Science', 'Engineering', 'Business', 'Biology'],
+    'Yale University': ['Economics', 'Political Science', 'History', 'Psychology'],
+    'Princeton University': ['Economics', 'Public Policy', 'Engineering', 'Computer Science'],
+    'Columbia University': ['Economics', 'Political Science', 'Engineering', 'Business'],
+    'University of Pennsylvania': ['Business', 'Economics', 'Engineering', 'Nursing'],
+    'Dartmouth College': ['Economics', 'Government', 'Engineering', 'Biology'],
+    'Brown University': ['Economics', 'Computer Science', 'Biology', 'International Relations'],
+    'Duke University': ['Economics', 'Public Policy', 'Biology', 'Engineering'],
+    'Northwestern University': ['Journalism', 'Engineering', 'Business', 'Psychology'],
+    'Vanderbilt University': ['Economics', 'Engineering', 'Medicine', 'Business'],
+    'Rice University': ['Engineering', 'Business', 'Medicine', 'Architecture'],
+    'Emory University': ['Business', 'Medicine', 'Psychology', 'Biology'],
+    'Georgetown University': ['International Relations', 'Political Science', 'Business', 'Economics'],
+    'New York University': ['Business', 'Film', 'Psychology', 'Economics'],
+    'University of Chicago': ['Economics', 'Mathematics', 'Physics', 'Political Science'],
+    
+    // State Universities
+    'University of California Berkeley': ['Engineering', 'Business', 'Computer Science', 'Biology'],
+    'University of California Los Angeles': ['Business', 'Psychology', 'Biology', 'Engineering'],
+    'University of Michigan': ['Engineering', 'Business', 'Psychology', 'Biology'],
+    'University of Virginia': ['Business', 'Economics', 'Psychology', 'Biology'],
+    'University of North Carolina': ['Business', 'Psychology', 'Biology', 'Journalism'],
+    'University of Texas': ['Business', 'Engineering', 'Computer Science', 'Biology'],
+    'University of Illinois': ['Engineering', 'Business', 'Computer Science', 'Psychology'],
+    'University of Wisconsin': ['Business', 'Engineering', 'Psychology', 'Biology'],
+    'University of Washington': ['Engineering', 'Business', 'Computer Science', 'Psychology'],
+    'University of Florida': ['Business', 'Engineering', 'Psychology', 'Biology'],
+    'University of Georgia': ['Business', 'Psychology', 'Biology', 'Journalism'],
+    'University of Alabama': ['Business', 'Engineering', 'Psychology', 'Nursing'],
+    'University of Arkansas': ['Business', 'Engineering', 'Agriculture', 'Nursing'],
+    'University of Central Arkansas': ['Business', 'Education', 'Nursing', 'Psychology'],
+    'Prescott College': ['Environmental Studies', 'Psychology', 'Education', 'Liberal Arts'],
+    'Baptist Health College Little Rock': ['Nursing', 'Health Sciences', 'Radiology', 'Physical Therapy'],
+    'Ouachita Baptist University': ['Business', 'Education', 'Psychology', 'Music'],
+    'John Brown University': ['Business', 'Engineering', 'Education', 'Psychology'],
+    'Southern Arkansas University': ['Business', 'Education', 'Nursing', 'Agriculture'],
+    'Harding University': ['Business', 'Education', 'Nursing', 'Psychology'],
+    'Talladega College': ['Business', 'Education', 'Psychology', 'Biology'],
+    'Samford University': ['Business', 'Education', 'Nursing', 'Psychology'],
+    'Northern Arizona University': ['Business', 'Education', 'Engineering', 'Psychology'],
+    
+    // Default fallback
+    'default': ['Business', 'Psychology', 'Biology', 'Education']
+  }
+  
+  // Try exact match first
+  if (collegeMajors[collegeName]) {
+    return collegeMajors[collegeName]
+  }
+  
+  // Try partial match
+  for (const [key, majors] of Object.entries(collegeMajors)) {
+    if (collegeName.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(collegeName.toLowerCase())) {
+      return majors
+    }
+  }
+  
+  // Return default majors
+  return collegeMajors['default']
+}
 
 export default function CollegeSelectionPage() {
   const router = useRouter()
@@ -267,7 +336,7 @@ export default function CollegeSelectionPage() {
                         onChange={() => handleCollegeSelect(college.college_id)}
                         className="w-4 h-4 text-yellow-400 bg-transparent border-gray-600 rounded focus:ring-yellow-400"
                       />
-                      <div>
+                      <div className="flex-1">
                         <p className="text-white font-medium">{college.name}</p>
                         <p className="text-gray-400 text-sm">
                           {college.selectivity_tier} • {(college.acceptance_rate * 100).toFixed(1)}% acceptance
@@ -275,6 +344,19 @@ export default function CollegeSelectionPage() {
                         <p className="text-gray-500 text-xs">
                           {college.city}, {college.state} • ${college.tuition_in_state?.toLocaleString() || 'N/A'} tuition
                         </p>
+                        {/* Popular Majors */}
+                        <div className="mt-2">
+                          <div className="flex flex-wrap gap-1">
+                            {getPopularMajors(college.name).slice(0, 2).map((major, idx) => (
+                              <span
+                                key={idx}
+                                className="px-2 py-1 bg-yellow-400/10 text-yellow-400 text-xs rounded-full border border-yellow-400/20"
+                              >
+                                {major}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </motion.div>
@@ -350,6 +432,24 @@ export default function CollegeSelectionPage() {
                             </div>
                           </div>
                           
+                          {/* Popular Majors */}
+                          <div className="mt-3">
+                            <div className="flex items-center gap-2 text-gray-400 text-sm mb-2">
+                              <BookOpen className="w-4 h-4" />
+                              <span>Popular Majors:</span>
+                            </div>
+                            <div className="flex flex-wrap gap-1">
+                              {getPopularMajors(college.name).slice(0, 3).map((major, idx) => (
+                                <span
+                                  key={idx}
+                                  className="px-2 py-1 bg-green-400/10 text-green-400 text-xs rounded-full border border-green-400/20"
+                                >
+                                  {major}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                          
                           <div className="mt-3 flex gap-2">
                             <input
                               type="checkbox"
@@ -421,6 +521,24 @@ export default function CollegeSelectionPage() {
                             </div>
                           </div>
                           
+                          {/* Popular Majors */}
+                          <div className="mt-3">
+                            <div className="flex items-center gap-2 text-gray-400 text-sm mb-2">
+                              <BookOpen className="w-4 h-4" />
+                              <span>Popular Majors:</span>
+                            </div>
+                            <div className="flex flex-wrap gap-1">
+                              {getPopularMajors(college.name).slice(0, 3).map((major, idx) => (
+                                <span
+                                  key={idx}
+                                  className="px-2 py-1 bg-yellow-400/10 text-yellow-400 text-xs rounded-full border border-yellow-400/20"
+                                >
+                                  {major}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                          
                           <div className="mt-3 flex gap-2">
                             <input
                               type="checkbox"
@@ -489,6 +607,24 @@ export default function CollegeSelectionPage() {
                             <div className="flex items-center gap-2 text-gray-300">
                               <Star className="w-4 h-4 text-red-400" />
                               <span>Challenging</span>
+                            </div>
+                          </div>
+                          
+                          {/* Popular Majors */}
+                          <div className="mt-3">
+                            <div className="flex items-center gap-2 text-gray-400 text-sm mb-2">
+                              <BookOpen className="w-4 h-4" />
+                              <span>Popular Majors:</span>
+                            </div>
+                            <div className="flex flex-wrap gap-1">
+                              {getPopularMajors(college.name).slice(0, 3).map((major, idx) => (
+                                <span
+                                  key={idx}
+                                  className="px-2 py-1 bg-red-400/10 text-red-400 text-xs rounded-full border border-red-400/20"
+                                >
+                                  {major}
+                                </span>
+                              ))}
                             </div>
                           </div>
                           
