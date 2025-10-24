@@ -271,26 +271,27 @@ export default function CollegeSelectionPage() {
         </motion.div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Left Column - Search and Results */}
-        <motion.div {...enter} className="space-y-6">
-          {/* Search Bar */}
-          <div className="rox-card p-6">
-            <h2 className="text-xl font-semibold text-white mb-4">Search Colleges</h2>
-            <div className="relative" ref={searchRef}>
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Search for colleges..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-transparent border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-yellow-400 focus:outline-none"
-              />
-            </div>
+      {/* Search Section - Full Width */}
+      <motion.div {...enter} className="mb-8">
+        <div className="rox-card p-6 max-w-2xl">
+          <h2 className="text-xl font-semibold text-white mb-4">Search Colleges</h2>
+          <div className="relative" ref={searchRef}>
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <input
+              type="text"
+              placeholder="Search for colleges..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-3 bg-transparent border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-yellow-400 focus:outline-none"
+            />
           </div>
+        </div>
+      </motion.div>
 
-          {/* Search Results */}
-          <div className="rox-card p-6">
+      {/* Search Results - Full Width */}
+      {searchQuery.length >= 2 && (
+        <motion.div {...enter} className="mb-8">
+          <div className="rox-card p-6 max-w-4xl">
             <h3 className="text-lg font-semibold text-white mb-4">Search Results</h3>
             <div className="space-y-3 max-h-96 overflow-y-auto">
               {isLoadingSearch ? (
@@ -336,21 +337,18 @@ export default function CollegeSelectionPage() {
                     </Button>
                   </motion.div>
                 ))
-              ) : searchQuery.length >= 2 ? (
-                <div className="text-center py-8 text-gray-400">
-                  No colleges found matching "{searchQuery}"
-                </div>
               ) : (
                 <div className="text-center py-8 text-gray-400">
-                  Start typing to search for colleges...
+                  No colleges found matching "{searchQuery}"
                 </div>
               )}
             </div>
           </div>
         </motion.div>
+      )}
 
-        {/* Right Column - AI Suggestions */}
-        <motion.div {...enter} className="space-y-6">
+      {/* AI Recommendations - Full Width */}
+      <motion.div {...enter} className="space-y-8">
           <div className="rox-card p-6">
             <h2 className="text-xl font-semibold text-white mb-4">AI Recommendations</h2>
             {isLoadingSuggestions ? (
@@ -367,14 +365,14 @@ export default function CollegeSelectionPage() {
                       <div className="w-3 h-3 bg-green-400 rounded-full"></div>
                       Safety Schools (75%+ chance)
                     </h3>
-                    <div className="grid grid-cols-3 gap-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {suggestedColleges.filter(c => c.category === 'safety').map((college, index) => (
                         <motion.div
                           key={college.college_id}
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.1 }}
-                          className="p-4 border border-green-400/30 bg-green-400/5 rounded-xl hover:border-green-400/50 transition-colors"
+                          className="p-6 border border-green-400/30 bg-green-400/5 rounded-xl hover:border-green-400/50 transition-colors"
                         >
                           <div className="flex items-start justify-between mb-3">
                             <div>
@@ -443,14 +441,14 @@ export default function CollegeSelectionPage() {
                       <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
                       Target Schools (25-75% chance)
                     </h3>
-                    <div className="grid grid-cols-3 gap-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {suggestedColleges.filter(c => c.category === 'target').map((college, index) => (
                         <motion.div
                           key={college.college_id}
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.1 }}
-                          className="p-4 border border-yellow-400/30 bg-yellow-400/5 rounded-xl hover:border-yellow-400/50 transition-colors"
+                          className="p-6 border border-yellow-400/30 bg-yellow-400/5 rounded-xl hover:border-yellow-400/50 transition-colors"
                         >
                           <div className="flex items-start justify-between mb-3">
                             <div>
@@ -519,14 +517,14 @@ export default function CollegeSelectionPage() {
                       <div className="w-3 h-3 bg-red-400 rounded-full"></div>
                       Reach Schools (10-25% chance)
                     </h3>
-                    <div className="grid grid-cols-3 gap-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {suggestedColleges.filter(c => c.category === 'reach').map((college, index) => (
                         <motion.div
                           key={college.college_id}
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.1 }}
-                          className="p-4 border border-red-400/30 bg-red-400/5 rounded-xl hover:border-red-400/50 transition-colors"
+                          className="p-6 border border-red-400/30 bg-red-400/5 rounded-xl hover:border-red-400/50 transition-colors"
                         >
                           <div className="flex items-start justify-between mb-3">
                             <div>
