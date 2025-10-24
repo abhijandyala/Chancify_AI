@@ -896,16 +896,21 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
             safety_threshold = 0.75
             target_min = 0.25
             reach_min = 0.10
-        elif max_prob >= 0.50:
+        elif max_prob >= 0.60:
             # Moderate student: lower thresholds
             safety_threshold = 0.60
             target_min = 0.20
             reach_min = 0.05
-        else:
+        elif max_prob >= 0.50:
             # Weak student: even lower thresholds
-            safety_threshold = 0.45
+            safety_threshold = 0.50
             target_min = 0.15
             reach_min = 0.02
+        else:
+            # Very weak student: extremely low thresholds
+            safety_threshold = 0.40
+            target_min = 0.10
+            reach_min = 0.01
         
         # Use dynamic thresholds for categorization
         if prob >= safety_threshold:  # Safety schools
