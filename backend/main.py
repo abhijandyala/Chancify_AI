@@ -10,6 +10,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.config import settings
 from backend.database import create_tables
+from backend.data.major_college_mapping import get_colleges_for_major, get_major_strength_score
 
 # Configure logging
 logging.basicConfig(
@@ -606,17 +607,32 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
         elif act > 0:
             academic_score += (act / 36) * 40
         
-        # Add factor scores
-        factor_score = (
-            safe_float(request.extracurricular_depth) +  # Use extracurricular depth as rigor proxy 
-            safe_float(request.extracurricular_depth) + 
-            safe_float(request.leadership_positions) + 
-            safe_float(request.awards_publications) + 
-            safe_float(request.essay_quality) + 
-            safe_float(request.recommendations)
-        ) / 6.0
+        # COMPREHENSIVE PROFILE SCORING: Consider all dropdown factors
+        comprehensive_factor_score = (
+            safe_float(request.extracurricular_depth) +      # Extracurricular depth
+            safe_float(request.leadership_positions) +       # Leadership positions
+            safe_float(request.awards_publications) +        # Awards and publications
+            safe_float(request.passion_projects) +           # Passion projects
+            safe_float(request.business_ventures) +          # Business ventures
+            safe_float(request.volunteer_work) +             # Volunteer work
+            safe_float(request.research_experience) +        # Research experience
+            safe_float(request.portfolio_audition) +         # Portfolio/audition
+            safe_float(request.essay_quality) +              # Essay quality
+            safe_float(request.recommendations) +            # Recommendations
+            safe_float(request.interview) +                  # Interview performance
+            safe_float(request.demonstrated_interest) +      # Demonstrated interest
+            safe_float(request.legacy_status) +              # Legacy status
+            safe_float(request.hs_reputation) +              # High school reputation
+            safe_float(request.geographic_diversity) +       # Geographic diversity
+            safe_float(request.plan_timing) +                # Plan timing
+            safe_float(request.geography_residency) +        # Geography residency
+            safe_float(request.firstgen_diversity) +         # First generation diversity
+            safe_float(request.ability_to_pay) +             # Ability to pay
+            safe_float(request.policy_knob) +                # Policy considerations
+            safe_float(request.conduct_record)               # Conduct record
+        ) / 21.0  # Average of all 21 factors
         
-        academic_score += factor_score * 20
+        academic_score += comprehensive_factor_score * 20
         
         # Determine target tier based on academic strength
         if academic_score >= 80:
@@ -628,15 +644,59 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
         else:
             target_tiers = ['Moderately Selective', 'Less Selective']
         
-        # OPTIMIZATION: Only process a subset of colleges for faster response
-        # Prioritize diverse selection across tiers
-        elite_colleges = df[df['selectivity_tier'] == 'Elite'].head(15)
-        highly_selective = df[df['selectivity_tier'] == 'Highly Selective'].head(25)
-        moderately_selective = df[df['selectivity_tier'] == 'Moderately Selective'].head(30)
-        less_selective = df[df['selectivity_tier'] == 'Less Selective'].head(20)
+        # MAJOR-BASED COLLEGE SELECTION: Prioritize colleges strong in user's major
+        major = request.major
+        major_colleges = get_colleges_for_major(major)
         
-        # Combine for faster processing (90 colleges instead of 477)
-        df_subset = pd.concat([elite_colleges, highly_selective, moderately_selective, less_selective], ignore_index=True)
+        # Get colleges that are strong in the user's major, organized by tier
+        major_elite = []
+        major_highly_selective = []
+        major_selective = []
+        major_moderately_selective = []
+        
+        # Filter colleges by major strength and tier
+        for _, row in df.iterrows():
+            college_name = str(row['name']) if pd.notna(row['name']) else f"College_{row['unitid']}"
+            tier = row['selectivity_tier']
+            
+            # Check if this college is strong in the user's major
+            major_strength = get_major_strength_score(college_name, major)
+            
+            # Only include colleges with decent major strength (>= 0.4) or if no major-specific colleges found
+            if major_strength >= 0.4 or len(major_colleges) == 0:
+                if tier == 'Elite' and len(major_elite) < 15:
+                    major_elite.append(row)
+                elif tier == 'Highly Selective' and len(major_highly_selective) < 25:
+                    major_highly_selective.append(row)
+                elif tier == 'Moderately Selective' and len(major_selective) < 30:
+                    major_selective.append(row)
+                elif tier == 'Less Selective' and len(major_moderately_selective) < 20:
+                    major_moderately_selective.append(row)
+        
+        # If we don't have enough major-specific colleges, fill with general colleges
+        if len(major_elite) < 5:
+            general_elite = df[df['selectivity_tier'] == 'Elite'].head(15 - len(major_elite))
+            major_elite.extend([row for _, row in general_elite.iterrows()])
+        
+        if len(major_highly_selective) < 10:
+            general_highly = df[df['selectivity_tier'] == 'Highly Selective'].head(25 - len(major_highly_selective))
+            major_highly_selective.extend([row for _, row in general_highly.iterrows()])
+        
+        if len(major_selective) < 15:
+            general_selective = df[df['selectivity_tier'] == 'Moderately Selective'].head(30 - len(major_selective))
+            major_selective.extend([row for _, row in general_selective.iterrows()])
+        
+        if len(major_moderately_selective) < 10:
+            general_less = df[df['selectivity_tier'] == 'Less Selective'].head(20 - len(major_moderately_selective))
+            major_moderately_selective.extend([row for _, row in general_less.iterrows()])
+        
+        # Combine for processing (prioritizing major-specific colleges)
+        df_subset = pd.concat([
+            pd.DataFrame(major_elite),
+            pd.DataFrame(major_highly_selective), 
+            pd.DataFrame(major_selective),
+            pd.DataFrame(major_moderately_selective)
+        ], ignore_index=True)
         
         # Get predictions for subset of colleges to find balanced suggestions
         all_college_predictions = []
@@ -697,10 +757,24 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
                 # Get prediction
                 result = predictor.predict(student, college, model_name='ensemble', use_formula=True)
                 
+                # Calculate major fit score for this college
+                major_fit_score = get_major_strength_score(college_data['name'], request.major)
+                
+                # Adjust probability based on major fit (boost colleges strong in user's major)
+                adjusted_probability = result.probability
+                if major_fit_score >= 0.8:  # Elite in this major
+                    adjusted_probability = min(0.95, adjusted_probability * 1.1)
+                elif major_fit_score >= 0.6:  # Strong in this major
+                    adjusted_probability = min(0.95, adjusted_probability * 1.05)
+                elif major_fit_score < 0.3:  # Weak in this major
+                    adjusted_probability = max(0.05, adjusted_probability * 0.9)
+                
                 all_college_predictions.append({
                     'college_id': f"college_{row['unitid']}",
                     'name': college_data['name'],
-                    'probability': round(result.probability, 4),
+                    'probability': round(adjusted_probability, 4),
+                    'original_probability': round(result.probability, 4),  # Keep original for reference
+                    'major_fit_score': round(major_fit_score, 2),
                     'confidence_interval': {
                         "lower": round(result.confidence_interval[0], 4),
                         "upper": round(result.confidence_interval[1], 4)
