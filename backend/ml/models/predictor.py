@@ -56,9 +56,79 @@ class AdmissionPredictor:
         self.metadata = {}
         self.feature_names = []
         
+        # Load elite calibration data
+        self.elite_calibration = self._load_elite_calibration()
+        
         # Load models if available
         if self.model_dir.exists():
             self._load_models()
+    
+    def _load_elite_calibration(self):
+        """Load elite university calibration data for realistic probabilities."""
+        elite_calibration = {
+            # Ultra-selective (acceptance rate < 5%)
+            'massachusetts institute of technology': {'factor': 0.1, 'max_prob': 0.12, 'acceptance_rate': 0.041},
+            'harvard university': {'factor': 0.1, 'max_prob': 0.12, 'acceptance_rate': 0.040},
+            'stanford university': {'factor': 0.1, 'max_prob': 0.12, 'acceptance_rate': 0.040},
+            
+            # Highly selective (acceptance rate 5-8%)
+            'yale university': {'factor': 0.15, 'max_prob': 0.18, 'acceptance_rate': 0.053},
+            'princeton university': {'factor': 0.15, 'max_prob': 0.18, 'acceptance_rate': 0.044},
+            'columbia university': {'factor': 0.15, 'max_prob': 0.18, 'acceptance_rate': 0.041},
+            'university of pennsylvania': {'factor': 0.15, 'max_prob': 0.18, 'acceptance_rate': 0.059},
+            'dartmouth college': {'factor': 0.15, 'max_prob': 0.18, 'acceptance_rate': 0.062},
+            'brown university': {'factor': 0.15, 'max_prob': 0.18, 'acceptance_rate': 0.055},
+            'university of chicago': {'factor': 0.15, 'max_prob': 0.18, 'acceptance_rate': 0.065},
+            
+            # Very selective (acceptance rate 8-12%)
+            'cornell university': {'factor': 0.25, 'max_prob': 0.25, 'acceptance_rate': 0.087},
+            'duke university': {'factor': 0.25, 'max_prob': 0.25, 'acceptance_rate': 0.059},
+            'northwestern university': {'factor': 0.25, 'max_prob': 0.25, 'acceptance_rate': 0.070},
+            'vanderbilt university': {'factor': 0.25, 'max_prob': 0.25, 'acceptance_rate': 0.071},
+            
+            # Selective (acceptance rate 12%+)
+            'rice university': {'factor': 0.4, 'max_prob': 0.35, 'acceptance_rate': 0.095},
+            'emory university': {'factor': 0.4, 'max_prob': 0.35, 'acceptance_rate': 0.131},
+            'georgetown university': {'factor': 0.4, 'max_prob': 0.35, 'acceptance_rate': 0.120},
+            'carnegie mellon university': {'factor': 0.4, 'max_prob': 0.35, 'acceptance_rate': 0.135},
+            'new york university': {'factor': 0.4, 'max_prob': 0.35, 'acceptance_rate': 0.130},
+        }
+        return elite_calibration
+    
+    def _apply_elite_calibration(self, probability: float, college: CollegeFeatures) -> float:
+        """
+        Apply elite university calibration to make probabilities realistic.
+        
+        Args:
+            probability: Raw probability from ML model
+            college: College features containing name
+            
+        Returns:
+            Calibrated probability
+        """
+        college_name = college.name.lower()
+        
+        # Check if this is an elite university
+        for elite_name, calibration_data in self.elite_calibration.items():
+            if elite_name in college_name or college_name in elite_name:
+                # Apply calibration factor
+                calibrated_prob = probability * calibration_data['factor']
+                
+                # Cap at maximum probability
+                calibrated_prob = min(calibrated_prob, calibration_data['max_prob'])
+                
+                # Log the calibration for debugging
+                print(f"ELITE CALIBRATION: {college.name}")
+                print(f"  Raw probability: {probability:.3f}")
+                print(f"  Calibrated: {calibrated_prob:.3f}")
+                print(f"  Factor: {calibration_data['factor']}")
+                print(f"  Max prob: {calibration_data['max_prob']}")
+                print(f"  Acceptance rate: {calibration_data['acceptance_rate']:.1%}")
+                
+                return calibrated_prob
+        
+        # Not an elite university, return original probability
+        return probability
     
     def _load_models(self):
         """Load all trained models from disk."""
@@ -215,6 +285,9 @@ class AdmissionPredictor:
         else:
             # For low probabilities, apply a slight expansion
             final_prob = final_prob * 1.1  # Slightly expand low probabilities
+        
+        # Apply elite university calibration for realistic probabilities
+        final_prob = self._apply_elite_calibration(final_prob, college)
         
         final_prob = np.clip(final_prob, 0.02, 0.98)  # Reasonable bounds
         
