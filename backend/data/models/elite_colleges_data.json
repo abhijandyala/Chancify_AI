@@ -1,0 +1,211 @@
+{
+  "MIT": {
+    "acceptance_rate": 0.041,
+    "sat_25th": 1520,
+    "sat_75th": 1580,
+    "act_25th": 35,
+    "act_75th": 36,
+    "gpa_avg": 4.17,
+    "gpa_unweighted_avg": 3.95,
+    "category": "ultra_selective",
+    "notes": "Even perfect profiles have < 12% chance"
+  },
+  "Harvard": {
+    "acceptance_rate": 0.04,
+    "sat_25th": 1480,
+    "sat_75th": 1580,
+    "act_25th": 33,
+    "act_75th": 36,
+    "gpa_avg": 4.18,
+    "gpa_unweighted_avg": 3.95,
+    "category": "ultra_selective",
+    "notes": "Even perfect profiles have < 12% chance"
+  },
+  "Stanford": {
+    "acceptance_rate": 0.04,
+    "sat_25th": 1470,
+    "sat_75th": 1570,
+    "act_25th": 33,
+    "act_75th": 35,
+    "gpa_avg": 4.17,
+    "gpa_unweighted_avg": 3.96,
+    "category": "ultra_selective",
+    "notes": "Even perfect profiles have < 12% chance"
+  },
+  "Yale": {
+    "acceptance_rate": 0.053,
+    "sat_25th": 1460,
+    "sat_75th": 1580,
+    "act_25th": 33,
+    "act_75th": 35,
+    "gpa_avg": 4.14,
+    "gpa_unweighted_avg": 3.95,
+    "category": "highly_selective",
+    "notes": "Perfect profiles have < 18% chance"
+  },
+  "Princeton": {
+    "acceptance_rate": 0.044,
+    "sat_25th": 1470,
+    "sat_75th": 1570,
+    "act_25th": 33,
+    "act_75th": 35,
+    "gpa_avg": 4.16,
+    "gpa_unweighted_avg": 3.95,
+    "category": "highly_selective",
+    "notes": "Perfect profiles have < 18% chance"
+  },
+  "Columbia": {
+    "acceptance_rate": 0.041,
+    "sat_25th": 1470,
+    "sat_75th": 1570,
+    "act_25th": 33,
+    "act_75th": 35,
+    "gpa_avg": 4.15,
+    "gpa_unweighted_avg": 3.95,
+    "category": "highly_selective",
+    "notes": "Perfect profiles have < 18% chance"
+  },
+  "University of Pennsylvania": {
+    "acceptance_rate": 0.059,
+    "sat_25th": 1460,
+    "sat_75th": 1570,
+    "act_25th": 33,
+    "act_75th": 35,
+    "gpa_avg": 4.13,
+    "gpa_unweighted_avg": 3.95,
+    "category": "highly_selective",
+    "notes": "Perfect profiles have < 18% chance"
+  },
+  "Dartmouth": {
+    "acceptance_rate": 0.062,
+    "sat_25th": 1440,
+    "sat_75th": 1560,
+    "act_25th": 32,
+    "act_75th": 35,
+    "gpa_avg": 4.11,
+    "gpa_unweighted_avg": 3.94,
+    "category": "highly_selective",
+    "notes": "Perfect profiles have < 18% chance"
+  },
+  "Brown": {
+    "acceptance_rate": 0.055,
+    "sat_25th": 1440,
+    "sat_75th": 1570,
+    "act_25th": 32,
+    "act_75th": 35,
+    "gpa_avg": 4.12,
+    "gpa_unweighted_avg": 3.94,
+    "category": "highly_selective",
+    "notes": "Perfect profiles have < 18% chance"
+  },
+  "University of Chicago": {
+    "acceptance_rate": 0.065,
+    "sat_25th": 1500,
+    "sat_75th": 1570,
+    "act_25th": 34,
+    "act_75th": 35,
+    "gpa_avg": 4.13,
+    "gpa_unweighted_avg": 3.95,
+    "category": "highly_selective",
+    "notes": "Perfect profiles have < 18% chance"
+  },
+  "Cornell": {
+    "acceptance_rate": 0.087,
+    "sat_25th": 1420,
+    "sat_75th": 1540,
+    "act_25th": 32,
+    "act_75th": 35,
+    "gpa_avg": 4.07,
+    "gpa_unweighted_avg": 3.9,
+    "category": "very_selective",
+    "notes": "Perfect profiles have < 25% chance"
+  },
+  "Duke": {
+    "acceptance_rate": 0.059,
+    "sat_25th": 1450,
+    "sat_75th": 1570,
+    "act_25th": 33,
+    "act_75th": 35,
+    "gpa_avg": 4.13,
+    "gpa_unweighted_avg": 3.94,
+    "category": "very_selective",
+    "notes": "Perfect profiles have < 25% chance"
+  },
+  "Northwestern": {
+    "acceptance_rate": 0.07,
+    "sat_25th": 1440,
+    "sat_75th": 1550,
+    "act_25th": 33,
+    "act_75th": 35,
+    "gpa_avg": 4.1,
+    "gpa_unweighted_avg": 3.92,
+    "category": "very_selective",
+    "notes": "Perfect profiles have < 25% chance"
+  },
+  "Vanderbilt": {
+    "acceptance_rate": 0.071,
+    "sat_25th": 1450,
+    "sat_75th": 1560,
+    "act_25th": 33,
+    "act_75th": 35,
+    "gpa_avg": 4.09,
+    "gpa_unweighted_avg": 3.91,
+    "category": "very_selective",
+    "notes": "Perfect profiles have < 25% chance"
+  },
+  "Rice": {
+    "acceptance_rate": 0.095,
+    "sat_25th": 1470,
+    "sat_75th": 1570,
+    "act_25th": 34,
+    "act_75th": 36,
+    "gpa_avg": 4.12,
+    "gpa_unweighted_avg": 3.96,
+    "category": "selective",
+    "notes": "Perfect profiles have < 35% chance"
+  },
+  "Emory": {
+    "acceptance_rate": 0.131,
+    "sat_25th": 1420,
+    "sat_75th": 1540,
+    "act_25th": 32,
+    "act_75th": 35,
+    "gpa_avg": 4.05,
+    "gpa_unweighted_avg": 3.89,
+    "category": "selective",
+    "notes": "Perfect profiles have < 35% chance"
+  },
+  "Georgetown": {
+    "acceptance_rate": 0.12,
+    "sat_25th": 1440,
+    "sat_75th": 1550,
+    "act_25th": 33,
+    "act_75th": 35,
+    "gpa_avg": 4.08,
+    "gpa_unweighted_avg": 3.9,
+    "category": "selective",
+    "notes": "Perfect profiles have < 35% chance"
+  },
+  "Carnegie Mellon": {
+    "acceptance_rate": 0.135,
+    "sat_25th": 1470,
+    "sat_75th": 1570,
+    "act_25th": 34,
+    "act_75th": 36,
+    "gpa_avg": 4.11,
+    "gpa_unweighted_avg": 3.93,
+    "category": "selective",
+    "notes": "Perfect profiles have < 35% chance"
+  },
+  "New York University": {
+    "acceptance_rate": 0.13,
+    "sat_25th": 1370,
+    "sat_75th": 1540,
+    "act_25th": 31,
+    "act_75th": 35,
+    "gpa_avg": 3.95,
+    "gpa_unweighted_avg": 3.85,
+    "category": "selective",
+    "notes": "Perfect profiles have < 35% chance"
+  }
+}

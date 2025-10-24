@@ -64,34 +64,58 @@ class AdmissionPredictor:
             self._load_models()
     
     def _load_elite_calibration(self):
-        """Load elite university calibration data for realistic probabilities."""
+        """Load enhanced elite university calibration data for realistic probabilities."""
+        # Load from the enhanced calibration system
+        try:
+            import json
+            from pathlib import Path
+            
+            calibration_file = Path(__file__).parent.parent.parent / 'data' / 'models' / 'enhanced_calibration_factors.json'
+            if calibration_file.exists():
+                with open(calibration_file, 'r') as f:
+                    enhanced_data = json.load(f)
+                
+                # Convert to the format expected by the calibration method
+                elite_calibration = {}
+                for college, data in enhanced_data.items():
+                    elite_calibration[college.lower()] = {
+                        'factor': data['calibration_factor'],
+                        'max_prob': data['max_probability'],
+                        'acceptance_rate': data['acceptance_rate'],
+                        'category': data['category']
+                    }
+                return elite_calibration
+        except Exception as e:
+            print(f"Warning: Could not load enhanced calibration data: {e}")
+        
+        # Fallback to basic calibration
         elite_calibration = {
             # Ultra-selective (acceptance rate < 5%)
-            'massachusetts institute of technology': {'factor': 0.1, 'max_prob': 0.12, 'acceptance_rate': 0.041},
-            'harvard university': {'factor': 0.1, 'max_prob': 0.12, 'acceptance_rate': 0.040},
-            'stanford university': {'factor': 0.1, 'max_prob': 0.12, 'acceptance_rate': 0.040},
+            'massachusetts institute of technology': {'factor': 0.073, 'max_prob': 0.098, 'acceptance_rate': 0.041},
+            'harvard university': {'factor': 0.074, 'max_prob': 0.098, 'acceptance_rate': 0.040},
+            'stanford university': {'factor': 0.074, 'max_prob': 0.098, 'acceptance_rate': 0.040},
             
             # Highly selective (acceptance rate 5-8%)
-            'yale university': {'factor': 0.15, 'max_prob': 0.18, 'acceptance_rate': 0.053},
-            'princeton university': {'factor': 0.15, 'max_prob': 0.18, 'acceptance_rate': 0.044},
-            'columbia university': {'factor': 0.15, 'max_prob': 0.18, 'acceptance_rate': 0.041},
-            'university of pennsylvania': {'factor': 0.15, 'max_prob': 0.18, 'acceptance_rate': 0.059},
-            'dartmouth college': {'factor': 0.15, 'max_prob': 0.18, 'acceptance_rate': 0.062},
-            'brown university': {'factor': 0.15, 'max_prob': 0.18, 'acceptance_rate': 0.055},
-            'university of chicago': {'factor': 0.15, 'max_prob': 0.18, 'acceptance_rate': 0.065},
+            'yale university': {'factor': 0.107, 'max_prob': 0.146, 'acceptance_rate': 0.053},
+            'princeton university': {'factor': 0.109, 'max_prob': 0.147, 'acceptance_rate': 0.044},
+            'columbia university': {'factor': 0.110, 'max_prob': 0.147, 'acceptance_rate': 0.041},
+            'university of pennsylvania': {'factor': 0.106, 'max_prob': 0.146, 'acceptance_rate': 0.059},
+            'dartmouth college': {'factor': 0.105, 'max_prob': 0.145, 'acceptance_rate': 0.062},
+            'brown university': {'factor': 0.107, 'max_prob': 0.146, 'acceptance_rate': 0.055},
+            'university of chicago': {'factor': 0.104, 'max_prob': 0.145, 'acceptance_rate': 0.065},
             
             # Very selective (acceptance rate 8-12%)
-            'cornell university': {'factor': 0.25, 'max_prob': 0.25, 'acceptance_rate': 0.087},
-            'duke university': {'factor': 0.25, 'max_prob': 0.25, 'acceptance_rate': 0.059},
-            'northwestern university': {'factor': 0.25, 'max_prob': 0.25, 'acceptance_rate': 0.070},
-            'vanderbilt university': {'factor': 0.25, 'max_prob': 0.25, 'acceptance_rate': 0.071},
+            'cornell university': {'factor': 0.165, 'max_prob': 0.210, 'acceptance_rate': 0.087},
+            'duke university': {'factor': 0.176, 'max_prob': 0.214, 'acceptance_rate': 0.059},
+            'northwestern university': {'factor': 0.172, 'max_prob': 0.212, 'acceptance_rate': 0.070},
+            'vanderbilt university': {'factor': 0.172, 'max_prob': 0.212, 'acceptance_rate': 0.071},
             
             # Selective (acceptance rate 12%+)
-            'rice university': {'factor': 0.4, 'max_prob': 0.35, 'acceptance_rate': 0.095},
-            'emory university': {'factor': 0.4, 'max_prob': 0.35, 'acceptance_rate': 0.131},
-            'georgetown university': {'factor': 0.4, 'max_prob': 0.35, 'acceptance_rate': 0.120},
-            'carnegie mellon university': {'factor': 0.4, 'max_prob': 0.35, 'acceptance_rate': 0.135},
-            'new york university': {'factor': 0.4, 'max_prob': 0.35, 'acceptance_rate': 0.130},
+            'rice university': {'factor': 0.283, 'max_prob': 0.286, 'acceptance_rate': 0.095},
+            'emory university': {'factor': 0.258, 'max_prob': 0.280, 'acceptance_rate': 0.131},
+            'georgetown university': {'factor': 0.266, 'max_prob': 0.282, 'acceptance_rate': 0.120},
+            'carnegie mellon university': {'factor': 0.256, 'max_prob': 0.280, 'acceptance_rate': 0.135},
+            'new york university': {'factor': 0.259, 'max_prob': 0.281, 'acceptance_rate': 0.130},
         }
         return elite_calibration
     

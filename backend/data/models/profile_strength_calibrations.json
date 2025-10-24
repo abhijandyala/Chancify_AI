@@ -1,0 +1,420 @@
+{
+  "MIT": {
+    "perfect_profile": {
+      "factor": 0.088128,
+      "max_prob": 0.09795000000000001,
+      "description": "4.0 GPA, 1600 SAT, 36 ACT, exceptional ECs"
+    },
+    "strong_profile": {
+      "factor": 0.07344,
+      "max_prob": 0.07836000000000001,
+      "description": "3.8+ GPA, 1500+ SAT, 34+ ACT, strong ECs"
+    },
+    "average_profile": {
+      "factor": 0.051408,
+      "max_prob": 0.05877,
+      "description": "3.5+ GPA, 1400+ SAT, 32+ ACT, decent ECs"
+    },
+    "below_average": {
+      "factor": 0.03672,
+      "max_prob": 0.039180000000000006,
+      "description": "3.0+ GPA, 1200+ SAT, 28+ ACT, basic ECs"
+    }
+  },
+  "Harvard": {
+    "perfect_profile": {
+      "factor": 0.08832,
+      "max_prob": 0.098,
+      "description": "4.0 GPA, 1600 SAT, 36 ACT, exceptional ECs"
+    },
+    "strong_profile": {
+      "factor": 0.0736,
+      "max_prob": 0.07840000000000001,
+      "description": "3.8+ GPA, 1500+ SAT, 34+ ACT, strong ECs"
+    },
+    "average_profile": {
+      "factor": 0.051519999999999996,
+      "max_prob": 0.0588,
+      "description": "3.5+ GPA, 1400+ SAT, 32+ ACT, decent ECs"
+    },
+    "below_average": {
+      "factor": 0.0368,
+      "max_prob": 0.039200000000000006,
+      "description": "3.0+ GPA, 1200+ SAT, 28+ ACT, basic ECs"
+    }
+  },
+  "Stanford": {
+    "perfect_profile": {
+      "factor": 0.08832,
+      "max_prob": 0.098,
+      "description": "4.0 GPA, 1600 SAT, 36 ACT, exceptional ECs"
+    },
+    "strong_profile": {
+      "factor": 0.0736,
+      "max_prob": 0.07840000000000001,
+      "description": "3.8+ GPA, 1500+ SAT, 34+ ACT, strong ECs"
+    },
+    "average_profile": {
+      "factor": 0.051519999999999996,
+      "max_prob": 0.0588,
+      "description": "3.5+ GPA, 1400+ SAT, 32+ ACT, decent ECs"
+    },
+    "below_average": {
+      "factor": 0.0368,
+      "max_prob": 0.039200000000000006,
+      "description": "3.0+ GPA, 1200+ SAT, 28+ ACT, basic ECs"
+    }
+  },
+  "Yale": {
+    "perfect_profile": {
+      "factor": 0.128736,
+      "max_prob": 0.146025,
+      "description": "4.0 GPA, 1600 SAT, 36 ACT, exceptional ECs"
+    },
+    "strong_profile": {
+      "factor": 0.10728,
+      "max_prob": 0.11682,
+      "description": "3.8+ GPA, 1500+ SAT, 34+ ACT, strong ECs"
+    },
+    "average_profile": {
+      "factor": 0.075096,
+      "max_prob": 0.08761499999999998,
+      "description": "3.5+ GPA, 1400+ SAT, 32+ ACT, decent ECs"
+    },
+    "below_average": {
+      "factor": 0.05364,
+      "max_prob": 0.05841,
+      "description": "3.0+ GPA, 1200+ SAT, 28+ ACT, basic ECs"
+    }
+  },
+  "Princeton": {
+    "perfect_profile": {
+      "factor": 0.131328,
+      "max_prob": 0.1467,
+      "description": "4.0 GPA, 1600 SAT, 36 ACT, exceptional ECs"
+    },
+    "strong_profile": {
+      "factor": 0.10944,
+      "max_prob": 0.11736,
+      "description": "3.8+ GPA, 1500+ SAT, 34+ ACT, strong ECs"
+    },
+    "average_profile": {
+      "factor": 0.076608,
+      "max_prob": 0.08802,
+      "description": "3.5+ GPA, 1400+ SAT, 32+ ACT, decent ECs"
+    },
+    "below_average": {
+      "factor": 0.05472,
+      "max_prob": 0.05868,
+      "description": "3.0+ GPA, 1200+ SAT, 28+ ACT, basic ECs"
+    }
+  },
+  "Columbia": {
+    "perfect_profile": {
+      "factor": 0.13219199999999998,
+      "max_prob": 0.146925,
+      "description": "4.0 GPA, 1600 SAT, 36 ACT, exceptional ECs"
+    },
+    "strong_profile": {
+      "factor": 0.11016,
+      "max_prob": 0.11754,
+      "description": "3.8+ GPA, 1500+ SAT, 34+ ACT, strong ECs"
+    },
+    "average_profile": {
+      "factor": 0.07711199999999999,
+      "max_prob": 0.088155,
+      "description": "3.5+ GPA, 1400+ SAT, 32+ ACT, decent ECs"
+    },
+    "below_average": {
+      "factor": 0.05508,
+      "max_prob": 0.05877,
+      "description": "3.0+ GPA, 1200+ SAT, 28+ ACT, basic ECs"
+    }
+  },
+  "University of Pennsylvania": {
+    "perfect_profile": {
+      "factor": 0.127008,
+      "max_prob": 0.145575,
+      "description": "4.0 GPA, 1600 SAT, 36 ACT, exceptional ECs"
+    },
+    "strong_profile": {
+      "factor": 0.10584,
+      "max_prob": 0.11646000000000001,
+      "description": "3.8+ GPA, 1500+ SAT, 34+ ACT, strong ECs"
+    },
+    "average_profile": {
+      "factor": 0.074088,
+      "max_prob": 0.087345,
+      "description": "3.5+ GPA, 1400+ SAT, 32+ ACT, decent ECs"
+    },
+    "below_average": {
+      "factor": 0.05292,
+      "max_prob": 0.058230000000000004,
+      "description": "3.0+ GPA, 1200+ SAT, 28+ ACT, basic ECs"
+    }
+  },
+  "Dartmouth": {
+    "perfect_profile": {
+      "factor": 0.12614399999999998,
+      "max_prob": 0.14534999999999998,
+      "description": "4.0 GPA, 1600 SAT, 36 ACT, exceptional ECs"
+    },
+    "strong_profile": {
+      "factor": 0.10511999999999999,
+      "max_prob": 0.11628,
+      "description": "3.8+ GPA, 1500+ SAT, 34+ ACT, strong ECs"
+    },
+    "average_profile": {
+      "factor": 0.07358399999999998,
+      "max_prob": 0.08720999999999998,
+      "description": "3.5+ GPA, 1400+ SAT, 32+ ACT, decent ECs"
+    },
+    "below_average": {
+      "factor": 0.052559999999999996,
+      "max_prob": 0.05814,
+      "description": "3.0+ GPA, 1200+ SAT, 28+ ACT, basic ECs"
+    }
+  },
+  "Brown": {
+    "perfect_profile": {
+      "factor": 0.12816,
+      "max_prob": 0.145875,
+      "description": "4.0 GPA, 1600 SAT, 36 ACT, exceptional ECs"
+    },
+    "strong_profile": {
+      "factor": 0.10679999999999999,
+      "max_prob": 0.11670000000000001,
+      "description": "3.8+ GPA, 1500+ SAT, 34+ ACT, strong ECs"
+    },
+    "average_profile": {
+      "factor": 0.07476,
+      "max_prob": 0.087525,
+      "description": "3.5+ GPA, 1400+ SAT, 32+ ACT, decent ECs"
+    },
+    "below_average": {
+      "factor": 0.053399999999999996,
+      "max_prob": 0.058350000000000006,
+      "description": "3.0+ GPA, 1200+ SAT, 28+ ACT, basic ECs"
+    }
+  },
+  "University of Chicago": {
+    "perfect_profile": {
+      "factor": 0.12527999999999997,
+      "max_prob": 0.145125,
+      "description": "4.0 GPA, 1600 SAT, 36 ACT, exceptional ECs"
+    },
+    "strong_profile": {
+      "factor": 0.10439999999999999,
+      "max_prob": 0.11610000000000001,
+      "description": "3.8+ GPA, 1500+ SAT, 34+ ACT, strong ECs"
+    },
+    "average_profile": {
+      "factor": 0.07307999999999999,
+      "max_prob": 0.087075,
+      "description": "3.5+ GPA, 1400+ SAT, 32+ ACT, decent ECs"
+    },
+    "below_average": {
+      "factor": 0.052199999999999996,
+      "max_prob": 0.058050000000000004,
+      "description": "3.0+ GPA, 1200+ SAT, 28+ ACT, basic ECs"
+    }
+  },
+  "Cornell": {
+    "perfect_profile": {
+      "factor": 0.19824,
+      "max_prob": 0.21043,
+      "description": "4.0 GPA, 1600 SAT, 36 ACT, exceptional ECs"
+    },
+    "strong_profile": {
+      "factor": 0.1652,
+      "max_prob": 0.16834400000000002,
+      "description": "3.8+ GPA, 1500+ SAT, 34+ ACT, strong ECs"
+    },
+    "average_profile": {
+      "factor": 0.11564,
+      "max_prob": 0.126258,
+      "description": "3.5+ GPA, 1400+ SAT, 32+ ACT, decent ECs"
+    },
+    "below_average": {
+      "factor": 0.0826,
+      "max_prob": 0.08417200000000001,
+      "description": "3.0+ GPA, 1200+ SAT, 28+ ACT, basic ECs"
+    }
+  },
+  "Duke": {
+    "perfect_profile": {
+      "factor": 0.21168,
+      "max_prob": 0.21351,
+      "description": "4.0 GPA, 1600 SAT, 36 ACT, exceptional ECs"
+    },
+    "strong_profile": {
+      "factor": 0.1764,
+      "max_prob": 0.17080800000000002,
+      "description": "3.8+ GPA, 1500+ SAT, 34+ ACT, strong ECs"
+    },
+    "average_profile": {
+      "factor": 0.12347999999999999,
+      "max_prob": 0.128106,
+      "description": "3.5+ GPA, 1400+ SAT, 32+ ACT, decent ECs"
+    },
+    "below_average": {
+      "factor": 0.0882,
+      "max_prob": 0.08540400000000001,
+      "description": "3.0+ GPA, 1200+ SAT, 28+ ACT, basic ECs"
+    }
+  },
+  "Northwestern": {
+    "perfect_profile": {
+      "factor": 0.2064,
+      "max_prob": 0.2123,
+      "description": "4.0 GPA, 1600 SAT, 36 ACT, exceptional ECs"
+    },
+    "strong_profile": {
+      "factor": 0.17200000000000001,
+      "max_prob": 0.16984,
+      "description": "3.8+ GPA, 1500+ SAT, 34+ ACT, strong ECs"
+    },
+    "average_profile": {
+      "factor": 0.12040000000000001,
+      "max_prob": 0.12738,
+      "description": "3.5+ GPA, 1400+ SAT, 32+ ACT, decent ECs"
+    },
+    "below_average": {
+      "factor": 0.08600000000000001,
+      "max_prob": 0.08492,
+      "description": "3.0+ GPA, 1200+ SAT, 28+ ACT, basic ECs"
+    }
+  },
+  "Vanderbilt": {
+    "perfect_profile": {
+      "factor": 0.20592,
+      "max_prob": 0.21219000000000002,
+      "description": "4.0 GPA, 1600 SAT, 36 ACT, exceptional ECs"
+    },
+    "strong_profile": {
+      "factor": 0.1716,
+      "max_prob": 0.16975200000000001,
+      "description": "3.8+ GPA, 1500+ SAT, 34+ ACT, strong ECs"
+    },
+    "average_profile": {
+      "factor": 0.12011999999999999,
+      "max_prob": 0.127314,
+      "description": "3.5+ GPA, 1400+ SAT, 32+ ACT, decent ECs"
+    },
+    "below_average": {
+      "factor": 0.0858,
+      "max_prob": 0.08487600000000001,
+      "description": "3.0+ GPA, 1200+ SAT, 28+ ACT, basic ECs"
+    }
+  },
+  "Rice": {
+    "perfect_profile": {
+      "factor": 0.34019999999999995,
+      "max_prob": 0.28575,
+      "description": "4.0 GPA, 1600 SAT, 36 ACT, exceptional ECs"
+    },
+    "strong_profile": {
+      "factor": 0.2835,
+      "max_prob": 0.22860000000000003,
+      "description": "3.8+ GPA, 1500+ SAT, 34+ ACT, strong ECs"
+    },
+    "average_profile": {
+      "factor": 0.19844999999999996,
+      "max_prob": 0.17145,
+      "description": "3.5+ GPA, 1400+ SAT, 32+ ACT, decent ECs"
+    },
+    "below_average": {
+      "factor": 0.14175,
+      "max_prob": 0.11430000000000001,
+      "description": "3.0+ GPA, 1200+ SAT, 28+ ACT, basic ECs"
+    }
+  },
+  "Emory": {
+    "perfect_profile": {
+      "factor": 0.30995999999999996,
+      "max_prob": 0.28035,
+      "description": "4.0 GPA, 1600 SAT, 36 ACT, exceptional ECs"
+    },
+    "strong_profile": {
+      "factor": 0.2583,
+      "max_prob": 0.22428,
+      "description": "3.8+ GPA, 1500+ SAT, 34+ ACT, strong ECs"
+    },
+    "average_profile": {
+      "factor": 0.18080999999999997,
+      "max_prob": 0.16821,
+      "description": "3.5+ GPA, 1400+ SAT, 32+ ACT, decent ECs"
+    },
+    "below_average": {
+      "factor": 0.12915,
+      "max_prob": 0.11214,
+      "description": "3.0+ GPA, 1200+ SAT, 28+ ACT, basic ECs"
+    }
+  },
+  "Georgetown": {
+    "perfect_profile": {
+      "factor": 0.31919999999999993,
+      "max_prob": 0.282,
+      "description": "4.0 GPA, 1600 SAT, 36 ACT, exceptional ECs"
+    },
+    "strong_profile": {
+      "factor": 0.26599999999999996,
+      "max_prob": 0.2256,
+      "description": "3.8+ GPA, 1500+ SAT, 34+ ACT, strong ECs"
+    },
+    "average_profile": {
+      "factor": 0.18619999999999995,
+      "max_prob": 0.1692,
+      "description": "3.5+ GPA, 1400+ SAT, 32+ ACT, decent ECs"
+    },
+    "below_average": {
+      "factor": 0.13299999999999998,
+      "max_prob": 0.1128,
+      "description": "3.0+ GPA, 1200+ SAT, 28+ ACT, basic ECs"
+    }
+  },
+  "Carnegie Mellon": {
+    "perfect_profile": {
+      "factor": 0.3066,
+      "max_prob": 0.27975,
+      "description": "4.0 GPA, 1600 SAT, 36 ACT, exceptional ECs"
+    },
+    "strong_profile": {
+      "factor": 0.2555,
+      "max_prob": 0.2238,
+      "description": "3.8+ GPA, 1500+ SAT, 34+ ACT, strong ECs"
+    },
+    "average_profile": {
+      "factor": 0.17884999999999998,
+      "max_prob": 0.16785,
+      "description": "3.5+ GPA, 1400+ SAT, 32+ ACT, decent ECs"
+    },
+    "below_average": {
+      "factor": 0.12775,
+      "max_prob": 0.1119,
+      "description": "3.0+ GPA, 1200+ SAT, 28+ ACT, basic ECs"
+    }
+  },
+  "New York University": {
+    "perfect_profile": {
+      "factor": 0.3108,
+      "max_prob": 0.2805,
+      "description": "4.0 GPA, 1600 SAT, 36 ACT, exceptional ECs"
+    },
+    "strong_profile": {
+      "factor": 0.259,
+      "max_prob": 0.22440000000000004,
+      "description": "3.8+ GPA, 1500+ SAT, 34+ ACT, strong ECs"
+    },
+    "average_profile": {
+      "factor": 0.1813,
+      "max_prob": 0.1683,
+      "description": "3.5+ GPA, 1400+ SAT, 32+ ACT, decent ECs"
+    },
+    "below_average": {
+      "factor": 0.1295,
+      "max_prob": 0.11220000000000002,
+      "description": "3.0+ GPA, 1200+ SAT, 28+ ACT, basic ECs"
+    }
+  }
+}
