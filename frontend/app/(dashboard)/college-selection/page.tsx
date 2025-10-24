@@ -190,6 +190,13 @@ export default function CollegeSelectionPage() {
     setIsLoadingPrediction(true)
     
     try {
+      // Find the college name from the collegeId
+      const college = suggestedColleges.find(c => c.college_id === collegeId)
+      if (college) {
+        // Auto-fill the search box with the college name
+        setSearchQuery(college.name)
+      }
+      
       const userProfile = JSON.parse(localStorage.getItem('userProfile') || '{}')
       
       const predictionRequest: PredictionRequest = {

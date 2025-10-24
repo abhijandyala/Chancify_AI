@@ -210,11 +210,11 @@ class AdmissionPredictor:
         # Apply calibration to make probabilities more realistic
         # The ML model tends to overestimate probabilities, so we apply a calibration curve
         if final_prob > 0.5:
-            # For high probabilities, apply a compression factor
-            final_prob = 0.5 + (final_prob - 0.5) * 0.6  # Compress high probabilities
+            # For high probabilities, apply a lighter compression factor
+            final_prob = 0.5 + (final_prob - 0.5) * 0.8  # Lighter compression for high probabilities
         else:
             # For low probabilities, apply a slight expansion
-            final_prob = final_prob * 1.2  # Slightly expand low probabilities
+            final_prob = final_prob * 1.1  # Slightly expand low probabilities
         
         final_prob = np.clip(final_prob, 0.02, 0.98)  # Reasonable bounds
         

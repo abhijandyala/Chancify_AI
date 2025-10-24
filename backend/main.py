@@ -769,41 +769,18 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
             # Check if this is an elite university (exact match)
             is_elite = college_name in elite_universities
             
-            # Adjust categorization based on both probability and acceptance rate
-            # A college with 90% acceptance rate should rarely be a "reach" school
-            if acceptance_rate >= 0.7:  # 70%+ acceptance rate
-                # High acceptance rate colleges are more likely to be safety/target
-                if prob >= 0.6:  # 60%+ chance
-                    college['category'] = 'safety'
-                    safety_colleges.append(college)
-                elif prob >= 0.3:  # 30-60% chance
-                    college['category'] = 'target'
-                    target_colleges.append(college)
-                else:
-                    college['category'] = 'reach'
-                    reach_colleges.append(college)
-            elif acceptance_rate >= 0.3:  # 30-70% acceptance rate
-                # Medium acceptance rate colleges
-                if prob >= 0.7:  # 70%+ chance
-                    college['category'] = 'safety'
-                    safety_colleges.append(college)
-                elif prob >= 0.25:  # 25-70% chance
-                    college['category'] = 'target'
-                    target_colleges.append(college)
-                else:
-                    college['category'] = 'reach'
-                    reach_colleges.append(college)
-            else:  # <30% acceptance rate (highly selective)
-                # Highly selective colleges are more likely to be reach/target
-                if prob >= 0.8:  # 80%+ chance
-                    college['category'] = 'safety'
-                    safety_colleges.append(college)
-                elif prob >= 0.3:  # 30-80% chance
-                    college['category'] = 'target'
-                    target_colleges.append(college)
-                else:
-                    college['category'] = 'reach'
-                    reach_colleges.append(college)
+            # Use correct probability thresholds for categorization
+            # Safety: 75%+ chance, Target: 25-75% chance, Reach: 10-25% chance
+            if prob >= 0.75:  # 75%+ chance = Safety
+                college['category'] = 'safety'
+                safety_colleges.append(college)
+            elif prob >= 0.25:  # 25-75% chance = Target
+                college['category'] = 'target'
+                target_colleges.append(college)
+            elif prob >= 0.10:  # 10-25% chance = Reach
+                college['category'] = 'reach'
+                reach_colleges.append(college)
+            # Skip colleges with <10% chance
             
             # Special handling for elite universities - ensure they appear in reach category
             if is_elite and prob > 0.005:  # Only if probability > 0.5%
