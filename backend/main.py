@@ -17,6 +17,10 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Simple in-memory cache for college suggestions
+suggestion_cache = {}
+CACHE_DURATION = 300  # 5 minutes
+
 # Get environment
 ENV = os.getenv("ENVIRONMENT", "development")
 
@@ -461,7 +465,7 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
     This endpoint:
     1. Processes user profile data from frontend
     2. Calculates academic strength score
-    3. Runs ML predictions on all 477 colleges in dataset
+    3. Runs ML predictions on subset of colleges (90 instead of 477) for faster response
     4. Categorizes colleges into Safety/Target/Reach based on realistic probability ranges
     5. Ensures elite universities appear in reach category when appropriate
     6. Returns balanced suggestions (3 safety, 3 target, 3 reach)
@@ -473,6 +477,18 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
         JSON response with 9 balanced college suggestions and metadata
     """
     try:
+        # Create cache key from request data
+        cache_key = f"{request.gpa_unweighted}_{request.gpa_weighted}_{request.sat}_{request.act}_{request.major}_{request.extracurricular_depth}"
+        
+        # Check cache first
+        current_time = time.time()
+        if cache_key in suggestion_cache:
+            cached_data, cache_time = suggestion_cache[cache_key]
+            if current_time - cache_time < CACHE_DURATION:
+                logger.info(f"Returning cached suggestions for key: {cache_key[:20]}...")
+                return cached_data
+        
+        logger.info(f"Processing new suggestions for key: {cache_key[:20]}...")
         # Get predictor
         predictor = get_predictor()
         
@@ -611,10 +627,20 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
         else:
             target_tiers = ['Moderately Selective', 'Less Selective']
         
-        # Get predictions for all colleges to find balanced suggestions
+        # OPTIMIZATION: Only process a subset of colleges for faster response
+        # Prioritize diverse selection across tiers
+        elite_colleges = df[df['selectivity_tier'] == 'Elite'].head(15)
+        highly_selective = df[df['selectivity_tier'] == 'Highly Selective'].head(25)
+        moderately_selective = df[df['selectivity_tier'] == 'Moderately Selective'].head(30)
+        less_selective = df[df['selectivity_tier'] == 'Less Selective'].head(20)
+        
+        # Combine for faster processing (90 colleges instead of 477)
+        df_subset = pd.concat([elite_colleges, highly_selective, moderately_selective, less_selective], ignore_index=True)
+        
+        # Get predictions for subset of colleges to find balanced suggestions
         all_college_predictions = []
         
-        for i, row in df.iterrows():
+        for i, row in df_subset.iterrows():
             try:
                 # Handle acceptance rate - use acceptance_rate_percent if acceptance_rate is missing
                 acceptance_rate = None
@@ -843,13 +869,19 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
         # Return top 9 balanced suggestions
         top_suggestions = balanced_suggestions[:9]
         
-        return {
+        response_data = {
             "success": True,
             "suggestions": top_suggestions,
             "academic_score": round(academic_score, 2),
             "target_tiers": target_tiers,
             "prediction_method": "hybrid_ml_formula"
         }
+        
+        # Cache the response
+        suggestion_cache[cache_key] = (response_data, current_time)
+        logger.info(f"Cached suggestions for key: {cache_key[:20]}...")
+        
+        return response_data
         
     except Exception as e:
         logger.error(f"College suggestion error: {e}")
@@ -863,6 +895,17 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
 async def search_colleges(q: str = "", limit: int = 20):
     """Search colleges by name using real college data"""
     try:
+        # Create cache key for search
+        search_cache_key = f"search_{q}_{limit}"
+        
+        # Check cache first
+        current_time = time.time()
+        if search_cache_key in suggestion_cache:
+            cached_data, cache_time = suggestion_cache[search_cache_key]
+            if current_time - cache_time < CACHE_DURATION:
+                logger.info(f"Returning cached search results for: {q}")
+                return cached_data
+        
         # Load integrated college data
         df = pd.read_csv('backend/data/raw/integrated_colleges.csv')
         
@@ -905,11 +948,17 @@ async def search_colleges(q: str = "", limit: int = 20):
                 'student_body_size': int(row['student_body_size']) if pd.notna(row['student_body_size']) else 5000
             })
         
-        return {
+        response_data = {
             "success": True,
             "colleges": colleges,
             "total": len(colleges)
         }
+        
+        # Cache the search results
+        suggestion_cache[search_cache_key] = (response_data, current_time)
+        logger.info(f"Cached search results for: {q}")
+        
+        return response_data
         
     except Exception as e:
         logger.error(f"College search error: {e}")
