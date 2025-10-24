@@ -915,23 +915,23 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
         target_colleges.sort(key=lambda x: x['probability'], reverse=True)
         reach_colleges.sort(key=lambda x: x['probability'], reverse=True)
         
-        # Select balanced suggestions: prioritize correct categorization over exact counts
+        # Select balanced suggestions: 3 safety + 3 target + 3 reach = 9 total
         balanced_suggestions = []
         
-        # Add safety colleges (75%+ chance) - take as many as we have
-        for college in safety_colleges:
+        # Add 3 safety colleges (75%+ chance) - only if they actually meet the threshold
+        for college in safety_colleges[:3]:
             if college['probability'] >= 0.75:
                 college['category'] = 'safety'
                 balanced_suggestions.append(college)
         
-        # Add target colleges (25-75% chance) - take as many as we have
-        for college in target_colleges:
+        # Add 3 target colleges (25-75% chance) - only if they actually meet the threshold
+        for college in target_colleges[:3]:
             if 0.25 <= college['probability'] < 0.75:
                 college['category'] = 'target'
                 balanced_suggestions.append(college)
         
-        # Add reach colleges (10-25% chance) - take as many as we have
-        for college in reach_colleges:
+        # Add 3 reach colleges (10-25% chance) - only if they actually meet the threshold
+        for college in reach_colleges[:3]:
             if 0.10 <= college['probability'] < 0.25:
                 college['category'] = 'reach'
                 balanced_suggestions.append(college)
@@ -941,21 +941,64 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
             balanced_suggestions.sort(key=lambda x: x['probability'], reverse=True)
             balanced_suggestions = balanced_suggestions[:9]
         
-        # If we don't have enough in any category, fill with the best available
-        if len(balanced_suggestions) < 9:
-            remaining_colleges = [c for c in all_college_predictions if c not in balanced_suggestions]
-            remaining_colleges.sort(key=lambda x: x['probability'], reverse=True)
-            
-            while len(balanced_suggestions) < 9 and remaining_colleges:
-                college = remaining_colleges.pop(0)
-                # Determine category based on probability
-                if college['probability'] >= 0.75:
-                    college['category'] = 'safety'
-                elif college['probability'] >= 0.25:
-                    college['category'] = 'target'
-                else:
-                    college['category'] = 'reach'
+        # Ensure we have exactly 3-3-3 distribution by filling missing categories
+        # Count current distribution
+        current_safety = len([c for c in balanced_suggestions if c['category'] == 'safety'])
+        current_target = len([c for c in balanced_suggestions if c['category'] == 'target'])
+        current_reach = len([c for c in balanced_suggestions if c['category'] == 'reach'])
+        
+        # Get all remaining colleges not yet in balanced_suggestions
+        used_colleges = set(id(c) for c in balanced_suggestions)
+        remaining_colleges = [c for c in all_college_predictions if id(c) not in used_colleges]
+        remaining_colleges.sort(key=lambda x: x['probability'], reverse=True)
+        
+        # Fill missing safety schools (need 3 total)
+        while current_safety < 3:
+            if len(safety_colleges) > current_safety:
+                college = safety_colleges[current_safety]
+                college['category'] = 'safety'
                 balanced_suggestions.append(college)
+                current_safety += 1
+            elif remaining_colleges:
+                # Use the highest probability remaining college as safety
+                college = remaining_colleges.pop(0)
+                college['category'] = 'safety'
+                balanced_suggestions.append(college)
+                current_safety += 1
+            else:
+                break
+        
+        # Fill missing target schools (need 3 total)
+        while current_target < 3:
+            if len(target_colleges) > current_target:
+                college = target_colleges[current_target]
+                college['category'] = 'target'
+                balanced_suggestions.append(college)
+                current_target += 1
+            elif remaining_colleges:
+                # Use the highest probability remaining college as target
+                college = remaining_colleges.pop(0)
+                college['category'] = 'target'
+                balanced_suggestions.append(college)
+                current_target += 1
+            else:
+                break
+        
+        # Fill missing reach schools (need 3 total)
+        while current_reach < 3:
+            if len(reach_colleges) > current_reach:
+                college = reach_colleges[current_reach]
+                college['category'] = 'reach'
+                balanced_suggestions.append(college)
+                current_reach += 1
+            elif remaining_colleges:
+                # Use the highest probability remaining college as reach
+                college = remaining_colleges.pop(0)
+                college['category'] = 'reach'
+                balanced_suggestions.append(college)
+                current_reach += 1
+            else:
+                break
         
         # Debug: Log the distribution
         logger.info(f"Total colleges processed: {len(all_college_predictions)}")

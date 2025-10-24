@@ -1,0 +1,59 @@
+{
+  "MIT": [
+    {
+      "title": "How to get into MIT with perfect grades?",
+      "content": "Even with 4.0 GPA, 1600 SAT, and 36 ACT, MIT acceptance rate is only 4.1%. You need exceptional research, leadership, and unique achievements.",
+      "metrics": {
+        "gpa": 4.0,
+        "sat": 1600,
+        "act": 36,
+        "acceptance_rate": 0.041
+      },
+      "advice": [
+        "Research experience is crucial",
+        "Unique projects matter more than perfect grades"
+      ]
+    },
+    {
+      "title": "MIT admission requirements 2023",
+      "content": "MIT looks for students who will change the world. Perfect test scores are just the baseline. You need to show innovation and impact.",
+      "metrics": {
+        "acceptance_rate": 0.041
+      },
+      "advice": [
+        "Show innovation",
+        "Demonstrate impact",
+        "Perfect scores are baseline"
+      ]
+    }
+  ],
+  "Harvard": [
+    {
+      "title": "What GPA do you need for Harvard?",
+      "content": "Harvard acceptance rate is 4.0%. Even with 4.0 GPA and perfect test scores, you need exceptional leadership and community impact.",
+      "metrics": {
+        "gpa": 4.0,
+        "acceptance_rate": 0.04
+      },
+      "advice": [
+        "Leadership experience",
+        "Community impact",
+        "Unique perspective"
+      ]
+    }
+  ],
+  "Stanford": [
+    {
+      "title": "Stanford admission tips",
+      "content": "Stanford acceptance rate is 4.0%. They want students who will make a difference. Perfect academics are expected, not exceptional.",
+      "metrics": {
+        "acceptance_rate": 0.04
+      },
+      "advice": [
+        "Make a difference",
+        "Perfect academics expected",
+        "Show impact"
+      ]
+    }
+  ]
+}
