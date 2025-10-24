@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.ico',
   },
+  // Force Railway deployment - updated frontend
 }
 
 export default function RootLayout({
