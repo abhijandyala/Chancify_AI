@@ -1,0 +1,205 @@
+{
+  "timestamp": 1761360966.9236772,
+  "backend_health": true,
+  "suggestions_success": true,
+  "suggestions_count": 9,
+  "predictions": [
+    {
+      "college": "Stanford University",
+      "probability": 0.039,
+      "category": "reach"
+    },
+    {
+      "college": "Harvard University",
+      "probability": 0.039,
+      "category": "reach"
+    },
+    {
+      "college": "Massachusetts Institute of Technology",
+      "probability": 0.0389,
+      "category": "reach"
+    },
+    {
+      "college": "University of California Berkeley",
+      "probability": 0.5297,
+      "category": "target"
+    },
+    {
+      "college": "Carnegie Mellon University",
+      "probability": 0.1353,
+      "category": "reach"
+    }
+  ],
+  "college_data": [
+    {
+      "college": "Stanford University",
+      "data": {
+        "name": "Stanford University",
+        "acceptance_rate": 0.05,
+        "sat_25th": 1400,
+        "sat_75th": 1600,
+        "act_25th": 32,
+        "act_75th": 36,
+        "test_policy": "Required",
+        "financial_aid_policy": "Need-blind",
+        "selectivity_tier": "Elite",
+        "gpa_average": 3.95,
+        "city": "Unknown",
+        "state": "Unknown",
+        "tuition_in_state": 60000,
+        "tuition_out_of_state": 60000,
+        "student_body_size": 10000
+      }
+    },
+    {
+      "college": "Harvard University",
+      "data": {
+        "name": "Harvard University",
+        "acceptance_rate": 0.05,
+        "sat_25th": 1400,
+        "sat_75th": 1600,
+        "act_25th": 32,
+        "act_75th": 36,
+        "test_policy": "Required",
+        "financial_aid_policy": "Need-blind",
+        "selectivity_tier": "Elite",
+        "gpa_average": 3.95,
+        "city": "Unknown",
+        "state": "Unknown",
+        "tuition_in_state": 60000,
+        "tuition_out_of_state": 60000,
+        "student_body_size": 10000
+      }
+    },
+    {
+      "college": "Massachusetts Institute of Technology",
+      "data": {
+        "name": "Massachusetts Institute of Technology",
+        "acceptance_rate": 0.05,
+        "sat_25th": 1400,
+        "sat_75th": 1600,
+        "act_25th": 32,
+        "act_75th": 36,
+        "test_policy": "Required",
+        "financial_aid_policy": "Need-blind",
+        "selectivity_tier": "Elite",
+        "gpa_average": 3.95,
+        "city": "Unknown",
+        "state": "Unknown",
+        "tuition_in_state": 60000,
+        "tuition_out_of_state": 60000,
+        "student_body_size": 10000
+      }
+    }
+  ],
+  "calculations_data": [
+    {
+      "college_name": "California Institute of Technology",
+      "category": "safety",
+      "probability": 0.5297,
+      "major_fit_score": 1.0,
+      "acceptance_rate": 0.0314,
+      "tuition_in_state": 63255,
+      "tuition_out_of_state": 63255,
+      "city": "Pasadena",
+      "state": "CA",
+      "selectivity_tier": "Elite"
+    },
+    {
+      "college_name": "Alliant International University-San Diego",
+      "category": "safety",
+      "probability": 0.5297,
+      "major_fit_score": 1.0,
+      "acceptance_rate": 0.0,
+      "tuition_in_state": 13918,
+      "tuition_out_of_state": 13918,
+      "city": "San Diego",
+      "state": "CA",
+      "selectivity_tier": "Elite"
+    },
+    {
+      "college_name": "University of Southern California",
+      "category": "safety",
+      "probability": 0.5297,
+      "major_fit_score": 1.0,
+      "acceptance_rate": 0.1002,
+      "tuition_in_state": 68237,
+      "tuition_out_of_state": 68237,
+      "city": "Los Angeles",
+      "state": "CA",
+      "selectivity_tier": "Highly Selective"
+    },
+    {
+      "college_name": "Casa Loma College-Los Angeles",
+      "category": "target",
+      "probability": 0.5297,
+      "major_fit_score": 0.9,
+      "acceptance_rate": 0.3641,
+      "tuition_in_state": 9748,
+      "tuition_out_of_state": 17062,
+      "city": "Sherman Oaks",
+      "state": "CA",
+      "selectivity_tier": "Moderately Selective"
+    },
+    {
+      "college_name": "San Diego State University",
+      "category": "target",
+      "probability": 0.5297,
+      "major_fit_score": 0.9,
+      "acceptance_rate": 0.3444,
+      "tuition_in_state": 8290,
+      "tuition_out_of_state": 20170,
+      "city": "San Diego",
+      "state": "CA",
+      "selectivity_tier": "Moderately Selective"
+    },
+    {
+      "college_name": "Connecticut College",
+      "category": "target",
+      "probability": 0.5297,
+      "major_fit_score": 0.9,
+      "acceptance_rate": 0.3828,
+      "tuition_in_state": 64812,
+      "tuition_out_of_state": 64812,
+      "city": "New London",
+      "state": "CT",
+      "selectivity_tier": "Moderately Selective"
+    },
+    {
+      "college_name": "Duke University",
+      "category": "reach",
+      "probability": 0.0934,
+      "major_fit_score": 1.0,
+      "acceptance_rate": 0.059,
+      "tuition_in_state": 60244,
+      "tuition_out_of_state": 60244,
+      "city": "Durham",
+      "state": "NC",
+      "selectivity_tier": "Elite"
+    },
+    {
+      "college_name": "Harvard University",
+      "category": "reach",
+      "probability": 0.039,
+      "major_fit_score": 1.0,
+      "acceptance_rate": 0.034,
+      "tuition_in_state": 55587,
+      "tuition_out_of_state": 55587,
+      "city": "Cambridge",
+      "state": "MA",
+      "selectivity_tier": "Elite"
+    },
+    {
+      "college_name": "Stanford University",
+      "category": "reach",
+      "probability": 0.039,
+      "major_fit_score": 1.0,
+      "acceptance_rate": 0.034,
+      "tuition_in_state": 56169,
+      "tuition_out_of_state": 56169,
+      "city": "Stanford",
+      "state": "CA",
+      "selectivity_tier": "Elite"
+    }
+  ]
+}

@@ -1,0 +1,3096 @@
+{
+  "timestamp": 1761359576.4208987,
+  "search_results": [
+    {
+      "query": "MIT",
+      "count": 20,
+      "colleges": [
+        {
+          "college_id": "college_1000000",
+          "name": "Alabama A & M University",
+          "acceptance_rate": 0.6622,
+          "selectivity_tier": "Less Selective",
+          "city": "Normal",
+          "state": "AL",
+          "tuition_in_state": 10024,
+          "tuition_out_of_state": 18634,
+          "student_body_size": 5726
+        },
+        {
+          "college_id": "college_1000001",
+          "name": "University of Alabama at Birmingham",
+          "acceptance_rate": 0.8842,
+          "selectivity_tier": "Less Selective",
+          "city": "Birmingham",
+          "state": "AL",
+          "tuition_in_state": 8832,
+          "tuition_out_of_state": 21864,
+          "student_body_size": 12118
+        },
+        {
+          "college_id": "college_1000002",
+          "name": "Amridge University",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 9748,
+          "tuition_out_of_state": 17062,
+          "student_body_size": 226
+        },
+        {
+          "college_id": "college_1000003",
+          "name": "University of Alabama in Huntsville",
+          "acceptance_rate": 0.7425,
+          "selectivity_tier": "Less Selective",
+          "city": "Huntsville",
+          "state": "AL",
+          "tuition_in_state": 11770,
+          "tuition_out_of_state": 24662,
+          "student_body_size": 6650
+        },
+        {
+          "college_id": "college_1000004",
+          "name": "Alabama State University",
+          "acceptance_rate": 0.9564,
+          "selectivity_tier": "Less Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 11248,
+          "tuition_out_of_state": 19576,
+          "student_body_size": 3322
+        },
+        {
+          "college_id": "college_1000005",
+          "name": "The University of Alabama",
+          "acceptance_rate": 0.7582,
+          "selectivity_tier": "Less Selective",
+          "city": "Tuscaloosa",
+          "state": "AL",
+          "tuition_in_state": 11900,
+          "tuition_out_of_state": 33200,
+          "student_body_size": 32323
+        },
+        {
+          "college_id": "college_1000006",
+          "name": "Central Alabama Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Alexander City",
+          "state": "AL",
+          "tuition_in_state": 5040,
+          "tuition_out_of_state": 8850,
+          "student_body_size": 1134
+        },
+        {
+          "college_id": "college_1000007",
+          "name": "Athens State University",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Athens",
+          "state": "AL",
+          "tuition_in_state": 9748,
+          "tuition_out_of_state": 17062,
+          "student_body_size": 2407
+        },
+        {
+          "college_id": "college_1000008",
+          "name": "Auburn University at Montgomery",
+          "acceptance_rate": 0.9263,
+          "selectivity_tier": "Less Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 9436,
+          "tuition_out_of_state": 20092,
+          "student_body_size": 2693
+        },
+        {
+          "college_id": "college_1000009",
+          "name": "Auburn University",
+          "acceptance_rate": 0.5047,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Auburn",
+          "state": "AL",
+          "tuition_in_state": 12536,
+          "tuition_out_of_state": 33944,
+          "student_body_size": 25732
+        },
+        {
+          "college_id": "college_1000010",
+          "name": "Birmingham-Southern College",
+          "acceptance_rate": 0.5194,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Birmingham",
+          "state": "AL",
+          "tuition_in_state": 22750,
+          "tuition_out_of_state": 22750,
+          "student_body_size": 713
+        },
+        {
+          "college_id": "college_1000011",
+          "name": "Chattahoochee Valley Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Phenix City",
+          "state": "AL",
+          "tuition_in_state": 5040,
+          "tuition_out_of_state": 8850,
+          "student_body_size": 1044
+        },
+        {
+          "college_id": "college_1000012",
+          "name": "Enterprise State Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Enterprise",
+          "state": "AL",
+          "tuition_in_state": 5040,
+          "tuition_out_of_state": 8850,
+          "student_body_size": 1476
+        },
+        {
+          "college_id": "college_1000013",
+          "name": "Coastal Alabama Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Bay Minette",
+          "state": "AL",
+          "tuition_in_state": 4980,
+          "tuition_out_of_state": 8790,
+          "student_body_size": 4714
+        },
+        {
+          "college_id": "college_1000014",
+          "name": "Faulkner University",
+          "acceptance_rate": 0.6613,
+          "selectivity_tier": "Less Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 23920,
+          "tuition_out_of_state": 23920,
+          "student_body_size": 1555
+        },
+        {
+          "college_id": "college_1000015",
+          "name": "Gadsden State Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Gadsden",
+          "state": "AL",
+          "tuition_in_state": 4032,
+          "tuition_out_of_state": 7080,
+          "student_body_size": 3619
+        },
+        {
+          "college_id": "college_1000016",
+          "name": "George C Wallace Community College-Dothan",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Dothan",
+          "state": "AL",
+          "tuition_in_state": 4920,
+          "tuition_out_of_state": 8730,
+          "student_body_size": 3053
+        },
+        {
+          "college_id": "college_1000017",
+          "name": "George C Wallace State Community College-Hanceville",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Hanceville",
+          "state": "AL",
+          "tuition_in_state": 4980,
+          "tuition_out_of_state": 8790,
+          "student_body_size": 4413
+        },
+        {
+          "college_id": "college_1000018",
+          "name": "George C Wallace State Community College-Selma",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Selma",
+          "state": "AL",
+          "tuition_in_state": 4680,
+          "tuition_out_of_state": 8490,
+          "student_body_size": 828
+        },
+        {
+          "college_id": "college_1000019",
+          "name": "Huntingdon College",
+          "acceptance_rate": 0.7082999999999999,
+          "selectivity_tier": "Less Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 28650,
+          "tuition_out_of_state": 28650,
+          "student_body_size": 865
+        }
+      ]
+    },
+    {
+      "query": "Harvard",
+      "count": 20,
+      "colleges": [
+        {
+          "college_id": "college_1000000",
+          "name": "Alabama A & M University",
+          "acceptance_rate": 0.6622,
+          "selectivity_tier": "Less Selective",
+          "city": "Normal",
+          "state": "AL",
+          "tuition_in_state": 10024,
+          "tuition_out_of_state": 18634,
+          "student_body_size": 5726
+        },
+        {
+          "college_id": "college_1000001",
+          "name": "University of Alabama at Birmingham",
+          "acceptance_rate": 0.8842,
+          "selectivity_tier": "Less Selective",
+          "city": "Birmingham",
+          "state": "AL",
+          "tuition_in_state": 8832,
+          "tuition_out_of_state": 21864,
+          "student_body_size": 12118
+        },
+        {
+          "college_id": "college_1000002",
+          "name": "Amridge University",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 9748,
+          "tuition_out_of_state": 17062,
+          "student_body_size": 226
+        },
+        {
+          "college_id": "college_1000003",
+          "name": "University of Alabama in Huntsville",
+          "acceptance_rate": 0.7425,
+          "selectivity_tier": "Less Selective",
+          "city": "Huntsville",
+          "state": "AL",
+          "tuition_in_state": 11770,
+          "tuition_out_of_state": 24662,
+          "student_body_size": 6650
+        },
+        {
+          "college_id": "college_1000004",
+          "name": "Alabama State University",
+          "acceptance_rate": 0.9564,
+          "selectivity_tier": "Less Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 11248,
+          "tuition_out_of_state": 19576,
+          "student_body_size": 3322
+        },
+        {
+          "college_id": "college_1000005",
+          "name": "The University of Alabama",
+          "acceptance_rate": 0.7582,
+          "selectivity_tier": "Less Selective",
+          "city": "Tuscaloosa",
+          "state": "AL",
+          "tuition_in_state": 11900,
+          "tuition_out_of_state": 33200,
+          "student_body_size": 32323
+        },
+        {
+          "college_id": "college_1000006",
+          "name": "Central Alabama Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Alexander City",
+          "state": "AL",
+          "tuition_in_state": 5040,
+          "tuition_out_of_state": 8850,
+          "student_body_size": 1134
+        },
+        {
+          "college_id": "college_1000007",
+          "name": "Athens State University",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Athens",
+          "state": "AL",
+          "tuition_in_state": 9748,
+          "tuition_out_of_state": 17062,
+          "student_body_size": 2407
+        },
+        {
+          "college_id": "college_1000008",
+          "name": "Auburn University at Montgomery",
+          "acceptance_rate": 0.9263,
+          "selectivity_tier": "Less Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 9436,
+          "tuition_out_of_state": 20092,
+          "student_body_size": 2693
+        },
+        {
+          "college_id": "college_1000009",
+          "name": "Auburn University",
+          "acceptance_rate": 0.5047,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Auburn",
+          "state": "AL",
+          "tuition_in_state": 12536,
+          "tuition_out_of_state": 33944,
+          "student_body_size": 25732
+        },
+        {
+          "college_id": "college_1000010",
+          "name": "Birmingham-Southern College",
+          "acceptance_rate": 0.5194,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Birmingham",
+          "state": "AL",
+          "tuition_in_state": 22750,
+          "tuition_out_of_state": 22750,
+          "student_body_size": 713
+        },
+        {
+          "college_id": "college_1000011",
+          "name": "Chattahoochee Valley Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Phenix City",
+          "state": "AL",
+          "tuition_in_state": 5040,
+          "tuition_out_of_state": 8850,
+          "student_body_size": 1044
+        },
+        {
+          "college_id": "college_1000012",
+          "name": "Enterprise State Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Enterprise",
+          "state": "AL",
+          "tuition_in_state": 5040,
+          "tuition_out_of_state": 8850,
+          "student_body_size": 1476
+        },
+        {
+          "college_id": "college_1000013",
+          "name": "Coastal Alabama Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Bay Minette",
+          "state": "AL",
+          "tuition_in_state": 4980,
+          "tuition_out_of_state": 8790,
+          "student_body_size": 4714
+        },
+        {
+          "college_id": "college_1000014",
+          "name": "Faulkner University",
+          "acceptance_rate": 0.6613,
+          "selectivity_tier": "Less Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 23920,
+          "tuition_out_of_state": 23920,
+          "student_body_size": 1555
+        },
+        {
+          "college_id": "college_1000015",
+          "name": "Gadsden State Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Gadsden",
+          "state": "AL",
+          "tuition_in_state": 4032,
+          "tuition_out_of_state": 7080,
+          "student_body_size": 3619
+        },
+        {
+          "college_id": "college_1000016",
+          "name": "George C Wallace Community College-Dothan",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Dothan",
+          "state": "AL",
+          "tuition_in_state": 4920,
+          "tuition_out_of_state": 8730,
+          "student_body_size": 3053
+        },
+        {
+          "college_id": "college_1000017",
+          "name": "George C Wallace State Community College-Hanceville",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Hanceville",
+          "state": "AL",
+          "tuition_in_state": 4980,
+          "tuition_out_of_state": 8790,
+          "student_body_size": 4413
+        },
+        {
+          "college_id": "college_1000018",
+          "name": "George C Wallace State Community College-Selma",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Selma",
+          "state": "AL",
+          "tuition_in_state": 4680,
+          "tuition_out_of_state": 8490,
+          "student_body_size": 828
+        },
+        {
+          "college_id": "college_1000019",
+          "name": "Huntingdon College",
+          "acceptance_rate": 0.7082999999999999,
+          "selectivity_tier": "Less Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 28650,
+          "tuition_out_of_state": 28650,
+          "student_body_size": 865
+        }
+      ]
+    },
+    {
+      "query": "Stanford",
+      "count": 20,
+      "colleges": [
+        {
+          "college_id": "college_1000000",
+          "name": "Alabama A & M University",
+          "acceptance_rate": 0.6622,
+          "selectivity_tier": "Less Selective",
+          "city": "Normal",
+          "state": "AL",
+          "tuition_in_state": 10024,
+          "tuition_out_of_state": 18634,
+          "student_body_size": 5726
+        },
+        {
+          "college_id": "college_1000001",
+          "name": "University of Alabama at Birmingham",
+          "acceptance_rate": 0.8842,
+          "selectivity_tier": "Less Selective",
+          "city": "Birmingham",
+          "state": "AL",
+          "tuition_in_state": 8832,
+          "tuition_out_of_state": 21864,
+          "student_body_size": 12118
+        },
+        {
+          "college_id": "college_1000002",
+          "name": "Amridge University",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 9748,
+          "tuition_out_of_state": 17062,
+          "student_body_size": 226
+        },
+        {
+          "college_id": "college_1000003",
+          "name": "University of Alabama in Huntsville",
+          "acceptance_rate": 0.7425,
+          "selectivity_tier": "Less Selective",
+          "city": "Huntsville",
+          "state": "AL",
+          "tuition_in_state": 11770,
+          "tuition_out_of_state": 24662,
+          "student_body_size": 6650
+        },
+        {
+          "college_id": "college_1000004",
+          "name": "Alabama State University",
+          "acceptance_rate": 0.9564,
+          "selectivity_tier": "Less Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 11248,
+          "tuition_out_of_state": 19576,
+          "student_body_size": 3322
+        },
+        {
+          "college_id": "college_1000005",
+          "name": "The University of Alabama",
+          "acceptance_rate": 0.7582,
+          "selectivity_tier": "Less Selective",
+          "city": "Tuscaloosa",
+          "state": "AL",
+          "tuition_in_state": 11900,
+          "tuition_out_of_state": 33200,
+          "student_body_size": 32323
+        },
+        {
+          "college_id": "college_1000006",
+          "name": "Central Alabama Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Alexander City",
+          "state": "AL",
+          "tuition_in_state": 5040,
+          "tuition_out_of_state": 8850,
+          "student_body_size": 1134
+        },
+        {
+          "college_id": "college_1000007",
+          "name": "Athens State University",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Athens",
+          "state": "AL",
+          "tuition_in_state": 9748,
+          "tuition_out_of_state": 17062,
+          "student_body_size": 2407
+        },
+        {
+          "college_id": "college_1000008",
+          "name": "Auburn University at Montgomery",
+          "acceptance_rate": 0.9263,
+          "selectivity_tier": "Less Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 9436,
+          "tuition_out_of_state": 20092,
+          "student_body_size": 2693
+        },
+        {
+          "college_id": "college_1000009",
+          "name": "Auburn University",
+          "acceptance_rate": 0.5047,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Auburn",
+          "state": "AL",
+          "tuition_in_state": 12536,
+          "tuition_out_of_state": 33944,
+          "student_body_size": 25732
+        },
+        {
+          "college_id": "college_1000010",
+          "name": "Birmingham-Southern College",
+          "acceptance_rate": 0.5194,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Birmingham",
+          "state": "AL",
+          "tuition_in_state": 22750,
+          "tuition_out_of_state": 22750,
+          "student_body_size": 713
+        },
+        {
+          "college_id": "college_1000011",
+          "name": "Chattahoochee Valley Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Phenix City",
+          "state": "AL",
+          "tuition_in_state": 5040,
+          "tuition_out_of_state": 8850,
+          "student_body_size": 1044
+        },
+        {
+          "college_id": "college_1000012",
+          "name": "Enterprise State Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Enterprise",
+          "state": "AL",
+          "tuition_in_state": 5040,
+          "tuition_out_of_state": 8850,
+          "student_body_size": 1476
+        },
+        {
+          "college_id": "college_1000013",
+          "name": "Coastal Alabama Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Bay Minette",
+          "state": "AL",
+          "tuition_in_state": 4980,
+          "tuition_out_of_state": 8790,
+          "student_body_size": 4714
+        },
+        {
+          "college_id": "college_1000014",
+          "name": "Faulkner University",
+          "acceptance_rate": 0.6613,
+          "selectivity_tier": "Less Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 23920,
+          "tuition_out_of_state": 23920,
+          "student_body_size": 1555
+        },
+        {
+          "college_id": "college_1000015",
+          "name": "Gadsden State Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Gadsden",
+          "state": "AL",
+          "tuition_in_state": 4032,
+          "tuition_out_of_state": 7080,
+          "student_body_size": 3619
+        },
+        {
+          "college_id": "college_1000016",
+          "name": "George C Wallace Community College-Dothan",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Dothan",
+          "state": "AL",
+          "tuition_in_state": 4920,
+          "tuition_out_of_state": 8730,
+          "student_body_size": 3053
+        },
+        {
+          "college_id": "college_1000017",
+          "name": "George C Wallace State Community College-Hanceville",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Hanceville",
+          "state": "AL",
+          "tuition_in_state": 4980,
+          "tuition_out_of_state": 8790,
+          "student_body_size": 4413
+        },
+        {
+          "college_id": "college_1000018",
+          "name": "George C Wallace State Community College-Selma",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Selma",
+          "state": "AL",
+          "tuition_in_state": 4680,
+          "tuition_out_of_state": 8490,
+          "student_body_size": 828
+        },
+        {
+          "college_id": "college_1000019",
+          "name": "Huntingdon College",
+          "acceptance_rate": 0.7082999999999999,
+          "selectivity_tier": "Less Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 28650,
+          "tuition_out_of_state": 28650,
+          "student_body_size": 865
+        }
+      ]
+    },
+    {
+      "query": "Berkeley",
+      "count": 20,
+      "colleges": [
+        {
+          "college_id": "college_1000000",
+          "name": "Alabama A & M University",
+          "acceptance_rate": 0.6622,
+          "selectivity_tier": "Less Selective",
+          "city": "Normal",
+          "state": "AL",
+          "tuition_in_state": 10024,
+          "tuition_out_of_state": 18634,
+          "student_body_size": 5726
+        },
+        {
+          "college_id": "college_1000001",
+          "name": "University of Alabama at Birmingham",
+          "acceptance_rate": 0.8842,
+          "selectivity_tier": "Less Selective",
+          "city": "Birmingham",
+          "state": "AL",
+          "tuition_in_state": 8832,
+          "tuition_out_of_state": 21864,
+          "student_body_size": 12118
+        },
+        {
+          "college_id": "college_1000002",
+          "name": "Amridge University",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 9748,
+          "tuition_out_of_state": 17062,
+          "student_body_size": 226
+        },
+        {
+          "college_id": "college_1000003",
+          "name": "University of Alabama in Huntsville",
+          "acceptance_rate": 0.7425,
+          "selectivity_tier": "Less Selective",
+          "city": "Huntsville",
+          "state": "AL",
+          "tuition_in_state": 11770,
+          "tuition_out_of_state": 24662,
+          "student_body_size": 6650
+        },
+        {
+          "college_id": "college_1000004",
+          "name": "Alabama State University",
+          "acceptance_rate": 0.9564,
+          "selectivity_tier": "Less Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 11248,
+          "tuition_out_of_state": 19576,
+          "student_body_size": 3322
+        },
+        {
+          "college_id": "college_1000005",
+          "name": "The University of Alabama",
+          "acceptance_rate": 0.7582,
+          "selectivity_tier": "Less Selective",
+          "city": "Tuscaloosa",
+          "state": "AL",
+          "tuition_in_state": 11900,
+          "tuition_out_of_state": 33200,
+          "student_body_size": 32323
+        },
+        {
+          "college_id": "college_1000006",
+          "name": "Central Alabama Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Alexander City",
+          "state": "AL",
+          "tuition_in_state": 5040,
+          "tuition_out_of_state": 8850,
+          "student_body_size": 1134
+        },
+        {
+          "college_id": "college_1000007",
+          "name": "Athens State University",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Athens",
+          "state": "AL",
+          "tuition_in_state": 9748,
+          "tuition_out_of_state": 17062,
+          "student_body_size": 2407
+        },
+        {
+          "college_id": "college_1000008",
+          "name": "Auburn University at Montgomery",
+          "acceptance_rate": 0.9263,
+          "selectivity_tier": "Less Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 9436,
+          "tuition_out_of_state": 20092,
+          "student_body_size": 2693
+        },
+        {
+          "college_id": "college_1000009",
+          "name": "Auburn University",
+          "acceptance_rate": 0.5047,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Auburn",
+          "state": "AL",
+          "tuition_in_state": 12536,
+          "tuition_out_of_state": 33944,
+          "student_body_size": 25732
+        },
+        {
+          "college_id": "college_1000010",
+          "name": "Birmingham-Southern College",
+          "acceptance_rate": 0.5194,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Birmingham",
+          "state": "AL",
+          "tuition_in_state": 22750,
+          "tuition_out_of_state": 22750,
+          "student_body_size": 713
+        },
+        {
+          "college_id": "college_1000011",
+          "name": "Chattahoochee Valley Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Phenix City",
+          "state": "AL",
+          "tuition_in_state": 5040,
+          "tuition_out_of_state": 8850,
+          "student_body_size": 1044
+        },
+        {
+          "college_id": "college_1000012",
+          "name": "Enterprise State Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Enterprise",
+          "state": "AL",
+          "tuition_in_state": 5040,
+          "tuition_out_of_state": 8850,
+          "student_body_size": 1476
+        },
+        {
+          "college_id": "college_1000013",
+          "name": "Coastal Alabama Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Bay Minette",
+          "state": "AL",
+          "tuition_in_state": 4980,
+          "tuition_out_of_state": 8790,
+          "student_body_size": 4714
+        },
+        {
+          "college_id": "college_1000014",
+          "name": "Faulkner University",
+          "acceptance_rate": 0.6613,
+          "selectivity_tier": "Less Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 23920,
+          "tuition_out_of_state": 23920,
+          "student_body_size": 1555
+        },
+        {
+          "college_id": "college_1000015",
+          "name": "Gadsden State Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Gadsden",
+          "state": "AL",
+          "tuition_in_state": 4032,
+          "tuition_out_of_state": 7080,
+          "student_body_size": 3619
+        },
+        {
+          "college_id": "college_1000016",
+          "name": "George C Wallace Community College-Dothan",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Dothan",
+          "state": "AL",
+          "tuition_in_state": 4920,
+          "tuition_out_of_state": 8730,
+          "student_body_size": 3053
+        },
+        {
+          "college_id": "college_1000017",
+          "name": "George C Wallace State Community College-Hanceville",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Hanceville",
+          "state": "AL",
+          "tuition_in_state": 4980,
+          "tuition_out_of_state": 8790,
+          "student_body_size": 4413
+        },
+        {
+          "college_id": "college_1000018",
+          "name": "George C Wallace State Community College-Selma",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Selma",
+          "state": "AL",
+          "tuition_in_state": 4680,
+          "tuition_out_of_state": 8490,
+          "student_body_size": 828
+        },
+        {
+          "college_id": "college_1000019",
+          "name": "Huntingdon College",
+          "acceptance_rate": 0.7082999999999999,
+          "selectivity_tier": "Less Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 28650,
+          "tuition_out_of_state": 28650,
+          "student_body_size": 865
+        }
+      ]
+    },
+    {
+      "query": "Carnegie",
+      "count": 20,
+      "colleges": [
+        {
+          "college_id": "college_1000000",
+          "name": "Alabama A & M University",
+          "acceptance_rate": 0.6622,
+          "selectivity_tier": "Less Selective",
+          "city": "Normal",
+          "state": "AL",
+          "tuition_in_state": 10024,
+          "tuition_out_of_state": 18634,
+          "student_body_size": 5726
+        },
+        {
+          "college_id": "college_1000001",
+          "name": "University of Alabama at Birmingham",
+          "acceptance_rate": 0.8842,
+          "selectivity_tier": "Less Selective",
+          "city": "Birmingham",
+          "state": "AL",
+          "tuition_in_state": 8832,
+          "tuition_out_of_state": 21864,
+          "student_body_size": 12118
+        },
+        {
+          "college_id": "college_1000002",
+          "name": "Amridge University",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 9748,
+          "tuition_out_of_state": 17062,
+          "student_body_size": 226
+        },
+        {
+          "college_id": "college_1000003",
+          "name": "University of Alabama in Huntsville",
+          "acceptance_rate": 0.7425,
+          "selectivity_tier": "Less Selective",
+          "city": "Huntsville",
+          "state": "AL",
+          "tuition_in_state": 11770,
+          "tuition_out_of_state": 24662,
+          "student_body_size": 6650
+        },
+        {
+          "college_id": "college_1000004",
+          "name": "Alabama State University",
+          "acceptance_rate": 0.9564,
+          "selectivity_tier": "Less Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 11248,
+          "tuition_out_of_state": 19576,
+          "student_body_size": 3322
+        },
+        {
+          "college_id": "college_1000005",
+          "name": "The University of Alabama",
+          "acceptance_rate": 0.7582,
+          "selectivity_tier": "Less Selective",
+          "city": "Tuscaloosa",
+          "state": "AL",
+          "tuition_in_state": 11900,
+          "tuition_out_of_state": 33200,
+          "student_body_size": 32323
+        },
+        {
+          "college_id": "college_1000006",
+          "name": "Central Alabama Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Alexander City",
+          "state": "AL",
+          "tuition_in_state": 5040,
+          "tuition_out_of_state": 8850,
+          "student_body_size": 1134
+        },
+        {
+          "college_id": "college_1000007",
+          "name": "Athens State University",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Athens",
+          "state": "AL",
+          "tuition_in_state": 9748,
+          "tuition_out_of_state": 17062,
+          "student_body_size": 2407
+        },
+        {
+          "college_id": "college_1000008",
+          "name": "Auburn University at Montgomery",
+          "acceptance_rate": 0.9263,
+          "selectivity_tier": "Less Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 9436,
+          "tuition_out_of_state": 20092,
+          "student_body_size": 2693
+        },
+        {
+          "college_id": "college_1000009",
+          "name": "Auburn University",
+          "acceptance_rate": 0.5047,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Auburn",
+          "state": "AL",
+          "tuition_in_state": 12536,
+          "tuition_out_of_state": 33944,
+          "student_body_size": 25732
+        },
+        {
+          "college_id": "college_1000010",
+          "name": "Birmingham-Southern College",
+          "acceptance_rate": 0.5194,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Birmingham",
+          "state": "AL",
+          "tuition_in_state": 22750,
+          "tuition_out_of_state": 22750,
+          "student_body_size": 713
+        },
+        {
+          "college_id": "college_1000011",
+          "name": "Chattahoochee Valley Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Phenix City",
+          "state": "AL",
+          "tuition_in_state": 5040,
+          "tuition_out_of_state": 8850,
+          "student_body_size": 1044
+        },
+        {
+          "college_id": "college_1000012",
+          "name": "Enterprise State Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Enterprise",
+          "state": "AL",
+          "tuition_in_state": 5040,
+          "tuition_out_of_state": 8850,
+          "student_body_size": 1476
+        },
+        {
+          "college_id": "college_1000013",
+          "name": "Coastal Alabama Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Bay Minette",
+          "state": "AL",
+          "tuition_in_state": 4980,
+          "tuition_out_of_state": 8790,
+          "student_body_size": 4714
+        },
+        {
+          "college_id": "college_1000014",
+          "name": "Faulkner University",
+          "acceptance_rate": 0.6613,
+          "selectivity_tier": "Less Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 23920,
+          "tuition_out_of_state": 23920,
+          "student_body_size": 1555
+        },
+        {
+          "college_id": "college_1000015",
+          "name": "Gadsden State Community College",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Gadsden",
+          "state": "AL",
+          "tuition_in_state": 4032,
+          "tuition_out_of_state": 7080,
+          "student_body_size": 3619
+        },
+        {
+          "college_id": "college_1000016",
+          "name": "George C Wallace Community College-Dothan",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Dothan",
+          "state": "AL",
+          "tuition_in_state": 4920,
+          "tuition_out_of_state": 8730,
+          "student_body_size": 3053
+        },
+        {
+          "college_id": "college_1000017",
+          "name": "George C Wallace State Community College-Hanceville",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Hanceville",
+          "state": "AL",
+          "tuition_in_state": 4980,
+          "tuition_out_of_state": 8790,
+          "student_body_size": 4413
+        },
+        {
+          "college_id": "college_1000018",
+          "name": "George C Wallace State Community College-Selma",
+          "acceptance_rate": 0.5,
+          "selectivity_tier": "Moderately Selective",
+          "city": "Selma",
+          "state": "AL",
+          "tuition_in_state": 4680,
+          "tuition_out_of_state": 8490,
+          "student_body_size": 828
+        },
+        {
+          "college_id": "college_1000019",
+          "name": "Huntingdon College",
+          "acceptance_rate": 0.7082999999999999,
+          "selectivity_tier": "Less Selective",
+          "city": "Montgomery",
+          "state": "AL",
+          "tuition_in_state": 28650,
+          "tuition_out_of_state": 28650,
+          "student_body_size": 865
+        }
+      ]
+    }
+  ],
+  "recommendation_results": [
+    {
+      "major": "Computer Science",
+      "count": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "suggestions": [
+        {
+          "college_id": "college_1000157",
+          "name": "California Institute of Technology",
+          "probability": 0.1326,
+          "original_probability": 0.1326,
+          "major_fit_score": 1.0,
+          "confidence_interval": {
+            "lower": 0.0276,
+            "upper": 0.2376
+          },
+          "acceptance_rate": 0.0314,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "Pasadena",
+          "state": "CA",
+          "tuition_in_state": 63255,
+          "tuition_out_of_state": 63255,
+          "student_body_size": 1023,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Computer Science",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.0% acceptance rate",
+          "category": "safety"
+        },
+        {
+          "college_id": "college_1000160",
+          "name": "Alliant International University-San Diego",
+          "probability": 0.1325,
+          "original_probability": 0.1325,
+          "major_fit_score": 1.0,
+          "confidence_interval": {
+            "lower": 0.0275,
+            "upper": 0.2375
+          },
+          "acceptance_rate": 0.0,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "San Diego",
+          "state": "CA",
+          "tuition_in_state": 13918,
+          "tuition_out_of_state": 13918,
+          "student_body_size": 355,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Computer Science",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.0% acceptance rate",
+          "category": "safety"
+        },
+        {
+          "college_id": "college_1000361",
+          "name": "University of Southern California",
+          "probability": 0.1295,
+          "original_probability": 0.1295,
+          "major_fit_score": 1.0,
+          "confidence_interval": {
+            "lower": 0.0245,
+            "upper": 0.2345
+          },
+          "acceptance_rate": 0.1002,
+          "selectivity_tier": "Highly Selective",
+          "tier": "Highly Selective",
+          "city": "Los Angeles",
+          "state": "CA",
+          "tuition_in_state": 68237,
+          "tuition_out_of_state": 68237,
+          "student_body_size": 20817,
+          "enrollment": "10,000",
+          "difficulty": "Highly Selective",
+          "popularMajors": [
+            "Computer Science",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong highly selective institution with 0.1% acceptance rate",
+          "category": "safety"
+        },
+        {
+          "college_id": "college_1000188",
+          "name": "Casa Loma College-Los Angeles",
+          "probability": 0.0987,
+          "original_probability": 0.0987,
+          "major_fit_score": 0.9,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.1869
+          },
+          "acceptance_rate": 0.3641,
+          "selectivity_tier": "Moderately Selective",
+          "tier": "Moderately Selective",
+          "city": "Sherman Oaks",
+          "state": "CA",
+          "tuition_in_state": 9748,
+          "tuition_out_of_state": 17062,
+          "student_body_size": 581,
+          "enrollment": "10,000",
+          "difficulty": "Moderately Selective",
+          "popularMajors": [
+            "Computer Science",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong moderately selective institution with 0.4% acceptance rate",
+          "category": "target"
+        },
+        {
+          "college_id": "college_1000329",
+          "name": "San Diego State University",
+          "probability": 0.0978,
+          "original_probability": 0.0978,
+          "major_fit_score": 0.9,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.1866
+          },
+          "acceptance_rate": 0.3444,
+          "selectivity_tier": "Moderately Selective",
+          "tier": "Moderately Selective",
+          "city": "San Diego",
+          "state": "CA",
+          "tuition_in_state": 8290,
+          "tuition_out_of_state": 20170,
+          "student_body_size": 33654,
+          "enrollment": "10,000",
+          "difficulty": "Moderately Selective",
+          "popularMajors": [
+            "Computer Science",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong moderately selective institution with 0.3% acceptance rate",
+          "category": "target"
+        },
+        {
+          "college_id": "college_1000431",
+          "name": "Connecticut College",
+          "probability": 0.0978,
+          "original_probability": 0.0978,
+          "major_fit_score": 0.9,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.1839
+          },
+          "acceptance_rate": 0.3828,
+          "selectivity_tier": "Moderately Selective",
+          "tier": "Moderately Selective",
+          "city": "New London",
+          "state": "CT",
+          "tuition_in_state": 64812,
+          "tuition_out_of_state": 64812,
+          "student_body_size": 1960,
+          "enrollment": "10,000",
+          "difficulty": "Moderately Selective",
+          "popularMajors": [
+            "Computer Science",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong moderately selective institution with 0.4% acceptance rate",
+          "category": "target"
+        },
+        {
+          "college_id": "college_2052682",
+          "name": "Duke University",
+          "probability": 0.0228,
+          "original_probability": 0.0228,
+          "major_fit_score": 1.0,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.1278
+          },
+          "acceptance_rate": 0.059,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "Durham",
+          "state": "NC",
+          "tuition_in_state": 60244,
+          "tuition_out_of_state": 60244,
+          "student_body_size": 5000,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Computer Science",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.1% acceptance rate",
+          "category": "reach"
+        },
+        {
+          "college_id": "college_2081252",
+          "name": "Harvard University",
+          "probability": 0.02,
+          "original_probability": 0.02,
+          "major_fit_score": 1.0,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.125
+          },
+          "acceptance_rate": 0.034,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "Cambridge",
+          "state": "MA",
+          "tuition_in_state": 55587,
+          "tuition_out_of_state": 55587,
+          "student_body_size": 5000,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Computer Science",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.0% acceptance rate",
+          "category": "reach"
+        },
+        {
+          "college_id": "college_2020582",
+          "name": "Stanford University",
+          "probability": 0.02,
+          "original_probability": 0.02,
+          "major_fit_score": 1.0,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.125
+          },
+          "acceptance_rate": 0.034,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "Stanford",
+          "state": "CA",
+          "tuition_in_state": 56169,
+          "tuition_out_of_state": 56169,
+          "student_body_size": 5000,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Computer Science",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.0% acceptance rate",
+          "category": "reach"
+        }
+      ]
+    },
+    {
+      "major": "Business",
+      "count": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "suggestions": [
+        {
+          "college_id": "college_1000157",
+          "name": "California Institute of Technology",
+          "probability": 0.1326,
+          "original_probability": 0.1326,
+          "major_fit_score": 1.0,
+          "confidence_interval": {
+            "lower": 0.0276,
+            "upper": 0.2376
+          },
+          "acceptance_rate": 0.0314,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "Pasadena",
+          "state": "CA",
+          "tuition_in_state": 63255,
+          "tuition_out_of_state": 63255,
+          "student_body_size": 1023,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Business",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.0% acceptance rate",
+          "category": "safety"
+        },
+        {
+          "college_id": "college_1000160",
+          "name": "Alliant International University-San Diego",
+          "probability": 0.1325,
+          "original_probability": 0.1325,
+          "major_fit_score": 1.0,
+          "confidence_interval": {
+            "lower": 0.0275,
+            "upper": 0.2375
+          },
+          "acceptance_rate": 0.0,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "San Diego",
+          "state": "CA",
+          "tuition_in_state": 13918,
+          "tuition_out_of_state": 13918,
+          "student_body_size": 355,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Business",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.0% acceptance rate",
+          "category": "safety"
+        },
+        {
+          "college_id": "college_1000361",
+          "name": "University of Southern California",
+          "probability": 0.1295,
+          "original_probability": 0.1295,
+          "major_fit_score": 1.0,
+          "confidence_interval": {
+            "lower": 0.0245,
+            "upper": 0.2345
+          },
+          "acceptance_rate": 0.1002,
+          "selectivity_tier": "Highly Selective",
+          "tier": "Highly Selective",
+          "city": "Los Angeles",
+          "state": "CA",
+          "tuition_in_state": 68237,
+          "tuition_out_of_state": 68237,
+          "student_body_size": 20817,
+          "enrollment": "10,000",
+          "difficulty": "Highly Selective",
+          "popularMajors": [
+            "Business",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong highly selective institution with 0.1% acceptance rate",
+          "category": "safety"
+        },
+        {
+          "college_id": "college_1000188",
+          "name": "Casa Loma College-Los Angeles",
+          "probability": 0.0987,
+          "original_probability": 0.0987,
+          "major_fit_score": 1.0,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.1869
+          },
+          "acceptance_rate": 0.3641,
+          "selectivity_tier": "Moderately Selective",
+          "tier": "Moderately Selective",
+          "city": "Sherman Oaks",
+          "state": "CA",
+          "tuition_in_state": 9748,
+          "tuition_out_of_state": 17062,
+          "student_body_size": 581,
+          "enrollment": "10,000",
+          "difficulty": "Moderately Selective",
+          "popularMajors": [
+            "Business",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong moderately selective institution with 0.4% acceptance rate",
+          "category": "target"
+        },
+        {
+          "college_id": "college_1000453",
+          "name": "Trinity College",
+          "probability": 0.0985,
+          "original_probability": 0.0985,
+          "major_fit_score": 0.9,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.1887
+          },
+          "acceptance_rate": 0.3352,
+          "selectivity_tier": "Moderately Selective",
+          "tier": "Moderately Selective",
+          "city": "Hartford",
+          "state": "CT",
+          "tuition_in_state": 67420,
+          "tuition_out_of_state": 67420,
+          "student_body_size": 2193,
+          "enrollment": "10,000",
+          "difficulty": "Moderately Selective",
+          "popularMajors": [
+            "Business",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong moderately selective institution with 0.3% acceptance rate",
+          "category": "target"
+        },
+        {
+          "college_id": "college_1000329",
+          "name": "San Diego State University",
+          "probability": 0.0978,
+          "original_probability": 0.0978,
+          "major_fit_score": 1.0,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.1866
+          },
+          "acceptance_rate": 0.3444,
+          "selectivity_tier": "Moderately Selective",
+          "tier": "Moderately Selective",
+          "city": "San Diego",
+          "state": "CA",
+          "tuition_in_state": 8290,
+          "tuition_out_of_state": 20170,
+          "student_body_size": 33654,
+          "enrollment": "10,000",
+          "difficulty": "Moderately Selective",
+          "popularMajors": [
+            "Business",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong moderately selective institution with 0.3% acceptance rate",
+          "category": "target"
+        },
+        {
+          "college_id": "college_2052682",
+          "name": "Duke University",
+          "probability": 0.0228,
+          "original_probability": 0.0228,
+          "major_fit_score": 1.0,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.1278
+          },
+          "acceptance_rate": 0.059,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "Durham",
+          "state": "NC",
+          "tuition_in_state": 60244,
+          "tuition_out_of_state": 60244,
+          "student_body_size": 5000,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Business",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.1% acceptance rate",
+          "category": "reach"
+        },
+        {
+          "college_id": "college_2081252",
+          "name": "Harvard University",
+          "probability": 0.02,
+          "original_probability": 0.02,
+          "major_fit_score": 1.0,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.125
+          },
+          "acceptance_rate": 0.034,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "Cambridge",
+          "state": "MA",
+          "tuition_in_state": 55587,
+          "tuition_out_of_state": 55587,
+          "student_body_size": 5000,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Business",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.0% acceptance rate",
+          "category": "reach"
+        },
+        {
+          "college_id": "college_2020582",
+          "name": "Stanford University",
+          "probability": 0.02,
+          "original_probability": 0.02,
+          "major_fit_score": 1.0,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.125
+          },
+          "acceptance_rate": 0.034,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "Stanford",
+          "state": "CA",
+          "tuition_in_state": 56169,
+          "tuition_out_of_state": 56169,
+          "student_body_size": 5000,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Business",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.0% acceptance rate",
+          "category": "reach"
+        }
+      ]
+    },
+    {
+      "major": "Engineering",
+      "count": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "suggestions": [
+        {
+          "college_id": "college_1000157",
+          "name": "California Institute of Technology",
+          "probability": 0.1326,
+          "original_probability": 0.1326,
+          "major_fit_score": 1.0,
+          "confidence_interval": {
+            "lower": 0.0276,
+            "upper": 0.2376
+          },
+          "acceptance_rate": 0.0314,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "Pasadena",
+          "state": "CA",
+          "tuition_in_state": 63255,
+          "tuition_out_of_state": 63255,
+          "student_body_size": 1023,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Engineering",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.0% acceptance rate",
+          "category": "safety"
+        },
+        {
+          "college_id": "college_1000160",
+          "name": "Alliant International University-San Diego",
+          "probability": 0.1325,
+          "original_probability": 0.1325,
+          "major_fit_score": 1.0,
+          "confidence_interval": {
+            "lower": 0.0275,
+            "upper": 0.2375
+          },
+          "acceptance_rate": 0.0,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "San Diego",
+          "state": "CA",
+          "tuition_in_state": 13918,
+          "tuition_out_of_state": 13918,
+          "student_body_size": 355,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Engineering",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.0% acceptance rate",
+          "category": "safety"
+        },
+        {
+          "college_id": "college_1000361",
+          "name": "University of Southern California",
+          "probability": 0.1295,
+          "original_probability": 0.1295,
+          "major_fit_score": 0.9,
+          "confidence_interval": {
+            "lower": 0.0245,
+            "upper": 0.2345
+          },
+          "acceptance_rate": 0.1002,
+          "selectivity_tier": "Highly Selective",
+          "tier": "Highly Selective",
+          "city": "Los Angeles",
+          "state": "CA",
+          "tuition_in_state": 68237,
+          "tuition_out_of_state": 68237,
+          "student_body_size": 20817,
+          "enrollment": "10,000",
+          "difficulty": "Highly Selective",
+          "popularMajors": [
+            "Engineering",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong highly selective institution with 0.1% acceptance rate",
+          "category": "safety"
+        },
+        {
+          "college_id": "college_1000188",
+          "name": "Casa Loma College-Los Angeles",
+          "probability": 0.0987,
+          "original_probability": 0.0987,
+          "major_fit_score": 0.8,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.1869
+          },
+          "acceptance_rate": 0.3641,
+          "selectivity_tier": "Moderately Selective",
+          "tier": "Moderately Selective",
+          "city": "Sherman Oaks",
+          "state": "CA",
+          "tuition_in_state": 9748,
+          "tuition_out_of_state": 17062,
+          "student_body_size": 581,
+          "enrollment": "10,000",
+          "difficulty": "Moderately Selective",
+          "popularMajors": [
+            "Engineering",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong moderately selective institution with 0.4% acceptance rate",
+          "category": "target"
+        },
+        {
+          "college_id": "college_1000329",
+          "name": "San Diego State University",
+          "probability": 0.0978,
+          "original_probability": 0.0978,
+          "major_fit_score": 0.8,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.1866
+          },
+          "acceptance_rate": 0.3444,
+          "selectivity_tier": "Moderately Selective",
+          "tier": "Moderately Selective",
+          "city": "San Diego",
+          "state": "CA",
+          "tuition_in_state": 8290,
+          "tuition_out_of_state": 20170,
+          "student_body_size": 33654,
+          "enrollment": "10,000",
+          "difficulty": "Moderately Selective",
+          "popularMajors": [
+            "Engineering",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong moderately selective institution with 0.3% acceptance rate",
+          "category": "target"
+        },
+        {
+          "college_id": "college_1000431",
+          "name": "Connecticut College",
+          "probability": 0.0978,
+          "original_probability": 0.0978,
+          "major_fit_score": 0.8,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.1839
+          },
+          "acceptance_rate": 0.3828,
+          "selectivity_tier": "Moderately Selective",
+          "tier": "Moderately Selective",
+          "city": "New London",
+          "state": "CT",
+          "tuition_in_state": 64812,
+          "tuition_out_of_state": 64812,
+          "student_body_size": 1960,
+          "enrollment": "10,000",
+          "difficulty": "Moderately Selective",
+          "popularMajors": [
+            "Engineering",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong moderately selective institution with 0.4% acceptance rate",
+          "category": "target"
+        },
+        {
+          "college_id": "college_2052682",
+          "name": "Duke University",
+          "probability": 0.0228,
+          "original_probability": 0.0228,
+          "major_fit_score": 1.0,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.1278
+          },
+          "acceptance_rate": 0.059,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "Durham",
+          "state": "NC",
+          "tuition_in_state": 60244,
+          "tuition_out_of_state": 60244,
+          "student_body_size": 5000,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Engineering",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.1% acceptance rate",
+          "category": "reach"
+        },
+        {
+          "college_id": "college_2081252",
+          "name": "Harvard University",
+          "probability": 0.02,
+          "original_probability": 0.02,
+          "major_fit_score": 1.0,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.125
+          },
+          "acceptance_rate": 0.034,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "Cambridge",
+          "state": "MA",
+          "tuition_in_state": 55587,
+          "tuition_out_of_state": 55587,
+          "student_body_size": 5000,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Engineering",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.0% acceptance rate",
+          "category": "reach"
+        },
+        {
+          "college_id": "college_2020582",
+          "name": "Stanford University",
+          "probability": 0.02,
+          "original_probability": 0.02,
+          "major_fit_score": 1.0,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.125
+          },
+          "acceptance_rate": 0.034,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "Stanford",
+          "state": "CA",
+          "tuition_in_state": 56169,
+          "tuition_out_of_state": 56169,
+          "student_body_size": 5000,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Engineering",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.0% acceptance rate",
+          "category": "reach"
+        }
+      ]
+    },
+    {
+      "major": "Medicine",
+      "count": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "suggestions": [
+        {
+          "college_id": "college_1000157",
+          "name": "California Institute of Technology",
+          "probability": 0.1326,
+          "original_probability": 0.1326,
+          "major_fit_score": 0.7,
+          "confidence_interval": {
+            "lower": 0.0276,
+            "upper": 0.2376
+          },
+          "acceptance_rate": 0.0314,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "Pasadena",
+          "state": "CA",
+          "tuition_in_state": 63255,
+          "tuition_out_of_state": 63255,
+          "student_body_size": 1023,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Medicine",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.0% acceptance rate",
+          "category": "safety"
+        },
+        {
+          "college_id": "college_1000160",
+          "name": "Alliant International University-San Diego",
+          "probability": 0.1325,
+          "original_probability": 0.1325,
+          "major_fit_score": 0.7,
+          "confidence_interval": {
+            "lower": 0.0275,
+            "upper": 0.2375
+          },
+          "acceptance_rate": 0.0,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "San Diego",
+          "state": "CA",
+          "tuition_in_state": 13918,
+          "tuition_out_of_state": 13918,
+          "student_body_size": 355,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Medicine",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.0% acceptance rate",
+          "category": "safety"
+        },
+        {
+          "college_id": "college_1000361",
+          "name": "University of Southern California",
+          "probability": 0.1295,
+          "original_probability": 0.1295,
+          "major_fit_score": 0.6,
+          "confidence_interval": {
+            "lower": 0.0245,
+            "upper": 0.2345
+          },
+          "acceptance_rate": 0.1002,
+          "selectivity_tier": "Highly Selective",
+          "tier": "Highly Selective",
+          "city": "Los Angeles",
+          "state": "CA",
+          "tuition_in_state": 68237,
+          "tuition_out_of_state": 68237,
+          "student_body_size": 20817,
+          "enrollment": "10,000",
+          "difficulty": "Highly Selective",
+          "popularMajors": [
+            "Medicine",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong highly selective institution with 0.1% acceptance rate",
+          "category": "safety"
+        },
+        {
+          "college_id": "college_1000188",
+          "name": "Casa Loma College-Los Angeles",
+          "probability": 0.0987,
+          "original_probability": 0.0987,
+          "major_fit_score": 0.5,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.1869
+          },
+          "acceptance_rate": 0.3641,
+          "selectivity_tier": "Moderately Selective",
+          "tier": "Moderately Selective",
+          "city": "Sherman Oaks",
+          "state": "CA",
+          "tuition_in_state": 9748,
+          "tuition_out_of_state": 17062,
+          "student_body_size": 581,
+          "enrollment": "10,000",
+          "difficulty": "Moderately Selective",
+          "popularMajors": [
+            "Medicine",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong moderately selective institution with 0.4% acceptance rate",
+          "category": "target"
+        },
+        {
+          "college_id": "college_1000453",
+          "name": "Trinity College",
+          "probability": 0.0985,
+          "original_probability": 0.0985,
+          "major_fit_score": 0.7,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.1887
+          },
+          "acceptance_rate": 0.3352,
+          "selectivity_tier": "Moderately Selective",
+          "tier": "Moderately Selective",
+          "city": "Hartford",
+          "state": "CT",
+          "tuition_in_state": 67420,
+          "tuition_out_of_state": 67420,
+          "student_body_size": 2193,
+          "enrollment": "10,000",
+          "difficulty": "Moderately Selective",
+          "popularMajors": [
+            "Medicine",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong moderately selective institution with 0.3% acceptance rate",
+          "category": "target"
+        },
+        {
+          "college_id": "college_1000329",
+          "name": "San Diego State University",
+          "probability": 0.0978,
+          "original_probability": 0.0978,
+          "major_fit_score": 0.5,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.1866
+          },
+          "acceptance_rate": 0.3444,
+          "selectivity_tier": "Moderately Selective",
+          "tier": "Moderately Selective",
+          "city": "San Diego",
+          "state": "CA",
+          "tuition_in_state": 8290,
+          "tuition_out_of_state": 20170,
+          "student_body_size": 33654,
+          "enrollment": "10,000",
+          "difficulty": "Moderately Selective",
+          "popularMajors": [
+            "Medicine",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong moderately selective institution with 0.3% acceptance rate",
+          "category": "target"
+        },
+        {
+          "college_id": "college_2052682",
+          "name": "Duke University",
+          "probability": 0.0228,
+          "original_probability": 0.0228,
+          "major_fit_score": 0.7,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.1278
+          },
+          "acceptance_rate": 0.059,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "Durham",
+          "state": "NC",
+          "tuition_in_state": 60244,
+          "tuition_out_of_state": 60244,
+          "student_body_size": 5000,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Medicine",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.1% acceptance rate",
+          "category": "reach"
+        },
+        {
+          "college_id": "college_2081252",
+          "name": "Harvard University",
+          "probability": 0.02,
+          "original_probability": 0.02,
+          "major_fit_score": 0.7,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.125
+          },
+          "acceptance_rate": 0.034,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "Cambridge",
+          "state": "MA",
+          "tuition_in_state": 55587,
+          "tuition_out_of_state": 55587,
+          "student_body_size": 5000,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Medicine",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.0% acceptance rate",
+          "category": "reach"
+        },
+        {
+          "college_id": "college_2020582",
+          "name": "Stanford University",
+          "probability": 0.02,
+          "original_probability": 0.02,
+          "major_fit_score": 0.7,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.125
+          },
+          "acceptance_rate": 0.034,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "Stanford",
+          "state": "CA",
+          "tuition_in_state": 56169,
+          "tuition_out_of_state": 56169,
+          "student_body_size": 5000,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Medicine",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.0% acceptance rate",
+          "category": "reach"
+        }
+      ]
+    },
+    {
+      "major": "Psychology",
+      "count": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "suggestions": [
+        {
+          "college_id": "college_1000157",
+          "name": "California Institute of Technology",
+          "probability": 0.1326,
+          "original_probability": 0.1326,
+          "major_fit_score": 0.7,
+          "confidence_interval": {
+            "lower": 0.0276,
+            "upper": 0.2376
+          },
+          "acceptance_rate": 0.0314,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "Pasadena",
+          "state": "CA",
+          "tuition_in_state": 63255,
+          "tuition_out_of_state": 63255,
+          "student_body_size": 1023,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Psychology",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.0% acceptance rate",
+          "category": "safety"
+        },
+        {
+          "college_id": "college_1000160",
+          "name": "Alliant International University-San Diego",
+          "probability": 0.1325,
+          "original_probability": 0.1325,
+          "major_fit_score": 0.7,
+          "confidence_interval": {
+            "lower": 0.0275,
+            "upper": 0.2375
+          },
+          "acceptance_rate": 0.0,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "San Diego",
+          "state": "CA",
+          "tuition_in_state": 13918,
+          "tuition_out_of_state": 13918,
+          "student_body_size": 355,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Psychology",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.0% acceptance rate",
+          "category": "safety"
+        },
+        {
+          "college_id": "college_1000361",
+          "name": "University of Southern California",
+          "probability": 0.1295,
+          "original_probability": 0.1295,
+          "major_fit_score": 0.6,
+          "confidence_interval": {
+            "lower": 0.0245,
+            "upper": 0.2345
+          },
+          "acceptance_rate": 0.1002,
+          "selectivity_tier": "Highly Selective",
+          "tier": "Highly Selective",
+          "city": "Los Angeles",
+          "state": "CA",
+          "tuition_in_state": 68237,
+          "tuition_out_of_state": 68237,
+          "student_body_size": 20817,
+          "enrollment": "10,000",
+          "difficulty": "Highly Selective",
+          "popularMajors": [
+            "Psychology",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong highly selective institution with 0.1% acceptance rate",
+          "category": "safety"
+        },
+        {
+          "college_id": "college_1000188",
+          "name": "Casa Loma College-Los Angeles",
+          "probability": 0.0987,
+          "original_probability": 0.0987,
+          "major_fit_score": 0.5,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.1869
+          },
+          "acceptance_rate": 0.3641,
+          "selectivity_tier": "Moderately Selective",
+          "tier": "Moderately Selective",
+          "city": "Sherman Oaks",
+          "state": "CA",
+          "tuition_in_state": 9748,
+          "tuition_out_of_state": 17062,
+          "student_body_size": 581,
+          "enrollment": "10,000",
+          "difficulty": "Moderately Selective",
+          "popularMajors": [
+            "Psychology",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong moderately selective institution with 0.4% acceptance rate",
+          "category": "target"
+        },
+        {
+          "college_id": "college_1000453",
+          "name": "Trinity College",
+          "probability": 0.0985,
+          "original_probability": 0.0985,
+          "major_fit_score": 0.9,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.1887
+          },
+          "acceptance_rate": 0.3352,
+          "selectivity_tier": "Moderately Selective",
+          "tier": "Moderately Selective",
+          "city": "Hartford",
+          "state": "CT",
+          "tuition_in_state": 67420,
+          "tuition_out_of_state": 67420,
+          "student_body_size": 2193,
+          "enrollment": "10,000",
+          "difficulty": "Moderately Selective",
+          "popularMajors": [
+            "Psychology",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong moderately selective institution with 0.3% acceptance rate",
+          "category": "target"
+        },
+        {
+          "college_id": "college_1000329",
+          "name": "San Diego State University",
+          "probability": 0.0978,
+          "original_probability": 0.0978,
+          "major_fit_score": 0.5,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.1866
+          },
+          "acceptance_rate": 0.3444,
+          "selectivity_tier": "Moderately Selective",
+          "tier": "Moderately Selective",
+          "city": "San Diego",
+          "state": "CA",
+          "tuition_in_state": 8290,
+          "tuition_out_of_state": 20170,
+          "student_body_size": 33654,
+          "enrollment": "10,000",
+          "difficulty": "Moderately Selective",
+          "popularMajors": [
+            "Psychology",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong moderately selective institution with 0.3% acceptance rate",
+          "category": "target"
+        },
+        {
+          "college_id": "college_2052682",
+          "name": "Duke University",
+          "probability": 0.0228,
+          "original_probability": 0.0228,
+          "major_fit_score": 0.7,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.1278
+          },
+          "acceptance_rate": 0.059,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "Durham",
+          "state": "NC",
+          "tuition_in_state": 60244,
+          "tuition_out_of_state": 60244,
+          "student_body_size": 5000,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Psychology",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.1% acceptance rate",
+          "category": "reach"
+        },
+        {
+          "college_id": "college_2081252",
+          "name": "Harvard University",
+          "probability": 0.02,
+          "original_probability": 0.02,
+          "major_fit_score": 0.7,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.125
+          },
+          "acceptance_rate": 0.034,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "Cambridge",
+          "state": "MA",
+          "tuition_in_state": 55587,
+          "tuition_out_of_state": 55587,
+          "student_body_size": 5000,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Psychology",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.0% acceptance rate",
+          "category": "reach"
+        },
+        {
+          "college_id": "college_2020582",
+          "name": "Stanford University",
+          "probability": 0.02,
+          "original_probability": 0.02,
+          "major_fit_score": 0.7,
+          "confidence_interval": {
+            "lower": 0.02,
+            "upper": 0.125
+          },
+          "acceptance_rate": 0.034,
+          "selectivity_tier": "Elite",
+          "tier": "Elite",
+          "city": "Stanford",
+          "state": "CA",
+          "tuition_in_state": 56169,
+          "tuition_out_of_state": 56169,
+          "student_body_size": 5000,
+          "enrollment": "10,000",
+          "difficulty": "Elite",
+          "popularMajors": [
+            "Psychology",
+            "Business",
+            "Engineering",
+            "Liberal Arts"
+          ],
+          "description": "Strong elite institution with 0.0% acceptance rate",
+          "category": "reach"
+        }
+      ]
+    }
+  ],
+  "flow_results": {
+    "suggestions": [
+      {
+        "college_id": "college_1000157",
+        "name": "California Institute of Technology",
+        "probability": 0.1326,
+        "original_probability": 0.1326,
+        "major_fit_score": 1.0,
+        "confidence_interval": {
+          "lower": 0.0276,
+          "upper": 0.2376
+        },
+        "acceptance_rate": 0.0314,
+        "selectivity_tier": "Elite",
+        "tier": "Elite",
+        "city": "Pasadena",
+        "state": "CA",
+        "tuition_in_state": 63255,
+        "tuition_out_of_state": 63255,
+        "student_body_size": 1023,
+        "enrollment": "10,000",
+        "difficulty": "Elite",
+        "popularMajors": [
+          "Computer Science",
+          "Business",
+          "Engineering",
+          "Liberal Arts"
+        ],
+        "description": "Strong elite institution with 0.0% acceptance rate",
+        "category": "safety"
+      },
+      {
+        "college_id": "college_1000160",
+        "name": "Alliant International University-San Diego",
+        "probability": 0.1325,
+        "original_probability": 0.1325,
+        "major_fit_score": 1.0,
+        "confidence_interval": {
+          "lower": 0.0275,
+          "upper": 0.2375
+        },
+        "acceptance_rate": 0.0,
+        "selectivity_tier": "Elite",
+        "tier": "Elite",
+        "city": "San Diego",
+        "state": "CA",
+        "tuition_in_state": 13918,
+        "tuition_out_of_state": 13918,
+        "student_body_size": 355,
+        "enrollment": "10,000",
+        "difficulty": "Elite",
+        "popularMajors": [
+          "Computer Science",
+          "Business",
+          "Engineering",
+          "Liberal Arts"
+        ],
+        "description": "Strong elite institution with 0.0% acceptance rate",
+        "category": "safety"
+      },
+      {
+        "college_id": "college_1000361",
+        "name": "University of Southern California",
+        "probability": 0.1295,
+        "original_probability": 0.1295,
+        "major_fit_score": 1.0,
+        "confidence_interval": {
+          "lower": 0.0245,
+          "upper": 0.2345
+        },
+        "acceptance_rate": 0.1002,
+        "selectivity_tier": "Highly Selective",
+        "tier": "Highly Selective",
+        "city": "Los Angeles",
+        "state": "CA",
+        "tuition_in_state": 68237,
+        "tuition_out_of_state": 68237,
+        "student_body_size": 20817,
+        "enrollment": "10,000",
+        "difficulty": "Highly Selective",
+        "popularMajors": [
+          "Computer Science",
+          "Business",
+          "Engineering",
+          "Liberal Arts"
+        ],
+        "description": "Strong highly selective institution with 0.1% acceptance rate",
+        "category": "safety"
+      },
+      {
+        "college_id": "college_1000188",
+        "name": "Casa Loma College-Los Angeles",
+        "probability": 0.0987,
+        "original_probability": 0.0987,
+        "major_fit_score": 0.9,
+        "confidence_interval": {
+          "lower": 0.02,
+          "upper": 0.1869
+        },
+        "acceptance_rate": 0.3641,
+        "selectivity_tier": "Moderately Selective",
+        "tier": "Moderately Selective",
+        "city": "Sherman Oaks",
+        "state": "CA",
+        "tuition_in_state": 9748,
+        "tuition_out_of_state": 17062,
+        "student_body_size": 581,
+        "enrollment": "10,000",
+        "difficulty": "Moderately Selective",
+        "popularMajors": [
+          "Computer Science",
+          "Business",
+          "Engineering",
+          "Liberal Arts"
+        ],
+        "description": "Strong moderately selective institution with 0.4% acceptance rate",
+        "category": "target"
+      },
+      {
+        "college_id": "college_1000329",
+        "name": "San Diego State University",
+        "probability": 0.0978,
+        "original_probability": 0.0978,
+        "major_fit_score": 0.9,
+        "confidence_interval": {
+          "lower": 0.02,
+          "upper": 0.1866
+        },
+        "acceptance_rate": 0.3444,
+        "selectivity_tier": "Moderately Selective",
+        "tier": "Moderately Selective",
+        "city": "San Diego",
+        "state": "CA",
+        "tuition_in_state": 8290,
+        "tuition_out_of_state": 20170,
+        "student_body_size": 33654,
+        "enrollment": "10,000",
+        "difficulty": "Moderately Selective",
+        "popularMajors": [
+          "Computer Science",
+          "Business",
+          "Engineering",
+          "Liberal Arts"
+        ],
+        "description": "Strong moderately selective institution with 0.3% acceptance rate",
+        "category": "target"
+      },
+      {
+        "college_id": "college_1000431",
+        "name": "Connecticut College",
+        "probability": 0.0978,
+        "original_probability": 0.0978,
+        "major_fit_score": 0.9,
+        "confidence_interval": {
+          "lower": 0.02,
+          "upper": 0.1839
+        },
+        "acceptance_rate": 0.3828,
+        "selectivity_tier": "Moderately Selective",
+        "tier": "Moderately Selective",
+        "city": "New London",
+        "state": "CT",
+        "tuition_in_state": 64812,
+        "tuition_out_of_state": 64812,
+        "student_body_size": 1960,
+        "enrollment": "10,000",
+        "difficulty": "Moderately Selective",
+        "popularMajors": [
+          "Computer Science",
+          "Business",
+          "Engineering",
+          "Liberal Arts"
+        ],
+        "description": "Strong moderately selective institution with 0.4% acceptance rate",
+        "category": "target"
+      },
+      {
+        "college_id": "college_2052682",
+        "name": "Duke University",
+        "probability": 0.0228,
+        "original_probability": 0.0228,
+        "major_fit_score": 1.0,
+        "confidence_interval": {
+          "lower": 0.02,
+          "upper": 0.1278
+        },
+        "acceptance_rate": 0.059,
+        "selectivity_tier": "Elite",
+        "tier": "Elite",
+        "city": "Durham",
+        "state": "NC",
+        "tuition_in_state": 60244,
+        "tuition_out_of_state": 60244,
+        "student_body_size": 5000,
+        "enrollment": "10,000",
+        "difficulty": "Elite",
+        "popularMajors": [
+          "Computer Science",
+          "Business",
+          "Engineering",
+          "Liberal Arts"
+        ],
+        "description": "Strong elite institution with 0.1% acceptance rate",
+        "category": "reach"
+      },
+      {
+        "college_id": "college_2081252",
+        "name": "Harvard University",
+        "probability": 0.02,
+        "original_probability": 0.02,
+        "major_fit_score": 1.0,
+        "confidence_interval": {
+          "lower": 0.02,
+          "upper": 0.125
+        },
+        "acceptance_rate": 0.034,
+        "selectivity_tier": "Elite",
+        "tier": "Elite",
+        "city": "Cambridge",
+        "state": "MA",
+        "tuition_in_state": 55587,
+        "tuition_out_of_state": 55587,
+        "student_body_size": 5000,
+        "enrollment": "10,000",
+        "difficulty": "Elite",
+        "popularMajors": [
+          "Computer Science",
+          "Business",
+          "Engineering",
+          "Liberal Arts"
+        ],
+        "description": "Strong elite institution with 0.0% acceptance rate",
+        "category": "reach"
+      },
+      {
+        "college_id": "college_2020582",
+        "name": "Stanford University",
+        "probability": 0.02,
+        "original_probability": 0.02,
+        "major_fit_score": 1.0,
+        "confidence_interval": {
+          "lower": 0.02,
+          "upper": 0.125
+        },
+        "acceptance_rate": 0.034,
+        "selectivity_tier": "Elite",
+        "tier": "Elite",
+        "city": "Stanford",
+        "state": "CA",
+        "tuition_in_state": 56169,
+        "tuition_out_of_state": 56169,
+        "student_body_size": 5000,
+        "enrollment": "10,000",
+        "difficulty": "Elite",
+        "popularMajors": [
+          "Computer Science",
+          "Business",
+          "Engineering",
+          "Liberal Arts"
+        ],
+        "description": "Strong elite institution with 0.0% acceptance rate",
+        "category": "reach"
+      }
+    ],
+    "selected_colleges": [
+      {
+        "college_id": "college_1000157",
+        "name": "California Institute of Technology",
+        "probability": 0.1326,
+        "original_probability": 0.1326,
+        "major_fit_score": 1.0,
+        "confidence_interval": {
+          "lower": 0.0276,
+          "upper": 0.2376
+        },
+        "acceptance_rate": 0.0314,
+        "selectivity_tier": "Elite",
+        "tier": "Elite",
+        "city": "Pasadena",
+        "state": "CA",
+        "tuition_in_state": 63255,
+        "tuition_out_of_state": 63255,
+        "student_body_size": 1023,
+        "enrollment": "10,000",
+        "difficulty": "Elite",
+        "popularMajors": [
+          "Computer Science",
+          "Business",
+          "Engineering",
+          "Liberal Arts"
+        ],
+        "description": "Strong elite institution with 0.0% acceptance rate",
+        "category": "safety"
+      },
+      {
+        "college_id": "college_1000188",
+        "name": "Casa Loma College-Los Angeles",
+        "probability": 0.0987,
+        "original_probability": 0.0987,
+        "major_fit_score": 0.9,
+        "confidence_interval": {
+          "lower": 0.02,
+          "upper": 0.1869
+        },
+        "acceptance_rate": 0.3641,
+        "selectivity_tier": "Moderately Selective",
+        "tier": "Moderately Selective",
+        "city": "Sherman Oaks",
+        "state": "CA",
+        "tuition_in_state": 9748,
+        "tuition_out_of_state": 17062,
+        "student_body_size": 581,
+        "enrollment": "10,000",
+        "difficulty": "Moderately Selective",
+        "popularMajors": [
+          "Computer Science",
+          "Business",
+          "Engineering",
+          "Liberal Arts"
+        ],
+        "description": "Strong moderately selective institution with 0.4% acceptance rate",
+        "category": "target"
+      },
+      {
+        "college_id": "college_2052682",
+        "name": "Duke University",
+        "probability": 0.0228,
+        "original_probability": 0.0228,
+        "major_fit_score": 1.0,
+        "confidence_interval": {
+          "lower": 0.02,
+          "upper": 0.1278
+        },
+        "acceptance_rate": 0.059,
+        "selectivity_tier": "Elite",
+        "tier": "Elite",
+        "city": "Durham",
+        "state": "NC",
+        "tuition_in_state": 60244,
+        "tuition_out_of_state": 60244,
+        "student_body_size": 5000,
+        "enrollment": "10,000",
+        "difficulty": "Elite",
+        "popularMajors": [
+          "Computer Science",
+          "Business",
+          "Engineering",
+          "Liberal Arts"
+        ],
+        "description": "Strong elite institution with 0.1% acceptance rate",
+        "category": "reach"
+      }
+    ],
+    "predictions": [
+      {
+        "college": "California Institute of Technology",
+        "probability": 0.5297,
+        "category": "target",
+        "original_category": "safety"
+      },
+      {
+        "college": "Casa Loma College-Los Angeles",
+        "probability": 0.5297,
+        "category": "target",
+        "original_category": "target"
+      },
+      {
+        "college": "Duke University",
+        "probability": 0.0934,
+        "category": "reach",
+        "original_category": "reach"
+      }
+    ]
+  },
+  "loader_success": true,
+  "calculations_data": [
+    {
+      "collegeName": "California Institute of Technology",
+      "category": "target",
+      "probability": 0.5297,
+      "outcome": {
+        "accept": 52.96999999999999,
+        "waitlist": 14.109000000000002,
+        "reject": 32.921
+      },
+      "subjects": [
+        {
+          "label": "Computer Science",
+          "value": 35
+        },
+        {
+          "label": "Engineering",
+          "value": 25
+        },
+        {
+          "label": "Business",
+          "value": 15
+        },
+        {
+          "label": "Mathematics",
+          "value": 10
+        },
+        {
+          "label": "Other",
+          "value": 15
+        }
+      ],
+      "ethnicity": [
+        {
+          "label": "White",
+          "value": 40
+        },
+        {
+          "label": "Asian",
+          "value": 30
+        },
+        {
+          "label": "Hispanic/Latino",
+          "value": 15
+        },
+        {
+          "label": "Black/African American",
+          "value": 10
+        },
+        {
+          "label": "Other",
+          "value": 5
+        }
+      ],
+      "costs": {
+        "year": 2025,
+        "inStateTuition": 60000,
+        "outStateTuition": 60000,
+        "fees": 2000,
+        "roomBoard": 15000,
+        "books": 1000,
+        "other": 3000
+      },
+      "tags": [
+        "Test-Optional",
+        "Need-Blind",
+        "Meets Full Need"
+      ],
+      "facts": {
+        "Student-Faculty Ratio": "6:1",
+        "Graduation Rate (6yr)": "95%",
+        "Freshman Retention": "98%",
+        "Endowment": "$25B"
+      }
+    },
+    {
+      "collegeName": "Casa Loma College-Los Angeles",
+      "category": "target",
+      "probability": 0.5297,
+      "outcome": {
+        "accept": 52.96999999999999,
+        "waitlist": 14.109000000000002,
+        "reject": 32.921
+      },
+      "subjects": [
+        {
+          "label": "Computer Science",
+          "value": 35
+        },
+        {
+          "label": "Engineering",
+          "value": 25
+        },
+        {
+          "label": "Business",
+          "value": 15
+        },
+        {
+          "label": "Mathematics",
+          "value": 10
+        },
+        {
+          "label": "Other",
+          "value": 15
+        }
+      ],
+      "ethnicity": [
+        {
+          "label": "White",
+          "value": 40
+        },
+        {
+          "label": "Asian",
+          "value": 30
+        },
+        {
+          "label": "Hispanic/Latino",
+          "value": 15
+        },
+        {
+          "label": "Black/African American",
+          "value": 10
+        },
+        {
+          "label": "Other",
+          "value": 5
+        }
+      ],
+      "costs": {
+        "year": 2025,
+        "inStateTuition": 60000,
+        "outStateTuition": 60000,
+        "fees": 2000,
+        "roomBoard": 15000,
+        "books": 1000,
+        "other": 3000
+      },
+      "tags": [
+        "Test-Optional",
+        "Need-Blind",
+        "Meets Full Need"
+      ],
+      "facts": {
+        "Student-Faculty Ratio": "6:1",
+        "Graduation Rate (6yr)": "95%",
+        "Freshman Retention": "98%",
+        "Endowment": "$25B"
+      }
+    },
+    {
+      "collegeName": "Duke University",
+      "category": "reach",
+      "probability": 0.0934,
+      "outcome": {
+        "accept": 9.34,
+        "waitlist": 27.198,
+        "reject": 63.461999999999996
+      },
+      "subjects": [
+        {
+          "label": "Computer Science",
+          "value": 35
+        },
+        {
+          "label": "Engineering",
+          "value": 25
+        },
+        {
+          "label": "Business",
+          "value": 15
+        },
+        {
+          "label": "Mathematics",
+          "value": 10
+        },
+        {
+          "label": "Other",
+          "value": 15
+        }
+      ],
+      "ethnicity": [
+        {
+          "label": "White",
+          "value": 40
+        },
+        {
+          "label": "Asian",
+          "value": 30
+        },
+        {
+          "label": "Hispanic/Latino",
+          "value": 15
+        },
+        {
+          "label": "Black/African American",
+          "value": 10
+        },
+        {
+          "label": "Other",
+          "value": 5
+        }
+      ],
+      "costs": {
+        "year": 2025,
+        "inStateTuition": 60000,
+        "outStateTuition": 60000,
+        "fees": 2000,
+        "roomBoard": 15000,
+        "books": 1000,
+        "other": 3000
+      },
+      "tags": [
+        "Test-Optional",
+        "Need-Blind",
+        "Meets Full Need"
+      ],
+      "facts": {
+        "Student-Faculty Ratio": "6:1",
+        "Graduation Rate (6yr)": "95%",
+        "Freshman Retention": "98%",
+        "Endowment": "$25B"
+      }
+    }
+  ]
+}
