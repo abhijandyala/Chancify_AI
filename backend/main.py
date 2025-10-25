@@ -182,46 +182,46 @@ def get_college_data(college_name: str) -> Dict[str, Any]:
 # Frontend profile request model (matches frontend format)
 class FrontendProfileRequest(BaseModel):
     # Academic data
-    gpa_unweighted: str
-    gpa_weighted: str
-    sat: str
-    act: str
+    gpa_unweighted: str = "3.5"
+    gpa_weighted: str = "3.8"
+    sat: str = "1200"
+    act: str = "25"
     
     # Course rigor and class info
-    rigor: str
-    ap_count: str
-    honors_count: str
-    class_rank_percentile: str
-    class_size: str
+    rigor: str = "5"
+    ap_count: str = "0"
+    honors_count: str = "0"
+    class_rank_percentile: str = "50"
+    class_size: str = "300"
     
     # Factor scores (1-10 scale from frontend dropdowns)
-    extracurricular_depth: str
-    leadership_positions: str
-    awards_publications: str
-    passion_projects: str
-    business_ventures: str
-    volunteer_work: str
-    research_experience: str
-    portfolio_audition: str
-    essay_quality: str
-    recommendations: str
-    interview: str
-    demonstrated_interest: str
-    legacy_status: str
-    hs_reputation: str
+    extracurricular_depth: str = "5"
+    leadership_positions: str = "5"
+    awards_publications: str = "5"
+    passion_projects: str = "5"
+    business_ventures: str = "5"
+    volunteer_work: str = "5"
+    research_experience: str = "5"
+    portfolio_audition: str = "5"
+    essay_quality: str = "5"
+    recommendations: str = "5"
+    interview: str = "5"
+    demonstrated_interest: str = "5"
+    legacy_status: str = "5"
+    hs_reputation: str = "5"
     
     # Additional ML model fields (derived from dropdowns)
-    geographic_diversity: str
-    plan_timing: str
-    geography_residency: str
-    firstgen_diversity: str
-    ability_to_pay: str
-    policy_knob: str
-    conduct_record: str
+    geographic_diversity: str = "5"
+    plan_timing: str = "5"
+    geography_residency: str = "5"
+    firstgen_diversity: str = "5"
+    ability_to_pay: str = "5"
+    policy_knob: str = "5"
+    conduct_record: str = "9"
     
     # Major and college
-    major: str
-    college: str
+    major: str = "Computer Science"
+    college: str = "Stanford University"
 
 # Legacy prediction request model (for backward compatibility)
 class PredictionRequest(BaseModel):
