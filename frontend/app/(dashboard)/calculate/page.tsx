@@ -244,9 +244,19 @@ export default function CalculationsPage() {
         const firstCollege = selectedColleges[0];
         
         // Calculate probability using the backend API
-        const response = await fetch('/api/predict/frontend', {
+        const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://unsmug-untensely-elroy.ngrok-free.dev';
+        const headers: HeadersInit = {
+          'Content-Type': 'application/json',
+        };
+        
+        // Add ngrok skip warning header if using ngrok
+        if (API_BASE_URL.includes('ngrok')) {
+          headers['ngrok-skip-browser-warning'] = 'true';
+        }
+        
+        const response = await fetch(`${API_BASE_URL}/api/predict/frontend`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers,
           body: JSON.stringify({
             ...userProfile,
             college: firstCollege
