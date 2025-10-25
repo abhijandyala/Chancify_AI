@@ -12,13 +12,22 @@ class RealCollegeSuggestions:
     def __init__(self):
         """Initialize with real college and major data"""
         self.college_df = None
+        self.college_by_name = {}  # Index for fast lookup by name
         self.load_college_data()
     
     def load_college_data(self):
-        """Load the college data"""
+        """Load the college data and create indexes for fast lookup"""
         try:
             self.college_df = pd.read_csv('backend/data/raw/real_colleges_integrated.csv')
             print(f"Loaded college data: {self.college_df.shape}")
+            
+            # Create index for fast lookup by name
+            for idx, row in self.college_df.iterrows():
+                college_name = row.get('name', '')
+                if college_name:
+                    self.college_by_name[college_name] = row
+            
+            print(f"Indexed {len(self.college_by_name)} colleges by name")
         except Exception as e:
             print(f"Error loading college data: {e}")
             self.college_df = pd.DataFrame()
@@ -31,15 +40,13 @@ class RealCollegeSuggestions:
         # Get colleges from IPEDS data
         ipeds_colleges = real_ipeds_mapping.get_colleges_for_major(ipeds_major, tier, limit)
         
-        # Convert to college data format
+        # Convert to college data format (using index for fast lookup)
         college_suggestions = []
         for college_name in ipeds_colleges:
-            # Find the college in our college data
-            college_row = self.college_df[self.college_df['name'] == college_name]
+            # Use indexed lookup instead of DataFrame search
+            row = self.college_by_name.get(college_name)
             
-            if len(college_row) > 0:
-                row = college_row.iloc[0]
-                
+            if row is not None:
                 # Get major strength score
                 major_fit_score = real_ipeds_mapping.get_major_strength_score(college_name, ipeds_major)
                 
