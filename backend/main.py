@@ -704,37 +704,8 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
         for college_data in college_suggestions[:9]:  # Ensure exactly 9 suggestions
             college_name = college_data['name']
             
-            # Calculate probability based on student strength and college selectivity
-            acceptance_rate = college_data['acceptance_rate']
-            college_selectivity = 10.0 - (acceptance_rate * 10.0)
-            
-            # Calculate probability using realistic formula
-            if student_strength >= 9.0:
-                base_prob = 0.98
-            elif student_strength >= 8.0:
-                base_prob = 0.96 + (student_strength - 8.0) * 0.02
-            elif student_strength >= 7.0:
-                base_prob = 0.92 + (student_strength - 7.0) * 0.04
-            elif student_strength >= 5.5:
-                base_prob = 0.85 + (student_strength - 5.5) * 0.047
-            elif student_strength >= 4.0:
-                base_prob = 0.78 + (student_strength - 4.0) * 0.047
-            else:
-                base_prob = 0.70 + (student_strength * 0.02)
-            
-            # Apply college selectivity adjustment
-            if college_selectivity >= 9.0:  # Elite schools
-                selectivity_factor = 0.12
-            elif college_selectivity >= 7.0:  # Highly selective
-                selectivity_factor = 0.25
-            elif college_selectivity >= 5.0:  # Moderately selective
-                selectivity_factor = 0.70
-            elif college_selectivity >= 3.0:  # Less selective
-                selectivity_factor = 0.95
-            else:  # Open admission
-                selectivity_factor = 1.0
-            
-            probability = max(0.01, min(0.95, base_prob * selectivity_factor))
+            # Use the probability already calculated by the real_college_suggestions system
+            probability = college_data.get('probability', 0.5)
             
             # Get major relevance info
             major_relevance = get_major_relevance_info(college_name, major)

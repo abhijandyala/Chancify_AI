@@ -68,39 +68,90 @@ class RealCollegeSuggestions:
         
         return college_suggestions
     
+    def calculate_probability(self, college: Dict, academic_strength: float) -> float:
+        """Calculate admission probability based on college selectivity and student strength"""
+        acceptance_rate = college.get('acceptance_rate', 0.5)
+        
+        # Calculate base probability from academic strength (0-10 scale)
+        # Higher academic strength = higher base probability
+        base_prob = min(0.95, max(0.05, academic_strength / 10.0))
+        
+        # Apply college selectivity adjustment
+        # More selective colleges (lower acceptance rate) reduce probability more
+        if acceptance_rate <= 0.05:  # Elite schools (5% or less)
+            selectivity_factor = 0.08  # Very low probability
+        elif acceptance_rate <= 0.15:  # Highly selective (5-15%)
+            selectivity_factor = 0.15  # Low probability
+        elif acceptance_rate <= 0.30:  # Selective (15-30%)
+            selectivity_factor = 0.35  # Moderate probability
+        elif acceptance_rate <= 0.50:  # Moderately selective (30-50%)
+            selectivity_factor = 0.65  # Good probability
+        elif acceptance_rate <= 0.75:  # Less selective (50-75%)
+            selectivity_factor = 0.85  # High probability
+        else:  # Open admission (75%+)
+            selectivity_factor = 0.95  # Very high probability
+        
+        # Calculate final probability
+        final_prob = base_prob * selectivity_factor
+        
+        # Ensure realistic bounds
+        return max(0.01, min(0.95, final_prob))
+
     def get_balanced_suggestions(self, major: str, academic_strength: float) -> List[Dict]:
-        """Get balanced suggestions (3 safety, 3 target, 3 reach) for a major"""
+        """Get balanced suggestions (3 safety, 3 target, 3 reach) for a major based on actual probabilities"""
         suggestions = []
         
-        # Determine tier limits based on academic strength
-        if academic_strength >= 8.0:  # Elite student
-            safety_tier = 'highly_selective'
-            target_tier = 'elite'
-            reach_tier = 'elite'
-        elif academic_strength >= 6.0:  # Strong student
-            safety_tier = 'selective'
-            target_tier = 'highly_selective'
-            reach_tier = 'elite'
-        elif academic_strength >= 4.0:  # Average student
-            safety_tier = 'moderately_selective'
-            target_tier = 'selective'
-            reach_tier = 'highly_selective'
-        else:  # Weak student
-            safety_tier = 'moderately_selective'
-            target_tier = 'moderately_selective'
-            reach_tier = 'selective'
+        # Get all colleges that offer this major
+        ipeds_major = real_ipeds_mapping.map_major_name(major)
+        all_colleges = real_ipeds_mapping.get_colleges_for_major(ipeds_major, limit=100)
         
-        # Get colleges for each tier
-        safety_colleges = self.get_colleges_for_major_and_tier(major, safety_tier, limit=10)
-        target_colleges = self.get_colleges_for_major_and_tier(major, target_tier, limit=10)
-        reach_colleges = self.get_colleges_for_major_and_tier(major, reach_tier, limit=10)
+        # Convert to college data with probabilities
+        college_data = []
+        for college_name in all_colleges:
+            row = self.college_by_name.get(college_name)
+            
+            if row is not None:
+                major_fit_score = real_ipeds_mapping.get_major_strength_score(college_name, ipeds_major)
+                
+                college_info = {
+                    'name': college_name,
+                    'unitid': row.get('unitid', 0),
+                    'city': row.get('city', ''),
+                    'state': row.get('state', ''),
+                    'selectivity_tier': row.get('selectivity_tier', 'Moderately Selective'),
+                    'acceptance_rate': row.get('acceptance_rate', 0.5),
+                    'tuition_in_state': row.get('tuition_in_state_usd', 0),
+                    'tuition_out_of_state': row.get('tuition_out_of_state_usd', 0),
+                    'student_body_size': row.get('student_body_size', 0),
+                    'major_fit_score': major_fit_score,
+                    'ipeds_major': ipeds_major
+                }
+                
+                # Calculate probability for this student
+                probability = self.calculate_probability(college_info, academic_strength)
+                college_info['probability'] = probability
+                
+                college_data.append(college_info)
         
-        # Sort by major fit score (descending)
-        safety_colleges.sort(key=lambda x: x['major_fit_score'], reverse=True)
-        target_colleges.sort(key=lambda x: x['major_fit_score'], reverse=True)
-        reach_colleges.sort(key=lambda x: x['major_fit_score'], reverse=True)
+        # Sort by major fit score first, then by probability
+        college_data.sort(key=lambda x: (x['major_fit_score'], x['probability']), reverse=True)
         
-        # Take top 3 from each category
+        # Categorize based on calculated probabilities
+        safety_colleges = []
+        target_colleges = []
+        reach_colleges = []
+        
+        for college in college_data:
+            prob = college['probability']
+            
+            if prob >= 0.75:  # Safety: 75%+ chance
+                safety_colleges.append(college)
+            elif prob >= 0.25:  # Target: 25-75% chance
+                target_colleges.append(college)
+            elif prob >= 0.10:  # Reach: 10-25% chance
+                reach_colleges.append(college)
+        
+        # Take top 3 from each category (sorted by major fit score)
         for college in safety_colleges[:3]:
             college['category'] = 'safety'
             suggestions.append(college)
@@ -112,6 +163,22 @@ class RealCollegeSuggestions:
         for college in reach_colleges[:3]:
             college['category'] = 'reach'
             suggestions.append(college)
+        
+        # If we don't have enough in any category, fill with the best available
+        if len(suggestions) < 9:
+            remaining_colleges = [c for c in college_data if c not in suggestions]
+            remaining_colleges.sort(key=lambda x: x['major_fit_score'], reverse=True)
+            
+            for college in remaining_colleges[:9-len(suggestions)]:
+                # Assign category based on probability
+                prob = college['probability']
+                if prob >= 0.75:
+                    college['category'] = 'safety'
+                elif prob >= 0.25:
+                    college['category'] = 'target'
+                else:
+                    college['category'] = 'reach'
+                suggestions.append(college)
         
         return suggestions
     
