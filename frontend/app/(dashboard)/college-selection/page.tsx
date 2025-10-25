@@ -6,6 +6,7 @@ import { Search, Building2, Users, DollarSign, GraduationCap, ChevronRight, Star
 import { Button } from '@/components/ui/Button'
 import { useRouter } from 'next/navigation'
 import { getCollegeSuggestions, searchColleges, type CollegeSuggestionsRequest, type CollegeSuggestion, type CollegeSearchResult } from '@/lib/api'
+import Loader from '@/components/Loader'
 
 // Function to get major relevance information for a college
 // This uses the major_fit_score from the backend data
@@ -40,6 +41,7 @@ export default function CollegeSelectionPage() {
   const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false)
   const [isLoadingSearch, setIsLoadingSearch] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [showLoader, setShowLoader] = useState(false)
   const searchRef = useRef<HTMLDivElement>(null)
   
   // Get user profile from localStorage
@@ -676,7 +678,7 @@ export default function CollegeSelectionPage() {
           onClick={() => {
             // Save selected colleges to localStorage for calculate page
             localStorage.setItem('selectedColleges', JSON.stringify(selectedColleges))
-            router.push('/calculate')
+            setShowLoader(true)
           }}
           disabled={selectedColleges.length === 0}
         >
@@ -684,6 +686,16 @@ export default function CollegeSelectionPage() {
           <ChevronRight className="w-4 h-4 ml-2" />
         </Button>
       </motion.div>
+
+      {/* Loader */}
+      {showLoader && (
+        <Loader
+          onComplete={() => {
+            router.push('/calculate')
+          }}
+          duration={5}
+        />
+      )}
     </div>
   )
 }

@@ -42,6 +42,11 @@ const config: Config = {
         danger: {
           DEFAULT: '#ef4444',
         },
+        // ROX Color Scheme
+        ROX_GOLD: '#F7B500',
+        ROX_BLACK: '#0A0A0A',
+        ROX_DARK_GRAY: '#1A1A1A',
+        ROX_WHITE: '#FFFFFF',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-out',

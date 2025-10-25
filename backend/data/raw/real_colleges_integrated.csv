@@ -1,0 +1,1014 @@
+name,city,state,tuition_in_state_usd,tuition_out_of_state_usd,avg_net_price_usd,selectivity_tier,acceptance_rate,accepted_per_year,applicants_total,student_body_size,unitid,data_completeness,gpa_average,test_policy,financial_aid_policy,control,major_1,major_2,major_3
+Alabama A & M University,Normal,AL,10024.0,18634.0,14559.0,Less Selective,0.6622,,,5726,1000000,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Alabama at Birmingham,Birmingham,AL,8832.0,21864.0,17727.0,Less Selective,0.8842,,,12118,1000001,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Amridge University,Montgomery,AL,9748.0,17062.0,,Moderately Selective,0.5,,,226,1000002,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Alabama in Huntsville,Huntsville,AL,11770.0,24662.0,19880.0,Less Selective,0.7425,,,6650,1000003,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Alabama State University,Montgomery,AL,11248.0,19576.0,13889.0,Less Selective,0.9564,,,3322,1000004,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+The University of Alabama,Tuscaloosa,AL,11900.0,33200.0,22150.0,Less Selective,0.7582,,,32323,1000005,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Central Alabama Community College,Alexander City,AL,5040.0,8850.0,14346.0,Moderately Selective,0.5,,,1134,1000006,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Athens State University,Athens,AL,9748.0,17062.0,,Moderately Selective,0.5,,,2407,1000007,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Auburn University at Montgomery,Montgomery,AL,9436.0,20092.0,14596.0,Less Selective,0.9262999999999999,,,2693,1000008,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Auburn University,Auburn,AL,12536.0,33944.0,23897.0,Moderately Selective,0.5047,,,25732,1000009,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Birmingham-Southern College,Birmingham,AL,22750.0,22750.0,23351.0,Moderately Selective,0.5194,,,713,1000010,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Chattahoochee Valley Community College,Phenix City,AL,5040.0,8850.0,5814.0,Moderately Selective,0.5,,,1044,1000011,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Enterprise State Community College,Enterprise,AL,5040.0,8850.0,8187.0,Moderately Selective,0.5,,,1476,1000012,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Coastal Alabama Community College,Bay Minette,AL,4980.0,8790.0,9514.0,Moderately Selective,0.5,,,4714,1000013,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Faulkner University,Montgomery,AL,23920.0,23920.0,21165.0,Less Selective,0.6613,,,1555,1000014,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Gadsden State Community College,Gadsden,AL,4032.0,7080.0,3568.0,Moderately Selective,0.5,,,3619,1000015,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+George C Wallace Community College-Dothan,Dothan,AL,4920.0,8730.0,2697.0,Moderately Selective,0.5,,,3053,1000016,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+George C Wallace State Community College-Hanceville,Hanceville,AL,4980.0,8790.0,14042.0,Moderately Selective,0.5,,,4413,1000017,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+George C Wallace State Community College-Selma,Selma,AL,4680.0,8490.0,970.0,Moderately Selective,0.5,,,828,1000018,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Huntingdon College,Montgomery,AL,28650.0,28650.0,21401.0,Less Selective,0.7082999999999999,,,865,1000019,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+J. F. Drake State Community and Technical College,Huntsville,AL,5130.0,8940.0,4644.0,Moderately Selective,0.5,,,719,1000020,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+J F Ingram State Technical College,Deatsville,AL,6084.0,6084.0,,Moderately Selective,0.5,,,826,1000021,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Jacksonville State University,Jacksonville,AL,12426.0,22716.0,14850.0,Less Selective,0.7622,,,7030,1000022,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Jefferson State Community College,Birmingham,AL,5040.0,8850.0,9024.0,Moderately Selective,0.5,,,5443,1000023,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+John C Calhoun State Community College,Tanner,AL,5060.0,8870.0,7336.0,Moderately Selective,0.5,,,6928,1000024,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lawson State Community College,Birmingham,AL,4980.0,8790.0,6564.0,Moderately Selective,0.5,,,2720,1000025,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of West Alabama,Livingston,AL,10990.0,20090.0,13832.0,Less Selective,0.8711,,,2666,1000026,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lurleen B Wallace Community College,Andalusia,AL,4980.0,8790.0,3041.0,Moderately Selective,0.5,,,1122,1000027,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Marion Military Institute,Marion,AL,9538.0,15538.0,10137.0,Moderately Selective,0.5917,,,308,1000028,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Miles College,Fairfield,AL,12714.0,12714.0,14514.0,Moderately Selective,0.5,,,1151,1000029,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Mobile,Mobile,AL,26120.0,26120.0,19603.0,Less Selective,0.7251000000000001,,,1079,1000030,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Montevallo,Montevallo,AL,13710.0,26730.0,17053.0,Moderately Selective,0.539,,,2087,1000031,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Northwest Shoals Community College,Muscle Shoals,AL,5071.0,8881.0,4545.0,Moderately Selective,0.5,,,1924,1000032,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of North Alabama,Florence,AL,11990.0,22190.0,11024.0,Less Selective,0.9648,,,5468,1000033,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Northeast Alabama Community College,Rainsville,AL,4980.0,8790.0,1612.0,Moderately Selective,0.5,,,1547,1000034,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Oakwood University,Huntsville,AL,21838.0,21838.0,23384.0,Moderately Selective,0.5051,,,1253,1000035,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Reid State Technical College,Evergreen,AL,6100.0,10700.0,131.0,Moderately Selective,0.5,,,365,1000036,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Bishop State Community College,Mobile,AL,5280.0,9090.0,4176.0,Moderately Selective,0.5,,,2100,1000037,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Samford University,Birmingham,AL,38144.0,38144.0,30795.0,Less Selective,0.8223,,,3828,1000038,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Shelton State Community College,Tuscaloosa,AL,5067.0,8877.0,10880.0,Moderately Selective,0.5,,,3191,1000039,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Snead State Community College,Boaz,AL,5472.0,9536.0,6369.0,Moderately Selective,0.5,,,1494,1000040,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of South Alabama,Mobile,AL,9676.0,18652.0,15142.0,Less Selective,0.6548999999999999,,,8540,1000041,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Spring Hill College,Mobile,AL,23270.0,23270.0,19514.0,Moderately Selective,0.591,,,850,1000042,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Stillman College,Tuscaloosa,AL,11392.0,11392.0,12272.0,Less Selective,0.7422,,,761,1000043,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Talladega College,Talladega,AL,15650.0,15650.0,13461.0,Less Selective,0.9925,,,782,1000044,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+H Councill Trenholm State Community College,Montgomery,AL,4890.0,8700.0,5568.0,Moderately Selective,0.5,,,1584,1000045,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Troy University,Troy,AL,9792.0,19584.0,13869.0,Less Selective,0.9261,,,10089,1000046,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Tuskegee University,Tuskegee,AL,23440.0,23440.0,32977.0,Moderately Selective,0.3143,,,2367,1000047,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+United States Sports Academy,Daphne,AL,18900.0,18900.0,,Moderately Selective,0.3529,,,136,1000048,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Bevill State Community College,Jasper,AL,4678.0,8234.0,5249.0,Moderately Selective,0.5,,,2189,1000049,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Alaska Anchorage,Anchorage,AK,7566.0,21693.0,13780.0,Less Selective,0.6652,,,6916,1000050,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Alaska Fairbanks,Fairbanks,AK,8640.0,22752.0,9634.0,Moderately Selective,0.5,,,4027,1000051,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Alaska Southeast,Juneau,AK,6960.0,21096.0,7233.0,Less Selective,0.625,,,920,1000052,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Alaska Pacific University,Anchorage,AK,20760.0,20760.0,18976.0,Less Selective,0.8621,,,400,1000053,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Alaska Vocational Technical Center,Seward,AK,9748.0,17062.0,12071.0,Moderately Selective,0.5,,,452,1000054,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Charter College,Anchorage,AK,18678.0,18678.0,25225.0,Moderately Selective,0.5,,,2277,1000055,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Alaska Career College,Anchorage,AK,9748.0,17062.0,18091.0,Moderately Selective,0.5,,,255,1000056,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Carrington College-Phoenix North,Phoenix,AZ,9748.0,17062.0,,Moderately Selective,0.5,,,1087,1000057,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Brookline College-Phoenix,Phoenix,AZ,9748.0,17062.0,,Moderately Selective,0.5,,,714,1000058,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Arizona State University Campus Immersion,Tempe,AZ,12051.0,32193.0,13670.0,Less Selective,0.9018999999999999,,,64398,1000059,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Arizona Western College,Yuma,AZ,3020.0,9830.0,9582.0,Moderately Selective,0.5,,,6198,1000060,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Arizona,Tucson,AZ,13626.0,41095.0,15960.0,Less Selective,0.8565999999999999,,,40769,1000061,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Central Arizona College,Coolidge,AZ,2250.0,4500.0,4591.0,Moderately Selective,0.5,,,4892,1000062,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Cochise County Community College District,Sierra Vista,AZ,2232.0,6000.0,7420.0,Moderately Selective,0.5,,,3007,1000063,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Avalon Institute-Mesa,Mesa,AZ,9748.0,17062.0,16847.0,Moderately Selective,0.5,,,388,1000064,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Eastern Arizona College,Thatcher,AZ,2352.0,9552.0,9765.0,Moderately Selective,0.5,,,3058,1000065,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Glendale Community College,Glendale,AZ,2358.0,8958.0,12158.0,Moderately Selective,0.5,,,10180,1000066,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Grand Canyon University,Phoenix,AZ,17450.0,17450.0,21931.0,Less Selective,0.6036,,,68619,1000067,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+GateWay Community College,Phoenix,AZ,2358.0,8958.0,12871.0,Moderately Selective,0.5,,,3473,1000068,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Mesa Community College,Mesa,AZ,2358.0,8958.0,13438.0,Moderately Selective,0.5,,,12049,1000069,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Mohave Community College,Kingman,AZ,2136.0,7248.0,6806.0,Moderately Selective,0.5,,,2750,1000070,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Universal Technical Institute of Arizona Inc-Motorcycle Mechanics Institute Division,Avondale,AZ,9748.0,17062.0,21925.0,Moderately Selective,0.5,,,567,1000071,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Dine College,Tsaile,AZ,1410.0,1410.0,10218.0,Moderately Selective,0.5,,,1507,1000072,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Northern Arizona University,Flagstaff,AZ,12652.0,28900.0,14922.0,Less Selective,0.9095,,,23041,1000073,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Northland Pioneer College,Holbrook,AZ,2428.0,9851.0,9251.0,Moderately Selective,0.5,,,1024,1000074,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Phoenix College,Phoenix,AZ,2358.0,8958.0,11728.0,Moderately Selective,0.5,,,6952,1000075,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Pima Community College,Tucson,AZ,2370.0,7686.0,3123.0,Moderately Selective,0.5,,,13869,1000076,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Pima Medical Institute-Tucson,Tucson,AZ,9748.0,17062.0,,Moderately Selective,0.5,,,2619,1000077,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Pima Medical Institute-Albuquerque,Albuquerque,NM,9748.0,17062.0,20348.0,Moderately Selective,0.5,,,737,1000078,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Prescott College,Prescott,AZ,35685.0,35685.0,20906.0,Less Selective,0.9856999999999999,,,253,1000079,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Refrigeration School Inc,Phoenix,AZ,9748.0,17062.0,25300.0,Moderately Selective,0.5,,,1271,1000080,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Rio Salado College,Tempe,AZ,2358.0,8958.0,8764.0,Moderately Selective,0.5,,,4879,1000081,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Scottsdale Community College,Scottsdale,AZ,2358.0,8958.0,14380.0,Moderately Selective,0.5,,,4274,1000082,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+South Mountain Community College,Phoenix,AZ,2358.0,8958.0,11942.0,Moderately Selective,0.5,,,2612,1000083,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Arizona Christian University,Glendale,AZ,34697.0,34697.0,32383.0,Less Selective,0.7442,,,1127,1000084,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Universal Technical Institute of Arizona Inc,Avondale,AZ,9748.0,17062.0,27139.0,Moderately Selective,0.5,,,1791,1000085,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Yavapai College,Prescott,AZ,2838.0,9344.0,6355.0,Moderately Selective,0.5,,,3732,1000086,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Arkansas at Little Rock,Little Rock,AR,8455.0,19210.0,16136.0,Moderately Selective,0.5774,,,4740,1000087,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Arkansas for Medical Sciences,Little Rock,AR,9748.0,17062.0,,Moderately Selective,0.5,,,1361,1000088,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Arkansas Baptist College,Little Rock,AR,8760.0,8760.0,11139.0,Moderately Selective,0.5,,,373,1000089,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Arkansas Beauty School-Little Rock,Little Rock,AR,9748.0,17062.0,24060.0,Moderately Selective,0.5,,,111,1000090,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lyon College,Batesville,AR,31000.0,31000.0,22670.0,Less Selective,0.6554000000000001,,,563,1000091,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Arkansas Technical School,North Little Rock,AR,9748.0,17062.0,35353.0,Moderately Selective,0.5,,,111,1000092,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Arkansas,Fayetteville,AR,9748.0,28772.0,17525.0,Less Selective,0.7167,,,27312,1000093,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Arkansas at Pine Bluff,Pine Bluff,AR,9019.0,17029.0,11679.0,Moderately Selective,0.5754,,,1899,1000094,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Arkansas State University-Beebe,Beebe,AR,3216.0,5040.0,8652.0,Moderately Selective,0.5,,,1902,1000095,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Arkansas State University,Jonesboro,AR,7754.0,13826.0,13085.0,Less Selective,0.6967,,,7994,1000096,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Arkansas Tech University,Russellville,AR,8508.0,14502.0,12171.0,Less Selective,0.9629000000000001,,,5993,1000097,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Arkansas at Monticello,Monticello,AR,8868.0,14718.0,14013.0,Moderately Selective,0.5,,,1868,1000098,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Baptist Health College Little Rock,Little Rock,AR,13593.0,13593.0,34755.0,Less Selective,1.0,,,512,1000099,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Black River Technical College,Pocahontas,AR,4584.0,7242.0,6053.0,Moderately Selective,0.5,,,938,1000100,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Central Arkansas,Conway,AR,10118.0,17258.0,16775.0,Less Selective,0.9047,,,7426,1000101,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Central Baptist College,Conway,AR,19680.0,19680.0,16664.0,Moderately Selective,0.4636,,,477,1000102,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Cossatot Community College of the University of Arkansas,De Queen,AR,3906.0,4746.0,5200.0,Moderately Selective,0.5,,,835,1000103,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Crowley's Ridge College,Paragould,AR,16440.0,16440.0,17236.0,Moderately Selective,0.5,,,162,1000104,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+East Arkansas Community College,Forrest City,AR,3960.0,4980.0,6769.0,Moderately Selective,0.5,,,492,1000105,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Paul Mitchell the School-Little Rock,North Little Rock,AR,9748.0,17062.0,14508.0,Moderately Selective,0.5,,,411,1000106,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+National Park College,Hot Springs,AR,5600.0,7280.0,11442.0,Moderately Selective,0.5,,,1706,1000107,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Arkansas Community College-Batesville,Batesville,AR,3558.0,4542.0,9359.0,Moderately Selective,0.5,,,788,1000108,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Harding University,Searcy,AR,24888.0,24888.0,20579.0,Less Selective,1.0,,,3323,1000109,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Henderson State University,Arkadelphia,AR,7885.0,9882.0,16929.0,Less Selective,0.8192,,,1491,1000110,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Hendrix College,Conway,AR,36650.0,36650.0,23409.0,Moderately Selective,0.5297999999999999,,,1094,1000111,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+John Brown University,Siloam Springs,AR,30832.0,30832.0,21144.0,Less Selective,0.6764,,,1415,1000112,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Career Academy of Hair Design,Springdale,AR,9748.0,17062.0,13563.0,Moderately Selective,0.5,,,244,1000113,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Arkansas State University Mid-South,West Memphis,AR,3048.0,4560.0,3558.0,Moderately Selective,0.5,,,435,1000114,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Arkansas Northeastern College,Blytheville,AR,2570.0,4250.0,5144.0,Moderately Selective,0.5,,,787,1000115,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+North Arkansas College,Harrison,AR,3168.0,5544.0,10146.0,Moderately Selective,0.5,,,1184,1000116,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Northwest Technical Institute,Springdale,AR,5184.0,5184.0,11212.0,Moderately Selective,0.5,,,217,1000117,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Ouachita Baptist University,Arkadelphia,AR,32480.0,32480.0,22355.0,Less Selective,0.6851999999999999,,,1612,1000118,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Arkansas State University Three Rivers,Malvern,AR,3568.0,4168.0,7520.0,Moderately Selective,0.5,,,514,1000119,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Ozarka College,Melbourne,AR,3820.0,6820.0,4396.0,Moderately Selective,0.5,,,564,1000120,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of the Ozarks,Clarksville,AR,25950.0,25950.0,13630.0,Moderately Selective,0.5814,,,753,1000121,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Arkansas Community College-Morrilton,Morrilton,AR,3504.0,4176.0,11718.0,Less Selective,1.0,,,1538,1000122,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Philander Smith University,Little Rock,AR,13014.0,13014.0,15360.0,Moderately Selective,0.5,,,842,1000123,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Phillips Community College of the University of Arkansas,Helena,AR,3230.0,5270.0,5420.0,Moderately Selective,0.5,,,595,1000124,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Southeast Arkansas College,Pine Bluff,AR,4960.0,8260.0,11185.0,Moderately Selective,0.5,,,748,1000125,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Arkansas-Pulaski Technical College,North Little Rock,AR,4848.0,7248.0,15000.0,Moderately Selective,0.5,,,3791,1000126,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Arkansas Hope-Texarkana,Hope,AR,3400.0,4960.0,8210.0,Moderately Selective,0.5,,,697,1000127,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Arkansas Community College Rich Mountain,Mena,AR,3528.0,4104.0,4914.0,Moderately Selective,0.5,,,475,1000128,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Paul Mitchell the School-Arkansas,Fayetteville,AR,9748.0,17062.0,15309.0,Moderately Selective,0.5,,,107,1000129,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Shorter College,N Little Rock,AR,6246.0,6246.0,12993.0,Moderately Selective,0.5,,,290,1000130,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Williams Baptist University,Walnut Ridge,AR,20330.0,20330.0,15875.0,Moderately Selective,0.5888,,,490,1000131,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+South Arkansas College,El Dorado,AR,3204.0,5364.0,6235.0,Moderately Selective,0.5,,,879,1000132,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Southern Arkansas University Main Campus,Magnolia,AR,9820.0,15400.0,15944.0,Less Selective,0.6659,,,2865,1000133,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Southern Arkansas University Tech,Camden,AR,4685.0,4685.0,5895.0,Moderately Selective,0.5,,,663,1000134,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Arkansas-Fort Smith,Fort Smith,AR,6906.0,13770.0,10097.0,Less Selective,0.8147,,,4133,1000135,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Academy of Art University,San Francisco,CA,28024.0,28024.0,39778.0,Moderately Selective,0.5,,,4131,1000136,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+College of Alameda,Alameda,CA,1148.0,8684.0,9280.0,Moderately Selective,0.5,,,4274,1000137,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Allan Hancock College,Santa Maria,CA,1156.0,9436.0,4638.0,Moderately Selective,0.5,,,7812,1000138,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+American Beauty College,West Covina,CA,9748.0,17062.0,24076.0,Moderately Selective,0.5,,,250,1000139,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+American Career College-Los Angeles,Los Angeles,CA,9748.0,17062.0,27508.0,Moderately Selective,0.5,,,2066,1000140,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+American River College,Sacramento,CA,1288.0,12808.0,4628.0,Moderately Selective,0.5,,,25758,1000141,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Antelope Valley Community College District,Lancaster,CA,1124.0,8228.0,8263.0,Moderately Selective,0.5,,,10905,1000142,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Art Center College of Design,Pasadena,CA,51640.0,51640.0,50209.0,Less Selective,0.7498,,,2054,1000143,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Associated Technical College-Los Angeles,Los Angeles,CA,9748.0,17062.0,22236.0,Moderately Selective,0.5,,,159,1000144,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Azusa Pacific University,Azusa,CA,43600.0,43600.0,19798.0,Less Selective,0.7948000000000001,,,2977,1000145,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Bakersfield College,Bakersfield,CA,1430.0,10310.0,4751.0,Moderately Selective,0.5,,,16451,1000146,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Barstow Community College,Barstow,CA,1104.0,9936.0,12347.0,Moderately Selective,0.5,,,2585,1000147,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Bellus Academy-Chula Vista,Chula Vista,CA,9748.0,17062.0,20159.0,Moderately Selective,0.5,,,379,1000148,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Bethesda University,Anaheim,CA,7220.0,7220.0,8388.0,Moderately Selective,0.5,,,212,1000149,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Biola University,La Mirada,CA,46704.0,46704.0,28101.0,Less Selective,0.6008,,,3390,1000150,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Brownson Technical School,Anaheim,CA,9748.0,17062.0,32584.0,Moderately Selective,0.5,,,284,1000151,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Bryan University,Tempe,AZ,12185.0,12185.0,20948.0,Moderately Selective,0.5,,,2083,1000152,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Butte College,Oroville,CA,1336.0,8416.0,4632.0,Moderately Selective,0.5,,,8384,1000153,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Cabrillo College,Aptos,CA,1270.0,9910.0,13328.0,Moderately Selective,0.5,,,7404,1000154,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California Baptist University,Riverside,CA,39720.0,39720.0,27384.0,Less Selective,0.7356999999999999,,,7914,1000155,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California College of the Arts,San Francisco,CA,57946.0,57946.0,42168.0,Less Selective,0.7340000000000001,,,1004,1000156,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California Institute of Technology,Pasadena,CA,63255.0,63255.0,18902.0,Elite,0.031400000000000004,,,1023,1000157,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California Lutheran University,Thousand Oaks,CA,50670.0,50670.0,26433.0,Less Selective,0.8887999999999999,,,2374,1000158,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California Polytechnic State University-San Luis Obispo,San Luis Obispo,CA,11075.0,30995.0,15624.0,Moderately Selective,0.2975,,,21521,1000159,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Alliant International University-San Diego,San Diego,CA,13918.0,13918.0,,Elite,0.0,,,355,1000160,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California State University-Bakersfield,Bakersfield,CA,7696.0,19576.0,5825.0,Less Selective,0.8819,,,8183,1000161,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California State University-Stanislaus,Turlock,CA,7826.0,19706.0,5671.0,Less Selective,0.9747,,,8564,1000162,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California State University-San Bernardino,San Bernardino,CA,7675.0,19555.0,5918.0,Less Selective,0.9825,,,15771,1000163,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California State Polytechnic University-Pomona,Pomona,CA,7439.0,19319.0,11580.0,Less Selective,0.737,,,24271,1000164,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California State University-Chico,Chico,CA,8064.0,19944.0,14838.0,Less Selective,0.9372,,,13057,1000165,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California State University-Dominguez Hills,Carson,CA,7064.0,18944.0,3659.0,Less Selective,0.9131999999999999,,,12642,1000166,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California State University-Fresno,Fresno,CA,6980.0,18860.0,6480.0,Less Selective,0.9638,,,21070,1000167,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California State University-Fullerton,Fullerton,CA,7073.0,18953.0,5646.0,Less Selective,0.8674,,,36956,1000168,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California State University-East Bay,Hayward,CA,7055.0,18935.0,11276.0,Less Selective,0.9681000000000001,,,10422,1000169,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California State University-Long Beach,Long Beach,CA,7008.0,18888.0,8931.0,Moderately Selective,0.47119999999999995,,,34131,1000170,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California State University-Los Angeles,Los Angeles,CA,6813.0,18698.0,4113.0,Less Selective,0.9193000000000001,,,21478,1000171,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California State University-Northridge,Northridge,CA,7095.0,18975.0,7599.0,Less Selective,0.9315000000000001,,,32357,1000172,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California State University-Sacramento,Sacramento,CA,7602.0,19482.0,10512.0,Less Selective,0.9362,,,27867,1000173,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of California-Berkeley,Berkeley,CA,14850.0,45627.0,14979.0,Highly Selective,0.1166,,,33073,1000174,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of California-Davis,Davis,CA,15247.0,46024.0,15288.0,Moderately Selective,0.4163,,,31777,1000175,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of California-Irvine,Irvine,CA,14237.0,45014.0,12840.0,Moderately Selective,0.2557,,,29494,1000176,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of California-Los Angeles,Los Angeles,CA,13747.0,44524.0,14013.0,Elite,0.0873,,,33040,1000177,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of California-Riverside,Riverside,CA,14170.0,44947.0,13707.0,Less Selective,0.633,,,22644,1000178,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of California-San Diego,La Jolla,CA,15265.0,46042.0,11750.0,Highly Selective,0.2452,,,33787,1000179,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of California-Santa Barbara,Santa Barbara,CA,14965.0,45742.0,13825.0,Moderately Selective,0.2778,,,23205,1000180,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of California-Santa Cruz,Santa Cruz,CA,14560.0,45337.0,16607.0,Less Selective,0.6254,,,17812,1000181,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California Hair Design Academy,La Mesa,CA,9748.0,17062.0,40350.0,Moderately Selective,0.5,,,125,1000182,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California Institute of the Arts,Valencia,CA,56724.0,56724.0,47183.0,Moderately Selective,0.2595,,,881,1000183,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California State University Maritime Academy,Vallejo,CA,7672.0,19552.0,17555.0,Less Selective,0.9873000000000001,,,761,1000184,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Canada College,Redwood City,CA,1332.0,9508.0,10.0,Moderately Selective,0.5,,,4878,1000185,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+College of the Canyons,Santa Clarita,CA,1176.0,11232.0,2114.0,Moderately Selective,0.5,,,15365,1000186,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Career Academy of Beauty,Garden Grove,CA,9748.0,17062.0,19101.0,Moderately Selective,0.5,,,207,1000187,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Casa Loma College-Los Angeles,Sherman Oaks,CA,9748.0,17062.0,27721.0,Moderately Selective,0.3641,,,581,1000188,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+CET-San Jose,San Jose,CA,9748.0,17062.0,15045.0,Moderately Selective,0.5,,,175,1000189,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Cerritos College,Norwalk,CA,1364.0,12004.0,693.0,Moderately Selective,0.5,,,18710,1000190,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Cerro Coso Community College,Ridgecrest,CA,1384.0,10264.0,6078.0,Moderately Selective,0.5,,,3496,1000191,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Chabot College,Hayward,CA,1150.0,8686.0,4616.0,Moderately Selective,0.5,,,10861,1000192,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Chaffey College,Rancho Cucamonga,CA,1184.0,11120.0,5743.0,Moderately Selective,0.5,,,13568,1000193,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Chapman University,Orange,CA,62784.0,62784.0,47527.0,Moderately Selective,0.5561,,,7629,1000194,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Charles R Drew University of Medicine and Science,Los Angeles,CA,18933.0,18933.0,27789.0,Moderately Selective,0.38780000000000003,,,233,1000195,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Concordia University-Irvine,Irvine,CA,41390.0,41390.0,28046.0,Moderately Selective,0.5986,,,1456,1000196,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Citrus College,Glendora,CA,1204.0,9844.0,3800.0,Moderately Selective,0.5,,,8126,1000197,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Citrus Heights Beauty College,Citrus Heights,CA,9748.0,17062.0,30408.0,Moderately Selective,0.5,,,110,1000198,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+City College of San Francisco,San Francisco,CA,1696.0,14656.0,7272.0,Moderately Selective,0.5,,,16060,1000199,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Claremont McKenna College,Claremont,CA,64150.0,64150.0,27384.0,Highly Selective,0.1112,,,1379,1000200,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Milan Institute-Visalia,Visalia,CA,9748.0,17062.0,28638.0,Moderately Selective,0.5,,,632,1000201,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Clovis Adult Education,Clovis,CA,9748.0,17062.0,,Moderately Selective,0.5,,,268,1000202,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Coastline Community College,Fountain Valley,CA,1180.0,9964.0,9605.0,Moderately Selective,0.5,,,7007,1000203,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Silicon Valley,San Jose,CA,22480.0,22480.0,30799.0,Moderately Selective,0.5131,,,377,1000204,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Coba Academy,Anaheim,CA,9748.0,17062.0,16761.0,Moderately Selective,0.5,,,100,1000205,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Columbia College,Sonora,CA,1547.0,8870.0,15468.0,Moderately Selective,0.5,,,1917,1000206,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California College of ASU,Los Angeles,CA,26175.0,26175.0,30320.0,Moderately Selective,0.5,,,149,1000207,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Compton College,Compton,CA,1142.0,8822.0,11103.0,Moderately Selective,0.5,,,2881,1000208,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Contra Costa College,San Pablo,CA,1312.0,9012.0,6522.0,Moderately Selective,0.5,,,4805,1000209,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Cosumnes River College,Sacramento,CA,1288.0,12808.0,4648.0,Moderately Selective,0.5,,,13527,1000210,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Crafton Hills College,Yucaipa,CA,1188.0,12320.0,10655.0,Moderately Selective,0.5,,,5074,1000211,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Cuesta College,San Luis Obispo,CA,1340.0,11000.0,12898.0,Moderately Selective,0.5,,,6879,1000212,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Cuyamaca College,El Cajon,CA,1340.0,10636.0,6187.0,Moderately Selective,0.5,,,6788,1000213,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Cypress College,Cypress,CA,1150.0,9399.0,4683.0,Moderately Selective,0.5,,,12309,1000214,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+De Anza College,Cupertino,CA,1562.0,12317.0,4667.0,Moderately Selective,0.5,,,14953,1000215,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+International School of Beauty Inc,Palm Desert,CA,9748.0,17062.0,13450.0,Moderately Selective,0.5,,,173,1000216,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+College of the Desert,Palm Desert,CA,1326.0,9586.0,11812.0,Moderately Selective,0.5,,,8900,1000217,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Diablo Valley College,Pleasant Hill,CA,1312.0,9012.0,6142.0,Moderately Selective,0.5,,,14734,1000218,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Dominican University of California,San Rafael,CA,50666.0,50666.0,50218.0,Less Selective,0.9562,,,1178,1000219,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+East Los Angeles College,Monterey Park,CA,1238.0,10130.0,9791.0,Moderately Selective,0.5,,,24401,1000220,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+El Camino Community College District,Torrance,CA,1144.0,7144.0,5170.0,Moderately Selective,0.5,,,18994,1000221,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Evergreen Valley College,San Jose,CA,1366.0,8718.0,12591.0,Moderately Selective,0.5,,,7670,1000222,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+FIDM-Fashion Institute of Design & Merchandising,Los Angeles,CA,34325.0,34325.0,41493.0,Moderately Selective,0.415,,,1319,1000223,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Feather River Community College District,Quincy,CA,1465.0,9925.0,6520.0,Moderately Selective,0.5,,,1574,1000224,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Federico Beauty Institute,Sacramento,CA,9748.0,17062.0,25736.0,Moderately Selective,0.5,,,245,1000225,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Foothill College,Los Altos Hills,CA,1565.0,12320.0,7549.0,Moderately Selective,0.5,,,10922,1000226,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Fresno City College,Fresno,CA,1334.0,9454.0,1699.0,Moderately Selective,0.5,,,18774,1000227,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Fresno Pacific University,Fresno,CA,35558.0,35558.0,14317.0,Moderately Selective,0.5752,,,1614,1000228,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Fullerton College,Fullerton,CA,1150.0,9399.0,8090.0,Moderately Selective,0.5,,,16637,1000229,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Gavilan College,Gilroy,CA,1506.0,12246.0,2244.0,Moderately Selective,0.5,,,4410,1000230,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Gemological Institute of America-Carlsbad,Carlsbad,CA,9748.0,17062.0,31435.0,Moderately Selective,0.5,,,308,1000231,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Glendale Community College,Glendale,CA,1181.0,8381.0,7461.0,Moderately Selective,0.5,,,9807,1000232,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Glendale Career College,Glendale,CA,9748.0,17062.0,46212.0,Moderately Selective,0.5,,,854,1000233,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Golden Gate University,San Francisco,CA,31243.0,31243.0,,Moderately Selective,0.5,,,550,1000234,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Golden West College,Huntington Beach,CA,1196.0,11084.0,2861.0,Moderately Selective,0.5,,,8919,1000235,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Grossmont College,El Cajon,CA,1332.0,10628.0,2755.0,Moderately Selective,0.5,,,11467,1000236,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Salon Success Academy-Riverside,Riverside,CA,9748.0,17062.0,13095.0,Moderately Selective,0.5,,,173,1000237,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Hartnell College,Salinas,CA,1404.0,8994.0,2895.0,Moderately Selective,0.5,,,7153,1000238,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Harvey Mudd College,Claremont,CA,66255.0,66255.0,32492.0,Highly Selective,0.1306,,,915,1000239,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+California State Polytechnic University-Humboldt,Arcata,CA,7913.0,19793.0,13167.0,Less Selective,0.9883,,,5491,1000240,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Humphreys University-Stockton and Modesto Campuses,Stockton,CA,14760.0,14760.0,11410.0,Moderately Selective,0.5,,,178,1000241,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Imperial Valley College,Imperial,CA,1126.0,7990.0,1697.0,Moderately Selective,0.5,,,6881,1000242,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Institute for Business and Technology,Santa Clara,CA,9748.0,17062.0,25471.0,Moderately Selective,0.5,,,609,1000243,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Interior Designers Institute,Newport Beach,CA,20250.0,20250.0,,Moderately Selective,0.5,,,107,1000244,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Irvine Valley College,Irvine,CA,1156.0,10996.0,1886.0,Moderately Selective,0.5,,,9577,1000245,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Bellus Academy-El Cajon,El Cajon,CA,9748.0,17062.0,29547.0,Moderately Selective,0.5,,,205,1000246,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Reedley College,Reedley,CA,1334.0,9454.0,1584.0,Moderately Selective,0.5,,,4853,1000247,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Life Pacific University,San Dimas,CA,20462.0,20462.0,22343.0,Less Selective,0.9395,,,393,1000248,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of La Verne,La Verne,CA,47000.0,47000.0,26925.0,Moderately Selective,0.48479999999999995,,,3341,1000249,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Laguna College of Art and Design,Laguna Beach,CA,35650.0,35650.0,42354.0,Less Selective,0.7761,,,776,1000250,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lake Tahoe Community College,South Lake Tahoe,CA,1131.0,11067.0,10975.0,Moderately Selective,0.5,,,2909,1000251,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lancaster Beauty School,Lancaster,CA,9748.0,17062.0,21235.0,Moderately Selective,0.5,,,131,1000252,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Laney College,Oakland,CA,1148.0,8684.0,15805.0,Moderately Selective,0.5,,,7158,1000253,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lassen Community College,Susanville,CA,1144.0,8224.0,7677.0,Moderately Selective,0.5,,,1564,1000254,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lincoln University,Oakland,CA,11420.0,11420.0,,Moderately Selective,0.5,,,223,1000255,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+La Sierra University,Riverside,CA,35910.0,35910.0,26217.0,Less Selective,0.9329999999999999,,,1155,1000256,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Loma Linda University,Loma Linda,CA,9748.0,17062.0,,Moderately Selective,0.5,,,867,1000257,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Long Beach City College,Long Beach,CA,1556.0,11440.0,5001.0,Moderately Selective,0.5,,,21899,1000258,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Southern California University of Health Sciences,Whittier,CA,10769.0,10769.0,45633.0,Moderately Selective,0.5,,,132,1000259,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Los Angeles Harbor College,Wilmington,CA,1238.0,10050.0,11245.0,Moderately Selective,0.5,,,6496,1000260,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Los Angeles Pierce College,Woodland Hills,CA,1238.0,10130.0,11196.0,Moderately Selective,0.5,,,13029,1000261,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Los Angeles Southwest College,Los Angeles,CA,1238.0,10130.0,6683.0,Moderately Selective,0.5,,,3793,1000262,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Los Angeles Trade Technical College,Los Angeles,CA,1238.0,10130.0,10658.0,Moderately Selective,0.5,,,10165,1000263,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Los Angeles Valley College,Valley Glen,CA,1238.0,10130.0,10200.0,Moderately Selective,0.5,,,12470,1000264,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+The Master's University and Seminary,Santa Clarita,CA,36930.0,36930.0,32121.0,Less Selective,0.7589,,,1606,1000265,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Los Angeles City College,Los Angeles,CA,1238.0,10130.0,7532.0,Moderately Selective,0.5,,,10857,1000266,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Los Angeles County College of Nursing and Allied Health,Los Angeles,CA,9748.0,17062.0,,Moderately Selective,0.5,,,220,1000267,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Los Angeles Mission College,Sylmar,CA,1238.0,10130.0,11972.0,Moderately Selective,0.5,,,8031,1000268,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Los Medanos College,Pittsburg,CA,1312.0,9012.0,5692.0,Moderately Selective,0.5,,,7100,1000269,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Loyola Marymount University,Los Angeles,CA,58974.0,58974.0,45723.0,Moderately Selective,0.4029,,,7171,1000270,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lu Ross Academy,Ventura,CA,9748.0,17062.0,15711.0,Moderately Selective,0.5,,,277,1000271,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lytles Redwood Empire Beauty College,Santa Rosa,CA,9748.0,17062.0,24603.0,Moderately Selective,0.5,,,114,1000272,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+MTI College,Sacramento,CA,9748.0,17062.0,20336.0,Less Selective,0.8193,,,1025,1000273,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+College of Marin,Kentfield,CA,1558.0,10828.0,15517.0,Moderately Selective,0.5,,,3928,1000274,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Mendocino College,Ukiah,CA,1423.0,8893.0,7500.0,Moderately Selective,0.5,,,2857,1000275,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Menlo College,Atherton,CA,51070.0,51070.0,27032.0,Less Selective,0.6781,,,811,1000276,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Merced College,Merced,CA,1194.0,8154.0,4260.0,Moderately Selective,0.5,,,9677,1000277,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Merritt College,Oakland,CA,1167.0,8703.0,14742.0,Moderately Selective,0.5,,,5153,1000278,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+MiraCosta College,Oceanside,CA,1152.0,9120.0,7178.0,Moderately Selective,0.5,,,10474,1000279,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Mission College,Santa Clara,CA,1438.0,12220.0,5198.0,Moderately Selective,0.5,,,5557,1000280,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Modesto Junior College,Modesto,CA,1270.0,8870.0,10176.0,Moderately Selective,0.5,,,14714,1000281,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Moler Barber College,Oakland,CA,9748.0,17062.0,22135.0,Moderately Selective,0.5,,,335,1000282,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Monterey Peninsula College,Monterey,CA,1188.0,9924.0,13498.0,Moderately Selective,0.5,,,5759,1000283,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Moorpark College,Moorpark,CA,1416.0,8179.0,742.0,Moderately Selective,0.5,,,12011,1000284,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Mt San Antonio College,Walnut,CA,1364.0,10212.0,3107.0,Moderately Selective,0.5,,,25311,1000285,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Mount Saint Mary's University,Los Angeles,CA,48132.0,48132.0,25009.0,Less Selective,0.6872,,,1746,1000286,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Mt San Jacinto Community College District,San Jacinto,CA,1406.0,11276.0,7098.0,Moderately Selective,0.5,,,14859,1000287,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Musicians Institute,Hollywood,CA,28400.0,28400.0,37793.0,Less Selective,0.7129000000000001,,,735,1000288,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Napa Valley College,Napa,CA,1156.0,11908.0,14046.0,Moderately Selective,0.5,,,3205,1000289,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+National Holistic Institute,Emeryville,CA,9748.0,17062.0,29199.0,Moderately Selective,0.5,,,1134,1000290,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+National University,San Diego,CA,13320.0,13320.0,31058.0,Moderately Selective,0.5,,,9725,1000291,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Newschool of Architecture and Design,San Diego,CA,30291.0,30291.0,48616.0,Less Selective,1.0,,,212,1000292,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+North Adrian's College of Beauty Inc,Modesto,CA,9748.0,17062.0,20347.0,Moderately Selective,0.5,,,213,1000293,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+North-West College-Pomona,Pomona,CA,9748.0,17062.0,33256.0,Moderately Selective,0.5,,,315,1000294,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+North-West College-West Covina,West Covina,CA,9748.0,17062.0,28408.0,Moderately Selective,0.5,,,635,1000295,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+North-West College-Van Nuys,Van Nuys,CA,9748.0,17062.0,33464.0,Moderately Selective,0.5,,,225,1000296,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Occidental College,Los Angeles,CA,63446.0,63446.0,39329.0,Moderately Selective,0.39890000000000003,,,1844,1000297,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Ohlone College,Fremont,CA,1202.0,8714.0,14130.0,Moderately Selective,0.5,,,6958,1000298,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Orange Coast College,Costa Mesa,CA,1208.0,9992.0,4754.0,Moderately Selective,0.5,,,16117,1000299,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Otis College of Art and Design,Los Angeles,CA,55513.0,55513.0,45864.0,Less Selective,0.8398,,,1242,1000300,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Oxnard College,Oxnard,CA,1416.0,8179.0,659.0,Moderately Selective,0.5,,,6059,1000301,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Hope International University,Fullerton,CA,36250.0,36250.0,27653.0,Moderately Selective,0.3539,,,549,1000302,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Concorde Career College-San Diego,San Diego,CA,9748.0,17062.0,24477.0,Less Selective,0.9395,,,178,1000303,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Pacific Oaks College,Pasadena,CA,33360.0,33360.0,,Elite,0.1,,,346,1000304,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Pacific Union College,Angwin,CA,35214.0,35214.0,20979.0,Moderately Selective,0.42479999999999996,,,910,1000305,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of the Pacific,Stockton,CA,55340.0,55340.0,25926.0,Less Selective,0.9486,,,3247,1000306,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Palo Verde College,Blythe,CA,1288.0,12880.0,10543.0,Moderately Selective,0.5,,,2909,1000307,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Palomar College,San Marcos,CA,1354.0,10650.0,5247.0,Moderately Selective,0.5,,,16167,1000308,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Pasadena City College,Pasadena,CA,1180.0,10756.0,3123.0,Moderately Selective,0.5,,,20624,1000309,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Pepperdine University,Malibu,CA,66742.0,66742.0,45409.0,Moderately Selective,0.4985,,,3629,1000310,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Pitzer College,Claremont,CA,62692.0,62692.0,31663.0,Highly Selective,0.1666,,,1191,1000311,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Point Loma Nazarene University,San Diego,CA,43550.0,43550.0,50168.0,Less Selective,0.8176000000000001,,,3132,1000312,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Pomona College,Claremont,CA,62326.0,62326.0,19424.0,Elite,0.0676,,,1638,1000313,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Porterville College,Porterville,CA,1409.0,10289.0,3728.0,Moderately Selective,0.5,,,2775,1000314,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Santa Ana College,Santa Ana,CA,1180.0,9460.0,3854.0,Moderately Selective,0.5,,,22011,1000315,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Shasta School of Cosmetology,Redding,CA,9748.0,17062.0,26582.0,Moderately Selective,0.5,,,101,1000316,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Redlands,Redlands,CA,57614.0,57614.0,22867.0,Less Selective,0.8092,,,2095,1000317,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+College of the Redwoods,Eureka,CA,1147.0,7783.0,3214.0,Moderately Selective,0.5,,,3514,1000318,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Salon Success Academy-Upland,Upland,CA,9748.0,17062.0,16626.0,Moderately Selective,0.5,,,238,1000319,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Salon Success Academy-Corona,Corona,CA,9748.0,17062.0,12983.0,Moderately Selective,0.5,,,216,1000320,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Rio Hondo College,Whittier,CA,1388.0,9884.0,11903.0,Moderately Selective,0.5,,,15365,1000321,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Riverside City College,Riverside,CA,1420.0,11230.0,4026.0,Moderately Selective,0.5,,,17361,1000322,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Sacramento City College,Sacramento,CA,1288.0,12808.0,3974.0,Moderately Selective,0.5,,,16952,1000323,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Saddleback College,Mission Viejo,CA,1432.0,13732.0,2976.0,Moderately Selective,0.5,,,15959,1000324,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Samuel Merritt University,Oakland,CA,9748.0,17062.0,,Moderately Selective,0.5,,,712,1000325,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+San Diego City College,San Diego,CA,1150.0,9094.0,-818.0,Moderately Selective,0.5,,,10584,1000326,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+San Diego Mesa College,San Diego,CA,1150.0,9094.0,-904.0,Moderately Selective,0.5,,,15899,1000327,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+San Diego Miramar College,San Diego,CA,1150.0,9094.0,-2735.0,Moderately Selective,0.5,,,10740,1000328,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+San Diego State University,San Diego,CA,8290.0,20170.0,16174.0,Moderately Selective,0.3444,,,33654,1000329,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of San Diego,San Diego,CA,56444.0,56444.0,31265.0,Moderately Selective,0.4675,,,5619,1000330,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+San Francisco Conservatory of Music,San Francisco,CA,54550.0,54550.0,42448.0,Moderately Selective,0.5194,,,215,1000331,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+San Francisco State University,San Francisco,CA,7424.0,19304.0,12882.0,Less Selective,0.9615,,,20033,1000332,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of San Francisco,San Francisco,CA,58222.0,58222.0,39495.0,Moderately Selective,0.5077,,,5697,1000333,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+San Joaquin Delta College,Stockton,CA,1288.0,9072.0,8508.0,Moderately Selective,0.5,,,13964,1000334,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+San Joaquin Valley College-Visalia,Visalia,CA,9748.0,17062.0,29092.0,Moderately Selective,0.5,,,2270,1000335,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+William Jessup University,Rocklin,CA,37150.0,37150.0,25300.0,Less Selective,0.7681999999999999,,,1021,1000336,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+San Jose City College,San Jose,CA,1366.0,9486.0,16658.0,Moderately Selective,0.5,,,7039,1000337,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+San Jose State University,San Jose,CA,7992.0,19872.0,13741.0,Less Selective,0.8023,,,26757,1000338,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+College of San Mateo,San Mateo,CA,1332.0,11384.0,1504.0,Moderately Selective,0.5,,,7359,1000339,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Santa Barbara City College,Santa Barbara,CA,1234.0,10186.0,10029.0,Moderately Selective,0.5,,,10070,1000340,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Santa Clara University,Santa Clara,CA,59241.0,59241.0,50959.0,Moderately Selective,0.4384,,,6235,1000341,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Santa Monica College,Santa Monica,CA,1156.0,9316.0,3600.0,Moderately Selective,0.5,,,21194,1000342,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Santa Rosa Junior College,Santa Rosa,CA,1318.0,11308.0,5541.0,Moderately Selective,0.5,,,14327,1000343,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Scripps College,Claremont,CA,63434.0,63434.0,38802.0,Moderately Selective,0.3394,,,1077,1000344,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+College of the Sequoias,Visalia,CA,1394.0,8338.0,29.0,Moderately Selective,0.5,,,10752,1000345,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Shasta College,Redding,CA,1197.0,8277.0,3743.0,Moderately Selective,0.5,,,5536,1000346,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Sierra College,Rocklin,CA,1156.0,9988.0,4462.0,Moderately Selective,0.5,,,13455,1000347,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Sierra College of Beauty,Merced,CA,9748.0,17062.0,11519.0,Moderately Selective,0.5,,,245,1000348,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Simpson University,Redding,CA,38522.0,38522.0,27923.0,Less Selective,0.9903,,,751,1000349,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+College of the Siskiyous,Weed,CA,1444.0,9394.0,7241.0,Moderately Selective,0.5,,,1080,1000350,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Skyline College,San Bruno,CA,1332.0,11384.0,-1180.0,Moderately Selective,0.5,,,7132,1000351,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+San Bernardino Valley College,San Bernardino,CA,1185.0,10017.0,8234.0,Moderately Selective,0.5,,,11106,1000352,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Saint Mary's College of California,Moraga,CA,56134.0,56134.0,31198.0,Less Selective,0.8858,,,2024,1000353,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Solano Community College,Fairfield,CA,1172.0,8900.0,3869.0,Moderately Selective,0.5,,,7688,1000354,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Sonoma State University,Rohnert Park,CA,8190.0,20070.0,13801.0,Less Selective,0.9473,,,5374,1000355,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+South Coast College,Orange,CA,13409.0,13409.0,22480.0,Moderately Selective,0.5,,,241,1000356,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Vanguard University of Southern California,Costa Mesa,CA,39950.0,39950.0,19761.0,Less Selective,0.647,,,1975,1000357,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Concorde Career College-Garden Grove,Garden Grove,CA,9748.0,17062.0,22610.0,Less Selective,0.9593,,,202,1000358,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Southwestern College,Chula Vista,CA,1344.0,9492.0,10893.0,Moderately Selective,0.5,,,16640,1000359,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Southern California Institute of Architecture,Los Angeles,CA,53564.0,53564.0,37535.0,Less Selective,0.8267,,,236,1000360,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Southern California,Los Angeles,CA,68237.0,68237.0,31927.0,Highly Selective,0.1002,,,20817,1000361,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Taft College,Taft,CA,1108.0,9076.0,2699.0,Moderately Selective,0.5,,,3216,1000362,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Thomas Aquinas College,Santa Paula,CA,28700.0,28700.0,25032.0,Less Selective,0.7870999999999999,,,539,1000363,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+UEI College-Huntington Park,Huntington Park,CA,9748.0,17062.0,26959.0,Moderately Selective,0.5,,,1036,1000364,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Concorde Career College-San Bernardino,San Bernardino,CA,9748.0,17062.0,23161.0,Less Selective,0.981,,,260,1000365,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Concorde Career College-North Hollywood,North Hollywood,CA,9748.0,17062.0,23584.0,Less Selective,0.9902,,,143,1000366,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Ventura College,Ventura,CA,1416.0,8179.0,2257.0,Moderately Selective,0.5,,,9971,1000367,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Victor Valley College,Victorville,CA,1425.0,10125.0,3228.0,Moderately Selective,0.5,,,12107,1000368,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Berkeley City College,Berkeley,CA,1148.0,8684.0,8957.0,Moderately Selective,0.5,,,4541,1000369,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Walden University,Minneapolis,MN,12498.0,12498.0,,Moderately Selective,0.5,,,7337,1000370,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Coalinga College,Coalinga,CA,1384.0,10084.0,8626.0,Moderately Selective,0.5,,,2177,1000371,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+West Los Angeles College,Culver City,CA,1238.0,10130.0,7131.0,Moderately Selective,0.5,,,7277,1000372,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+West Valley College,Saratoga,CA,1490.0,8702.0,1842.0,Moderately Selective,0.5,,,6086,1000373,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Carrington College-Sacramento,Sacramento,CA,9748.0,17062.0,37143.0,Moderately Selective,0.5,,,2262,1000374,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Westmont College,Santa Barbara,CA,51790.0,51790.0,32926.0,Less Selective,0.7986,,,1310,1000375,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Whittier College,Whittier,CA,49864.0,49864.0,29871.0,Less Selective,0.8538,,,812,1000376,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Woodbury University,Burbank,CA,44886.0,44886.0,28248.0,Less Selective,0.7287,,,825,1000377,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Yeshiva Ohr Elchonon Chabad West Coast Talmudical Seminary,Los Angeles,CA,16900.0,16900.0,12258.0,Less Selective,0.6168,,,157,1000378,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Yuba College,Marysville,CA,1128.0,8208.0,3573.0,Moderately Selective,0.5,,,4311,1000379,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Adams State University,Alamosa,CO,9776.0,21848.0,14173.0,Moderately Selective,0.5,,,1239,1000380,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Aims Community College,Greeley,CO,2090.0,11306.0,9535.0,Moderately Selective,0.5,,,3182,1000381,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Arapahoe Community College,Littleton,CO,4308.0,16542.0,10790.0,Moderately Selective,0.5,,,5392,1000382,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Bel-Rea Institute of Animal Technology,Denver,CO,13819.0,13819.0,24961.0,Moderately Selective,0.5942000000000001,,,161,1000383,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Colorado Denver/Anschutz Medical Campus,Denver,CO,10017.0,28209.0,19133.0,Less Selective,0.7781,,,10686,1000384,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Colorado Colorado Springs,Colorado Springs,CO,9712.0,20492.0,16431.0,Less Selective,0.9656999999999999,,,8870,1000385,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Spartan College of Aeronautics and Technology,Broomfield,CO,17406.0,17406.0,30922.0,Moderately Selective,0.5,,,321,1000386,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Colorado Boulder,Boulder,CO,16430.0,41943.0,21480.0,Less Selective,0.8328,,,31578,1000387,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Colorado Christian University,Lakewood,CO,39266.0,39266.0,25458.0,Moderately Selective,0.5,,,5363,1000388,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Colorado College,Colorado Springs,CO,67932.0,67932.0,31678.0,Highly Selective,0.2003,,,2139,1000389,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Concorde Career College-Aurora,Aurora,CO,9748.0,17062.0,16547.0,Less Selective,1.0,,,196,1000390,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Colorado Mountain College,Glenwood Springs,CO,2700.0,12540.0,6342.0,Moderately Selective,0.5,,,2821,1000391,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Colorado Northwestern Community College,Rangely,CO,4454.0,7084.0,12316.0,Moderately Selective,0.5,,,500,1000392,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Colorado School of Mines,Golden,CO,21186.0,44376.0,29240.0,Moderately Selective,0.5971,,,5801,1000393,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Colorado School of Trades,Lakewood,CO,9748.0,17062.0,22635.0,Less Selective,0.7692,,,108,1000394,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Colorado State University-Fort Collins,Fort Collins,CO,12896.0,33751.0,20332.0,Less Selective,0.8959,,,25148,1000395,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Colorado Technical University-Colorado Springs,Colorado Springs,CO,12760.0,12760.0,14954.0,Moderately Selective,0.5,,,25932,1000396,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Community College of Aurora,Aurora,CO,4030.0,15680.0,7466.0,Moderately Selective,0.5,,,3346,1000397,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Technical College of the Rockies,Delta,CO,9748.0,17062.0,3790.0,Moderately Selective,0.5,,,142,1000398,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Community College of Denver,Denver,CO,4902.0,17136.0,9431.0,Moderately Selective,0.5,,,5156,1000399,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Denver,Denver,CO,59340.0,59340.0,36037.0,Less Selective,0.7119,,,6059,1000400,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Emily Griffith Technical College,Denver,CO,9748.0,17062.0,7003.0,Moderately Selective,0.5,,,5914,1000401,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Fort Lewis College,Durango,CO,9670.0,20798.0,17339.0,Less Selective,0.932,,,3070,1000402,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Front Range Community College,Westminster,CO,4740.0,16974.0,10854.0,Moderately Selective,0.5,,,11132,1000403,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+International Salon and Spa Academy,Colorado Springs,CO,9748.0,17062.0,20904.0,Moderately Selective,0.5,,,307,1000404,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lamar Community College,Lamar,CO,4422.0,7052.0,10328.0,Moderately Selective,0.5,,,406,1000405,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Colorado Mesa University,Grand Junction,CO,9712.0,24312.0,15331.0,Less Selective,0.8139,,,7604,1000406,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Metropolitan State University of Denver,Denver,CO,10780.0,29503.0,14294.0,Less Selective,0.9914000000000001,,,14932,1000407,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Morgan Community College,Fort  Morgan,CO,4127.0,16360.0,7161.0,Moderately Selective,0.5,,,619,1000408,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Naropa University,Boulder,CO,34600.0,34600.0,28862.0,Less Selective,0.94,,,368,1000409,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Nazarene Bible College,Colorado Springs,CO,10002.0,10002.0,,Moderately Selective,0.5,,,336,1000410,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Northeastern Junior College,Sterling,CO,5582.0,8045.0,13224.0,Moderately Selective,0.5,,,825,1000411,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Northern Colorado,Greeley,CO,12010.0,26204.0,18457.0,Less Selective,0.8643000000000001,,,5693,1000412,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Otero College,La Junta,CO,4418.0,7048.0,11329.0,Moderately Selective,0.5,,,642,1000413,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Pikes Peak State College,Colorado Springs,CO,4302.0,16534.0,9682.0,Moderately Selective,0.5,,,9307,1000414,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Pueblo Community College,Pueblo,CO,4883.0,17116.0,11063.0,Moderately Selective,0.5,,,3293,1000415,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Red Rocks Community College,Lakewood,CO,4707.0,16947.0,9356.0,Moderately Selective,0.5,,,4281,1000416,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Regis University,Denver,CO,43980.0,43980.0,22689.0,Less Selective,0.8726999999999999,,,2599,1000417,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Rocky Mountain College of Art and Design,Lakewood,CO,23720.0,23720.0,28037.0,Moderately Selective,0.5,,,1878,1000418,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Colorado State University Pueblo,Pueblo,CO,9401.0,17242.0,12948.0,Less Selective,0.9984000000000001,,,3028,1000419,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Pickens Technical College,Aurora,CO,4930.0,8330.0,7055.0,Moderately Selective,0.5,,,646,1000420,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Intellitec College-Colorado Springs,Colorado Springs,CO,9748.0,17062.0,22051.0,Moderately Selective,0.5,,,816,1000421,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Intellitec College-Grand Junction,Grand Junction,CO,9748.0,17062.0,16656.0,Moderately Selective,0.5,,,1160,1000422,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Trinidad State College,Trinidad,CO,4468.0,7100.0,11197.0,Moderately Selective,0.5,,,1168,1000423,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+United States Air Force Academy,USAF Academy,CO,9748.0,17062.0,,Highly Selective,0.1393,,,4124,1000424,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Western Colorado University,Gunnison,CO,11083.0,23683.0,16773.0,Less Selective,0.9747,,,1653,1000425,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Albertus Magnus College,New Haven,CT,39924.0,39924.0,32681.0,Less Selective,0.6437,,,882,1000426,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Bridgeport,Bridgeport,CT,35760.0,35760.0,24786.0,Less Selective,0.6431,,,1450,1000427,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Central Connecticut State University,New Britain,CT,12460.0,25736.0,16435.0,Less Selective,0.7553,,,7670,1000428,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Charter Oak State College,New Britain,CT,8506.0,8506.0,15663.0,Moderately Selective,0.5,,,1620,1000429,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Cortiva Institute,Cromwell,CT,9748.0,17062.0,34368.0,Moderately Selective,0.5,,,220,1000430,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Connecticut College,New London,CT,64812.0,64812.0,33998.0,Moderately Selective,0.38280000000000003,,,1960,1000431,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Porter & Chester Institute of Hamden,Hamden,CT,14337.0,14337.0,19011.0,Moderately Selective,0.5,,,333,1000432,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Connecticut,Storrs,CT,20366.0,43034.0,22886.0,Moderately Selective,0.5395,,,19147,1000433,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Goodwin University,East Hartford,CT,21198.0,21198.0,28544.0,Moderately Selective,0.5,,,2761,1000434,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Eastern Connecticut State University,Willimantic,CT,13292.0,16624.0,20480.0,Less Selective,0.8055,,,3377,1000435,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Fairfield University,Fairfield,CT,56360.0,56360.0,46274.0,Moderately Selective,0.4498,,,4938,1000436,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Paul Mitchell the School-North Haven,North Haven,CT,9748.0,17062.0,13534.0,Moderately Selective,0.5,,,191,1000437,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Connecticut State Community College,Hartford,CT,5092.0,14840.0,8865.0,Moderately Selective,0.5,,,32292,1000438,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+American Institute-West Hartford,West Hartford,CT,9748.0,17062.0,18110.0,Moderately Selective,0.5,,,396,1000439,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Hartford,West Hartford,CT,47647.0,47647.0,29558.0,Less Selective,0.8301000000000001,,,4032,1000440,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Holy Apostles College and Seminary,Cromwell,CT,9580.0,9580.0,16073.0,Moderately Selective,0.5,,,203,1000441,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Mitchell College,New London,CT,39050.0,39050.0,30841.0,Less Selective,0.7336,,,421,1000442,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lincoln Technical Institute-New Britain,New Britain,CT,9748.0,17062.0,30180.0,Moderately Selective,0.5,,,783,1000443,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+New England Tractor Trailer Training School of Connecticut,Somers,CT,9748.0,17062.0,15448.0,Moderately Selective,0.5,,,293,1000444,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of New Haven,West Haven,CT,45730.0,45730.0,34089.0,Less Selective,0.8055,,,4799,1000445,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Paier College,Bridgeport,CT,26400.0,26400.0,30982.0,Less Selective,0.6154,,,183,1000446,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Porter & Chester Institute,Bridgeport,CT,14349.0,14349.0,17332.0,Moderately Selective,0.5,,,1405,1000447,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Post University,Waterbury,CT,17100.0,17100.0,19196.0,Moderately Selective,0.5,,,18975,1000448,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Quinnipiac University,Hamden,CT,53090.0,53090.0,39207.0,Less Selective,0.77,,,6208,1000449,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Sacred Heart University,Fairfield,CT,48460.0,48460.0,45459.0,Less Selective,0.6768000000000001,,,6904,1000450,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Saint Joseph,West Hartford,CT,45908.0,45908.0,27375.0,Less Selective,0.7964,,,825,1000451,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Southern Connecticut State University,New Haven,CT,12828.0,26104.0,20877.0,Less Selective,0.8112,,,6180,1000452,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Trinity College,Hartford,CT,67420.0,67420.0,35009.0,Moderately Selective,0.33520000000000005,,,2193,1000453,1.0,3.5,Required,Need-blind,Public,Liberal Arts,Biology,Economics
+United States Coast Guard Academy,New London,CT,9748.0,17062.0,,Highly Selective,0.2432,,,1081,1000454,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Wesleyan University,Middletown,CT,67316.0,67316.0,27888.0,Highly Selective,0.171,,,2973,1000455,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Western Connecticut State University,Danbury,CT,12763.0,16095.0,18617.0,Less Selective,0.8136,,,3434,1000456,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Yale University,New Haven,CT,64700.0,64700.0,27818.0,Elite,0.045,,,6811,1000457,1.0,3.5,Required,Need-blind,Public,Law,History,Political Science
+Dawn Career Institute LLC,Newark,DE,9748.0,17062.0,15731.0,Moderately Selective,0.5,,,385,1000458,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Delaware Technical Community College-Terry,Dover,DE,4965.0,11828.0,8033.0,Moderately Selective,0.5,,,11012,1000459,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Delaware State University,Dover,DE,10314.0,20250.0,15745.0,Less Selective,0.6167,,,4630,1000460,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Delaware,Newark,DE,16080.0,39720.0,16931.0,Less Selective,0.6511,,,18812,1000461,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Goldey-Beacom College,Wilmington,DE,13440.0,13440.0,16957.0,Less Selective,0.7653,,,634,1000462,1.0,3.5,Required,Need-blind,Public,Liberal Arts,Biology,Economics
+Schilling-Douglas School of Hair Design,Newark,DE,9748.0,17062.0,15105.0,Moderately Selective,0.5,,,166,1000463,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Wilmington University,New Castle,DE,12330.0,12330.0,15355.0,Moderately Selective,0.5,,,8497,1000464,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+American University,Washington,DC,56543.0,56543.0,41945.0,Moderately Selective,0.4738,,,7593,1000465,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+The Catholic University of America,Washington,DC,55834.0,55834.0,32798.0,Less Selective,0.8384,,,3063,1000466,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of the District of Columbia,Washington,DC,6152.0,13004.0,14693.0,Moderately Selective,0.5,,,3080,1000467,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Gallaudet University,Washington,DC,18382.0,18382.0,14085.0,Less Selective,0.6093999999999999,,,879,1000468,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+George Washington University,Washington,DC,64990.0,64990.0,37454.0,Moderately Selective,0.4354,,,10848,1000469,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Georgetown University,Washington,DC,65081.0,65081.0,39433.0,Highly Selective,0.1308,,,7462,1000470,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Howard University,Washington,DC,33344.0,33344.0,47919.0,Moderately Selective,0.3489,,,9604,1000471,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Strayer University-District of Columbia,Washington,DC,13920.0,13920.0,,Moderately Selective,0.5,,,309,1000472,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Trinity Washington University,Washington,DC,26110.0,26110.0,12233.0,Less Selective,0.9919,,,1415,1000473,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Atlantic Technical College,Coconut Creek,FL,9748.0,17062.0,13018.0,Moderately Selective,0.5,,,2672,1000474,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Baptist University of Florida,Graceville,FL,13800.0,13800.0,8829.0,Less Selective,0.6409999999999999,,,248,1000475,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Barry University,Miami,FL,33450.0,33450.0,22978.0,Moderately Selective,0.5907,,,2245,1000476,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Bethune-Cookman University,Daytona Beach,FL,14794.0,14794.0,14892.0,Less Selective,0.9984999999999999,,,2414,1000477,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lynn University,Boca Raton,FL,42950.0,42950.0,38222.0,Less Selective,0.7395,,,2820,1000478,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Eastern Florida State College,Melbourne,FL,2496.0,9739.0,5939.0,Moderately Selective,0.5,,,10162,1000479,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Broward College,Fort Lauderdale,FL,2830.0,8952.0,20077.0,Moderately Selective,0.5,,,23799,1000480,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+College of Central Florida,Ocala,FL,2710.0,10517.0,12310.0,Moderately Selective,0.5,,,4717,1000481,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Central Florida,Orlando,FL,6368.0,22467.0,10650.0,Moderately Selective,0.39520000000000005,,,59095,1000482,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Charlotte Technical College,Port Charlotte,FL,3100.0,12100.0,10076.0,Moderately Selective,0.5,,,295,1000483,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Chipola College,Marianna,FL,3120.0,8950.0,832.0,Moderately Selective,0.5,,,1218,1000484,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lorenzo Walker Technical College,Naples,FL,9748.0,17062.0,12241.0,Moderately Selective,0.5,,,767,1000485,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Daytona State College,Daytona Beach,FL,3106.0,11994.0,7201.0,Moderately Selective,0.5,,,9367,1000486,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Eckerd College,Saint Petersburg,FL,50374.0,50374.0,33011.0,Less Selective,0.7868999999999999,,,1984,1000487,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Florida SouthWestern State College,Fort Myers,FL,3401.0,12979.0,8249.0,Moderately Selective,0.5,,,10613,1000488,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Edward Waters University,Jacksonville,FL,14878.0,14878.0,13580.0,Less Selective,0.8481000000000001,,,1113,1000489,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Embry-Riddle Aeronautical University-Daytona Beach,Daytona Beach,FL,42304.0,42304.0,40289.0,Less Selective,0.6628000000000001,,,7535,1000490,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Florida Agricultural and Mechanical University,Tallahassee,FL,5785.0,17725.0,15847.0,Highly Selective,0.2112,,,7516,1000491,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Florida Atlantic University,Boca Raton,FL,4879.0,17324.0,8001.0,Less Selective,0.7343999999999999,,,23458,1000492,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Florida State College at Jacksonville,Jacksonville,FL,2878.0,9992.0,2760.0,Moderately Selective,0.5,,,17739,1000493,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Flagler College,Saint Augustine,FL,26610.0,26610.0,29951.0,Less Selective,0.7809,,,2404,1000494,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Florida College,Temple Terrace,FL,18920.0,18920.0,22527.0,Less Selective,0.6645,,,589,1000495,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Concorde Career Institute-Jacksonville,Jacksonville,FL,9748.0,17062.0,27104.0,Less Selective,0.9647,,,140,1000496,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Concorde Career Institute-Miramar,Miramar,FL,9748.0,17062.0,25614.0,Less Selective,0.9906,,,137,1000497,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Concorde Career Institute-Tampa,Tampa,FL,9748.0,17062.0,24449.0,Less Selective,0.9854,,,132,1000498,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+AdventHealth University,Orlando,FL,20880.0,20880.0,31885.0,Moderately Selective,0.5,,,1068,1000499,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Florida Institute of Technology,Melbourne,FL,44360.0,44360.0,35300.0,Less Selective,0.6253,,,3235,1000500,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Florida International University,Miami,FL,6565.0,18963.0,9133.0,Moderately Selective,0.5884,,,38761,1000501,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+The College of the Florida Keys,Key West,FL,3279.0,13162.0,13818.0,Moderately Selective,0.5,,,823,1000502,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Florida Memorial University,Miami Gardens,FL,19110.0,19110.0,18675.0,Less Selective,0.7431,,,1299,1000503,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Florida Career College-Miami,Miami,FL,9748.0,17062.0,34275.0,Moderately Selective,0.5,,,130,1000504,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Florida Southern College,Lakeland,FL,42360.0,42360.0,29664.0,Moderately Selective,0.5907,,,2607,1000505,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Florida State University,Tallahassee,FL,5656.0,18786.0,10997.0,Moderately Selective,0.25379999999999997,,,31812,1000506,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Florida,Gainesville,FL,6381.0,28659.0,6351.0,Highly Selective,0.2403,,,34102,1000507,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Full Sail University,Winter Park,FL,26417.0,26417.0,31759.0,Moderately Selective,0.5,,,25195,1000508,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+George Stone Technical College,Pensacola,FL,9748.0,17062.0,9098.0,Moderately Selective,0.5,,,566,1000509,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+George T Baker Aviation Technical College,Miami,FL,9748.0,17062.0,6984.0,Moderately Selective,0.5,,,922,1000510,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Gulf Coast State College,Panama City,FL,2370.0,8635.0,2339.0,Moderately Selective,0.5,,,3614,1000511,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Hillsborough Community College,Tampa,FL,2506.0,9111.0,4929.0,Moderately Selective,0.5,,,19998,1000512,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Hobe Sound Bible College,Hobe Sound,FL,9068.0,9068.0,10888.0,Moderately Selective,0.5,,,125,1000513,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Hollywood Institute of Beauty Careers,Hollywood,FL,9748.0,17062.0,18597.0,Moderately Selective,0.5,,,286,1000514,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Cortiva Institute,St. Petersburg,FL,9748.0,17062.0,26629.0,Moderately Selective,0.5,,,138,1000515,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Indian River State College,Fort Pierce,FL,2764.0,10201.0,5202.0,Moderately Selective,0.5,,,11571,1000516,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+International Academy,South Daytona,FL,9748.0,17062.0,19071.0,Moderately Selective,0.5,,,191,1000517,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Jacksonville University,Jacksonville,FL,46180.0,46180.0,26255.0,Moderately Selective,0.5729,,,2649,1000518,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Keiser University-Ft Lauderdale,Fort Lauderdale,FL,24136.0,24136.0,34439.0,Less Selective,0.9742000000000001,,,17370,1000519,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+La Belle Beauty School,Hialeah,FL,9748.0,17062.0,12731.0,Moderately Selective,0.5,,,239,1000520,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Florida Gateway College,Lake City,FL,3100.0,11747.0,2915.0,Moderately Selective,0.5,,,2231,1000521,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lake Technical College,Eustis,FL,9748.0,17062.0,14597.0,Moderately Selective,0.5,,,738,1000522,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lake-Sumter State College,Leesburg,FL,3292.0,13276.0,5742.0,Moderately Selective,0.5,,,3572,1000523,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Fort Myers Technical College,Fort Myers,FL,9748.0,17062.0,14072.0,Moderately Selective,0.5,,,668,1000524,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lively Technical College,Tallahassee,FL,9748.0,17062.0,7225.0,Moderately Selective,0.5,,,785,1000525,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lindsey Hopkins Technical College,Miami,FL,9748.0,17062.0,6900.0,Moderately Selective,0.5,,,388,1000526,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Luther Rice College & Seminary,Lithonia,GA,10538.0,10538.0,3935.0,Moderately Selective,0.3429,,,195,1000527,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+State College of Florida-Manatee-Sarasota,Bradenton,FL,3074.0,11595.0,21433.0,Moderately Selective,0.5,,,7161,1000528,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Manatee Technical College,Bradenton,FL,9748.0,17062.0,7591.0,Moderately Selective,0.5,,,1117,1000529,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Traviss Technical College,Lakeland,FL,9748.0,17062.0,,Moderately Selective,0.5,,,336,1000530,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Miami Lakes Educational Center and Technical College,Miami Lakes,FL,9748.0,17062.0,98.0,Moderately Selective,0.5,,,730,1000531,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Miami Dade College,Miami,FL,2838.0,9661.0,5929.0,Moderately Selective,0.5,,,35001,1000532,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Miami,Coral Gables,FL,59926.0,59926.0,36803.0,Highly Selective,0.18510000000000001,,,12570,1000533,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Orange Technical College-South Campus,Orlando,FL,9748.0,17062.0,,Moderately Selective,0.5,,,1157,1000534,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Paul Mitchell the School-Jacksonville,Jacksonville,FL,9748.0,17062.0,21529.0,Moderately Selective,0.5,,,117,1000535,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+North Florida College,Madison,FL,3054.0,11400.0,1799.0,Moderately Selective,0.5,,,817,1000536,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of North Florida,Jacksonville,FL,6389.0,20793.0,10353.0,Less Selective,0.6227,,,13915,1000537,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Nova Southeastern University,Fort Lauderdale,FL,37080.0,37080.0,31303.0,Less Selective,0.7267,,,7171,1000538,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Northwest Florida State College,Niceville,FL,3246.0,11625.0,5554.0,Moderately Selective,0.5,,,3193,1000539,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Orange Technical College,Orlando,FL,9748.0,17062.0,7826.0,Moderately Selective,0.5,,,189,1000540,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Palm Beach Atlantic University,West Palm Beach,FL,37990.0,37990.0,32751.0,Less Selective,0.8832,,,2427,1000541,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Palm Beach State College,Lake Worth,FL,3050.0,10910.0,9832.0,Moderately Selective,0.5,,,20532,1000542,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Pasco-Hernando State College,New Port Richey,FL,3155.0,12032.0,5154.0,Moderately Selective,0.5,,,6933,1000543,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Pensacola State College,Pensacola,FL,2348.0,9407.0,2254.0,Moderately Selective,0.5,,,6725,1000544,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Pinellas Technical College-Clearwater,Clearwater,FL,9748.0,17062.0,12103.0,Moderately Selective,0.5,,,730,1000545,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Polk State College,Winter Haven,FL,3366.0,12272.0,9027.0,Moderately Selective,0.5,,,5954,1000546,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Radford M Locklin Technical College,Milton,FL,9748.0,17062.0,5888.0,Moderately Selective,0.5,,,235,1000547,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Ridge Technical College,Winter Haven,FL,3918.0,10398.0,22547.0,Moderately Selective,0.5,,,375,1000548,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Ringling College of Art and Design,Sarasota,FL,55480.0,55480.0,55390.0,Less Selective,0.6737000000000001,,,1719,1000549,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Robert Morgan Educational Center and Technical College,Miami,FL,9748.0,17062.0,12702.0,Moderately Selective,0.5,,,868,1000550,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Rollins College,Winter Park,FL,58300.0,58300.0,33847.0,Moderately Selective,0.4056,,,2582,1000551,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+First Coast Technical College,Saint Augustine,FL,9748.0,17062.0,9538.0,Moderately Selective,0.5,,,369,1000552,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Saint Leo University,Saint Leo,FL,28360.0,28360.0,18467.0,Less Selective,0.721,,,6999,1000553,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+St Petersburg College,St. Petersburg,FL,2682.0,9286.0,-52.0,Moderately Selective,0.5,,,18759,1000554,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Pinellas Technical College-St. Petersburg,Saint Petersburg,FL,9748.0,17062.0,17981.0,Moderately Selective,0.5,,,1421,1000555,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Santa Fe College,Gainesville,FL,2563.0,9189.0,11154.0,Moderately Selective,0.5,,,11133,1000556,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Suncoast Technical College,Sarasota,FL,9748.0,17062.0,17430.0,Moderately Selective,0.5,,,1102,1000557,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Seminole State College of Florida,Sanford,FL,3227.0,11447.0,3119.0,Moderately Selective,0.5,,,11790,1000558,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Sheridan Technical College,Hollywood,FL,9748.0,17062.0,8663.0,Moderately Selective,0.5,,,1245,1000559,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Saint Johns River State College,Palatka,FL,2830.0,10352.0,5808.0,Moderately Selective,0.5,,,3909,1000560,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+South Florida State College,Avon Park,FL,3165.0,11859.0,4443.0,Moderately Selective,0.5,,,2084,1000561,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of South Florida,Tampa,FL,6410.0,17324.0,10043.0,Moderately Selective,0.4096,,,36299,1000562,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+St. Thomas University,Miami Gardens,FL,34770.0,34770.0,24275.0,Less Selective,0.9940000000000001,,,1963,1000563,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Stetson University,DeLand,FL,55220.0,55220.0,21318.0,Less Selective,0.8643000000000001,,,2292,1000564,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Southeastern University,Lakeland,FL,31732.0,31732.0,30209.0,Less Selective,0.7429000000000001,,,4646,1000565,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Bene's Career Academy,New Port Richey,FL,9748.0,17062.0,22360.0,Moderately Selective,0.5,,,288,1000566,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Riveroak Technical College,Live Oak,FL,9748.0,17062.0,8836.0,Moderately Selective,0.5,,,241,1000567,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Tallahassee Community College,Tallahassee,FL,2026.0,8062.0,8478.0,Moderately Selective,0.5,,,10357,1000568,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+The University of Tampa,Tampa,FL,33424.0,33424.0,35634.0,Moderately Selective,0.4093,,,10093,1000569,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Big Bend Technical College,Perry,FL,9748.0,17062.0,12558.0,Moderately Selective,0.5,,,160,1000570,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Tom P. Haney Technical College,Panama City,FL,9748.0,17062.0,5182.0,Moderately Selective,0.5,,,432,1000571,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Trinity Baptist College,Jacksonville,FL,14300.0,14300.0,19273.0,Less Selective,0.625,,,363,1000572,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Trinity College of Florida,Trinity,FL,16300.0,16300.0,21283.0,Less Selective,0.963,,,187,1000573,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Valencia College,Orlando,FL,2474.0,9383.0,10399.0,Moderately Selective,0.5,,,35125,1000574,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Warner University,Lake Wales,FL,28160.0,28160.0,21007.0,Moderately Selective,0.4779,,,753,1000575,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Florida Panhandle Technical College,Chipley,FL,9748.0,17062.0,9063.0,Moderately Selective,0.5,,,201,1000576,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Webber International University,Babson Park,FL,32150.0,32150.0,29932.0,Less Selective,0.7756000000000001,,,879,1000577,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of West Florida,Pensacola,FL,6360.0,19241.0,8155.0,Moderately Selective,0.5687,,,9042,1000578,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Orange Technical College-West Campus,Winter Garden,FL,9748.0,17062.0,10256.0,Moderately Selective,0.5,,,607,1000579,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+William T McFatter Technical College,Davie,FL,9748.0,17062.0,8919.0,Moderately Selective,0.5,,,617,1000580,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Orange Technical College-East Campus,Winter Park,FL,9748.0,17062.0,22206.0,Moderately Selective,0.5,,,372,1000581,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Withlacoochee Technical College,Inverness,FL,9748.0,17062.0,,Moderately Selective,0.5,,,262,1000582,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Abraham Baldwin Agricultural College,Tifton,GA,3195.0,10101.0,6061.0,Less Selective,0.7716,,,3218,1000583,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Agnes Scott College,Decatur,GA,48150.0,48150.0,24224.0,Less Selective,0.6731,,,898,1000584,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Interactive College of Technology-Chamblee,Chamblee,GA,11330.0,11330.0,13775.0,Moderately Selective,0.5,,,529,1000585,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Albany Technical College,Albany,GA,3196.0,5596.0,4293.0,Moderately Selective,0.5,,,2214,1000586,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Albany State University,Albany,GA,5934.0,16656.0,14251.0,Moderately Selective,0.5,,,5829,1000587,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Andrew College,Cuthbert,GA,19126.0,19126.0,21934.0,Moderately Selective,0.5115,,,287,1000588,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Georgia Career Institute,Conyers,GA,9748.0,17062.0,16052.0,Moderately Selective,0.5,,,586,1000589,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Atlanta Technical College,Atlanta,GA,3164.0,5564.0,-864.0,Moderately Selective,0.5,,,3044,1000590,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Point University,West Point,GA,22300.0,22300.0,20752.0,Less Selective,0.6751,,,2617,1000591,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Atlanta Metropolitan State College,Atlanta,GA,3105.0,9731.0,5090.0,Moderately Selective,0.5,,,1348,1000592,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Atlanta School of Massage,Atlanta,GA,9748.0,17062.0,27774.0,Moderately Selective,0.5,,,319,1000593,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Clark Atlanta University,Atlanta,GA,26446.0,26446.0,35115.0,Less Selective,0.6463,,,3482,1000594,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Augusta Technical College,Augusta,GA,4022.0,7022.0,8509.0,Moderately Selective,0.5,,,3531,1000595,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Berry College,Mount Berry,GA,40416.0,40416.0,21568.0,Less Selective,0.6185,,,2213,1000596,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Beulah Heights University,Atlanta,GA,8492.0,8492.0,5970.0,Moderately Selective,0.5,,,158,1000597,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Brenau University,Gainesville,GA,33275.0,33275.0,20786.0,Less Selective,0.8695999999999999,,,981,1000598,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Brewton-Parker College,Mount Vernon,GA,21696.0,21696.0,21983.0,Less Selective,0.8634999999999999,,,684,1000599,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+College of Coastal Georgia,Brunswick,GA,3483.0,10389.0,12905.0,Less Selective,0.9851000000000001,,,2794,1000600,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+West Georgia Technical College,Waco,GA,3122.0,5522.0,2050.0,Moderately Selective,0.5,,,4811,1000601,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Clayton  State University,Morrow,GA,5068.0,15790.0,10145.0,Less Selective,0.7059000000000001,,,4390,1000602,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Columbus Technical College,Columbus,GA,3042.0,5442.0,4959.0,Moderately Selective,0.5,,,2668,1000603,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Columbus State University,Columbus,GA,5751.0,16805.0,11889.0,Less Selective,0.9924,,,5537,1000604,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Georgia Northwestern Technical College,Rome,GA,3132.0,5532.0,1432.0,Moderately Selective,0.5,,,4080,1000605,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Covenant College,Lookout Mountain,GA,40464.0,40464.0,24832.0,Less Selective,0.8176000000000001,,,858,1000606,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Dalton State College,Dalton,GA,3283.0,10189.0,4694.0,Moderately Selective,0.5,,,4419,1000607,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+South University-Savannah,Savannah,GA,18238.0,18238.0,24116.0,Moderately Selective,0.5,,,246,1000608,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+East Georgia State College,Swainsboro,GA,2736.0,9088.0,9380.0,Moderately Selective,0.5,,,1368,1000609,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Emmanuel University,Franklin Springs,GA,23664.0,23664.0,19297.0,Moderately Selective,0.5336,,,719,1000610,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Emory University,Atlanta,GA,60774.0,60774.0,23911.0,Highly Selective,0.111,,,7275,1000611,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Georgia Highlands College,Rome,GA,2944.0,9296.0,6588.0,Moderately Selective,0.5,,,4441,1000612,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Fort Valley State University,Fort Valley,GA,5392.0,16114.0,11609.0,Less Selective,0.628,,,2541,1000613,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Georgia Institute of Technology-Main Campus,Atlanta,GA,11764.0,32876.0,13289.0,Highly Selective,0.1646,,,18260,1000614,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Georgia Southwestern State University,Americus,GA,4980.0,15702.0,12052.0,Less Selective,0.7716,,,2291,1000615,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Georgia College & State University,Milledgeville,GA,8998.0,28178.0,18809.0,Less Selective,0.8776999999999999,,,5599,1000616,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Georgia Southern University,Statesboro,GA,5905.0,16959.0,16531.0,Less Selective,0.8963,,,21029,1000617,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Georgia State University,Atlanta,GA,8478.0,23709.0,15931.0,Less Selective,0.6228,,,27109,1000618,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Georgia,Athens,GA,11180.0,30220.0,13816.0,Moderately Selective,0.37200000000000005,,,31310,1000619,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Gordon State College,Barnesville,GA,3475.0,10381.0,8918.0,Less Selective,0.8678,,,2605,1000620,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Southern Crescent Technical College,Griffin,GA,3126.0,5526.0,4652.0,Moderately Selective,0.5,,,4035,1000621,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Gupton Jones College of Funeral Service,Decatur,GA,21000.0,21000.0,21563.0,Moderately Selective,0.5,,,451,1000622,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Gwinnett College-Lilburn,Lilburn,GA,10850.0,10850.0,27010.0,Moderately Selective,0.5,,,132,1000623,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Gwinnett Technical College,Lawrenceville,GA,3356.0,5756.0,12599.0,Moderately Selective,0.5,,,7395,1000624,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+LaGrange College,Lagrange,GA,34540.0,34540.0,17805.0,Less Selective,0.6321,,,566,1000625,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lanier Technical College,Gainesville,GA,3716.0,6716.0,5613.0,Moderately Selective,0.5,,,4147,1000626,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Life University,Marietta,GA,15036.0,15036.0,30257.0,Less Selective,0.9381,,,869,1000627,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Chattahoochee Technical College,Marietta,GA,3252.0,5652.0,4546.0,Moderately Selective,0.5,,,7555,1000628,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Mercer University,Macon,GA,40890.0,40890.0,22350.0,Less Selective,0.6646,,,4620,1000629,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Morehouse College,Atlanta,GA,31725.0,31725.0,35949.0,Moderately Selective,0.5139,,,2736,1000630,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Morris Brown College,Atlanta,GA,9558.0,9558.0,18898.0,Moderately Selective,0.5,,,338,1000631,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+North Georgia Technical College,Clarkesville,GA,3162.0,5562.0,4361.0,Moderately Selective,0.5,,,1966,1000632,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Oglethorpe University,Atlanta,GA,45806.0,45806.0,21735.0,Less Selective,0.6006,,,1429,1000633,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Paine College,Augusta,GA,14596.0,14596.0,15074.0,Less Selective,0.8336,,,338,1000634,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Piedmont University,Demorest,GA,30680.0,30680.0,20893.0,Less Selective,0.9284,,,1235,1000635,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Reinhardt University,Waleska,GA,28420.0,28420.0,27769.0,Moderately Selective,0.5516,,,1012,1000636,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Savannah Technical College,Savannah,GA,3072.0,5472.0,5821.0,Moderately Selective,0.5,,,2967,1000637,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Savannah College of Art and Design,Savannah,GA,40595.0,40595.0,45450.0,Less Selective,0.8368000000000001,,,14423,1000638,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Savannah State University,Savannah,GA,5498.0,16218.0,8683.0,Moderately Selective,0.5,,,2727,1000639,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Shorter University,Rome,GA,24044.0,24044.0,16286.0,Less Selective,0.9693,,,1091,1000640,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+South Georgia Technical College,Americus,GA,3782.0,6782.0,1026.0,Moderately Selective,0.5,,,1302,1000641,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Spelman College,Atlanta,GA,30058.0,30058.0,36828.0,Moderately Selective,0.34090000000000004,,,3633,1000642,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Thomas University,Thomasville,GA,11640.0,11640.0,19313.0,Moderately Selective,0.4316,,,813,1000643,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Toccoa Falls College,Toccoa Falls,GA,23250.0,23250.0,20133.0,Less Selective,0.6381,,,820,1000644,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Truett McConnell University,Cleveland,GA,25568.0,25568.0,22328.0,Less Selective,0.9068,,,768,1000645,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Wiregrass Georgia Technical College,Valdosta,GA,3212.0,5612.0,1228.0,Moderately Selective,0.5,,,2762,1000646,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Valdosta State University,Valdosta,GA,6007.0,17062.0,11298.0,Less Selective,0.8349,,,6858,1000647,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Wesleyan College,Macon,GA,27650.0,27650.0,14528.0,Less Selective,0.6207,,,466,1000648,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of West Georgia,Carrollton,GA,5971.0,17024.0,15450.0,Moderately Selective,0.49369999999999997,,,7485,1000649,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Young Harris College,Young Harris,GA,32305.0,32305.0,11008.0,Less Selective,0.6402,,,810,1000650,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Chaminade University of Honolulu,Honolulu,HI,29970.0,29970.0,28061.0,Less Selective,0.9262999999999999,,,1648,1000651,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Hawaii at Hilo,Hilo,HI,7838.0,20798.0,12063.0,Less Selective,0.8976999999999999,,,2260,1000652,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Hawaii at Manoa,Honolulu,HI,12186.0,34218.0,13181.0,Less Selective,0.6969,,,14306,1000653,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Hawaii Pacific University,Honolulu,HI,33020.0,33020.0,30557.0,Less Selective,0.8448,,,2502,1000654,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Honolulu Community College,Honolulu,HI,3174.0,8310.0,6399.0,Moderately Selective,0.5,,,1897,1000655,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Kapiolani Community College,Honolulu,HI,3284.0,8420.0,5194.0,Moderately Selective,0.5,,,3955,1000656,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Kauai Community College,Lihue,HI,3252.0,8388.0,5724.0,Moderately Selective,0.5,,,726,1000657,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Leeward Community College,Pearl City,HI,3214.0,8350.0,7636.0,Moderately Selective,0.5,,,3382,1000658,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Hawaii Maui College,Kahului,HI,3284.0,8420.0,9421.0,Moderately Selective,0.5,,,1635,1000659,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Hawaii-West Oahu,Kapolei,HI,7584.0,20544.0,10666.0,Less Selective,0.956,,,2510,1000660,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Windward Community College,Kaneohe,HI,3194.0,8330.0,7533.0,Moderately Selective,0.5,,,1109,1000661,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Carrington College-Boise,Boise,ID,9748.0,17062.0,,Moderately Selective,0.5,,,433,1000662,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Boise Bible College,Boise,ID,11240.0,11240.0,16884.0,Less Selective,0.9643,,,103,1000663,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Boise State University,Boise,ID,8782.0,26976.0,19182.0,Less Selective,0.8395999999999999,,,17081,1000664,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+College of Eastern Idaho,Idaho Falls,ID,3390.0,6750.0,8728.0,Moderately Selective,0.5,,,1396,1000665,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Idaho State University,Pocatello,ID,8356.0,27466.0,17324.0,Moderately Selective,0.5,,,7260,1000666,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Idaho,Moscow,ID,8816.0,29784.0,13782.0,Less Selective,0.7909,,,7363,1000667,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+The College of Idaho,Caldwell,ID,36030.0,36030.0,20566.0,Moderately Selective,0.4722,,,1049,1000668,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lewis-Clark State College,Lewiston,ID,7388.0,21386.0,12832.0,Less Selective,0.8978,,,2277,1000669,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+North Idaho College,Coeur d'Alene,ID,3396.0,8736.0,11481.0,Moderately Selective,0.5,,,2488,1000670,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Northwest Nazarene University,Nampa,ID,39370.0,39370.0,25537.0,Less Selective,0.6295000000000001,,,1138,1000671,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Brigham Young University-Idaho,Rexburg,ID,4656.0,4656.0,7131.0,Less Selective,0.9695,,,42090,1000672,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+College of Southern Idaho,Twin Falls,ID,3360.0,6840.0,7005.0,Moderately Selective,0.5,,,3476,1000673,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+School of the Art Institute of Chicago,Chicago,IL,54530.0,54530.0,49822.0,Less Selective,0.7642,,,2762,1000674,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Augustana College,Rock Island,IL,49834.0,49834.0,12437.0,Less Selective,0.6765000000000001,,,2418,1000675,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Aurora University,Aurora,IL,28220.0,28220.0,18992.0,Less Selective,0.8514,,,4021,1000676,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Southwestern Illinois College,Belleville,IL,3870.0,6210.0,7210.0,Moderately Selective,0.5,,,5280,1000677,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Black Hawk College,Moline,IL,4920.0,8100.0,6718.0,Moderately Selective,0.5,,,2266,1000678,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Blackburn College,Carlinville,IL,26758.0,26758.0,21814.0,Less Selective,0.8014,,,341,1000679,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Blessing Rieman College of Nursing and Health Sciences,Quincy,IL,9748.0,17062.0,,Moderately Selective,0.5,,,176,1000680,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Bradley University,Peoria,IL,39680.0,39680.0,23572.0,Less Selective,0.7666,,,3865,1000681,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Paul Mitchell the School-Tinley Park,Tinley Park,IL,9748.0,17062.0,14852.0,Moderately Selective,0.5,,,253,1000682,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Carl Sandburg College,Galesburg,IL,5300.0,8810.0,1036.0,Moderately Selective,0.5,,,1124,1000683,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Chicago State University,Chicago,IL,12754.0,12754.0,10133.0,Moderately Selective,0.4052,,,1414,1000684,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Chicago,Chicago,IL,66939.0,66939.0,18967.0,Elite,0.0479,,,7540,1000685,1.0,3.5,Required,Need-blind,Public,Economics,Mathematics,Public Policy
+City Colleges of Chicago-Kennedy-King College,Chicago,IL,4380.0,14430.0,4902.0,Moderately Selective,0.5,,,1564,1000686,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+City Colleges of Chicago-Malcolm X College,Chicago,IL,4380.0,14430.0,3729.0,Moderately Selective,0.5,,,5847,1000687,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+City Colleges of Chicago-Olive-Harvey College,Chicago,IL,4380.0,14430.0,5749.0,Moderately Selective,0.5,,,1425,1000688,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+City Colleges of Chicago-Harry S Truman College,Chicago,IL,4380.0,14430.0,3816.0,Moderately Selective,0.5,,,2248,1000689,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+City Colleges of Chicago-Richard J Daley College,Chicago,IL,4380.0,14430.0,3166.0,Moderately Selective,0.5,,,2540,1000690,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+City Colleges of Chicago-Harold Washington College,Chicago,IL,4380.0,14430.0,2974.0,Moderately Selective,0.5,,,4146,1000691,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+City Colleges of Chicago-Wilbur Wright College,Chicago,IL,4380.0,14430.0,2651.0,Moderately Selective,0.5,,,4186,1000692,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Columbia College Chicago,Chicago,IL,32520.0,32520.0,26788.0,Less Selective,0.9117000000000001,,,6294,1000693,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Concordia University-Chicago,River Forest,IL,36258.0,36258.0,16774.0,Less Selective,0.9336,,,1337,1000694,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Danville Area Community College,Danville,IL,5300.0,9200.0,2943.0,Moderately Selective,0.5,,,1360,1000695,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Tricoci University of Beauty Culture,Urbana,IL,9748.0,17062.0,15024.0,Moderately Selective,0.5,,,171,1000696,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+DePaul University,Chicago,IL,44460.0,44460.0,29141.0,Less Selective,0.7353000000000001,,,14283,1000697,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Cosmetology & Spa Academy,Crystal Lake,IL,9748.0,17062.0,14887.0,Moderately Selective,0.5,,,377,1000698,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+College of DuPage,Glen Ellyn,IL,4320.0,12510.0,6182.0,Moderately Selective,0.5,,,15185,1000699,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+East-West University,Chicago,IL,26100.0,26100.0,21055.0,Moderately Selective,0.5,,,528,1000700,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Eastern Illinois University,Charleston,IL,13403.0,15879.0,14093.0,Less Selective,0.6775,,,4398,1000701,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Elgin Community College,Elgin,IL,3180.0,9516.0,5778.0,Moderately Selective,0.5,,,6463,1000702,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Elmhurst University,Elmhurst,IL,41628.0,41628.0,21063.0,Less Selective,0.7574,,,2954,1000703,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Eureka College,Eureka,IL,28400.0,28400.0,22048.0,Less Selective,0.8847,,,522,1000704,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+First Institute of Travel Inc.,Crystal Lake,IL,9748.0,17062.0,20410.0,Moderately Selective,0.5,,,274,1000705,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Fox College,Tinley Park,IL,17190.0,17190.0,13506.0,Less Selective,0.7656000000000001,,,239,1000706,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Governors State University,University Park,IL,11320.0,11320.0,9477.0,Moderately Selective,0.5,,,2518,1000707,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Greenville University,Greenville,IL,30598.0,30598.0,21270.0,Less Selective,0.9537,,,873,1000708,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+G Skin & Beauty Institute,Schaumburg,IL,9748.0,17062.0,21142.0,Moderately Selective,0.5,,,494,1000709,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Hair Professionals School of Cosmetology,Oswego,IL,9748.0,17062.0,19759.0,Moderately Selective,0.5,,,121,1000710,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Highland Community College,Freeport,IL,4696.0,7120.0,5359.0,Moderately Selective,0.5,,,926,1000711,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Illinois Chicago,Chicago,IL,14338.0,29360.0,12313.0,Less Selective,0.785,,,21814,1000712,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Benedictine University,Lisle,IL,34290.0,34290.0,23529.0,Less Selective,0.7722,,,1817,1000713,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Illinois Urbana-Champaign,Champaign,IL,16004.0,34501.0,15201.0,Moderately Selective,0.43689999999999996,,,34623,1000714,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Illinois Wesleyan University,Bloomington,IL,55704.0,55704.0,29550.0,Moderately Selective,0.4517,,,1570,1000715,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Illinois Central College,East Peoria,IL,4650.0,11700.0,11510.0,Moderately Selective,0.5,,,4909,1000716,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Illinois College,Jacksonville,IL,37470.0,37470.0,17945.0,Less Selective,0.7467,,,925,1000717,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Olney Central College,Olney,IL,4390.0,12340.0,9968.0,Moderately Selective,0.5,,,549,1000718,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Illinois Institute of Technology,Chicago,IL,51763.0,51763.0,19353.0,Moderately Selective,0.5542,,,2812,1000719,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Illinois State University,Normal,IL,16021.0,28086.0,18996.0,Less Selective,0.8901,,,18414,1000720,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Illinois Valley Community College,Oglesby,IL,4060.0,14981.0,3957.0,Moderately Selective,0.5,,,1851,1000721,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+John A Logan College,Carterville,IL,4630.0,7540.0,7599.0,Moderately Selective,0.5,,,2018,1000722,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+John Wood Community College,Quincy,IL,5700.0,9000.0,6596.0,Moderately Selective,0.5,,,1387,1000723,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Joliet Junior College,Joliet,IL,4530.0,13800.0,5741.0,Moderately Selective,0.5,,,8843,1000724,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Judson University,Elgin,IL,30910.0,30910.0,25027.0,Less Selective,0.6312,,,780,1000725,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Kankakee Community College,Kankakee,IL,5070.0,25680.0,5190.0,Moderately Selective,0.5,,,1904,1000726,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Kaskaskia College,Centralia,IL,4800.0,12570.0,6839.0,Moderately Selective,0.5,,,1842,1000727,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Kishwaukee College,Malta,IL,4980.0,13800.0,6480.0,Moderately Selective,0.5,,,1794,1000728,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Knox College,Galesburg,IL,55587.0,55587.0,24875.0,Less Selective,0.7112999999999999,,,997,1000729,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+College of Lake County,Grayslake,IL,4494.0,14036.0,6212.0,Moderately Selective,0.5,,,9282,1000730,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lake Forest College,Lake Forest,IL,54202.0,54202.0,27499.0,Moderately Selective,0.5941,,,1782,1000731,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lake Land College,Mattoon,IL,4280.0,13906.0,3271.0,Moderately Selective,0.5,,,2492,1000732,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lewis and Clark Community College,Godfrey,IL,3552.0,12552.0,4281.0,Moderately Selective,0.5,,,2252,1000733,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lewis University,Romeoville,IL,37882.0,37882.0,18370.0,Less Selective,0.7273000000000001,,,3665,1000734,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lincoln Land Community College,Springfield,IL,3672.0,10248.0,5294.0,Moderately Selective,0.5,,,3917,1000735,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Loyola University Chicago,Chicago,IL,51716.0,51716.0,35196.0,Less Selective,0.8139,,,11576,1000736,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Generations College,Chicago,IL,12700.0,12700.0,19558.0,Moderately Selective,0.5,,,317,1000737,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+McHenry County College,Crystal Lake,IL,4012.0,14885.0,8093.0,Moderately Selective,0.5,,,4335,1000738,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+McKendree University,Lebanon,IL,34070.0,34070.0,24190.0,Less Selective,0.6388,,,1600,1000739,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Methodist College,Peoria,IL,18008.0,18008.0,14867.0,Moderately Selective,0.3111,,,374,1000740,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Millikin University,Decatur,IL,26892.0,43670.0,8837.0,Moderately Selective,0.5405,,,1458,1000741,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Monmouth College,Monmouth,IL,43520.0,43520.0,18034.0,Less Selective,0.8662000000000001,,,725,1000742,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Moody Bible Institute,Chicago,IL,15356.0,15356.0,25007.0,Less Selective,0.9754,,,1586,1000743,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Moraine Valley Community College,Palos Hills,IL,3822.0,9846.0,1771.0,Moderately Selective,0.5,,,7417,1000744,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Morton College,Cicero,IL,4884.0,11028.0,6763.0,Moderately Selective,0.5,,,2593,1000745,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+National Louis University,Chicago,IL,12345.0,12345.0,16157.0,Less Selective,0.9312,,,4100,1000746,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+North Central College,Naperville,IL,44394.0,44394.0,23033.0,Moderately Selective,0.5831000000000001,,,2360,1000747,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+North Park University,Chicago,IL,35325.0,35325.0,18191.0,Less Selective,0.7284,,,1844,1000748,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Northern Illinois University,Dekalb,IL,12700.0,12700.0,12909.0,Less Selective,0.7045,,,11277,1000749,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Northwestern University,Evanston,IL,65997.0,65997.0,27143.0,Elite,0.07150000000000001,,,8960,1000750,1.0,3.5,Required,Need-blind,Public,Journalism,Business,Performing Arts
+Northeastern Illinois University,Chicago,IL,12383.0,22726.0,13550.0,Less Selective,0.7040000000000001,,,3869,1000751,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Oakton College,Des Plaines,IL,3985.0,12462.0,6188.0,Moderately Selective,0.5,,,6229,1000752,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Olivet Nazarene University,Bourbonnais,IL,37940.0,37940.0,21539.0,Less Selective,0.669,,,2485,1000753,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Parkland College,Champaign,IL,4284.0,13266.0,8271.0,Moderately Selective,0.5,,,3293,1000754,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Prairie State College,Chicago Heights,IL,4176.0,11064.0,5280.0,Moderately Selective,0.5,,,2448,1000755,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Principia College,Elsah,IL,33280.0,33280.0,,Moderately Selective,0.444,,,337,1000756,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Quincy University,Quincy,IL,35740.0,35740.0,17324.0,Moderately Selective,0.4989,,,1038,1000757,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Rend Lake College,Ina,IL,4500.0,7800.0,7309.0,Moderately Selective,0.5,,,1196,1000758,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Richland Community College,Decatur,IL,4590.0,17070.0,5393.0,Moderately Selective,0.5,,,1412,1000759,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Rock Valley College,Rockford,IL,4274.0,21344.0,7325.0,Moderately Selective,0.5,,,4362,1000760,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Rockford University,Rockford,IL,37300.0,37300.0,23066.0,Moderately Selective,0.5722999999999999,,,956,1000761,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Roosevelt University,Chicago,IL,20280.0,20280.0,20152.0,Less Selective,0.9427,,,2583,1000762,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Dominican University,River Forest,IL,37844.0,37844.0,15113.0,Less Selective,0.7979999999999999,,,2271,1000763,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Rush University,Chicago,IL,9748.0,17062.0,,Moderately Selective,0.5,,,120,1000764,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Saint Francis Medical Center College of Nursing,Peoria,IL,9748.0,17062.0,,Moderately Selective,0.5,,,267,1000765,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of St Francis,Joliet,IL,37000.0,37000.0,16284.0,Less Selective,0.6393,,,1292,1000766,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Saint Xavier University,Chicago,IL,36840.0,36840.0,12093.0,Less Selective,0.8575,,,3030,1000767,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Illinois Springfield,Springfield,IL,12252.0,22017.0,8916.0,Less Selective,0.8437,,,2292,1000768,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Sauk Valley Community College,Dixon,IL,5190.0,12840.0,8388.0,Moderately Selective,0.5,,,1164,1000769,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Shawnee Community College,Ullin,IL,4650.0,7500.0,4542.0,Moderately Selective,0.5,,,675,1000770,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+St. Augustine College,Chicago,IL,13288.0,13288.0,17082.0,Moderately Selective,0.5,,,749,1000771,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Southeastern Illinois College,Harrisburg,IL,4320.0,6540.0,5571.0,Moderately Selective,0.5,,,659,1000772,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Spoon River College,Canton,IL,5580.0,12540.0,6584.0,Moderately Selective,0.5,,,735,1000773,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Saint Anthony College of Nursing,Rockford,IL,27811.0,27811.0,,Less Selective,1.0,,,152,1000774,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Southern Illinois University-Carbondale,Carbondale,IL,13244.0,13244.0,16177.0,Less Selective,0.9044,,,8116,1000775,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Southern Illinois University-Edwardsville,Edwardsville,IL,12922.0,12922.0,13696.0,Less Selective,0.9721,,,8836,1000776,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+South Suburban College,South Holland,IL,5093.0,12683.0,2919.0,Moderately Selective,0.5,,,2012,1000777,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Trinity Christian College,Palos Heights,IL,20325.0,20325.0,16381.0,Less Selective,0.8865000000000001,,,796,1000778,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Trinity International University-Illinois,Deerfield,IL,12320.0,12320.0,21386.0,Less Selective,0.9318000000000001,,,140,1000779,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Triton College,River Grove,IL,4920.0,14880.0,4427.0,Moderately Selective,0.5,,,6229,1000780,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Spa & Cosmetology Arts,Springfield,IL,9748.0,17062.0,17951.0,Moderately Selective,0.5,,,165,1000781,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Waubonsee Community College,Sugar Grove,IL,3432.0,12330.0,6113.0,Moderately Selective,0.5,,,5499,1000782,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Western Illinois University,Macomb,IL,14952.0,14952.0,11592.0,Less Selective,0.7495999999999999,,,4939,1000783,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Wheaton College,Wheaton,IL,43930.0,43930.0,26984.0,Less Selective,0.8998,,,2087,1000784,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+William Rainey Harper College,Palatine,IL,3822.0,11802.0,6186.0,Moderately Selective,0.5,,,8815,1000785,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Anderson University,Anderson,IN,35640.0,35640.0,22144.0,Moderately Selective,0.5342,,,1070,1000786,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Ball State University,Muncie,IN,10758.0,28766.0,15898.0,Less Selective,0.716,,,13770,1000787,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Bethel University,Mishawaka,IN,33320.0,33320.0,19726.0,Less Selective,0.9868000000000001,,,1069,1000788,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Butler University,Indianapolis,IN,45980.0,45980.0,38472.0,Less Selective,0.8587,,,4383,1000789,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Calumet College of Saint Joseph,Whiting,IN,22650.0,22650.0,20739.0,Moderately Selective,0.5,,,560,1000790,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+College of Court Reporting Inc,Valparaiso,IN,10080.0,10080.0,41410.0,Moderately Selective,0.5,,,183,1000791,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Tricoci University of Beauty Culture-Highland,Highland,IN,9748.0,17062.0,19194.0,Moderately Selective,0.5,,,317,1000792,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+DePauw University,Greencastle,IN,57070.0,57070.0,24546.0,Moderately Selective,0.5406,,,1804,1000793,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Earlham College,Richmond,IN,51840.0,51840.0,24516.0,Less Selective,0.7422,,,612,1000794,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Evansville,Evansville,IN,42676.0,42676.0,20230.0,Less Selective,0.7765000000000001,,,1477,1000795,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Franklin College,Franklin,IN,37350.0,37350.0,22762.0,Less Selective,0.7058,,,872,1000796,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Goshen College,Goshen,IN,37760.0,37760.0,15725.0,Less Selective,0.8894,,,761,1000797,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Grace College and Theological Seminary,Winona Lake,IN,30034.0,30034.0,18406.0,Less Selective,0.8078,,,1511,1000798,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Hanover College,Hanover,IN,42894.0,42894.0,21826.0,Less Selective,0.8397,,,958,1000799,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Holy Cross College,Notre Dame,IN,35500.0,35500.0,26470.0,Less Selective,0.7371,,,533,1000800,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+PJ's College of Cosmetology-Clarksville,Clarksville,IN,9748.0,17062.0,20299.0,Moderately Selective,0.5,,,222,1000801,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Huntington University,Huntington,IN,29982.0,29982.0,13710.0,Less Selective,0.7115,,,1016,1000802,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Ivy Tech Community College,Indianapolis,IN,4912.0,9465.0,6544.0,Moderately Selective,0.5,,,54926,1000803,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Purdue University Fort Wayne,Fort Wayne,IN,9254.0,22220.0,11513.0,Less Selective,0.8565999999999999,,,5450,1000804,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Indiana University-Indianapolis,Indianapolis,IN,10449.0,33717.0,11408.0,Less Selective,0.8139,,,16582,1000805,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Indianapolis,Indianapolis,IN,36136.0,36136.0,18748.0,Less Selective,0.7276,,,3147,1000806,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Indiana Institute of Technology,Fort Wayne,IN,30446.0,30446.0,21318.0,Moderately Selective,0.5689,,,1361,1000807,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Southern Indiana,Evansville,IN,10136.0,22573.0,12621.0,Less Selective,0.9465,,,5344,1000808,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Indiana State University,Terre Haute,IN,9992.0,21734.0,12188.0,Less Selective,0.915,,,6620,1000809,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Indiana University-Kokomo,Kokomo,IN,8179.0,22043.0,6276.0,Less Selective,0.8469,,,2308,1000810,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Indiana University-South Bend,South Bend,IN,8179.0,22043.0,8364.0,Less Selective,0.8599,,,3807,1000811,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Indiana University-Bloomington,Bloomington,IN,11790.0,40482.0,15342.0,Less Selective,0.8037000000000001,,,36571,1000812,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Indiana University-Northwest,Gary,IN,8179.0,22043.0,5970.0,Less Selective,0.767,,,2582,1000813,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Indiana University-Southeast,New Albany,IN,8179.0,22043.0,8257.0,Less Selective,0.8312,,,3088,1000814,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Indiana University-East,Richmond,IN,8179.0,22043.0,9082.0,Less Selective,0.7123999999999999,,,2446,1000815,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+International Business College-Indianapolis,Indianapolis,IN,16480.0,16480.0,14989.0,Less Selective,0.8181999999999999,,,145,1000816,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lincoln College of Technology-Indianapolis,Indianapolis,IN,9748.0,17062.0,29530.0,Moderately Selective,0.5,,,1004,1000817,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Manchester University,North Manchester,IN,37090.0,37090.0,19268.0,Less Selective,0.9129999999999999,,,895,1000818,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Marian University,Indianapolis,IN,39100.0,39100.0,23594.0,Less Selective,0.9534,,,2336,1000819,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Indiana Wesleyan University-Marion,Marion,IN,31168.0,31168.0,23069.0,Less Selective,0.8220999999999999,,,1927,1000820,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Martin University,Indianapolis,IN,12830.0,12830.0,13879.0,Moderately Selective,0.5,,,164,1000821,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Mid-America College of Funeral Service,Jeffersonville,IN,19800.0,19800.0,25456.0,Moderately Selective,0.5,,,337,1000822,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Notre Dame,Notre Dame,IN,62693.0,62693.0,27823.0,Highly Selective,0.12380000000000001,,,8923,1000823,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Oakland City University,Oakland City,IN,27150.0,27150.0,12820.0,Less Selective,0.6820999999999999,,,470,1000824,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Ravenscroft Beauty College,Fort Wayne,IN,9748.0,17062.0,,Moderately Selective,0.5,,,114,1000825,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Rogers Academy of Hair Design,Evansville,IN,9748.0,17062.0,15466.0,Moderately Selective,0.5,,,101,1000826,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Rose-Hulman Institute of Technology,Terre Haute,IN,56674.0,56674.0,40665.0,Less Selective,0.7281,,,2224,1000827,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Saint Francis-Fort Wayne,Fort Wayne,IN,35420.0,35420.0,20361.0,Less Selective,0.9756,,,1599,1000828,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Saint Mary-of-the-Woods College,Saint Mary of the Woods,IN,33490.0,33490.0,43465.0,Less Selective,0.7614,,,896,1000829,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Saint Mary's College,Notre Dame,IN,51430.0,51430.0,28552.0,Less Selective,0.8111,,,1399,1000830,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Saint Elizabeth School of Nursing,Lafayette,IN,20064.0,20064.0,27833.0,Less Selective,1.0,,,131,1000831,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Taylor University,Upland,IN,39104.0,39104.0,24327.0,Less Selective,0.7611,,,1890,1000832,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Trine University,Angola,IN,35600.0,35600.0,25580.0,Less Selective,0.8469,,,2344,1000833,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Valparaiso University,Valparaiso,IN,46588.0,46588.0,21583.0,Less Selective,0.9222,,,2229,1000834,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Vincennes University,Vincennes,IN,6886.0,16289.0,10215.0,Moderately Selective,0.5,,,3739,1000835,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Wabash College,Crawfordsville,IN,49125.0,49125.0,21906.0,Less Selective,0.6278,,,845,1000836,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Allen College,Waterloo,IA,20444.0,20444.0,,Moderately Selective,0.5,,,279,1000837,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Briar Cliff University,Sioux City,IA,35534.0,35534.0,21590.0,Moderately Selective,0.5,,,626,1000838,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Buena Vista University,Storm Lake,IA,40190.0,40190.0,18321.0,Less Selective,0.7176,,,1378,1000839,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Capri College-Dubuque,Dubuque,IA,9748.0,17062.0,14104.0,Moderately Selective,0.5,,,153,1000840,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Capri College-Cedar Rapids,Cedar Rapids,IA,9748.0,17062.0,13683.0,Moderately Selective,0.5,,,128,1000841,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Central College,Pella,IA,20988.0,20988.0,22353.0,Less Selective,0.7897,,,1062,1000842,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Clarke University,Dubuque,IA,39600.0,39600.0,20068.0,Less Selective,0.6816,,,782,1000843,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Coe College,Cedar Rapids,IA,52576.0,52576.0,19155.0,Less Selective,0.7067,,,1246,1000844,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Cornell College,Mount Vernon,IA,50634.0,50634.0,25079.0,Less Selective,0.8066,,,1074,1000845,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Des Moines Area Community College,Ankeny,IA,5550.0,11100.0,11050.0,Moderately Selective,0.5,,,10406,1000846,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Dordt University,Sioux Center,IA,35960.0,35960.0,25383.0,Less Selective,0.7116,,,1547,1000847,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Drake University,Des Moines,IA,49944.0,49944.0,30042.0,Less Selective,0.6413,,,2669,1000848,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Dubuque,Dubuque,IA,40065.0,40065.0,23250.0,Less Selective,0.8692,,,1473,1000849,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Ellsworth Community College,Iowa Falls,IA,5304.0,6312.0,10915.0,Moderately Selective,0.5,,,540,1000850,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Emmaus Bible College,Dubuque,IA,20000.0,20000.0,12904.0,Less Selective,0.977,,,183,1000851,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Eastern Iowa Community College District,Davenport,IA,4680.0,6299.0,9722.0,Moderately Selective,0.5,,,3244,1000852,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Faith Baptist Bible College and Theological Seminary,Ankeny,IA,19530.0,19530.0,17819.0,Moderately Selective,0.4968,,,371,1000853,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Graceland University-Lamoni,Lamoni,IA,33220.0,33220.0,15975.0,Less Selective,0.8321999999999999,,,901,1000854,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Grand View University,Des Moines,IA,33450.0,33450.0,21616.0,Less Selective,0.9838,,,1472,1000855,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Grinnell College,Grinnell,IA,64862.0,64862.0,15608.0,Highly Selective,0.1268,,,1705,1000856,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Hawkeye Community College,Waterloo,IA,6308.0,6598.0,10298.0,Moderately Selective,0.5,,,2528,1000857,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Indian Hills Community College,Ottumwa,IA,4872.0,6120.0,7492.0,Moderately Selective,0.5,,,1635,1000858,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Iowa Central Community College,Fort Dodge,IA,5376.0,7668.0,9601.0,Moderately Selective,0.5,,,3107,1000859,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Iowa Lakes Community College,Estherville,IA,7196.0,7644.0,10846.0,Moderately Selective,0.5,,,995,1000860,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Iowa State University,Ames,IA,10497.0,27683.0,18165.0,Less Selective,0.8913,,,25033,1000861,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Iowa Western Community College,Council Bluffs,IA,6780.0,6930.0,11574.0,Moderately Selective,0.5,,,3029,1000862,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Iowa,Iowa City,IA,10964.0,32927.0,21398.0,Less Selective,0.8467,,,21691,1000863,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Kirkwood Community College,Cedar Rapids,IA,5980.0,7968.0,9388.0,Moderately Selective,0.5,,,7438,1000864,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+La James International College-Johnston,Johnston,IA,9748.0,17062.0,17456.0,Moderately Selective,0.5,,,113,1000865,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Loras College,Dubuque,IA,38298.0,38298.0,21057.0,Less Selective,0.9183,,,1087,1000866,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Luther College,Decorah,IA,50320.0,50320.0,25635.0,Less Selective,0.7326999999999999,,,1454,1000867,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Maharishi International University,Fairfield,IA,16530.0,16530.0,18225.0,Less Selective,0.9690000000000001,,,774,1000868,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Marshalltown Community College,Marshalltown,IA,5304.0,5808.0,7144.0,Moderately Selective,0.5,,,868,1000869,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Mercy College of Health Sciences,Des Moines,IA,17328.0,17328.0,23417.0,Less Selective,0.9878,,,905,1000870,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Morningside University,Sioux City,IA,38190.0,38190.0,23169.0,Less Selective,0.7056999999999999,,,1166,1000871,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Mount Mercy University,Cedar Rapids,IA,39070.0,39070.0,23435.0,Less Selective,0.7876000000000001,,,1135,1000872,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Ashford University,San Diego,CA,13160.0,13160.0,25321.0,Moderately Selective,0.5,,,23734,1000873,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+North Iowa Area Community College,Mason City,IA,6436.0,9245.0,8849.0,Moderately Selective,0.5,,,1271,1000874,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Northern Iowa,Cedar Falls,IA,9728.0,21272.0,14609.0,Less Selective,0.9440000000000001,,,7599,1000875,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Northwestern College,Orange City,IA,35300.0,35300.0,23519.0,Less Selective,0.8701000000000001,,,1125,1000876,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Northeast Iowa Community College,Calmar,IA,6600.0,7470.0,10059.0,Moderately Selective,0.5,,,1736,1000877,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Northwest Iowa Community College,Sheldon,IA,7110.0,7410.0,12357.0,Moderately Selective,0.5,,,856,1000878,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+PCI Academy-Ames,Ames,IA,9748.0,17062.0,18518.0,Moderately Selective,0.5,,,170,1000879,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Saint Ambrose University,Davenport,IA,35598.0,35598.0,22750.0,Less Selective,0.7332,,,2101,1000880,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+St Luke's College,Sioux City,IA,20940.0,20940.0,13021.0,Moderately Selective,0.44439999999999996,,,192,1000881,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+La James International College-Davenport,Davenport,IA,9748.0,17062.0,20940.0,Moderately Selective,0.5,,,123,1000882,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Simpson College,Indianola,IA,46212.0,46212.0,22231.0,Less Selective,0.8887999999999999,,,1130,1000883,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Southeastern Community College,West Burlington,IA,6300.0,6450.0,12812.0,Moderately Selective,0.5,,,1529,1000884,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Southwestern Community College,Creston,IA,7024.0,7248.0,9775.0,Moderately Selective,0.5,,,774,1000885,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Capri College-Davenport,Davenport,IA,9748.0,17062.0,12882.0,Moderately Selective,0.5,,,142,1000886,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Upper Iowa University,Fayette,IA,19000.0,19000.0,23172.0,Less Selective,0.9338,,,2021,1000887,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Waldorf University,Forest City,IA,25220.0,25220.0,21683.0,Less Selective,0.726,,,2103,1000888,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Wartburg College,Waverly,IA,51040.0,51040.0,22604.0,Less Selective,0.9941,,,1446,1000889,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+The Salon Professional Academy-Cedar Falls,Cedar Falls,IA,9748.0,17062.0,13595.0,Moderately Selective,0.5,,,101,1000890,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Western Iowa Tech Community College,Sioux City,IA,5042.0,5186.0,8875.0,Moderately Selective,0.5,,,2589,1000891,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+William Penn University,Oskaloosa,IA,28750.0,28750.0,22115.0,Moderately Selective,0.5700999999999999,,,1391,1000892,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Allen County Community College,Iola,KS,3920.0,4480.0,5899.0,Moderately Selective,0.5,,,761,1000893,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Baker University,Baldwin City,KS,33900.0,33900.0,22500.0,Less Selective,0.9209999999999999,,,1080,1000894,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Barton County Community College,Great Bend,KS,3616.0,4832.0,11865.0,Moderately Selective,0.5,,,2273,1000895,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Benedictine College,Atchison,KS,34800.0,34800.0,27477.0,Less Selective,0.7645000000000001,,,2236,1000896,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Bethany College,Lindsborg,KS,31946.0,31946.0,29203.0,Less Selective,0.7859999999999999,,,583,1000897,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Bethel College-North Newton,North Newton,KS,34002.0,34002.0,24392.0,Less Selective,0.9570000000000001,,,499,1000898,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Butler Community College,El Dorado,KS,3556.0,6256.0,16051.0,Moderately Selective,0.5,,,5694,1000899,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Central Christian College of Kansas,McPherson,KS,21000.0,21000.0,12473.0,Moderately Selective,0.5,,,394,1000900,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Cloud County Community College,Concordia,KS,3180.0,4140.0,11477.0,Moderately Selective,0.5,,,807,1000901,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Coffeyville Community College,Coffeyville,KS,3040.0,4608.0,5481.0,Moderately Selective,0.5,,,870,1000902,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Colby Community College,Colby,KS,4046.0,5736.0,8021.0,Moderately Selective,0.5,,,837,1000903,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Cowley County Community College,Arkansas City,KS,4350.0,6150.0,6752.0,Moderately Selective,0.5,,,1548,1000904,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Dodge City Community College,Dodge City,KS,4650.0,5850.0,6147.0,Moderately Selective,0.5,,,1200,1000905,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Donnelly College,Kansas City,KS,10350.0,10350.0,15025.0,Moderately Selective,0.5,,,343,1000906,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Emporia State University,Emporia,KS,7356.0,15669.0,15702.0,Less Selective,0.9773999999999999,,,2328,1000907,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Flint Hills Technical College,Emporia,KS,6196.0,6196.0,15533.0,Moderately Selective,0.5,,,341,1000908,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Fort Hays State University,Hays,KS,5633.0,16811.0,13493.0,Less Selective,0.9177,,,9792,1000909,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Barclay College,Haviland,KS,26590.0,26590.0,28827.0,Moderately Selective,0.5449,,,161,1000910,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Friends University,Wichita,KS,32748.0,32748.0,25752.0,Moderately Selective,0.5564,,,1015,1000911,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Fort Scott Community College,Fort Scott,KS,3240.0,3690.0,665.0,Moderately Selective,0.5,,,763,1000912,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Garden City Community College,Garden City,KS,3570.0,4200.0,8681.0,Moderately Selective,0.5,,,1321,1000913,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Haskell Indian Nations University,Lawrence,KS,600.0,600.0,3031.0,Less Selective,0.8832,,,878,1000914,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Hesston College,Hesston,KS,31368.0,31368.0,21458.0,Moderately Selective,0.5,,,308,1000915,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Highland Community College,Highland,KS,4116.0,4116.0,10388.0,Moderately Selective,0.5,,,1262,1000916,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Hutchinson Community College,Hutchinson,KS,3420.0,4650.0,5300.0,Moderately Selective,0.5,,,2911,1000917,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Independence Community College,Independence,KS,4260.0,4650.0,6262.0,Moderately Selective,0.5,,,518,1000918,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Johnson County Community College,Overland Park,KS,2328.0,5472.0,13912.0,Moderately Selective,0.5,,,10634,1000919,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Concorde Career College-Kansas City,Kansas City,MO,9748.0,17062.0,28094.0,Less Selective,0.9883,,,240,1000920,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Kansas City Kansas Community College,Kansas City,KS,3150.0,6720.0,15255.0,Moderately Selective,0.5,,,3071,1000921,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Kansas Christian College,Overland Park,KS,10950.0,10950.0,15686.0,Moderately Selective,0.5,,,143,1000922,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Kansas,Lawrence,KS,11700.0,29412.0,17365.0,Less Selective,0.882,,,19857,1000923,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Newman University,Wichita,KS,35500.0,35500.0,19045.0,Moderately Selective,0.47609999999999997,,,857,1000924,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Kansas State University,Manhattan,KS,10942.0,27816.0,17883.0,Less Selective,0.7936,,,14835,1000925,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Kansas Wesleyan University,Salina,KS,33470.0,33470.0,23369.0,Less Selective,0.8498,,,894,1000926,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Labette Community College,Parsons,KS,3968.0,4768.0,7795.0,Moderately Selective,0.5,,,766,1000927,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Manhattan Area Technical College,Manhattan,KS,9276.0,9276.0,11752.0,Moderately Selective,0.5,,,328,1000928,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Manhattan Christian College,Manhattan,KS,18424.0,18424.0,23608.0,Less Selective,1.0,,,132,1000929,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+McPherson College,McPherson,KS,35162.0,35162.0,24837.0,Less Selective,0.8379000000000001,,,786,1000930,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+MidAmerica Nazarene University,Olathe,KS,36120.0,36120.0,29520.0,Less Selective,0.7345999999999999,,,977,1000931,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Neosho County Community College,Chanute,KS,5644.0,5644.0,10179.0,Moderately Selective,0.5,,,848,1000932,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+North Central Kansas Technical College,Beloit,KS,7208.0,7208.0,17460.0,Moderately Selective,0.5,,,472,1000933,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Northwest Kansas Technical College,Goodland,KS,9748.0,17062.0,12222.0,Moderately Selective,0.5,,,314,1000934,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Ottawa University-Ottawa,Ottawa,KS,35300.0,35300.0,28083.0,Less Selective,0.8003,,,935,1000935,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Pittsburg State University,Pittsburg,KS,8008.0,19692.0,18889.0,Less Selective,0.8817,,,4162,1000936,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Pratt Community College,Pratt,KS,4064.0,4712.0,8244.0,Moderately Selective,0.5,,,600,1000937,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Saint Mary,Leavenworth,KS,33890.0,33890.0,23335.0,Less Selective,0.8984000000000001,,,889,1000938,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Salina Area Technical College,Salina,KS,7020.0,7020.0,7018.0,Moderately Selective,0.5,,,352,1000939,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Seward County Community College,Liberal,KS,3744.0,5056.0,6742.0,Moderately Selective,0.5,,,1140,1000940,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Southwestern College,Winfield,KS,38480.0,38480.0,27310.0,Less Selective,0.6496999999999999,,,1026,1000941,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Sterling College,Sterling,KS,32200.0,32200.0,22403.0,Moderately Selective,0.5303,,,569,1000942,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Tabor College,Hillsboro,KS,35050.0,35050.0,19868.0,Less Selective,0.6462,,,530,1000943,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Washburn University,Topeka,KS,9578.0,20582.0,13046.0,Moderately Selective,0.5,,,4093,1000944,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Wichita State University-Campus of Applied Sciences and Technology,Wichita,KS,6018.0,6928.0,10741.0,Moderately Selective,0.5,,,2778,1000945,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Wichita State University,Wichita,KS,9322.0,19240.0,13776.0,Less Selective,0.9494,,,10493,1000946,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Wichita Technical Institute,Wichita,KS,9748.0,17062.0,18524.0,Moderately Selective,0.5,,,866,1000947,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Alice Lloyd College,Pippa Passes,KY,14080.0,14080.0,17839.0,Less Selective,0.8556999999999999,,,528,1000948,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Asbury University,Wilmore,KY,33640.0,33640.0,20428.0,Less Selective,0.6406000000000001,,,1369,1000949,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Ashland Community and Technical College,Ashland,KY,4656.0,6192.0,4907.0,Moderately Selective,0.5,,,1566,1000950,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Bellarmine University,Louisville,KY,47180.0,47180.0,23587.0,Less Selective,0.9359000000000001,,,2286,1000951,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Berea College,Berea,KY,49326.0,49326.0,4483.0,Moderately Selective,0.3271,,,1472,1000952,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+PJ's College of Cosmetology-Bowling Green,Bowling Green,KY,9748.0,17062.0,20272.0,Moderately Selective,0.5,,,285,1000953,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Southcentral Kentucky Community and Technical College,Bowling Green,KY,4656.0,6192.0,3794.0,Moderately Selective,0.5,,,2952,1000954,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Brescia University,Owensboro,KY,30450.0,30450.0,14626.0,Moderately Selective,0.3461,,,538,1000955,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Campbellsville University,Campbellsville,KY,26990.0,26990.0,18246.0,Less Selective,0.9833,,,2641,1000956,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Bluegrass Community and Technical College,Lexington,KY,4706.0,6242.0,5920.0,Moderately Selective,0.5,,,7713,1000957,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Centre College,Danville,KY,50550.0,50550.0,21497.0,Moderately Selective,0.5434,,,1346,1000958,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Clear Creek Baptist Bible College,Pineville,KY,10120.0,10120.0,10255.0,Moderately Selective,0.5,,,132,1000959,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Paul Mitchell the School-Lexington,Lexington,KY,9748.0,17062.0,22869.0,Moderately Selective,0.5,,,204,1000960,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Galen College of Nursing-Louisville,Louisville,KY,9748.0,17062.0,,Moderately Selective,0.5,,,4184,1000961,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of the Cumberlands,Williamsburg,KY,9875.0,9875.0,11286.0,Less Selective,0.7139,,,5468,1000962,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Eastern Kentucky University,Richmond,KY,10130.0,20820.0,9962.0,Less Selective,0.7809,,,11674,1000963,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Elizabethtown Community and Technical College,Elizabethtown,KY,4656.0,6192.0,5594.0,Moderately Selective,0.5,,,3775,1000964,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Georgetown College,Georgetown,KY,42010.0,42010.0,13485.0,Less Selective,0.7387999999999999,,,1180,1000965,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Hazard Community and Technical College,Hazard,KY,4656.0,6192.0,3376.0,Moderately Selective,0.5,,,1404,1000966,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Paul Mitchell the School-Louisville,Louisville,KY,9748.0,17062.0,26643.0,Moderately Selective,0.5,,,219,1000967,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Henderson Community College,Henderson,KY,4656.0,6192.0,5063.0,Moderately Selective,0.5,,,876,1000968,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Hopkinsville Community College,Hopkinsville,KY,4656.0,6192.0,3939.0,Moderately Selective,0.5,,,1498,1000969,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Jefferson Community and Technical College,Louisville,KY,4706.0,6242.0,6058.0,Moderately Selective,0.5,,,7105,1000970,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Summit Salon Academy-Lexington,Lexington,KY,9748.0,17062.0,13809.0,Moderately Selective,0.5,,,123,1000971,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+American National University-Pikeville,Pikeville,KY,11484.0,11484.0,16238.0,Moderately Selective,0.5,,,229,1000972,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Kentucky State University,Frankfort,KY,9214.0,13260.0,8900.0,Less Selective,0.9255,,,1317,1000973,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Kentucky Wesleyan College,Owensboro,KY,33393.0,33393.0,36431.0,Less Selective,0.67,,,794,1000974,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Kentucky,Lexington,KY,13212.0,33406.0,17218.0,Less Selective,0.9238,,,23189,1000975,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Kentucky Christian University,Grayson,KY,25000.0,25000.0,22139.0,Less Selective,0.6238,,,438,1000976,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Lindsey Wilson College,Columbia,KY,27274.0,27274.0,13811.0,Moderately Selective,0.5,,,1649,1000977,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Louisville,Louisville,KY,12828.0,29174.0,17634.0,Less Selective,0.8054000000000001,,,14187,1000978,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Madisonville Community College,Madisonville,KY,4656.0,6192.0,5782.0,Moderately Selective,0.5,,,1797,1000979,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Maysville Community and Technical College,Maysville,KY,4656.0,6192.0,5577.0,Moderately Selective,0.5,,,2207,1000980,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Midway University,Midway,KY,26080.0,26080.0,23863.0,Less Selective,0.9518000000000001,,,1250,1000981,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Morehead State University,Morehead,KY,9838.0,14706.0,10089.0,Less Selective,0.8212,,,4689,1000982,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Murray State University,Murray,KY,9708.0,19452.0,9121.0,Less Selective,0.8617,,,6646,1000983,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Gateway Community and Technical College,Florence,KY,4656.0,6192.0,5897.0,Moderately Selective,0.5,,,2824,1000984,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Northern Kentucky University,Highland Heights,KY,10896.0,21480.0,7168.0,Less Selective,0.9603,,,8065,1000985,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+West Kentucky Community and Technical College,Paducah,KY,4656.0,6192.0,5023.0,Moderately Selective,0.5,,,2810,1000986,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+University of Pikeville,Pikeville,KY,24150.0,24150.0,13591.0,Moderately Selective,0.5,,,1140,1000987,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Big Sandy Community and Technical College,Prestonsburg,KY,4656.0,6192.0,4530.0,Moderately Selective,0.5,,,1590,1000988,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Somerset Community College,Somerset,KY,4656.0,6192.0,3913.0,Moderately Selective,0.5,,,3899,1000989,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Southeast Kentucky Community & Technical College,Cumberland,KY,4656.0,6192.0,3537.0,Moderately Selective,0.5,,,1680,1000990,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+The Southern Baptist Theological Seminary,Louisville,KY,13086.0,13086.0,,Less Selective,0.9689,,,844,1000991,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Spalding University,Louisville,KY,27850.0,27850.0,24264.0,Less Selective,0.9864,,,597,1000992,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Sullivan University,Louisville,KY,14220.0,14220.0,25785.0,Moderately Selective,0.5,,,2498,1000993,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Thomas More University,Crestview Hills,KY,38400.0,38400.0,20701.0,Less Selective,0.9703,,,1305,1000994,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Transylvania University,Lexington,KY,44980.0,44980.0,23560.0,Less Selective,0.8499,,,1014,1000995,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Union College,Barbourville,KY,30946.0,30946.0,23906.0,Moderately Selective,0.5504,,,736,1000996,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Western Kentucky University,Bowling Green,KY,11436.0,27000.0,10916.0,Less Selective,0.9704999999999999,,,12267,1000997,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Central Louisiana Technical Community College,Alexandria,LA,4099.0,4099.0,5497.0,Moderately Selective,0.5,,,1100,1000998,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Ayers Career College,Shreveport,LA,9748.0,17062.0,17824.0,Moderately Selective,0.5,,,213,1000999,1.0,3.5,Required,Need-blind,Public,Business,Engineering,Biology
+Harvard University,Cambridge,MA,55587.0,55587.0,38910.899999999994,Elite,0.034,,,,2081252,1.0,3.9,Required,Need-blind,Private,Business,Engineering,Biology
+Stanford University,Stanford,CA,56169.0,56169.0,39318.299999999996,Elite,0.034,,,,2020582,1.0,3.9,Required,Need-blind,Private,Business,Engineering,Biology
+Massachusetts Institute of Technology,Cambridge,MA,55878.0,55878.0,39114.6,Elite,0.041,,,,2054622,1.0,3.9,Required,Need-blind,Private,Business,Engineering,Biology
+Princeton University,Princeton,NJ,56010.0,56010.0,39207.0,Elite,0.044,,,,2077154,1.0,3.9,Required,Need-blind,Private,Business,Engineering,Biology
+Columbia University,New York,NY,63530.0,63530.0,44471.0,Elite,0.041,,,,2093939,1.0,3.9,Required,Need-blind,Private,Business,Engineering,Biology
+University of Pennsylvania,Philadelphia,PA,61710.0,61710.0,43197.0,Elite,0.059,,,,2015521,1.0,3.9,Required,Need-blind,Private,Business,Engineering,Biology
+Dartmouth College,Hanover,NH,60870.0,60870.0,42609.0,Elite,0.062,,,,2052078,1.0,3.9,Required,Need-blind,Private,Business,Engineering,Biology
+Cornell University,Ithaca,NY,61015.0,61015.0,42710.5,Elite,0.087,,,,2038209,1.0,3.9,Required,Need-blind,Private,Business,Engineering,Biology
+Duke University,Durham,NC,60244.0,60244.0,42170.799999999996,Elite,0.059,,,,2052682,1.0,3.9,Required,Need-blind,Private,Business,Engineering,Biology
+Vanderbilt University,Nashville,TN,60920.0,60920.0,42644.0,Elite,0.071,,,,2064812,1.0,3.9,Required,Need-blind,Private,Business,Engineering,Biology
+Rice University,Houston,TX,52895.0,52895.0,37026.5,Elite,0.095,,,,2025423,1.0,3.9,Required,Need-blind,Private,Business,Engineering,Biology
+Carnegie Mellon University,Pittsburgh,PA,61030.0,61030.0,42721.0,Highly Selective,0.135,,,,2073268,1.0,3.9,Required,Need-blind,Private,Business,Engineering,Biology
+New York University,New York,NY,56500.0,56500.0,39550.0,Highly Selective,0.13,,,,2014734,1.0,3.9,Required,Need-blind,Private,Business,Engineering,Biology
