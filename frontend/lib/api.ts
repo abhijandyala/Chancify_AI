@@ -3,8 +3,22 @@
  */
 
 // Backend URL configuration
-// TODO: Deploy backend to Railway and update this URL
-const API_BASE_URL = 'http://localhost:8000';
+// Use ngrok URL for production, fallback to localhost for development
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://unsmug-untensely-elroy.ngrok-free.dev';
+
+// Headers for ngrok requests
+const getHeaders = () => {
+  const headers: HeadersInit = {
+    'Content-Type': 'application/json',
+  };
+  
+  // Add ngrok skip warning header if using ngrok
+  if (API_BASE_URL.includes('ngrok')) {
+    headers['ngrok-skip-browser-warning'] = 'true';
+  }
+  
+  return headers;
+};
 
 export interface PredictionRequest {
   gpa_unweighted: string;
@@ -134,9 +148,7 @@ export async function getAdmissionProbability(
   try {
     const response = await fetch(`${API_BASE_URL}/api/predict/frontend`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: getHeaders(),
       body: JSON.stringify(profile),
     });
 
@@ -179,9 +191,7 @@ export async function getCollegeSuggestions(
   try {
     const response = await fetch(`${API_BASE_URL}/api/suggest/colleges`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: getHeaders(),
       body: JSON.stringify(profile),
     });
 
@@ -221,9 +231,7 @@ export async function searchColleges(query: string, limit: number = 20): Promise
   try {
     const response = await fetch(`${API_BASE_URL}/api/search/colleges?q=${encodeURIComponent(query)}&limit=${limit}`, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: getHeaders(),
     });
 
     if (!response.ok) {
@@ -251,6 +259,7 @@ export async function checkMLBackendStatus(): Promise<boolean> {
   try {
     const response = await fetch(`${API_BASE_URL}/api/health`, {
       method: 'GET',
+      headers: getHeaders(),
     });
 
     if (!response.ok) {
