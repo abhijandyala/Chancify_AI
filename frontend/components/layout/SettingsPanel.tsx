@@ -1,8 +1,9 @@
 'use client'
 
-import { X } from 'lucide-react'
+import { X, LogOut } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '../ui/Button'
+import { useAuth } from '@/components/providers/AuthProvider'
 
 interface SettingsPanelProps {
   isOpen: boolean
@@ -10,6 +11,12 @@ interface SettingsPanelProps {
 }
 
 export function SettingsPanel({ isOpen, onClose }: SettingsPanelProps) {
+  const { user, logout } = useAuth()
+
+  const handleLogout = () => {
+    logout()
+    onClose()
+  }
 
   return (
     <AnimatePresence>
@@ -48,15 +55,26 @@ export function SettingsPanel({ isOpen, onClose }: SettingsPanelProps) {
             {/* Settings Content */}
             <div className="flex-1 space-y-6">
 
-              {/* User Info (Placeholder) */}
-              <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-4 opacity-50 cursor-not-allowed">
+              {/* User Info */}
+              <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-4">
                 <p className="font-semibold text-white mb-2">
                   Account
                 </p>
                 <p className="text-sm text-gray-400 mb-4">
-                  Email: Coming soon
+                  Email: {user?.email || 'Not signed in'}
                 </p>
-                <Button variant="ghost" size="sm" disabled className="text-gray-500">
+                {user?.name && (
+                  <p className="text-sm text-gray-400 mb-4">
+                    Name: {user.name}
+                  </p>
+                )}
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={handleLogout}
+                  className="text-red-400 hover:text-red-300 hover:bg-red-500/10"
+                >
+                  <LogOut className="w-4 h-4 mr-2" />
                   Sign Out
                 </Button>
               </div>

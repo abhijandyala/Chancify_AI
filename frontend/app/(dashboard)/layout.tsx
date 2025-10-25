@@ -4,6 +4,7 @@ import { useState, Suspense, useEffect } from 'react'
 import { Sidebar } from '@/components/layout/Sidebar'
 import { Header } from '@/components/layout/Header'
 import { SettingsPanel } from '@/components/layout/SettingsPanel'
+import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
 
 export default function DashboardLayout({
   children,
@@ -23,7 +24,8 @@ export default function DashboardLayout({
   }, [])
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-x-hidden">
+    <ProtectedRoute>
+      <div className="min-h-screen bg-black text-white relative overflow-x-hidden">
       {/* Complex Square Star Pattern Background */}
       <div className="absolute inset-0 opacity-30 -z-10">
         <div className="absolute inset-0" style={{
@@ -85,7 +87,8 @@ export default function DashboardLayout({
           onClose={() => setIsSettingsOpen(false)} 
         />
       </Suspense>
-    </div>
+      </div>
+    </ProtectedRoute>
   )
 }
 

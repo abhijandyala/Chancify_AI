@@ -1,20 +1,30 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { motion, AnimatePresence } from 'framer-motion'
 import SophisticatedBackground from '@/components/ui/SophisticatedBackground'
 import NextAuthGoogleButton from '@/components/auth/NextAuthGoogleButton'
 import SimpleGoogleOAuth from '@/components/auth/SimpleGoogleOAuth'
+import { useAuth } from '@/components/providers/AuthProvider'
 
 export default function AuthPage() {
   const router = useRouter()
+  const { login, signup, isAuthenticated, isLoading: authLoading } = useAuth()
   const [isLogin, setIsLogin] = useState(true)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated && !authLoading) {
+      router.push('/home')
+    }
+  }, [isAuthenticated, authLoading, router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -22,44 +32,29 @@ export default function AuthPage() {
     setError('')
 
     try {
-      // Simple authentication simulation
+      let success = false
+      
       if (isLogin) {
         // Login logic
         if (email && password) {
-          // Simulate API call
-          await new Promise(resolve => setTimeout(resolve, 1000))
-          
-          // Store auth token
-          if (typeof window !== 'undefined') {
-            localStorage.setItem('auth_token', 'demo_token_' + Date.now())
-            localStorage.setItem('user_email', email)
-            localStorage.removeItem('trial_mode') // Clear trial mode when signing in
-            // Trigger a custom event to notify header of auth change
-            window.dispatchEvent(new CustomEvent('authStateChanged'))
+          success = await login(email, password)
+          if (success) {
+            router.push('/home')
+          } else {
+            setError('Invalid email or password. Please try again.')
           }
-          
-          // Redirect to home page
-          window.location.href = '/home'
         } else {
           setError('Please fill in all fields')
         }
       } else {
         // Signup logic
         if (email) {
-          // Simulate API call
-          await new Promise(resolve => setTimeout(resolve, 1000))
-          
-          // Store auth token
-          if (typeof window !== 'undefined') {
-            localStorage.setItem('auth_token', 'demo_token_' + Date.now())
-            localStorage.setItem('user_email', email)
-            localStorage.removeItem('trial_mode') // Clear trial mode when signing in
-            // Trigger a custom event to notify header of auth change
-            window.dispatchEvent(new CustomEvent('authStateChanged'))
+          success = await signup(email, password, name)
+          if (success) {
+            router.push('/home')
+          } else {
+            setError('Failed to create account. Please try again.')
           }
-          
-          // Redirect to home page
-          window.location.href = '/home'
         } else {
           setError('Please enter your email')
         }
@@ -116,6 +111,27 @@ export default function AuthPage() {
           {/* Auth Form */}
           <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Name Input (only for signup) */}
+              <AnimatePresence>
+                {!isLogin && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Full name*"
+                      className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all"
+                      required={!isLogin}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
               {/* Email Input */}
               <div>
                 <input
@@ -128,26 +144,17 @@ export default function AuthPage() {
                 />
               </div>
 
-              {/* Password Input (only for login) */}
-              <AnimatePresence>
-                {isLogin && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <input
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Password*"
-                      className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all"
-                      required
-                    />
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {/* Password Input */}
+              <div>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder={isLogin ? "Password*" : "Create password*"}
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all"
+                  required
+                />
+              </div>
 
               {/* Submit Button */}
               <Button

@@ -1,48 +1,34 @@
 'use client'
 
 import { usePathname, useRouter } from 'next/navigation'
-import { Settings as SettingsIcon, Home, User } from 'lucide-react'
+import { Settings as SettingsIcon, Home, User, LogOut } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
+import { useAuth } from '@/components/providers/AuthProvider'
 
 export function Header() {
   const pathname = usePathname()
   const router = useRouter()
-  const [isSignedIn, setIsSignedIn] = useState(false)
+  const { isAuthenticated, user, logout } = useAuth()
   const [isTrialMode, setIsTrialMode] = useState(false)
   
-  // Check authentication status on component mount
+  // Check trial mode status
   useEffect(() => {
-    const checkAuthStatus = () => {
+    const checkTrialMode = () => {
       if (typeof window !== 'undefined') {
-        const authToken = localStorage.getItem('auth_token')
         const trialMode = localStorage.getItem('trial_mode')
-        setIsSignedIn(!!authToken)
         setIsTrialMode(trialMode === 'true')
       }
     }
     
-    checkAuthStatus()
-    
-    // Listen for auth changes
-    const handleStorageChange = () => {
-      checkAuthStatus()
-    }
-    
-    const handleAuthStateChange = () => {
-      checkAuthStatus()
-    }
+    checkTrialMode()
     
     const handleTrialModeChange = () => {
-      checkAuthStatus()
+      checkTrialMode()
     }
     
-    window.addEventListener('storage', handleStorageChange)
-    window.addEventListener('authStateChanged', handleAuthStateChange)
     window.addEventListener('trialModeChanged', handleTrialModeChange)
     return () => {
-      window.removeEventListener('storage', handleStorageChange)
-      window.removeEventListener('authStateChanged', handleAuthStateChange)
       window.removeEventListener('trialModeChanged', handleTrialModeChange)
     }
   }, [])
@@ -74,6 +60,10 @@ export function Header() {
     router.push('/')
   }
 
+  const handleLogout = () => {
+    logout()
+  }
+
   return (
     <header className="glass px-6 py-4 flex items-center justify-between mb-8 border border-white/10">
       <div className="flex items-center gap-4">
@@ -95,14 +85,15 @@ export function Header() {
       </div>
 
       <div className="flex items-center gap-3">
-        {isSignedIn ? (
-          // Show home, profile, and settings buttons when signed in
+        {isAuthenticated ? (
+          // Show home, profile, settings, and logout buttons when signed in
           <>
             <motion.button
               onClick={handleHomeClick}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="p-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300"
+              title="Go to Home"
             >
               <Home className="w-5 h-5 text-gray-400 hover:text-yellow-400 transition-colors" />
             </motion.button>
@@ -111,6 +102,7 @@ export function Header() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="p-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300"
+              title={`Profile: ${user?.email || 'User'}`}
             >
               <User className="w-5 h-5 text-gray-400 hover:text-yellow-400 transition-colors" />
             </motion.button>
@@ -121,8 +113,19 @@ export function Header() {
               transition={{ duration: 0.3 }}
               onClick={handleSettingsClick}
               className="p-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300"
+              title="Settings"
             >
               <SettingsIcon className="w-5 h-5 text-gray-400 hover:text-yellow-400 transition-colors" />
+            </motion.button>
+
+            <motion.button
+              onClick={handleLogout}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="p-3 rounded-xl border border-white/10 bg-white/5 hover:bg-red-500/20 transition-all duration-300"
+              title="Sign Out"
+            >
+              <LogOut className="w-5 h-5 text-gray-400 hover:text-red-400 transition-colors" />
             </motion.button>
           </>
         ) : isTrialMode ? (
