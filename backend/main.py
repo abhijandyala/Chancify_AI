@@ -42,13 +42,40 @@ def safe_float(value, default=0.0):
         except (ValueError, TypeError):
             return default
     else:
-        float_val = value
+        try:
+            float_val = float(value)
+        except (ValueError, TypeError):
+            return default
     
-    # Check for NaN and infinity
-    if pd.isna(float_val) or np.isinf(float_val):
+    # Check for NaN and infinity - only after conversion to float
+    try:
+        if pd.isna(float_val) or np.isinf(float_val):
+            return default
+    except (TypeError, ValueError):
         return default
     
     return float_val
+
+def safe_int(value, default=0):
+    """Convert value to int, handling NaN, None, and invalid values"""
+    if value is None:
+        return default
+    
+    # Handle string inputs
+    if isinstance(value, str):
+        if not value.strip():
+            return default
+        try:
+            int_val = int(float(value))  # Convert via float first to handle "3.0" strings
+        except (ValueError, TypeError):
+            return default
+    else:
+        try:
+            int_val = int(value)
+        except (ValueError, TypeError):
+            return default
+    
+    return int_val
 
 def safe_round(value, decimals=4, default=0.0):
     """Round value to specified decimals, handling NaN, None, and infinity"""
