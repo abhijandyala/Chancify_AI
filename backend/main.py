@@ -10,7 +10,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.config import settings
 from backend.database import create_tables
-from backend.data.improved_major_mapping import get_colleges_for_major, get_major_strength_score, get_major_relevance_info
+from backend.data.real_ipeds_major_mapping import get_colleges_for_major, get_major_strength_score, get_major_relevance_info
+from backend.data.real_college_suggestions import real_college_suggestions
 
 # Configure logging
 logging.basicConfig(
@@ -464,15 +465,14 @@ class CollegeSuggestionsRequest(BaseModel):
 @app.post("/api/suggest/colleges")
 async def suggest_colleges(request: CollegeSuggestionsRequest):
     """
-    Get AI-suggested colleges based on user profile using hybrid ML system.
+    Get AI-suggested colleges based on user profile using real IPEDS data.
     
     This endpoint:
     1. Processes user profile data from frontend
     2. Calculates academic strength score
-    3. Runs ML predictions on subset of colleges (90 instead of 477) for faster response
+    3. Uses real IPEDS data to find colleges strong in the user's major
     4. Categorizes colleges into Safety/Target/Reach based on realistic probability ranges
-    5. Ensures elite universities appear in reach category when appropriate
-    6. Returns balanced suggestions (3 safety, 3 target, 3 reach)
+    5. Returns balanced suggestions (3 safety, 3 target, 3 reach) with accurate major relevance
     
     Args:
         request: CollegeSuggestionsRequest containing user profile data
@@ -493,8 +493,6 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
                 return cached_data
         
         logger.info(f"Processing new suggestions for key: {cache_key[:20]}...")
-        # Get predictor
-        predictor = get_predictor()
         
         # Convert frontend string values to appropriate types
         def safe_float(value: str) -> float:
@@ -509,832 +507,156 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
             except (ValueError, TypeError):
                 return 0
         
-        # Calculate derived factor scores from real data
+        # Calculate academic strength
         gpa_unweighted = safe_float(request.gpa_unweighted)
         gpa_weighted = safe_float(request.gpa_weighted)
         sat_score = safe_int(request.sat)
         act_score = safe_int(request.act)
         
-        # Calculate grades score from GPA (0-10 scale)
-        def calculate_grades_score(gpa_unweighted, gpa_weighted):
-            if gpa_unweighted > 0:
-                return min(10.0, (gpa_unweighted / 4.0) * 10.0)
-            elif gpa_weighted > 0:
-                return min(10.0, (gpa_weighted / 5.0) * 10.0)
-            return 5.0
+        # Calculate academic strength (0-10 scale)
+        gpa_score = min(10.0, (gpa_unweighted / 4.0) * 10.0) if gpa_unweighted > 0 else 5.0
+        sat_score_scaled = min(10.0, max(0.0, ((sat_score - 1200) / 400) * 5.0 + 5.0)) if sat_score > 0 else 5.0
+        act_score_scaled = min(10.0, max(0.0, ((act_score - 20) / 16) * 5.0 + 5.0)) if act_score > 0 else 5.0
         
-        # Calculate testing score from SAT/ACT (0-10 scale)
-        def calculate_testing_score(sat, act):
-            if sat > 0:
-                # FIXED: More realistic SAT scoring - 1200=5.0, 1600=10.0
-                return min(10.0, max(0.0, ((sat - 1200) / 400) * 5.0 + 5.0))
-            elif act > 0:
-                # FIXED: More realistic ACT scoring - 20=5.0, 36=10.0
-                return min(10.0, max(0.0, ((act - 20) / 16) * 5.0 + 5.0))
-            return 5.0
+        # Use the higher of SAT or ACT
+        test_score = max(sat_score_scaled, act_score_scaled)
         
-        # Calculate major fit score based on major relevance
-        def calculate_major_fit_score(major, college_name):
-            popular_majors = ['Computer Science', 'Business', 'Engineering', 'Biology', 'Psychology']
-            if major in popular_majors:
-                return 7.0
-            return 6.0
+        # Calculate academic strength (0-10 scale)
+        academic_strength = (gpa_score + test_score) / 2.0
         
-        # Create student features from frontend data
-        student = StudentFeatures(
-            # Academic metrics
-            gpa_unweighted=gpa_unweighted,
-            gpa_weighted=gpa_weighted,
-            sat_total=sat_score,
-            act_composite=act_score,
+        # Calculate extracurricular strength
+        ec_strength = (
+            safe_float(request.extracurricular_depth) +
+            safe_float(request.leadership_positions) +
+            safe_float(request.awards_publications) +
+            safe_float(request.passion_projects)
+        ) / 4.0
+        
+        # Calculate overall student strength
+        student_strength = (academic_strength * 0.7) + (ec_strength * 0.3)
+        
+        # Get real college suggestions based on major
+        major = request.major
+        
+        # Try to get balanced suggestions from real IPEDS data
+        try:
+            college_suggestions = real_college_suggestions.get_balanced_suggestions(major, student_strength)
             
-            # Course rigor and class info
-            ap_count=int(safe_float(request.extracurricular_depth) * 2),  # Estimate based on extracurricular depth
-            honors_count=int(safe_float(request.extracurricular_depth) * 1.5),  # Estimate based on extracurricular depth
-            class_rank_percentile=safe_float(request.hs_reputation) * 10,  # Estimate based on HS reputation
-            class_size=500,  # Default class size
+            # If we don't have enough suggestions, use fallback
+            if len(college_suggestions) < 9:
+                college_suggestions = real_college_suggestions.get_fallback_suggestions(major, student_strength)
             
-            # Extracurricular counts and commitment
-            ec_count=min(10, max(1, safe_int(request.extracurricular_depth) // 2)),  # Derive from extracurricular depth
-            leadership_positions_count=safe_int(request.leadership_positions),
-            years_commitment=min(6, max(1, safe_int(request.extracurricular_depth) // 2)),  # Derive from extracurricular depth
-            hours_per_week=min(20.0, max(2.0, safe_float(request.extracurricular_depth) * 1.5)),  # Derive from extracurricular depth
-            awards_count=safe_int(request.awards_publications),
-            national_awards=min(5, max(0, safe_int(request.awards_publications) // 2)),  # Derive from awards/publications
+        except Exception as e:
+            logger.error(f"Error getting real college suggestions: {e}")
+            college_suggestions = real_college_suggestions.get_fallback_suggestions(major, student_strength)
+        
+        # Convert to API response format
+        suggestions = []
+        for college_data in college_suggestions[:9]:  # Ensure exactly 9 suggestions
+            college_name = college_data['name']
             
-            # Demographics and diversity
-            first_generation=safe_float(request.firstgen_diversity) > 7.0,  # Derive from firstgen_diversity
-            underrepresented_minority=safe_float(request.firstgen_diversity) > 6.0,  # Derive from firstgen_diversity
-            geographic_diversity=safe_float(request.geographic_diversity),
-            legacy_status=bool(safe_int(request.legacy_status)),
-            recruited_athlete=safe_float(request.volunteer_work) > 7.0,  # Derive from volunteer_work
+            # Calculate probability based on student strength and college selectivity
+            acceptance_rate = college_data['acceptance_rate']
+            college_selectivity = 10.0 - (acceptance_rate * 10.0)
             
-            # Factor scores (calculated from real data, not defaults)
-            factor_scores={
-                'grades': calculate_grades_score(gpa_unweighted, gpa_weighted),
-                'rigor': safe_float(request.extracurricular_depth),  # Use extracurricular depth as rigor proxy
-                'testing': calculate_testing_score(sat_score, act_score),
-                'essay': safe_float(request.essay_quality),
-                'ecs_leadership': safe_float(request.extracurricular_depth),
-                'recommendations': safe_float(request.recommendations),
-                'plan_timing': safe_float(request.plan_timing),
-                'athletic_recruit': safe_float(request.volunteer_work),  # Use volunteer_work as proxy
-                'major_fit': calculate_major_fit_score(request.major, "Unknown"),  # No specific college for suggestions
-                'geography_residency': safe_float(request.geography_residency),
-                'firstgen_diversity': safe_float(request.firstgen_diversity),
-                'ability_to_pay': safe_float(request.ability_to_pay),
-                'awards_publications': safe_float(request.awards_publications),
-                'portfolio_audition': safe_float(request.portfolio_audition),
-                'policy_knob': safe_float(request.policy_knob),
-                'demonstrated_interest': safe_float(request.demonstrated_interest),
-                'legacy': safe_float(request.legacy_status),
-                'interview': safe_float(request.interview),
-                'conduct_record': safe_float(request.conduct_record),
-                'hs_reputation': safe_float(request.hs_reputation)
+            # Calculate probability using realistic formula
+            if student_strength >= 9.0:
+                base_prob = 0.98
+            elif student_strength >= 8.0:
+                base_prob = 0.96 + (student_strength - 8.0) * 0.02
+            elif student_strength >= 7.0:
+                base_prob = 0.92 + (student_strength - 7.0) * 0.04
+            elif student_strength >= 5.5:
+                base_prob = 0.85 + (student_strength - 5.5) * 0.047
+            elif student_strength >= 4.0:
+                base_prob = 0.78 + (student_strength - 4.0) * 0.047
+            else:
+                base_prob = 0.70 + (student_strength * 0.02)
+            
+            # Apply college selectivity adjustment
+            if college_selectivity >= 9.0:  # Elite schools
+                selectivity_factor = 0.12
+            elif college_selectivity >= 7.0:  # Highly selective
+                selectivity_factor = 0.25
+            elif college_selectivity >= 5.0:  # Moderately selective
+                selectivity_factor = 0.70
+            elif college_selectivity >= 3.0:  # Less selective
+                selectivity_factor = 0.95
+            else:  # Open admission
+                selectivity_factor = 1.0
+            
+            probability = max(0.01, min(0.95, base_prob * selectivity_factor))
+            
+            # Get major relevance info
+            major_relevance = get_major_relevance_info(college_name, major)
+            
+            # Handle NaN values for enrollment
+            student_body_size = college_data['student_body_size']
+            if pd.isna(student_body_size) or student_body_size is None:
+                enrollment_str = "N/A"
+                student_body_size = 0
+            else:
+                enrollment_str = f"{int(student_body_size):,}"
+            
+            suggestion = {
+                'college_id': f"college_{college_data['unitid']}",
+                'name': college_name,
+                'probability': round(probability, 4),
+                'original_probability': round(probability, 4),
+                'major_fit_score': round(college_data['major_fit_score'], 2),
+                'confidence_interval': {
+                    "lower": round(max(0.01, probability - 0.1), 4),
+                    "upper": round(min(0.95, probability + 0.1), 4)
+                },
+                'acceptance_rate': college_data['acceptance_rate'],
+                'selectivity_tier': college_data['selectivity_tier'],
+                'tier': college_data['selectivity_tier'],
+                'city': college_data['city'],
+                'state': college_data['state'],
+                'tuition_in_state': college_data['tuition_in_state'],
+                'tuition_out_of_state': college_data['tuition_out_of_state'],
+                'student_body_size': student_body_size,
+                'enrollment': enrollment_str,
+                'category': college_data['category'],
+                'major_match': major_relevance['match_level'],
+                'major_relevance_score': major_relevance['score']
             }
-        )
+            
+            suggestions.append(suggestion)
         
-        # Load integrated college data to get suggestions
-        df = pd.read_csv('backend/data/raw/real_colleges_integrated.csv')
+        # Calculate academic score for response
+        academic_score = (gpa_unweighted * 25) + (sat_score * 0.1) + (act_score * 2.5) + (ec_strength * 5)
         
-        # Calculate academic strength to determine target tier
-        gpa = safe_float(request.gpa_unweighted)
-        sat = safe_int(request.sat)
-        act = safe_int(request.act)
-        
-        # Calculate composite academic score
-        academic_score = 0
-        if gpa > 0:
-            academic_score += (gpa / 4.0) * 40
-        if sat > 0:
-            academic_score += (sat / 1600) * 40
-        elif act > 0:
-            academic_score += (act / 36) * 40
-        
-        # COMPREHENSIVE PROFILE SCORING: Consider all dropdown factors
-        comprehensive_factor_score = (
-            safe_float(request.extracurricular_depth) +      # Extracurricular depth
-            safe_float(request.leadership_positions) +       # Leadership positions
-            safe_float(request.awards_publications) +        # Awards and publications
-            safe_float(request.passion_projects) +           # Passion projects
-            safe_float(request.business_ventures) +          # Business ventures
-            safe_float(request.volunteer_work) +             # Volunteer work
-            safe_float(request.research_experience) +        # Research experience
-            safe_float(request.portfolio_audition) +         # Portfolio/audition
-            safe_float(request.essay_quality) +              # Essay quality
-            safe_float(request.recommendations) +            # Recommendations
-            safe_float(request.interview) +                  # Interview performance
-            safe_float(request.demonstrated_interest) +      # Demonstrated interest
-            safe_float(request.legacy_status) +              # Legacy status
-            safe_float(request.hs_reputation) +              # High school reputation
-            safe_float(request.geographic_diversity) +       # Geographic diversity
-            safe_float(request.plan_timing) +                # Plan timing
-            safe_float(request.geography_residency) +        # Geography residency
-            safe_float(request.firstgen_diversity) +         # First generation diversity
-            safe_float(request.ability_to_pay) +             # Ability to pay
-            safe_float(request.policy_knob) +                # Policy considerations
-            safe_float(request.conduct_record)               # Conduct record
-        ) / 21.0  # Average of all 21 factors
-        
-        academic_score += comprehensive_factor_score * 20
-        
-        # Determine target tier based on academic strength
-        if academic_score >= 80:
+        # Determine target tiers based on academic strength
+        target_tiers = []
+        if academic_strength >= 8.0:
             target_tiers = ['Elite', 'Highly Selective']
-        elif academic_score >= 60:
-            target_tiers = ['Highly Selective', 'Selective']
-        elif academic_score >= 40:
-            target_tiers = ['Selective', 'Moderately Selective']
+        elif academic_strength >= 6.0:
+            target_tiers = ['Highly Selective', 'Moderately Selective']
         else:
             target_tiers = ['Moderately Selective', 'Less Selective']
         
-        # Create student features for ML prediction
-        student = StudentFeatures(
-            # Academic metrics
-            gpa_unweighted=gpa_unweighted,
-            gpa_weighted=gpa_weighted,
-            sat_total=sat_score,
-            act_composite=act_score,
-            
-            # Course rigor and class info
-            ap_count=int(safe_float(request.extracurricular_depth) * 2),  # Estimate based on extracurricular depth
-            honors_count=int(safe_float(request.extracurricular_depth) * 1.5),  # Estimate based on extracurricular depth
-            class_rank_percentile=safe_float(request.hs_reputation) * 10,  # Estimate based on HS reputation
-            class_size=500,  # Default class size
-            
-            # Extracurricular metrics
-            ec_count=int(safe_float(request.extracurricular_depth) * 3),  # Estimate based on depth
-            leadership_positions_count=int(safe_float(request.leadership_positions)),
-            years_commitment=int(safe_float(request.extracurricular_depth) * 2),
-            hours_per_week=safe_float(request.extracurricular_depth) * 2,
-            awards_count=int(safe_float(request.awards_publications)),
-            national_awards=int(safe_float(request.awards_publications) / 2),
-            
-            # Demographics
-            first_generation=safe_float(request.firstgen_diversity) > 5,
-            underrepresented_minority=False,  # Not tracked in current system
-            geographic_diversity=safe_float(request.geographic_diversity),
-            legacy_status=safe_float(request.legacy_status) > 5,
-            recruited_athlete=False,  # Not tracked in current system
-            
-            # Factor scores (0-1 scale)
-            factor_scores={
-                'extracurricular_depth': safe_float(request.extracurricular_depth) / 10.0,
-                'leadership_positions': safe_float(request.leadership_positions) / 10.0,
-                'awards_publications': safe_float(request.awards_publications) / 10.0,
-                'passion_projects': safe_float(request.passion_projects) / 10.0,
-                'business_ventures': safe_float(request.business_ventures) / 10.0,
-                'volunteer_work': safe_float(request.volunteer_work) / 10.0,
-                'research_experience': safe_float(request.research_experience) / 10.0,
-                'portfolio_audition': safe_float(request.portfolio_audition) / 10.0,
-                'essay_quality': safe_float(request.essay_quality) / 10.0,
-                'recommendations': safe_float(request.recommendations) / 10.0,
-                'interview': safe_float(request.interview) / 10.0,
-                'demonstrated_interest': safe_float(request.demonstrated_interest) / 10.0,
-                'legacy_status': safe_float(request.legacy_status) / 10.0,
-                'geographic_diversity': safe_float(request.geographic_diversity) / 10.0,
-                'firstgen_diversity': safe_float(request.firstgen_diversity) / 10.0,
-                'hs_reputation': safe_float(request.hs_reputation) / 10.0,
-                'plan_timing': safe_float(request.plan_timing) / 10.0,
-                'geography_residency': safe_float(request.geography_residency) / 10.0,
-                'ability_to_pay': safe_float(request.ability_to_pay) / 10.0,
-                'policy_knob': safe_float(request.policy_knob) / 10.0,
-                'conduct_record': safe_float(request.conduct_record) / 10.0
-            }
-        )
-        
-        # MAJOR-BASED COLLEGE SELECTION: Prioritize colleges strong in user's major
-        major = request.major
-        
-        # Get colleges that are strong in the user's major, organized by tier
-        major_elite_names = get_colleges_for_major(major, 'elite')
-        major_highly_selective_names = get_colleges_for_major(major, 'highly_selective')
-        major_selective_names = get_colleges_for_major(major, 'selective')
-        major_moderately_selective_names = get_colleges_for_major(major, 'moderately_selective')
-        
-        # Convert college names to actual DataFrame rows
-        major_elite_rows = []
-        major_highly_selective_rows = []
-        major_selective_rows = []
-        major_moderately_selective_rows = []
-        
-        # Find the actual rows for major-specific colleges
-        for college_name in major_elite_names:
-            matching_rows = df[df['name'] == college_name]
-            if len(matching_rows) > 0:
-                major_elite_rows.append(matching_rows.iloc[0])
-        
-        for college_name in major_highly_selective_names:
-            matching_rows = df[df['name'] == college_name]
-            if len(matching_rows) > 0:
-                major_highly_selective_rows.append(matching_rows.iloc[0])
-        
-        for college_name in major_selective_names:
-            matching_rows = df[df['name'] == college_name]
-            if len(matching_rows) > 0:
-                major_selective_rows.append(matching_rows.iloc[0])
-        
-        for college_name in major_moderately_selective_names:
-            matching_rows = df[df['name'] == college_name]
-            if len(matching_rows) > 0:
-                major_moderately_selective_rows.append(matching_rows.iloc[0])
-        
-        # Filter colleges by major strength and tier
-        for _, row in df.iterrows():
-            college_name = str(row['name']) if pd.notna(row['name']) else f"College_{row['unitid']}"
-            tier = row.get('selectivity_tier', 'Moderately Selective')
-            
-            # Check if this college is strong in the user's major
-            major_strength = get_major_strength_score(college_name, major)
-            
-            # Only include colleges with decent major strength (>= 0.2) or if no major-specific colleges found
-            if major_strength >= 0.2 or len(major_elite_rows + major_highly_selective_rows + major_selective_rows + major_moderately_selective_rows) == 0:
-                if tier == 'Elite' and len(major_elite_rows) < 15:
-                    major_elite_rows.append(row)
-                elif tier == 'Highly Selective' and len(major_highly_selective_rows) < 25:
-                    major_highly_selective_rows.append(row)
-                elif tier == 'Moderately Selective' and len(major_selective_rows) < 30:
-                    major_selective_rows.append(row)
-                elif tier == 'Less Selective' and len(major_moderately_selective_rows) < 20:
-                    major_moderately_selective_rows.append(row)
-        
-        # If we don't have enough major-specific colleges, fill with general colleges
-        # But prioritize colleges that are at least somewhat relevant to the major
-        if len(major_elite_rows) < 5:
-            # Get all elite colleges and sort by major strength
-            all_elite = df[df['selectivity_tier'] == 'Elite']
-            elite_with_scores = []
-            for _, row in all_elite.iterrows():
-                college_name = str(row['name']) if pd.notna(row['name']) else f"College_{row['unitid']}"
-                strength = get_major_strength_score(college_name, major)
-                elite_with_scores.append((row, strength))
-            
-            # Sort by major strength (descending) and take the best ones
-            elite_with_scores.sort(key=lambda x: x[1], reverse=True)
-            for row, _ in elite_with_scores[:15 - len(major_elite_rows)]:
-                major_elite_rows.append(row)
-        
-        if len(major_highly_selective_rows) < 10:
-            # Get all highly selective colleges and sort by major strength
-            all_highly = df[df['selectivity_tier'] == 'Highly Selective']
-            highly_with_scores = []
-            for _, row in all_highly.iterrows():
-                college_name = str(row['name']) if pd.notna(row['name']) else f"College_{row['unitid']}"
-                strength = get_major_strength_score(college_name, major)
-                highly_with_scores.append((row, strength))
-            
-            # Sort by major strength (descending) and take the best ones
-            highly_with_scores.sort(key=lambda x: x[1], reverse=True)
-            for row, _ in highly_with_scores[:25 - len(major_highly_selective_rows)]:
-                major_highly_selective_rows.append(row)
-        
-        if len(major_selective_rows) < 15:
-            # Get all moderately selective colleges and sort by major strength
-            all_selective = df[df['selectivity_tier'] == 'Moderately Selective']
-            selective_with_scores = []
-            for _, row in all_selective.iterrows():
-                college_name = str(row['name']) if pd.notna(row['name']) else f"College_{row['unitid']}"
-                strength = get_major_strength_score(college_name, major)
-                selective_with_scores.append((row, strength))
-            
-            # Sort by major strength (descending) and take the best ones
-            selective_with_scores.sort(key=lambda x: x[1], reverse=True)
-            for row, _ in selective_with_scores[:30 - len(major_selective_rows)]:
-                major_selective_rows.append(row)
-        
-        if len(major_moderately_selective_rows) < 10:
-            # Get all less selective colleges and sort by major strength
-            all_less = df[df['selectivity_tier'] == 'Less Selective']
-            less_with_scores = []
-            for _, row in all_less.iterrows():
-                college_name = str(row['name']) if pd.notna(row['name']) else f"College_{row['unitid']}"
-                strength = get_major_strength_score(college_name, major)
-                less_with_scores.append((row, strength))
-            
-            # Sort by major strength (descending) and take the best ones
-            less_with_scores.sort(key=lambda x: x[1], reverse=True)
-            for row, _ in less_with_scores[:20 - len(major_moderately_selective_rows)]:
-                major_moderately_selective_rows.append(row)
-        
-        # Combine for processing (prioritizing major-specific colleges)
-        # Limit the number of colleges to process for performance
-        df_subset = pd.concat([
-            pd.DataFrame(major_elite_rows[:10]),  # Limit to 10 elite colleges
-            pd.DataFrame(major_highly_selective_rows[:15]),  # Limit to 15 highly selective
-            pd.DataFrame(major_selective_rows[:20]),  # Limit to 20 selective
-            pd.DataFrame(major_moderately_selective_rows[:15])  # Limit to 15 moderately selective
-        ], ignore_index=True)
-        
-        # Get predictions for subset of colleges to find balanced suggestions
-        all_college_predictions = []
-        
-        for i, row in df_subset.iterrows():
-            try:
-                # Handle acceptance rate - use acceptance_rate_percent if acceptance_rate is missing
-                acceptance_rate = None
-                if pd.notna(row.get('acceptance_rate')):
-                    acceptance_rate = float(row['acceptance_rate'])
-                elif pd.notna(row.get('acceptance_rate_percent')):
-                    acceptance_rate = float(row['acceptance_rate_percent']) / 100
-                else:
-                    # Default based on selectivity tier
-                    tier = row.get('selectivity_tier', 'Moderately Selective')
-                    if tier == 'Elite':
-                        acceptance_rate = 0.1
-                    elif tier == 'Highly Selective':
-                        acceptance_rate = 0.3
-                    elif tier == 'Moderately Selective':
-                        acceptance_rate = 0.6
-                    else:
-                        acceptance_rate = 0.8
-                
-                college_data = {
-                    'unitid': row['unitid'],
-                    'name': str(row['name']) if pd.notna(row['name']) else f"College_{row['unitid']}",
-                    'acceptance_rate': acceptance_rate,
-                    'selectivity_tier': row.get('selectivity_tier', 'Moderately Selective'),
-                    'sat_25th': 1200,  # Default values since SAT/ACT data not available
-                    'sat_75th': 1500,
-                    'act_25th': 25,
-                    'act_75th': 35,
-                    'test_policy': row.get('test_policy', 'Required'),
-                    'financial_aid_policy': row.get('financial_aid_policy', 'Need-blind'),
-                    'gpa_average': float(row['gpa_average']) if pd.notna(row['gpa_average']) else 3.7,
-                    'city': str(row['city']) if pd.notna(row['city']) else "Unknown",
-                    'state': str(row['state']) if pd.notna(row['state']) else "Unknown",
-                    'tuition_in_state': int(row['tuition_in_state_usd']) if pd.notna(row['tuition_in_state_usd']) else 20000,
-                    'tuition_out_of_state': int(row['tuition_out_of_state_usd']) if pd.notna(row['tuition_out_of_state_usd']) else 40000,
-                    'student_body_size': int(row['student_body_size']) if pd.notna(row['student_body_size']) else 5000
-                }
-                
-                # Create college features and get prediction
-                college = CollegeFeatures(
-                    name=college_data['name'],
-                    acceptance_rate=college_data['acceptance_rate'],
-                    sat_25th=college_data['sat_25th'],
-                    sat_75th=college_data['sat_75th'],
-                    act_25th=college_data['act_25th'],
-                    act_75th=college_data['act_75th'],
-                    test_policy=college_data['test_policy'],
-                    financial_aid_policy=college_data['financial_aid_policy'],
-                    selectivity_tier=college_data['selectivity_tier'],
-                    gpa_average=college_data['gpa_average']
-                )
-                
-                # FIXED: Calculate realistic probability directly from academic metrics
-                # This bypasses the broken composite score system
-                
-                # Calculate base probability from academic strength
-                gpa_score = min(10.0, (gpa_unweighted / 4.0) * 10.0) if gpa_unweighted > 0 else 5.0
-                sat_score = min(10.0, max(0.0, ((sat_score - 1200) / 400) * 5.0 + 5.0)) if sat_score > 0 else 5.0
-                act_score = min(10.0, max(0.0, ((act_score - 20) / 16) * 5.0 + 5.0)) if act_score > 0 else 5.0
-                
-                # Use the higher of SAT or ACT
-                test_score = max(sat_score, act_score)
-                
-                # Calculate academic strength (0-10 scale)
-                academic_strength = (gpa_score + test_score) / 2.0
-                
-                # Calculate extracurricular strength from dropdown values
-                ec_strength = (
-                    safe_float(request.extracurricular_depth) +
-                    safe_float(request.leadership_positions) +
-                    safe_float(request.awards_publications) +
-                    safe_float(request.passion_projects)
-                ) / 4.0
-                
-                # Calculate overall student strength (0-10 scale)
-                student_strength = (academic_strength * 0.7) + (ec_strength * 0.3)
-                
-                # Calculate college selectivity (0-10 scale, higher = more selective)
-                acceptance_rate = college_data.get('acceptance_rate', 0.1)
-                college_selectivity = 10.0 - (acceptance_rate * 10.0)  # 10% acceptance = 9.0 selectivity
-                
-                # Calculate probability using realistic formula
-                # Formula: base probability determined by student strength, adjusted by college selectivity
-                
-                # Calculate base probability (0-100% scale)
-                # This represents the student's general admission potential
-                if student_strength >= 9.0:
-                    base_prob = 0.98  # Exceptional students start at 98%
-                elif student_strength >= 8.0:
-                    base_prob = 0.96 + (student_strength - 8.0) * 0.02  # 96-98%
-                elif student_strength >= 7.0:
-                    base_prob = 0.92 + (student_strength - 7.0) * 0.04  # 92-96%
-                elif student_strength >= 5.5:
-                    base_prob = 0.85 + (student_strength - 5.5) * 0.047  # 85-92%
-                elif student_strength >= 4.0:
-                    base_prob = 0.78 + (student_strength - 4.0) * 0.047  # 78-85%
-                else:
-                    base_prob = 0.70 + (student_strength * 0.02)  # 70-80%
-                
-                # Apply college selectivity adjustment (balanced for all categories)
-                # Selective colleges reduce probability more significantly
-                if college_selectivity >= 9.0:  # Elite schools (acceptance rate < 10%)
-                    selectivity_factor = 0.12  # Reduce to 12% of base
-                elif college_selectivity >= 7.0:  # Highly selective (10-30%)
-                    selectivity_factor = 0.25  # Reduce to 25% of base
-                elif college_selectivity >= 5.0:  # Moderately selective (30-50%)
-                    selectivity_factor = 0.70  # Reduce to 70% of base
-                elif college_selectivity >= 3.0:  # Less selective (50-70%)
-                    selectivity_factor = 0.95  # Reduce to 95% of base
-                else:  # Open admission (70%+)
-                    selectivity_factor = 1.0  # No reduction
-                
-                adjusted_probability = base_prob * selectivity_factor
-                
-                # Ensure realistic bounds
-                adjusted_probability = max(0.01, min(0.95, adjusted_probability))
-                
-                # Calculate major fit score for this college
-                major_fit_score = get_major_strength_score(college_data['name'], request.major)
-                
-                all_college_predictions.append({
-                    'college_id': f"college_{row['unitid']}",
-                    'name': college_data['name'],
-                    'probability': round(adjusted_probability, 4),
-                    'original_probability': round(adjusted_probability, 4),  # Using new calculation method
-                    'major_fit_score': round(major_fit_score, 2),
-                    'confidence_interval': {
-                        "lower": round(max(0.01, adjusted_probability - 0.1), 4),
-                        "upper": round(min(0.95, adjusted_probability + 0.1), 4)
-                    },
-                    'acceptance_rate': college_data['acceptance_rate'],
-                    'selectivity_tier': college_data['selectivity_tier'],
-                    'tier': college_data['selectivity_tier'],
-                    'city': college_data['city'],
-                    'state': college_data['state'],
-                    'tuition_in_state': college_data['tuition_in_state'],
-                    'tuition_out_of_state': college_data['tuition_out_of_state'],
-                    'student_body_size': college_data['student_body_size'],
-                    'enrollment': f"{int(row.get('enrollment', 10000)):,}",
-                    'difficulty': college_data['selectivity_tier'],
-                    'popularMajors': [request.major, 'Business', 'Engineering', 'Liberal Arts'],
-                    'description': f"Strong {college_data['selectivity_tier'].lower()} institution with {college_data['acceptance_rate']:.1f}% acceptance rate"
-                })
-                
-                # Log progress every 10 colleges
-                if (i + 1) % 10 == 0:
-                    logger.info(f"Processed {i + 1} colleges, current count: {len(all_college_predictions)}")
-                    
-            except Exception as e:
-                logger.error(f"Error processing college {i}: {e}")
-                continue
-        
-        # Temporarily disable major filtering to see what scores elite universities get
-        # Filter out colleges that are very weak in the user's major (major_fit_score < 0.1)
-        # This ensures we only recommend colleges that are at least somewhat relevant to the user's major
-        major_relevant_colleges = [college for college in all_college_predictions if college['major_fit_score'] >= 0.1]
-        
-        # Sort by major relevance first, then by probability
-        # This ensures colleges strong in the user's major are prioritized
-        major_relevant_colleges.sort(key=lambda x: (x['major_fit_score'], x['probability']), reverse=True)
-        
-        # Use the filtered and sorted list for categorization
-        all_college_predictions = major_relevant_colleges
-        
-        # Use realistic probability-based categorization with acceptance rate consideration
-        safety_colleges = []
-        target_colleges = []
-        reach_colleges = []
-        
-        # Elite universities list - these are the most selective institutions
-        # We ensure they appear in the reach category when appropriate
-        # Using exact name matches to avoid false positives (e.g., "Northwestern College" vs "Northwestern University")
-        elite_universities = [
-            "harvard university",                    # 4.0% acceptance rate
-            "massachusetts institute of technology", # 4.1% acceptance rate
-            "stanford university",                   # 4.0% acceptance rate
-            "yale university",                       # 5.3% acceptance rate
-            "princeton university",                  # 4.4% acceptance rate
-            "columbia university in the city of new york", # 4.1% acceptance rate
-            "university of pennsylvania",            # 5.9% acceptance rate
-            "dartmouth college",                     # 6.2% acceptance rate
-            "brown university",                      # 5.5% acceptance rate
-            "cornell university",                    # 8.7% acceptance rate
-            "duke university",                       # 5.9% acceptance rate
-            "northwestern university",               # 7.0% acceptance rate
-            "vanderbilt university",                 # 7.1% acceptance rate
-            "rice university",                       # 9.5% acceptance rate
-            "emory university",                      # 13.1% acceptance rate
-            "georgetown university",                 # 12.0% acceptance rate
-            "carnegie mellon university",            # 13.5% acceptance rate
-            "new york university",                   # 13.0% acceptance rate
-            "university of chicago"                  # 6.5% acceptance rate
-        ]
-        
-        # Calculate dynamic thresholds based on student profile strength
-        # For weaker students, use lower thresholds to ensure adequate recommendations
-        max_prob = max([c['probability'] for c in all_college_predictions]) if all_college_predictions else 0.8
-        
-        # Dynamic thresholds: adjust based on the highest probability achieved
-        if max_prob >= 0.75:
-            # Strong student: use adjusted thresholds to ensure 3-3-3 distribution
-            # Since all colleges have high probabilities, we need to adjust thresholds
-            safety_threshold = 0.70  # Lowered from 0.75
-            target_min = 0.50        # Raised from 0.25 to create a middle range
-            reach_min = 0.05         # Lowered to capture elite universities with very low probabilities
-        elif max_prob >= 0.60:
-            # Moderate student: lower thresholds
-            safety_threshold = 0.60
-            target_min = 0.20
-            reach_min = 0.05
-        elif max_prob >= 0.30:
-            # Moderate-weak student: much lower thresholds
-            safety_threshold = 0.30
-            target_min = 0.10
-            reach_min = 0.02
-        elif max_prob >= 0.15:
-            # Weak student: very low thresholds
-            safety_threshold = 0.15
-            target_min = 0.05
-            reach_min = 0.01
-        else:
-            # Very weak student: extremely low thresholds
-            safety_threshold = 0.10
-            target_min = 0.03
-            reach_min = 0.005
-        
-        # Categorize colleges using dynamic thresholds
-        for college in all_college_predictions:
-            prob = college['probability']
-            acceptance_rate = college['acceptance_rate']
-            college_name = college['name'].lower()
-            
-            # Check if this is an elite university (exact match)
-            is_elite = college_name in elite_universities
-            
-            # Debug logging for elite universities
-            if is_elite:
-                logger.info(f"ELITE DEBUG: {college['name']} - prob: {prob:.3f}, is_elite: {is_elite}")
-            
-            # Use dynamic thresholds for categorization
-            if prob >= safety_threshold:  # Safety schools
-                college['category'] = 'safety'
-                safety_colleges.append(college)
-                if is_elite:
-                    logger.info(f"ELITE DEBUG: {college['name']} -> SAFETY (prob: {prob:.3f}, threshold: {safety_threshold:.3f})")
-            elif prob >= target_min:  # Target schools
-                college['category'] = 'target'
-                target_colleges.append(college)
-                if is_elite:
-                    logger.info(f"ELITE DEBUG: {college['name']} -> TARGET (prob: {prob:.3f}, threshold: {target_min:.3f})")
-            elif prob >= reach_min:  # Reach schools
-                college['category'] = 'reach'
-                reach_colleges.append(college)
-                if is_elite:
-                    logger.info(f"ELITE DEBUG: {college['name']} -> REACH (prob: {prob:.3f}, threshold: {reach_min:.3f})")
-            # Skip colleges with very low chance
-            
-            # Note: Elite universities are now categorized based on actual probability
-            # No special override - they follow the same thresholds as other colleges
-        
-        logger.info(f"Found {len(safety_colleges)} safety, {len(target_colleges)} target, {len(reach_colleges)} reach colleges")
-        
-        # Sort each category by probability (highest first for safety, balanced for target, highest for reach)
-        safety_colleges.sort(key=lambda x: x['probability'], reverse=True)
-        target_colleges.sort(key=lambda x: x['probability'], reverse=True)
-        reach_colleges.sort(key=lambda x: x['probability'], reverse=True)
-        
-        # Select balanced suggestions: 3 safety + 3 target + 3 reach = 9 total
-        balanced_suggestions = []
-        
-        # Add 3 safety colleges - only if they actually meet the dynamic threshold
-        for college in safety_colleges[:3]:
-            if college['probability'] >= safety_threshold:
-                college['category'] = 'safety'
-                balanced_suggestions.append(college)
-        
-        # Add 3 target colleges - only if they actually meet the dynamic threshold
-        for college in target_colleges[:3]:
-            if target_min <= college['probability'] < safety_threshold:
-                college['category'] = 'target'
-                balanced_suggestions.append(college)
-        
-        # Add 3 reach colleges - only if they actually meet the dynamic threshold
-        for college in reach_colleges[:3]:
-            if reach_min <= college['probability'] < target_min:
-                college['category'] = 'reach'
-                balanced_suggestions.append(college)
-        
-        # If we have more than 9 suggestions, prioritize the highest probabilities
-        if len(balanced_suggestions) > 9:
-            balanced_suggestions.sort(key=lambda x: x['probability'], reverse=True)
-            balanced_suggestions = balanced_suggestions[:9]
-        
-        # Ensure we have exactly 3-3-3 distribution by filling missing categories
-        # Count current distribution
-        current_safety = len([c for c in balanced_suggestions if c['category'] == 'safety'])
-        current_target = len([c for c in balanced_suggestions if c['category'] == 'target'])
-        current_reach = len([c for c in balanced_suggestions if c['category'] == 'reach'])
-        
-        # Get all remaining colleges not yet in balanced_suggestions
-        used_colleges = set(id(c) for c in balanced_suggestions)
-        remaining_colleges = [c for c in all_college_predictions if id(c) not in used_colleges]
-        remaining_colleges.sort(key=lambda x: x['probability'], reverse=True)
-        
-        # Fill missing safety schools (need 3 total) - only if they meet 75%+ threshold
-        while current_safety < 3:
-            if len(safety_colleges) > current_safety:
-                college = safety_colleges[current_safety]
-                college['category'] = 'safety'
-                balanced_suggestions.append(college)
-                current_safety += 1
-            elif remaining_colleges:
-                # Find a remaining college that meets safety threshold
-                safety_candidate = None
-                for i, college in enumerate(remaining_colleges):
-                    if college['probability'] >= safety_threshold:
-                        safety_candidate = remaining_colleges.pop(i)
-                        break
-                
-                if safety_candidate:
-                    safety_candidate['category'] = 'safety'
-                    balanced_suggestions.append(safety_candidate)
-                    current_safety += 1
-                else:
-                    # No more colleges meet safety threshold
-                    break
-            else:
-                break
-        
-        # Fill missing target schools (need 3 total) - only if they meet 25-75% threshold
-        while current_target < 3:
-            if len(target_colleges) > current_target:
-                college = target_colleges[current_target]
-                college['category'] = 'target'
-                balanced_suggestions.append(college)
-                current_target += 1
-            elif remaining_colleges:
-                # Find a remaining college that meets target threshold
-                target_candidate = None
-                for i, college in enumerate(remaining_colleges):
-                    if target_min <= college['probability'] < safety_threshold:
-                        target_candidate = remaining_colleges.pop(i)
-                        break
-                
-                if target_candidate:
-                    target_candidate['category'] = 'target'
-                    balanced_suggestions.append(target_candidate)
-                    current_target += 1
-                else:
-                    # No more colleges meet target threshold
-                    break
-            else:
-                break
-        
-        # Fill missing reach schools (need 3 total) - only if they meet 10-25% threshold
-        while current_reach < 3:
-            if len(reach_colleges) > current_reach:
-                college = reach_colleges[current_reach]
-                college['category'] = 'reach'
-                balanced_suggestions.append(college)
-                current_reach += 1
-            elif remaining_colleges:
-                # Find a remaining college that meets reach threshold
-                reach_candidate = None
-                for i, college in enumerate(remaining_colleges):
-                    if reach_min <= college['probability'] < target_min:
-                        reach_candidate = remaining_colleges.pop(i)
-                        break
-                
-                if reach_candidate:
-                    reach_candidate['category'] = 'reach'
-                    balanced_suggestions.append(reach_candidate)
-                    current_reach += 1
-                else:
-                    # No more colleges meet reach threshold
-                    break
-            else:
-                break
-        
-        # Debug: Log the distribution
-        logger.info(f"Total colleges processed: {len(all_college_predictions)}")
-        logger.info(f"Found {len(safety_colleges)} safety, {len(target_colleges)} target, {len(reach_colleges)} reach colleges")
-        logger.info(f"Total balanced suggestions: {len(balanced_suggestions)}")
-        
-        # Log some sample probabilities
-        if all_college_predictions:
-            sample_probs = [c['probability'] for c in all_college_predictions[:5]]
-            logger.info(f"Sample probabilities: {sample_probs}")
-            
-            # Log all probabilities for debugging
-            all_probs = [c['probability'] for c in all_college_predictions]
-            logger.info(f"All probabilities range: {min(all_probs):.4f} - {max(all_probs):.4f}")
-            logger.info(f"Number of colleges with prob > 0.1: {len([p for p in all_probs if p > 0.1])}")
-            logger.info(f"Number of colleges with prob > 0.25: {len([p for p in all_probs if p > 0.25])}")
-            logger.info(f"Number of colleges with prob > 0.75: {len([p for p in all_probs if p > 0.75])}")
-        
-        # Remove duplicates by college name
-        seen_colleges = set()
-        deduplicated_suggestions = []
-        for college in balanced_suggestions:
-            college_name = college.get('name', '')
-            if college_name not in seen_colleges:
-                seen_colleges.add(college_name)
-                deduplicated_suggestions.append(college)
-        
-        # Return balanced suggestions: 3 safety + 3 target + 3 reach = 9 total
-        top_suggestions = deduplicated_suggestions[:9]
-        
+        # Prepare response
         response_data = {
             "success": True,
-            "suggestions": top_suggestions,
+            "suggestions": suggestions,
             "academic_score": round(academic_score, 2),
             "target_tiers": target_tiers,
-            "prediction_method": "hybrid_ml_formula"
+            "prediction_method": "real_ipeds_data"
         }
         
         # Cache the response
         suggestion_cache[cache_key] = (response_data, current_time)
+        
         logger.info(f"Cached suggestions for key: {cache_key[:20]}...")
         
         return response_data
         
     except Exception as e:
-        logger.error(f"College suggestion error: {e}")
-        return {
-            "success": False,
-            "error": str(e),
-            "message": "College suggestions failed. Please try again."
-        }
-
-@app.get("/api/search/colleges")
-async def search_colleges(q: str = "", limit: int = 20):
-    """Search colleges by name using real college data"""
-    try:
-        # Create cache key for search
-        search_cache_key = f"search_{q}_{limit}"
-        
-        # Check cache first
-        current_time = time.time()
-        if search_cache_key in suggestion_cache:
-            cached_data, cache_time = suggestion_cache[search_cache_key]
-            if current_time - cache_time < CACHE_DURATION:
-                logger.info(f"Returning cached search results for: {q}")
-                return cached_data
-        
-        # Load real college data (integrated from multiple sources)
-        df = pd.read_csv('backend/data/raw/real_colleges_integrated.csv')
-        
-        # Filter colleges by name if query provided
-        if q:
-            df = df[df['name'].str.contains(q, case=False, na=False)]
-        
-        # Limit results
-        df = df.head(limit)
-        
-        # Format results
-        colleges = []
-        for _, row in df.iterrows():
-            # Handle acceptance rate
-            if pd.notna(row.get('acceptance_rate')):
-                acceptance_rate = float(row['acceptance_rate'])
-            elif pd.notna(row.get('acceptance_rate_percent')):
-                acceptance_rate = float(row['acceptance_rate_percent']) / 100
-            else:
-                # Default based on selectivity tier
-                tier = row.get('selectivity_tier', 'Moderately Selective')
-                if tier == 'Elite':
-                    acceptance_rate = 0.1
-                elif tier == 'Highly Selective':
-                    acceptance_rate = 0.3
-                elif tier == 'Moderately Selective':
-                    acceptance_rate = 0.6
-                else:
-                    acceptance_rate = 0.8
-            
-            colleges.append({
-                'college_id': f"college_{row['unitid']}",
-                'name': str(row['name']) if pd.notna(row['name']) else f"College_{row['unitid']}",
-                'acceptance_rate': acceptance_rate,
-                'selectivity_tier': row.get('selectivity_tier', 'Moderately Selective'),
-                'city': str(row['city']) if pd.notna(row['city']) else "Unknown",
-                'state': str(row['state']) if pd.notna(row['state']) else "Unknown",
-                'tuition_in_state': int(row['tuition_in_state_usd']) if pd.notna(row['tuition_in_state_usd']) else 20000,
-                'tuition_out_of_state': int(row['tuition_out_of_state_usd']) if pd.notna(row['tuition_out_of_state_usd']) else 40000,
-                'student_body_size': int(row['student_body_size']) if pd.notna(row['student_body_size']) else 5000
-            })
-        
-        response_data = {
-            "success": True,
-            "colleges": colleges,
-            "total": len(colleges)
-        }
-        
-        # Cache the search results
-        suggestion_cache[search_cache_key] = (response_data, current_time)
-        logger.info(f"Cached search results for: {q}")
-        
-        return response_data
-        
-    except Exception as e:
-        logger.error(f"College search error: {e}")
-        return {
-            "success": False,
-            "error": str(e),
-            "message": "College search failed. Please try again."
-        }
+        logger.error(f"Error in suggest_colleges: {e}")
+        import traceback
+        logger.error(f"Traceback: {traceback.format_exc()}")
+        return {"success": False, "error": str(e), "suggestions": [], "traceback": traceback.format_exc()}
 
 @app.post("/predict")
 async def predict_admission(request: PredictionRequest):

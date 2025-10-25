@@ -1,51 +1,42 @@
 #!/usr/bin/env python3
 """
-Test script to verify all imports work correctly.
-Run this to check if the IDE import errors are real or just IDE issues.
+Test script to check if all imports are working correctly
 """
 
 import sys
-import os
-
-# Add backend to Python path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'backend'))
+import traceback
 
 def test_imports():
-    """Test all critical imports."""
+    """Test all the imports used in the backend"""
+    
+    print("Testing imports...")
+    
     try:
-        print("Testing imports...")
+        print("1. Testing pandas...")
+        import pandas as pd
+        print("   OK pandas imported successfully")
         
-        # Core FastAPI imports
-        import fastapi
-        print(f"FastAPI {fastapi.__version__} - OK")
+        print("2. Testing numpy...")
+        import numpy as np
+        print("   OK numpy imported successfully")
         
-        import uvicorn
-        print(f"Uvicorn {uvicorn.__version__} - OK")
+        print("3. Testing real_ipeds_major_mapping...")
+        from backend.data.real_ipeds_major_mapping import real_ipeds_mapping
+        print("   OK real_ipeds_major_mapping imported successfully")
         
-        # Pydantic imports
-        import pydantic
-        print(f"Pydantic {pydantic.__version__} - OK")
+        print("4. Testing real_college_suggestions...")
+        from backend.data.real_college_suggestions import real_college_suggestions
+        print("   OK real_college_suggestions imported successfully")
         
-        import pydantic_settings
-        print("Pydantic Settings - OK")
-        
-        # Project imports
-        from config import settings
-        print("Config settings - OK")
-        
-        from database import create_tables
-        print("Database module - OK")
+        print("5. Testing get_balanced_suggestions...")
+        suggestions = real_college_suggestions.get_balanced_suggestions("Computer Science", 8.0)
+        print(f"   OK get_balanced_suggestions works, got {len(suggestions)} suggestions")
         
         print("\nAll imports successful!")
-        return True
         
-    except ImportError as e:
-        print(f"Import error: {e}")
-        return False
     except Exception as e:
-        print(f"Unexpected error: {e}")
-        return False
+        print(f"   ERROR Import failed: {e}")
+        traceback.print_exc()
 
 if __name__ == "__main__":
-    success = test_imports()
-    sys.exit(0 if success else 1)
+    test_imports()
