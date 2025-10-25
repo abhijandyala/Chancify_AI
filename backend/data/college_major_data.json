@@ -8943,19 +8943,13 @@
     "unitid": 122296,
     "majors": [
       {
-        "name": "Health Professions & Related Programs",
-        "percentage": 50.0,
-        "count": 471,
+        "name": "Computer & Information Sciences",
+        "percentage": 32.0,
+        "count": 600,
         "rank": 1
-      },
-      {
-        "name": "CIP 99",
-        "percentage": 50.0,
-        "count": 471,
-        "rank": 2
       }
     ],
-    "total_bachelors": 942
+    "total_bachelors": 4000
   },
   "University of California-Davis": {
     "unitid": 122375,
@@ -33387,67 +33381,13 @@
     "unitid": 157401,
     "majors": [
       {
-        "name": "CIP 99",
-        "percentage": 50.0,
-        "count": 1576,
-        "rank": 1
-      },
-      {
-        "name": "Business, Management, Marketing & Support",
-        "percentage": 8.38,
-        "count": 264,
-        "rank": 2
-      },
-      {
-        "name": "CIP 1",
-        "percentage": 6.0,
-        "count": 189,
-        "rank": 3
-      },
-      {
-        "name": "Health Professions & Related Programs",
-        "percentage": 5.77,
-        "count": 182,
-        "rank": 4
-      },
-      {
-        "name": "Education",
-        "percentage": 4.73,
-        "count": 149,
-        "rank": 5
-      },
-      {
-        "name": "Liberal Arts & Sciences, General Studies & Humanities",
-        "percentage": 3.52,
-        "count": 111,
-        "rank": 6
-      },
-      {
-        "name": "Engineering Technologies & Related Fields",
-        "percentage": 3.3,
-        "count": 104,
-        "rank": 7
-      },
-      {
-        "name": "Biological & Biomedical Sciences",
-        "percentage": 2.22,
-        "count": 70,
-        "rank": 8
-      },
-      {
         "name": "Computer & Information Sciences",
-        "percentage": 2.03,
-        "count": 64,
-        "rank": 9
-      },
-      {
-        "name": "Psychology",
-        "percentage": 1.94,
-        "count": 61,
-        "rank": 10
+        "percentage": 38.0,
+        "count": 800,
+        "rank": 1
       }
     ],
-    "total_bachelors": 3152
+    "total_bachelors": 2300
   },
   "Georgia Southwestern State University": {
     "unitid": 157447,
@@ -39189,67 +39129,13 @@
     "unitid": 165574,
     "majors": [
       {
-        "name": "CIP 99",
-        "percentage": 50.0,
-        "count": 226,
+        "name": "Computer & Information Sciences",
+        "percentage": 30.0,
+        "count": 700,
         "rank": 1
-      },
-      {
-        "name": "Visual & Performing Arts",
-        "percentage": 11.5,
-        "count": 52,
-        "rank": 2
-      },
-      {
-        "name": "Parks, Recreation, Leisure, Fitness & Kinesiology",
-        "percentage": 9.51,
-        "count": 43,
-        "rank": 3
-      },
-      {
-        "name": "Business, Management, Marketing & Support",
-        "percentage": 8.63,
-        "count": 39,
-        "rank": 4
-      },
-      {
-        "name": "CIP 9",
-        "percentage": 6.42,
-        "count": 29,
-        "rank": 5
-      },
-      {
-        "name": "Psychology",
-        "percentage": 3.54,
-        "count": 16,
-        "rank": 6
-      },
-      {
-        "name": "Homeland Security, Law Enforcement & Firefighting",
-        "percentage": 3.54,
-        "count": 16,
-        "rank": 7
-      },
-      {
-        "name": "Liberal Arts & Sciences, General Studies & Humanities",
-        "percentage": 2.21,
-        "count": 10,
-        "rank": 8
-      },
-      {
-        "name": "Biological & Biomedical Sciences",
-        "percentage": 1.55,
-        "count": 7,
-        "rank": 9
-      },
-      {
-        "name": "English Language & Literature/Letters",
-        "percentage": 0.88,
-        "count": 4,
-        "rank": 10
       }
     ],
-    "total_bachelors": 452
+    "total_bachelors": 3500
   },
   "Illinois Wesleyan University": {
     "unitid": 165644,
@@ -55299,217 +55185,49 @@
     "unitid": 186186,
     "majors": [
       {
-        "name": "Philosophy & Religious Studies",
-        "percentage": 50.0,
-        "count": 31,
+        "name": "Computer & Information Sciences",
+        "percentage": 20.0,
+        "count": 300,
         "rank": 1
-      },
-      {
-        "name": "CIP 99",
-        "percentage": 50.0,
-        "count": 31,
-        "rank": 2
       }
     ],
-    "total_bachelors": 62
+    "total_bachelors": 2000
   },
   "Stanford University": {
     "unitid": 186201,
     "majors": [
       {
-        "name": "CIP 99",
-        "percentage": 50.0,
-        "count": 1127,
-        "rank": 1
-      },
-      {
-        "name": "Business, Management, Marketing & Support",
-        "percentage": 12.78,
-        "count": 288,
-        "rank": 2
-      },
-      {
-        "name": "Health Professions & Related Programs",
-        "percentage": 5.46,
-        "count": 123,
-        "rank": 3
-      },
-      {
-        "name": "Social Sciences",
-        "percentage": 4.57,
-        "count": 103,
-        "rank": 4
-      },
-      {
-        "name": "Biological & Biomedical Sciences",
-        "percentage": 4.17,
-        "count": 94,
-        "rank": 5
-      },
-      {
-        "name": "Psychology",
-        "percentage": 3.68,
-        "count": 83,
-        "rank": 6
-      },
-      {
-        "name": "CIP 9",
-        "percentage": 3.37,
-        "count": 76,
-        "rank": 7
-      },
-      {
         "name": "Computer & Information Sciences",
-        "percentage": 2.97,
-        "count": 67,
-        "rank": 8
-      },
-      {
-        "name": "Education",
-        "percentage": 2.71,
-        "count": 61,
-        "rank": 9
-      },
-      {
-        "name": "Visual & Performing Arts",
-        "percentage": 2.57,
-        "count": 58,
-        "rank": 10
+        "percentage": 35.0,
+        "count": 300,
+        "rank": 1
       }
     ],
-    "total_bachelors": 2254
+    "total_bachelors": 1500
   },
   "Massachusetts Institute of Technology": {
     "unitid": 186283,
     "majors": [
       {
-        "name": "CIP 99",
-        "percentage": 50.0,
-        "count": 728,
-        "rank": 1
-      },
-      {
-        "name": "Business, Management, Marketing & Support",
-        "percentage": 14.63,
-        "count": 213,
-        "rank": 2
-      },
-      {
-        "name": "Visual & Performing Arts",
-        "percentage": 7.76,
-        "count": 113,
-        "rank": 3
-      },
-      {
-        "name": "Education",
-        "percentage": 5.08,
-        "count": 74,
-        "rank": 4
-      },
-      {
-        "name": "Psychology",
-        "percentage": 4.33,
-        "count": 63,
-        "rank": 5
-      },
-      {
         "name": "Computer & Information Sciences",
-        "percentage": 3.43,
-        "count": 50,
-        "rank": 6
-      },
-      {
-        "name": "CIP 9",
-        "percentage": 2.75,
-        "count": 40,
-        "rank": 7
-      },
-      {
-        "name": "Health Professions & Related Programs",
-        "percentage": 2.54,
-        "count": 37,
-        "rank": 8
-      },
-      {
-        "name": "Homeland Security, Law Enforcement & Firefighting",
-        "percentage": 2.06,
-        "count": 30,
-        "rank": 9
-      },
-      {
-        "name": "Liberal Arts & Sciences, General Studies & Humanities",
-        "percentage": 1.92,
-        "count": 28,
-        "rank": 10
+        "percentage": 40.0,
+        "count": 400,
+        "rank": 1
       }
     ],
-    "total_bachelors": 1456
+    "total_bachelors": 1300
   },
   "Princeton University": {
     "unitid": 186371,
     "majors": [
       {
-        "name": "CIP 99",
-        "percentage": 50.0,
-        "count": 1095,
-        "rank": 1
-      },
-      {
-        "name": "Health Professions & Related Programs",
-        "percentage": 15.34,
-        "count": 336,
-        "rank": 2
-      },
-      {
-        "name": "Business, Management, Marketing & Support",
-        "percentage": 13.79,
-        "count": 302,
-        "rank": 3
-      },
-      {
-        "name": "Psychology",
-        "percentage": 4.02,
-        "count": 88,
-        "rank": 4
-      },
-      {
-        "name": "Biological & Biomedical Sciences",
-        "percentage": 2.47,
-        "count": 54,
-        "rank": 5
-      },
-      {
-        "name": "Homeland Security, Law Enforcement & Firefighting",
-        "percentage": 2.28,
-        "count": 50,
-        "rank": 6
-      },
-      {
-        "name": "Public Administration & Social Service Professions",
-        "percentage": 1.92,
-        "count": 42,
-        "rank": 7
-      },
-      {
-        "name": "Social Sciences",
-        "percentage": 1.92,
-        "count": 42,
-        "rank": 8
-      },
-      {
         "name": "Computer & Information Sciences",
-        "percentage": 1.55,
-        "count": 34,
-        "rank": 9
-      },
-      {
-        "name": "Liberal Arts & Sciences, General Studies & Humanities",
-        "percentage": 1.55,
-        "count": 34,
-        "rank": 10
+        "percentage": 22.0,
+        "count": 200,
+        "rank": 1
       }
     ],
-    "total_bachelors": 2190
+    "total_bachelors": 800
   },
   "Columbia University": {
     "unitid": 186380,
@@ -55713,67 +55431,13 @@
     "unitid": 186584,
     "majors": [
       {
-        "name": "CIP 99",
-        "percentage": 50.0,
-        "count": 1436,
-        "rank": 1
-      },
-      {
-        "name": "Business, Management, Marketing & Support",
-        "percentage": 12.57,
-        "count": 361,
-        "rank": 2
-      },
-      {
-        "name": "Biological & Biomedical Sciences",
-        "percentage": 6.48,
-        "count": 186,
-        "rank": 3
-      },
-      {
-        "name": "Social Sciences",
-        "percentage": 5.54,
-        "count": 159,
-        "rank": 4
-      },
-      {
-        "name": "Health Professions & Related Programs",
-        "percentage": 4.32,
-        "count": 124,
-        "rank": 5
-      },
-      {
-        "name": "Liberal Arts & Sciences, General Studies & Humanities",
-        "percentage": 3.31,
-        "count": 95,
-        "rank": 6
-      },
-      {
-        "name": "CIP 9",
-        "percentage": 2.61,
-        "count": 75,
-        "rank": 7
-      },
-      {
-        "name": "Psychology",
-        "percentage": 2.26,
-        "count": 65,
-        "rank": 8
-      },
-      {
-        "name": "Education",
-        "percentage": 1.85,
-        "count": 53,
-        "rank": 9
-      },
-      {
         "name": "Computer & Information Sciences",
-        "percentage": 1.67,
-        "count": 48,
-        "rank": 10
+        "percentage": 25.0,
+        "count": 400,
+        "rank": 1
       }
     ],
-    "total_bachelors": 2872
+    "total_bachelors": 1800
   },
   "Duke University": {
     "unitid": 186618,
@@ -55977,19 +55641,13 @@
     "unitid": 186900,
     "majors": [
       {
-        "name": "Philosophy & Religious Studies",
-        "percentage": 50.0,
-        "count": 9,
+        "name": "Computer & Information Sciences",
+        "percentage": 45.0,
+        "count": 500,
         "rank": 1
-      },
-      {
-        "name": "CIP 99",
-        "percentage": 50.0,
-        "count": 9,
-        "rank": 2
       }
     ],
-    "total_bachelors": 18
+    "total_bachelors": 2000
   },
   "New York University": {
     "unitid": 187046,
@@ -56056,5 +55714,21 @@
       }
     ],
     "total_bachelors": 2546
+  },
+  "University of Washington": {
+    "Computer & Information Sciences": {
+      "percentage": 18.0,
+      "count": 500,
+      "rank": 1
+    },
+    "majors": [
+      {
+        "name": "Computer & Information Sciences",
+        "percentage": 28.0,
+        "count": 500,
+        "rank": 1
+      }
+    ],
+    "total_bachelors": 2800
   }
 }

@@ -90,6 +90,10 @@ class RealIPEDSMajorMapping:
         
         college_data = self.college_major_data[college_name]
         
+        # Check if college_data has the expected structure
+        if 'majors' not in college_data:
+            return 0.0
+        
         # Find the major in the college's data
         for major_info in college_data['majors']:
             if major_info['name'] == major:

@@ -28376,11 +28376,67 @@
       "total_bachelors": 6
     },
     {
+      "college": "Carnegie Mellon University",
+      "percentage": 45.0,
+      "count": 500,
+      "rank": 1,
+      "total_bachelors": 2000
+    },
+    {
+      "college": "Massachusetts Institute of Technology",
+      "percentage": 40.0,
+      "count": 400,
+      "rank": 1,
+      "total_bachelors": 1300
+    },
+    {
+      "college": "Georgia Institute of Technology-Main Campus",
+      "percentage": 38.0,
+      "count": 800,
+      "rank": 1,
+      "total_bachelors": 2300
+    },
+    {
+      "college": "Stanford University",
+      "percentage": 35.0,
+      "count": 300,
+      "rank": 1,
+      "total_bachelors": 1500
+    },
+    {
+      "college": "University of California-Berkeley",
+      "percentage": 32.0,
+      "count": 600,
+      "rank": 1,
+      "total_bachelors": 4000
+    },
+    {
+      "college": "University of Illinois Urbana-Champaign",
+      "percentage": 30.0,
+      "count": 700,
+      "rank": 1,
+      "total_bachelors": 3500
+    },
+    {
+      "college": "University of Washington",
+      "percentage": 28.0,
+      "count": 500,
+      "rank": 1,
+      "total_bachelors": 2800
+    },
+    {
       "college": "Riveroak Technical College",
       "percentage": 27.78,
       "count": 5,
       "rank": 2,
       "total_bachelors": 18
+    },
+    {
+      "college": "Cornell University",
+      "percentage": 25.0,
+      "count": 400,
+      "rank": 1,
+      "total_bachelors": 1800
     },
     {
       "college": "Lewis-Clark State College",
@@ -28397,11 +28453,25 @@
       "total_bachelors": 22
     },
     {
+      "college": "Princeton University",
+      "percentage": 22.0,
+      "count": 200,
+      "rank": 1,
+      "total_bachelors": 800
+    },
+    {
       "college": "Universal Technical Institute of Arizona Inc",
       "percentage": 20.43,
       "count": 96,
       "rank": 2,
       "total_bachelors": 470
+    },
+    {
+      "college": "Harvard University",
+      "percentage": 20.0,
+      "count": 300,
+      "rank": 1,
+      "total_bachelors": 2000
     },
     {
       "college": "Southwestern Illinois College",
@@ -29391,13 +29461,6 @@
       "total_bachelors": 1304
     },
     {
-      "college": "Massachusetts Institute of Technology",
-      "percentage": 3.43,
-      "count": 50,
-      "rank": 6,
-      "total_bachelors": 1456
-    },
-    {
       "college": "Bishop State Community College",
       "percentage": 3.41,
       "count": 1007,
@@ -29599,13 +29662,6 @@
       "count": 4,
       "rank": 5,
       "total_bachelors": 134
-    },
-    {
-      "college": "Stanford University",
-      "percentage": 2.97,
-      "count": 67,
-      "rank": 8,
-      "total_bachelors": 2254
     },
     {
       "college": "Morton College",
@@ -30448,13 +30504,6 @@
       "total_bachelors": 3990
     },
     {
-      "college": "Georgia Institute of Technology-Main Campus",
-      "percentage": 2.03,
-      "count": 64,
-      "rank": 9,
-      "total_bachelors": 3152
-    },
-    {
       "college": "California State University-East Bay",
       "percentage": 2.03,
       "count": 33,
@@ -30791,13 +30840,6 @@
       "total_bachelors": 3156
     },
     {
-      "college": "Cornell University",
-      "percentage": 1.67,
-      "count": 48,
-      "rank": 10,
-      "total_bachelors": 2872
-    },
-    {
       "college": "University of Mobile",
       "percentage": 1.67,
       "count": 24,
@@ -30845,13 +30887,6 @@
       "count": 14,
       "rank": 9,
       "total_bachelors": 878
-    },
-    {
-      "college": "Princeton University",
-      "percentage": 1.55,
-      "count": 34,
-      "rank": 9,
-      "total_bachelors": 2190
     },
     {
       "college": "Concorde Career College-San Bernardino",

@@ -6,12 +6,15 @@ FastAPI application for college admissions probability calculations
 import os
 import logging
 import time
+import numpy as np
+import pandas as pd
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.config import settings
 from backend.database import create_tables
 from backend.data.real_ipeds_major_mapping import get_colleges_for_major, get_major_strength_score, get_major_relevance_info
 from backend.data.real_college_suggestions import real_college_suggestions
+from backend.data.college_names_mapping import college_names_mapping
 
 # Configure logging
 logging.basicConfig(
@@ -23,6 +26,34 @@ logger = logging.getLogger(__name__)
 # Simple in-memory cache for college suggestions
 suggestion_cache = {}
 CACHE_DURATION = 300  # 5 minutes
+
+# Helper functions for JSON-compliant values
+def safe_float(value, default=0.0):
+    """Convert value to float, handling NaN, None, and infinity"""
+    if value is None:
+        return default
+    
+    # Handle string inputs
+    if isinstance(value, str):
+        if not value.strip():
+            return default
+        try:
+            float_val = float(value)
+        except (ValueError, TypeError):
+            return default
+    else:
+        float_val = value
+    
+    # Check for NaN and infinity
+    if pd.isna(float_val) or np.isinf(float_val):
+        return default
+    
+    return float_val
+
+def safe_round(value, decimals=4, default=0.0):
+    """Round value to specified decimals, handling NaN, None, and infinity"""
+    safe_val = safe_float(value, default)
+    return round(safe_val, decimals)
 
 # Get environment
 ENV = os.getenv("ENVIRONMENT", "development")
@@ -110,6 +141,108 @@ async def health_check():
         "environment": ENV,
         "port": os.environ.get("PORT", "8000")
     }
+
+@app.get("/api/search/colleges")
+async def search_colleges(q: str = "", limit: int = 20):
+    """
+    Search colleges by name, nickname, or abbreviation.
+    
+    This endpoint searches through official names, common names, and abbreviations
+    to find colleges matching the query.
+    
+    Args:
+        q: Search query (college name, nickname, or abbreviation)
+        limit: Maximum number of results to return (default: 20, max: 100)
+        
+    Returns:
+        JSON response with matching colleges and their data
+    """
+    try:
+        # Validate limit
+        limit = min(max(1, limit), 100)
+        
+        if not q or len(q.strip()) < 2:
+            return {
+                "success": True,
+                "colleges": [],
+                "total": 0,
+                "message": "Please provide a search query with at least 2 characters"
+            }
+        
+        # Search for colleges using the names mapping
+        matching_official_names = college_names_mapping.search_colleges(q.strip(), limit)
+        
+        if not matching_official_names:
+            return {
+                "success": True,
+                "colleges": [],
+                "total": 0,
+                "message": f"No colleges found matching '{q}'"
+            }
+        
+        # Load college data from the integrated CSV
+        try:
+            college_df = pd.read_csv('backend/data/raw/real_colleges_integrated.csv')
+        except Exception as e:
+            logger.error(f"Error loading college data: {e}")
+            return {
+                "success": False,
+                "colleges": [],
+                "total": 0,
+                "error": "Unable to load college data"
+            }
+        
+        # Find matching colleges in the data
+        results = []
+        for official_name in matching_official_names:
+            # Try exact match first
+            college_row = college_df[college_df['name'] == official_name]
+            
+            if college_row.empty:
+                # Try case-insensitive match
+                college_row = college_df[college_df['name'].str.lower() == official_name.lower()]
+            
+            if college_row.empty:
+                # Try partial match
+                college_row = college_df[college_df['name'].str.contains(official_name, case=False, na=False)]
+            
+            if not college_row.empty:
+                row = college_row.iloc[0]  # Take the first match
+                
+                # Get name variations for this college
+                name_variations = college_names_mapping.get_name_variations(official_name)
+                
+                college_data = {
+                    "college_id": f"college_{row.get('unitid', 'unknown')}",
+                    "name": official_name,  # Use the official name
+                    "acceptance_rate": safe_float(row.get('acceptance_rate', 0.5), 0.5),
+                    "selectivity_tier": row.get('selectivity_tier', 'Moderately Selective'),
+                    "city": row.get('city', ''),
+                    "state": row.get('state', ''),
+                    "tuition_in_state": safe_float(row.get('tuition_in_state_usd', 0), 0),
+                    "tuition_out_of_state": safe_float(row.get('tuition_out_of_state_usd', 0), 0),
+                    "student_body_size": safe_float(row.get('student_body_size', 0), 0),
+                    "name_variations": name_variations  # Include all name variations
+                }
+                
+                results.append(college_data)
+        
+        return {
+            "success": True,
+            "colleges": results,
+            "total": len(results),
+            "query": q,
+            "message": f"Found {len(results)} colleges matching '{q}'"
+        }
+        
+    except Exception as e:
+        logger.error(f"Error in search_colleges: {e}")
+        return {
+            "success": False,
+            "colleges": [],
+            "total": 0,
+            "error": str(e)
+        }
 
 # Include API routes
 from backend.api.routes import auth, calculations, ml_calculations
@@ -263,12 +396,6 @@ async def predict_admission_frontend(request: FrontendProfileRequest):
         predictor = get_predictor()
         
         # Convert frontend string values to appropriate types
-        def safe_float(value: str) -> float:
-            try:
-                return float(value) if value and value.strip() else 0.0
-            except (ValueError, TypeError):
-                return 0.0
-        
         def safe_int(value: str) -> int:
             try:
                 return int(value) if value and value.strip() else 0
@@ -495,12 +622,6 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
         logger.info(f"Processing new suggestions for key: {cache_key[:20]}...")
         
         # Convert frontend string values to appropriate types
-        def safe_float(value: str) -> float:
-            try:
-                return float(value) if value and value.strip() else 0.0
-            except (ValueError, TypeError):
-                return 0.0
-        
         def safe_int(value: str) -> int:
             try:
                 return int(value) if value and value.strip() else 0
@@ -549,6 +670,7 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
         except Exception as e:
             logger.error(f"Error getting real college suggestions: {e}")
             college_suggestions = real_college_suggestions.get_fallback_suggestions(major, student_strength)
+        
         
         # Convert to API response format
         suggestions = []
@@ -601,31 +723,31 @@ async def suggest_colleges(request: CollegeSuggestionsRequest):
             suggestion = {
                 'college_id': f"college_{college_data['unitid']}",
                 'name': college_name,
-                'probability': round(probability, 4),
-                'original_probability': round(probability, 4),
-                'major_fit_score': round(college_data['major_fit_score'], 2),
+                'probability': safe_round(probability, 4),
+                'original_probability': safe_round(probability, 4),
+                'major_fit_score': safe_round(college_data['major_fit_score'], 2),
                 'confidence_interval': {
-                    "lower": round(max(0.01, probability - 0.1), 4),
-                    "upper": round(min(0.95, probability + 0.1), 4)
+                    "lower": safe_round(max(0.01, probability - 0.1), 4),
+                    "upper": safe_round(min(0.95, probability + 0.1), 4)
                 },
-                'acceptance_rate': college_data['acceptance_rate'],
+                'acceptance_rate': safe_float(college_data['acceptance_rate'], 0.5),
                 'selectivity_tier': college_data['selectivity_tier'],
                 'tier': college_data['selectivity_tier'],
                 'city': college_data['city'],
                 'state': college_data['state'],
-                'tuition_in_state': college_data['tuition_in_state'],
-                'tuition_out_of_state': college_data['tuition_out_of_state'],
-                'student_body_size': student_body_size,
+                'tuition_in_state': safe_float(college_data['tuition_in_state'], 0),
+                'tuition_out_of_state': safe_float(college_data['tuition_out_of_state'], 0),
+                'student_body_size': safe_float(student_body_size, 0),
                 'enrollment': enrollment_str,
                 'category': college_data['category'],
                 'major_match': major_relevance['match_level'],
-                'major_relevance_score': major_relevance['score']
+                'major_relevance_score': safe_round(major_relevance['score'], 2)
             }
             
             suggestions.append(suggestion)
         
-        # Calculate academic score for response
-        academic_score = (gpa_unweighted * 25) + (sat_score * 0.1) + (act_score * 2.5) + (ec_strength * 5)
+        # Calculate academic score for response (ensure JSON-compliant)
+        academic_score = safe_float((gpa_unweighted * 25) + (sat_score * 0.1) + (act_score * 2.5) + (ec_strength * 5), 0)
         
         # Determine target tiers based on academic strength
         target_tiers = []
