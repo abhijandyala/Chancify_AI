@@ -1,0 +1,154 @@
+name,city,state,major_1,major_2,major_3
+University of Alabama,Tuscaloosa,AL,Business,Engineering,Biology
+Auburn University,Auburn,AL,Business,Engineering,Biology
+University of South Alabama,Mobile,AL,Business,Engineering,Biology
+University of Alaska Fairbanks,Fairbanks,AK,Business,Engineering,Biology
+University of Alaska Anchorage,Anchorage,AK,Business,Engineering,Biology
+Alaska Pacific University,Anchorage,AK,Business,Engineering,Biology
+University of Arizona,Tucson,AZ,Business,Engineering,Biology
+Arizona State University,Tempe,AZ,Business,Engineering,Biology
+Northern Arizona University,Flagstaff,AZ,Business,Engineering,Biology
+University of Arkansas,Fayetteville,AR,Business,Engineering,Biology
+Arkansas State University,Jonesboro,AR,Business,Engineering,Biology
+University of Central Arkansas,Conway,AR,Business,Engineering,Biology
+"University of California, Los Angeles",Los Angeles,CA,Film,Biology,Engineering
+"University of California, Berkeley",Berkeley,CA,Computer Science,Electrical Engineering,Biology
+Stanford University,Stanford,CA,Computer Science,Business,Engineering
+University of Colorado Boulder,Boulder,CO,Business,Engineering,Biology
+Colorado State University,Fort Collins,CO,Business,Engineering,Biology
+University of Denver,Denver,CO,Business,Engineering,Biology
+Yale University,New Haven,CT,Law,History,Political Science
+University of Connecticut,Storrs,CT,Business,Engineering,Biology
+Trinity College,Hartford,CT,Liberal Arts,Biology,Economics
+University of Delaware,Newark,DE,Business,Engineering,Biology
+Delaware State University,Dover,DE,Business,Engineering,Biology
+Goldey-Beacom College,Wilmington,DE,Liberal Arts,Biology,Economics
+Georgetown University,Washington,DC,Business,Engineering,Biology
+George Washington University,Washington,DC,Business,Engineering,Biology
+American University,Washington,DC,Business,Engineering,Biology
+University of Florida,Gainesville,FL,Business,Engineering,Biology
+Florida State University,Tallahassee,FL,Business,Engineering,Biology
+University of Miami,Coral Gables,FL,Business,Engineering,Biology
+University of Georgia,Athens,GA,Business,Engineering,Biology
+Georgia Institute of Technology,Atlanta,GA,Computer Science,Mechanical Engineering,Aerospace
+Emory University,Atlanta,GA,Business,Engineering,Biology
+University of Hawaii at Manoa,Honolulu,HI,Business,Engineering,Biology
+Hawai‘i Pacific University,Honolulu,HI,Business,Engineering,Biology
+Chaminade University of Honolulu,Honolulu,HI,Business,Engineering,Biology
+University of Idaho,Moscow,ID,Business,Engineering,Biology
+Boise State University,Boise,ID,Business,Engineering,Biology
+Idaho State University,Pocatello,ID,Business,Engineering,Biology
+University of Illinois Urbana-Champaign,Champaign,IL,Business,Engineering,Biology
+Northwestern University,Evanston,IL,Journalism,Business,Performing Arts
+University of Chicago,Chicago,IL,Economics,Mathematics,Public Policy
+Indiana University Bloomington,Bloomington,IN,Business,Engineering,Biology
+Purdue University,West Lafayette,IN,Business,Engineering,Biology
+University of Notre Dame,Notre Dame,IN,Business,Engineering,Biology
+University of Iowa,Iowa City,IA,Business,Engineering,Biology
+Iowa State University,Ames,IA,Business,Engineering,Biology
+University of Northern Iowa,Cedar Falls,IA,Business,Engineering,Biology
+University of Kansas,Lawrence,KS,Business,Engineering,Biology
+Kansas State University,Manhattan,KS,Business,Engineering,Biology
+Wichita State University,Wichita,KS,Business,Engineering,Biology
+University of Kentucky,Lexington,KY,Business,Engineering,Biology
+University of Louisville,Louisville,KY,Business,Engineering,Biology
+Western Kentucky University,Bowling Green,KY,Business,Engineering,Biology
+Louisiana State University,Baton Rouge,LA,Business,Engineering,Biology
+Tulane University,New Orleans,LA,Business,Engineering,Biology
+Louisiana Tech University,Ruston,LA,Business,Engineering,Biology
+University of Maine,Orono,ME,Business,Engineering,Biology
+Bowdoin College,Brunswick,ME,Liberal Arts,Biology,Economics
+Colby College,Waterville,ME,Liberal Arts,Biology,Economics
+"University of Maryland, College Park",College Park,MD,Liberal Arts,Biology,Economics
+Johns Hopkins University,Baltimore,MD,Business,Engineering,Biology
+Towson University,Towson,MD,Business,Engineering,Biology
+Harvard University,Cambridge,MA,Law,Business,Medicine
+Massachusetts Institute of Technology,Cambridge,MA,Computer Science,Engineering,Physics
+Boston University,Boston,MA,Business,Engineering,Biology
+University of Michigan,Ann Arbor,MI,Engineering,Business,Political Science
+Michigan State University,East Lansing,MI,Business,Engineering,Biology
+Wayne State University,Detroit,MI,Business,Engineering,Biology
+University of Minnesota Twin Cities,Minneapolis,MN,Business,Engineering,Biology
+Carleton College,Northfield,MN,Liberal Arts,Biology,Economics
+Macalester College,Saint Paul,MN,Liberal Arts,Biology,Economics
+University of Mississippi,Oxford,MS,Business,Engineering,Biology
+Mississippi State University,Starkville,MS,Business,Engineering,Biology
+Jackson State University,Jackson,MS,Business,Engineering,Biology
+University of Missouri,Columbia,MO,Business,Engineering,Biology
+Washington University in St. Louis,St. Louis,MO,Business,Engineering,Biology
+Saint Louis University,St. Louis,MO,Business,Engineering,Biology
+University of Montana,Missoula,MT,Business,Engineering,Biology
+Montana State University,Bozeman,MT,Business,Engineering,Biology
+Carroll College,Helena,MT,Liberal Arts,Biology,Economics
+University of Nebraska–Lincoln,Lincoln,NE,Business,Engineering,Biology
+Creighton University,Omaha,NE,Business,Engineering,Biology
+University of Nebraska at Omaha,Omaha,NE,Business,Engineering,Biology
+"University of Nevada, Reno",Reno,NV,Business,Engineering,Biology
+"University of Nevada, Las Vegas",Las Vegas,NV,Business,Engineering,Biology
+Nevada State University,Henderson,NV,Business,Engineering,Biology
+Dartmouth College,Hanover,NH,Liberal Arts,Biology,Economics
+University of New Hampshire,Durham,NH,Business,Engineering,Biology
+Keene State College,Keene,NH,Liberal Arts,Biology,Economics
+Princeton University,Princeton,NJ,Mathematics,Economics,Public Policy
+Rutgers University–New Brunswick,New Brunswick,NJ,Business,Engineering,Biology
+Stevens Institute of Technology,Hoboken,NJ,Engineering,Computer Science,Mathematics
+University of New Mexico,Albuquerque,NM,Business,Engineering,Biology
+New Mexico State University,Las Cruces,NM,Business,Engineering,Biology
+New Mexico Institute of Mining and Technology,Socorro,NM,Engineering,Computer Science,Mathematics
+Columbia University,New York,NY,Law,Journalism,Medicine
+New York University,New York,NY,Business,Engineering,Biology
+Cornell University,Ithaca,NY,Engineering,Hotel Administration,Architecture
+University of North Carolina at Chapel Hill,Chapel Hill,NC,Public Health,Business,Journalism
+North Carolina State University,Raleigh,NC,Business,Engineering,Biology
+Duke University,Durham,NC,Medicine,Public Policy,Computer Science
+University of North Dakota,Grand Forks,ND,Business,Engineering,Biology
+North Dakota State University,Fargo,ND,Business,Engineering,Biology
+Minot State University,Minot,ND,Business,Engineering,Biology
+The Ohio State University,Columbus,OH,Business,Engineering,Biology
+University of Cincinnati,Cincinnati,OH,Business,Engineering,Biology
+Case Western Reserve University,Cleveland,OH,Business,Engineering,Biology
+University of Oklahoma,Norman,OK,Business,Engineering,Biology
+Oklahoma State University,Stillwater,OK,Business,Engineering,Biology
+University of Tulsa,Tulsa,OK,Business,Engineering,Biology
+University of Oregon,Eugene,OR,Business,Engineering,Biology
+Oregon State University,Corvallis,OR,Business,Engineering,Biology
+Portland State University,Portland,OR,Business,Engineering,Biology
+University of Pennsylvania,Philadelphia,PA,Finance,Business,Nursing
+Pennsylvania State University (University Park),University Park,PA,Business,Engineering,Biology
+Carnegie Mellon University,Pittsburgh,PA,Computer Science,Electrical Engineering,Drama
+Brown University,Providence,RI,Business,Engineering,Biology
+University of Rhode Island,Kingston,RI,Business,Engineering,Biology
+Providence College,Providence,RI,Liberal Arts,Biology,Economics
+University of South Carolina,Columbia,SC,Business,Engineering,Biology
+Clemson University,Clemson,SC,Business,Engineering,Biology
+College of Charleston,Charleston,SC,Liberal Arts,Biology,Economics
+University of South Dakota,Vermillion,SD,Business,Engineering,Biology
+South Dakota State University,Brookings,SD,Business,Engineering,Biology
+Augustana University,Sioux Falls,SD,Business,Engineering,Biology
+"University of Tennessee, Knoxville",Knoxville,TN,Business,Engineering,Biology
+Vanderbilt University,Nashville,TN,Business,Engineering,Biology
+University of Memphis,Memphis,TN,Business,Engineering,Biology
+The University of Texas at Austin,Austin,TX,Computer Science,Engineering,Business
+Texas A&M University,College Station,TX,Engineering,Veterinary Medicine,Agriculture
+Rice University,Houston,TX,Engineering,Computer Science,Physics
+University of Utah,Salt Lake City,UT,Business,Engineering,Biology
+Brigham Young University,Provo,UT,Business,Engineering,Biology
+Utah State University,Logan,UT,Business,Engineering,Biology
+University of Vermont,Burlington,VT,Business,Engineering,Biology
+Middlebury College,Middlebury,VT,Liberal Arts,Biology,Economics
+Norwich University,Northfield,VT,Business,Engineering,Biology
+University of Virginia,Charlottesville,VA,Business,Engineering,Biology
+Virginia Tech,Blacksburg,VA,Business,Engineering,Biology
+George Mason University,Fairfax,VA,Business,Engineering,Biology
+University of Washington,Seattle,WA,Business,Engineering,Biology
+Washington State University,Pullman,WA,Business,Engineering,Biology
+Gonzaga University,Spokane,WA,Business,Engineering,Biology
+West Virginia University,Morgantown,WV,Business,Engineering,Biology
+Marshall University,Huntington,WV,Business,Engineering,Biology
+Shepherd University,Shepherdstown,WV,Business,Engineering,Biology
+University of Wisconsin–Madison,Madison,WI,Business,Engineering,Biology
+Marquette University,Milwaukee,WI,Business,Engineering,Biology
+Lawrence University,Appleton,WI,Business,Engineering,Biology
+University of Wyoming,Laramie,WY,Business,Engineering,Biology
+Wyoming Catholic College,Lander,WY,Liberal Arts,Biology,Economics
+Laramie County Community College,Cheyenne,WY,Liberal Arts,Biology,Economics

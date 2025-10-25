@@ -1,0 +1,3113 @@
+{
+  "summary": {
+    "total_tests": 47,
+    "tests_with_issues": 0,
+    "success_rate": 100.0,
+    "total_issues": 0
+  },
+  "results": [
+    {
+      "test_name": "Weak Student - GPA 2.0, SAT 800",
+      "profile": {
+        "gpa_unweighted": "2.0",
+        "gpa_weighted": "2.3",
+        "sat": "800",
+        "act": "20",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.779
+        },
+        {
+          "college": "Grand Canyon University",
+          "category": "safety",
+          "probability": 0.779
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.779
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.574
+        },
+        {
+          "college": "Tuskegee University",
+          "category": "target",
+          "probability": 0.574
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.574
+        },
+        {
+          "college": "Emory University",
+          "category": "reach",
+          "probability": 0.246
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.246
+        },
+        {
+          "college": "University of California-Berkeley",
+          "category": "reach",
+          "probability": 0.246
+        }
+      ],
+      "max_probability": 0.779,
+      "min_probability": 0.246,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Weak Student - GPA 2.0, SAT 1000",
+      "profile": {
+        "gpa_unweighted": "2.0",
+        "gpa_weighted": "2.3",
+        "sat": "1000",
+        "act": "25",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.779
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.779
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.779
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.574
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.574
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.574
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.246
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.246
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.246
+        }
+      ],
+      "max_probability": 0.779,
+      "min_probability": 0.246,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Weak Student - GPA 2.0, SAT 1200",
+      "profile": {
+        "gpa_unweighted": "2.0",
+        "gpa_weighted": "2.3",
+        "sat": "1200",
+        "act": "30",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.779
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.779
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.779
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.574
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.574
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.574
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.205
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.205
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.205
+        }
+      ],
+      "max_probability": 0.779,
+      "min_probability": 0.205,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Weak Student - GPA 2.5, SAT 800",
+      "profile": {
+        "gpa_unweighted": "2.5",
+        "gpa_weighted": "2.8",
+        "sat": "800",
+        "act": "20",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.7985
+        },
+        {
+          "college": "Grand Canyon University",
+          "category": "safety",
+          "probability": 0.7985
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.7985
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.5884
+        },
+        {
+          "college": "Tuskegee University",
+          "category": "target",
+          "probability": 0.5884
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.5884
+        },
+        {
+          "college": "Emory University",
+          "category": "reach",
+          "probability": 0.2101
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2101
+        },
+        {
+          "college": "University of California-Berkeley",
+          "category": "reach",
+          "probability": 0.2101
+        }
+      ],
+      "max_probability": 0.7985,
+      "min_probability": 0.2101,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Weak Student - GPA 2.5, SAT 1000",
+      "profile": {
+        "gpa_unweighted": "2.5",
+        "gpa_weighted": "2.8",
+        "sat": "1000",
+        "act": "25",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.7985
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.7985
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.7985
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.5884
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.5884
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.5884
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2101
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2101
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2101
+        }
+      ],
+      "max_probability": 0.7985,
+      "min_probability": 0.2101,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Weak Student - GPA 2.5, SAT 1200",
+      "profile": {
+        "gpa_unweighted": "2.5",
+        "gpa_weighted": "2.8",
+        "sat": "1200",
+        "act": "30",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.7985
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.7985
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.7985
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.5884
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.5884
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.5884
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2101
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2101
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2101
+        }
+      ],
+      "max_probability": 0.7985,
+      "min_probability": 0.2101,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Weak Student - GPA 3.0, SAT 800",
+      "profile": {
+        "gpa_unweighted": "3.0",
+        "gpa_weighted": "3.3",
+        "sat": "800",
+        "act": "20",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8175
+        },
+        {
+          "college": "Grand Canyon University",
+          "category": "safety",
+          "probability": 0.8175
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8175
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6024
+        },
+        {
+          "college": "Tuskegee University",
+          "category": "target",
+          "probability": 0.6024
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6024
+        },
+        {
+          "college": "Emory University",
+          "category": "reach",
+          "probability": 0.2151
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2151
+        },
+        {
+          "college": "University of California-Berkeley",
+          "category": "reach",
+          "probability": 0.2151
+        }
+      ],
+      "max_probability": 0.8175,
+      "min_probability": 0.2151,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Weak Student - GPA 3.0, SAT 1000",
+      "profile": {
+        "gpa_unweighted": "3.0",
+        "gpa_weighted": "3.3",
+        "sat": "1000",
+        "act": "25",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8175
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8175
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8175
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6024
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6024
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6024
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2151
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2151
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2151
+        }
+      ],
+      "max_probability": 0.8175,
+      "min_probability": 0.2151,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Weak Student - GPA 3.0, SAT 1200",
+      "profile": {
+        "gpa_unweighted": "3.0",
+        "gpa_weighted": "3.3",
+        "sat": "1200",
+        "act": "30",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8175
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8175
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8175
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6024
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6024
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6024
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2151
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2151
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2151
+        }
+      ],
+      "max_probability": 0.8175,
+      "min_probability": 0.2151,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Average Student - GPA 3.0, SAT 1200",
+      "profile": {
+        "gpa_unweighted": "3.0",
+        "gpa_weighted": "3.4",
+        "sat": "1200",
+        "act": "30",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8242
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8242
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8242
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6073
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6073
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6073
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2169
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2169
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2169
+        }
+      ],
+      "max_probability": 0.8242,
+      "min_probability": 0.2169,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Average Student - GPA 3.0, SAT 1300",
+      "profile": {
+        "gpa_unweighted": "3.0",
+        "gpa_weighted": "3.4",
+        "sat": "1300",
+        "act": "32",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8242
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8242
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8242
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6073
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6073
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6073
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2169
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2169
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2169
+        }
+      ],
+      "max_probability": 0.8242,
+      "min_probability": 0.2169,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Average Student - GPA 3.0, SAT 1400",
+      "profile": {
+        "gpa_unweighted": "3.0",
+        "gpa_weighted": "3.4",
+        "sat": "1400",
+        "act": "35",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8242
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8242
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8242
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6073
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6073
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6073
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2169
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2169
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2169
+        }
+      ],
+      "max_probability": 0.8242,
+      "min_probability": 0.2169,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Average Student - GPA 3.3, SAT 1200",
+      "profile": {
+        "gpa_unweighted": "3.3",
+        "gpa_weighted": "3.6999999999999997",
+        "sat": "1200",
+        "act": "30",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.836
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.836
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.836
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.616
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.616
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.616
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.22
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.22
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.22
+        }
+      ],
+      "max_probability": 0.836,
+      "min_probability": 0.22,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Average Student - GPA 3.3, SAT 1300",
+      "profile": {
+        "gpa_unweighted": "3.3",
+        "gpa_weighted": "3.6999999999999997",
+        "sat": "1300",
+        "act": "32",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.836
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.836
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.836
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.616
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.616
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.616
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.22
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.22
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.22
+        }
+      ],
+      "max_probability": 0.836,
+      "min_probability": 0.22,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Average Student - GPA 3.3, SAT 1400",
+      "profile": {
+        "gpa_unweighted": "3.3",
+        "gpa_weighted": "3.6999999999999997",
+        "sat": "1400",
+        "act": "35",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.836
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.836
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.836
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.616
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.616
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.616
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.22
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.22
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.22
+        }
+      ],
+      "max_probability": 0.836,
+      "min_probability": 0.22,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Average Student - GPA 3.5, SAT 1200",
+      "profile": {
+        "gpa_unweighted": "3.5",
+        "gpa_weighted": "3.9",
+        "sat": "1200",
+        "act": "30",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8438
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8438
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8438
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6217
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6217
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6217
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.222
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.222
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.222
+        }
+      ],
+      "max_probability": 0.8438,
+      "min_probability": 0.222,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Average Student - GPA 3.5, SAT 1300",
+      "profile": {
+        "gpa_unweighted": "3.5",
+        "gpa_weighted": "3.9",
+        "sat": "1300",
+        "act": "32",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8438
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8438
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8438
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6217
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6217
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6217
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.222
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.222
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.222
+        }
+      ],
+      "max_probability": 0.8438,
+      "min_probability": 0.222,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Average Student - GPA 3.5, SAT 1400",
+      "profile": {
+        "gpa_unweighted": "3.5",
+        "gpa_weighted": "3.9",
+        "sat": "1400",
+        "act": "35",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8438
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8438
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8438
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6217
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6217
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6217
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.222
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.222
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.222
+        }
+      ],
+      "max_probability": 0.8438,
+      "min_probability": 0.222,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Average Student - GPA 3.7, SAT 1200",
+      "profile": {
+        "gpa_unweighted": "3.7",
+        "gpa_weighted": "4.1000000000000005",
+        "sat": "1200",
+        "act": "30",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8516
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8516
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8516
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6275
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6275
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6275
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2241
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2241
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2241
+        }
+      ],
+      "max_probability": 0.8516,
+      "min_probability": 0.2241,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Average Student - GPA 3.7, SAT 1300",
+      "profile": {
+        "gpa_unweighted": "3.7",
+        "gpa_weighted": "4.1000000000000005",
+        "sat": "1300",
+        "act": "32",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8516
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8516
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8516
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6275
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6275
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6275
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2241
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2241
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2241
+        }
+      ],
+      "max_probability": 0.8516,
+      "min_probability": 0.2241,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Average Student - GPA 3.7, SAT 1400",
+      "profile": {
+        "gpa_unweighted": "3.7",
+        "gpa_weighted": "4.1000000000000005",
+        "sat": "1400",
+        "act": "35",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8516
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8516
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8516
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6275
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6275
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6275
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2241
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2241
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2241
+        }
+      ],
+      "max_probability": 0.8516,
+      "min_probability": 0.2241,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Strong Student - GPA 3.7, SAT 1400",
+      "profile": {
+        "gpa_unweighted": "3.7",
+        "gpa_weighted": "4.2",
+        "sat": "1400",
+        "act": "35",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8616
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8616
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8616
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6349
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6349
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6349
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2267
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2267
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2267
+        }
+      ],
+      "max_probability": 0.8616,
+      "min_probability": 0.2267,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Strong Student - GPA 3.7, SAT 1500",
+      "profile": {
+        "gpa_unweighted": "3.7",
+        "gpa_weighted": "4.2",
+        "sat": "1500",
+        "act": "37",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8616
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8616
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8616
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6349
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6349
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6349
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2267
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2267
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2267
+        }
+      ],
+      "max_probability": 0.8616,
+      "min_probability": 0.2267,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Strong Student - GPA 3.7, SAT 1600",
+      "profile": {
+        "gpa_unweighted": "3.7",
+        "gpa_weighted": "4.2",
+        "sat": "1600",
+        "act": "40",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8616
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8616
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8616
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6349
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6349
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6349
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2267
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2267
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2267
+        }
+      ],
+      "max_probability": 0.8616,
+      "min_probability": 0.2267,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Strong Student - GPA 3.8, SAT 1400",
+      "profile": {
+        "gpa_unweighted": "3.8",
+        "gpa_weighted": "4.3",
+        "sat": "1400",
+        "act": "35",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8655
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8655
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8655
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6378
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6378
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6378
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2278
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2278
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2278
+        }
+      ],
+      "max_probability": 0.8655,
+      "min_probability": 0.2278,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Strong Student - GPA 3.8, SAT 1500",
+      "profile": {
+        "gpa_unweighted": "3.8",
+        "gpa_weighted": "4.3",
+        "sat": "1500",
+        "act": "37",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8655
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8655
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8655
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6378
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6378
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6378
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2278
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2278
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2278
+        }
+      ],
+      "max_probability": 0.8655,
+      "min_probability": 0.2278,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Strong Student - GPA 3.8, SAT 1600",
+      "profile": {
+        "gpa_unweighted": "3.8",
+        "gpa_weighted": "4.3",
+        "sat": "1600",
+        "act": "40",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8655
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8655
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8655
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6378
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6378
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6378
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2278
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2278
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2278
+        }
+      ],
+      "max_probability": 0.8655,
+      "min_probability": 0.2278,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Strong Student - GPA 3.9, SAT 1400",
+      "profile": {
+        "gpa_unweighted": "3.9",
+        "gpa_weighted": "4.4",
+        "sat": "1400",
+        "act": "35",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8695
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8695
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8695
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6406
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6406
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6406
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2288
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2288
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2288
+        }
+      ],
+      "max_probability": 0.8695,
+      "min_probability": 0.2288,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Strong Student - GPA 3.9, SAT 1500",
+      "profile": {
+        "gpa_unweighted": "3.9",
+        "gpa_weighted": "4.4",
+        "sat": "1500",
+        "act": "37",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8695
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8695
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8695
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6406
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6406
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6406
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2288
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2288
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2288
+        }
+      ],
+      "max_probability": 0.8695,
+      "min_probability": 0.2288,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Strong Student - GPA 3.9, SAT 1600",
+      "profile": {
+        "gpa_unweighted": "3.9",
+        "gpa_weighted": "4.4",
+        "sat": "1600",
+        "act": "40",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8695
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8695
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8695
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6406
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6406
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6406
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2288
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2288
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2288
+        }
+      ],
+      "max_probability": 0.8695,
+      "min_probability": 0.2288,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Strong Student - GPA 4.0, SAT 1400",
+      "profile": {
+        "gpa_unweighted": "4.0",
+        "gpa_weighted": "4.5",
+        "sat": "1400",
+        "act": "35",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8734
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8734
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8734
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6435
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6435
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6435
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2298
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2298
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2298
+        }
+      ],
+      "max_probability": 0.8734,
+      "min_probability": 0.2298,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Strong Student - GPA 4.0, SAT 1500",
+      "profile": {
+        "gpa_unweighted": "4.0",
+        "gpa_weighted": "4.5",
+        "sat": "1500",
+        "act": "37",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8734
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8734
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8734
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6435
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6435
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6435
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2298
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2298
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2298
+        }
+      ],
+      "max_probability": 0.8734,
+      "min_probability": 0.2298,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Strong Student - GPA 4.0, SAT 1600",
+      "profile": {
+        "gpa_unweighted": "4.0",
+        "gpa_weighted": "4.5",
+        "sat": "1600",
+        "act": "40",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8734
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8734
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8734
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6435
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6435
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6435
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2298
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2298
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2298
+        }
+      ],
+      "max_probability": 0.8734,
+      "min_probability": 0.2298,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Elite Student - GPA 4.0, SAT 1500",
+      "profile": {
+        "gpa_unweighted": "4.0",
+        "gpa_weighted": "4.6",
+        "sat": "1500",
+        "act": "37",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2313
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2313
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2313
+        }
+      ],
+      "max_probability": 0.8788,
+      "min_probability": 0.2313,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Elite Student - GPA 4.0, SAT 1550",
+      "profile": {
+        "gpa_unweighted": "4.0",
+        "gpa_weighted": "4.6",
+        "sat": "1550",
+        "act": "38",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2313
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2313
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2313
+        }
+      ],
+      "max_probability": 0.8788,
+      "min_probability": 0.2313,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Elite Student - GPA 4.0, SAT 1600",
+      "profile": {
+        "gpa_unweighted": "4.0",
+        "gpa_weighted": "4.6",
+        "sat": "1600",
+        "act": "40",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2313
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2313
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2313
+        }
+      ],
+      "max_probability": 0.8788,
+      "min_probability": 0.2313,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Elite Student - GPA 4.2, SAT 1500",
+      "profile": {
+        "gpa_unweighted": "4.2",
+        "gpa_weighted": "4.8",
+        "sat": "1500",
+        "act": "37",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2313
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2313
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2313
+        }
+      ],
+      "max_probability": 0.8788,
+      "min_probability": 0.2313,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Elite Student - GPA 4.2, SAT 1550",
+      "profile": {
+        "gpa_unweighted": "4.2",
+        "gpa_weighted": "4.8",
+        "sat": "1550",
+        "act": "38",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2313
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2313
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2313
+        }
+      ],
+      "max_probability": 0.8788,
+      "min_probability": 0.2313,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Elite Student - GPA 4.2, SAT 1600",
+      "profile": {
+        "gpa_unweighted": "4.2",
+        "gpa_weighted": "4.8",
+        "sat": "1600",
+        "act": "40",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2313
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2313
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2313
+        }
+      ],
+      "max_probability": 0.8788,
+      "min_probability": 0.2313,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Elite Student - GPA 4.5, SAT 1500",
+      "profile": {
+        "gpa_unweighted": "4.5",
+        "gpa_weighted": "5.1",
+        "sat": "1500",
+        "act": "37",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2313
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2313
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2313
+        }
+      ],
+      "max_probability": 0.8788,
+      "min_probability": 0.2313,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Elite Student - GPA 4.5, SAT 1550",
+      "profile": {
+        "gpa_unweighted": "4.5",
+        "gpa_weighted": "5.1",
+        "sat": "1550",
+        "act": "38",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2313
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2313
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2313
+        }
+      ],
+      "max_probability": 0.8788,
+      "min_probability": 0.2313,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Elite Student - GPA 4.5, SAT 1600",
+      "profile": {
+        "gpa_unweighted": "4.5",
+        "gpa_weighted": "5.1",
+        "sat": "1600",
+        "act": "40",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8788
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6475
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2313
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2313
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2313
+        }
+      ],
+      "max_probability": 0.8788,
+      "min_probability": 0.2313,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Major Test - Computer Science",
+      "profile": {
+        "gpa_unweighted": "3.8",
+        "gpa_weighted": "4.2",
+        "sat": "1450",
+        "act": "33",
+        "major": "Computer Science"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8622
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8622
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8622
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6353
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6353
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6353
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2269
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2269
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2269
+        }
+      ],
+      "max_probability": 0.8622,
+      "min_probability": 0.2269,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Major Test - Business",
+      "profile": {
+        "gpa_unweighted": "3.8",
+        "gpa_weighted": "4.2",
+        "sat": "1450",
+        "act": "33",
+        "major": "Business"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8622
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8622
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8622
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6353
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6353
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6353
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2269
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2269
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2269
+        }
+      ],
+      "max_probability": 0.8622,
+      "min_probability": 0.2269,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Major Test - Engineering",
+      "profile": {
+        "gpa_unweighted": "3.8",
+        "gpa_weighted": "4.2",
+        "sat": "1450",
+        "act": "33",
+        "major": "Engineering"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8622
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8622
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8622
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6353
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6353
+        },
+        {
+          "college": "Scripps College",
+          "category": "target",
+          "probability": 0.6353
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2269
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2269
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2269
+        }
+      ],
+      "max_probability": 0.8622,
+      "min_probability": 0.2269,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Major Test - Medicine",
+      "profile": {
+        "gpa_unweighted": "3.8",
+        "gpa_weighted": "4.2",
+        "sat": "1450",
+        "act": "33",
+        "major": "Medicine"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8622
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8622
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8622
+        },
+        {
+          "college": "Trinity College",
+          "category": "target",
+          "probability": 0.6353
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6353
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6353
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2269
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2269
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2269
+        }
+      ],
+      "max_probability": 0.8622,
+      "min_probability": 0.2269,
+      "categorization_issues": []
+    },
+    {
+      "test_name": "Major Test - Psychology",
+      "profile": {
+        "gpa_unweighted": "3.8",
+        "gpa_weighted": "4.2",
+        "sat": "1450",
+        "act": "33",
+        "major": "Psychology"
+      },
+      "total_suggestions": 9,
+      "categories": {
+        "safety": 3,
+        "target": 3,
+        "reach": 3
+      },
+      "probabilities": [
+        {
+          "college": "Oglethorpe University",
+          "category": "safety",
+          "probability": 0.8622
+        },
+        {
+          "college": "Biola University",
+          "category": "safety",
+          "probability": 0.8622
+        },
+        {
+          "college": "Gallaudet University",
+          "category": "safety",
+          "probability": 0.8622
+        },
+        {
+          "college": "Trinity College",
+          "category": "target",
+          "probability": 0.6353
+        },
+        {
+          "college": "Methodist College",
+          "category": "target",
+          "probability": 0.6353
+        },
+        {
+          "college": "Berea College",
+          "category": "target",
+          "probability": 0.6353
+        },
+        {
+          "college": "University of Southern California",
+          "category": "reach",
+          "probability": 0.2269
+        },
+        {
+          "college": "Claremont McKenna College",
+          "category": "reach",
+          "probability": 0.2269
+        },
+        {
+          "college": "University of Notre Dame",
+          "category": "reach",
+          "probability": 0.2269
+        }
+      ],
+      "max_probability": 0.8622,
+      "min_probability": 0.2269,
+      "categorization_issues": []
+    }
+  ],
+  "issues": []
+}

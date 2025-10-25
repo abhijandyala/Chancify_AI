@@ -3,588 +3,588 @@
     "test": "Backend Health Check",
     "status": "PASS",
     "details": "Backend is running",
-    "timestamp": 1761360468.6568425
+    "timestamp": 1761366447.5058315
   },
   {
     "test": "Frontend Health Check",
     "status": "PASS",
     "details": "Frontend is running",
-    "timestamp": 1761360468.752563
+    "timestamp": 1761366448.0477216
   },
   {
     "test": "College Suggestions Endpoint",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360476.1200716
+    "timestamp": 1761366450.4544604
   },
   {
     "test": "Major: Computer Science",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360478.1744018
+    "timestamp": 1761366452.5046809
   },
   {
     "test": "Major: Business",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360485.7806966
+    "timestamp": 1761366454.9048898
   },
   {
     "test": "Major: Engineering",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360494.3028462
+    "timestamp": 1761366457.322362
   },
   {
     "test": "Major: Medicine",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360501.9710734
+    "timestamp": 1761366459.738397
   },
   {
     "test": "Major: Law",
     "status": "PASS",
-    "details": "Got 7 suggestions",
-    "timestamp": 1761360510.790133
+    "details": "Got 9 suggestions",
+    "timestamp": 1761366462.1608117
   },
   {
     "test": "Major: Psychology",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360518.5739987
+    "timestamp": 1761366464.6139255
   },
   {
     "test": "Major: Biology",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360526.421526
+    "timestamp": 1761366467.035386
   },
   {
     "test": "Major: Mathematics",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360534.8803353
+    "timestamp": 1761366469.4370294
   },
   {
     "test": "Major: Physics",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360542.883392
+    "timestamp": 1761366471.8655133
   },
   {
     "test": "Major: Chemistry",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360550.928588
+    "timestamp": 1761366474.2821805
   },
   {
     "test": "GPA Range 1: 3.0/3.5",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360558.9834247
+    "timestamp": 1761366476.6969666
   },
   {
     "test": "GPA Range 2: 3.2/3.7",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360567.6619513
+    "timestamp": 1761366479.1039457
   },
   {
     "test": "GPA Range 3: 3.5/4.0",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360575.6489563
+    "timestamp": 1761366481.5555477
   },
   {
     "test": "GPA Range 4: 3.7/4.2",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360583.621632
+    "timestamp": 1761366483.9408236
   },
   {
     "test": "GPA Range 5: 3.9/4.4",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360591.4304874
+    "timestamp": 1761366486.3601916
   },
   {
     "test": "GPA Range 6: 4.0/4.5",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360599.2574906
+    "timestamp": 1761366488.7516763
   },
   {
     "test": "GPA Range 7: 4.2/4.7",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360607.0848932
+    "timestamp": 1761366491.1718743
   },
   {
     "test": "GPA Range 8: 4.4/4.9",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360614.927999
+    "timestamp": 1761366493.5630352
   },
   {
     "test": "GPA Range 9: 4.6/5.1",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360622.8295543
+    "timestamp": 1761366496.024285
   },
   {
     "test": "GPA Range 10: 4.8/5.3",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360631.7145855
+    "timestamp": 1761366498.4346793
   },
   {
     "test": "SAT/ACT 1: 1200/25",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360639.3145878
+    "timestamp": 1761366500.8456185
   },
   {
     "test": "SAT/ACT 2: 1300/28",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360647.0578737
+    "timestamp": 1761366503.2698395
   },
   {
     "test": "SAT/ACT 3: 1400/31",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360655.1251109
+    "timestamp": 1761366505.6721432
   },
   {
     "test": "SAT/ACT 4: 1500/34",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360662.931967
+    "timestamp": 1761366508.0659335
   },
   {
     "test": "SAT/ACT 5: 1600/36",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360670.847857
+    "timestamp": 1761366510.5041187
   },
   {
     "test": "SAT/ACT 6: 1100/23",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360678.649777
+    "timestamp": 1761366512.8993268
   },
   {
     "test": "SAT/ACT 7: 1350/29",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360687.1031446
+    "timestamp": 1761366515.291443
   },
   {
     "test": "SAT/ACT 8: 1450/32",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360689.1408167
+    "timestamp": 1761366517.3484888
   },
   {
     "test": "SAT/ACT 9: 1550/35",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360696.8534713
+    "timestamp": 1761366519.7446518
   },
   {
     "test": "SAT/ACT 10: 1250/27",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360704.7010343
+    "timestamp": 1761366522.137109
   },
   {
     "test": "EC Profile 1: Depth 3",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360712.22785
+    "timestamp": 1761366524.5485144
   },
   {
     "test": "EC Profile 2: Depth 5",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360720.1640322
+    "timestamp": 1761366526.9915893
   },
   {
     "test": "EC Profile 3: Depth 7",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360727.9706025
+    "timestamp": 1761366529.4070632
   },
   {
     "test": "EC Profile 4: Depth 9",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360736.1094155
+    "timestamp": 1761366531.808525
   },
   {
     "test": "EC Profile 5: Depth 10",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360744.3591151
+    "timestamp": 1761366534.192661
   },
   {
     "test": "EC Profile 6: Depth 2",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360753.2678125
+    "timestamp": 1761366536.5975616
   },
   {
     "test": "EC Profile 7: Depth 4",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360761.2447088
+    "timestamp": 1761366539.0033152
   },
   {
     "test": "EC Profile 8: Depth 6",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360768.9562325
+    "timestamp": 1761366541.4500375
   },
   {
     "test": "EC Profile 9: Depth 8",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360777.3996422
+    "timestamp": 1761366543.5143147
   },
   {
     "test": "EC Profile 10: Depth 1",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360785.0154743
+    "timestamp": 1761366545.9450386
   },
   {
     "test": "Demo Profile 1: Legacy 1",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360787.0608768
+    "timestamp": 1761366547.979464
   },
   {
     "test": "Demo Profile 2: Legacy 3",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360789.1246183
+    "timestamp": 1761366550.0186656
   },
   {
     "test": "Demo Profile 3: Legacy 5",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360791.153331
+    "timestamp": 1761366552.068255
   },
   {
     "test": "Demo Profile 4: Legacy 7",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360793.2055936
+    "timestamp": 1761366554.11377
   },
   {
     "test": "Demo Profile 5: Legacy 10",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360795.2595282
+    "timestamp": 1761366556.1666207
   },
   {
     "test": "Demo Profile 6: Legacy 2",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360797.3151798
+    "timestamp": 1761366558.2019887
   },
   {
     "test": "Demo Profile 7: Legacy 4",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360799.3593404
+    "timestamp": 1761366560.2584634
   },
   {
     "test": "Demo Profile 8: Legacy 6",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360801.4109583
+    "timestamp": 1761366562.3116388
   },
   {
     "test": "Demo Profile 9: Legacy 8",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360803.4834526
+    "timestamp": 1761366564.3507025
   },
   {
     "test": "Demo Profile 10: Legacy 9",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360805.5330598
+    "timestamp": 1761366566.3798258
   },
   {
     "test": "Edge Case 1: GPA 0.0",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360813.8031135
+    "timestamp": 1761366568.7948508
   },
   {
     "test": "Edge Case 2: GPA 5.0",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360821.6763844
+    "timestamp": 1761366571.2106273
   },
   {
     "test": "Edge Case 3: GPA 2.0",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360829.7522678
+    "timestamp": 1761366573.6294951
   },
   {
     "test": "Edge Case 4: GPA 4.0",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360837.662328
+    "timestamp": 1761366576.0534637
   },
   {
     "test": "Edge Case 5: GPA 3.5",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360845.694444
+    "timestamp": 1761366578.5021126
   },
   {
     "test": "Edge Case 6: GPA 4.5",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360853.461632
+    "timestamp": 1761366580.922956
   },
   {
     "test": "Edge Case 7: GPA 1.0",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360861.2166653
+    "timestamp": 1761366583.3389015
   },
   {
     "test": "Edge Case 8: GPA 4.8",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360867.7723129
+    "timestamp": 1761366585.7510219
   },
   {
     "test": "Edge Case 9: GPA 2.5",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360874.3163037
+    "timestamp": 1761366588.1577244
   },
   {
     "test": "Edge Case 10: GPA 4.2",
     "status": "PASS",
     "details": "Got 9 suggestions",
-    "timestamp": 1761360882.1906645
+    "timestamp": 1761366590.5696318
   },
   {
-    "test": "College Data 1: University of Southern California",
+    "test": "College Data 1: Oglethorpe University",
     "status": "PASS",
     "details": "All required fields present",
-    "timestamp": 1761360882.1906645
+    "timestamp": 1761366590.5696318
   },
   {
-    "test": "College Data 2: Alliant International University-San Diego",
+    "test": "College Data 2: Biola University",
     "status": "PASS",
     "details": "All required fields present",
-    "timestamp": 1761360882.1906645
+    "timestamp": 1761366590.5696318
   },
   {
-    "test": "College Data 3: California Institute of Technology",
+    "test": "College Data 3: Gallaudet University",
     "status": "PASS",
     "details": "All required fields present",
-    "timestamp": 1761360882.1906645
+    "timestamp": 1761366590.5696318
   },
   {
-    "test": "College Data 4: Berea College",
+    "test": "College Data 4: Methodist College",
     "status": "PASS",
     "details": "All required fields present",
-    "timestamp": 1761360882.1906645
+    "timestamp": 1761366590.5696318
   },
   {
-    "test": "College Data 5: Casa Loma College-Los Angeles",
+    "test": "College Data 5: Berea College",
     "status": "PASS",
     "details": "All required fields present",
-    "timestamp": 1761360882.1906645
+    "timestamp": 1761366590.5696318
   },
   {
-    "test": "College Data 6: University of Georgia",
+    "test": "College Data 6: Scripps College",
     "status": "PASS",
     "details": "All required fields present",
-    "timestamp": 1761360882.1906645
+    "timestamp": 1761366590.5696318
   },
   {
-    "test": "College Data 7: Duke University",
+    "test": "College Data 7: University of Southern California",
     "status": "PASS",
     "details": "All required fields present",
-    "timestamp": 1761360882.1906645
+    "timestamp": 1761366590.5696318
   },
   {
-    "test": "College Data 8: Harvard University",
+    "test": "College Data 8: Claremont McKenna College",
     "status": "PASS",
     "details": "All required fields present",
-    "timestamp": 1761360882.1906645
+    "timestamp": 1761366590.5696318
   },
   {
-    "test": "College Data 9: Stanford University",
+    "test": "College Data 9: University of Notre Dame",
     "status": "PASS",
     "details": "All required fields present",
-    "timestamp": 1761360882.1906645
+    "timestamp": 1761366590.5696318
   },
   {
-    "test": "Probability 1: University of Southern California",
+    "test": "Probability 1: Oglethorpe University",
     "status": "PASS",
-    "details": "Valid range: 0.1%",
-    "timestamp": 1761360882.1906645
+    "details": "Valid range: 0.9%",
+    "timestamp": 1761366590.5696318
   },
   {
-    "test": "Probability 2: Alliant International University-San Diego",
+    "test": "Probability 2: Biola University",
     "status": "PASS",
-    "details": "Valid range: 0.1%",
-    "timestamp": 1761360882.1906645
+    "details": "Valid range: 0.9%",
+    "timestamp": 1761366590.5696318
   },
   {
-    "test": "Probability 3: California Institute of Technology",
+    "test": "Probability 3: Gallaudet University",
     "status": "PASS",
-    "details": "Valid range: 0.1%",
-    "timestamp": 1761360882.1906645
+    "details": "Valid range: 0.9%",
+    "timestamp": 1761366590.5696318
   },
   {
-    "test": "Probability 4: Berea College",
+    "test": "Probability 4: Methodist College",
     "status": "PASS",
-    "details": "Valid range: 0.1%",
-    "timestamp": 1761360882.1906645
+    "details": "Valid range: 0.7%",
+    "timestamp": 1761366590.5696318
   },
   {
-    "test": "Probability 5: Casa Loma College-Los Angeles",
+    "test": "Probability 5: Berea College",
     "status": "PASS",
-    "details": "Valid range: 0.1%",
-    "timestamp": 1761360882.1906645
+    "details": "Valid range: 0.7%",
+    "timestamp": 1761366590.5696318
   },
   {
-    "test": "Probability 6: University of Georgia",
+    "test": "Probability 6: Scripps College",
     "status": "PASS",
-    "details": "Valid range: 0.1%",
-    "timestamp": 1761360882.1906645
+    "details": "Valid range: 0.7%",
+    "timestamp": 1761366590.5696318
   },
   {
-    "test": "Probability 7: Duke University",
+    "test": "Probability 7: University of Southern California",
     "status": "PASS",
-    "details": "Valid range: 0.0%",
-    "timestamp": 1761360882.1906645
+    "details": "Valid range: 0.2%",
+    "timestamp": 1761366590.5696318
   },
   {
-    "test": "Probability 8: Harvard University",
+    "test": "Probability 8: Claremont McKenna College",
     "status": "PASS",
-    "details": "Valid range: 0.0%",
-    "timestamp": 1761360882.1906645
+    "details": "Valid range: 0.2%",
+    "timestamp": 1761366590.5696318
   },
   {
-    "test": "Probability 9: Stanford University",
+    "test": "Probability 9: University of Notre Dame",
     "status": "PASS",
-    "details": "Valid range: 0.0%",
-    "timestamp": 1761360882.1906645
+    "details": "Valid range: 0.2%",
+    "timestamp": 1761366590.5696318
   },
   {
     "test": "Category: safety",
     "status": "PASS",
     "details": "Found 3 colleges",
-    "timestamp": 1761360882.1906645
+    "timestamp": 1761366590.5710874
   },
   {
     "test": "Category: target",
     "status": "PASS",
     "details": "Found 3 colleges",
-    "timestamp": 1761360882.1906645
+    "timestamp": 1761366590.5710874
   },
   {
     "test": "Category: reach",
     "status": "PASS",
     "details": "Found 3 colleges",
-    "timestamp": 1761360882.1906645
+    "timestamp": 1761366590.5710874
   },
   {
-    "test": "Major Fit 1: University of Southern California",
+    "test": "Major Fit 1: Oglethorpe University",
     "status": "PASS",
-    "details": "Score: 1.00",
-    "timestamp": 1761360882.1906645
+    "details": "Score: 0.80",
+    "timestamp": 1761366590.5710874
   },
   {
-    "test": "Major Fit 2: Alliant International University-San Diego",
+    "test": "Major Fit 2: Biola University",
     "status": "PASS",
-    "details": "Score: 1.00",
-    "timestamp": 1761360882.1906645
+    "details": "Score: 0.80",
+    "timestamp": 1761366590.5710874
   },
   {
-    "test": "Major Fit 3: California Institute of Technology",
+    "test": "Major Fit 3: Gallaudet University",
     "status": "PASS",
-    "details": "Score: 1.00",
-    "timestamp": 1761360882.1906645
+    "details": "Score: 0.80",
+    "timestamp": 1761366590.5710874
   },
   {
-    "test": "Major Fit 4: Berea College",
-    "status": "PASS",
-    "details": "Score: 0.90",
-    "timestamp": 1761360882.1906645
-  },
-  {
-    "test": "Major Fit 5: Casa Loma College-Los Angeles",
+    "test": "Major Fit 4: Methodist College",
     "status": "PASS",
     "details": "Score: 0.90",
-    "timestamp": 1761360882.1906645
+    "timestamp": 1761366590.5710874
   },
   {
-    "test": "Major Fit 6: University of Georgia",
+    "test": "Major Fit 5: Berea College",
     "status": "PASS",
     "details": "Score: 0.90",
-    "timestamp": 1761360882.1906645
+    "timestamp": 1761366590.5710874
   },
   {
-    "test": "Major Fit 7: Duke University",
+    "test": "Major Fit 6: Scripps College",
+    "status": "PASS",
+    "details": "Score: 0.90",
+    "timestamp": 1761366590.5710874
+  },
+  {
+    "test": "Major Fit 7: University of Southern California",
     "status": "PASS",
     "details": "Score: 1.00",
-    "timestamp": 1761360882.1906645
+    "timestamp": 1761366590.5710874
   },
   {
-    "test": "Major Fit 8: Harvard University",
+    "test": "Major Fit 8: Claremont McKenna College",
     "status": "PASS",
     "details": "Score: 1.00",
-    "timestamp": 1761360882.1906645
+    "timestamp": 1761366590.5710874
   },
   {
-    "test": "Major Fit 9: Stanford University",
+    "test": "Major Fit 9: University of Notre Dame",
     "status": "PASS",
     "details": "Score: 1.00",
-    "timestamp": 1761360882.1906645
+    "timestamp": 1761366590.5710874
   },
   {
-    "test": "Prediction for University of Southern California",
+    "test": "Prediction for Oglethorpe University",
     "status": "PASS",
-    "details": "Probability: 0.5%",
-    "timestamp": 1761360884.3225138
+    "details": "Probability: 0.9%",
+    "timestamp": 1761366592.6503825
   },
   {
-    "test": "Prediction for Alliant International University-San Diego",
+    "test": "Prediction for Biola University",
     "status": "PASS",
-    "details": "Probability: 0.5%",
-    "timestamp": 1761360886.4646037
+    "details": "Probability: 0.9%",
+    "timestamp": 1761366594.7446506
   },
   {
-    "test": "Prediction for California Institute of Technology",
+    "test": "Prediction for Gallaudet University",
     "status": "PASS",
-    "details": "Probability: 0.5%",
-    "timestamp": 1761360888.600278
+    "details": "Probability: 0.9%",
+    "timestamp": 1761366596.8396916
+  },
+  {
+    "test": "Prediction for Methodist College",
+    "status": "PASS",
+    "details": "Probability: 0.7%",
+    "timestamp": 1761366598.9460094
   },
   {
     "test": "Prediction for Berea College",
     "status": "PASS",
-    "details": "Probability: 0.5%",
-    "timestamp": 1761360890.7239995
-  },
-  {
-    "test": "Prediction for Casa Loma College-Los Angeles",
-    "status": "PASS",
-    "details": "Probability: 0.5%",
-    "timestamp": 1761360892.8347206
+    "details": "Probability: 0.7%",
+    "timestamp": 1761366601.0669956
   }
 ]

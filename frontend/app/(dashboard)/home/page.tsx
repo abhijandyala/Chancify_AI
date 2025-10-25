@@ -383,7 +383,7 @@ export default function HomePage() {
           </div>
           <h1 className="rox-heading-1 mb-6 text-white">
             Chancify AI
-          </h1>
+        </h1>
           <p className="rox-text-large max-w-3xl mx-auto">
             The only AI that considers your unique story — not just numbers
           </p>
@@ -395,9 +395,9 @@ export default function HomePage() {
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2 rounded-lg bg-yellow-400/20 text-yellow-400">
                 <GraduationCap className="w-5 h-5" />
-              </div>
+        </div>
               <h2 className="rox-heading-3">Academic Foundation</h2>
-            </div>
+      </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Input
               label="Unweighted GPA (4.0)"
@@ -453,7 +453,7 @@ export default function HomePage() {
                 <Star className="w-5 h-5" />
               </div>
               <h2 className="rox-heading-3">Course Rigor & Class Info</h2>
-            </div>
+        </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Input
               label="AP Courses Taken"
