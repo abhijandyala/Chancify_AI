@@ -9,20 +9,14 @@ import { getCollegeSuggestions, searchColleges, type CollegeSuggestionsRequest, 
 import Loader from '@/components/Loader'
 
 // Function to get major relevance information for a college
-// This uses the major_fit_score from the backend data
+// This uses the major_fit_score and major_match from the backend data
 const getMajorRelevanceInfo = (college: any) => {
   const majorFitScore = college.major_fit_score || 0.3
-  const isRelevant = majorFitScore >= 0.6
-  const isStrong = majorFitScore >= 0.8
+  const matchText = college.major_match || 'Weak Match' // Use backend's match level
   
-  let matchText = 'Weak Match'
-  if (isStrong) {
-    matchText = 'Strong Match'
-  } else if (isRelevant) {
-    matchText = 'Good Match'
-  } else if (majorFitScore >= 0.4) {
-    matchText = 'Moderate Match'
-  }
+  // Determine isRelevant and isStrong based on match text
+  const isStrong = matchText === 'Strong Match'
+  const isRelevant = matchText === 'Good Match' || isStrong
   
   return { 
     strength: majorFitScore, 
