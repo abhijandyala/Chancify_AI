@@ -3,8 +3,8 @@
  */
 
 // Backend URL configuration
-// Use Railway URL for production, fallback to localhost for development
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://chancifyai.up.railway.app';
+// Use ngrok URL for development, fallback to Railway for production
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://unsmug-untensely-elroy.ngrok-free.dev';
 
 // Headers for API requests
 const getHeaders = () => {

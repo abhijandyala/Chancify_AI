@@ -8,22 +8,22 @@ export async function GET(request: NextRequest) {
 
   if (error) {
     // Handle OAuth error - redirect to home page with error
-    return NextResponse.redirect(new URL(`/home?error=${error}`, 'https://chancifyai.up.railway.app'))
+    return NextResponse.redirect(new URL(`/home?error=${error}`, request.url))
   }
 
   if (!code) {
-    return NextResponse.redirect(new URL('/home?error=no_code', 'https://chancifyai.up.railway.app'))
+    return NextResponse.redirect(new URL('/home?error=no_code', request.url))
   }
 
   try {
     // Check if environment variables are set
     if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
       console.error('Missing Google OAuth environment variables')
-      return NextResponse.redirect(new URL('/home?error=missing_config', 'https://chancifyai.up.railway.app'))
+      return NextResponse.redirect(new URL('/home?error=missing_config', request.url))
     }
 
     // ALWAYS use Railway URL - NO localhost fallbacks
-    const baseUrl = 'https://chancifyai.up.railway.app'
+    const baseUrl = request.url.split('/api')[0]
 
     // DEBUG: Log OAuth callback information
     console.log('=== OAUTH CALLBACK DEBUG ===')
@@ -71,7 +71,7 @@ export async function GET(request: NextRequest) {
 
     // Create success URL with user data - redirect to home page
     // CRITICAL: Use Railway URL for redirect, not request.url which might be localhost
-    const successUrl = new URL('/home', 'https://chancifyai.up.railway.app')
+    const successUrl = new URL('/home', baseUrl)
     successUrl.searchParams.set('google_auth', 'success')
     successUrl.searchParams.set('email', userInfo.email)
     successUrl.searchParams.set('name', userInfo.name)
@@ -82,6 +82,6 @@ export async function GET(request: NextRequest) {
 
   } catch (error) {
     console.error('Google OAuth error:', error)
-    return NextResponse.redirect(new URL('/home?error=oauth_failed', 'https://chancifyai.up.railway.app'))
+    return NextResponse.redirect(new URL('/home?error=oauth_failed', baseUrl))
   }
 }
