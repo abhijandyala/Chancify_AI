@@ -26,7 +26,7 @@ function ResultsContent() {
   
   // Find the college name from the college ID
   const selectedCollege = COLLEGES.find(college => college.value === collegeId)
-  const collegeName = selectedCollege?.label || 'Selected College'
+  const collegeName = selectedCollege?.label || collegeId || 'Selected College'
   
   // Fetch real college information using OpenAI
   const { data: collegeInfo, loading: collegeInfoLoading, error: collegeInfoError } = useCollegeInfo(collegeName)
@@ -376,6 +376,61 @@ function ResultsContent() {
             <p className="text-gray-300 text-sm">
               We couldn't fetch detailed information about {collegeName}. The prediction results above are still accurate.
             </p>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Fallback College Information when OpenAI data is not available */}
+      {!collegeInfo && !collegeInfoLoading && !collegeInfoError && (
+        <motion.div {...enter}>
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold text-white mb-2">About {collegeName}</h2>
+            <p className="text-gray-400">Basic college information</p>
+          </div>
+          <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* College Name */}
+              <div className="bg-white/5 border border-white/10 rounded-lg p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <Award className="w-4 h-4 text-yellow-400" />
+                  <span className="text-sm text-gray-400">College</span>
+                </div>
+                <div className="text-lg font-bold text-white">{collegeName}</div>
+              </div>
+
+              {/* Acceptance Rate */}
+              <div className="bg-white/5 border border-white/10 rounded-lg p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <Award className="w-4 h-4 text-yellow-400" />
+                  <span className="text-sm text-gray-400">Acceptance Rate</span>
+                </div>
+                <div className="text-xl font-bold text-white">
+                  {(realAcceptanceRate * 100).toFixed(1)}%
+                </div>
+              </div>
+
+              {/* Your Probability */}
+              <div className="bg-white/5 border border-white/10 rounded-lg p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <Target className="w-4 h-4 text-yellow-400" />
+                  <span className="text-sm text-gray-400">Your Probability</span>
+                </div>
+                <div className="text-xl font-bold text-white">
+                  {(probability * 100).toFixed(1)}%
+                </div>
+              </div>
+
+              {/* Category */}
+              <div className="bg-white/5 border border-white/10 rounded-lg p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <BarChart3 className="w-4 h-4 text-yellow-400" />
+                  <span className="text-sm text-gray-400">Category</span>
+                </div>
+                <div className="text-lg font-bold text-white">
+                  {probability >= 0.75 ? 'Safety' : probability >= 0.25 ? 'Target' : 'Reach'}
+                </div>
+              </div>
+            </div>
           </div>
         </motion.div>
       )}
