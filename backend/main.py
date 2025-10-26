@@ -285,25 +285,54 @@ app.include_router(ml_calculations.router, prefix="/api/calculations", tags=["ML
 app.include_router(openai_routes.router, prefix="/api/openai", tags=["OpenAI College Info"])
 
 # College data mapping based on training data
-def get_college_data(college_name: str) -> Dict[str, Any]:
-    """Get college data based on the college name from integrated data."""
+def get_college_data(college_identifier: str) -> Dict[str, Any]:
+    """Get college data based on college ID or name from integrated data."""
     
     # Load the integrated college data
     try:
         df = pd.read_csv('data/raw/real_colleges_integrated.csv')
         
-        # Find the college by name (case-insensitive, with partial matching)
-        college_name_lower = college_name.lower()
-        college_row = df[df['name'].str.lower() == college_name_lower]
-        
-        # If exact match not found, try partial matching
-        if college_row.empty:
-            college_row = df[df['name'].str.lower().str.contains(college_name_lower, na=False)]
+        # Check if it's a college ID (starts with 'college_')
+        if college_identifier.startswith('college_'):
+            # Extract the numeric part
+            try:
+                college_id = int(college_identifier.replace('college_', ''))
+                # Map college IDs to unitids (this is a simplified mapping)
+                unitid_mapping = {
+                    166027: 2081252,  # Harvard University
+                    130794: 2020582,  # Stanford University  
+                    227757: 130794,   # Yale University
+                    189097: 186131,   # Princeton University
+                    121345: 2054622,  # MIT
+                    168342: 190150,   # Columbia University
+                }
+                
+                unitid = unitid_mapping.get(college_id)
+                if unitid:
+                    college_row = df[df['unitid'] == unitid]
+                else:
+                    # Fallback: try to find by partial name matching
+                    college_name_lower = college_identifier.lower()
+                    college_row = df[df['name'].str.lower().str.contains(college_name_lower, na=False)]
+            except ValueError:
+                # If not a valid college ID, treat as name
+                college_name_lower = college_identifier.lower()
+                college_row = df[df['name'].str.lower() == college_name_lower]
+                if college_row.empty:
+                    college_row = df[df['name'].str.lower().str.contains(college_name_lower, na=False)]
+        else:
+            # Treat as college name
+            college_name_lower = college_identifier.lower()
+            college_row = df[df['name'].str.lower() == college_name_lower]
+            
+            # If exact match not found, try partial matching
+            if college_row.empty:
+                college_row = df[df['name'].str.lower().str.contains(college_name_lower, na=False)]
         
         if not college_row.empty:
             row = college_row.iloc[0]
             return {
-                'name': str(row['name']) if pd.notna(row['name']) else college_name,
+                'name': str(row['name']) if pd.notna(row['name']) else college_identifier,
                 'acceptance_rate': float(row.get('acceptance_rate', 0.5)) if pd.notna(row.get('acceptance_rate')) else (float(row.get('acceptance_rate_percent', 50)) / 100 if pd.notna(row.get('acceptance_rate_percent')) else 0.5),
                 'sat_25th': 1200,  # Default values since SAT/ACT data not available
                 'sat_75th': 1500,
@@ -324,7 +353,7 @@ def get_college_data(college_name: str) -> Dict[str, Any]:
     
     # Default fallback data
     return {
-        'name': college_name,
+        'name': college_identifier,
         'acceptance_rate': 0.1,
         'sat_25th': 1200,
         'sat_75th': 1500,
