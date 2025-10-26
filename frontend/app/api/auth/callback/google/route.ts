@@ -6,24 +6,24 @@ export async function GET(request: NextRequest) {
   const state = searchParams.get('state')
   const error = searchParams.get('error')
 
+  // Define baseUrl at the top level so it's available in catch block
+  const baseUrl = request.url.split('/api')[0]
+
   if (error) {
     // Handle OAuth error - redirect to home page with error
-    return NextResponse.redirect(new URL(`/home?error=${error}`, request.url))
+    return NextResponse.redirect(new URL(`/home?error=${error}`, baseUrl))
   }
 
   if (!code) {
-    return NextResponse.redirect(new URL('/home?error=no_code', request.url))
+    return NextResponse.redirect(new URL('/home?error=no_code', baseUrl))
   }
 
   try {
     // Check if environment variables are set
     if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
       console.error('Missing Google OAuth environment variables')
-      return NextResponse.redirect(new URL('/home?error=missing_config', request.url))
+      return NextResponse.redirect(new URL('/home?error=missing_config', baseUrl))
     }
-
-    // ALWAYS use Railway URL - NO localhost fallbacks
-    const baseUrl = request.url.split('/api')[0]
 
     // DEBUG: Log OAuth callback information
     console.log('=== OAUTH CALLBACK DEBUG ===')
