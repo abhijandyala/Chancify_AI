@@ -97,7 +97,7 @@ export default function ROXFloatingElements() {
           
           <div className="p-6 border border-gray-800/50 rounded-xl backdrop-blur-sm bg-gray-900/20">
             <h3 className="text-white font-semibold mb-2">Probability Engine</h3>
-            <p className="text-gray-400 text-sm">Machine learning models with 94.3% accuracy using Random Forest, XGBoost, and neural networks for admission prediction</p>
+            <p className="text-gray-400 text-sm">Machine learning models with 81.8% ROC-AUC using Random Forest, XGBoost, and neural networks for admission prediction</p>
           </div>
         </motion.div>
 

@@ -130,7 +130,7 @@ function ResultsContent() {
             className="flex items-center justify-center gap-2 text-gray-300"
           >
             <TrendingUp className="w-5 h-5" />
-            <span>94.3% Model Confidence</span>
+            <span>81.8% Model Confidence</span>
           </motion.div>
         </div>
       </motion.div>

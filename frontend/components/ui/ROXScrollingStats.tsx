@@ -17,7 +17,7 @@ const stats = [
   },
   {
     label: "Prediction Accuracy",
-    value: "94.3%",
+    value: "81.8%",
     description: "ROC-AUC score achieved"
   },
   {

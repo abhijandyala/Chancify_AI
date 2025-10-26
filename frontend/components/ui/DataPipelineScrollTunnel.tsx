@@ -316,7 +316,7 @@ export default function DataPipelineScrollTunnel() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-400">Model Accuracy</span>
-                    <span className="text-yellow-400">94.3%</span>
+                    <span className="text-yellow-400">81.8%</span>
                   </div>
                 </div>
               </motion.div>

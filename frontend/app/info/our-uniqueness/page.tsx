@@ -72,7 +72,7 @@ export default function OurUniquenessPage() {
               <h3 className="text-2xl font-semibold mb-4">What Sets Us Apart</h3>
               <div className="space-y-4">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-yellow-400">94.3%</div>
+                  <div className="text-2xl font-bold text-yellow-400">81.8%</div>
                   <div className="text-gray-400">Prediction Accuracy</div>
                 </div>
                 <div className="text-center">
@@ -164,7 +164,7 @@ export default function OurUniquenessPage() {
               <ul className="text-gray-300 space-y-2 text-sm">
                 <li>• 5,000+ real outcomes</li>
                 <li>• Comprehensive analysis</li>
-                <li>• 94.3% accuracy</li>
+                <li>• 81.8% ROC-AUC accuracy</li>
                 <li>• Affordable & accessible</li>
               </ul>
             </div>
@@ -364,7 +364,7 @@ export default function OurUniquenessPage() {
               </div>
               <h4 className="text-lg font-semibold text-white mb-3">Advanced AI Models</h4>
               <p className="text-gray-300 text-sm mb-4">
-                Ensemble machine learning with 94.3% accuracy, combining Random Forest, XGBoost, and Neural Networks.
+                Ensemble machine learning with 81.8% ROC-AUC, combining Random Forest, XGBoost, and Neural Networks.
               </p>
               <div className="text-yellow-400 text-sm font-medium">Cutting-Edge Technology</div>
             </motion.div>

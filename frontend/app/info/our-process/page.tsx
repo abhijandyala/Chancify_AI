@@ -106,7 +106,7 @@ export default function OurProcessPage() {
                   Our ensemble of machine learning models analyzes your profile against thousands of similar students to predict admission outcomes. We use Random Forest, XGBoost, and neural networks for maximum accuracy.
                 </p>
                 <ul className="text-gray-400 space-y-2">
-                  <li>• 94.3% cross-validation accuracy</li>
+                  <li>• 81.8% ROC-AUC cross-validation accuracy</li>
                   <li>• Ensemble method for robust predictions</li>
                   <li>• Feature importance analysis</li>
                   <li>• Confidence interval calculations</li>
@@ -270,7 +270,7 @@ export default function OurProcessPage() {
                   <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 flex-shrink-0"></div>
                   <div>
                     <div className="text-white font-medium">Cross-Validation</div>
-                    <div className="text-gray-400 text-sm">94.3% accuracy with 5-fold validation</div>
+                    <div className="text-gray-400 text-sm">81.8% ROC-AUC with 5-fold validation</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">

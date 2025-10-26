@@ -31,7 +31,7 @@ const HOVER_CARDS_DATA = [
     id: 'ai-engine',
     title: 'AI Analysis Engine',
     subtitle: 'Machine Learning',
-    description: '94.3% Accuracy, Neural Networks, Pattern Recognition',
+    description: '81.8% ROC-AUC, Neural Networks, Pattern Recognition',
     details: 'Our proprietary AI engine uses advanced machine learning algorithms to analyze student profiles and predict admission chances.',
     icon: '🤖',
     color: 'from-yellow-500/20 to-yellow-600/20',

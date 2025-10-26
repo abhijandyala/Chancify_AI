@@ -172,7 +172,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
             <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
             <span className="text-xs text-gray-400">Model Status</span>
           </div>
-          <div className="text-xs font-semibold text-green-400">94.3%</div>
+          <div className="text-xs font-semibold text-green-400">81.8%</div>
         </div>
       </motion.div>
       </motion.aside>

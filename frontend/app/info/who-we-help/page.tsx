@@ -123,7 +123,7 @@ export default function WhoWeHelpPage() {
                     animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                     transition={{ duration: 0.6, delay: 1.6 }}
                   >
-                    <div className="text-3xl font-bold text-yellow-400">94.3%</div>
+                    <div className="text-3xl font-bold text-yellow-400">81.8%</div>
                     <div className="text-gray-300">Accuracy Rate</div>
                   </motion.div>
                 </div>

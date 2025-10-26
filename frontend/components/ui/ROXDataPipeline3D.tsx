@@ -169,7 +169,7 @@ export default function ROXDataPipeline3D() {
           <li>• Feature engineering (GPA, tests, ECs)</li>
           <li>• Ensemble methods (RF + XGB)</li>
           <li>• Neural networks for complex patterns</li>
-          <li>• Cross-validation accuracy: 94.3%</li>
+          <li>• Cross-validation ROC-AUC: 81.8%</li>
         </ul>
       )
     }

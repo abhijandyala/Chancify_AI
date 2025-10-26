@@ -264,7 +264,7 @@ export default function WhyThisMattersPage() {
                   <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
                   <div>
                     <div className="text-white font-medium">Data-Driven Decisions</div>
-                    <div className="text-gray-400 text-sm">94.3% accurate admission predictions</div>
+                    <div className="text-gray-400 text-sm">81.8% ROC-AUC accurate admission predictions</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
