@@ -2,12 +2,14 @@
 
 import { useSearchParams, useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { CheckCircle, XCircle, Clock, ArrowLeft, TrendingUp, Target, Brain, BarChart3, Zap } from 'lucide-react'
+import { CheckCircle, XCircle, Clock, ArrowLeft, TrendingUp, Target, Brain, BarChart3, Zap, MapPin, DollarSign, Users, Calendar, Award, BookOpen } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { Badge } from '@/components/ui/Badge'
 import { COLLEGES } from '@/lib/colleges'
-import { Suspense } from 'react'
+import { Suspense, useState, useEffect } from 'react'
+import { useCollegeInfo } from '@/lib/hooks/useCollegeInfo'
+import { CollegeInfoDisplay } from '@/components/ui/CollegeInfoDisplay'
 
 function ResultsContent() {
   const searchParams = useSearchParams()
@@ -20,6 +22,9 @@ function ResultsContent() {
   // Find the college name from the college ID
   const selectedCollege = COLLEGES.find(college => college.value === collegeId)
   const collegeName = selectedCollege?.label || 'Selected College'
+  
+  // Fetch real college information using OpenAI
+  const { data: collegeInfo, loading: collegeInfoLoading, error: collegeInfoError } = useCollegeInfo(collegeName)
   
   const getOutcomeIcon = () => {
     switch (outcome) {
@@ -134,6 +139,36 @@ function ResultsContent() {
           </motion.div>
         </div>
       </motion.div>
+
+      {/* College Information Section */}
+      {collegeInfoLoading && (
+        <motion.div {...enter} className="text-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-400 mx-auto mb-4"></div>
+          <p className="text-gray-400">Loading college information...</p>
+        </motion.div>
+      )}
+
+      {collegeInfoError && (
+        <motion.div {...enter} className="text-center py-12">
+          <div className="bg-red-400/20 border border-red-400/30 rounded-xl p-6 max-w-md mx-auto">
+            <XCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-red-400 mb-2">Unable to Load College Data</h3>
+            <p className="text-gray-300 text-sm">
+              We couldn't fetch detailed information about {collegeName}. The prediction results above are still accurate.
+            </p>
+          </div>
+        </motion.div>
+      )}
+
+      {collegeInfo && (
+        <motion.div {...enter}>
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold text-white mb-2">About {collegeInfo.name}</h2>
+            <p className="text-gray-400">Real-time college information powered by AI</p>
+          </div>
+          <CollegeInfoDisplay collegeInfo={collegeInfo} />
+        </motion.div>
+      )}
 
       {/* Analysis Details */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

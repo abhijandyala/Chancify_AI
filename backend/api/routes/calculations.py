@@ -5,8 +5,8 @@ Probability calculation routes using our scoring system.
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from backend.database import get_db, College, UserProfile, AcademicData, Extracurricular
-from backend.database.schemas import (
+from database import get_db, College, UserProfile, AcademicData, Extracurricular
+from database.schemas import (
     FactorScoresRequest,
     BatchCalculationRequest,
     CalculationResponse,
@@ -14,8 +14,8 @@ from backend.database.schemas import (
     ProbabilityCalculationCreate,
     ProbabilityCalculationResponse
 )
-from backend.api.dependencies import get_current_user_profile
-from backend.core import calculate_admission_probability
+from api.dependencies import get_current_user_profile
+from core import calculate_admission_probability
 
 router = APIRouter()
 

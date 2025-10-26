@@ -6,9 +6,9 @@ Uses real IPEDS data for accurate major-based college suggestions
 import time
 import logging
 from fastapi import APIRouter
-from backend.data.real_college_suggestions import real_college_suggestions
-from backend.data.real_ipeds_major_mapping import get_major_relevance_info
-from backend.api.dependencies import CollegeSuggestionsRequest
+from data.real_college_suggestions import real_college_suggestions
+from data.real_ipeds_major_mapping import get_major_relevance_info
+from api.dependencies import CollegeSuggestionsRequest
 
 logger = logging.getLogger(__name__)
 

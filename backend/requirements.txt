@@ -49,3 +49,6 @@ mypy==1.8.0
 # API Documentation
 pydantic[email]==2.5.3
 
+# OpenAI Integration
+openai>=1.0.0
+

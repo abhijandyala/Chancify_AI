@@ -10,11 +10,11 @@ import numpy as np
 import pandas as pd
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.config import settings
-from backend.database import create_tables
-from backend.data.real_ipeds_major_mapping import get_colleges_for_major, get_major_strength_score, get_major_relevance_info
-from backend.data.real_college_suggestions import real_college_suggestions
-from backend.data.college_names_mapping import college_names_mapping
+from config import settings
+from database import create_tables
+from data.real_ipeds_major_mapping import get_colleges_for_major, get_major_strength_score, get_major_relevance_info
+from data.real_college_suggestions import real_college_suggestions
+from data.college_names_mapping import college_names_mapping
 
 # Configure logging
 logging.basicConfig(
@@ -148,7 +148,7 @@ async def health_check():
     # Test database connection
     db_status = "unknown"
     try:
-        from backend.database.connection import engine
+        from database.connection import engine
         from sqlalchemy import text
         if engine is not None:
             # Try a simple query to verify connection
@@ -209,7 +209,7 @@ async def search_colleges(q: str = "", limit: int = 20):
         
         # Load college data from the integrated CSV
         try:
-            college_df = pd.read_csv('backend/data/raw/real_colleges_integrated.csv')
+            college_df = pd.read_csv('data/raw/real_colleges_integrated.csv')
         except Exception as e:
             logger.error(f"Error loading college data: {e}")
             return {
@@ -272,9 +272,9 @@ async def search_colleges(q: str = "", limit: int = 20):
         }
 
 # Include API routes
-from backend.api.routes import auth, calculations, ml_calculations
-from backend.ml.models.predictor import get_predictor
-from backend.ml.preprocessing.feature_extractor import StudentFeatures, CollegeFeatures
+from api.routes import auth, calculations, ml_calculations, openai_routes
+from ml.models.predictor import get_predictor
+from ml.preprocessing.feature_extractor import StudentFeatures, CollegeFeatures
 from pydantic import BaseModel
 from typing import Dict, Any
 import pandas as pd
@@ -282,6 +282,7 @@ import pandas as pd
 app.include_router(auth.router, prefix="/api/auth", tags=["Authentication"])
 app.include_router(calculations.router, prefix="/api/calculations", tags=["Probability Calculations"])
 app.include_router(ml_calculations.router, prefix="/api/calculations", tags=["ML Predictions"])
+app.include_router(openai_routes.router, prefix="/api/openai", tags=["OpenAI College Info"])
 
 # College data mapping based on training data
 def get_college_data(college_name: str) -> Dict[str, Any]:
@@ -289,7 +290,7 @@ def get_college_data(college_name: str) -> Dict[str, Any]:
     
     # Load the integrated college data
     try:
-        df = pd.read_csv('backend/data/raw/real_colleges_integrated.csv')
+        df = pd.read_csv('data/raw/real_colleges_integrated.csv')
         
         # Find the college by name (case-insensitive, with partial matching)
         college_name_lower = college_name.lower()

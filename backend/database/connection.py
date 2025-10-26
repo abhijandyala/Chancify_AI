@@ -6,7 +6,7 @@ from typing import Generator, Optional
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 from supabase import create_client, Client
-from backend.config import settings
+from config import settings
 import logging
 
 logger = logging.getLogger(__name__)

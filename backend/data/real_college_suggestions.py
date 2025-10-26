@@ -3,6 +3,7 @@ Real College Suggestions System
 Uses real IPEDS data to suggest colleges based on major strength
 """
 
+import os
 import pandas as pd
 import numpy as np
 from typing import Dict, List, Tuple, Optional
@@ -18,7 +19,10 @@ class RealCollegeSuggestions:
     def load_college_data(self):
         """Load the college data and create indexes for fast lookup"""
         try:
-            self.college_df = pd.read_csv('backend/data/raw/real_colleges_integrated.csv')
+            # Get the directory of this file and construct the path
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            csv_path = os.path.join(current_dir, 'raw', 'real_colleges_integrated.csv')
+            self.college_df = pd.read_csv(csv_path)
             print(f"Loaded college data: {self.college_df.shape}")
             
             # Create index for fast lookup by name
