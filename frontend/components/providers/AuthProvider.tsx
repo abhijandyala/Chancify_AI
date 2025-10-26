@@ -256,7 +256,48 @@ export function AuthProvider({ children }: AuthProviderProps) {
   // Check auth status on mount
   useEffect(() => {
     checkAuthStatus()
-  }, [])
+    
+    // Check for Google OAuth callback
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search)
+      const googleAuth = urlParams.get('google_auth')
+      const email = urlParams.get('email')
+      const name = urlParams.get('name')
+      
+      if (googleAuth === 'success' && email) {
+        // User just completed Google OAuth
+        console.log('Google OAuth success detected:', { email, name })
+        
+        // Store auth data
+        localStorage.setItem('auth_token', 'google_token_' + Date.now())
+        localStorage.setItem('user_email', email)
+        if (name) {
+          localStorage.setItem('user_name', name)
+        }
+        localStorage.removeItem('trial_mode')
+        
+        setUser({
+          id: 'google_user',
+          email: email,
+          name: name || undefined
+        })
+        
+        // Trigger auth state change event
+        window.dispatchEvent(new CustomEvent('authStateChanged'))
+        
+        // Clean up URL parameters
+        const newUrl = new URL(window.location.href)
+        newUrl.searchParams.delete('google_auth')
+        newUrl.searchParams.delete('email')
+        newUrl.searchParams.delete('name')
+        newUrl.searchParams.delete('picture')
+        window.history.replaceState({}, '', newUrl.toString())
+        
+        // Redirect to home page
+        router.push('/home')
+      }
+    }
+  }, [router])
 
   // Listen for storage changes (e.g., from other tabs)
   useEffect(() => {

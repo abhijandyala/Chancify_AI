@@ -24,6 +24,20 @@ export default function AuthPage() {
     if (isAuthenticated && !authLoading) {
       router.push('/home')
     }
+    
+    // Check for Google OAuth error
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search)
+      const error = urlParams.get('error')
+      
+      if (error) {
+        setError(`Google authentication failed: ${error}`)
+        // Clean up URL
+        const newUrl = new URL(window.location.href)
+        newUrl.searchParams.delete('error')
+        window.history.replaceState({}, '', newUrl.toString())
+      }
+    }
   }, [isAuthenticated, authLoading, router])
 
   const handleSubmit = async (e: React.FormEvent) => {
