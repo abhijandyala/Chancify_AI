@@ -326,8 +326,25 @@ def get_college_data(college_name: str) -> Dict[str, Any]:
         if not college_row.empty:
             row = college_row.iloc[0]
             logger.info(f"Found college: {row['name']}")
+            # Debug: Print all column names and the name value
+            logger.info(f"CSV columns: {list(row.index)}")
+            logger.info(f"Row name value: {row.get('name', 'MISSING_NAME_COLUMN')}")
+            logger.info(f"Row name type: {type(row.get('name'))}")
+            logger.info(f"Row name is NaN: {pd.isna(row.get('name'))}")
+            
+            # Try to get name from different possible column names
+            college_actual_name = None
+            if pd.notna(row.get('name')):
+                college_actual_name = str(row['name'])
+            elif pd.notna(row.get('Name')):
+                college_actual_name = str(row['Name'])
+            elif pd.notna(row.get('institution_name')):
+                college_actual_name = str(row['institution_name'])
+            else:
+                college_actual_name = college_name  # Fallback to original input
+            
             result = {
-                'name': str(row['name']) if pd.notna(row['name']) else college_name,
+                'name': college_actual_name,
                 'acceptance_rate': float(row.get('acceptance_rate', 0.5)) if pd.notna(row.get('acceptance_rate')) else (float(row.get('acceptance_rate_percent', 50)) / 100 if pd.notna(row.get('acceptance_rate_percent')) else 0.5),
                 'sat_25th': 1200,  # Default values since SAT/ACT data not available
                 'sat_75th': 1500,
