@@ -60,8 +60,10 @@ export default function ProfilePage() {
             <ArrowLeft className="w-5 h-5" />
             Back to Assessment
           </motion.button>
-          <h1 className="text-2xl font-bold text-yellow-400">Your Presets</h1>
-          <div></div> {/* Spacer for alignment */}
+          <div className="flex-1 flex justify-center">
+            <h1 className="text-2xl font-bold text-yellow-400">Your Presets</h1>
+          </div>
+          <div className="w-[120px]"></div> {/* Spacer for perfect centering */}
         </div>
       </div>
 
@@ -69,15 +71,17 @@ export default function ProfilePage() {
       <div className="container mx-auto px-4 py-8">
         {presets.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-lg text-gray-400">No presets saved yet.</p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => router.push('/home')}
-              className="mt-6 px-6 py-3 rounded-lg bg-yellow-400 text-black font-semibold hover:bg-yellow-500 transition-colors"
-            >
-              Go to AI Assessment to save one
-            </motion.button>
+            <div className="bg-white/5 border border-white/10 rounded-xl p-8 max-w-md mx-auto">
+              <p className="text-lg text-gray-300 mb-6">No presets saved yet.</p>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => router.push('/home')}
+                className="px-6 py-3 rounded-lg bg-yellow-400 text-black font-semibold hover:bg-yellow-500 transition-colors"
+              >
+                Go to AI Assessment to save one
+              </motion.button>
+            </div>
           </div>
         ) : (
           <div className="space-y-4">
@@ -87,21 +91,21 @@ export default function ProfilePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
-                className="backdrop-blur-sm border border-white/10 rounded-xl p-4 bg-gray-800/50"
+                className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-200"
               >
                 <div className="flex items-center justify-between">
                   {/* Horizontal layout for NAME, MAJOR, TIME */}
-                  <div className="flex items-center gap-6 flex-1">
-                    <div className="min-w-[120px]">
+                  <div className="flex items-center gap-8 flex-1">
+                    <div className="min-w-[140px]">
                       <h3 className="text-lg font-semibold text-white">{preset.name}</h3>
                     </div>
-                    <div className="flex items-center gap-1 min-w-[150px]">
-                      <BookOpen className="w-4 h-4 text-gray-400" />
-                      <span className="text-sm text-gray-400">{preset.major || 'Undecided'}</span>
+                    <div className="flex items-center gap-2 min-w-[180px]">
+                      <BookOpen className="w-4 h-4 text-yellow-400" />
+                      <span className="text-sm text-gray-300">{preset.major || 'Undecided'}</span>
                     </div>
-                    <div className="flex items-center gap-1 min-w-[200px]">
-                      <Clock className="w-3 h-3 text-gray-500" />
-                      <span className="text-xs text-gray-500">{new Date(preset.createdAt).toLocaleString()}</span>
+                    <div className="flex items-center gap-2 min-w-[220px]">
+                      <Clock className="w-4 h-4 text-gray-400" />
+                      <span className="text-sm text-gray-400">{new Date(preset.createdAt).toLocaleString()}</span>
                     </div>
                   </div>
                   
@@ -111,7 +115,7 @@ export default function ProfilePage() {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => handleLoadPreset(preset)}
-                      className="px-4 py-2 rounded-lg bg-yellow-400 text-black font-semibold hover:bg-yellow-500 transition-colors flex items-center gap-2"
+                      className="px-6 py-2 rounded-lg bg-yellow-400 text-black font-semibold hover:bg-yellow-500 transition-colors flex items-center gap-2"
                       disabled={loading === preset.id}
                     >
                       {loading === preset.id && <Loader2 className="w-4 h-4 animate-spin" />}
@@ -121,7 +125,7 @@ export default function ProfilePage() {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => handleDeletePreset(preset.id)}
-                      className="p-2 rounded-lg text-red-400 hover:bg-red-900/50 transition-colors"
+                      className="p-2 rounded-lg text-red-400 hover:bg-red-900/30 hover:text-red-300 transition-colors"
                     >
                       <Trash2 className="w-5 h-5" />
                     </motion.button>
