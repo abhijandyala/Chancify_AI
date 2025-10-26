@@ -15,6 +15,8 @@ import { motion } from 'framer-motion'
 import { GraduationCap, Star, Building2, Calculator, Brain, Zap, Target, ChevronRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { MajorSelectionModal } from '@/components/ui/MajorSelectionModal'
+import { SaveModal } from '@/components/SaveModal'
+import { PresetStorage } from '@/lib/preset-storage'
 
 export const dynamic = 'force-dynamic'
 
@@ -28,6 +30,13 @@ export default function HomePage() {
   
   // Major modal state
   const [isMajorModalOpen, setIsMajorModalOpen] = useState(false)
+  
+  // Save preset modal state
+  const [isSaveModalOpen, setIsSaveModalOpen] = useState(false)
+  const [showSavedToast, setShowSavedToast] = useState(false)
+  
+  // Preset storage
+  const storage = new PresetStorage()
   
   const [profile, setProfile] = useState({
     // Academic metrics
@@ -98,6 +107,27 @@ export default function HomePage() {
   const handleSelectMajor = (major: string) => {
     updateProfile('major', major)
   }
+
+  const handleSavePreset = (name: string) => {
+    storage.savePreset(name, profile.major, profile)
+    setShowSavedToast(true)
+    setTimeout(() => setShowSavedToast(false), 3000)
+    setIsSaveModalOpen(false) // Close modal after saving
+  }
+
+  // Check for preset to load on mount
+  useEffect(() => {
+    const loadPresetData = sessionStorage.getItem('loadPreset')
+    if (loadPresetData) {
+      try {
+        const preset = JSON.parse(loadPresetData)
+        setProfile(preset.formData)
+        sessionStorage.removeItem('loadPreset')
+      } catch (error) {
+        console.error('Failed to load preset:', error)
+      }
+    }
+  }, [])
 
   // Handle Google OAuth success and trial mode
   useEffect(() => {
@@ -595,10 +625,7 @@ export default function HomePage() {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <button 
-                  onClick={() => {
-                    // Save logic will be added later
-                    console.log('Save profile clicked')
-                  }}
+                  onClick={() => setIsSaveModalOpen(true)}
                   className="rox-button-secondary text-lg px-8 py-4 flex items-center gap-3"
                 >
                   <span>Save</span>
@@ -643,6 +670,25 @@ export default function HomePage() {
           selectedMajor={profile.major}
           onSelectMajor={handleSelectMajor}
         />
+
+        {/* Save Modal */}
+        <SaveModal
+          isOpen={isSaveModalOpen}
+          onClose={() => setIsSaveModalOpen(false)}
+          onSave={handleSavePreset}
+        />
+
+        {/* Saved Toast */}
+        {showSavedToast && (
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            className="fixed top-4 right-4 z-50 px-6 py-3 bg-green-600 text-white rounded-lg shadow-lg"
+          >
+            Saved!
+          </motion.div>
+        )}
       </div>
     </div>
   )

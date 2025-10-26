@@ -60,6 +60,11 @@ export function Header() {
     router.push('/')
   }
 
+  const handleProfileClick = () => {
+    // Navigate to profile page
+    router.push('/profile')
+  }
+
   return (
     <header className="glass px-6 py-4 flex items-center justify-between mb-8 border border-white/10">
       <div className="flex items-center gap-4">
@@ -95,6 +100,7 @@ export function Header() {
             </motion.button>
             
             <motion.button
+              onClick={handleProfileClick}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="p-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300"
