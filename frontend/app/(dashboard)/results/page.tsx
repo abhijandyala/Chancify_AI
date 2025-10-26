@@ -414,7 +414,7 @@ function ResultsContent() {
                       style={{ width: `${profileAnalysis.academic.score}%` }}
                     ></div>
                   </div>
-                  <Badge variant={profileAnalysis.academic.score >= 80 ? "success" : profileAnalysis.academic.score >= 60 ? "warning" : "error"} size="sm">
+                  <Badge variant={profileAnalysis.academic.score >= 80 ? "success" : profileAnalysis.academic.score >= 60 ? "warning" : "danger"} size="sm">
                     {profileAnalysis.academic.label}
                   </Badge>
                 </div>
@@ -428,7 +428,7 @@ function ResultsContent() {
                       style={{ width: `${profileAnalysis.extracurricular.score}%` }}
                     ></div>
                   </div>
-                  <Badge variant={profileAnalysis.extracurricular.score >= 80 ? "success" : profileAnalysis.extracurricular.score >= 60 ? "warning" : "error"} size="sm">
+                  <Badge variant={profileAnalysis.extracurricular.score >= 80 ? "success" : profileAnalysis.extracurricular.score >= 60 ? "warning" : "danger"} size="sm">
                     {profileAnalysis.extracurricular.label}
                   </Badge>
                 </div>
@@ -442,7 +442,7 @@ function ResultsContent() {
                       style={{ width: `${profileAnalysis.essays.score}%` }}
                     ></div>
                   </div>
-                  <Badge variant={profileAnalysis.essays.score >= 80 ? "success" : profileAnalysis.essays.score >= 60 ? "warning" : "error"} size="sm">
+                  <Badge variant={profileAnalysis.essays.score >= 80 ? "success" : profileAnalysis.essays.score >= 60 ? "warning" : "danger"} size="sm">
                     {profileAnalysis.essays.label}
                   </Badge>
                 </div>
@@ -456,7 +456,7 @@ function ResultsContent() {
                       style={{ width: `${profileAnalysis.uniqueFactors.score}%` }}
                     ></div>
                   </div>
-                  <Badge variant={profileAnalysis.uniqueFactors.score >= 80 ? "success" : profileAnalysis.uniqueFactors.score >= 60 ? "warning" : "error"} size="sm">
+                  <Badge variant={profileAnalysis.uniqueFactors.score >= 80 ? "success" : profileAnalysis.uniqueFactors.score >= 60 ? "warning" : "danger"} size="sm">
                     {profileAnalysis.uniqueFactors.label}
                   </Badge>
                 </div>
