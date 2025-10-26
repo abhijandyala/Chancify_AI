@@ -73,8 +73,9 @@ class RealCollegeSuggestions:
         acceptance_rate = college.get('acceptance_rate', 0.5)
         
         # Calculate base probability from academic strength (0-10 scale)
-        # Higher academic strength = higher base probability
-        base_prob = min(0.95, max(0.05, academic_strength / 10.0))
+        # More conservative base probability calculation
+        # Even perfect students shouldn't have 95% base probability
+        base_prob = min(0.80, max(0.10, academic_strength / 12.5))  # Max 80% base, scaled by 12.5 instead of 10
         
         # Apply college selectivity adjustment
         # More selective colleges (lower acceptance rate) reduce probability more
@@ -94,8 +95,8 @@ class RealCollegeSuggestions:
         # Calculate final probability
         final_prob = base_prob * selectivity_factor
         
-        # Ensure realistic bounds
-        return max(0.01, min(0.95, final_prob))
+        # Ensure realistic bounds - cap at 85% maximum
+        return max(0.01, min(0.85, final_prob))
 
     def get_balanced_suggestions(self, major: str, academic_strength: float) -> List[Dict]:
         """Get balanced suggestions (3 safety, 3 target, 3 reach) for a major based on actual probabilities"""

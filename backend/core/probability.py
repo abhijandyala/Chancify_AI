@@ -53,7 +53,8 @@ def logistic_prob(
         probability = 1.0 / (1.0 + math.exp(exponent))
     
     # Clamp to reasonable range (never 0% or 100%)
-    return max(0.02, min(0.98, probability))
+    # Cap at 85% for consistency with real college suggestions system
+    return max(0.02, min(0.85, probability))
 
 
 def default_calibration(acceptance_rate: float) -> CalibrationParams:
