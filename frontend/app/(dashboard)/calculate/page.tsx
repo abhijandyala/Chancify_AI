@@ -244,14 +244,14 @@ export default function CalculationsPage() {
         // Get the first selected college for detailed analysis
         const firstCollege = selectedColleges[0];
         
-        // Convert college ID to college name using COLLEGES array
-        const selectedCollege = COLLEGES.find(college => college.value === firstCollege);
-        const collegeName = selectedCollege ? selectedCollege.label : firstCollege;
+        // The college ID from localStorage might be a backend ID (e.g., college_1000669)
+        // We need to get the actual college name from the backend data
+        // For now, we'll use the ID as-is and let the backend handle it
+        const collegeName = firstCollege;
         
         console.log('🔍 DEBUGGING CALCULATE PAGE:');
         console.log('🔍 Selected Colleges from localStorage:', selectedColleges);
         console.log('🔍 First College ID:', firstCollege);
-        console.log('🔍 Found College in COLLEGES:', selectedCollege);
         console.log('🔍 College Name to send:', collegeName);
         console.log('🔍 User Profile from localStorage:', userProfile);
         
