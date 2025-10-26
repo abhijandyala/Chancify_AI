@@ -174,7 +174,7 @@ export default function HomePage() {
 
   // Validation function to check if all required fields are filled
   const isProfileComplete = () => {
-    const requiredFields = ['gpa_unweighted', 'gpa_weighted']
+    const requiredFields = ['gpa_unweighted', 'gpa_weighted', 'college']
     return requiredFields.every(field => profile[field as keyof typeof profile] && profile[field as keyof typeof profile].trim() !== '')
   }
 
@@ -609,6 +609,27 @@ export default function HomePage() {
         </div>
       </motion.section>
 
+      {/* College Selection */}
+      <motion.section {...enter} className="mb-12">
+        <div className="rox-card p-8">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-2 rounded-lg bg-yellow-400/20 text-yellow-400">
+              <Building2 className="w-5 h-5" />
+            </div>
+            <div>
+              <h2 className="rox-heading-3">Target College</h2>
+              <p className="rox-text-muted">Select the college you want to calculate admission chances for</p>
+            </div>
+          </div>
+          
+          <CollegeCombobox
+            value={profile.college}
+            onChange={(value) => updateProfile('college', value)}
+            placeholder="Search for a college..."
+            options={COLLEGES}
+          />
+        </div>
+      </motion.section>
 
         {/* Action Buttons */}
         <motion.section {...enter} className="mb-12">
@@ -616,14 +637,14 @@ export default function HomePage() {
             <div className="text-center space-y-8">
               <div className="space-y-4">
                 <h2 className="rox-heading-3">
-                  {isProfileComplete() ? 'Ready to Explore?' : 'Complete Your Profile'}
+                  {isProfileComplete() ? 'Ready to Calculate?' : 'Complete Your Profile'}
                 </h2>
-                <p className="rox-text-body">
-                  {isProfileComplete() 
-                    ? 'Your profile is complete. Let\'s discover colleges that match your unique story.'
-                    : 'Please fill in your GPA information to continue to college discovery.'
-                  }
-                </p>
+                    <p className="rox-text-body">
+                      {isProfileComplete() 
+                        ? 'Your profile is complete. Let\'s calculate your admission chances.'
+                        : 'Please fill in your GPA information and select a target college to calculate admission chances.'
+                      }
+                    </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -643,16 +664,16 @@ export default function HomePage() {
                       : 'bg-gray-700/50 text-gray-500 cursor-not-allowed'
                   }`}
                 >
-                  <span>Next</span>
+                  <span>Calculate Admission Chances</span>
                   <ChevronRight className="w-5 h-5" />
                 </button>
               </div>
             
-              {!isProfileComplete() && (
-                <p className="rox-text-muted mt-4">
-                  Required: Unweighted GPA and Weighted GPA
-                </p>
-              )}
+                  {!isProfileComplete() && (
+                    <p className="rox-text-muted mt-4">
+                      Required: Unweighted GPA, Weighted GPA, and Target College
+                    </p>
+                  )}
       </div>
         </div>
       </motion.section>
