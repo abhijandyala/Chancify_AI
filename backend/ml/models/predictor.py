@@ -250,17 +250,16 @@ class AdmissionPredictor:
         )
         formula_prob = formula_result.probability
         
-        # FIXED: Remove excessive calibration that was making probabilities too low
         # Keep formula probabilities as-is for realistic ranges
-        # Cap at 85% for consistency with real college suggestions system
-        formula_prob = np.clip(formula_prob, 0.01, 0.85)  # Reasonable bounds
+        # Allow probabilities to go up to 98% for exceptional applicants
+        formula_prob = np.clip(formula_prob, 0.01, 0.98)
         
         # If ML not available or not requested, return formula only
         if not self.is_available() or not use_formula:
             return PredictionResult(
                 probability=formula_prob,
                 confidence_interval=(max(0.02, formula_prob - 0.10), 
-                                   min(0.85, formula_prob + 0.10)),
+                                   min(0.98, formula_prob + 0.10)),
                 ml_probability=formula_prob,
                 formula_probability=formula_prob,
                 ml_confidence=0.0,
@@ -326,13 +325,13 @@ class AdmissionPredictor:
         # Apply elite university calibration for realistic probabilities
         final_prob = self._apply_elite_calibration(final_prob, college)
         
-        # Cap at 85% for consistency with real college suggestions system
-        final_prob = np.clip(final_prob, 0.02, 0.85)  # Reasonable bounds
+        # Allow probabilities up to 98% for exceptional applicants
+        final_prob = np.clip(final_prob, 0.02, 0.98)
         
         # Confidence interval (wider if ML is uncertain)
         ci_width = 0.15 * (1 - ml_confidence)  # Smaller CI when more confident
         ci_lower = max(0.02, final_prob - ci_width)
-        ci_upper = min(0.85, final_prob + ci_width)
+        ci_upper = min(0.98, final_prob + ci_width)
         
         # Feature importances (if available)
         feature_importances = None
