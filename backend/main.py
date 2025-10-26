@@ -288,24 +288,30 @@ app.include_router(openai_routes.router, prefix="/api/openai", tags=["OpenAI Col
 def get_college_data(college_name: str) -> Dict[str, Any]:
     """Get college data based on college name from integrated data."""
     
+    logger.info(f"Getting college data for: {college_name}")
+    
     # Load the integrated college data
     try:
         df = pd.read_csv('data/raw/real_colleges_integrated.csv')
+        logger.info(f"Loaded college data: {df.shape}")
         
         # Find the college by name (case-insensitive, with exact matching first)
         college_name_lower = college_name.lower()
         college_row = df[df['name'].str.lower() == college_name_lower]
+        logger.info(f"Exact match found: {len(college_row)} rows")
         
         # If exact match not found, try partial matching but prefer shorter matches
         if college_row.empty:
             college_row = df[df['name'].str.lower().str.contains(college_name_lower, na=False)]
+            logger.info(f"Partial match found: {len(college_row)} rows")
             # If multiple matches, prefer the one with the shortest name (most specific)
             if not college_row.empty and len(college_row) > 1:
                 college_row = college_row.loc[college_row['name'].str.len().idxmin():college_row['name'].str.len().idxmin()]
         
         if not college_row.empty:
             row = college_row.iloc[0]
-            return {
+            logger.info(f"Found college: {row['name']}")
+            result = {
                 'name': str(row['name']) if pd.notna(row['name']) else college_name,
                 'acceptance_rate': float(row.get('acceptance_rate', 0.5)) if pd.notna(row.get('acceptance_rate')) else (float(row.get('acceptance_rate_percent', 50)) / 100 if pd.notna(row.get('acceptance_rate_percent')) else 0.5),
                 'sat_25th': 1200,  # Default values since SAT/ACT data not available
@@ -322,10 +328,15 @@ def get_college_data(college_name: str) -> Dict[str, Any]:
                 'tuition_out_of_state': int(row.get('tuition_out_of_state_usd', 40000)) if pd.notna(row.get('tuition_out_of_state_usd')) else 40000,
                 'student_body_size': int(row.get('student_body_size', 5000)) if pd.notna(row.get('student_body_size')) else 5000
             }
+            logger.info(f"Returning college data: {result}")
+            return result
+        else:
+            logger.warning(f"No college found for: {college_name}")
     except Exception as e:
         logger.warning(f"Could not load college data: {e}")
     
     # Default fallback data
+    logger.info(f"Returning fallback data for: {college_name}")
     return {
         'name': college_name,
         'acceptance_rate': 0.1,
@@ -524,6 +535,10 @@ async def predict_admission_frontend(request: FrontendProfileRequest):
         
         # Get college data with real acceptance rate from OpenAI
         college_data = get_college_data(request.college)
+        logger.info(f"College data retrieved: {college_data}")
+        logger.info(f"College name: {college_data.get('name', 'MISSING')}")
+        logger.info(f"College city: {college_data.get('city', 'MISSING')}")
+        logger.info(f"College state: {college_data.get('state', 'MISSING')}")
         
         # Get real acceptance rate from OpenAI API
         try:

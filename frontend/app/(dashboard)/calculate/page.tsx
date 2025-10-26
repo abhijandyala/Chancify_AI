@@ -248,6 +248,13 @@ export default function CalculationsPage() {
         const selectedCollege = COLLEGES.find(college => college.value === firstCollege);
         const collegeName = selectedCollege ? selectedCollege.label : firstCollege;
         
+        console.log('🔍 DEBUGGING CALCULATE PAGE:');
+        console.log('🔍 Selected Colleges from localStorage:', selectedColleges);
+        console.log('🔍 First College ID:', firstCollege);
+        console.log('🔍 Found College in COLLEGES:', selectedCollege);
+        console.log('🔍 College Name to send:', collegeName);
+        console.log('🔍 User Profile from localStorage:', userProfile);
+        
         // Calculate probability using the backend API
         const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://unsmug-untensely-elroy.ngrok-free.dev';
         const headers: HeadersInit = {
@@ -259,16 +266,26 @@ export default function CalculationsPage() {
           headers['ngrok-skip-browser-warning'] = 'true';
         }
         
+        const requestData = {
+          ...userProfile,
+          college: collegeName // Send college name instead of ID
+        };
+        
+        console.log('🔍 REQUEST DATA TO BACKEND:', requestData);
+        console.log('🔍 API URL:', `${API_BASE_URL}/api/predict/frontend`);
+        
         const response = await fetch(`${API_BASE_URL}/api/predict/frontend`, {
           method: 'POST',
           headers,
-          body: JSON.stringify({
-            ...userProfile,
-            college: collegeName // Send college name instead of ID
-          })
+          body: JSON.stringify(requestData)
         });
         
         const result = await response.json();
+        console.log('🔍 BACKEND RESPONSE DEBUG:', result);
+        console.log('🔍 COLLEGE DATA FROM BACKEND:', result.college_data);
+        console.log('🔍 COLLEGE NAME FROM BACKEND:', result.college_name);
+        console.log('🔍 ACCEPTANCE RATE FROM BACKEND:', result.acceptance_rate);
+        
         const probability = result.probability || 0;
         setUserChance(Math.round(probability * 100));
 
@@ -323,6 +340,11 @@ export default function CalculationsPage() {
           },
           updatedAtISO: new Date().toISOString(),
         };
+
+        console.log('🔍 FINAL COLLEGE STATS CREATED:', collegeStats);
+        console.log('🔍 COLLEGE NAME IN STATS:', collegeStats.collegeName);
+        console.log('🔍 CITY IN STATS:', collegeStats.city);
+        console.log('🔍 STATE IN STATS:', collegeStats.state);
 
         setCollegeData(collegeStats);
       } catch (error) {
