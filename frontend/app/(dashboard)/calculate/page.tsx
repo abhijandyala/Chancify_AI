@@ -289,13 +289,13 @@ export default function CalculationsPage() {
         const probability = result.probability || 0;
         setUserChance(Math.round(probability * 100));
 
-        // Use real college data from backend response
-        const collegeStats: CollegeStats = {
-          collegeName: collegeName || 'Selected College',
-          city: result.college_data?.city || 'Unknown',
-          state: result.college_data?.state || 'Unknown', 
-          isPublic: result.college_data?.is_public || false,
-          acceptanceRateOfficial: Math.round((result.acceptance_rate || 0.15) * 100),
+                 // Use real college data from backend response
+         const collegeStats: CollegeStats = {
+           collegeName: result.college_name || collegeName || 'Selected College', // Use college name from backend
+           city: result.college_data?.city || 'Unknown',
+           state: result.college_data?.state || 'Unknown', 
+           isPublic: result.college_data?.is_public || false,
+           acceptanceRateOfficial: Math.round((result.acceptance_rate || 0.15) * 100),
           outcome: {
             accept: Math.round(probability * 100),
             waitlist: Math.round(probability * 15),
