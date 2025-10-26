@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Info, MapPin, TrendingUp, Zap, Target, TrendingDown, Award, ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import { COLLEGES } from '@/lib/colleges';
 import {
   ResponsiveContainer,
   BarChart,
@@ -243,6 +244,10 @@ export default function CalculationsPage() {
         // Get the first selected college for detailed analysis
         const firstCollege = selectedColleges[0];
         
+        // Convert college ID to college name using COLLEGES array
+        const selectedCollege = COLLEGES.find(college => college.value === firstCollege);
+        const collegeName = selectedCollege ? selectedCollege.label : firstCollege;
+        
         // Calculate probability using the backend API
         const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://unsmug-untensely-elroy.ngrok-free.dev';
         const headers: HeadersInit = {
@@ -259,7 +264,7 @@ export default function CalculationsPage() {
           headers,
           body: JSON.stringify({
             ...userProfile,
-            college: firstCollege
+            college: collegeName // Send college name instead of ID
           })
         });
         
@@ -269,7 +274,7 @@ export default function CalculationsPage() {
 
         // Create college data structure
         const collegeStats: CollegeStats = {
-          collegeName: firstCollege || 'Selected College',
+          collegeName: collegeName || 'Selected College',
           city: 'Unknown',
           state: 'Unknown',
           isPublic: false,
