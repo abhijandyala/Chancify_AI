@@ -47,9 +47,9 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-black text-white">
       {/* Header */}
-      <div className="border-b border-white/10 bg-gray-900/80 backdrop-blur-sm">
+      <div className="border-b border-white/10 bg-black/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <motion.button
             whileHover={{ scale: 1.05 }}
