@@ -15,9 +15,16 @@ export default function SimpleGoogleOAuth() {
     // This redirects to the official Google account selection page
     // Using the correct Google Client ID as specified
     const GOOGLE_CLIENT_ID = '117818010137-4fmntjdknmm16c9eef296l96isok6620.apps.googleusercontent.com'
-    // ALWAYS use Railway URL for OAuth - NO localhost references
-    // This prevents any 0.0.0.0:8080 or localhost errors
-    const REDIRECT_URI = 'https://chancifyai.up.railway.app/api/auth/callback/google'
+    
+    // Determine redirect URI based on current environment
+    // For local development, use localhost; for production, use Railway
+    let REDIRECT_URI: string
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      REDIRECT_URI = `${window.location.origin}/api/auth/callback/google`
+    } else {
+      REDIRECT_URI = 'https://chancifyai.up.railway.app/api/auth/callback/google'
+    }
+    
     const SCOPE = 'email profile'
     const STATE = 'google_oauth_state_' + Date.now()
     
@@ -36,7 +43,7 @@ export default function SimpleGoogleOAuth() {
     console.log('Current origin:', window.location.origin)
     console.log('Current hostname:', window.location.hostname)
     console.log('Current URL:', window.location.href)
-    console.log('ALWAYS using Railway redirect URI:', REDIRECT_URI)
+    console.log('Using redirect URI:', REDIRECT_URI)
     console.log('Full OAuth URL:', authUrl.toString())
     console.log('========================')
     

@@ -6,8 +6,15 @@ export async function GET(request: NextRequest) {
   const state = searchParams.get('state')
   const error = searchParams.get('error')
 
-  // Use Railway URL for all redirects - no localhost references
-  const baseUrl = 'https://chancifyai.up.railway.app'
+  // Determine base URL based on current request
+  // For localhost, use localhost; for Railway, use Railway URL
+  const url = new URL(request.url)
+  let baseUrl: string
+  if (url.hostname === 'localhost' || url.hostname === '127.0.0.1') {
+    baseUrl = `${url.protocol}//${url.host}`
+  } else {
+    baseUrl = 'https://chancifyai.up.railway.app'
+  }
 
   if (error) {
     // Handle OAuth error - redirect to home page with error
@@ -27,8 +34,9 @@ export async function GET(request: NextRequest) {
 
     // DEBUG: Log OAuth callback information
     console.log('=== OAUTH CALLBACK DEBUG ===')
-    console.log('ALWAYS using Railway URL:', baseUrl)
+    console.log('Using base URL:', baseUrl)
     console.log('request.url:', request.url)
+    console.log('request.hostname:', url.hostname)
     console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID)
     console.log('GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET ? 'SET' : 'NOT SET')
     console.log('============================')
