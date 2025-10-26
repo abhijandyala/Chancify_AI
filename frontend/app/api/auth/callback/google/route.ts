@@ -6,8 +6,8 @@ export async function GET(request: NextRequest) {
   const state = searchParams.get('state')
   const error = searchParams.get('error')
 
-  // Define baseUrl at the top level so it's available in catch block
-  const baseUrl = request.url.split('/api')[0]
+  // Use Railway URL for all redirects - no localhost references
+  const baseUrl = 'https://chancifyai.up.railway.app'
 
   if (error) {
     // Handle OAuth error - redirect to home page with error
