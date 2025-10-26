@@ -3,20 +3,20 @@
  */
 
 // Backend URL configuration
-// Use ngrok URL for production, fallback to localhost for development
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://unsmug-untensely-elroy.ngrok-free.dev';
+// Use Railway URL for production, fallback to localhost for development
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://chancifyai.up.railway.app';
 
-// Headers for ngrok requests
+// Headers for API requests
 const getHeaders = () => {
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
   };
-  
-  // Add ngrok skip warning header if using ngrok
+
+  // Add ngrok skip warning header if using ngrok (legacy support)
   if (API_BASE_URL.includes('ngrok')) {
     headers['ngrok-skip-browser-warning'] = 'true';
   }
-  
+
   return headers;
 };
 
