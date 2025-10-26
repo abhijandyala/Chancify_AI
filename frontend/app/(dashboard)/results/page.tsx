@@ -37,22 +37,22 @@ function ResultsContent() {
       academic: {
         score: 0,
         label: 'Unknown',
-        details: []
+        details: [] as string[]
       },
       extracurricular: {
         score: 0,
         label: 'Unknown', 
-        details: []
+        details: [] as string[]
       },
       essays: {
         score: 0,
         label: 'Unknown',
-        details: []
+        details: [] as string[]
       },
       uniqueFactors: {
         score: 0,
         label: 'Unknown',
-        details: []
+        details: [] as string[]
       }
     }
 
