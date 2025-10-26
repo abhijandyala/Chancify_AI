@@ -287,7 +287,7 @@ app.include_router(openai_routes.router, prefix="/api/openai", tags=["OpenAI Col
 
 # College data mapping based on training data
 def get_college_data(college_name: str) -> Dict[str, Any]:
-    """Get college data based on college name or ID from integrated data."""
+    """Get college data based on college name from integrated data."""
     
     logger.info(f"Getting college data for: {college_name}")
     
@@ -297,33 +297,34 @@ def get_college_data(college_name: str) -> Dict[str, Any]:
         logger.info(f"Loaded college data: {df.shape}")
         
         # Check if the input is a college ID (format: college_XXXXXX)
-        college_id_match = None
+        college_row = None
         if college_name.startswith('college_'):
             college_id = college_name.replace('college_', '')
-            # Try to find by unitid
-            college_id_match = df[df['unitid'] == int(college_id)]
             logger.info(f"Looking for college ID: {college_id}")
-            logger.info(f"Found by unitid: {len(college_id_match)} rows")
+            
+            # Try to find by unitid (MOST COMMON CASE)
+            college_row = df[df['unitid'] == int(college_id)]
+            logger.info(f"Found by unitid: {len(college_row)} rows")
+            
+            if not college_row.empty:
+                logger.info(f"✅ SUCCESS: Found college by ID")
+            else:
+                logger.warning(f"❌ FAILED: No college found with unitid={college_id}")
+        else:
+            # Find the college by name (case-insensitive, with exact matching first)
+            college_name_lower = college_name.lower()
+            college_row = df[df['name'].str.lower() == college_name_lower]
+            logger.info(f"Exact match found: {len(college_row)} rows")
+            
+            # If exact match not found, try partial matching but prefer shorter matches
+            if college_row.empty:
+                college_row = df[df['name'].str.lower().str.contains(college_name_lower, na=False)]
+                logger.info(f"Partial match found: {len(college_row)} rows")
+                # If multiple matches, prefer the one with the shortest name (most specific)
+                if not college_row.empty and len(college_row) > 1:
+                    college_row = college_row.loc[college_row['name'].str.len().idxmin():college_row['name'].str.len().idxmin()]
         
-        # Find the college by name (case-insensitive, with exact matching first)
-        college_name_lower = college_name.lower()
-        college_row = df[df['name'].str.lower() == college_name_lower]
-        logger.info(f"Exact match found: {len(college_row)} rows")
-        
-        # If exact match not found, try partial matching but prefer shorter matches
-        if college_row.empty:
-            college_row = df[df['name'].str.lower().str.contains(college_name_lower, na=False)]
-            logger.info(f"Partial match found: {len(college_row)} rows")
-            # If multiple matches, prefer the one with the shortest name (most specific)
-            if not college_row.empty and len(college_row) > 1:
-                college_row = college_row.loc[college_row['name'].str.len().idxmin():college_row['name'].str.len().idxmin()]
-        
-        # If name match failed but we have a college_id match, use that
-        if college_row.empty and college_id_match is not None and not college_id_match.empty:
-            college_row = college_id_match
-            logger.info(f"Using college_id match: {len(college_row)} rows")
-        
-        if not college_row.empty:
+        if college_row is not None and not college_row.empty:
             row = college_row.iloc[0]
             logger.info(f"Found college: {row['name']}")
             # Debug: Print all column names and the name value
