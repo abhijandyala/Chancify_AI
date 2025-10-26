@@ -361,6 +361,7 @@ export default function HomePage() {
         probability: result.probability.toString(),
         outcome: result.outcome,
         college: profile.college,
+        realAcceptanceRate: result.acceptance_rate?.toString() || '0',
         // Pass user profile data as JSON string
         profile: JSON.stringify(profile)
       })

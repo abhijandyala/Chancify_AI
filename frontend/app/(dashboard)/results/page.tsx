@@ -18,6 +18,7 @@ function ResultsContent() {
   const probability = parseFloat(searchParams.get('probability') || '0')
   const outcome = searchParams.get('outcome') || 'Unknown'
   const collegeId = searchParams.get('college') || ''
+  const realAcceptanceRate = parseFloat(searchParams.get('realAcceptanceRate') || '0')
   const profileData = searchParams.get('profile') || '{}'
   
   // Parse user profile data
@@ -261,15 +262,26 @@ function ResultsContent() {
             <p className="text-gray-300 text-lg">Probability of Admission</p>
           </motion.div>
           
-          {/* Confidence */}
+          {/* Real Acceptance Rate */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.6 }}
-            className="flex items-center justify-center gap-2 text-gray-300"
+            className="flex items-center justify-center gap-2 text-gray-300 mb-2"
           >
             <TrendingUp className="w-5 h-5" />
-            <span>81.8% Model Confidence</span>
+            <span>{collegeName} Acceptance Rate: {(realAcceptanceRate * 100).toFixed(1)}%</span>
+          </motion.div>
+          
+          {/* Confidence */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.0, duration: 0.6 }}
+            className="flex items-center justify-center gap-2 text-gray-300"
+          >
+            <Brain className="w-5 h-5" />
+            <span>Your probability calculated against this college's actual acceptance rate</span>
           </motion.div>
         </div>
       </motion.div>

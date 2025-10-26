@@ -272,7 +272,7 @@ async def search_colleges(q: str = "", limit: int = 20):
         }
 
 # Include API routes
-from api.routes import auth, calculations, ml_calculations, openai_routes
+from services.openai_service import college_info_service
 from ml.models.predictor import get_predictor
 from ml.preprocessing.feature_extractor import StudentFeatures, CollegeFeatures
 from pydantic import BaseModel
@@ -519,11 +519,21 @@ async def predict_admission_frontend(request: FrontendProfileRequest):
             }
         )
         
-        # Get college data
+        # Get college data with real acceptance rate from OpenAI
         college_data = get_college_data(request.college)
+        
+        # Get real acceptance rate from OpenAI API
+        try:
+            college_info = await college_info_service.get_college_info(college_data['name'])
+            real_acceptance_rate = college_info['academics']['acceptance_rate']
+            print(f"Using real acceptance rate for {college_data['name']}: {real_acceptance_rate:.1%}")
+        except Exception as e:
+            print(f"Failed to get real acceptance rate for {college_data['name']}: {e}")
+            real_acceptance_rate = college_data['acceptance_rate']  # Fallback to database value
+        
         college = CollegeFeatures(
             name=college_data['name'],
-            acceptance_rate=college_data['acceptance_rate'],
+            acceptance_rate=real_acceptance_rate,  # Use real acceptance rate from OpenAI
             sat_25th=college_data['sat_25th'],
             sat_75th=college_data['sat_75th'],
             act_25th=college_data['act_25th'],
@@ -566,7 +576,7 @@ async def predict_admission_frontend(request: FrontendProfileRequest):
             "prediction_method": "hybrid_ml_formula",
             "explanation": result.explanation,
             "category": category,
-            "acceptance_rate": college_data['acceptance_rate'],
+            "acceptance_rate": real_acceptance_rate,  # Use real acceptance rate from OpenAI
             "selectivity_tier": college_data['selectivity_tier']
         }
         
