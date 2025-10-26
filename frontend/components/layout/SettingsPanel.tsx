@@ -41,7 +41,7 @@ export function SettingsPanel({ isOpen, onClose }: SettingsPanelProps) {
           >
             {/* Header */}
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-white bg-clip-text text-transparent">
+              <h2 className="text-2xl font-bold text-white">
                 Settings
               </h2>
               <button
