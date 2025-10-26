@@ -361,6 +361,8 @@ export default function HomePage() {
         probability: result.probability.toString(),
         outcome: result.outcome,
         college: profile.college,
+        // Pass user profile data as JSON string
+        profile: JSON.stringify(profile)
       })
       
       router.push(`/results?${params.toString()}`)

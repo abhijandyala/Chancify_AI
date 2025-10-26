@@ -18,6 +18,10 @@ function ResultsContent() {
   const probability = parseFloat(searchParams.get('probability') || '0')
   const outcome = searchParams.get('outcome') || 'Unknown'
   const collegeId = searchParams.get('college') || ''
+  const profileData = searchParams.get('profile') || '{}'
+  
+  // Parse user profile data
+  const userProfile = JSON.parse(profileData)
   
   // Find the college name from the college ID
   const selectedCollege = COLLEGES.find(college => college.value === collegeId)
@@ -25,6 +29,136 @@ function ResultsContent() {
   
   // Fetch real college information using OpenAI
   const { data: collegeInfo, loading: collegeInfoLoading, error: collegeInfoError } = useCollegeInfo(collegeName)
+  
+  // Analyze user profile for dynamic efficiency scores
+  const analyzeUserProfile = () => {
+    const analysis = {
+      academic: {
+        score: 0,
+        label: 'Unknown',
+        details: []
+      },
+      extracurricular: {
+        score: 0,
+        label: 'Unknown', 
+        details: []
+      },
+      essays: {
+        score: 0,
+        label: 'Unknown',
+        details: []
+      },
+      uniqueFactors: {
+        score: 0,
+        label: 'Unknown',
+        details: []
+      }
+    }
+
+    // Academic Performance Analysis
+    const gpaUnweighted = parseFloat(userProfile.gpa_unweighted || '0')
+    const gpaWeighted = parseFloat(userProfile.gpa_weighted || '0')
+    const sat = parseInt(userProfile.sat || '0')
+    const act = parseInt(userProfile.act || '0')
+    
+    if (gpaUnweighted >= 3.8) {
+      analysis.academic.score = 90
+      analysis.academic.label = 'Excellent'
+      analysis.academic.details.push(`Strong GPA: ${gpaUnweighted}`)
+    } else if (gpaUnweighted >= 3.5) {
+      analysis.academic.score = 75
+      analysis.academic.label = 'Strong'
+      analysis.academic.details.push(`Good GPA: ${gpaUnweighted}`)
+    } else if (gpaUnweighted >= 3.0) {
+      analysis.academic.score = 60
+      analysis.academic.label = 'Good'
+      analysis.academic.details.push(`Solid GPA: ${gpaUnweighted}`)
+    } else {
+      analysis.academic.score = 40
+      analysis.academic.label = 'Needs Improvement'
+      analysis.academic.details.push(`GPA: ${gpaUnweighted}`)
+    }
+
+    if (sat >= 1400) {
+      analysis.academic.score = Math.max(analysis.academic.score, 90)
+      analysis.academic.details.push(`Strong SAT: ${sat}`)
+    } else if (sat >= 1200) {
+      analysis.academic.score = Math.max(analysis.academic.score, 70)
+      analysis.academic.details.push(`Good SAT: ${sat}`)
+    }
+
+    if (act >= 32) {
+      analysis.academic.score = Math.max(analysis.academic.score, 90)
+      analysis.academic.details.push(`Strong ACT: ${act}`)
+    } else if (act >= 28) {
+      analysis.academic.score = Math.max(analysis.academic.score, 70)
+      analysis.academic.details.push(`Good ACT: ${act}`)
+    }
+
+    // Extracurricular Analysis
+    const ecDepth = parseInt(userProfile.extracurricular_depth || '5')
+    const leadership = parseInt(userProfile.leadership_positions || '5')
+    const awards = parseInt(userProfile.awards_publications || '5')
+    
+    const ecScore = (ecDepth + leadership + awards) / 3 * 10
+    analysis.extracurricular.score = Math.round(ecScore)
+    
+    if (ecScore >= 80) {
+      analysis.extracurricular.label = 'Outstanding'
+      analysis.extracurricular.details.push('Deep involvement in activities')
+    } else if (ecScore >= 60) {
+      analysis.extracurricular.label = 'Strong'
+      analysis.extracurricular.details.push('Good activity involvement')
+    } else if (ecScore >= 40) {
+      analysis.extracurricular.label = 'Moderate'
+      analysis.extracurricular.details.push('Some activity involvement')
+    } else {
+      analysis.extracurricular.label = 'Limited'
+      analysis.extracurricular.details.push('Limited activity involvement')
+    }
+
+    // Essays & Recommendations Analysis
+    const essayQuality = parseInt(userProfile.essay_quality || '5')
+    const recommendations = parseInt(userProfile.recommendations || '5')
+    
+    const essayScore = (essayQuality + recommendations) / 2 * 10
+    analysis.essays.score = Math.round(essayScore)
+    
+    if (essayScore >= 80) {
+      analysis.essays.label = 'Excellent'
+      analysis.essays.details.push('Strong writing and recommendations')
+    } else if (essayScore >= 60) {
+      analysis.essays.label = 'Good'
+      analysis.essays.details.push('Solid essays and recommendations')
+    } else {
+      analysis.essays.label = 'Needs Work'
+      analysis.essays.details.push('Focus on essay quality')
+    }
+
+    // Unique Factors Analysis
+    const legacy = parseInt(userProfile.legacy_status || '5')
+    const diversity = parseInt(userProfile.firstgen_diversity || '5')
+    const geographic = parseInt(userProfile.geographic_diversity || '5')
+    const research = parseInt(userProfile.research_experience || '5')
+    
+    const uniqueScore = (legacy + diversity + geographic + research) / 4 * 10
+    analysis.uniqueFactors.score = Math.round(uniqueScore)
+    
+    if (uniqueScore >= 80) {
+      analysis.uniqueFactors.label = 'Exceptional'
+      analysis.uniqueFactors.details.push('Strong unique factors')
+    } else if (uniqueScore >= 60) {
+      analysis.uniqueFactors.label = 'Good'
+      analysis.uniqueFactors.details.push('Some unique factors')
+    } else {
+      analysis.uniqueFactors.label = 'Standard'
+      analysis.uniqueFactors.details.push('Standard profile factors')
+    }
+
+    return analysis
+  }
+
+  const profileAnalysis = analyzeUserProfile()
   
   const getOutcomeIcon = () => {
     switch (outcome) {
@@ -140,6 +274,80 @@ function ResultsContent() {
         </div>
       </motion.div>
 
+      {/* User Profile Summary */}
+      <motion.div {...enter}>
+        <div className="text-center mb-6">
+          <h2 className="text-2xl font-bold text-white mb-2">Your Profile Summary</h2>
+          <p className="text-gray-400">Based on your assessment responses</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          {/* Academic Stats */}
+          <div className="bg-white/5 border border-white/10 rounded-lg p-4">
+            <h3 className="text-lg font-semibold text-white mb-2">Academic</h3>
+            <div className="space-y-1 text-sm">
+              <div className="flex justify-between">
+                <span className="text-gray-400">GPA:</span>
+                <span className="text-white">{userProfile.gpa_unweighted || 'N/A'}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-400">SAT:</span>
+                <span className="text-white">{userProfile.sat || 'N/A'}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-400">ACT:</span>
+                <span className="text-white">{userProfile.act || 'N/A'}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Major */}
+          <div className="bg-white/5 border border-white/10 rounded-lg p-4">
+            <h3 className="text-lg font-semibold text-white mb-2">Intended Major</h3>
+            <div className="text-center">
+              <span className="text-yellow-400 font-medium">{userProfile.major || 'Undecided'}</span>
+            </div>
+          </div>
+
+          {/* Extracurriculars */}
+          <div className="bg-white/5 border border-white/10 rounded-lg p-4">
+            <h3 className="text-lg font-semibold text-white mb-2">Activities</h3>
+            <div className="space-y-1 text-sm">
+              <div className="flex justify-between">
+                <span className="text-gray-400">Depth:</span>
+                <span className="text-white">{userProfile.extracurricular_depth}/10</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-400">Leadership:</span>
+                <span className="text-white">{userProfile.leadership_positions}/10</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-400">Awards:</span>
+                <span className="text-white">{userProfile.awards_publications}/10</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Unique Factors */}
+          <div className="bg-white/5 border border-white/10 rounded-lg p-4">
+            <h3 className="text-lg font-semibold text-white mb-2">Unique Factors</h3>
+            <div className="space-y-1 text-sm">
+              <div className="flex justify-between">
+                <span className="text-gray-400">Legacy:</span>
+                <span className="text-white">{userProfile.legacy_status}/10</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-400">Diversity:</span>
+                <span className="text-white">{userProfile.firstgen_diversity}/10</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-400">Research:</span>
+                <span className="text-white">{userProfile.research_experience}/10</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
       {/* College Information Section */}
       {collegeInfoLoading && (
         <motion.div {...enter} className="text-center py-12">
@@ -187,19 +395,59 @@ function ResultsContent() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <span className="text-gray-400">Academic Performance</span>
-                <Badge variant="success" size="sm">Strong</Badge>
+                <div className="flex items-center gap-2">
+                  <div className="w-20 bg-gray-700 rounded-full h-2">
+                    <div 
+                      className="bg-yellow-400 h-2 rounded-full transition-all duration-1000"
+                      style={{ width: `${profileAnalysis.academic.score}%` }}
+                    ></div>
+                  </div>
+                  <Badge variant={profileAnalysis.academic.score >= 80 ? "success" : profileAnalysis.academic.score >= 60 ? "warning" : "error"} size="sm">
+                    {profileAnalysis.academic.label}
+                  </Badge>
+                </div>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-gray-400">Extracurriculars</span>
-                <Badge variant="warning" size="sm">Good</Badge>
+                <div className="flex items-center gap-2">
+                  <div className="w-20 bg-gray-700 rounded-full h-2">
+                    <div 
+                      className="bg-yellow-400 h-2 rounded-full transition-all duration-1000"
+                      style={{ width: `${profileAnalysis.extracurricular.score}%` }}
+                    ></div>
+                  </div>
+                  <Badge variant={profileAnalysis.extracurricular.score >= 80 ? "success" : profileAnalysis.extracurricular.score >= 60 ? "warning" : "error"} size="sm">
+                    {profileAnalysis.extracurricular.label}
+                  </Badge>
+                </div>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-gray-400">Essays & Recommendations</span>
-                <Badge variant="success" size="sm">Excellent</Badge>
+                <div className="flex items-center gap-2">
+                  <div className="w-20 bg-gray-700 rounded-full h-2">
+                    <div 
+                      className="bg-yellow-400 h-2 rounded-full transition-all duration-1000"
+                      style={{ width: `${profileAnalysis.essays.score}%` }}
+                    ></div>
+                  </div>
+                  <Badge variant={profileAnalysis.essays.score >= 80 ? "success" : profileAnalysis.essays.score >= 60 ? "warning" : "error"} size="sm">
+                    {profileAnalysis.essays.label}
+                  </Badge>
+                </div>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-gray-400">Unique Factors</span>
-                <Badge variant="success" size="sm">Strong</Badge>
+                <div className="flex items-center gap-2">
+                  <div className="w-20 bg-gray-700 rounded-full h-2">
+                    <div 
+                      className="bg-yellow-400 h-2 rounded-full transition-all duration-1000"
+                      style={{ width: `${profileAnalysis.uniqueFactors.score}%` }}
+                    ></div>
+                  </div>
+                  <Badge variant={profileAnalysis.uniqueFactors.score >= 80 ? "success" : profileAnalysis.uniqueFactors.score >= 60 ? "warning" : "error"} size="sm">
+                    {profileAnalysis.uniqueFactors.label}
+                  </Badge>
+                </div>
               </div>
             </div>
           </GlassCard>
