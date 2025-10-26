@@ -326,7 +326,7 @@ def get_college_data(college_name: str) -> Dict[str, Any]:
         if not college_row.empty:
             row = college_row.iloc[0]
             logger.info(f"Found college: {row['name']}")
-                         result = {
+            result = {
                 'name': str(row['name']) if pd.notna(row['name']) else college_name,
                 'acceptance_rate': float(row.get('acceptance_rate', 0.5)) if pd.notna(row.get('acceptance_rate')) else (float(row.get('acceptance_rate_percent', 50)) / 100 if pd.notna(row.get('acceptance_rate_percent')) else 0.5),
                 'sat_25th': 1200,  # Default values since SAT/ACT data not available
