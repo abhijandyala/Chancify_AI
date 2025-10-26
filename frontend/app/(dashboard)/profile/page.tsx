@@ -13,7 +13,23 @@ export default function ProfilePage() {
   const storage = useMemo(() => new PresetStorage(), [])
 
   useEffect(() => {
-    setPresets(storage.getPresets())
+    const presets = storage.getPresets()
+    // Filter out any presets with invalid dates
+    const validPresets = presets.filter(preset => {
+      const date = new Date(preset.createdAt)
+      return !isNaN(date.getTime())
+    })
+    
+    // If we filtered out any invalid presets, save the cleaned list
+    if (validPresets.length !== presets.length) {
+      // Clear and re-save only valid presets
+      localStorage.removeItem('chancify_presets')
+      validPresets.forEach(preset => {
+        storage.savePreset(preset.name, preset.major, preset.formData)
+      })
+    }
+    
+    setPresets(validPresets)
   }, [storage])
 
   const handleLoadPreset = (preset: Preset) => {
@@ -71,36 +87,45 @@ export default function ProfilePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
-                className="backdrop-blur-sm border border-white/10 rounded-xl p-4 flex items-center justify-between bg-gray-800/50"
+                className="backdrop-blur-sm border border-white/10 rounded-xl p-4 bg-gray-800/50"
               >
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-white">{preset.name}</h3>
-                  <p className="text-sm flex items-center gap-1 mt-1 text-gray-400">
-                    <BookOpen className="w-4 h-4" /> {preset.major || 'Undecided'}
-                  </p>
-                  <p className="text-xs flex items-center gap-1 mt-1 text-gray-500">
-                    <Clock className="w-3 h-3" /> {new Date(preset.createdAt).toLocaleString()}
-                  </p>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => handleLoadPreset(preset)}
-                    className="px-4 py-2 rounded-lg bg-yellow-400 text-black font-semibold hover:bg-yellow-500 transition-colors flex items-center gap-2"
-                    disabled={loading === preset.id}
-                  >
-                    {loading === preset.id && <Loader2 className="w-4 h-4 animate-spin" />}
-                    Load
-                  </motion.button>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => handleDeletePreset(preset.id)}
-                    className="p-2 rounded-lg text-red-400 hover:bg-red-900/50 transition-colors"
-                  >
-                    <Trash2 className="w-5 h-5" />
-                  </motion.button>
+                <div className="flex items-center justify-between">
+                  {/* Horizontal layout for NAME, MAJOR, TIME */}
+                  <div className="flex items-center gap-6 flex-1">
+                    <div className="min-w-[120px]">
+                      <h3 className="text-lg font-semibold text-white">{preset.name}</h3>
+                    </div>
+                    <div className="flex items-center gap-1 min-w-[150px]">
+                      <BookOpen className="w-4 h-4 text-gray-400" />
+                      <span className="text-sm text-gray-400">{preset.major || 'Undecided'}</span>
+                    </div>
+                    <div className="flex items-center gap-1 min-w-[200px]">
+                      <Clock className="w-3 h-3 text-gray-500" />
+                      <span className="text-xs text-gray-500">{new Date(preset.createdAt).toLocaleString()}</span>
+                    </div>
+                  </div>
+                  
+                  {/* Action buttons */}
+                  <div className="flex items-center space-x-3">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => handleLoadPreset(preset)}
+                      className="px-4 py-2 rounded-lg bg-yellow-400 text-black font-semibold hover:bg-yellow-500 transition-colors flex items-center gap-2"
+                      disabled={loading === preset.id}
+                    >
+                      {loading === preset.id && <Loader2 className="w-4 h-4 animate-spin" />}
+                      Load
+                    </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => handleDeletePreset(preset.id)}
+                      className="p-2 rounded-lg text-red-400 hover:bg-red-900/50 transition-colors"
+                    >
+                      <Trash2 className="w-5 h-5" />
+                    </motion.button>
+                  </div>
                 </div>
               </motion.div>
             ))}
