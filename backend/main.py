@@ -272,6 +272,7 @@ async def search_colleges(q: str = "", limit: int = 20):
         }
 
 # Include API routes
+from api.routes import calculations, ml_calculations, openai_routes, auth
 from services.openai_service import college_info_service
 from ml.models.predictor import get_predictor
 from ml.preprocessing.feature_extractor import StudentFeatures, CollegeFeatures

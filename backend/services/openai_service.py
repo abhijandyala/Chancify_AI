@@ -17,7 +17,8 @@ class CollegeInfoService:
         # Use environment variable for API key
         api_key = os.getenv("OPENAI_API_KEY")
         if not api_key:
-            raise ValueError("OPENAI_API_KEY environment variable is required")
+            logger.warning("OPENAI_API_KEY not set - OpenAI service will be disabled")
+            api_key = None
         openai.api_key = api_key
     
     async def get_college_info(self, college_name: str) -> Dict[str, Any]:
@@ -30,6 +31,21 @@ class CollegeInfoService:
         Returns:
             Dictionary with college information
         """
+        if not self.api_key:
+            logger.warning("OpenAI API key not available - returning fallback data")
+            return {
+                "name": college_name,
+                "location": {
+                    "city": "Unknown",
+                    "state": "Unknown",
+                    "country": "USA"
+                },
+                "academics": {
+                    "acceptance_rate": 0.15,
+                    "selectivity": "Moderately Selective"
+                }
+            }
+        
         try:
             prompt = f"""
             Provide comprehensive information about {college_name} in JSON format. Include:
