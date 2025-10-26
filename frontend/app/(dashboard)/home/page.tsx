@@ -312,36 +312,40 @@ export default function HomePage() {
     ]
   }
 
-  const handleCalculateChances = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    
-    try {
-      const predictionData = {
-        gpa_unweighted: parseFloat(profile.gpa_unweighted) || 0,
-        gpa_weighted: parseFloat(profile.gpa_weighted) || 0,
-        sat: parseInt(profile.sat) || 0,
-        act: parseInt(profile.act) || 0,
-        rigor: parseInt(profile.rigor),
-        extracurricular_depth: parseInt(profile.extracurricular_depth),
-        leadership_positions: parseInt(profile.leadership_positions),
-        awards_publications: parseInt(profile.awards_publications),
-        passion_projects: parseInt(profile.passion_projects),
-        business_ventures: parseInt(profile.business_ventures),
-        volunteer_work: parseInt(profile.volunteer_work),
-        research_experience: parseInt(profile.research_experience),
-        portfolio_audition: parseInt(profile.portfolio_audition),
-        essay_quality: parseInt(profile.essay_quality),
-        recommendations: parseInt(profile.recommendations),
-        interview: parseInt(profile.interview),
-        demonstrated_interest: parseInt(profile.demonstrated_interest),
-        legacy_status: parseInt(profile.legacy_status),
-        geographic_diversity: parseInt(profile.geographic_diversity),
-        firstgen_diversity: parseInt(profile.firstgen_diversity),
-        major: profile.major,
-        hs_reputation: parseInt(profile.hs_reputation),
-        college: profile.college,
-      }
+      const handleCalculateChances = async (e: React.FormEvent) => {
+        e.preventDefault()
+        setIsLoading(true)
+        
+        try {
+          // Convert college ID to college name
+          const selectedCollege = COLLEGES.find(college => college.value === profile.college)
+          const collegeName = selectedCollege ? selectedCollege.label : profile.college
+          
+          const predictionData = {
+            gpa_unweighted: parseFloat(profile.gpa_unweighted) || 0,
+            gpa_weighted: parseFloat(profile.gpa_weighted) || 0,
+            sat: parseInt(profile.sat) || 0,
+            act: parseInt(profile.act) || 0,
+            rigor: parseInt(profile.rigor),
+            extracurricular_depth: parseInt(profile.extracurricular_depth),
+            leadership_positions: parseInt(profile.leadership_positions),
+            awards_publications: parseInt(profile.awards_publications),
+            passion_projects: parseInt(profile.passion_projects),
+            business_ventures: parseInt(profile.business_ventures),
+            volunteer_work: parseInt(profile.volunteer_work),
+            research_experience: parseInt(profile.research_experience),
+            portfolio_audition: parseInt(profile.portfolio_audition),
+            essay_quality: parseInt(profile.essay_quality),
+            recommendations: parseInt(profile.recommendations),
+            interview: parseInt(profile.interview),
+            demonstrated_interest: parseInt(profile.demonstrated_interest),
+            legacy_status: parseInt(profile.legacy_status),
+            geographic_diversity: parseInt(profile.geographic_diversity),
+            firstgen_diversity: parseInt(profile.firstgen_diversity),
+            major: profile.major,
+            hs_reputation: parseInt(profile.hs_reputation),
+            college: collegeName, // Send college name instead of ID
+          }
       
       const response = await fetch('/api/predict', {
         method: 'POST',
@@ -357,14 +361,14 @@ export default function HomePage() {
       
       const result = await response.json()
       
-      const params = new URLSearchParams({
-        probability: result.probability.toString(),
-        outcome: result.outcome,
-        college: profile.college,
-        realAcceptanceRate: result.acceptance_rate?.toString() || '0',
-        // Pass user profile data as JSON string
-        profile: JSON.stringify(profile)
-      })
+          const params = new URLSearchParams({
+            probability: result.probability.toString(),
+            outcome: result.outcome,
+            college: collegeName, // Pass college name instead of ID
+            realAcceptanceRate: result.acceptance_rate?.toString() || '0',
+            // Pass user profile data as JSON string
+            profile: JSON.stringify(profile)
+          })
       
       router.push(`/results?${params.toString()}`)
       
