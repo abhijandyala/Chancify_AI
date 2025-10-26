@@ -272,13 +272,13 @@ export default function CalculationsPage() {
         const probability = result.probability || 0;
         setUserChance(Math.round(probability * 100));
 
-        // Create college data structure
+        // Use real college data from backend response
         const collegeStats: CollegeStats = {
           collegeName: collegeName || 'Selected College',
-          city: 'Unknown',
-          state: 'Unknown',
-          isPublic: false,
-          acceptanceRateOfficial: Math.round((1 - probability) * 100),
+          city: result.college_data?.city || 'Unknown',
+          state: result.college_data?.state || 'Unknown', 
+          isPublic: result.college_data?.is_public || false,
+          acceptanceRateOfficial: Math.round((result.acceptance_rate || 0.15) * 100),
           outcome: {
             accept: Math.round(probability * 100),
             waitlist: Math.round(probability * 15),
@@ -303,14 +303,18 @@ export default function CalculationsPage() {
           ],
           costs: {
             year: 2025,
-            inStateTuition: 60849,
-            outStateTuition: 60849,
+            inStateTuition: result.college_data?.tuition_in_state || 60849,
+            outStateTuition: result.college_data?.tuition_out_of_state || 60849,
             fees: 882,
             roomBoard: 20691,
             books: 891,
             other: 2283,
           },
-          tags: ['Need-Blind', 'Meets Full Need', 'Test-Optional'],
+          tags: [
+            result.college_data?.financial_aid_policy || 'Need-Blind',
+            'Meets Full Need', 
+            result.college_data?.test_policy || 'Test-Optional'
+          ],
           facts: {
             'Student-Faculty Ratio': '5:1',
             'Graduation Rate (6yr)': '97%',

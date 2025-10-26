@@ -580,7 +580,20 @@ async def predict_admission_frontend(request: FrontendProfileRequest):
             "explanation": result.explanation,
             "category": category,
             "acceptance_rate": real_acceptance_rate,  # Use real acceptance rate from OpenAI
-            "selectivity_tier": college_data['selectivity_tier']
+            "selectivity_tier": college_data['selectivity_tier'],
+            # Return full college data for frontend
+            "college_data": {
+                "name": college_data['name'],
+                "city": college_data['city'],
+                "state": college_data['state'],
+                "is_public": college_data.get('is_public', False),
+                "tuition_in_state": college_data['tuition_in_state'],
+                "tuition_out_of_state": college_data['tuition_out_of_state'],
+                "student_body_size": college_data['student_body_size'],
+                "test_policy": college_data['test_policy'],
+                "financial_aid_policy": college_data['financial_aid_policy'],
+                "gpa_average": college_data['gpa_average']
+            }
         }
         
     except Exception as e:
