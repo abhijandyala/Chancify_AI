@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Play } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Play, X } from 'lucide-react';
 
 function HoverBox({ children, text }: { children?: React.ReactNode; text?: string }) {
   return (
@@ -55,6 +55,7 @@ function HoverBox({ children, text }: { children?: React.ReactNode; text?: strin
 
 export default function ROXTestimonialSection() {
   const [showVideo, setShowVideo] = useState(false);
+  const [isVideoLoading, setIsVideoLoading] = useState(false);
 
   return (
     <section className="relative bg-black py-24 lg:py-32 overflow-hidden">
@@ -278,28 +279,44 @@ export default function ROXTestimonialSection() {
               />
             </div>
 
-            {/* Video Container */}
-            <div className="relative aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800/50">
-              {/* YouTube Embed */}
-              <iframe
-                className="w-full h-full"
-                src="https://www.youtube.com/embed/wh2SWrGRpko"
-                title="Chancify's impacts in the Real World"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+            {/* Video Thumbnail Container */}
+            <motion.div 
+              className="relative aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800/50 cursor-pointer group"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => {
+                setIsVideoLoading(true);
+                setShowVideo(true);
+                // Reset loading state after a brief delay
+                setTimeout(() => setIsVideoLoading(false), 1000);
+              }}
+            >
+              {/* Static Thumbnail Image */}
+              <div className="relative w-full h-full bg-gradient-to-br from-gray-900 to-black">
+                {/* Placeholder for video thumbnail - you can replace this with actual thumbnail */}
+                <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 via-gray-800/20 to-black/40" />
+                
+                {/* Video thumbnail content */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center space-y-4">
+                    <div className="w-16 h-16 bg-yellow-400/20 rounded-full flex items-center justify-center mx-auto">
+                      <Play className="w-8 h-8 text-yellow-400" />
+                    </div>
+                    <div className="text-white/80 text-sm font-medium">Chancify AI Demo</div>
+                  </div>
+                </div>
+              </div>
 
               {/* Premium Play Button Overlay */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="absolute inset-0 flex items-center justify-center bg-black/10 hover:bg-black/5 transition-colors"
+                className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/10 transition-colors"
               >
                 <motion.div
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative group cursor-pointer"
+                  className="relative group"
                 >
                   {/* Outer ring */}
                   <div className="w-20 h-20 border-2 border-white/30 rounded-full flex items-center justify-center group-hover:border-yellow-400/60 transition-colors duration-300">
@@ -313,7 +330,10 @@ export default function ROXTestimonialSection() {
                   <div className="absolute inset-0 w-20 h-20 bg-yellow-400/20 rounded-full blur-xl group-hover:bg-yellow-400/30 transition-colors duration-300" />
                 </motion.div>
               </motion.div>
-            </div>
+
+              {/* Hover overlay effect */}
+              <div className="absolute inset-0 bg-yellow-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </motion.div>
           </motion.div>
         </div>
       </div>
@@ -343,6 +363,72 @@ export default function ROXTestimonialSection() {
           ease: 'easeInOut'
         }}
       />
+
+      {/* Video Modal */}
+      <AnimatePresence>
+        {showVideo && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            onClick={() => setShowVideo(false)}
+          >
+            {/* Blurred Background */}
+            <motion.div
+              initial={{ backdropFilter: 'blur(0px)' }}
+              animate={{ backdropFilter: 'blur(20px)' }}
+              exit={{ backdropFilter: 'blur(0px)' }}
+              className="absolute inset-0 bg-black/60"
+            />
+
+            {/* Video Container */}
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setShowVideo(false)}
+                className="absolute top-4 right-4 z-10 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </motion.button>
+
+              {/* Loading State */}
+              {isVideoLoading && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="absolute inset-0 flex items-center justify-center bg-black"
+                >
+                  <div className="text-center space-y-4">
+                    <div className="w-12 h-12 border-2 border-yellow-400 border-t-transparent rounded-full animate-spin mx-auto" />
+                    <div className="text-white/80 text-sm">Loading video...</div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* YouTube Embed */}
+              <iframe
+                className="w-full h-full"
+                src="https://www.youtube.com/embed/wh2SWrGRpko?autoplay=1&rel=0"
+                title="Chancify AI Demo"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                onLoad={() => setIsVideoLoading(false)}
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }
