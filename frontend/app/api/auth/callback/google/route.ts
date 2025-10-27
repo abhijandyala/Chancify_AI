@@ -6,40 +6,30 @@ export async function GET(request: NextRequest) {
   const state = searchParams.get('state')
   const error = searchParams.get('error')
 
-  // Determine base URL based on current request
-  // For localhost, use localhost; for Railway, use Railway URL
-  const url = new URL(request.url)
-  let baseUrl: string
-  if (url.hostname === 'localhost' || url.hostname === '127.0.0.1') {
-    baseUrl = `${url.protocol}//${url.host}`
-  } else {
-    baseUrl = 'https://chancifyai.up.railway.app'
-  }
-
   if (error) {
     // Handle OAuth error - redirect to home page with error
-    return NextResponse.redirect(new URL(`/home?error=${error}`, baseUrl))
+    return NextResponse.redirect(new URL(`/home?error=${error}`, 'https://chancifyai.up.railway.app'))
   }
 
   if (!code) {
-    return NextResponse.redirect(new URL('/home?error=no_code', baseUrl))
+    return NextResponse.redirect(new URL('/home?error=no_code', 'https://chancifyai.up.railway.app'))
   }
 
   try {
     // Check if environment variables are set
-    if (!process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+    if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
       console.error('Missing Google OAuth environment variables')
-      console.error('GOOGLE_CLIENT_ID:', process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ? 'SET' : 'NOT SET')
-      console.error('GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET ? 'SET' : 'NOT SET')
-      return NextResponse.redirect(new URL('/home?error=missing_config', baseUrl))
+      return NextResponse.redirect(new URL('/home?error=missing_config', 'https://chancifyai.up.railway.app'))
     }
+
+    // ALWAYS use Railway URL - NO localhost fallbacks
+    const baseUrl = 'https://chancifyai.up.railway.app'
 
     // DEBUG: Log OAuth callback information
     console.log('=== OAUTH CALLBACK DEBUG ===')
-    console.log('Using base URL:', baseUrl)
+    console.log('ALWAYS using Railway URL:', baseUrl)
     console.log('request.url:', request.url)
-    console.log('request.hostname:', url.hostname)
-    console.log('GOOGLE_CLIENT_ID:', process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID)
+    console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID)
     console.log('GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET ? 'SET' : 'NOT SET')
     console.log('============================')
 
@@ -53,8 +43,8 @@ export async function GET(request: NextRequest) {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams({
-        client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
-        client_secret: process.env.GOOGLE_CLIENT_SECRET!,
+        client_id: process.env.GOOGLE_CLIENT_ID,
+        client_secret: process.env.GOOGLE_CLIENT_SECRET,
         code,
         grant_type: 'authorization_code',
         redirect_uri: redirectUri,
@@ -79,9 +69,9 @@ export async function GET(request: NextRequest) {
 
     const userInfo = await userResponse.json()
 
-    // Create success URL with user data - redirect to auth page (not home) to avoid ProtectedRoute issues
-    // The auth page will detect the OAuth success params and redirect to home after setting auth state
-    const successUrl = new URL('/auth', baseUrl)
+    // Create success URL with user data - redirect to home page
+    // CRITICAL: Use Railway URL for redirect, not request.url which might be localhost
+    const successUrl = new URL('/home', 'https://chancifyai.up.railway.app')
     successUrl.searchParams.set('google_auth', 'success')
     successUrl.searchParams.set('email', userInfo.email)
     successUrl.searchParams.set('name', userInfo.name)
@@ -92,6 +82,6 @@ export async function GET(request: NextRequest) {
 
   } catch (error) {
     console.error('Google OAuth error:', error)
-    return NextResponse.redirect(new URL('/home?error=oauth_failed', baseUrl))
+    return NextResponse.redirect(new URL('/home?error=oauth_failed', 'https://chancifyai.up.railway.app'))
   }
 }

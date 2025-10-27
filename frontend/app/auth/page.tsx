@@ -19,38 +19,17 @@ export default function AuthPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
-  // Redirect if already authenticated OR handle OAuth success
+  // Redirect if already authenticated
   useEffect(() => {
+    if (isAuthenticated && !authLoading) {
+      router.push('/home')
+    }
+    
+    // Check for Google OAuth error
     if (typeof window !== 'undefined') {
       const urlParams = new URLSearchParams(window.location.search)
-      
-      // Check for Google OAuth success
-      const googleAuth = urlParams.get('google_auth')
-      const email = urlParams.get('email')
-      const name = urlParams.get('name')
-      
-      if (googleAuth === 'success' && email) {
-        // Set auth data in localStorage
-        localStorage.setItem('auth_token', 'google_token_' + Date.now())
-        localStorage.setItem('user_email', email)
-        if (name) localStorage.setItem('user_name', name)
-        localStorage.removeItem('trial_mode')
-        
-        // Clean up URL
-        const newUrl = new URL(window.location.href)
-        newUrl.searchParams.delete('google_auth')
-        newUrl.searchParams.delete('email')
-        newUrl.searchParams.delete('name')
-        newUrl.searchParams.delete('picture')
-        window.history.replaceState({}, '', newUrl.toString())
-        
-        // Redirect to home
-        router.push('/home')
-        return
-      }
-      
-      // Check for Google OAuth error
       const error = urlParams.get('error')
+      
       if (error) {
         setError(`Google authentication failed: ${error}`)
         // Clean up URL
@@ -58,11 +37,6 @@ export default function AuthPage() {
         newUrl.searchParams.delete('error')
         window.history.replaceState({}, '', newUrl.toString())
       }
-    }
-    
-    // Redirect if already authenticated
-    if (isAuthenticated && !authLoading) {
-      router.push('/home')
     }
   }, [isAuthenticated, authLoading, router])
 

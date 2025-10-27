@@ -14,25 +14,10 @@ export function ProtectedRoute({ children, fallback }: ProtectedRouteProps) {
   const router = useRouter()
 
   useEffect(() => {
-    if (!isLoading) {
-      // Check if this is an OAuth callback - if so, don't redirect yet
-      if (typeof window !== 'undefined') {
-        const urlParams = new URLSearchParams(window.location.search)
-        const googleAuth = urlParams.get('google_auth')
-        if (googleAuth === 'success') {
-          // OAuth callback in progress, wait for AuthProvider to handle it
-          return
-        }
-      }
-      
-      // Check localStorage directly as a fallback for OAuth
-      const authToken = typeof window !== 'undefined' ? localStorage.getItem('auth_token') : null
-      const trialMode = typeof window !== 'undefined' ? localStorage.getItem('trial_mode') : null
-      
-      // User is authenticated if either provider says so OR localStorage has auth_token
-      const actuallyAuthenticated = isAuthenticated || !!authToken
-      
-      if (!actuallyAuthenticated && !trialMode) {
+    if (!isLoading && !isAuthenticated) {
+      // Check if user is in trial mode
+      const trialMode = localStorage.getItem('trial_mode')
+      if (!trialMode) {
         // Redirect to auth page if not authenticated and not in trial mode
         router.push('/auth')
       }
@@ -59,22 +44,8 @@ export function ProtectedRoute({ children, fallback }: ProtectedRouteProps) {
   }
 
   // Show fallback or redirect if not authenticated
-  // Check if this is an OAuth callback
-  const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null
-  const googleAuth = urlParams?.get('google_auth')
-  const isOAuthCallback = googleAuth === 'success'
-  
-  // Check localStorage as fallback for OAuth
-  const authToken = typeof window !== 'undefined' ? localStorage.getItem('auth_token') : null
-  const trialMode = typeof window !== 'undefined' ? localStorage.getItem('trial_mode') : null
-  const actuallyAuthenticated = isAuthenticated || !!authToken
-  
-  // Allow OAuth callback to proceed without redirect
-  if (isOAuthCallback) {
-    return <>{children}</>
-  }
-  
-  if (!actuallyAuthenticated) {
+  if (!isAuthenticated) {
+    const trialMode = localStorage.getItem('trial_mode')
     if (trialMode) {
       // Allow access in trial mode
       return <>{children}</>
