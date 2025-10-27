@@ -44,24 +44,18 @@ export default function Loader({ onComplete, duration = 5 }: LoaderProps) {
         {/* Loader text with shimmer effect */}
         <div className="relative">
           <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 animate-pulse">
-            LOADER
+            LOADING
           </h1>
           {/* Shimmer overlay */}
           <div className="absolute inset-0 text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer">
-            LOADER
+            LOADING
           </div>
         </div>
 
         {/* Spinner */}
-        <div className="spinner">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
+        <div className="relative w-16 h-16">
+          <div className="absolute inset-0 border-4 border-amber-400/20 border-t-amber-400 rounded-full animate-spin"></div>
+          <div className="absolute inset-2 border-4 border-yellow-300/20 border-t-yellow-300 rounded-full animate-spin" style={{animationDirection: 'reverse', animationDuration: '1.5s'}}></div>
         </div>
 
         {/* Timer */}
@@ -83,88 +77,8 @@ export default function Loader({ onComplete, duration = 5 }: LoaderProps) {
         </div>
       </div>
 
-      {/* Custom CSS for spinner and animations */}
+      {/* Custom CSS for animations */}
       <style jsx>{`
-        .spinner {
-          position: relative;
-          width: 60px;
-          height: 60px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          border-radius: 50%;
-          margin-left: -75px;
-          perspective: 600px;
-        }
-
-        .spinner span {
-          position: absolute;
-          top: 50%;
-          left: var(--left);
-          width: 35px;
-          height: 7px;
-          border-radius: 6px;
-
-          /* Main metallic gold base */
-          background: linear-gradient(
-            90deg,
-            #5a4a00 0%,
-            #b88a00 20%,
-            #d4af37 45%,
-            #ffe88a 55%,
-            #d4af37 70%,
-            #b88a00 85%,
-            #5a4a00 100%
-          );
-          background-size: 400% 400%;
-          animation:
-            dominos 1s ease infinite,
-            goldShimmer 3.5s linear infinite;
-
-          /* glow & shine */
-          box-shadow:
-            0 0 10px rgba(212, 175, 55, 0.6),
-            inset 0 0 6px rgba(255, 240, 190, 0.3),
-            0 0 25px rgba(212, 175, 55, 0.4);
-          transform: rotateY(18deg);
-        }
-
-        .spinner span:nth-child(1) { --left: 80px; animation-delay: 0.125s; }
-        .spinner span:nth-child(2) { --left: 70px; animation-delay: 0.3s; }
-        .spinner span:nth-child(3) { left: 60px; animation-delay: 0.425s; }
-        .spinner span:nth-child(4) { left: 50px; animation-delay: 0.54s; }
-        .spinner span:nth-child(5) { left: 40px; animation-delay: 0.665s; }
-        .spinner span:nth-child(6) { left: 30px; animation-delay: 0.79s; }
-        .spinner span:nth-child(7) { left: 20px; animation-delay: 0.915s; }
-        .spinner span:nth-child(8) { left: 10px; }
-
-        @keyframes dominos {
-          50% { opacity: 0.7; }
-          75% { transform: rotateY(18deg) rotate(90deg); }
-          80% { opacity: 1; }
-        }
-
-        @keyframes goldShimmer {
-          0% {
-            background-position: 0% 50%;
-            filter: brightness(1) saturate(1.1);
-          }
-          25% {
-            filter: brightness(1.3) saturate(1.3);
-          }
-          50% {
-            background-position: 100% 50%;
-            filter: brightness(1.45) saturate(1.4);
-          }
-          75% {
-            filter: brightness(1.25) saturate(1.2);
-          }
-          100% {
-            background-position: 0% 50%;
-            filter: brightness(1) saturate(1.1);
-          }
-        }
-
         @keyframes shimmer {
           0% {
             transform: translateX(-100%);
