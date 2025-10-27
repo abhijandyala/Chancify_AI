@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Info, MapPin, TrendingUp, Zap, Target, TrendingDown, Award, ArrowLeft } from 'lucide-react';
+import { MapPin, TrendingUp, Zap, Target, TrendingDown, Award, ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { COLLEGES } from '@/lib/colleges';
@@ -726,42 +726,6 @@ export default function CalculationsPage() {
               </div>
             </motion.div>
 
-            {/* Debug Info Card - Remove this after testing */}
-            <motion.div 
-              className="relative bg-gradient-to-br from-purple-950/80 via-purple-900/60 to-purple-950/80 border border-purple-500/30 rounded-3xl p-6 backdrop-blur-xl overflow-hidden group"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.35 }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-t from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-              <div className="relative">
-                <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                  <Info className="h-5 w-5 text-purple-400" /> Debug Info
-                </h2>
-                <div className="space-y-3 text-xs">
-                  <div className="flex justify-between items-center p-2 rounded-lg bg-purple-950/50 border border-purple-500/20">
-                    <span className="text-neutral-300">Raw Probability:</span>
-                    <span className="font-mono font-bold text-purple-300">{d.outcome.accept}%</span>
-                  </div>
-                  <div className="flex justify-between items-center p-2 rounded-lg bg-purple-950/50 border border-purple-500/20">
-                    <span className="text-neutral-300">Accept:</span>
-                    <span className="font-mono font-bold text-green-400">{d.outcome.accept}%</span>
-                  </div>
-                  <div className="flex justify-between items-center p-2 rounded-lg bg-purple-950/50 border border-purple-500/20">
-                    <span className="text-neutral-300">Waitlist:</span>
-                    <span className="font-mono font-bold text-yellow-400">{d.outcome.waitlist}%</span>
-                  </div>
-                  <div className="flex justify-between items-center p-2 rounded-lg bg-purple-950/50 border border-purple-500/20">
-                    <span className="text-neutral-300">Reject:</span>
-                    <span className="font-mono font-bold text-red-400">{d.outcome.reject}%</span>
-                  </div>
-                  <div className="mt-3 p-2 rounded-lg bg-purple-900/30 border border-purple-500/10">
-                    <div className="text-purple-300 text-xs">Total Check: {d.outcome.accept + d.outcome.waitlist + d.outcome.reject}%</div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
 
             {/* Outcome Snapshot Card */}
             <motion.div 
