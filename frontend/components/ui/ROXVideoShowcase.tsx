@@ -1,21 +1,25 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useRef } from 'react'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
-import { Play } from 'lucide-react'
+import { Play, ArrowRight } from 'lucide-react'
 
 interface VideoShowcaseProps {
   videoSrc?: string
+  testimonial?: string
+  attribution?: string
   title?: string
-  subtitle?: string
-  description?: string
+  highlight?: string
+  ctaText?: string
 }
 
 export default function ROXVideoShowcase({
-  videoSrc = "https://www.youtube.com/embed/dQw4w9WgXcQ", // Replace with your actual video
-  title = "See Chancify AI in Action",
-  subtitle = "Watch Demo",
-  description = "Experience how our AI-powered platform transforms college admission predictions with real data and machine learning."
+  videoSrc = "https://www.youtube.com/embed/wh2SWrGRpko",
+  testimonial = "I get more accurate predictions when I use Chancify AI. That's the bottom line.",
+  attribution = "Student Success Story",
+  title = "VP of Admissions",
+  highlight = "85% prediction accuracy",
+  ctaText = "Read The Full Case Study"
 }: VideoShowcaseProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef, { amount: 0.3 })
@@ -25,8 +29,7 @@ export default function ROXVideoShowcase({
     offset: ["start end", "end start"]
   })
   
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100])
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50])
 
   return (
     <section 
@@ -34,153 +37,162 @@ export default function ROXVideoShowcase({
       className="relative bg-black py-24 lg:py-32 overflow-hidden"
     >
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-black" />
+      <div className="absolute inset-0 bg-black" />
       
-      {/* Animated Background Grid */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="grid grid-cols-12 gap-4 h-full">
-          {Array.from({ length: 144 }).map((_, i) => (
+      {/* Company Logos Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 0.8 }}
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16"
+      >
+        <div className="flex items-center justify-center space-x-8 text-gray-400">
+          <div className="flex items-center space-x-2">
+            <div className="w-6 h-6 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
+            <span className="text-sm font-medium">ChancifyAI</span>
+          </div>
+          <div className="w-px h-4 bg-gray-600"></div>
+          <div className="flex items-center space-x-2">
+            <div className="w-6 h-6 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full"></div>
+            <span className="text-sm font-medium">Education</span>
+          </div>
+          <div className="w-px h-4 bg-gray-600"></div>
+          <div className="flex items-center space-x-2">
+            <div className="w-6 h-6 bg-gradient-to-r from-green-400 to-green-600 rounded-full"></div>
+            <span className="text-sm font-medium">AI</span>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Main Content - Split Layout */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          
+          {/* Left Side - Testimonial */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="space-y-8"
+          >
+            {/* Highlight */}
             <motion.div
-              key={i}
-              className="border border-gray-800"
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ delay: i * 0.01, duration: 0.5 }}
-            />
-          ))}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-yellow-400 text-lg font-semibold"
+            >
+              {highlight}
+            </motion.div>
+
+            {/* Main Quote */}
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="text-3xl lg:text-5xl font-bold text-white leading-tight"
+            >
+              {testimonial}
+            </motion.h2>
+
+            {/* Attribution */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="space-y-1"
+            >
+              <div className="text-white text-lg font-medium">{attribution}</div>
+              <div className="text-gray-400 text-sm">{title}</div>
+            </motion.div>
+
+            {/* CTA Button */}
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 1 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-center space-x-2 px-6 py-3 border border-white/20 hover:border-white/40 rounded-full text-white hover:text-yellow-400 transition-all duration-300 group"
+            >
+              <span className="text-sm font-medium">{ctaText}</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+            </motion.button>
+          </motion.div>
+
+          {/* Right Side - Video */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="relative"
+          >
+            {/* Dramatic Lighting Effects */}
+            <div className="absolute inset-0 overflow-hidden rounded-2xl">
+              {/* Diagonal light streaks */}
+              <motion.div
+                style={{ y }}
+                className="absolute -top-20 -left-20 w-96 h-96 bg-gradient-to-br from-yellow-400/20 via-yellow-600/10 to-transparent rounded-full blur-3xl"
+              />
+              <motion.div
+                style={{ y: useTransform(scrollYProgress, [0, 1], [-30, 30]) }}
+                className="absolute -top-10 -right-10 w-80 h-80 bg-gradient-to-bl from-yellow-500/15 via-yellow-400/5 to-transparent rounded-full blur-2xl"
+              />
+              <motion.div
+                style={{ y: useTransform(scrollYProgress, [0, 1], [20, -20]) }}
+                className="absolute -bottom-10 -left-10 w-72 h-72 bg-gradient-to-tr from-yellow-600/10 via-yellow-400/5 to-transparent rounded-full blur-2xl"
+              />
+            </div>
+
+            {/* Video Container */}
+            <div className="relative aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800/50">
+              {/* YouTube Embed */}
+              <iframe
+                className="w-full h-full"
+                src={videoSrc}
+                title="Chancify AI Demo"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+
+              {/* Premium Play Button Overlay */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="absolute inset-0 flex items-center justify-center bg-black/10 hover:bg-black/5 transition-colors"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative group cursor-pointer"
+                >
+                  {/* Outer ring */}
+                  <div className="w-20 h-20 border-2 border-white/30 rounded-full flex items-center justify-center group-hover:border-yellow-400/60 transition-colors duration-300">
+                    {/* Inner play button */}
+                    <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center group-hover:bg-yellow-500 transition-colors duration-300">
+                      <Play className="w-6 h-6 text-black ml-1" />
+                    </div>
+                  </div>
+                  
+                  {/* Glow effect */}
+                  <div className="absolute inset-0 w-20 h-20 bg-yellow-400/20 rounded-full blur-xl group-hover:bg-yellow-400/30 transition-colors duration-300" />
+                </motion.div>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Floating Elements */}
       <motion.div
         style={{ y }}
-        className="absolute top-20 left-10 w-20 h-20 bg-yellow-400/10 rounded-full blur-xl"
+        className="absolute top-20 left-10 w-20 h-20 bg-yellow-400/5 rounded-full blur-xl"
       />
       <motion.div
         style={{ y: useTransform(scrollYProgress, [0, 1], [-50, 50]) }}
-        className="absolute bottom-20 right-10 w-32 h-32 bg-blue-400/10 rounded-full blur-xl"
+        className="absolute bottom-20 right-10 w-32 h-32 bg-blue-400/5 rounded-full blur-xl"
       />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-block px-6 py-3 bg-gradient-to-r from-yellow-400/20 to-yellow-600/20 border border-yellow-400/30 rounded-full mb-8"
-          >
-            <span className="text-yellow-400 text-sm font-semibold tracking-wide uppercase">
-              {subtitle}
-            </span>
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight"
-          >
-            {title.split(' ').map((word, index) => (
-              <motion.span
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-                className={index === 2 ? "bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent" : ""}
-              >
-                {word}{' '}
-              </motion.span>
-            ))}
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-gray-400 text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed"
-          >
-            {description}
-          </motion.p>
-        </motion.div>
-
-        {/* Video Container */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="relative max-w-5xl mx-auto"
-        >
-          <div className="relative aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800">
-            {/* YouTube Embed */}
-            <iframe
-              className="w-full h-full"
-              src={videoSrc}
-              title="Chancify AI Demo"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-
-            {/* Video Overlay with Play Button */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/10 transition-colors"
-            >
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-20 h-20 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-2xl transition-colors cursor-pointer"
-              >
-                <Play className="w-10 h-10 text-black ml-2" />
-              </motion.div>
-            </motion.div>
-          </div>
-
-          {/* Video Stats/Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
-            className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6"
-          >
-            <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-400 mb-2">85%</div>
-              <div className="text-gray-400">Prediction Accuracy</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-400 mb-2">1000+</div>
-              <div className="text-gray-400">Colleges Analyzed</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-400 mb-2">50K+</div>
-              <div className="text-gray-400">Data Points</div>
-            </div>
-          </motion.div>
-        </motion.div>
-
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8, delay: 1.4 }}
-          className="text-center mt-16"
-        >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
-          >
-            Try Chancify AI Now
-          </motion.button>
-        </motion.div>
-      </div>
     </section>
   )
 }
