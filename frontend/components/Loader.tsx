@@ -43,13 +43,13 @@ export default function Loader({ onComplete, duration = 5 }: LoaderProps) {
       <div className="relative z-10 flex flex-col items-center justify-center space-y-8">
         {/* Loader text with shimmer effect */}
         <div className="relative">
-          <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 animate-pulse">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 animate-pulse">
             LOADING
           </h1>
         </div>
 
         {/* Spinner */}
-        <div className="spinner">
+        <div className="spinner w-12 h-12 sm:w-16 sm:h-16">
           <span></span>
           <span></span>
           <span></span>
@@ -83,23 +83,46 @@ export default function Loader({ onComplete, duration = 5 }: LoaderProps) {
       <style jsx>{`
         .spinner {
           position: relative;
-          width: 60px;
-          height: 60px;
+          width: 48px;
+          height: 48px;
           display: flex;
           justify-content: center;
           align-items: center;
           border-radius: 50%;
-          margin-left: -75px;
+          margin-left: -60px;
           perspective: 600px;
+        }
+
+        @media (min-width: 640px) {
+          .spinner {
+            width: 60px;
+            height: 60px;
+            margin-left: -75px;
+          }
+          
+          .spinner span {
+            width: 35px;
+            height: 7px;
+            border-radius: 6px;
+          }
+          
+          .spinner span:nth-child(1) { --left: 80px; }
+          .spinner span:nth-child(2) { --left: 70px; }
+          .spinner span:nth-child(3) { left: 60px; }
+          .spinner span:nth-child(4) { left: 50px; }
+          .spinner span:nth-child(5) { left: 40px; }
+          .spinner span:nth-child(6) { left: 30px; }
+          .spinner span:nth-child(7) { left: 20px; }
+          .spinner span:nth-child(8) { left: 10px; }
         }
 
         .spinner span {
           position: absolute;
           top: 50%;
           left: var(--left);
-          width: 35px;
-          height: 7px;
-          border-radius: 6px;
+          width: 28px;
+          height: 6px;
+          border-radius: 5px;
 
           /* Main metallic gold base */
           background: linear-gradient(
@@ -125,14 +148,14 @@ export default function Loader({ onComplete, duration = 5 }: LoaderProps) {
           transform: rotateY(18deg);
         }
 
-        .spinner span:nth-child(1) { --left: 80px; animation-delay: 0.125s; }
-        .spinner span:nth-child(2) { --left: 70px; animation-delay: 0.3s; }
-        .spinner span:nth-child(3) { left: 60px; animation-delay: 0.425s; }
-        .spinner span:nth-child(4) { left: 50px; animation-delay: 0.54s; }
-        .spinner span:nth-child(5) { left: 40px; animation-delay: 0.665s; }
-        .spinner span:nth-child(6) { left: 30px; animation-delay: 0.79s; }
-        .spinner span:nth-child(7) { left: 20px; animation-delay: 0.915s; }
-        .spinner span:nth-child(8) { left: 10px; }
+        .spinner span:nth-child(1) { --left: 64px; animation-delay: 0.125s; }
+        .spinner span:nth-child(2) { --left: 56px; animation-delay: 0.3s; }
+        .spinner span:nth-child(3) { left: 48px; animation-delay: 0.425s; }
+        .spinner span:nth-child(4) { left: 40px; animation-delay: 0.54s; }
+        .spinner span:nth-child(5) { left: 32px; animation-delay: 0.665s; }
+        .spinner span:nth-child(6) { left: 24px; animation-delay: 0.79s; }
+        .spinner span:nth-child(7) { left: 16px; animation-delay: 0.915s; }
+        .spinner span:nth-child(8) { left: 8px; }
 
         @keyframes dominos {
           50% { opacity: 0.7; }

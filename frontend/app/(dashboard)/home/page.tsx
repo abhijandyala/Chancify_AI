@@ -412,7 +412,7 @@ export default function HomePage() {
     <div className="rox-container">
       <div className="rox-section">
         {/* Header */}
-        <motion.div {...enter} className="text-center mb-16">
+        <motion.div {...enter} className="text-center mb-8 sm:mb-12 lg:mb-16">
           <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/20 bg-white/10 text-white mb-6 backdrop-blur-sm">
             <Brain className="w-4 h-4" />
             <span className="text-sm font-medium">AI Assessment</span>
@@ -426,15 +426,15 @@ export default function HomePage() {
         </motion.div>
 
         {/* Academic Foundation */}
-        <motion.section {...enter} className="mb-12">
-          <div className="rox-card p-8">
+        <motion.section {...enter} className="mb-8 sm:mb-10 lg:mb-12">
+          <div className="rox-card p-4 sm:p-6 lg:p-8">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2 rounded-lg bg-yellow-400/20 text-yellow-400">
                 <GraduationCap className="w-5 h-5" />
         </div>
               <h2 className="rox-heading-3">Academic Foundation</h2>
       </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           <Input
               label="Unweighted GPA (4.0)"
             type="number"
@@ -482,15 +482,15 @@ export default function HomePage() {
       </motion.section>
 
         {/* Course Rigor and Class Info */}
-        <motion.section {...enter} className="mb-12">
-          <div className="rox-card p-8">
+        <motion.section {...enter} className="mb-8 sm:mb-10 lg:mb-12">
+          <div className="rox-card p-4 sm:p-6 lg:p-8">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2 rounded-lg bg-yellow-400/20 text-yellow-400">
                 <Star className="w-5 h-5" />
               </div>
               <h2 className="rox-heading-3">Course Rigor & Class Info</h2>
         </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             <Input
               label="AP Courses Taken"
               type="number"
@@ -536,8 +536,8 @@ export default function HomePage() {
       </motion.section>
 
         {/* Your Unique Story */}
-        <motion.section {...enter} className="mb-12">
-          <div className="rox-card p-8">
+        <motion.section {...enter} className="mb-8 sm:mb-10 lg:mb-12">
+          <div className="rox-card p-4 sm:p-6 lg:p-8">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2 rounded-lg bg-yellow-400/20 text-yellow-400">
                 <Star className="w-5 h-5" />
@@ -547,7 +547,7 @@ export default function HomePage() {
                 <p className="rox-text-muted">The holistic factors most other predictors ignore.</p>
               </div>
             </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {[
               ['Extracurricular Depth', 'extracurricular_depth'],
               ['Leadership Positions', 'leadership_positions'],
@@ -588,8 +588,8 @@ export default function HomePage() {
       </motion.section>
 
         {/* Intended Major */}
-        <motion.section {...enter} className="mb-12">
-          <div className="rox-card p-8">
+        <motion.section {...enter} className="mb-8 sm:mb-10 lg:mb-12">
+          <div className="rox-card p-4 sm:p-6 lg:p-8">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2 rounded-lg bg-yellow-400/20 text-yellow-400">
                 <GraduationCap className="w-5 h-5" />
@@ -613,8 +613,8 @@ export default function HomePage() {
       </motion.section>
 
         {/* Action Buttons */}
-        <motion.section {...enter} className="mb-12">
-          <div className="rox-card p-8">
+        <motion.section {...enter} className="mb-8 sm:mb-10 lg:mb-12">
+          <div className="rox-card p-4 sm:p-6 lg:p-8">
             <div className="text-center space-y-8">
               <div className="space-y-4">
                 <h2 className="rox-heading-3">

@@ -61,12 +61,12 @@ export default function DashboardLayout({
       />
       
       <div className={`relative z-10 transition-all duration-300 ease-in-out ${
-        isSidebarCollapsed ? 'ml-0' : 'ml-64'
+        isSidebarCollapsed ? 'ml-0' : 'lg:ml-64'
       }`}>
-        <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
           <Header />
           
-          <main className="space-y-8 relative z-10">
+          <main className="space-y-6 sm:space-y-8 relative z-10">
             <Suspense fallback={
               <div className="flex items-center justify-center min-h-[400px]">
                 <div className="text-center">
