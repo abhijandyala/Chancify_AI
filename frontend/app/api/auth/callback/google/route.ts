@@ -27,8 +27,10 @@ export async function GET(request: NextRequest) {
 
   try {
     // Check if environment variables are set
-    if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+    if (!process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
       console.error('Missing Google OAuth environment variables')
+      console.error('GOOGLE_CLIENT_ID:', process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ? 'SET' : 'NOT SET')
+      console.error('GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET ? 'SET' : 'NOT SET')
       return NextResponse.redirect(new URL('/home?error=missing_config', baseUrl))
     }
 
@@ -37,7 +39,7 @@ export async function GET(request: NextRequest) {
     console.log('Using base URL:', baseUrl)
     console.log('request.url:', request.url)
     console.log('request.hostname:', url.hostname)
-    console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID)
+    console.log('GOOGLE_CLIENT_ID:', process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID)
     console.log('GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET ? 'SET' : 'NOT SET')
     console.log('============================')
 
@@ -51,8 +53,8 @@ export async function GET(request: NextRequest) {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams({
-        client_id: process.env.GOOGLE_CLIENT_ID,
-        client_secret: process.env.GOOGLE_CLIENT_SECRET,
+        client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
+        client_secret: process.env.GOOGLE_CLIENT_SECRET!,
         code,
         grant_type: 'authorization_code',
         redirect_uri: redirectUri,

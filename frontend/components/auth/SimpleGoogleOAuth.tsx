@@ -14,7 +14,7 @@ export default function SimpleGoogleOAuth() {
     // Use real Google OAuth flow like ROX
     // This redirects to the official Google account selection page
     // Using the correct Google Client ID as specified
-    const GOOGLE_CLIENT_ID = '117818010137-4fmntjdknmm16c9eef296l96isok6620.apps.googleusercontent.com'
+    const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '117818010137-4fmntjdknmm16c9eef296l96isok6620.apps.googleusercontent.com'
     
     // Determine redirect URI based on current environment
     // For local development, use localhost; for production, use Railway
