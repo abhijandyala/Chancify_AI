@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { ArrowLeft, Mail, MessageCircle, Phone, MapPin, Send, CheckCircle } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import emailjs from '@emailjs/browser'
 
 export default function ContactPage() {
@@ -17,27 +17,37 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
 
+  // Initialize EmailJS
+  useEffect(() => {
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'igE0hcuIxtFuZMchC'
+    emailjs.init(publicKey)
+  }, [])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
 
     try {
       // EmailJS configuration
-      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_chancifyai'
-      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_contact'
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY'
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_gu5ac7e'
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_nbpghyb'
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'igE0hcuIxtFuZMchC'
       
-      // Prepare template parameters
+      console.log('EmailJS Config:', { serviceId, templateId, publicKey })
+      
+      // Prepare template parameters - only use variables that exist in your template
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
         subject: formData.subject || 'Contact from Chancify AI Website',
-        message: formData.message,
-        to_email: 'chancifyai@gmail.com'
+        message: formData.message
       }
 
+      console.log('Template Params:', templateParams)
+
       // Send email using EmailJS
-      await emailjs.send(serviceId, templateId, templateParams, publicKey)
+      const result = await emailjs.send(serviceId, templateId, templateParams, publicKey)
+      console.log('EmailJS Success:', result)
       
       // Success
       setIsSubmitted(true)
@@ -46,6 +56,7 @@ export default function ContactPage() {
       
     } catch (error) {
       console.error('Error sending email:', error)
+      console.error('Error details:', error.text || error.message)
       setIsSubmitting(false)
       
       // Fallback to mailto if EmailJS fails
