@@ -22,7 +22,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             checked={checked}
             onChange={(e) => onChange(e.target.checked)}
             disabled={disabled}
-            className="sr-only"
+            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
           />
           <svg viewBox="0 0 35.6 35.6" aria-hidden="true">
             <defs>
@@ -91,13 +91,8 @@ const checkboxStyles = `
 
 /* invisible clickable input over the SVG */
 .checkbox-wrapper-31 input[type=checkbox] {
-  position: absolute;
-  inset: 0;
-  margin: 0;
-  opacity: 0;
   appearance: none;
   -webkit-appearance: none;
-  cursor: pointer;
 }
 
 /* optional hover to preview the check draw */
