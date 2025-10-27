@@ -376,8 +376,8 @@ export default function CalculationsPage() {
         console.log('🔍 IS PUBLIC IN STATS:', collegeStats.isPublic);
         console.log('🔍 OFFICIAL ACCEPTANCE RATE IN STATS:', collegeStats.acceptanceRateOfficial + '%');
         console.log('🔍 OUTCOME BREAKDOWN:', collegeStats.outcome);
-        console.log('🔍 TUITION IN STATE:', collegeStats.costs.inStateTuition);
-        console.log('🔍 TUITION OUT OF STATE:', collegeStats.costs.outStateTuition);
+        console.log('🔍 TUITION IN STATE:', collegeStats.costs?.inStateTuition);
+        console.log('🔍 TUITION OUT OF STATE:', collegeStats.costs?.outStateTuition);
 
         setCollegeData(collegeStats);
       } catch (error) {
