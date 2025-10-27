@@ -46,21 +46,102 @@ export default function ROXVideoShowcase({
         transition={{ duration: 0.8 }}
         className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16"
       >
-        <div className="flex items-center justify-center space-x-8 text-gray-400">
-          <div className="flex items-center space-x-2">
-            <div className="w-6 h-6 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
-            <span className="text-sm font-medium">ChancifyAI</span>
-          </div>
-          <div className="w-px h-4 bg-gray-600"></div>
-          <div className="flex items-center space-x-2">
-            <div className="w-6 h-6 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full"></div>
-            <span className="text-sm font-medium">Education</span>
-          </div>
-          <div className="w-px h-4 bg-gray-600"></div>
-          <div className="flex items-center space-x-2">
-            <div className="w-6 h-6 bg-gradient-to-r from-green-400 to-green-600 rounded-full"></div>
-            <span className="text-sm font-medium">AI</span>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          {/* Marvin Box */}
+          <motion.div
+            whileHover={{ 
+              scale: 1.05,
+              y: -8,
+              transition: { duration: 0.3, ease: "easeOut" }
+            }}
+            className="group relative bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 cursor-pointer overflow-hidden"
+          >
+            {/* Background gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            {/* Content */}
+            <div className="relative z-10">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-white font-bold text-lg">M</span>
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold text-lg group-hover:text-blue-300 transition-colors duration-300">Marvin</h3>
+                  <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">AI Assistant</p>
+                </div>
+              </div>
+              <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">
+                Intelligent college admission guidance powered by advanced AI algorithms.
+              </p>
+            </div>
+            
+            {/* Hover glow effect */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
+          </motion.div>
+
+          {/* Help Box */}
+          <motion.div
+            whileHover={{ 
+              scale: 1.05,
+              y: -8,
+              transition: { duration: 0.3, ease: "easeOut" }
+            }}
+            className="group relative bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 cursor-pointer overflow-hidden"
+          >
+            {/* Background gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-transparent to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            {/* Content */}
+            <div className="relative z-10">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-white font-bold text-lg">H</span>
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold text-lg group-hover:text-green-300 transition-colors duration-300">Help</h3>
+                  <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">Support System</p>
+                </div>
+              </div>
+              <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">
+                Comprehensive support and guidance throughout your college application journey.
+              </p>
+            </div>
+            
+            {/* Hover glow effect */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-500/20 to-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
+          </motion.div>
+
+          {/* AI Box */}
+          <motion.div
+            whileHover={{ 
+              scale: 1.05,
+              y: -8,
+              transition: { duration: 0.3, ease: "easeOut" }
+            }}
+            className="group relative bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 cursor-pointer overflow-hidden"
+          >
+            {/* Background gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 via-transparent to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            {/* Content */}
+            <div className="relative z-10">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-black font-bold text-lg">AI</span>
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold text-lg group-hover:text-yellow-300 transition-colors duration-300">AI</h3>
+                  <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">Machine Learning</p>
+                </div>
+              </div>
+              <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">
+                Advanced machine learning models trained on real admission data for accurate predictions.
+              </p>
+            </div>
+            
+            {/* Hover glow effect */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-yellow-500/20 to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
+          </motion.div>
         </div>
       </motion.div>
 
