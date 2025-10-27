@@ -5,6 +5,7 @@ ML Model Predictor with hybrid formula+ML approach.
 import numpy as np
 import joblib
 import json
+import os
 from pathlib import Path
 from typing import Dict, Optional, Tuple
 from dataclasses import dataclass
@@ -423,12 +424,12 @@ class AdmissionPredictor:
 _predictor: Optional[AdmissionPredictor] = None
 
 
-def get_predictor(model_dir: str = 'data/models', force_reload: bool = False) -> AdmissionPredictor:
+def get_predictor(model_dir: str = None, force_reload: bool = False) -> AdmissionPredictor:
     """
     Get global predictor instance (singleton pattern).
     
     Args:
-        model_dir: Directory containing models
+        model_dir: Directory containing models (if None, auto-detect)
         force_reload: Force re-initialization even if predictor exists
         
     Returns:
@@ -436,6 +437,25 @@ def get_predictor(model_dir: str = 'data/models', force_reload: bool = False) ->
     """
     global _predictor
     if _predictor is None or force_reload:
+        # Auto-detect model directory if not provided
+        if model_dir is None:
+            # Try different possible paths
+            possible_paths = [
+                'data/models',  # When running from backend/
+                'backend/data/models',  # When running from root/
+                os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'models'),  # Relative to this file
+            ]
+            
+            for path in possible_paths:
+                if os.path.exists(path):
+                    model_dir = path
+                    print(f"DEBUG: Auto-detected model directory: {model_dir}")
+                    break
+            
+            if model_dir is None:
+                model_dir = 'data/models'  # Fallback
+                print(f"DEBUG: Using fallback model directory: {model_dir}")
+        
         print(f"DEBUG: Initializing predictor with model_dir: {model_dir}")
         _predictor = AdmissionPredictor(model_dir=model_dir)
     return _predictor
