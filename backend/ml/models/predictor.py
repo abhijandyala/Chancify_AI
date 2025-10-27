@@ -157,8 +157,15 @@ class AdmissionPredictor:
         """
         college_name = college.name.lower()
         
+        # Debug: Print what we're looking for
+        print(f"ELITE CALIBRATION DEBUG:")
+        print(f"  College name: '{college.name}'")
+        print(f"  College name (lower): '{college_name}'")
+        print(f"  Raw probability: {probability:.3f}")
+        
         # Check if this is an elite university
         for elite_name, calibration_data in self.elite_calibration.items():
+            print(f"  Checking against: '{elite_name}'")
             if elite_name in college_name or college_name in elite_name:
                 # Apply calibration factor
                 calibrated_prob = probability * calibration_data['factor']
@@ -167,7 +174,7 @@ class AdmissionPredictor:
                 calibrated_prob = min(calibrated_prob, calibration_data['max_prob'])
                 
                 # Log the calibration for debugging
-                print(f"ELITE CALIBRATION: {college.name}")
+                print(f"ELITE CALIBRATION MATCH: {college.name}")
                 print(f"  Raw probability: {probability:.3f}")
                 print(f"  Calibrated: {calibrated_prob:.3f}")
                 print(f"  Factor: {calibration_data['factor']}")
@@ -176,7 +183,7 @@ class AdmissionPredictor:
                 
                 return calibrated_prob
         
-        # Not an elite university, return original probability
+        print(f"  No elite calibration match found for '{college_name}'")
         return probability
     
     def _load_models(self):
