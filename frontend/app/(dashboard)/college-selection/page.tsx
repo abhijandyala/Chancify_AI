@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Search, Building2, Users, DollarSign, GraduationCap, ChevronRight, Star, MapPin, Loader2, BookOpen } from 'lucide-react'
-import { Button } from '@/components/ui/Button'
+import { Checkbox } from '@/components/ui/Checkbox'
 import { useRouter } from 'next/navigation'
 import { getCollegeSuggestions, searchColleges, type CollegeSuggestionsRequest, type CollegeSuggestion, type CollegeSearchResult } from '@/lib/api'
 import Loader from '@/components/Loader'
@@ -299,11 +299,9 @@ export default function CollegeSelectionPage() {
                     className="flex items-center justify-between p-3 border border-gray-600 rounded-lg hover:border-yellow-400/50 transition-colors"
                   >
                     <div className="flex items-center gap-3">
-                      <input
-                        type="checkbox"
+                      <Checkbox
                         checked={selectedColleges.includes(college.college_id)}
                         onChange={() => handleCollegeSelect(college.college_id)}
-                        className="w-4 h-4 text-yellow-400 bg-transparent border-gray-600 rounded focus:ring-yellow-400"
                       />
                       <div className="flex-1">
                         <p className="text-white font-medium">{college.name}</p>
@@ -438,12 +436,10 @@ export default function CollegeSelectionPage() {
                               </div>
                             </div>
                           
-                          <div className="mt-3 flex gap-2">
-                            <input
-                              type="checkbox"
+                          <div className="mt-3 flex items-center gap-3">
+                            <Checkbox
                               checked={selectedColleges.includes(college.college_id)}
                               onChange={() => handleCollegeSelect(college.college_id)}
-                              className="w-4 h-4 text-green-400 bg-transparent border-gray-600 rounded focus:ring-green-400"
                             />
                             <Button
                               variant="ghost"
@@ -536,12 +532,10 @@ export default function CollegeSelectionPage() {
                             </div>
                           </div>
                           
-                          <div className="mt-3 flex gap-2">
-                            <input
-                              type="checkbox"
+                          <div className="mt-3 flex items-center gap-3">
+                            <Checkbox
                               checked={selectedColleges.includes(college.college_id)}
                               onChange={() => handleCollegeSelect(college.college_id)}
-                              className="w-4 h-4 text-yellow-400 bg-transparent border-gray-600 rounded focus:ring-yellow-400"
                             />
                             <Button
                               variant="ghost"
@@ -634,12 +628,10 @@ export default function CollegeSelectionPage() {
                             </div>
                           </div>
                           
-                          <div className="mt-3 flex gap-2">
-                            <input
-                              type="checkbox"
+                          <div className="mt-3 flex items-center gap-3">
+                            <Checkbox
                               checked={selectedColleges.includes(college.college_id)}
                               onChange={() => handleCollegeSelect(college.college_id)}
-                              className="w-4 h-4 text-red-400 bg-transparent border-gray-600 rounded focus:ring-red-400"
                             />
                             <Button
                               variant="ghost"
