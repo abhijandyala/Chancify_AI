@@ -20,6 +20,95 @@ from api.dependencies import get_current_user_profile
 router = APIRouter()
 
 
+@router.post("/google-oauth", response_model=Token)
+async def google_oauth_callback(
+    email: str,
+    name: str,
+    google_id: str,
+    db: Session = Depends(get_db)
+) -> Dict[str, Any]:
+    """
+    Handle Google OAuth callback and create user in local database.
+    
+    Args:
+        email: User's email from Google
+        name: User's name from Google
+        google_id: Google user ID
+        db: Database session
+        
+    Returns:
+        Dict: Access token and user information
+    """
+    supabase = get_supabase()
+    
+    try:
+        # Check if user already exists in Supabase Auth
+        existing_users = supabase.auth.admin.list_users()
+        user_exists = False
+        user_id = None
+        
+        for user in existing_users.users:
+            if user.email == email:
+                user_exists = True
+                user_id = user.id
+                break
+        
+        if not user_exists:
+            # Create user in Supabase Auth
+            auth_response = supabase.auth.admin.create_user({
+                "email": email,
+                "email_confirm": True,
+                "user_metadata": {
+                    "name": name,
+                    "google_id": google_id
+                }
+            })
+            user_id = auth_response.user.id
+        
+        # Check if profile already exists in local database
+        existing_profile = db.query(UserProfile).filter(UserProfile.user_id == user_id).first()
+        
+        if not existing_profile:
+            # Create profile in local database
+            profile_data = UserProfileCreate(
+                first_name=name.split(' ')[0] if name else None,
+                last_name=' '.join(name.split(' ')[1:]) if name and len(name.split(' ')) > 1 else None,
+                email=email
+            )
+            
+            profile = UserProfile(
+                user_id=user_id,
+                **profile_data.dict()
+            )
+            db.add(profile)
+            db.commit()
+            db.refresh(profile)
+        else:
+            profile = existing_profile
+        
+        # Generate a session token (simplified for demo)
+        # In production, you'd want to use proper JWT tokens
+        access_token = f"google_token_{user_id}_{google_id}"
+        
+        return {
+            "access_token": access_token,
+            "token_type": "bearer",
+            "user": {
+                "id": user_id,
+                "email": email,
+                "name": name,
+                "profile": UserProfileResponse.from_orm(profile) if profile else None
+            }
+        }
+        
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to create Google OAuth user: {str(e)}"
+        )
+
+
 @router.post("/signup", response_model=Token)
 async def signup(
     email: str,
@@ -146,50 +235,16 @@ async def login(
 @router.post("/logout")
 async def logout():
     """
-    Logout user (invalidate token).
-    
-    Returns:
-        Dict: Success message
+    Logout user (clear session).
     """
-    # Note: With JWT tokens, we can't actually invalidate them server-side
-    # In production, you'd want to implement a token blacklist
-    # For now, we'll just return success
     return {"message": "Logged out successfully"}
 
 
 @router.get("/me", response_model=CompleteProfileResponse)
 async def get_current_user(
-    db: Session = Depends(get_db),
-    current_user_profile: UserProfile = Depends(get_current_user_profile)
+    current_user: UserProfile = Depends(get_current_user_profile)
 ):
     """
-    Get current user's complete profile information.
-    
-    Args:
-        db: Database session
-        current_user_profile: Current user's profile
-        
-    Returns:
-        CompleteProfileResponse: Complete user profile with all related data
+    Get current user's complete profile.
     """
-    # Get academic data
-    academic_data = db.query(AcademicData).filter(
-        AcademicData.profile_id == current_user_profile.id
-    ).first()
-    
-    # Get extracurriculars
-    extracurriculars = db.query(Extracurricular).filter(
-        Extracurricular.profile_id == current_user_profile.id
-    ).order_by(Extracurricular.display_order).all()
-    
-    # Get saved colleges
-    saved_colleges = db.query(SavedCollege).filter(
-        SavedCollege.profile_id == current_user_profile.id
-    ).all()
-    
-    return CompleteProfileResponse(
-        profile=UserProfileResponse.from_orm(current_user_profile),
-        academic_data=AcademicDataResponse.from_orm(academic_data) if academic_data else None,
-        extracurriculars=[ExtracurricularResponse.from_orm(ec) for ec in extracurriculars],
-        saved_colleges=[SavedCollegeResponse.from_orm(sc) for sc in saved_colleges]
-    )
+    return current_user

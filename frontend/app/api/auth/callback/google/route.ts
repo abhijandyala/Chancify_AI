@@ -69,6 +69,32 @@ export async function GET(request: NextRequest) {
 
     const userInfo = await userResponse.json()
 
+    // Call backend API to create user in database
+    try {
+      const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'https://unsmug-untensely-elroy.ngrok-free.dev'
+      const createUserResponse = await fetch(`${backendUrl}/api/auth/google-oauth`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': 'true'
+        },
+        body: JSON.stringify({
+          email: userInfo.email,
+          name: userInfo.name,
+          google_id: userInfo.id
+        })
+      })
+
+      if (createUserResponse.ok) {
+        const userData = await createUserResponse.json()
+        console.log('User created in database:', userData)
+      } else {
+        console.error('Failed to create user in database:', await createUserResponse.text())
+      }
+    } catch (error) {
+      console.error('Error calling backend API:', error)
+    }
+
     // Create success URL with user data - redirect to home page
     // CRITICAL: Use Railway URL for redirect, not request.url which might be localhost
     const successUrl = new URL('/home', 'https://chancifyai.up.railway.app')
