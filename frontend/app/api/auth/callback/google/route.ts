@@ -79,9 +79,9 @@ export async function GET(request: NextRequest) {
 
     const userInfo = await userResponse.json()
 
-    // Create success URL with user data - redirect to home page
-    // CRITICAL: Use Railway URL for redirect, not request.url which might be localhost
-    const successUrl = new URL('/home', baseUrl)
+    // Create success URL with user data - redirect to auth page (not home) to avoid ProtectedRoute issues
+    // The auth page will detect the OAuth success params and redirect to home after setting auth state
+    const successUrl = new URL('/auth', baseUrl)
     successUrl.searchParams.set('google_auth', 'success')
     successUrl.searchParams.set('email', userInfo.email)
     successUrl.searchParams.set('name', userInfo.name)
