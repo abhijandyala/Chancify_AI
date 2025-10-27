@@ -35,11 +35,6 @@ export default function BlogPage() {
           icon: <Users className="w-6 h-6 text-yellow-400" />
         }
       ]}
-      cta={{
-        text: "Read Our Blog",
-        href: "#",
-        external: true
-      }}
     />
   )
 }

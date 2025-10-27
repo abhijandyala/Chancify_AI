@@ -37,7 +37,7 @@ export default function ProfileBuilderPage() {
       ]}
       cta={{
         text: "Start Building Profile",
-        href: "/home"
+        href: "/profile"
       }}
     />
   )

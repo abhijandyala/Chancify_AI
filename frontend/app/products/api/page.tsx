@@ -35,11 +35,6 @@ export default function APIPage() {
           icon: <Globe className="w-6 h-6 text-yellow-400" />
         }
       ]}
-      cta={{
-        text: "View API Documentation",
-        href: "/docs",
-        external: true
-      }}
     />
   )
 }

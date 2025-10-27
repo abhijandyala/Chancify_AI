@@ -19,23 +19,12 @@ export default function ROXMegaFooter() {
       title: 'Solutions', 
       links: [
         { name: 'High School Students', href: '/solutions/high-school-students' },
-        { name: 'College Prep', href: '/solutions/college-prep' },
-        { name: 'Transfer Students', href: '/solutions/transfer-students' },
-        { name: 'International Students', href: '/solutions/international-students' },
-        { name: 'Gap Year Planning', href: '/solutions/gap-year-planning' },
-        { name: 'Career Guidance', href: '/solutions/career-guidance' }
+        { name: 'College Prep', href: '/solutions/college-prep' }
       ]
     },
     {
       title: 'Resources',
-      links: [
-        { name: 'Blog', href: '/resources/blog' },
-        { name: 'Docs', href: '/resources/docs' },
-        { name: 'Case Studies', href: '/resources/case-studies' },
-        { name: 'Status', href: '/resources/status' },
-        { name: 'Changelog', href: '/resources/changelog' },
-        { name: 'Help Center', href: '/resources/help-center' }
-      ]
+      links: []
     },
     {
       title: 'Company',

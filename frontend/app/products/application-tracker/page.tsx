@@ -35,10 +35,6 @@ export default function ApplicationTrackerPage() {
           icon: <AlertCircle className="w-6 h-6 text-yellow-400" />
         }
       ]}
-      cta={{
-        text: "Track Applications",
-        href: "/home"
-      }}
     />
   )
 }

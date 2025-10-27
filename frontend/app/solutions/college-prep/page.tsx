@@ -35,10 +35,6 @@ export default function CollegePrepPage() {
           icon: <CheckCircle className="w-6 h-6 text-yellow-400" />
         }
       ]}
-      cta={{
-        text: "Start College Prep",
-        href: "/home"
-      }}
     />
   )
 }

@@ -35,10 +35,6 @@ export default function CollegeMatcherPage() {
           icon: <Heart className="w-6 h-6 text-yellow-400" />
         }
       ]}
-      cta={{
-        text: "Find My Matches",
-        href: "/college-selection"
-      }}
     />
   )
 }
