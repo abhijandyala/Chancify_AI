@@ -287,7 +287,26 @@ export default function CalculationsPage() {
         console.log('🔍 ACCEPTANCE RATE FROM BACKEND:', result.acceptance_rate);
         
         const probability = result.probability || 0;
-        setUserChance(Math.round(probability * 100));
+        const userChancePercent = Math.round(probability * 100);
+        setUserChance(userChancePercent);
+
+        console.log('🔍 PROBABILITY CALCULATION:');
+        console.log('🔍 Probability from backend:', probability);
+        console.log('🔍 User chance %:', userChancePercent);
+        
+        // FIXED: Calculate realistic outcome distribution
+        // For elite schools like Carnegie Mellon with ~16.5% acceptance chance:
+        // - Acceptance: actual probability from ML model
+        // - Waitlist: ~15-20% of admits get waitlisted, so roughly 3-5% of applicants
+        // - Rejection: remaining percentage
+        const acceptRate = probability; // 0.0 to 1.0
+        const waitlistRate = Math.min(0.10, acceptRate * 0.5); // 10% max, or half of acceptance rate
+        const rejectRate = 1.0 - acceptRate - waitlistRate;
+        
+        console.log('🔍 OUTCOME CALCULATION:');
+        console.log('🔍 Accept Rate:', (acceptRate * 100).toFixed(1) + '%');
+        console.log('🔍 Waitlist Rate:', (waitlistRate * 100).toFixed(1) + '%');
+        console.log('🔍 Reject Rate:', (rejectRate * 100).toFixed(1) + '%');
 
                  // Use real college data from backend response
          const collegeStats: CollegeStats = {
@@ -297,9 +316,9 @@ export default function CalculationsPage() {
            isPublic: result.college_data?.is_public || false,
            acceptanceRateOfficial: Math.round((result.acceptance_rate || 0.15) * 100),
           outcome: {
-            accept: Math.round(probability * 100),
-            waitlist: Math.round(probability * 15),
-            reject: Math.round((1 - probability) * 100)
+            accept: Math.round(acceptRate * 100),
+            waitlist: Math.round(waitlistRate * 100),
+            reject: Math.round(rejectRate * 100)
           },
           subjects: [
             { label: 'Computer Science', value: 28 },
@@ -690,6 +709,43 @@ export default function CalculationsPage() {
                   <h2 className="text-lg font-semibold text-white">Your Admission Chance</h2>
                 </div>
                 <CircularChance value={userChance} />
+              </div>
+            </motion.div>
+
+            {/* Debug Info Card - Remove this after testing */}
+            <motion.div 
+              className="relative bg-gradient-to-br from-purple-950/80 via-purple-900/60 to-purple-950/80 border border-purple-500/30 rounded-3xl p-6 backdrop-blur-xl overflow-hidden group"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.35 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-t from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+              <div className="relative">
+                <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                  <Info className="h-5 w-5 text-purple-400" /> Debug Info
+                </h2>
+                <div className="space-y-3 text-xs">
+                  <div className="flex justify-between items-center p-2 rounded-lg bg-purple-950/50 border border-purple-500/20">
+                    <span className="text-neutral-300">Raw Probability:</span>
+                    <span className="font-mono font-bold text-purple-300">{d.outcome.accept}%</span>
+                  </div>
+                  <div className="flex justify-between items-center p-2 rounded-lg bg-purple-950/50 border border-purple-500/20">
+                    <span className="text-neutral-300">Accept:</span>
+                    <span className="font-mono font-bold text-green-400">{d.outcome.accept}%</span>
+                  </div>
+                  <div className="flex justify-between items-center p-2 rounded-lg bg-purple-950/50 border border-purple-500/20">
+                    <span className="text-neutral-300">Waitlist:</span>
+                    <span className="font-mono font-bold text-yellow-400">{d.outcome.waitlist}%</span>
+                  </div>
+                  <div className="flex justify-between items-center p-2 rounded-lg bg-purple-950/50 border border-purple-500/20">
+                    <span className="text-neutral-300">Reject:</span>
+                    <span className="font-mono font-bold text-red-400">{d.outcome.reject}%</span>
+                  </div>
+                  <div className="mt-3 p-2 rounded-lg bg-purple-900/30 border border-purple-500/10">
+                    <div className="text-purple-300 text-xs">Total Check: {d.outcome.accept + d.outcome.waitlist + d.outcome.reject}%</div>
+                  </div>
+                </div>
               </div>
             </motion.div>
 
