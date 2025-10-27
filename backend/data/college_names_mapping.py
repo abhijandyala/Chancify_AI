@@ -23,6 +23,9 @@ class CollegeNamesMapping:
         try:
             # Load the Excel file
             excel_path = os.path.join(os.path.dirname(__file__), '..', '..', 'therealdatabase', 'College_Names_and_Nicknames.xlsx')
+            # Alternative path if the above doesn't work
+            if not os.path.exists(excel_path):
+                excel_path = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'therealdatabase', 'College_Names_and_Nicknames.xlsx')
             df = pd.read_excel(excel_path)
             
             print(f"Loaded college names mapping: {len(df)} colleges")

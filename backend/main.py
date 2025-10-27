@@ -196,18 +196,7 @@ async def search_colleges(q: str = "", limit: int = 20):
                 "message": "Please provide a search query with at least 2 characters"
             }
         
-        # Search for colleges using the names mapping
-        matching_official_names = college_names_mapping.search_colleges(q.strip(), limit)
-        
-        if not matching_official_names:
-            return {
-                "success": True,
-                "colleges": [],
-                "total": 0,
-                "message": f"No colleges found matching '{q}'"
-            }
-        
-        # Load college data from the integrated CSV
+        # Search for colleges directly in the CSV data (bypass names mapping)
         try:
             college_df = pd.read_csv('data/raw/real_colleges_integrated.csv')
         except Exception as e:
@@ -219,40 +208,58 @@ async def search_colleges(q: str = "", limit: int = 20):
                 "error": "Unable to load college data"
             }
         
-        # Find matching colleges in the data
+        # Search for colleges directly in the CSV data
+        query = q.strip().lower()
+        matching_colleges = []
+        
+        # Search through college names
+        for _, row in college_df.iterrows():
+            college_name = str(row.get('name', '')).lower()
+            if query in college_name:
+                matching_colleges.append(row)
+        
+        # If no matches found, try broader search
+        if not matching_colleges:
+            # Try searching for partial matches in city/state
+            for _, row in college_df.iterrows():
+                college_name = str(row.get('name', '')).lower()
+                city = str(row.get('city', '')).lower()
+                state = str(row.get('state', '')).lower()
+                
+                if (query in city or query in state or 
+                    any(word.startswith(query) for word in college_name.split())):
+                    matching_colleges.append(row)
+        
+        # Limit results
+        matching_colleges = matching_colleges[:limit]
+        
+        if not matching_colleges:
+            return {
+                "success": True,
+                "colleges": [],
+                "total": 0,
+                "message": f"No colleges found matching '{q}'"
+            }
+        
+        # Format results
         results = []
-        for official_name in matching_official_names:
-            # Try exact match first
-            college_row = college_df[college_df['name'] == official_name]
-            
-            if college_row.empty:
-                # Try case-insensitive match
-                college_row = college_df[college_df['name'].str.lower() == official_name.lower()]
-            
-            if college_row.empty:
-                # Try partial match
-                college_row = college_df[college_df['name'].str.contains(official_name, case=False, na=False)]
-            
-            if not college_row.empty:
-                row = college_row.iloc[0]  # Take the first match
-                
-                # Get name variations for this college
-                name_variations = college_names_mapping.get_name_variations(official_name)
-                
-                college_data = {
-                    "college_id": f"college_{row.get('unitid', 'unknown')}",
-                    "name": official_name,  # Use the official name
-                    "acceptance_rate": safe_float(row.get('acceptance_rate', 0.5), 0.5),
-                    "selectivity_tier": row.get('selectivity_tier', 'Moderately Selective'),
-                    "city": row.get('city', ''),
-                    "state": row.get('state', ''),
-                    "tuition_in_state": safe_float(row.get('tuition_in_state_usd', 0), 0),
-                    "tuition_out_of_state": safe_float(row.get('tuition_out_of_state_usd', 0), 0),
-                    "student_body_size": safe_float(row.get('student_body_size', 0), 0),
-                    "name_variations": name_variations  # Include all name variations
+        for row in matching_colleges:
+            college_data = {
+                "college_id": f"college_{row.get('unitid', 'unknown')}",
+                "name": row.get('name', ''),
+                "acceptance_rate": safe_float(row.get('acceptance_rate', 0.5), 0.5),
+                "selectivity_tier": row.get('selectivity_tier', 'Moderately Selective'),
+                "city": row.get('city', ''),
+                "state": row.get('state', ''),
+                "tuition_in_state": safe_float(row.get('tuition_in_state_usd', 0), 0),
+                "tuition_out_of_state": safe_float(row.get('tuition_out_of_state_usd', 0), 0),
+                "student_body_size": safe_float(row.get('student_body_size', 0), 0),
+                "name_variations": {
+                    "official": row.get('name', '').lower(),
+                    "common": row.get('name', '').lower()  # Use same as official for now
                 }
-                
-                results.append(college_data)
+            }
+            results.append(college_data)
         
         return {
             "success": True,
