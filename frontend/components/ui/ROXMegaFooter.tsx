@@ -11,8 +11,7 @@ export default function ROXMegaFooter() {
         { name: 'Profile Builder', href: '/products/profile-builder' },
         { name: 'College Matcher', href: '/products/college-matcher' },
         { name: 'SAT Prep', href: '/products/sat-prep' },
-        { name: 'Application Tracker', href: '/products/application-tracker' },
-        { name: 'API', href: '/products/api' }
+        { name: 'Application Tracker', href: '/products/application-tracker' }
       ]
     },
     {
