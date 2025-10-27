@@ -14,10 +14,15 @@ export function ProtectedRoute({ children, fallback }: ProtectedRouteProps) {
   const router = useRouter()
 
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      // Check if user is in trial mode
-      const trialMode = localStorage.getItem('trial_mode')
-      if (!trialMode) {
+    if (!isLoading) {
+      // Check localStorage directly as a fallback for OAuth
+      const authToken = typeof window !== 'undefined' ? localStorage.getItem('auth_token') : null
+      const trialMode = typeof window !== 'undefined' ? localStorage.getItem('trial_mode') : null
+      
+      // User is authenticated if either provider says so OR localStorage has auth_token
+      const actuallyAuthenticated = isAuthenticated || !!authToken
+      
+      if (!actuallyAuthenticated && !trialMode) {
         // Redirect to auth page if not authenticated and not in trial mode
         router.push('/auth')
       }
@@ -44,8 +49,12 @@ export function ProtectedRoute({ children, fallback }: ProtectedRouteProps) {
   }
 
   // Show fallback or redirect if not authenticated
-  if (!isAuthenticated) {
-    const trialMode = localStorage.getItem('trial_mode')
+  // Check localStorage as fallback for OAuth
+  const authToken = typeof window !== 'undefined' ? localStorage.getItem('auth_token') : null
+  const trialMode = typeof window !== 'undefined' ? localStorage.getItem('trial_mode') : null
+  const actuallyAuthenticated = isAuthenticated || !!authToken
+  
+  if (!actuallyAuthenticated) {
     if (trialMode) {
       // Allow access in trial mode
       return <>{children}</>
