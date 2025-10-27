@@ -69,101 +69,92 @@ export default function ROXTestimonialSection() {
         viewport={{ amount: 0.3 }}
         className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16"
       >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {/* Marvin Box */}
           <motion.div
             whileHover={{ 
-              scale: 1.05,
-              y: -8,
-              transition: { duration: 0.3, ease: "easeOut" }
+              scale: 1.02,
+              y: -4,
+              transition: { duration: 0.2, ease: "easeOut" }
             }}
-            className="group relative bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 cursor-pointer overflow-hidden"
+            className="group relative bg-black border border-white/10 rounded-xl p-8 cursor-pointer overflow-hidden"
           >
-            {/* Background gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            {/* Subtle hover overlay */}
+            <div className="absolute inset-0 bg-yellow-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             
             {/* Content */}
             <div className="relative z-10">
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-white font-bold text-lg">M</span>
+              <div className="flex items-center space-x-4 mb-6">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center group-hover:bg-yellow-400 transition-colors duration-300">
+                  <span className="text-black font-bold text-xl">M</span>
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold text-lg group-hover:text-blue-300 transition-colors duration-300">Marvin</h3>
-                  <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">AI Assistant</p>
+                  <h3 className="text-white font-semibold text-xl group-hover:text-yellow-400 transition-colors duration-300">Marvin</h3>
+                  <p className="text-white/60 text-sm">AI Assistant</p>
                 </div>
               </div>
-              <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">
+              <p className="text-white/80 text-sm leading-relaxed">
                 Intelligent college admission guidance powered by advanced AI algorithms.
               </p>
             </div>
-            
-            {/* Hover glow effect */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
           </motion.div>
 
           {/* Help Box */}
           <motion.div
             whileHover={{ 
-              scale: 1.05,
-              y: -8,
-              transition: { duration: 0.3, ease: "easeOut" }
+              scale: 1.02,
+              y: -4,
+              transition: { duration: 0.2, ease: "easeOut" }
             }}
-            className="group relative bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 cursor-pointer overflow-hidden"
+            className="group relative bg-black border border-white/10 rounded-xl p-8 cursor-pointer overflow-hidden"
           >
-            {/* Background gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-transparent to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            {/* Subtle hover overlay */}
+            <div className="absolute inset-0 bg-yellow-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             
             {/* Content */}
             <div className="relative z-10">
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-white font-bold text-lg">H</span>
+              <div className="flex items-center space-x-4 mb-6">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center group-hover:bg-yellow-400 transition-colors duration-300">
+                  <span className="text-black font-bold text-xl">H</span>
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold text-lg group-hover:text-green-300 transition-colors duration-300">Help</h3>
-                  <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">Support System</p>
+                  <h3 className="text-white font-semibold text-xl group-hover:text-yellow-400 transition-colors duration-300">Help</h3>
+                  <p className="text-white/60 text-sm">Support System</p>
                 </div>
               </div>
-              <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">
+              <p className="text-white/80 text-sm leading-relaxed">
                 Comprehensive support and guidance throughout your college application journey.
               </p>
             </div>
-            
-            {/* Hover glow effect */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-500/20 to-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
           </motion.div>
 
           {/* AI Box */}
           <motion.div
             whileHover={{ 
-              scale: 1.05,
-              y: -8,
-              transition: { duration: 0.3, ease: "easeOut" }
+              scale: 1.02,
+              y: -4,
+              transition: { duration: 0.2, ease: "easeOut" }
             }}
-            className="group relative bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 cursor-pointer overflow-hidden"
+            className="group relative bg-black border border-white/10 rounded-xl p-8 cursor-pointer overflow-hidden"
           >
-            {/* Background gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 via-transparent to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            {/* Subtle hover overlay */}
+            <div className="absolute inset-0 bg-yellow-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             
             {/* Content */}
             <div className="relative z-10">
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-black font-bold text-lg">AI</span>
+              <div className="flex items-center space-x-4 mb-6">
+                <div className="w-12 h-12 bg-yellow-400 rounded-lg flex items-center justify-center group-hover:bg-white transition-colors duration-300">
+                  <span className="text-black font-bold text-xl">AI</span>
                 </div>
                 <div>
-                  <h3 className="text-white font-semibold text-lg group-hover:text-yellow-300 transition-colors duration-300">AI</h3>
-                  <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">Machine Learning</p>
+                  <h3 className="text-white font-semibold text-xl group-hover:text-yellow-400 transition-colors duration-300">AI</h3>
+                  <p className="text-white/60 text-sm">Machine Learning</p>
                 </div>
               </div>
-              <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300">
+              <p className="text-white/80 text-sm leading-relaxed">
                 Advanced machine learning models trained on real admission data for accurate predictions.
               </p>
             </div>
-            
-            {/* Hover glow effect */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-yellow-500/20 to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
           </motion.div>
         </div>
       </motion.div>
@@ -329,25 +320,25 @@ export default function ROXTestimonialSection() {
 
       {/* Floating Elements */}
       <motion.div
-        className="absolute top-20 left-10 w-20 h-20 bg-yellow-400/5 rounded-full blur-xl"
+        className="absolute top-20 left-10 w-16 h-16 bg-yellow-400/10 rounded-full blur-xl"
         animate={{
-          y: [0, -20, 0],
-          opacity: [0.3, 0.6, 0.3],
+          y: [0, -10, 0],
+          opacity: [0.3, 0.5, 0.3],
         }}
         transition={{
-          duration: 6,
+          duration: 8,
           repeat: Infinity,
           ease: 'easeInOut'
         }}
       />
       <motion.div
-        className="absolute bottom-20 right-10 w-32 h-32 bg-blue-400/5 rounded-full blur-xl"
+        className="absolute bottom-20 right-10 w-24 h-24 bg-white/5 rounded-full blur-xl"
         animate={{
-          y: [0, 20, 0],
-          opacity: [0.2, 0.5, 0.2],
+          y: [0, 10, 0],
+          opacity: [0.2, 0.4, 0.2],
         }}
         transition={{
-          duration: 8,
+          duration: 10,
           repeat: Infinity,
           ease: 'easeInOut'
         }}
