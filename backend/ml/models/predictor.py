@@ -423,18 +423,20 @@ class AdmissionPredictor:
 _predictor: Optional[AdmissionPredictor] = None
 
 
-def get_predictor(model_dir: str = 'data/models') -> AdmissionPredictor:
+def get_predictor(model_dir: str = 'data/models', force_reload: bool = False) -> AdmissionPredictor:
     """
     Get global predictor instance (singleton pattern).
     
     Args:
         model_dir: Directory containing models
+        force_reload: Force re-initialization even if predictor exists
         
     Returns:
         AdmissionPredictor instance
     """
     global _predictor
-    if _predictor is None:
+    if _predictor is None or force_reload:
+        print(f"DEBUG: Initializing predictor with model_dir: {model_dir}")
         _predictor = AdmissionPredictor(model_dir=model_dir)
     return _predictor
 

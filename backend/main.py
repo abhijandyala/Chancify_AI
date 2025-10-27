@@ -942,6 +942,27 @@ async def predict_admission(request: PredictionRequest):
             "explanation": "Mock prediction for development"
         }
 
+# Debug endpoint to force reload predictor
+@app.get("/api/debug/reload-predictor")
+async def debug_reload_predictor():
+    """Debug endpoint to force reload the ML predictor."""
+    try:
+        from ml.models.predictor import get_predictor
+        predictor = get_predictor(force_reload=True)
+        return {
+            "status": "success",
+            "message": "Predictor reloaded",
+            "models_available": len(predictor.models),
+            "scaler_available": predictor.scaler is not None,
+            "feature_selector_available": predictor.feature_selector is not None,
+            "available_models": list(predictor.models.keys())
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "message": f"Failed to reload predictor: {str(e)}"
+        }
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
