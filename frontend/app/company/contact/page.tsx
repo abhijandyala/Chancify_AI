@@ -5,6 +5,7 @@ import { ArrowLeft, Mail, MessageCircle, Phone, MapPin, Send, CheckCircle } from
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 import { useState } from 'react'
+import emailjs from '@emailjs/browser'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -21,27 +22,39 @@ export default function ContactPage() {
     setIsSubmitting(true)
 
     try {
-      // Create mailto link with form data
-      const subject = encodeURIComponent(formData.subject || 'Contact from Chancify AI Website')
-      const body = encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-      )
+      // EmailJS configuration
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_chancifyai'
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_contact'
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY'
       
-      const mailtoLink = `mailto:chancifyai@gmail.com?subject=${subject}&body=${body}`
+      // Prepare template parameters
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject || 'Contact from Chancify AI Website',
+        message: formData.message,
+        to_email: 'chancifyai@gmail.com'
+      }
+
+      // Send email using EmailJS
+      await emailjs.send(serviceId, templateId, templateParams, publicKey)
       
-      // Open email client
-      window.location.href = mailtoLink
-      
-      // Simulate success after a brief delay
-      setTimeout(() => {
-        setIsSubmitted(true)
-        setIsSubmitting(false)
-        setFormData({ name: '', email: '', subject: '', message: '' })
-      }, 1000)
+      // Success
+      setIsSubmitted(true)
+      setIsSubmitting(false)
+      setFormData({ name: '', email: '', subject: '', message: '' })
       
     } catch (error) {
       console.error('Error sending email:', error)
       setIsSubmitting(false)
+      
+      // Fallback to mailto if EmailJS fails
+      const subject = encodeURIComponent(formData.subject || 'Contact from Chancify AI Website')
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      )
+      const mailtoLink = `mailto:chancifyai@gmail.com?subject=${subject}&body=${body}`
+      window.location.href = mailtoLink
     }
   }
 
