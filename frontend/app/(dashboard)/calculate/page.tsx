@@ -285,6 +285,11 @@ export default function CalculationsPage() {
         console.log('🔍 COLLEGE DATA FROM BACKEND:', result.college_data);
         console.log('🔍 COLLEGE NAME FROM BACKEND:', result.college_name);
         console.log('🔍 ACCEPTANCE RATE FROM BACKEND:', result.acceptance_rate);
+        console.log('🔍 PROBABILITY FROM BACKEND:', result.probability);
+        console.log('🔍 ML PROBABILITY FROM BACKEND:', result.ml_probability);
+        console.log('🔍 FORMULA PROBABILITY FROM BACKEND:', result.formula_probability);
+        console.log('🔍 MODEL USED FROM BACKEND:', result.model_used);
+        console.log('🔍 EXPLANATION FROM BACKEND:', result.explanation);
         
         const probability = result.probability || 0;
         const userChancePercent = Math.round(probability * 100);
@@ -293,6 +298,10 @@ export default function CalculationsPage() {
         console.log('🔍 PROBABILITY CALCULATION:');
         console.log('🔍 Probability from backend:', probability);
         console.log('🔍 User chance %:', userChancePercent);
+        console.log('🔍 ML Probability:', result.ml_probability);
+        console.log('🔍 Formula Probability:', result.formula_probability);
+        console.log('🔍 Model Used:', result.model_used);
+        console.log('🔍 Explanation:', result.explanation);
         
         // FIXED: Calculate realistic outcome distribution
         // For elite schools like Carnegie Mellon with ~16.5% acceptance chance:
@@ -364,6 +373,11 @@ export default function CalculationsPage() {
         console.log('🔍 COLLEGE NAME IN STATS:', collegeStats.collegeName);
         console.log('🔍 CITY IN STATS:', collegeStats.city);
         console.log('🔍 STATE IN STATS:', collegeStats.state);
+        console.log('🔍 IS PUBLIC IN STATS:', collegeStats.isPublic);
+        console.log('🔍 OFFICIAL ACCEPTANCE RATE IN STATS:', collegeStats.acceptanceRateOfficial + '%');
+        console.log('🔍 OUTCOME BREAKDOWN:', collegeStats.outcome);
+        console.log('🔍 TUITION IN STATE:', collegeStats.costs.inStateTuition);
+        console.log('🔍 TUITION OUT OF STATE:', collegeStats.costs.outStateTuition);
 
         setCollegeData(collegeStats);
       } catch (error) {
