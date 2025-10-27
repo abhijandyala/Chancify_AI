@@ -42,7 +42,7 @@ class AdmissionPredictor:
     Intelligently blends ML model predictions with formula-based calculations.
     """
     
-    def __init__(self, model_dir: str = 'backend/data/models'):
+    def __init__(self, model_dir: str = 'data/models'):
         """
         Initialize predictor by loading trained models.
         
@@ -189,22 +189,35 @@ class AdmissionPredictor:
     def _load_models(self):
         """Load all trained models from disk."""
         try:
+            print(f"DEBUG: Attempting to load models from: {self.model_dir}")
+            print(f"DEBUG: Model directory exists: {self.model_dir.exists()}")
+            print(f"DEBUG: Model directory contents: {list(self.model_dir.iterdir()) if self.model_dir.exists() else 'Directory does not exist'}")
+            
             # Load metadata
             metadata_file = self.model_dir / 'metadata.json'
+            print(f"DEBUG: Looking for metadata file: {metadata_file}")
+            print(f"DEBUG: Metadata file exists: {metadata_file.exists()}")
             if metadata_file.exists():
                 with open(metadata_file, 'r') as f:
                     self.metadata = json.load(f)
                 self.feature_names = self.metadata.get('feature_names', [])
+                print(f"DEBUG: Loaded metadata with {len(self.feature_names)} features")
             
             # Load scaler
             scaler_file = self.model_dir / 'scaler.joblib'
+            print(f"DEBUG: Looking for scaler file: {scaler_file}")
+            print(f"DEBUG: Scaler file exists: {scaler_file.exists()}")
             if scaler_file.exists():
                 self.scaler = joblib.load(scaler_file)
+                print("DEBUG: Successfully loaded scaler")
             
             # Load feature selector
             selector_file = self.model_dir / 'feature_selector.joblib'
+            print(f"DEBUG: Looking for feature selector file: {selector_file}")
+            print(f"DEBUG: Feature selector file exists: {selector_file.exists()}")
             if selector_file.exists():
                 self.feature_selector = joblib.load(selector_file)
+                print("DEBUG: Successfully loaded feature selector")
             
             # Load models
             model_files = {
@@ -216,10 +229,16 @@ class AdmissionPredictor:
             
             for name, filename in model_files.items():
                 filepath = self.model_dir / filename
+                print(f"DEBUG: Looking for {name} model: {filepath}")
+                print(f"DEBUG: {name} model exists: {filepath.exists()}")
                 if filepath.exists():
                     self.models[name] = joblib.load(filepath)
+                    print(f"DEBUG: Successfully loaded {name} model")
             
-            print(f"Loaded {len(self.models)} models from {self.model_dir}")
+            print(f"DEBUG: Final result - Loaded {len(self.models)} models from {self.model_dir}")
+            print(f"DEBUG: Available models: {list(self.models.keys())}")
+            print(f"DEBUG: Scaler available: {self.scaler is not None}")
+            print(f"DEBUG: Feature selector available: {self.feature_selector is not None}")
             
         except Exception as e:
             print(f"Warning: Could not load models: {e}")
@@ -404,7 +423,7 @@ class AdmissionPredictor:
 _predictor: Optional[AdmissionPredictor] = None
 
 
-def get_predictor(model_dir: str = 'backend/data/models') -> AdmissionPredictor:
+def get_predictor(model_dir: str = 'data/models') -> AdmissionPredictor:
     """
     Get global predictor instance (singleton pattern).
     
