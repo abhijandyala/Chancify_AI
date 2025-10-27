@@ -169,5 +169,14 @@
     "base_factor": 0.35,
     "rate_adjustment": 0.74,
     "notes": "Perfect profiles have < 35% chance"
+  },
+  "Boston University": {
+    "calibration_factor": 0.400,
+    "max_probability": 0.500,
+    "acceptance_rate": 0.190,
+    "category": "selective",
+    "base_factor": 0.40,
+    "rate_adjustment": 1.0,
+    "notes": "Perfect profiles have < 50% chance"
   }
 }

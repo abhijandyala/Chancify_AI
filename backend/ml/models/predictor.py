@@ -99,7 +99,8 @@ class AdmissionPredictor:
                         'Georgetown': 'georgetown university',
                         'CMU': 'carnegie mellon university',
                         'NYU': 'new york university',
-                        'UChicago': 'university of chicago'
+                        'UChicago': 'university of chicago',
+                        'Boston University': 'boston university'
                     }
                     
                     # Use mapped name if available, otherwise use original
@@ -142,6 +143,7 @@ class AdmissionPredictor:
             'georgetown university': {'factor': 0.266, 'max_prob': 0.282, 'acceptance_rate': 0.120},
             'carnegie mellon university': {'factor': 0.256, 'max_prob': 0.280, 'acceptance_rate': 0.135},
             'new york university': {'factor': 0.259, 'max_prob': 0.281, 'acceptance_rate': 0.130},
+            'boston university': {'factor': 0.400, 'max_prob': 0.500, 'acceptance_rate': 0.190},
         }
         return elite_calibration
     
