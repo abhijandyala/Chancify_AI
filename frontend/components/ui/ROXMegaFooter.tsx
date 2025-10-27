@@ -6,19 +6,46 @@ export default function ROXMegaFooter() {
   const cols = [
     {
       title: 'Products',
-      links: ['AI Predictor', 'Profile Builder', 'College Matcher', 'SAT Prep', 'Application Tracker', 'API']
+      links: [
+        { name: 'AI Predictor', href: '/products/ai-predictor' },
+        { name: 'Profile Builder', href: '/products/profile-builder' },
+        { name: 'College Matcher', href: '/products/college-matcher' },
+        { name: 'SAT Prep', href: '/products/sat-prep' },
+        { name: 'Application Tracker', href: '/products/application-tracker' },
+        { name: 'API', href: '/products/api' }
+      ]
     },
     {
       title: 'Solutions', 
-      links: ['High School Students', 'College Prep', 'Transfer Students', 'International Students', 'Gap Year Planning', 'Career Guidance']
+      links: [
+        { name: 'High School Students', href: '/solutions/high-school-students' },
+        { name: 'College Prep', href: '/solutions/college-prep' },
+        { name: 'Transfer Students', href: '/solutions/transfer-students' },
+        { name: 'International Students', href: '/solutions/international-students' },
+        { name: 'Gap Year Planning', href: '/solutions/gap-year-planning' },
+        { name: 'Career Guidance', href: '/solutions/career-guidance' }
+      ]
     },
     {
       title: 'Resources',
-      links: ['Blog', 'Docs', 'Case Studies', 'Status', 'Changelog', 'Help Center']
+      links: [
+        { name: 'Blog', href: '/resources/blog' },
+        { name: 'Docs', href: '/resources/docs' },
+        { name: 'Case Studies', href: '/resources/case-studies' },
+        { name: 'Status', href: '/resources/status' },
+        { name: 'Changelog', href: '/resources/changelog' },
+        { name: 'Help Center', href: '/resources/help-center' }
+      ]
     },
     {
       title: 'Company',
-      links: ['About', 'Pricing', 'Contact', 'Careers', 'Privacy', 'Terms']
+      links: [
+        { name: 'About', href: '/company/about' },
+        { name: 'Contact', href: '/company/contact' },
+        { name: 'Careers', href: '/company/careers' },
+        { name: 'Privacy', href: '/company/privacy' },
+        { name: 'Terms', href: '/company/terms' }
+      ]
     }
   ]
 
@@ -31,9 +58,9 @@ export default function ROXMegaFooter() {
               <div className="font-semibold text-foreground mb-4">{col.title}</div>
               <ul className="space-y-2 text-foreground/70">
                 {col.links.map((link) => (
-                  <li key={link}>
-                    <Link href="#" className="hover:text-foreground transition-colors">
-                      {link}
+                  <li key={link.name}>
+                    <Link href={link.href} className="hover:text-foreground transition-colors">
+                      {link.name}
                     </Link>
                   </li>
                 ))}
@@ -51,9 +78,9 @@ export default function ROXMegaFooter() {
             </div>
             
             <div className="flex gap-6 text-foreground/60">
-              <Link href="#" className="hover:text-foreground transition-colors">Privacy Policy</Link>
-              <Link href="#" className="hover:text-foreground transition-colors">Terms of Service</Link>
-              <Link href="#" className="hover:text-foreground transition-colors">Cookie Policy</Link>
+              <Link href="/company/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
+              <Link href="/company/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
+              <Link href="/company/privacy" className="hover:text-foreground transition-colors">Cookie Policy</Link>
             </div>
           </div>
         </div>
