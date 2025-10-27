@@ -255,9 +255,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   // Check auth status on mount
   useEffect(() => {
-    checkAuthStatus()
-    
-    // Check for Google OAuth callback
+    // Check for Google OAuth callback FIRST (before checkAuthStatus)
     if (typeof window !== 'undefined') {
       const urlParams = new URLSearchParams(window.location.search)
       const googleAuth = urlParams.get('google_auth')
@@ -282,10 +280,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
           name: name || undefined
         })
         
-        // Trigger auth state change event
-        window.dispatchEvent(new CustomEvent('authStateChanged'))
-        
-        // Clean up URL parameters
+        // Clean up URL parameters immediately
         const newUrl = new URL(window.location.href)
         newUrl.searchParams.delete('google_auth')
         newUrl.searchParams.delete('email')
@@ -293,10 +288,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
         newUrl.searchParams.delete('picture')
         window.history.replaceState({}, '', newUrl.toString())
         
-        // Redirect to home page
-        router.push('/home')
+        // Set isLoading to false since we've set the user
+        setIsLoading(false)
+        
+        // DON'T redirect - let the current page handle it
+        return
       }
     }
+    
+    // If no OAuth callback, check auth status normally
+    checkAuthStatus()
   }, [router])
 
   // Listen for storage changes (e.g., from other tabs)
