@@ -15,6 +15,16 @@ export function ProtectedRoute({ children, fallback }: ProtectedRouteProps) {
 
   useEffect(() => {
     if (!isLoading) {
+      // Check if this is an OAuth callback - if so, don't redirect yet
+      if (typeof window !== 'undefined') {
+        const urlParams = new URLSearchParams(window.location.search)
+        const googleAuth = urlParams.get('google_auth')
+        if (googleAuth === 'success') {
+          // OAuth callback in progress, wait for AuthProvider to handle it
+          return
+        }
+      }
+      
       // Check localStorage directly as a fallback for OAuth
       const authToken = typeof window !== 'undefined' ? localStorage.getItem('auth_token') : null
       const trialMode = typeof window !== 'undefined' ? localStorage.getItem('trial_mode') : null
@@ -49,10 +59,20 @@ export function ProtectedRoute({ children, fallback }: ProtectedRouteProps) {
   }
 
   // Show fallback or redirect if not authenticated
+  // Check if this is an OAuth callback
+  const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null
+  const googleAuth = urlParams?.get('google_auth')
+  const isOAuthCallback = googleAuth === 'success'
+  
   // Check localStorage as fallback for OAuth
   const authToken = typeof window !== 'undefined' ? localStorage.getItem('auth_token') : null
   const trialMode = typeof window !== 'undefined' ? localStorage.getItem('trial_mode') : null
   const actuallyAuthenticated = isAuthenticated || !!authToken
+  
+  // Allow OAuth callback to proceed without redirect
+  if (isOAuthCallback) {
+    return <>{children}</>
+  }
   
   if (!actuallyAuthenticated) {
     if (trialMode) {
