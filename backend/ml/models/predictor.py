@@ -281,8 +281,8 @@ class AdmissionPredictor:
         # Allow probabilities to go up to 98% for exceptional applicants
         formula_prob = np.clip(formula_prob, 0.01, 0.98)
         
-        # If ML not available or not requested, return formula only
-        if not self.is_available() or not use_formula:
+        # If ML not available, return formula only
+        if not self.is_available():
             return PredictionResult(
                 probability=formula_prob,
                 confidence_interval=(max(0.02, formula_prob - 0.10), 
@@ -322,29 +322,36 @@ class AdmissionPredictor:
         ml_confidence = 1.0 - 4 * ml_prob * (1 - ml_prob)  # 0 at 0.5, 1 at 0 or 1
         ml_confidence = max(0.3, min(0.9, ml_confidence))  # Clamp to reasonable range
         
-        # Determine blend weights
-        # If ML is confident and performs well, trust it more
-        # If ML is uncertain, trust formula more
-        
-        # Base weights (from training performance)
-        # Ensemble ROC-AUC: 0.7812, Formula ROC-AUC: 0.8101
-        # Formula is slightly better, so start with more formula weight
-        
-        if ml_confidence > 0.7:
-            # High ML confidence: 60% ML, 40% formula
-            ml_weight = 0.60
-            formula_weight = 0.40
-        elif ml_confidence > 0.5:
-            # Medium confidence: 50-50
-            ml_weight = 0.50
-            formula_weight = 0.50
+        # Determine blend weights based on use_formula parameter
+        if not use_formula:
+            # ML only
+            ml_weight = 1.0
+            formula_weight = 0.0
+            final_prob = ml_prob
         else:
-            # Low confidence: trust formula more
-            ml_weight = 0.40
-            formula_weight = 0.60
-        
-        # Blend predictions
-        final_prob = ml_weight * ml_prob + formula_weight * formula_prob
+            # Hybrid ML+Formula approach
+            # If ML is confident and performs well, trust it more
+            # If ML is uncertain, trust formula more
+            
+            # Base weights (from training performance)
+            # Ensemble ROC-AUC: 0.7812, Formula ROC-AUC: 0.8101
+            # Formula is slightly better, so start with more formula weight
+            
+            if ml_confidence > 0.7:
+                # High ML confidence: 60% ML, 40% formula
+                ml_weight = 0.60
+                formula_weight = 0.40
+            elif ml_confidence > 0.5:
+                # Medium confidence: 50-50
+                ml_weight = 0.50
+                formula_weight = 0.50
+            else:
+                # Low confidence: trust formula more
+                ml_weight = 0.40
+                formula_weight = 0.60
+            
+            # Blend predictions
+            final_prob = ml_weight * ml_prob + formula_weight * formula_prob
         
         # FIXED: Remove excessive final calibration that was making probabilities too low
         # Keep blended probabilities as-is for realistic ranges
@@ -371,7 +378,10 @@ class AdmissionPredictor:
             feature_importances = dict(zip(self.feature_names, importances))
         
         # Create explanation
-        explanation = f"Hybrid: {ml_weight:.0%} ML ({model_name}) + {formula_weight:.0%} Formula"
+        if not use_formula:
+            explanation = f"ML-only prediction using {model_name} model"
+        else:
+            explanation = f"Hybrid: {ml_weight:.0%} ML ({model_name}) + {formula_weight:.0%} Formula"
         
         return PredictionResult(
             probability=final_prob,
