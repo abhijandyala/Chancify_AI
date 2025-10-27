@@ -296,24 +296,19 @@ export default function ROXTestimonialSection() {
                 {/* Placeholder for video thumbnail - you can replace this with actual thumbnail */}
                 <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 via-gray-800/20 to-black/40" />
                 
-                {/* Video thumbnail content */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-white text-lg font-semibold">Chancify AI Interview</div>
-                  </div>
-                </div>
+                {/* Video thumbnail content - just background gradient */}
               </div>
 
               {/* Premium Play Button Overlay */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/10 transition-colors"
+                className="absolute inset-0 flex flex-col items-center justify-center bg-black/20 hover:bg-black/10 transition-colors"
               >
                 <motion.div
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative group"
+                  className="relative group mb-6"
                 >
                   {/* Outer ring */}
                   <div className="w-20 h-20 border-2 border-white/30 rounded-full flex items-center justify-center group-hover:border-yellow-400/60 transition-colors duration-300">
@@ -326,6 +321,9 @@ export default function ROXTestimonialSection() {
                   {/* Glow effect */}
                   <div className="absolute inset-0 w-20 h-20 bg-yellow-400/20 rounded-full blur-xl group-hover:bg-yellow-400/30 transition-colors duration-300" />
                 </motion.div>
+                
+                {/* Text below play button */}
+                <div className="text-white text-xl font-bold drop-shadow-lg">Chancify AI Interview</div>
               </motion.div>
 
               {/* Hover overlay effect */}
