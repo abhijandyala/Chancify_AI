@@ -330,6 +330,10 @@ class AdmissionPredictor:
         # Keep blended probabilities as-is for realistic ranges
         
         # Apply elite university calibration for realistic probabilities
+        print(f"DEBUG: About to apply elite calibration")
+        print(f"DEBUG: College object: {college}")
+        print(f"DEBUG: College name: {college.name}")
+        print(f"DEBUG: College type: {type(college)}")
         final_prob = self._apply_elite_calibration(final_prob, college)
         
         # Allow probabilities up to 98% for exceptional applicants
