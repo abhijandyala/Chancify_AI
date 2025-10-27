@@ -302,7 +302,7 @@ export default function ROXTestimonialSection() {
                     <div className="w-16 h-16 bg-yellow-400/20 rounded-full flex items-center justify-center mx-auto">
                       <Play className="w-8 h-8 text-yellow-400" />
                     </div>
-                    <div className="text-white/80 text-sm font-medium">Chancify AI Demo</div>
+                    <div className="text-white text-lg font-semibold">Chancify AI Interview</div>
                   </div>
                 </div>
               </div>
@@ -419,7 +419,7 @@ export default function ROXTestimonialSection() {
               <iframe
                 className="w-full h-full"
                 src="https://www.youtube.com/embed/wh2SWrGRpko?autoplay=1&rel=0"
-                title="Chancify AI Demo"
+                title="Chancify AI Interview"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
