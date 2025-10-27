@@ -298,10 +298,7 @@ export default function ROXTestimonialSection() {
                 
                 {/* Video thumbnail content */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center space-y-4">
-                    <div className="w-16 h-16 bg-yellow-400/20 rounded-full flex items-center justify-center mx-auto">
-                      <Play className="w-8 h-8 text-yellow-400" />
-                    </div>
+                  <div className="text-center">
                     <div className="text-white text-lg font-semibold">Chancify AI Interview</div>
                   </div>
                 </div>
