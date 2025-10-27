@@ -203,7 +203,7 @@ class AdmissionPredictor:
             if metadata_file.exists():
                 with open(metadata_file, 'r') as f:
                     self.metadata = json.load(f)
-                self.feature_names = self.metadata.get('feature_names', [])
+                self.feature_names = self.metadata.get('feature_names', self.metadata.get('selected_features', []))
                 print(f"DEBUG: Loaded metadata with {len(self.feature_names)} features")
             
             # Load scaler
