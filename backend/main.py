@@ -574,14 +574,29 @@ async def predict_admission_frontend(request: FrontendProfileRequest):
         logger.info(f"College city: {college_data.get('city', 'MISSING')}")
         logger.info(f"College state: {college_data.get('state', 'MISSING')}")
         
-        # Get real acceptance rate from OpenAI API
+        # Get real acceptance rate and subject emphasis from OpenAI API
         try:
             college_info = await college_info_service.get_college_info(college_data['name'])
             real_acceptance_rate = college_info['academics']['acceptance_rate']
             print(f"Using real acceptance rate for {college_data['name']}: {real_acceptance_rate:.1%}")
+            
+            # Get subject emphasis data
+            subject_data = await college_info_service.get_college_subject_emphasis(college_data['name'])
+            subject_emphasis = subject_data['subject_emphasis']
+            print(f"Using real subject emphasis for {college_data['name']}: {len(subject_emphasis)} subjects")
         except Exception as e:
-            print(f"Failed to get real acceptance rate for {college_data['name']}: {e}")
+            print(f"Failed to get OpenAI data for {college_data['name']}: {e}")
             real_acceptance_rate = college_data['acceptance_rate']  # Fallback to database value
+            subject_emphasis = [
+                {"label": "Computer Science", "value": 28},
+                {"label": "Engineering", "value": 24},
+                {"label": "Business", "value": 16},
+                {"label": "Biological Sciences", "value": 14},
+                {"label": "Mathematics & Stats", "value": 11},
+                {"label": "Social Sciences", "value": 9},
+                {"label": "Arts & Humanities", "value": 7},
+                {"label": "Education", "value": 5}
+            ]
         
         college = CollegeFeatures(
             name=college_data['name'],
@@ -642,7 +657,9 @@ async def predict_admission_frontend(request: FrontendProfileRequest):
                 "test_policy": college_data['test_policy'],
                 "financial_aid_policy": college_data['financial_aid_policy'],
                 "gpa_average": college_data['gpa_average']
-            }
+            },
+            # Return subject emphasis data from OpenAI
+            "subject_emphasis": subject_emphasis
         }
         
     except Exception as e:

@@ -329,7 +329,7 @@ export default function CalculationsPage() {
             waitlist: Math.round(waitlistRate * 100),
             reject: Math.round(rejectRate * 100)
           },
-          subjects: [
+          subjects: result.subject_emphasis || [
             { label: 'Computer Science', value: 28 },
             { label: 'Engineering', value: 24 },
             { label: 'Business', value: 16 },
