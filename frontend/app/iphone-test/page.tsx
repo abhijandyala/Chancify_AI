@@ -1,6 +1,6 @@
 'use client'
 
-import iPhone3D from '@/components/ui/iPhone3D'
+import iPhone3DComponent from '@/components/ui/iPhone3D'
 
 export default function iPhoneTestPage() {
   return (
@@ -11,7 +11,7 @@ export default function iPhoneTestPage() {
       </div>
       
       <div className="w-full max-w-4xl">
-        <iPhone3D />
+        <iPhone3DComponent />
       </div>
       
       <div className="text-center mt-8">
