@@ -16,7 +16,7 @@ import { useRouter } from 'next/navigation'
 import { MajorSelectionModal } from '@/components/ui/MajorSelectionModal'
 import { SaveModal } from '@/components/SaveModal'
 import { PresetStorage } from '@/lib/preset-storage'
-import MobileiPhoneShowcase from '@/components/ui/MobileiPhoneShowcase'
+import UltraRealisticShowcase from '@/components/ui/UltraRealisticShowcase'
 import AdvancediPhoneShowcase from '@/components/ui/AdvancediPhoneShowcase'
 
 export const dynamic = 'force-dynamic'
@@ -485,9 +485,9 @@ export default function HomePage() {
 
         {/* 3D iPhone Showcase */}
         <motion.section {...enter} className="mb-8 sm:mb-10 lg:mb-12">
-          <MobileiPhoneShowcase 
-            title="Experience Chancify AI"
-            subtitle="See how our mobile interface brings your college journey to life"
+          <UltraRealisticShowcase 
+            title="Experience Chancify AI in 4K"
+            subtitle="Ultra-realistic iPhone interface with stunning visual quality"
             variant="featured"
           />
         </motion.section>

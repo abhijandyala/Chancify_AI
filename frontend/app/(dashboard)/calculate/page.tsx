@@ -5,7 +5,7 @@ import { Info, MapPin, TrendingUp, Zap, Target, TrendingDown, Award, ArrowLeft }
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { COLLEGES } from '@/lib/colleges';
-import MobileiPhoneShowcase from '@/components/ui/MobileiPhoneShowcase';
+import UltraRealisticShowcase from '@/components/ui/UltraRealisticShowcase';
 import {
   ResponsiveContainer,
   BarChart,
@@ -748,18 +748,18 @@ export default function CalculationsPage() {
             </motion.div>
 
             {/* 3D iPhone Showcase */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              <MobileiPhoneShowcase 
-                title="Mobile Experience"
-                subtitle="See your results in 3D"
-                variant="compact"
-                showTitle={true}
-              />
-            </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
+          <UltraRealisticShowcase 
+            title="4K Mobile Experience"
+            subtitle="Ultra-realistic iPhone with your results"
+            variant="compact"
+            showTitle={true}
+          />
+        </motion.div>
 
             {(d.facts && Object.keys(d.facts).length > 0) && (
               <motion.div 

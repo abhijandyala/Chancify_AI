@@ -33,7 +33,7 @@ export const ROXSelect = ({
       }
     }
 
-    if (isOpen) {
+    if (isOpen && containerRef.current) {
       document.addEventListener('mousedown', handleClickOutside)
       return () => document.removeEventListener('mousedown', handleClickOutside)
     }

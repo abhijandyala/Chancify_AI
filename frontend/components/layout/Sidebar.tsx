@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Compass, Bookmark, FileText, Brain, Zap, ChevronRight, ChevronLeft, Menu, X, Sparkles } from 'lucide-react'
+import { Home, Compass, Bookmark, FileText, Brain, Zap, ChevronRight, ChevronLeft, Menu, X, Sparkles, Award } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { useState, useEffect } from 'react'
@@ -13,6 +13,7 @@ const navItems = [
   { href: '/watchlist', label: 'Watchlist', icon: Bookmark },
   { href: '/sat', label: 'SAT Prep', icon: FileText },
   { href: '/advanced-demo', label: '3D Demo', icon: Sparkles },
+  { href: '/ultra-realistic-demo', label: '4K Demo', icon: Award },
 ]
 
 interface SidebarProps {

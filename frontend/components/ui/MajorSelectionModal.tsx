@@ -34,7 +34,7 @@ export function MajorSelectionModal({
       }
     }
 
-    if (isOpen) {
+    if (isOpen && modalRef.current) {
       document.addEventListener('mousedown', handleClickOutside)
       // Prevent body scroll when modal is open
       document.body.style.overflow = 'hidden'
