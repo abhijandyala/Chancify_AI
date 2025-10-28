@@ -394,8 +394,18 @@ export default function ContactPage() {
       {/* Footer */}
       <div className="relative z-10 border-t border-white/10 mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center text-white/60 text-sm">
-            © {new Date().getFullYear()} Chancify AI. All rights reserved.
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-white/60 text-sm">
+              Copyright © {new Date().getFullYear()} Chancify AI. All rights reserved.
+            </div>
+            
+            <div className="flex gap-6 text-white/60">
+              <Link href="/company/about" className="hover:text-white transition-colors">About</Link>
+              <Link href="/company/contact" className="hover:text-white transition-colors">Contact</Link>
+              <Link href="/company/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+              <Link href="/company/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+              <Link href="/company/privacy" className="hover:text-white transition-colors">Cookie Policy</Link>
+            </div>
           </div>
         </div>
       </div>
