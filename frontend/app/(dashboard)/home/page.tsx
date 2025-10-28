@@ -17,6 +17,7 @@ import { MajorSelectionModal } from '@/components/ui/MajorSelectionModal'
 import { SaveModal } from '@/components/SaveModal'
 import { PresetStorage } from '@/lib/preset-storage'
 import MobileiPhoneShowcase from '@/components/ui/MobileiPhoneShowcase'
+import AdvancediPhoneShowcase from '@/components/ui/AdvancediPhoneShowcase'
 
 export const dynamic = 'force-dynamic'
 
@@ -488,6 +489,15 @@ export default function HomePage() {
             title="Experience Chancify AI"
             subtitle="See how our mobile interface brings your college journey to life"
             variant="featured"
+          />
+        </motion.section>
+
+        {/* Advanced 3D iPhone Showcase */}
+        <motion.section {...enter} className="mb-8 sm:mb-10 lg:mb-12">
+          <AdvancediPhoneShowcase 
+            title="Advanced 3D Experience"
+            subtitle="Gesture controls, physics animations, and immersive interactions"
+            variant="demo"
           />
         </motion.section>
 
