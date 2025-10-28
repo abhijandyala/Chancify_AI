@@ -3,9 +3,11 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import TermsOfServiceModal from './TermsOfServiceModal'
+import PrivacyPolicyModal from './PrivacyPolicyModal'
 
 export default function ROXMegaFooter() {
   const [showTermsModal, setShowTermsModal] = useState(false)
+  const [showPrivacyModal, setShowPrivacyModal] = useState(false)
   return (
     <footer className="border-t border-border bg-background-subtle">
       <div className="border-t border-border py-6">
@@ -19,7 +21,7 @@ export default function ROXMegaFooter() {
               <Link href="/company/about" className="hover:text-foreground transition-colors">About</Link>
               <Link href="/company/contact" className="hover:text-foreground transition-colors">Contact</Link>
               <button 
-                onClick={() => setShowTermsModal(true)}
+                onClick={() => setShowPrivacyModal(true)}
                 className="hover:text-foreground transition-colors"
               >
                 Privacy Policy
@@ -31,7 +33,7 @@ export default function ROXMegaFooter() {
                 Terms of Service
               </button>
               <button 
-                onClick={() => setShowTermsModal(true)}
+                onClick={() => setShowPrivacyModal(true)}
                 className="hover:text-foreground transition-colors"
               >
                 Cookie Policy
@@ -40,6 +42,12 @@ export default function ROXMegaFooter() {
           </div>
         </div>
       </div>
+      
+      {/* Privacy Policy Modal */}
+      <PrivacyPolicyModal 
+        isOpen={showPrivacyModal} 
+        onClose={() => setShowPrivacyModal(false)} 
+      />
       
       {/* Terms of Service Modal */}
       <TermsOfServiceModal 
