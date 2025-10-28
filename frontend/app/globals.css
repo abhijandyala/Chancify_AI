@@ -523,93 +523,68 @@
   }
 }
 
-/* College Selection Glow Effects */
-.college-card-selected {
+/* College Selection Glow Effects - Proper Implementation */
+.college-card-wrapper {
   position: relative;
-  background: linear-gradient(135deg, #1e1e24 10%, #050505 60%);
-  animation: gradient-shift 5s ease-in-out infinite;
-  background-size: 200% 200%;
-  border-radius: 12px;
-  overflow: hidden;
-  z-index: 1;
+  display: inline-block;
 }
 
-.college-card-selected::before,
-.college-card-selected::after {
-  --size: 8px;
-  content: "";
+.college-card-glow {
   position: absolute;
-  top: calc(var(--size) / -2);
-  left: calc(var(--size) / -2);
-  width: calc(100% + var(--size));
-  height: calc(100% + var(--size));
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
   border-radius: 20px;
   pointer-events: none;
   z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.college-card-selected::after {
-  --size: 4px;
-  z-index: -2;
-}
-
-.college-card-selected::before {
-  --size: 16px;
-  z-index: -3;
-  filter: blur(3vmin);
-  animation: blur-animation 3s ease-in-out alternate infinite;
+.college-card-glow.active {
+  opacity: 1;
 }
 
 /* Safety Schools - Green Glow */
-.college-card-selected.safety {
-  border-color: #10b981 !important;
-}
-
-.college-card-selected.safety::before,
-.college-card-selected.safety::after {
-  background: radial-gradient(circle at 0 0, #10b981, transparent),
-    radial-gradient(circle at 100% 0, #10b981, transparent),
-    radial-gradient(circle at 0 100%, #10b981, transparent),
-    radial-gradient(circle at 100% 100%, #10b981, transparent);
+.college-card-glow.safety {
+  background: radial-gradient(circle at center, rgba(16, 185, 129, 0.4) 0%, rgba(16, 185, 129, 0.2) 30%, transparent 70%);
+  box-shadow: 
+    0 0 20px rgba(16, 185, 129, 0.6),
+    0 0 40px rgba(16, 185, 129, 0.4),
+    0 0 60px rgba(16, 185, 129, 0.2);
 }
 
 /* Target Schools - Yellow Glow */
-.college-card-selected.target {
-  border-color: #f59e0b !important;
-}
-
-.college-card-selected.target::before,
-.college-card-selected.target::after {
-  background: radial-gradient(circle at 0 0, #f59e0b, transparent),
-    radial-gradient(circle at 100% 0, #f59e0b, transparent),
-    radial-gradient(circle at 0 100%, #f59e0b, transparent),
-    radial-gradient(circle at 100% 100%, #f59e0b, transparent);
+.college-card-glow.target {
+  background: radial-gradient(circle at center, rgba(245, 158, 11, 0.4) 0%, rgba(245, 158, 11, 0.2) 30%, transparent 70%);
+  box-shadow: 
+    0 0 20px rgba(245, 158, 11, 0.6),
+    0 0 40px rgba(245, 158, 11, 0.4),
+    0 0 60px rgba(245, 158, 11, 0.2);
 }
 
 /* Reach Schools - Red Glow */
-.college-card-selected.reach {
-  border-color: #ef4444 !important;
-}
-
-.college-card-selected.reach::before,
-.college-card-selected.reach::after {
-  background: radial-gradient(circle at 0 0, #ef4444, transparent),
-    radial-gradient(circle at 100% 0, #ef4444, transparent),
-    radial-gradient(circle at 0 100%, #ef4444, transparent),
-    radial-gradient(circle at 100% 100%, #ef4444, transparent);
+.college-card-glow.reach {
+  background: radial-gradient(circle at center, rgba(239, 68, 68, 0.4) 0%, rgba(239, 68, 68, 0.2) 30%, transparent 70%);
+  box-shadow: 
+    0 0 20px rgba(239, 68, 68, 0.6),
+    0 0 40px rgba(239, 68, 68, 0.4),
+    0 0 60px rgba(239, 68, 68, 0.2);
 }
 
 /* Search Results - Default Yellow Glow */
-.college-card-selected.search {
-  border-color: #f59e0b !important;
+.college-card-glow.search {
+  background: radial-gradient(circle at center, rgba(245, 158, 11, 0.4) 0%, rgba(245, 158, 11, 0.2) 30%, transparent 70%);
+  box-shadow: 
+    0 0 20px rgba(245, 158, 11, 0.6),
+    0 0 40px rgba(245, 158, 11, 0.4),
+    0 0 60px rgba(245, 158, 11, 0.2);
 }
 
-.college-card-selected.search::before,
-.college-card-selected.search::after {
-  background: radial-gradient(circle at 0 0, #f59e0b, transparent),
-    radial-gradient(circle at 100% 0, #f59e0b, transparent),
-    radial-gradient(circle at 0 100%, #f59e0b, transparent),
-    radial-gradient(circle at 100% 100%, #f59e0b, transparent);
+/* Remove old glow classes */
+.college-card-selected {
+  /* Remove all the old glow styling */
 }
 
 /* Faster blur animation */
