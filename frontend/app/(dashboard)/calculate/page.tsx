@@ -654,25 +654,25 @@ export default function CalculationsPage() {
                           <Money n={
                             zipcodeTuitionData && zipcodeTuitionData.success 
                               ? zipcodeTuitionData.tuition 
-                              : (tuitionData?.in_state_tuition ?? d.costs?.inStateTuition ?? d.costs?.outStateTuition)
+                              : (d.costs?.inStateTuition ?? d.costs?.outStateTuition ?? 0)
                           } />
                         </td>
                       </tr>
                       <tr>
                         <td className="p-3 text-white">Fees</td>
-                        <td className="p-3 text-right text-white"><Money n={tuitionData?.fees ?? d.costs?.fees} /></td>
+                        <td className="p-3 text-right text-white"><Money n={d.costs?.fees ?? 1000} /></td>
                       </tr>
                       <tr>
                         <td className="p-3 text-white">Room & Board</td>
-                        <td className="p-3 text-right text-white"><Money n={tuitionData?.room_board ?? d.costs?.roomBoard} /></td>
+                        <td className="p-3 text-right text-white"><Money n={d.costs?.roomBoard ?? 15000} /></td>
                       </tr>
                       <tr>
                         <td className="p-3 text-white">Books</td>
-                        <td className="p-3 text-right text-white"><Money n={tuitionData?.books ?? d.costs?.books} /></td>
+                        <td className="p-3 text-right text-white"><Money n={d.costs?.books ?? 1000} /></td>
                       </tr>
                       <tr>
                         <td className="p-3 text-white">Other</td>
-                        <td className="p-3 text-right text-white"><Money n={tuitionData?.other_expenses ?? d.costs?.other} /></td>
+                        <td className="p-3 text-right text-white"><Money n={d.costs?.other ?? 2000} /></td>
                       </tr>
                       <tr className="border-t border-ROX_GOLD/30 bg-ROX_DARK_GRAY/40">
                         <td className="p-3 text-white font-semibold">Total</td>
@@ -680,7 +680,7 @@ export default function CalculationsPage() {
                           <Money n={
                             zipcodeTuitionData && zipcodeTuitionData.success 
                               ? zipcodeTuitionData.tuition + 20000  // Add estimated room/board/fees
-                              : (tuitionData?.total_in_state ?? (d.costs?.inStateTuition ?? d.costs?.outStateTuition ?? 0))
+                              : (d.costs?.inStateTuition ?? d.costs?.outStateTuition ?? 0)
                           } />
                         </td>
                       </tr>
