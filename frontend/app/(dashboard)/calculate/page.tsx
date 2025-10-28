@@ -5,6 +5,7 @@ import { Info, MapPin, TrendingUp, Zap, Target, TrendingDown, Award, ArrowLeft }
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { COLLEGES } from '@/lib/colleges';
+import { useCollegeSubjectEmphasis } from '@/lib/hooks/useCollegeSubjectEmphasis';
 import { useCollegeTuition } from '@/lib/hooks/useCollegeTuition';
 import {
   ResponsiveContainer,
@@ -233,6 +234,9 @@ export default function CalculationsPage() {
 
   // Get tuition data for the selected college
   const { tuitionData, loading: tuitionLoading, error: tuitionError } = useCollegeTuition(collegeName);
+
+  // Get subject emphasis data for the selected college
+  const { subjects: subjectEmphasis, loading: subjectsLoading, error: subjectsError } = useCollegeSubjectEmphasis(collegeName);
 
   // Load data from localStorage and calculate probabilities
   React.useEffect(() => {
@@ -649,7 +653,7 @@ export default function CalculationsPage() {
                       <tr className="border-t border-ROX_GOLD/30 bg-ROX_DARK_GRAY/40">
                         <td className="p-3 text-white font-semibold">Total</td>
                         <td className="p-3 text-right text-white font-semibold">
-                          <Money n={tuitionData?.total_in_state ?? d.costs?.total} />
+                          <Money n={tuitionData?.total_in_state ?? (d.costs?.inStateTuition ?? d.costs?.outStateTuition ?? 0)} />
                         </td>
                       </tr>
                     </tbody>
