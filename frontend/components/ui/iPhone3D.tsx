@@ -29,8 +29,8 @@ export default function Phone3D({
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  // Use the iPhone 16 Pro Black model from Sketchfab (static position, clean UI)
-  const sketchfabUrl = "https://sketchfab.com/models/5cb0778041a34f09b409a38c687bb1d4/embed?autospin=0&autostart=1&preload=1&transparent=1&ui_theme=dark&camera=0&ui_hint=0&ui_infos=0&ui_stop=0&ui_watermark=0&ui_help=0&ui_settings=0&ui_fullscreen=0&ui_vr=0&ui_annotations=0&ui_controls=1&ui_inspector=0&ui_loading=0&ui_ar=0&ui_share=0&ui_viewer_controls=1&orbit_controls=1"
+  // Use the iPhone 16 Pro Black model from Sketchfab (NO UI ELEMENTS)
+  const sketchfabUrl = "https://sketchfab.com/models/5cb0778041a34f09b409a38c687bb1d4/embed?autospin=0&autostart=1&preload=1&transparent=1&ui_theme=dark&camera=0&ui_hint=0&ui_infos=0&ui_stop=0&ui_watermark=0&ui_help=0&ui_settings=0&ui_fullscreen=0&ui_vr=0&ui_annotations=0&ui_controls=0&ui_inspector=0&ui_loading=0&ui_ar=0&ui_share=0&ui_viewer_controls=0&orbit_controls=0&ui_watermark=0&ui_logo=0&ui_branding=0"
 
   return (
     <div className={`w-full h-64 sm:h-80 lg:h-96 relative ${className}`}>
