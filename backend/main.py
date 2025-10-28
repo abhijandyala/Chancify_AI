@@ -16,7 +16,7 @@ from data.real_ipeds_major_mapping import get_colleges_for_major, get_major_stre
 from data.real_college_suggestions import real_college_suggestions
 from data.college_names_mapping import college_names_mapping
 from data.college_nickname_mapper import nickname_mapper
-from data.college_subject_emphasis import college_subject_emphasis
+from data.college_tuition_service import college_tuition_service
 
 # Configure logging
 logging.basicConfig(
@@ -344,6 +344,46 @@ async def get_college_subject_emphasis(college_name: str):
             "success": False,
             "college_name": college_name,
             "subjects": [],
+            "error": str(e)
+        }
+
+@app.get("/api/college-tuition/{college_name}",
+         summary="Get college tuition data",
+         description="Get real tuition and cost data for a college",
+         tags=["College Tuition"])
+async def get_college_tuition(college_name: str):
+    """
+    Get tuition and cost data for a specific college.
+    
+    This endpoint returns real tuition, fees, room & board, and other costs
+    for the specified college.
+    
+    Args:
+        college_name: Name of the college
+        
+    Returns:
+        JSON response with tuition and cost information
+    """
+    try:
+        logger.info(f"Getting tuition data for: {college_name}")
+        
+        # Get tuition data
+        tuition_data = college_tuition_service.get_tuition_data_with_cache(college_name, suggestion_cache)
+        
+        logger.info(f"Tuition data retrieved for {college_name}: ${tuition_data['total_in_state']:,} total")
+        
+        return {
+            "success": True,
+            "college_name": college_name,
+            "tuition_data": tuition_data
+        }
+        
+    except Exception as e:
+        logger.error(f"Error getting tuition data for {college_name}: {e}")
+        return {
+            "success": False,
+            "college_name": college_name,
+            "tuition_data": None,
             "error": str(e)
         }
 

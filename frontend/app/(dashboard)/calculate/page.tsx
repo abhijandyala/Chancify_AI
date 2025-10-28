@@ -5,7 +5,7 @@ import { Info, MapPin, TrendingUp, Zap, Target, TrendingDown, Award, ArrowLeft }
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { COLLEGES } from '@/lib/colleges';
-import { useCollegeSubjectEmphasis } from '@/lib/hooks/useCollegeSubjectEmphasis';
+import { useCollegeTuition } from '@/lib/hooks/useCollegeTuition';
 import {
   ResponsiveContainer,
   BarChart,
@@ -231,8 +231,8 @@ export default function CalculationsPage() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [collegeName, setCollegeName] = React.useState<string | null>(null);
 
-  // Get subject emphasis data for the selected college
-  const { subjects: subjectEmphasis, loading: subjectsLoading, error: subjectsError } = useCollegeSubjectEmphasis(collegeName);
+  // Get tuition data for the selected college
+  const { tuitionData, loading: tuitionLoading, error: tuitionError } = useCollegeTuition(collegeName);
 
   // Load data from localStorage and calculate probabilities
   React.useEffect(() => {
@@ -600,7 +600,11 @@ export default function CalculationsPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-ROX_GOLD/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               <div className="relative">
-                <h2 className="text-lg font-semibold text-white mb-6">Tuition & Annual Costs {d.costs?.year ? `(${d.costs.year})` : ''}</h2>
+                <h2 className="text-lg font-semibold text-white mb-6">
+                  Tuition & Annual Costs (2025)
+                  {tuitionLoading && <span className="text-sm text-gray-400 ml-2">(Loading...)</span>}
+                  {tuitionError && <span className="text-sm text-red-400 ml-2">(Using default data)</span>}
+                </h2>
                 <div className="space-y-6">
                 {tuitionBars.length > 0 && (
                   <div className="grid sm:grid-cols-2 gap-4">
@@ -624,23 +628,29 @@ export default function CalculationsPage() {
                     <tbody className="divide-y divide-ROX_GOLD/20">
                       <tr>
                         <td className="p-3 text-white">Tuition</td>
-                        <td className="p-3 text-right text-white"><Money n={d.costs?.inStateTuition ?? d.costs?.outStateTuition} /></td>
+                        <td className="p-3 text-right text-white"><Money n={tuitionData?.in_state_tuition ?? d.costs?.inStateTuition ?? d.costs?.outStateTuition} /></td>
                       </tr>
                       <tr>
                         <td className="p-3 text-white">Fees</td>
-                        <td className="p-3 text-right text-white"><Money n={d.costs?.fees} /></td>
+                        <td className="p-3 text-right text-white"><Money n={tuitionData?.fees ?? d.costs?.fees} /></td>
                       </tr>
                       <tr>
                         <td className="p-3 text-white">Room & Board</td>
-                        <td className="p-3 text-right text-white"><Money n={d.costs?.roomBoard} /></td>
+                        <td className="p-3 text-right text-white"><Money n={tuitionData?.room_board ?? d.costs?.roomBoard} /></td>
                       </tr>
                       <tr>
                         <td className="p-3 text-white">Books</td>
-                        <td className="p-3 text-right text-white"><Money n={d.costs?.books} /></td>
+                        <td className="p-3 text-right text-white"><Money n={tuitionData?.books ?? d.costs?.books} /></td>
                       </tr>
                       <tr>
                         <td className="p-3 text-white">Other</td>
-                        <td className="p-3 text-right text-white"><Money n={d.costs?.other} /></td>
+                        <td className="p-3 text-right text-white"><Money n={tuitionData?.other_expenses ?? d.costs?.other} /></td>
+                      </tr>
+                      <tr className="border-t border-ROX_GOLD/30 bg-ROX_DARK_GRAY/40">
+                        <td className="p-3 text-white font-semibold">Total</td>
+                        <td className="p-3 text-right text-white font-semibold">
+                          <Money n={tuitionData?.total_in_state ?? d.costs?.total} />
+                        </td>
                       </tr>
                     </tbody>
                   </table>
