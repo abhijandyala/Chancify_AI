@@ -212,12 +212,12 @@ export default function CollegeSelectionPage() {
     }
   }, [])
 
-  // Handle college selection
+  // Handle college selection (single selection only)
   const handleCollegeSelect = (collegeId: string) => {
     setSelectedColleges(prev => 
       prev.includes(collegeId) 
-        ? prev.filter(id => id !== collegeId)
-        : [...prev, collegeId]
+        ? [] // Deselect if already selected
+        : [collegeId] // Select only this college
     )
   }
 
@@ -298,11 +298,11 @@ export default function CollegeSelectionPage() {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => handleCollegeSelect(college.college_id)}
-                    className={`flex items-center justify-between p-3 border rounded-lg transition-all duration-300 cursor-pointer ${
-                      selectedColleges.includes(college.college_id)
-                        ? 'college-card-selected border-yellow-400/50'
-                        : 'border-gray-600 hover:border-yellow-400/50'
-                    }`}
+                     className={`flex items-center justify-between p-3 border rounded-lg transition-all duration-300 cursor-pointer ${
+                       selectedColleges.includes(college.college_id)
+                         ? 'college-card-selected search border-yellow-400/50'
+                         : 'border-gray-600 hover:border-yellow-400/50'
+                     }`}
                   >
                     <div className="flex items-center gap-3">
                       <div className="flex-1">
@@ -378,11 +378,11 @@ export default function CollegeSelectionPage() {
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           onClick={() => handleCollegeSelect(college.college_id)}
-                          className={`p-6 border rounded-xl transition-all duration-300 cursor-pointer ${
-                            selectedColleges.includes(college.college_id)
-                              ? 'college-card-selected border-green-400/50'
-                              : 'border-green-400/30 bg-green-400/5 hover:border-green-400/50'
-                          }`}
+                           className={`p-6 border rounded-xl transition-all duration-300 cursor-pointer ${
+                             selectedColleges.includes(college.college_id)
+                               ? 'college-card-selected safety border-green-400/50'
+                               : 'border-green-400/30 bg-green-400/5 hover:border-green-400/50'
+                           }`}
                         >
                           <div className="flex items-start justify-between mb-3">
                             <div>
@@ -480,11 +480,11 @@ export default function CollegeSelectionPage() {
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           onClick={() => handleCollegeSelect(college.college_id)}
-                          className={`p-6 border rounded-xl transition-all duration-300 cursor-pointer ${
-                            selectedColleges.includes(college.college_id)
-                              ? 'college-card-selected border-yellow-400/50'
-                              : 'border-yellow-400/30 bg-yellow-400/5 hover:border-yellow-400/50'
-                          }`}
+                           className={`p-6 border rounded-xl transition-all duration-300 cursor-pointer ${
+                             selectedColleges.includes(college.college_id)
+                               ? 'college-card-selected target border-yellow-400/50'
+                               : 'border-yellow-400/30 bg-yellow-400/5 hover:border-yellow-400/50'
+                           }`}
                         >
                           <div className="flex items-start justify-between mb-3">
                             <div>
@@ -582,11 +582,11 @@ export default function CollegeSelectionPage() {
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           onClick={() => handleCollegeSelect(college.college_id)}
-                          className={`p-6 border rounded-xl transition-all duration-300 cursor-pointer ${
-                            selectedColleges.includes(college.college_id)
-                              ? 'college-card-selected border-red-400/50'
-                              : 'border-red-400/30 bg-red-400/5 hover:border-red-400/50'
-                          }`}
+                           className={`p-6 border rounded-xl transition-all duration-300 cursor-pointer ${
+                             selectedColleges.includes(college.college_id)
+                               ? 'college-card-selected reach border-red-400/50'
+                               : 'border-red-400/30 bg-red-400/5 hover:border-red-400/50'
+                           }`}
                         >
                           <div className="flex items-start justify-between mb-3">
                             <div>

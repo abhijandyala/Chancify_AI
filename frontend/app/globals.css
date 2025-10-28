@@ -523,7 +523,7 @@
   }
 }
 
-/* College Selection Glow Effect */
+/* College Selection Glow Effects */
 .college-card-selected {
   position: relative;
   background: linear-gradient(135deg, #1e1e24 10%, #050505 60%);
@@ -542,10 +542,6 @@
   left: calc(var(--size) / -2);
   width: calc(100% + var(--size));
   height: calc(100% + var(--size));
-  background: radial-gradient(circle at 0 0, hsl(27deg 93% 60%), transparent),
-    radial-gradient(circle at 100% 0, #FFC000, transparent),
-    radial-gradient(circle at 0 100%, #FFC000, transparent),
-    radial-gradient(circle at 100% 100%, #FFC000, transparent);
   border-radius: 16px;
   pointer-events: none;
 }
@@ -560,6 +556,58 @@
   z-index: -2;
   filter: blur(2vmin);
   animation: blur-animation 3s ease-in-out alternate infinite;
+}
+
+/* Safety Schools - Green Glow */
+.college-card-selected.safety {
+  border-color: #10b981 !important;
+}
+
+.college-card-selected.safety::before,
+.college-card-selected.safety::after {
+  background: radial-gradient(circle at 0 0, #10b981, transparent),
+    radial-gradient(circle at 100% 0, #10b981, transparent),
+    radial-gradient(circle at 0 100%, #10b981, transparent),
+    radial-gradient(circle at 100% 100%, #10b981, transparent);
+}
+
+/* Target Schools - Yellow Glow */
+.college-card-selected.target {
+  border-color: #f59e0b !important;
+}
+
+.college-card-selected.target::before,
+.college-card-selected.target::after {
+  background: radial-gradient(circle at 0 0, #f59e0b, transparent),
+    radial-gradient(circle at 100% 0, #f59e0b, transparent),
+    radial-gradient(circle at 0 100%, #f59e0b, transparent),
+    radial-gradient(circle at 100% 100%, #f59e0b, transparent);
+}
+
+/* Reach Schools - Red Glow */
+.college-card-selected.reach {
+  border-color: #ef4444 !important;
+}
+
+.college-card-selected.reach::before,
+.college-card-selected.reach::after {
+  background: radial-gradient(circle at 0 0, #ef4444, transparent),
+    radial-gradient(circle at 100% 0, #ef4444, transparent),
+    radial-gradient(circle at 0 100%, #ef4444, transparent),
+    radial-gradient(circle at 100% 100%, #ef4444, transparent);
+}
+
+/* Search Results - Default Yellow Glow */
+.college-card-selected.search {
+  border-color: #f59e0b !important;
+}
+
+.college-card-selected.search::before,
+.college-card-selected.search::after {
+  background: radial-gradient(circle at 0 0, #f59e0b, transparent),
+    radial-gradient(circle at 100% 0, #f59e0b, transparent),
+    radial-gradient(circle at 0 100%, #f59e0b, transparent),
+    radial-gradient(circle at 100% 100%, #f59e0b, transparent);
 }
 
 /* Faster blur animation */
