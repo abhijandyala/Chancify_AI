@@ -311,7 +311,7 @@ function AutoReturnControls({ children }: { children: React.ReactNode }) {
         clearTimeout(returnTimeout)
       }
     }
-  }, [isUserInteracting, returnTimeout])
+  }, [isUserInteracting, returnTimeout, defaultPosition.azimuth, defaultPosition.polar, defaultPosition.distance])
 
   return (
     <>
@@ -350,7 +350,7 @@ function IPHone({ dimensions }: { dimensions: any }) {
 }
 
 // Main iPhone3D Component
-export default function iPhone3D({ 
+export default function iPhone3DComponent({ 
   className = "",
   showControls = true
 }: { 

@@ -6,7 +6,7 @@ import { Home, Compass, Bookmark, FileText, Brain, Zap, ChevronRight, ChevronLef
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { useState, useEffect } from 'react'
-import iPhone3D from '@/components/ui/iPhone3D'
+import iPhone3DComponent from '@/components/ui/iPhone3D'
 
 const navItems = [
   { href: '/home', label: 'Assessment', icon: Home },
@@ -96,7 +96,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.2, duration: 0.6 }}
                 >
-                  <iPhone3D showControls={true} />
+                  <iPhone3DComponent showControls={true} />
                 </motion.div>
 
                 {/* Mobile Navigation */}
@@ -229,7 +229,7 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
           transition={{ delay: 0.3, duration: 0.8, type: "spring" }}
           className="mb-6"
         >
-          <iPhone3D showControls={true} />
+          <iPhone3DComponent showControls={true} />
         </motion.div>
       </motion.div>
 
