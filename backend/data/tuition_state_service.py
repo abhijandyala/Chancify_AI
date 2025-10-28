@@ -4,9 +4,11 @@ Tuition State Service
 Determines in-state vs out-of-state tuition based on zipcode and college location
 """
 
+from .zippopotam_service import zippopotam_service
+from .city_state_database import city_state_database
+import logging
 import pandas as pd
 import os
-import logging
 from typing import Dict, Optional, Tuple
 
 logger = logging.getLogger(__name__)
@@ -139,7 +141,7 @@ class TuitionStateService:
         return self.zipcode_states.get(zipcode_prefix)
     
     def get_tuition_for_college_and_zipcode(self, college_name: str, zipcode: str) -> Dict[str, any]:
-        """Get tuition information for a college based on zipcode"""
+        """Get tuition information for a college based on zipcode using Zippopotam API"""
         try:
             college_lower = college_name.lower().strip()
             
@@ -160,16 +162,27 @@ class TuitionStateService:
                     'tuition': None
                 }
             
-            # Determine if zipcode is in-state
-            college_state = self.college_states.get(college_lower)
-            zipcode_state = self.get_state_from_zipcode(zipcode)
+            # Get college state from database
+            college_state = city_state_database.get_state_for_college(college_name)
+            
+            # Get zipcode location using Zippopotam API
+            zipcode_location = zippopotam_service.get_location_from_zipcode(zipcode)
             
             is_in_state = False
-            if college_state and zipcode_state:
-                is_in_state = (college_state == zipcode_state)
-            elif not college_state:
-                # If we can't determine college state, assume out-of-state for safety
-                is_in_state = False
+            zipcode_state = None
+            zipcode_city = None
+            
+            if zipcode_location and college_state:
+                zipcode_state = zipcode_location['state_abbr']
+                zipcode_city = zipcode_location['city']
+                
+                # Check if zipcode state matches college state
+                if zipcode_state.upper() == college_state.upper():
+                    is_in_state = True
+                else:
+                    # Additional check: see if the zipcode city is in the college's state
+                    # This handles cases where zipcode might be in a different city but same state
+                    is_in_state = city_state_database.is_city_in_state(zipcode_city, college_state)
             
             # Get appropriate tuition
             if is_in_state and tuition_info['in_state'] is not None:
@@ -185,6 +198,7 @@ class TuitionStateService:
                 'zipcode': zipcode,
                 'college_state': college_state,
                 'zipcode_state': zipcode_state,
+                'zipcode_city': zipcode_city,
                 'is_in_state': is_in_state,
                 'tuition': tuition,
                 'in_state_tuition': tuition_info['in_state'],

@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import { getCollegeSuggestions, searchColleges, type CollegeSuggestionsRequest, type CollegeSuggestion, type CollegeSearchResult } from '@/lib/api'
 import Loader from '@/components/Loader'
 import { useTuitionByZipcode } from '@/lib/hooks/useTuitionByZipcode'
+import { useMultipleTuitionByZipcode } from '@/lib/hooks/useMultipleTuitionByZipcode'
 
 // Function to get tuition info with in-state/out-of-state status
 const getTuitionInfoForZipcode = (college: any, zipcode: string, tuitionData: any = null) => {
@@ -133,9 +134,14 @@ export default function CollegeSelectionPage() {
   // Get user profile from localStorage
   const [userProfile, setUserProfile] = useState<any>(null)
   
-  // Get tuition data for the selected college based on zipcode
-  const { tuitionData: zipcodeTuitionData, loading: zipcodeTuitionLoading, error: zipcodeTuitionError } = useTuitionByZipcode(
-    searchResults.length > 0 ? searchResults[0]?.name : null, 
+  // Get tuition data for all colleges based on zipcode
+  const allCollegeNames = [
+    ...searchResults.map(college => college.name),
+    ...suggestedColleges.map(college => college.name)
+  ].filter((name, index, array) => array.indexOf(name) === index) // Remove duplicates
+  
+  const { tuitionDataMap, loading: zipcodeTuitionLoading, error: zipcodeTuitionError } = useMultipleTuitionByZipcode(
+    allCollegeNames,
     zipcode
   )
   
@@ -440,10 +446,10 @@ export default function CollegeSelectionPage() {
                         </p>
                         <p className="text-gray-500 text-xs">
                           {college.city}, {college.state} • ${(() => {
-                            const tuitionInfo = getTuitionInfoForZipcode(college, zipcode, zipcodeTuitionData)
+                            const tuitionInfo = getTuitionInfoForZipcode(college, zipcode, tuitionDataMap.get(college.name))
                             return tuitionInfo.tuition?.toLocaleString() || 'N/A'
                           })()} tuition {zipcode && zipcode.length >= 5 && (() => {
-                            const tuitionInfo = getTuitionInfoForZipcode(college, zipcode, zipcodeTuitionData)
+                            const tuitionInfo = getTuitionInfoForZipcode(college, zipcode, tuitionDataMap.get(college.name))
                             if (tuitionInfo.isInState === true) {
                               return <span className="text-green-400">(In-State)</span>
                             } else if (tuitionInfo.isInState === false) {
@@ -553,10 +559,10 @@ export default function CollegeSelectionPage() {
                             <div className="flex items-center gap-2 text-gray-300">
                               <DollarSign className="w-4 h-4 text-yellow-400" />
                               <span>${(() => {
-                                const tuitionInfo = getTuitionInfoForZipcode(college, zipcode, zipcodeTuitionData)
+                                const tuitionInfo = getTuitionInfoForZipcode(college, zipcode, tuitionDataMap.get(college.name))
                                 return tuitionInfo.tuition?.toLocaleString() || 'N/A'
                               })()} {zipcode && zipcode.length >= 5 && (() => {
-                                const tuitionInfo = getTuitionInfoForZipcode(college, zipcode, zipcodeTuitionData)
+                                const tuitionInfo = getTuitionInfoForZipcode(college, zipcode, tuitionDataMap.get(college.name))
                                 if (tuitionInfo.isInState === true) {
                                   return <span className="text-green-400 text-xs">(In-State)</span>
                                 } else if (tuitionInfo.isInState === false) {
@@ -670,10 +676,10 @@ export default function CollegeSelectionPage() {
                             <div className="flex items-center gap-2 text-gray-300">
                               <DollarSign className="w-4 h-4 text-yellow-400" />
                               <span>${(() => {
-                                const tuitionInfo = getTuitionInfoForZipcode(college, zipcode, zipcodeTuitionData)
+                                const tuitionInfo = getTuitionInfoForZipcode(college, zipcode, tuitionDataMap.get(college.name))
                                 return tuitionInfo.tuition?.toLocaleString() || 'N/A'
                               })()} {zipcode && zipcode.length >= 5 && (() => {
-                                const tuitionInfo = getTuitionInfoForZipcode(college, zipcode, zipcodeTuitionData)
+                                const tuitionInfo = getTuitionInfoForZipcode(college, zipcode, tuitionDataMap.get(college.name))
                                 if (tuitionInfo.isInState === true) {
                                   return <span className="text-green-400 text-xs">(In-State)</span>
                                 } else if (tuitionInfo.isInState === false) {
@@ -787,10 +793,10 @@ export default function CollegeSelectionPage() {
                             <div className="flex items-center gap-2 text-gray-300">
                               <DollarSign className="w-4 h-4 text-yellow-400" />
                               <span>${(() => {
-                                const tuitionInfo = getTuitionInfoForZipcode(college, zipcode, zipcodeTuitionData)
+                                const tuitionInfo = getTuitionInfoForZipcode(college, zipcode, tuitionDataMap.get(college.name))
                                 return tuitionInfo.tuition?.toLocaleString() || 'N/A'
                               })()} {zipcode && zipcode.length >= 5 && (() => {
-                                const tuitionInfo = getTuitionInfoForZipcode(college, zipcode, zipcodeTuitionData)
+                                const tuitionInfo = getTuitionInfoForZipcode(college, zipcode, tuitionDataMap.get(college.name))
                                 if (tuitionInfo.isInState === true) {
                                   return <span className="text-green-400 text-xs">(In-State)</span>
                                 } else if (tuitionInfo.isInState === false) {
