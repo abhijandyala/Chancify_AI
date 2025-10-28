@@ -15,6 +15,7 @@ from database import create_tables
 from data.real_ipeds_major_mapping import get_colleges_for_major, get_major_strength_score, get_major_relevance_info
 from data.real_college_suggestions import real_college_suggestions
 from data.college_names_mapping import college_names_mapping
+from data.college_nickname_mapper import nickname_mapper
 
 # Configure logging
 logging.basicConfig(
@@ -212,23 +213,40 @@ async def search_colleges(q: str = "", limit: int = 20):
         query = q.strip().lower()
         matching_colleges = []
         
-        # Search through college names
-        for _, row in college_df.iterrows():
-            college_name = str(row.get('name', '')).lower()
-            if query in college_name:
-                matching_colleges.append(row)
+        # First, try to find college by nickname/abbreviation
+        official_name = nickname_mapper.find_college_by_nickname(q)
+        logger.info(f"Nickname search for '{q}': {official_name}")
         
-        # If no matches found, try broader search
-        if not matching_colleges:
-            # Try searching for partial matches in city/state
+        # If we found an official name from nickname mapping, search for that
+        if official_name:
+            logger.info(f"Searching for official name: {official_name}")
             for _, row in college_df.iterrows():
                 college_name = str(row.get('name', '')).lower()
-                city = str(row.get('city', '')).lower()
-                state = str(row.get('state', '')).lower()
-                
-                if (query in city or query in state or 
-                    any(word.startswith(query) for word in college_name.split())):
+                if official_name.lower() in college_name or college_name in official_name.lower():
                     matching_colleges.append(row)
+                    logger.info(f"Found match: {row.get('name', '')}")
+        
+        # If no matches from nickname mapping, do regular search
+        if not matching_colleges:
+            logger.info(f"No nickname matches, doing regular search for: {query}")
+            
+            # Search through college names
+            for _, row in college_df.iterrows():
+                college_name = str(row.get('name', '')).lower()
+                if query in college_name:
+                    matching_colleges.append(row)
+            
+            # If still no matches, try broader search
+            if not matching_colleges:
+                logger.info("No direct matches, trying broader search")
+                for _, row in college_df.iterrows():
+                    college_name = str(row.get('name', '')).lower()
+                    city = str(row.get('city', '')).lower()
+                    state = str(row.get('state', '')).lower()
+                    
+                    if (query in city or query in state or 
+                        any(word.startswith(query) for word in college_name.split())):
+                        matching_colleges.append(row)
         
         # Limit results
         matching_colleges = matching_colleges[:limit]
@@ -266,6 +284,7 @@ async def search_colleges(q: str = "", limit: int = 20):
             "colleges": results,
             "total": len(results),
             "query": q,
+            "nickname_matched": official_name is not None,
             "message": f"Found {len(results)} colleges matching '{q}'"
         }
         
