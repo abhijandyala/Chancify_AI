@@ -747,28 +747,6 @@ export default function CalculationsPage() {
               </div>
             </motion.div>
 
-            {(d.facts && Object.keys(d.facts).length > 0) && (
-              <motion.div 
-                className="relative bg-gradient-to-br from-ROX_DARK_GRAY/80 via-ROX_BLACK/60 to-ROX_BLACK/80 border border-ROX_GOLD/30 rounded-3xl p-6 backdrop-blur-xl overflow-hidden group"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-ROX_GOLD/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                <div className="relative">
-                  <h2 className="text-lg font-semibold text-white mb-4">Quick Facts</h2>
-                  <div className="grid grid-cols-1 gap-3">
-                    {Object.entries(d.facts!).map(([k, v]) => (
-                      <div key={k} className="flex items-center justify-between rounded-xl bg-ROX_DARK_GRAY/50 border border-ROX_GOLD/20 p-3 hover:bg-ROX_DARK_GRAY/70 transition-colors">
-                        <span className="text-neutral-400 text-sm">{k}</span>
-                        <span className="font-medium text-sm text-white">{v}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            )}
 
             {d.updatedAtISO && (
               <p className="text-xs text-neutral-500 px-2">Last updated: {new Date(d.updatedAtISO).toLocaleString()}</p>
