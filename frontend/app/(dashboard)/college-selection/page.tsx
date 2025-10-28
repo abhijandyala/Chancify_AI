@@ -308,7 +308,9 @@ export default function CollegeSelectionPage() {
 
   // Auto-fill search box with college name
   const handleAutoFillSearch = (collegeName: string) => {
+    console.log('Auto-filling search with:', collegeName)
     setSearchQuery(collegeName)
+    console.log('Search query set to:', collegeName)
   }
 
   // Animation variants
@@ -584,6 +586,7 @@ export default function CollegeSelectionPage() {
                               size="sm"
                               onClick={(e) => {
                                 e.stopPropagation()
+                                console.log('Auto-fill button clicked for:', college.name)
                                 handleAutoFillSearch(college.name)
                               }}
                             >
@@ -700,6 +703,7 @@ export default function CollegeSelectionPage() {
                               size="sm"
                               onClick={(e) => {
                                 e.stopPropagation()
+                                console.log('Auto-fill button clicked for:', college.name)
                                 handleAutoFillSearch(college.name)
                               }}
                             >
@@ -816,6 +820,7 @@ export default function CollegeSelectionPage() {
                               size="sm"
                               onClick={(e) => {
                                 e.stopPropagation()
+                                console.log('Auto-fill button clicked for:', college.name)
                                 handleAutoFillSearch(college.name)
                               }}
                             >
