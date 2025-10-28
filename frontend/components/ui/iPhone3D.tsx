@@ -328,10 +328,6 @@ function AutoReturnControls({ children }: { children: React.ReactNode }) {
         dampingFactor={0.05}
         rotateSpeed={1.0}
         autoRotate={false}
-        // Set initial position to match the image
-        azimuthAngle={defaultPosition.azimuth}
-        polarAngle={defaultPosition.polar}
-        distance={defaultPosition.distance}
       />
     </>
   )
@@ -350,7 +346,7 @@ function IPHone({ dimensions }: { dimensions: any }) {
 }
 
 // Main iPhone3D Component
-export default function iPhone3DComponent({ 
+export default function Phone3D({ 
   className = "",
   showControls = true
 }: { 
