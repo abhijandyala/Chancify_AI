@@ -57,6 +57,17 @@ export default function ContactPage() {
     } catch (error) {
       console.error('Error sending email:', error)
       console.error('Error details:', (error as any)?.text || (error as any)?.message || error)
+      
+      // Check for specific Gmail API errors
+      const errorMessage = (error as any)?.text || (error as any)?.message || ''
+      if (errorMessage.includes('insufficient authentication scopes')) {
+        console.error('Gmail API Error: Service needs to be reconnected with proper permissions')
+        alert('Email service needs to be reconfigured. Please try again later or contact support.')
+      } else if (errorMessage.includes('412')) {
+        console.error('EmailJS Error 412: Authentication or permission issue')
+        alert('Email service authentication error. Please try again later.')
+      }
+      
       setIsSubmitting(false)
       
       // Fallback to mailto if EmailJS fails
