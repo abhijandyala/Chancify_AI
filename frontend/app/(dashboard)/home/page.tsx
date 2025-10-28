@@ -16,8 +16,6 @@ import { useRouter } from 'next/navigation'
 import { MajorSelectionModal } from '@/components/ui/MajorSelectionModal'
 import { SaveModal } from '@/components/SaveModal'
 import { PresetStorage } from '@/lib/preset-storage'
-import UltraRealisticShowcase from '@/components/ui/UltraRealisticShowcase'
-import AdvancediPhoneShowcase from '@/components/ui/AdvancediPhoneShowcase'
 
 export const dynamic = 'force-dynamic'
 
@@ -483,22 +481,12 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-        {/* 3D iPhone Showcase */}
+        {/* Placeholder for new iPhone model */}
         <motion.section {...enter} className="mb-8 sm:mb-10 lg:mb-12">
-          <UltraRealisticShowcase 
-            title="Experience Chancify AI in 4K"
-            subtitle="Ultra-realistic iPhone interface with stunning visual quality"
-            variant="featured"
-          />
-        </motion.section>
-
-        {/* Advanced 3D iPhone Showcase */}
-        <motion.section {...enter} className="mb-8 sm:mb-10 lg:mb-12">
-          <AdvancediPhoneShowcase 
-            title="Advanced 3D Experience"
-            subtitle="Gesture controls, physics animations, and immersive interactions"
-            variant="demo"
-          />
+          <div className="bg-gradient-to-br from-gray-900/50 to-black/50 rounded-2xl border border-white/10 backdrop-blur-sm p-8 text-center">
+            <div className="text-yellow-400 text-lg font-semibold mb-2">iPhone Model Placeholder</div>
+            <div className="text-gray-400 text-sm">Waiting for new iPhone model...</div>
+          </div>
         </motion.section>
 
         {/* Course Rigor and Class Info */}

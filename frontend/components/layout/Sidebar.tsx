@@ -12,8 +12,6 @@ const navItems = [
   { href: '/discover', label: 'Discover', icon: Compass },
   { href: '/watchlist', label: 'Watchlist', icon: Bookmark },
   { href: '/sat', label: 'SAT Prep', icon: FileText },
-  { href: '/advanced-demo', label: '3D Demo', icon: Sparkles },
-  { href: '/ultra-realistic-demo', label: '4K Demo', icon: Award },
 ]
 
 interface SidebarProps {

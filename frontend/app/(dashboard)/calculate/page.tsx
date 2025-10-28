@@ -5,7 +5,6 @@ import { Info, MapPin, TrendingUp, Zap, Target, TrendingDown, Award, ArrowLeft }
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { COLLEGES } from '@/lib/colleges';
-import UltraRealisticShowcase from '@/components/ui/UltraRealisticShowcase';
 import {
   ResponsiveContainer,
   BarChart,
@@ -747,18 +746,16 @@ export default function CalculationsPage() {
               </div>
             </motion.div>
 
-            {/* 3D iPhone Showcase */}
+            {/* iPhone Model Placeholder */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <UltraRealisticShowcase 
-            title="4K Mobile Experience"
-            subtitle="Ultra-realistic iPhone with your results"
-            variant="compact"
-            showTitle={true}
-          />
+          <div className="bg-gradient-to-br from-gray-900/50 to-black/50 rounded-2xl border border-white/10 backdrop-blur-sm p-6 text-center">
+            <div className="text-yellow-400 text-lg font-semibold mb-2">iPhone Model Placeholder</div>
+            <div className="text-gray-400 text-sm">Waiting for new iPhone model...</div>
+          </div>
         </motion.div>
 
             {(d.facts && Object.keys(d.facts).length > 0) && (
