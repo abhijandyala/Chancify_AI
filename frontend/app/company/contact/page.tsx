@@ -56,7 +56,7 @@ export default function ContactPage() {
       
     } catch (error) {
       console.error('Error sending email:', error)
-      console.error('Error details:', error.text || error.message)
+      console.error('Error details:', (error as any)?.text || (error as any)?.message || error)
       setIsSubmitting(false)
       
       // Fallback to mailto if EmailJS fails
