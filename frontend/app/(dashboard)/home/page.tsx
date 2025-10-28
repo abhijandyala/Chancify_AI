@@ -481,14 +481,6 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-        {/* Placeholder for new iPhone model */}
-        <motion.section {...enter} className="mb-8 sm:mb-10 lg:mb-12">
-          <div className="bg-gradient-to-br from-gray-900/50 to-black/50 rounded-2xl border border-white/10 backdrop-blur-sm p-8 text-center">
-            <div className="text-yellow-400 text-lg font-semibold mb-2">iPhone Model Placeholder</div>
-            <div className="text-gray-400 text-sm">Waiting for new iPhone model...</div>
-          </div>
-        </motion.section>
-
         {/* Course Rigor and Class Info */}
         <motion.section {...enter} className="mb-8 sm:mb-10 lg:mb-12">
           <div className="rox-card p-4 sm:p-6 lg:p-8">

@@ -6,6 +6,7 @@ import { Home, Compass, Bookmark, FileText, Brain, Zap, ChevronRight, ChevronLef
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { useState, useEffect } from 'react'
+import iPhone3D from '@/components/ui/iPhone3D'
 
 const navItems = [
   { href: '/home', label: 'Assessment', icon: Home },
@@ -87,6 +88,16 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                     <X className="w-5 h-5 text-gray-400" />
                   </motion.button>
                 </div>
+
+                {/* iPhone 3D Model for Mobile */}
+                <motion.div
+                  className="px-6 pb-4"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.2, duration: 0.6 }}
+                >
+                  <iPhone3D showControls={true} />
+                </motion.div>
 
                 {/* Mobile Navigation */}
                 <nav className="flex-1 px-6 pb-6">
@@ -190,14 +201,14 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
         }}
         transition={{ duration: 0.3 }}
       >
-      {/* Brand Section - Minimal */}
+      {/* Brand Section with iPhone Model */}
       <motion.div 
         className="p-6 pb-8"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, type: "spring", stiffness: 120 }}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 mb-6">
           <div className="p-2 rounded-lg bg-yellow-400/20 text-yellow-400">
             <Brain className="w-5 h-5" />
           </div>
@@ -210,6 +221,16 @@ export function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
             </p>
           </div>
         </div>
+        
+        {/* iPhone 3D Model */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.3, duration: 0.8, type: "spring" }}
+          className="mb-6"
+        >
+          <iPhone3D showControls={true} />
+        </motion.div>
       </motion.div>
 
       {/* Spacer */}

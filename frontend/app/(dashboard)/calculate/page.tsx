@@ -746,18 +746,6 @@ export default function CalculationsPage() {
               </div>
             </motion.div>
 
-            {/* iPhone Model Placeholder */}
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-        >
-          <div className="bg-gradient-to-br from-gray-900/50 to-black/50 rounded-2xl border border-white/10 backdrop-blur-sm p-6 text-center">
-            <div className="text-yellow-400 text-lg font-semibold mb-2">iPhone Model Placeholder</div>
-            <div className="text-gray-400 text-sm">Waiting for new iPhone model...</div>
-          </div>
-        </motion.div>
-
             {(d.facts && Object.keys(d.facts).length > 0) && (
               <motion.div 
                 className="relative bg-gradient-to-br from-ROX_DARK_GRAY/80 via-ROX_BLACK/60 to-ROX_BLACK/80 border border-ROX_GOLD/30 rounded-3xl p-6 backdrop-blur-xl overflow-hidden group"
