@@ -17,7 +17,7 @@ from data.real_college_suggestions import real_college_suggestions
 from data.college_names_mapping import college_names_mapping
 from data.college_nickname_mapper import nickname_mapper
 from data.college_subject_emphasis import college_subject_emphasis
-from data.college_tuition_service import college_tuition_service
+from data.tuition_state_service import tuition_state_service
 
 # Configure logging
 logging.basicConfig(
@@ -386,6 +386,46 @@ async def get_college_tuition(college_name: str):
             "college_name": college_name,
             "tuition_data": None,
             "error": str(e)
+        }
+
+@app.get("/api/tuition-by-zipcode/{college_name}/{zipcode}",
+         summary="Get tuition based on zipcode",
+         description="Get in-state or out-of-state tuition for a college based on zipcode",
+         tags=["Tuition State"])
+async def get_tuition_by_zipcode(college_name: str, zipcode: str):
+    """
+    Get tuition information for a college based on zipcode.
+    
+    This endpoint determines if the zipcode qualifies for in-state tuition
+    and returns the appropriate tuition amount.
+    
+    Args:
+        college_name: Name of the college
+        zipcode: User's zipcode
+        
+    Returns:
+        JSON response with tuition information and state determination
+    """
+    try:
+        logger.info(f"Getting tuition for {college_name} with zipcode {zipcode}")
+        
+        # Get tuition data based on zipcode
+        result = tuition_state_service.get_tuition_for_college_and_zipcode(college_name, zipcode)
+        
+        if result['success']:
+            logger.info(f"Tuition determined for {college_name}: ${result['tuition']:,} ({'in-state' if result['is_in_state'] else 'out-of-state'})")
+        
+        return result
+        
+    except Exception as e:
+        logger.error(f"Error getting tuition for {college_name} with zipcode {zipcode}: {e}")
+        return {
+            "success": False,
+            "error": str(e),
+            "college_name": college_name,
+            "zipcode": zipcode,
+            "is_in_state": None,
+            "tuition": None
         }
 
 # Include API routes

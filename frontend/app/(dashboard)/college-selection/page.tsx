@@ -29,6 +29,7 @@ const getMajorRelevanceInfo = (college: any) => {
 export default function CollegeSelectionPage() {
   const router = useRouter()
   const [searchQuery, setSearchQuery] = useState('')
+  const [zipcode, setZipcode] = useState('')
   const [selectedColleges, setSelectedColleges] = useState<string[]>([])
   const [suggestedColleges, setSuggestedColleges] = useState<CollegeSuggestion[]>([])
   const [searchResults, setSearchResults] = useState<CollegeSearchResult[]>([])
@@ -214,11 +215,16 @@ export default function CollegeSelectionPage() {
 
   // Handle college selection (single selection only)
   const handleCollegeSelect = (collegeId: string) => {
-    setSelectedColleges(prev => 
-      prev.includes(collegeId) 
+    setSelectedColleges(prev =>
+      prev.includes(collegeId)
         ? [] // Deselect if already selected
         : [collegeId] // Select only this college
     )
+    
+    // Store zipcode in localStorage for ML model
+    if (zipcode) {
+      localStorage.setItem('userZipcode', zipcode)
+    }
   }
 
   // Auto-fill search box with college name
@@ -276,6 +282,27 @@ export default function CollegeSelectionPage() {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-3 bg-transparent border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-yellow-400 focus:outline-none"
             />
+          </div>
+          
+          {/* Zipcode Input */}
+          <div className="mt-4">
+            <label className="block text-sm font-medium text-gray-300 mb-2">
+              Your Zipcode (for in-state/out-of-state tuition)
+            </label>
+            <div className="relative">
+              <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Enter your zipcode (e.g., 15213)"
+                value={zipcode}
+                onChange={(e) => setZipcode(e.target.value.replace(/\D/g, '').slice(0, 5))}
+                className="w-full pl-10 pr-4 py-3 bg-transparent border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-yellow-400 focus:outline-none"
+                maxLength={5}
+              />
+            </div>
+            <p className="text-xs text-gray-500 mt-1">
+              This helps determine if you qualify for in-state tuition rates
+            </p>
           </div>
         </div>
       </motion.div>
@@ -694,8 +721,11 @@ export default function CollegeSelectionPage() {
         </Button>
         <Button
           onClick={() => {
-            // Save selected colleges to localStorage for calculate page
+            // Save selected colleges and zipcode to localStorage for calculate page
             localStorage.setItem('selectedColleges', JSON.stringify(selectedColleges))
+            if (zipcode) {
+              localStorage.setItem('userZipcode', zipcode)
+            }
             setShowLoader(true)
           }}
           disabled={selectedColleges.length === 0}

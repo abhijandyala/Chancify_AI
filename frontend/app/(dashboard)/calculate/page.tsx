@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { COLLEGES } from '@/lib/colleges';
 import { useCollegeSubjectEmphasis } from '@/lib/hooks/useCollegeSubjectEmphasis';
-import { useCollegeTuition } from '@/lib/hooks/useCollegeTuition';
+import { useCollegeTuitionByZipcode } from '@/lib/hooks/useCollegeTuitionByZipcode';
 import {
   ResponsiveContainer,
   BarChart,
@@ -231,9 +231,10 @@ export default function CalculationsPage() {
   const [userChance, setUserChance] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(true);
   const [collegeName, setCollegeName] = React.useState<string | null>(null);
+  const [zipcode, setZipcode] = React.useState<string | null>(null);
 
-  // Get tuition data for the selected college
-  const { tuitionData, loading: tuitionLoading, error: tuitionError } = useCollegeTuition(collegeName);
+  // Get tuition data for the selected college based on zipcode
+  const { tuitionData: zipcodeTuitionData, loading: zipcodeTuitionLoading, error: zipcodeTuitionError } = useCollegeTuitionByZipcode(collegeName, zipcode);
 
   // Get subject emphasis data for the selected college
   const { subjects: subjectEmphasis, loading: subjectsLoading, error: subjectsError } = useCollegeSubjectEmphasis(collegeName);
@@ -326,9 +327,15 @@ export default function CalculationsPage() {
         console.log('🔍 Waitlist Rate:', (waitlistRate * 100).toFixed(1) + '%');
         console.log('🔍 Reject Rate:', (rejectRate * 100).toFixed(1) + '%');
 
-                 // Set college name for subject emphasis hook
-        const actualCollegeName = result.college_name || collegeName || 'Selected College';
-        setCollegeName(actualCollegeName);
+      // Set college name for subject emphasis hook
+      const actualCollegeName = result.college_name || collegeName || 'Selected College';
+      setCollegeName(actualCollegeName);
+      
+      // Load zipcode from localStorage
+      const savedZipcode = localStorage.getItem('userZipcode');
+      if (savedZipcode) {
+        setZipcode(savedZipcode);
+      }
         
         // Use real college data from backend response
          const collegeStats: CollegeStats = {
@@ -604,11 +611,16 @@ export default function CalculationsPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-ROX_GOLD/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               <div className="relative">
-                <h2 className="text-lg font-semibold text-white mb-6">
-                  Tuition & Annual Costs (2025)
-                  {tuitionLoading && <span className="text-sm text-gray-400 ml-2">(Loading...)</span>}
-                  {tuitionError && <span className="text-sm text-red-400 ml-2">(Using default data)</span>}
-                </h2>
+          <h2 className="text-lg font-semibold text-white mb-6">
+            Tuition & Annual Costs (2025)
+            {zipcodeTuitionLoading && <span className="text-sm text-gray-400 ml-2">(Loading...)</span>}
+            {zipcodeTuitionError && <span className="text-sm text-red-400 ml-2">(Using default data)</span>}
+            {zipcodeTuitionData && (
+              <span className="text-sm text-yellow-400 ml-2">
+                ({zipcodeTuitionData.is_in_state ? 'In-State' : 'Out-of-State'} - {zipcodeTuitionData.zipcode_state || 'Unknown State'})
+              </span>
+            )}
+          </h2>
                 <div className="space-y-6">
                 {tuitionBars.length > 0 && (
                   <div className="grid sm:grid-cols-2 gap-4">
@@ -631,8 +643,20 @@ export default function CalculationsPage() {
                     </thead>
                     <tbody className="divide-y divide-ROX_GOLD/20">
                       <tr>
-                        <td className="p-3 text-white">Tuition</td>
-                        <td className="p-3 text-right text-white"><Money n={tuitionData?.in_state_tuition ?? d.costs?.inStateTuition ?? d.costs?.outStateTuition} /></td>
+                        <td className="p-3 text-white">
+                          Tuition {zipcodeTuitionData && zipcodeTuitionData.success && (
+                            <span className="text-xs text-yellow-400 ml-1">
+                              ({zipcodeTuitionData.is_in_state ? 'In-State' : 'Out-of-State'})
+                            </span>
+                          )}
+                        </td>
+                        <td className="p-3 text-right text-white">
+                          <Money n={
+                            zipcodeTuitionData && zipcodeTuitionData.success 
+                              ? zipcodeTuitionData.tuition 
+                              : (tuitionData?.in_state_tuition ?? d.costs?.inStateTuition ?? d.costs?.outStateTuition)
+                          } />
+                        </td>
                       </tr>
                       <tr>
                         <td className="p-3 text-white">Fees</td>
@@ -653,7 +677,11 @@ export default function CalculationsPage() {
                       <tr className="border-t border-ROX_GOLD/30 bg-ROX_DARK_GRAY/40">
                         <td className="p-3 text-white font-semibold">Total</td>
                         <td className="p-3 text-right text-white font-semibold">
-                          <Money n={tuitionData?.total_in_state ?? (d.costs?.inStateTuition ?? d.costs?.outStateTuition ?? 0)} />
+                          <Money n={
+                            zipcodeTuitionData && zipcodeTuitionData.success 
+                              ? zipcodeTuitionData.tuition + 20000  // Add estimated room/board/fees
+                              : (tuitionData?.total_in_state ?? (d.costs?.inStateTuition ?? d.costs?.outStateTuition ?? 0))
+                          } />
                         </td>
                       </tr>
                     </tbody>
