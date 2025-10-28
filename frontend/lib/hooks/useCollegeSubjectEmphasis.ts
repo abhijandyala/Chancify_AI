@@ -1,0 +1,74 @@
+import { useState, useEffect } from 'react'
+
+interface SubjectData {
+  label: string
+  value: number
+}
+
+interface SubjectEmphasisResponse {
+  success: boolean
+  college_name: string
+  subjects: SubjectData[]
+  total_subjects: number
+  error?: string
+}
+
+export function useCollegeSubjectEmphasis(collegeName: string | null) {
+  const [subjects, setSubjects] = useState<SubjectData[]>([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!collegeName) {
+      setSubjects([])
+      return
+    }
+
+    const fetchSubjectEmphasis = async () => {
+      setLoading(true)
+      setError(null)
+
+      try {
+        // Get the backend URL from environment or use default
+        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'
+        const encodedCollegeName = encodeURIComponent(collegeName)
+        
+        const response = await fetch(`${backendUrl}/api/college-subject-emphasis/${encodedCollegeName}`)
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
+
+        const data: SubjectEmphasisResponse = await response.json()
+
+        if (data.success) {
+          setSubjects(data.subjects)
+          console.log(`✅ Subject emphasis loaded for ${collegeName}:`, data.subjects)
+        } else {
+          throw new Error(data.error || 'Failed to fetch subject emphasis')
+        }
+      } catch (err) {
+        console.error(`❌ Error fetching subject emphasis for ${collegeName}:`, err)
+        setError(err instanceof Error ? err.message : 'Unknown error')
+        
+        // Fallback to default data
+        setSubjects([
+          { label: 'Computer Science', value: 20 },
+          { label: 'Engineering', value: 18 },
+          { label: 'Business', value: 15 },
+          { label: 'Biological Sciences', value: 12 },
+          { label: 'Mathematics & Stats', value: 10 },
+          { label: 'Social Sciences', value: 10 },
+          { label: 'Arts & Humanities', value: 10 },
+          { label: 'Education', value: 5 }
+        ])
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchSubjectEmphasis()
+  }, [collegeName])
+
+  return { subjects, loading, error }
+}

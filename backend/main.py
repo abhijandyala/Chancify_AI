@@ -16,6 +16,7 @@ from data.real_ipeds_major_mapping import get_colleges_for_major, get_major_stre
 from data.real_college_suggestions import real_college_suggestions
 from data.college_names_mapping import college_names_mapping
 from data.college_nickname_mapper import nickname_mapper
+from data.college_subject_emphasis import college_subject_emphasis
 
 # Configure logging
 logging.basicConfig(
@@ -294,6 +295,55 @@ async def search_colleges(q: str = "", limit: int = 20):
             "success": False,
             "colleges": [],
             "total": 0,
+            "error": str(e)
+        }
+
+@app.get("/api/college-subject-emphasis/{college_name}",
+         summary="Get college subject emphasis",
+         description="Get real-time subject emphasis percentages for a college using OpenAI API",
+         tags=["College Subject Emphasis"])
+async def get_college_subject_emphasis(college_name: str):
+    """
+    Get subject emphasis percentages for a specific college.
+    
+    This endpoint uses OpenAI API to analyze the college's academic focus
+    and return percentage emphasis for different subject areas.
+    
+    Args:
+        college_name: Name of the college
+        
+    Returns:
+        JSON response with subject emphasis percentages
+    """
+    try:
+        logger.info(f"Getting subject emphasis for: {college_name}")
+        
+        # Get subject emphasis data
+        subject_data = college_subject_emphasis.get_subject_emphasis_with_cache(college_name, suggestion_cache)
+        
+        # Format for frontend
+        subjects = []
+        for subject, percentage in subject_data.items():
+            subjects.append({
+                "label": subject,
+                "value": percentage
+            })
+        
+        logger.info(f"Subject emphasis retrieved for {college_name}: {len(subjects)} subjects")
+        
+        return {
+            "success": True,
+            "college_name": college_name,
+            "subjects": subjects,
+            "total_subjects": len(subjects)
+        }
+        
+    except Exception as e:
+        logger.error(f"Error getting subject emphasis for {college_name}: {e}")
+        return {
+            "success": False,
+            "college_name": college_name,
+            "subjects": [],
             "error": str(e)
         }
 

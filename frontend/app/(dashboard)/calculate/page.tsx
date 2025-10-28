@@ -5,6 +5,7 @@ import { Info, MapPin, TrendingUp, Zap, Target, TrendingDown, Award, ArrowLeft }
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { COLLEGES } from '@/lib/colleges';
+import { useCollegeSubjectEmphasis } from '@/lib/hooks/useCollegeSubjectEmphasis';
 import {
   ResponsiveContainer,
   BarChart,
@@ -228,6 +229,10 @@ export default function CalculationsPage() {
   const [collegeData, setCollegeData] = React.useState<CollegeStats | null>(null);
   const [userChance, setUserChance] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [collegeName, setCollegeName] = React.useState<string | null>(null);
+
+  // Get subject emphasis data for the selected college
+  const { subjects: subjectEmphasis, loading: subjectsLoading, error: subjectsError } = useCollegeSubjectEmphasis(collegeName);
 
   // Load data from localStorage and calculate probabilities
   React.useEffect(() => {
@@ -317,9 +322,13 @@ export default function CalculationsPage() {
         console.log('🔍 Waitlist Rate:', (waitlistRate * 100).toFixed(1) + '%');
         console.log('🔍 Reject Rate:', (rejectRate * 100).toFixed(1) + '%');
 
-                 // Use real college data from backend response
+                 // Set college name for subject emphasis hook
+        const actualCollegeName = result.college_name || collegeName || 'Selected College';
+        setCollegeName(actualCollegeName);
+        
+        // Use real college data from backend response
          const collegeStats: CollegeStats = {
-           collegeName: result.college_name || collegeName || 'Selected College', // Use college name from backend
+           collegeName: actualCollegeName, // Use college name from backend
            city: result.college_data?.city || 'Unknown',
            state: result.college_data?.state || 'Unknown', 
            isPublic: result.college_data?.is_public || false,
@@ -558,15 +567,19 @@ export default function CalculationsPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-ROX_GOLD/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               <div className="relative">
-                <h2 className="text-lg font-semibold text-white mb-6">Subject Emphasis</h2>
+                <h2 className="text-lg font-semibold text-white mb-6">
+                  Subject Emphasis
+                  {subjectsLoading && <span className="text-sm text-gray-400 ml-2">(Loading...)</span>}
+                  {subjectsError && <span className="text-sm text-red-400 ml-2">(Using default data)</span>}
+                </h2>
                 <div className="h-72">
                   <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={d.subjects} layout="vertical" margin={{ left: 140 }}>
+                    <BarChart data={subjectEmphasis.length > 0 ? subjectEmphasis : d.subjects} layout="vertical" margin={{ left: 140 }}>
                       <XAxis type="number" stroke="#9CA3AF" tickFormatter={(v) => `${v}%`} domain={[0, 100]} />
                       <YAxis type="category" dataKey="label" width={130} stroke="#9CA3AF" style={{ fontSize: '12px' }} />
                       <RTooltip contentStyle={{ background: ROX_BLACK, border: '1px solid #F7B500', color: 'white', borderRadius: '12px', boxShadow: '0 20px 25px rgba(0,0,0,0.3)' }} formatter={(v: number) => [`${v}%`, 'Share']} />
                       <Bar dataKey="value" radius={[0, 12, 12, 0]}>
-                        {d.subjects.map((_, i) => (
+                        {(subjectEmphasis.length > 0 ? subjectEmphasis : d.subjects).map((_, i) => (
                           <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
                         ))}
                       </Bar>
