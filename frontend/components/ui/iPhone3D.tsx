@@ -94,7 +94,9 @@ function IPhoneBody({ materials }: { materials: ReturnType<typeof createMaterial
       {/* Main Body */}
       <RoundedBox
         ref={meshRef}
-        args={[iPhoneDimensions.width, iPhoneDimensions.height, iPhoneDimensions.depth, iPhoneDimensions.cornerRadius, 20]}
+        args={[iPhoneDimensions.width, iPhoneDimensions.height, iPhoneDimensions.depth]}
+        radius={iPhoneDimensions.cornerRadius}
+        smoothness={20}
         material={materials.bodyMaterial}
       />
 
@@ -102,7 +104,9 @@ function IPhoneBody({ materials }: { materials: ReturnType<typeof createMaterial
       <group position={[0.25, 0.55, iPhoneDimensions.depth / 2 + 0.01]}>
         {/* Camera Bump */}
         <RoundedBox
-          args={[0.35, 0.35, 0.025, 0.08, 15]}
+          args={[0.35, 0.35, 0.025]}
+          radius={0.08}
+          smoothness={15}
           material={materials.cameraMaterial}
         />
         
@@ -139,13 +143,17 @@ function IPhoneBody({ materials }: { materials: ReturnType<typeof createMaterial
 
       {/* Volume Buttons */}
       <RoundedBox
-        args={[0.04, 0.25, 0.015, 0.01, 8]}
+        args={[0.04, 0.25, 0.015]}
+        radius={0.01}
+        smoothness={8}
         position={[-iPhoneDimensions.width / 2 - 0.015, 0.2, 0]}
         rotation={[0, 0, Math.PI / 2]}
         material={materials.buttonMaterial}
       />
       <RoundedBox
-        args={[0.04, 0.15, 0.015, 0.01, 8]}
+        args={[0.04, 0.15, 0.015]}
+        radius={0.01}
+        smoothness={8}
         position={[-iPhoneDimensions.width / 2 - 0.015, -0.15, 0]}
         rotation={[0, 0, Math.PI / 2]}
         material={materials.buttonMaterial}
@@ -153,7 +161,9 @@ function IPhoneBody({ materials }: { materials: ReturnType<typeof createMaterial
       
       {/* Power Button */}
       <RoundedBox
-        args={[0.04, 0.3, 0.015, 0.01, 8]}
+        args={[0.04, 0.3, 0.015]}
+        radius={0.01}
+        smoothness={8}
         position={[iPhoneDimensions.width / 2 + 0.015, 0.25, 0]}
         rotation={[0, 0, Math.PI / 2]}
         material={materials.buttonMaterial}
@@ -161,7 +171,9 @@ function IPhoneBody({ materials }: { materials: ReturnType<typeof createMaterial
       
       {/* Action Button */}
       <RoundedBox
-        args={[0.04, 0.15, 0.015, 0.01, 8]}
+        args={[0.04, 0.15, 0.015]}
+        radius={0.01}
+        smoothness={8}
         position={[iPhoneDimensions.width / 2 + 0.015, -0.2, 0]}
         rotation={[0, 0, Math.PI / 2]}
         material={materials.buttonMaterial}
@@ -193,7 +205,7 @@ function IPhoneScreen({ materials }: { materials: ReturnType<typeof createMateri
 
       {/* Dynamic Island */}
       <mesh position={[0, iPhoneDimensions.screenHeight / 2 - iPhoneDimensions.dynamicIslandHeight / 2 - 0.05, iPhoneDimensions.depth / 2 + 0.002]}>
-        <RoundedBox args={[iPhoneDimensions.dynamicIslandWidth, iPhoneDimensions.dynamicIslandHeight, 0.001, 0.02, 8]} />
+        <RoundedBox args={[iPhoneDimensions.dynamicIslandWidth, iPhoneDimensions.dynamicIslandHeight, 0.001]} radius={0.02} smoothness={8} />
         <meshBasicMaterial color="black" />
       </mesh>
 
