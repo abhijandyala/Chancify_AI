@@ -1,324 +1,13 @@
 'use client'
 
 import React, { useRef, useEffect, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, RoundedBox, Environment, Html } from '@react-three/drei'
-import * as THREE from 'three'
 import { motion } from 'framer-motion'
 
 interface iPhone3DProps {
   showControls?: boolean;
 }
 
-// Realistic iPhone 15 Pro Max dimensions
-const iPhoneDimensions = {
-  width: 0.77, // ~77mm
-  height: 1.6, // ~160mm  
-  depth: 0.083, // ~8.3mm
-  cornerRadius: 0.12, // More rounded corners like real iPhone
-  screenWidth: 0.72,
-  screenHeight: 1.52,
-  dynamicIslandWidth: 0.18,
-  dynamicIslandHeight: 0.035,
-  bezelWidth: 0.025, // Screen bezel
-}
-
-// Create realistic materials
-const createMaterials = () => {
-  // Titanium body material (iPhone 15 Pro Max)
-  const bodyMaterial = new THREE.MeshPhysicalMaterial({
-    color: new THREE.Color('#2C2C2E'), // Space Black
-    roughness: 0.1,
-    metalness: 0.9,
-    clearcoat: 0.2,
-    clearcoatRoughness: 0.1,
-    reflectivity: 0.8,
-  })
-
-  // Ceramic Shield screen material
-  const screenMaterial = new THREE.MeshPhysicalMaterial({
-    color: new THREE.Color('#000000'),
-    roughness: 0.05,
-    metalness: 0.0,
-    transmission: 0.95,
-    transparent: true,
-    opacity: 0.9,
-    ior: 1.52, // Glass IOR
-    thickness: 0.001,
-  })
-
-  // Camera module material
-  const cameraMaterial = new THREE.MeshPhysicalMaterial({
-    color: new THREE.Color('#1A1A1A'),
-    roughness: 0.3,
-    metalness: 0.95,
-    clearcoat: 0.1,
-  })
-
-  // Camera lens material
-  const lensMaterial = new THREE.MeshPhysicalMaterial({
-    color: new THREE.Color('#000000'),
-    roughness: 0.05,
-    metalness: 0.0,
-    transmission: 0.9,
-    transparent: true,
-    opacity: 0.8,
-    ior: 1.5,
-  })
-
-  // Button material
-  const buttonMaterial = new THREE.MeshPhysicalMaterial({
-    color: new THREE.Color('#4A4A4C'),
-    roughness: 0.4,
-    metalness: 0.8,
-  })
-
-  return { bodyMaterial, screenMaterial, cameraMaterial, lensMaterial, buttonMaterial }
-}
-
-// Realistic iPhone Body Component
-function IPhoneBody({ materials }: { materials: ReturnType<typeof createMaterials> }) {
-  const meshRef = useRef<THREE.Mesh>(null)
-
-  useFrame(() => {
-    if (meshRef.current) {
-      // Subtle breathing animation
-      const time = Date.now() * 0.0005
-      const breathe = Math.sin(time * 0.3) * 0.0005 + 1
-      meshRef.current.scale.setScalar(breathe)
-    }
-  })
-
-  return (
-    <group>
-      {/* Main Body */}
-      <RoundedBox
-        ref={meshRef}
-        args={[iPhoneDimensions.width, iPhoneDimensions.height, iPhoneDimensions.depth]}
-        radius={iPhoneDimensions.cornerRadius}
-        smoothness={20}
-        material={materials.bodyMaterial}
-      />
-
-      {/* Camera Module */}
-      <group position={[0.25, 0.55, iPhoneDimensions.depth / 2 + 0.01]}>
-        {/* Camera Bump */}
-        <RoundedBox
-          args={[0.35, 0.35, 0.025]}
-          radius={0.08}
-          smoothness={15}
-          material={materials.cameraMaterial}
-        />
-        
-        {/* Main Camera Lens */}
-        <mesh position={[-0.1, 0.1, 0.015]}>
-          <cylinderGeometry args={[0.06, 0.06, 0.01, 32]} />
-          <primitive object={materials.lensMaterial} />
-        </mesh>
-        
-        {/* Ultra Wide Camera */}
-        <mesh position={[0.1, 0.1, 0.015]}>
-          <cylinderGeometry args={[0.05, 0.05, 0.01, 32]} />
-          <primitive object={materials.lensMaterial} />
-        </mesh>
-        
-        {/* Telephoto Camera */}
-        <mesh position={[0, -0.1, 0.015]}>
-          <cylinderGeometry args={[0.05, 0.05, 0.01, 32]} />
-          <primitive object={materials.lensMaterial} />
-        </mesh>
-        
-        {/* LiDAR Scanner */}
-        <mesh position={[-0.15, -0.1, 0.015]}>
-          <cylinderGeometry args={[0.03, 0.03, 0.01, 16]} />
-          <meshBasicMaterial color="#FF6B6B" />
-        </mesh>
-        
-        {/* Flash */}
-        <mesh position={[0.15, -0.1, 0.015]}>
-          <cylinderGeometry args={[0.025, 0.025, 0.01, 16]} />
-          <meshBasicMaterial color="#FFFFFF" />
-        </mesh>
-      </group>
-
-      {/* Volume Buttons */}
-      <RoundedBox
-        args={[0.04, 0.25, 0.015]}
-        radius={0.01}
-        smoothness={8}
-        position={[-iPhoneDimensions.width / 2 - 0.015, 0.2, 0]}
-        rotation={[0, 0, Math.PI / 2]}
-        material={materials.buttonMaterial}
-      />
-      <RoundedBox
-        args={[0.04, 0.15, 0.015]}
-        radius={0.01}
-        smoothness={8}
-        position={[-iPhoneDimensions.width / 2 - 0.015, -0.15, 0]}
-        rotation={[0, 0, Math.PI / 2]}
-        material={materials.buttonMaterial}
-      />
-      
-      {/* Power Button */}
-      <RoundedBox
-        args={[0.04, 0.3, 0.015]}
-        radius={0.01}
-        smoothness={8}
-        position={[iPhoneDimensions.width / 2 + 0.015, 0.25, 0]}
-        rotation={[0, 0, Math.PI / 2]}
-        material={materials.buttonMaterial}
-      />
-      
-      {/* Action Button */}
-      <RoundedBox
-        args={[0.04, 0.15, 0.015]}
-        radius={0.01}
-        smoothness={8}
-        position={[iPhoneDimensions.width / 2 + 0.015, -0.2, 0]}
-        rotation={[0, 0, Math.PI / 2]}
-        material={materials.buttonMaterial}
-      />
-    </group>
-  )
-}
-
-// Realistic iPhone Screen Component
-function IPhoneScreen({ materials }: { materials: ReturnType<typeof createMaterials> }) {
-  const meshRef = useRef<THREE.Mesh>(null)
-
-  useFrame(() => {
-    if (meshRef.current) {
-      // Subtle screen glow animation
-      const time = Date.now() * 0.0008
-      const glow = Math.sin(time * 0.4) * 0.002 + 1
-      meshRef.current.scale.setScalar(glow)
-    }
-  })
-
-  return (
-    <group>
-      {/* Screen Surface */}
-      <mesh ref={meshRef} position={[0, 0, iPhoneDimensions.depth / 2 + 0.001]}>
-        <planeGeometry args={[iPhoneDimensions.screenWidth, iPhoneDimensions.screenHeight]} />
-        <primitive object={materials.screenMaterial} />
-      </mesh>
-
-      {/* Dynamic Island */}
-      <mesh position={[0, iPhoneDimensions.screenHeight / 2 - iPhoneDimensions.dynamicIslandHeight / 2 - 0.05, iPhoneDimensions.depth / 2 + 0.002]}>
-        <RoundedBox args={[iPhoneDimensions.dynamicIslandWidth, iPhoneDimensions.dynamicIslandHeight, 0.001]} radius={0.02} smoothness={8} />
-        <meshBasicMaterial color="black" />
-      </mesh>
-
-      {/* Screen Content - Blank with subtle gradient */}
-      <mesh position={[0, 0, iPhoneDimensions.depth / 2 + 0.003]}>
-        <planeGeometry args={[iPhoneDimensions.screenWidth - 0.01, iPhoneDimensions.screenHeight - 0.01]} />
-        <meshBasicMaterial color="#1a1a2e" />
-      </mesh>
-    </group>
-  )
-}
-
-// Auto-return controls with smooth animation
-function AutoReturnControls({ children, showControls }: { children: React.ReactNode, showControls: boolean }) {
-  const controlsRef = useRef<any>(null)
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
-  const [isUserInteracting, setIsUserInteracting] = useState(false)
-  const [returnTimeout, setReturnTimeout] = useState<NodeJS.Timeout | null>(null)
-
-  const defaultPosition = {
-    azimuth: -0.3, // Left rotation
-    polar: 0.4,    // Forward tilt
-    distance: 6    // Distance from center
-  }
-
-  useEffect(() => {
-    const controls = controlsRef.current
-    if (!controls) return
-
-    const handleStart = () => {
-      setIsUserInteracting(true)
-      if (returnTimeout) {
-        clearTimeout(returnTimeout)
-        setReturnTimeout(null)
-      }
-    }
-
-    const handleEnd = () => {
-      setIsUserInteracting(false)
-      
-      // Start return timer
-      const timeout = setTimeout(() => {
-        if (!isUserInteracting) {
-          // Smooth return to default position
-          const startAzimuth = controls.getAzimuthalAngle()
-          const startPolar = controls.getPolarAngle()
-          const startDistance = controls.getDistance()
-          
-          const duration = 1200 // 1.2 seconds
-          const startTime = Date.now()
-          
-          const animate = () => {
-            const elapsed = Date.now() - startTime
-            const progress = Math.min(elapsed / duration, 1)
-            
-            // Smooth easing function
-            const easeOutCubic = 1 - Math.pow(1 - progress, 3)
-            
-            controls.setAzimuthalAngle(
-              startAzimuth + (defaultPosition.azimuth - startAzimuth) * easeOutCubic
-            )
-            controls.setPolarAngle(
-              startPolar + (defaultPosition.polar - startPolar) * easeOutCubic
-            )
-            controls.setDistance(
-              startDistance + (defaultPosition.distance - startDistance) * easeOutCubic
-            )
-            
-            if (progress < 1) {
-              requestAnimationFrame(animate)
-            }
-          }
-          
-          animate()
-        }
-      }, 2500) // 2.5 second delay
-      
-      setReturnTimeout(timeout)
-    }
-
-    controls.addEventListener('start', handleStart)
-    controls.addEventListener('end', handleEnd)
-
-    return () => {
-      controls.removeEventListener('start', handleStart)
-      controls.removeEventListener('end', handleEnd)
-      if (returnTimeout) {
-        clearTimeout(returnTimeout)
-      }
-    }
-  }, [isUserInteracting, returnTimeout, defaultPosition.azimuth, defaultPosition.polar, defaultPosition.distance])
-
-  return (
-    <>
-      {children}
-      <OrbitControls
-        ref={controlsRef}
-        enableZoom={true}
-        enablePan={false}
-        minPolarAngle={0}
-        maxPolarAngle={Math.PI / 2}
-        minAzimuthAngle={-Math.PI / 2}
-        maxAzimuthAngle={Math.PI / 2}
-        enableDamping
-        dampingFactor={0.05}
-        rotateSpeed={1.0}
-        autoRotate={false}
-      />
-    </>
-  )
-}
-
-// Main iPhone3D Component
+// Main iPhone3D Component using Sketchfab
 export default function Phone3D({ 
   className = "",
   showControls = true
@@ -327,6 +16,8 @@ export default function Phone3D({
   showControls?: boolean
 }) {
   const [isMobile, setIsMobile] = useState(false)
+  const iframeRef = useRef<HTMLIFrameElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
   
   useEffect(() => {
     const checkMobile = () => {
@@ -338,46 +29,118 @@ export default function Phone3D({
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  const materials = createMaterials()
+  // Use the iPhone 16 Pro Black model from Sketchfab (most realistic)
+  const sketchfabUrl = "https://sketchfab.com/models/5cb0778041a34f09b409a38c687bb1d4/embed?autospin=1&autostart=1&preload=1&transparent=1&ui_theme=dark&camera=0&ui_hint=0&ui_infos=0&ui_stop=0&ui_watermark=0&ui_help=0"
 
   return (
     <div className={`w-full h-64 sm:h-80 lg:h-96 relative ${className}`}>
-      <Canvas
-        camera={{
-          position: [0, 0, 6],
-          fov: 30,
+      <motion.div
+        ref={containerRef}
+        className="w-full h-full relative overflow-hidden rounded-lg"
+        style={{
+          transform: 'perspective(1000px) rotateX(15deg) rotateY(-15deg)', // Exact tilt angle
+          transformStyle: 'preserve-3d',
         }}
-        gl={{
-          antialias: true,
-          alpha: true,
-          powerPreference: "high-performance"
-        }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, type: "spring", stiffness: 120 }}
+        whileHover={showControls ? { 
+          scale: 1.05,
+          transition: { duration: 0.3 }
+        } : {}}
       >
-        {/* Professional lighting setup */}
-        <Environment preset="studio" />
-        <ambientLight intensity={0.4} />
-        <directionalLight 
-          position={[10, 10, 5]} 
-          intensity={1.2}
-          castShadow
-          shadow-mapSize-width={2048}
-          shadow-mapSize-height={2048}
+        {/* Sketchfab iPhone Model */}
+        <iframe
+          ref={iframeRef}
+          title="iPhone 16 Pro Black - Realistic 3D Model"
+          src={sketchfabUrl}
+          className="w-full h-full border-0"
+          allow="autoplay; fullscreen; xr-spatial-tracking"
+          allowFullScreen
+          style={{
+            borderRadius: '12px',
+            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
+          }}
         />
-        <directionalLight 
-          position={[-10, -10, -5]} 
-          intensity={0.6}
-        />
-        <pointLight position={[0, 0, 10]} intensity={0.8} />
-
-        <AutoReturnControls showControls={showControls}>
-          <group
-            rotation={[0.4, -0.3, 0]} // Exact tilt angle from your image
+        
+        {/* Overlay for interaction feedback */}
+        {showControls && (
+          <motion.div
+            className="absolute inset-0 pointer-events-none"
+            initial={{ opacity: 0 }}
+            whileHover={{ opacity: 1 }}
+            transition={{ duration: 0.2 }}
           >
-            <IPhoneBody materials={materials} />
-            <IPhoneScreen materials={materials} />
-          </group>
-        </AutoReturnControls>
-      </Canvas>
+            <div className="absolute top-4 right-4 bg-black/50 text-white px-2 py-1 rounded text-xs">
+              Drag to rotate
+            </div>
+          </motion.div>
+        )}
+        
+        {/* Subtle glow effect */}
+        <div className="absolute inset-0 rounded-lg pointer-events-none"
+             style={{
+               background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.1) 100%)',
+               mixBlendMode: 'overlay'
+             }}
+        />
+      </motion.div>
+      
+      {/* Auto-return functionality simulation */}
+      {showControls && (
+        <AutoReturnIndicator />
+      )}
     </div>
+  )
+}
+
+// Auto-return indicator component
+function AutoReturnIndicator() {
+  const [isReturning, setIsReturning] = useState(false)
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+
+  useEffect(() => {
+    const handleMouseLeave = () => {
+      // Start return timer when mouse leaves
+      timeoutRef.current = setTimeout(() => {
+        setIsReturning(true)
+        // Reset after animation
+        setTimeout(() => setIsReturning(false), 1000)
+      }, 2000)
+    }
+
+    const handleMouseEnter = () => {
+      // Cancel return timer when mouse enters
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+        timeoutRef.current = null
+      }
+    }
+
+    const container = document.querySelector('[data-iphone-container]')
+    if (container) {
+      container.addEventListener('mouseleave', handleMouseLeave)
+      container.addEventListener('mouseenter', handleMouseEnter)
+      
+      return () => {
+        container.removeEventListener('mouseleave', handleMouseLeave)
+        container.removeEventListener('mouseenter', handleMouseEnter)
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current)
+        }
+      }
+    }
+  }, [])
+
+  return (
+    <motion.div
+      className="absolute bottom-2 left-1/2 transform -translate-x-1/2"
+      animate={isReturning ? { scale: [1, 1.2, 1] } : {}}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="bg-black/70 text-white px-3 py-1 rounded-full text-xs">
+        Auto-returning to position...
+      </div>
+    </motion.div>
   )
 }
