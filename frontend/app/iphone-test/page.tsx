@@ -1,6 +1,7 @@
 'use client'
 
-import iPhone3DComponent from '@/components/ui/iPhone3D'
+import iPhone3D from '@/components/ui/iPhone3D'
+import React from 'react'
 
 export default function iPhoneTestPage() {
   return (
@@ -11,7 +12,7 @@ export default function iPhoneTestPage() {
       </div>
       
       <div className="w-full max-w-4xl">
-        <iPhone3DComponent />
+        {React.createElement(iPhone3D)}
       </div>
       
       <div className="text-center mt-8">

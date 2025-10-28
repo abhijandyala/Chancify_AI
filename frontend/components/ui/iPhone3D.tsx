@@ -15,7 +15,7 @@ const DYNAMIC_ISLAND_WIDTH = 0.4
 const DYNAMIC_ISLAND_HEIGHT = 0.12
 
 // Auto-return to static position after interaction
-function AutoReturnControls({ children }: { children: React.ReactNode }) {
+function AutoReturnControls() {
   const controlsRef = useRef<any>()
   const [isInteracting, setIsInteracting] = useState(false)
   const [lastInteraction, setLastInteraction] = useState(Date.now())
@@ -68,8 +68,8 @@ function AutoReturnControls({ children }: { children: React.ReactNode }) {
       enablePan={false}
       minPolarAngle={Math.PI / 3}
       maxPolarAngle={Math.PI / 1.5}
-      minAzimuthalAngle={-Math.PI / 3}
-      maxAzimuthalAngle={Math.PI / 3}
+      minAzimuthAngle={-Math.PI / 3}
+      maxAzimuthAngle={Math.PI / 3}
       enableDamping
       dampingFactor={0.05}
     />
