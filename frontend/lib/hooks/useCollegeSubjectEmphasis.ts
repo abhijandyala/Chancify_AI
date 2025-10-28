@@ -37,7 +37,18 @@ export function useCollegeSubjectEmphasis(collegeName: string | null) {
         console.log(`🔍 Backend URL: ${backendUrl}`)
         console.log(`🔍 Full URL: ${backendUrl}/api/college-subject-emphasis/${encodedCollegeName}`)
         
-        const response = await fetch(`${backendUrl}/api/college-subject-emphasis/${encodedCollegeName}`)
+        const headers: HeadersInit = {
+          'Content-Type': 'application/json',
+        }
+
+        // Add ngrok skip warning header if using ngrok
+        if (backendUrl.includes('ngrok')) {
+          headers['ngrok-skip-browser-warning'] = 'true'
+        }
+
+        const response = await fetch(`${backendUrl}/api/college-subject-emphasis/${encodedCollegeName}`, {
+          headers
+        })
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
