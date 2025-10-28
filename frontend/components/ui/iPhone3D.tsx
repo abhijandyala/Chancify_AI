@@ -51,18 +51,44 @@ export default function Phone3D({
         } : {}}
       >
         {/* Sketchfab iPhone Model */}
-        <iframe
-          ref={iframeRef}
-          title="iPhone 16 Pro Black - Realistic 3D Model"
-          src={sketchfabUrl}
-          className="w-full h-full border-0"
-          allow="autoplay; fullscreen; xr-spatial-tracking"
-          allowFullScreen
-          style={{
-            borderRadius: '12px',
-            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
-          }}
-        />
+        <div className="relative w-full h-full">
+          <iframe
+            ref={iframeRef}
+            title="iPhone 16 Pro Black - Realistic 3D Model"
+            src={sketchfabUrl}
+            className="w-full h-full border-0"
+            allow="autoplay; fullscreen; xr-spatial-tracking"
+            allowFullScreen
+            style={{
+              borderRadius: '12px',
+              boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
+            }}
+          />
+          {/* CSS to hide Sketchfab UI elements */}
+          <style jsx global>{`
+            iframe[src*="sketchfab"] {
+              position: relative;
+            }
+            iframe[src*="sketchfab"]::after {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background: transparent;
+              pointer-events: none;
+              z-index: 10;
+            }
+            /* Hide Sketchfab UI elements */
+            iframe[src*="sketchfab"] * {
+              display: none !important;
+            }
+            iframe[src*="sketchfab"] canvas {
+              display: block !important;
+            }
+          `}</style>
+        </div>
         
         {/* Overlay for interaction feedback */}
         {showControls && (
