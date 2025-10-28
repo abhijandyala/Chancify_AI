@@ -16,7 +16,7 @@ from data.real_ipeds_major_mapping import get_colleges_for_major, get_major_stre
 from data.real_college_suggestions import real_college_suggestions
 from data.college_names_mapping import college_names_mapping
 from data.college_nickname_mapper import nickname_mapper
-from data.college_tuition_service import college_tuition_service
+from data.college_subject_emphasis import college_subject_emphasis
 
 # Configure logging
 logging.basicConfig(
