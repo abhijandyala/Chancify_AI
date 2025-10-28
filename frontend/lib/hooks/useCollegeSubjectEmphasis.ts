@@ -29,9 +29,13 @@ export function useCollegeSubjectEmphasis(collegeName: string | null) {
       setError(null)
 
       try {
-        // Get the backend URL from environment or use default
-        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'
+        // Get the backend URL from environment or use ngrok URL (same as other API calls)
+        const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'https://unsmug-untensely-elroy.ngrok-free.dev'
         const encodedCollegeName = encodeURIComponent(collegeName)
+        
+        console.log(`🔍 Fetching subject emphasis for: ${collegeName}`)
+        console.log(`🔍 Backend URL: ${backendUrl}`)
+        console.log(`🔍 Full URL: ${backendUrl}/api/college-subject-emphasis/${encodedCollegeName}`)
         
         const response = await fetch(`${backendUrl}/api/college-subject-emphasis/${encodedCollegeName}`)
         
