@@ -258,27 +258,24 @@ export default function PrivacyPage() {
                 border: '3px solid #FFD700'
               }}
             >
-              {/* Enhanced Glowing Border Effect */}
+              {/* Background Glow Effect - Behind Content */}
               <div 
-                className="absolute inset-0 rounded-2xl pointer-events-none"
+                className="absolute inset-[-20px] rounded-2xl pointer-events-none"
                 style={{
-                  background: 'linear-gradient(45deg, #FFD700, #FFA500, #FFD700, #FFA500)',
-                  padding: '3px',
-                  WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                  WebkitMaskComposite: 'xor',
-                  maskComposite: 'exclude',
-                  filter: 'blur(1px)',
-                  animation: 'glow-pulse 2s ease-in-out infinite alternate'
+                  background: 'radial-gradient(circle at center, rgba(255, 215, 0, 0.8) 0%, rgba(255, 165, 0, 0.6) 30%, rgba(255, 215, 0, 0.3) 60%, transparent 100%)',
+                  filter: 'blur(30px)',
+                  zIndex: -2,
+                  animation: 'glow-pulse 3s ease-in-out infinite alternate'
                 }}
               />
               
-              {/* Additional Glow Layer */}
+              {/* Inner Glow Layer */}
               <div 
-                className="absolute inset-[-6px] rounded-2xl pointer-events-none"
+                className="absolute inset-[-10px] rounded-2xl pointer-events-none"
                 style={{
-                  background: 'linear-gradient(45deg, #FFD700, #FFA500, #FFD700, #FFA500)',
-                  filter: 'blur(8px)',
-                  opacity: 0.6,
+                  background: 'linear-gradient(45deg, rgba(255, 215, 0, 0.6), rgba(255, 165, 0, 0.4), rgba(255, 215, 0, 0.6))',
+                  filter: 'blur(15px)',
+                  zIndex: -1,
                   animation: 'glow-pulse 2s ease-in-out infinite alternate'
                 }}
               />
@@ -364,8 +361,8 @@ export default function PrivacyPage() {
                   <section>
                     <h3 className="text-xl font-semibold text-yellow-400 mb-3">12. Contact Information</h3>
                     <p className="text-white/80">If you have questions or concerns about these Terms, please contact us at:</p>
-                    <p className="text-white/80 mt-2">📧 chancifyai@gmail.com</p>
-                    <p className="text-white/80">🏢 Marvin Ridge High School, Waxhaw, NC</p>
+                    <p className="text-white/80 mt-2">chancifyai@gmail.com</p>
+                    <p className="text-white/80">Marvin Ridge High School, Waxhaw, NC</p>
                   </section>
                 </div>
 
@@ -412,12 +409,14 @@ export default function PrivacyPage() {
       <style jsx>{`
         @keyframes glow-pulse {
           0% {
-            opacity: 0.6;
-            filter: blur(8px);
+            opacity: 0.4;
+            filter: blur(25px);
+            transform: scale(1);
           }
           100% {
-            opacity: 1;
-            filter: blur(4px);
+            opacity: 0.8;
+            filter: blur(35px);
+            transform: scale(1.05);
           }
         }
 
