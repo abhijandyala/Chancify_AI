@@ -212,14 +212,7 @@ function IPhoneScreen({ materials }: { materials: ReturnType<typeof createMateri
       {/* Screen Content - Blank with subtle gradient */}
       <mesh position={[0, 0, iPhoneDimensions.depth / 2 + 0.003]}>
         <planeGeometry args={[iPhoneDimensions.screenWidth - 0.01, iPhoneDimensions.screenHeight - 0.01]} />
-        <meshBasicMaterial>
-          <gradientTexture
-            attach="map"
-            stops={[0, 0.3, 0.7, 1]}
-            colors={['#1a1a2e', '#16213e', '#0f3460', '#533483']} // Dark gradient
-            rotation={Math.PI / 2}
-          />
-        </meshBasicMaterial>
+        <meshBasicMaterial color="#1a1a2e" />
       </mesh>
     </group>
   )
