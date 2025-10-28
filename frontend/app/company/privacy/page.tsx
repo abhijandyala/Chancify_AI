@@ -95,7 +95,7 @@ export default function PrivacyPage() {
             onClick={() => setShowTermsModal(true)}
             className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-8 py-4 rounded-full transition-colors flex items-center space-x-2 mx-auto"
           >
-            <span>Read Full Policy</span>
+            <span>Privacy Policy</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
@@ -249,23 +249,37 @@ export default function PrivacyPage() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               transition={{ duration: 0.3 }}
-              className="relative bg-black border border-white/20 rounded-2xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+              className="relative bg-black rounded-2xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
               style={{
                 background: 'linear-gradient(135deg, #1e1e24 10%, #050505 60%)',
                 position: 'relative',
-                boxShadow: '0 0 50px rgba(255, 215, 0, 0.3)'
+                boxShadow: '0 0 100px rgba(255, 215, 0, 0.8), 0 0 200px rgba(255, 215, 0, 0.4), inset 0 0 50px rgba(255, 215, 0, 0.1)',
+                border: '3px solid #FFD700'
               }}
             >
-              {/* Glowing Border Effect */}
+              {/* Enhanced Glowing Border Effect */}
               <div 
                 className="absolute inset-0 rounded-2xl pointer-events-none"
                 style={{
-                  background: 'radial-gradient(circle at 0 0, hsl(27deg 93% 60%), transparent), radial-gradient(circle at 100% 0, #FFC000, transparent), radial-gradient(circle at 0 100%, #FFC000, transparent), radial-gradient(circle at 100% 100%, #FFC000, transparent)',
-                  padding: '2px',
+                  background: 'linear-gradient(45deg, #FFD700, #FFA500, #FFD700, #FFA500)',
+                  padding: '3px',
                   WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                   WebkitMaskComposite: 'xor',
-                  maskComposite: 'exclude'
+                  maskComposite: 'exclude',
+                  filter: 'blur(1px)',
+                  animation: 'glow-pulse 2s ease-in-out infinite alternate'
+                }}
+              />
+              
+              {/* Additional Glow Layer */}
+              <div 
+                className="absolute inset-[-6px] rounded-2xl pointer-events-none"
+                style={{
+                  background: 'linear-gradient(45deg, #FFD700, #FFA500, #FFD700, #FFA500)',
+                  filter: 'blur(8px)',
+                  opacity: 0.6,
+                  animation: 'glow-pulse 2s ease-in-out infinite alternate'
                 }}
               />
 
@@ -396,6 +410,17 @@ export default function PrivacyPage() {
 
       {/* Custom CSS */}
       <style jsx>{`
+        @keyframes glow-pulse {
+          0% {
+            opacity: 0.6;
+            filter: blur(8px);
+          }
+          100% {
+            opacity: 1;
+            filter: blur(4px);
+          }
+        }
+
         .cl-checkbox {
           position: relative;
           display: inline-block;
