@@ -21,6 +21,9 @@ function AutoReturnControls({ children }: { children: React.ReactNode }) {
   const [lastInteraction, setLastInteraction] = useState(Date.now())
 
   useEffect(() => {
+    const controls = controlsRef.current
+    if (!controls) return
+
     const handleInteractionStart = () => {
       setIsInteracting(true)
       setLastInteraction(Date.now())
@@ -31,16 +34,12 @@ function AutoReturnControls({ children }: { children: React.ReactNode }) {
       setLastInteraction(Date.now())
     }
 
-    if (controlsRef.current) {
-      controlsRef.current.addEventListener('start', handleInteractionStart)
-      controlsRef.current.addEventListener('end', handleInteractionEnd)
-    }
+    controls.addEventListener('start', handleInteractionStart)
+    controls.addEventListener('end', handleInteractionEnd)
 
     return () => {
-      if (controlsRef.current) {
-        controlsRef.current.removeEventListener('start', handleInteractionStart)
-        controlsRef.current.removeEventListener('end', handleInteractionEnd)
-      }
+      controls.removeEventListener('start', handleInteractionStart)
+      controls.removeEventListener('end', handleInteractionEnd)
     }
   }, [])
 
@@ -116,7 +115,7 @@ const islandMaterial = new THREE.MeshPhysicalMaterial({
 })
 
 // iPhone Screen Component
-function iPhoneScreen() {
+function IPhoneScreen() {
   const meshRef = useRef<THREE.Mesh>(null)
 
   return (
@@ -140,7 +139,7 @@ function DynamicIsland() {
 }
 
 // iPhone Body Component
-function iPhoneBody() {
+function IPhoneBody() {
   const meshRef = useRef<THREE.Mesh>(null)
 
   return (
@@ -186,11 +185,11 @@ function MuteSwitch() {
 }
 
 // Main iPhone Component
-function iPhone() {
+function IPhone() {
   return (
     <group>
-      <iPhoneBody />
-      <iPhoneScreen />
+      <IPhoneBody />
+      <IPhoneScreen />
       <DynamicIsland />
       <VolumeButtons />
       <MuteSwitch />
@@ -229,7 +228,7 @@ export default function iPhone3D() {
       >
         <Lighting />
         <Environment preset="studio" />
-        <iPhone />
+        <IPhone />
         <AutoReturnControls />
       </Canvas>
     </div>
