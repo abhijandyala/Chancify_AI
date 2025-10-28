@@ -173,8 +173,8 @@ export default function PrivacyPolicyModal({ isOpen, onClose }: PrivacyPolicyMod
 
               <h3 className="text-xl font-semibold text-white mt-8 mb-2">12. Contact Us</h3>
               <p>If you have questions or concerns about this Privacy Policy, contact us at:</p>
-              <p>📧 chancifyai@gmail.com</p>
-              <p>🏢 Marvin Ridge High School, Waxhaw, NC</p>
+              <p>Email: chancifyai@gmail.com</p>
+              <p>Address: Marvin Ridge High School, Waxhaw, NC</p>
             </div>
 
             <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -229,130 +229,50 @@ const styles = `
 
   .cl-checkbox {
     position: relative;
-    display: inline-block;
-  }
-
-  .cl-checkbox > input {
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    z-index: -1;
-    position: absolute;
-    left: -10px;
-    top: -8px;
-    display: block;
-    margin: 0;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    background-color: rgba(0, 0, 0, 0.6);
-    box-shadow: none;
-    outline: none;
-    opacity: 0;
-    transform: scale(1);
-    pointer-events: none;
-    transition: opacity 0.3s, transform 0.2s;
-  }
-
-  .cl-checkbox > span {
-    display: inline-block;
-    width: 100%;
+    display: inline-flex;
+    align-items: center;
     cursor: pointer;
   }
 
-  .cl-checkbox > span::before {
-    content: "";
-    display: inline-block;
-    box-sizing: border-box;
-    margin: 3px 11px 3px 1px;
-    border: solid 2px;
-    border-color: rgba(0, 0, 0, 0.6);
-    border-radius: 2px;
-    width: 18px;
-    height: 18px;
-    vertical-align: top;
-    transition: border-color 0.2s, background-color 0.2s;
+  .cl-checkbox input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #FFD700;
+    border-radius: 3px;
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+    margin-right: 8px;
+    transition: all 0.2s ease;
   }
 
-  .cl-checkbox > span::after {
-    content: "";
-    display: block;
+  .cl-checkbox input[type="checkbox"]:checked {
+    background-color: #FFD700;
+    border-color: #FFD700;
+  }
+
+  .cl-checkbox input[type="checkbox"]:checked::after {
+    content: '';
     position: absolute;
-    top: 3px;
-    left: 1px;
-    width: 10px;
-    height: 5px;
-    border: solid 2px transparent;
-    border-right: none;
-    border-top: none;
-    transform: translate(3px, 4px) rotate(-45deg);
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 10px;
+    border: solid #000;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
   }
 
-  .cl-checkbox > input:checked,
-  .cl-checkbox > input:indeterminate {
-    background-color: #018786;
+  .cl-checkbox input[type="checkbox"]:hover {
+    border-color: #FFA500;
   }
 
-  .cl-checkbox > input:checked + span::before,
-  .cl-checkbox > input:indeterminate + span::before {
-    border-color: #FFD700;
-    background-color: #000000;
-  }
-
-  .cl-checkbox > input:checked + span::after,
-  .cl-checkbox > input:indeterminate + span::after {
-    border-color: #fff;
-  }
-
-  .cl-checkbox > input:indeterminate + span::after {
-    border-left: none;
-    transform: translate(4px, 3px);
-  }
-
-  .cl-checkbox:hover > input {
-    opacity: 0.04;
-  }
-
-  .cl-checkbox > input:focus {
-    opacity: 0.12;
-  }
-
-  .cl-checkbox:hover > input:focus {
-    opacity: 0.16;
-  }
-
-  .cl-checkbox > input:active {
-    opacity: 1;
-    transform: scale(0);
-    transition: transform 0s, opacity 0s;
-  }
-
-  .cl-checkbox > input:active + span::before {
-    border-color: #FFD700;
-  }
-
-  .cl-checkbox > input:checked:active + span::before {
-    border-color: transparent;
-    background-color: rgba(0, 0, 0, 0.6);
-  }
-
-  .cl-checkbox > input:disabled {
-    opacity: 0;
-  }
-
-  .cl-checkbox > input:disabled + span {
-    color: rgba(0, 0, 0, 0.38);
-    cursor: initial;
-  }
-
-  .cl-checkbox > input:disabled + span::before {
-    border-color: currentColor;
-  }
-
-  .cl-checkbox > input:checked:disabled + span::before,
-  .cl-checkbox > input:indeterminate:disabled + span::before {
-    border-color: transparent;
-    background-color: currentColor;
+  .cl-checkbox input[type="checkbox"]:checked:hover {
+    background-color: #FFA500;
+    border-color: #FFA500;
   }
 `
 
