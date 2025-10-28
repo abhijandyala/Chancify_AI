@@ -8,6 +8,85 @@ import { useRouter } from 'next/navigation'
 import { getCollegeSuggestions, searchColleges, type CollegeSuggestionsRequest, type CollegeSuggestion, type CollegeSearchResult } from '@/lib/api'
 import Loader from '@/components/Loader'
 
+// Function to get tuition info with in-state/out-of-state status
+const getTuitionInfoForZipcode = (college: any, zipcode: string) => {
+  if (!zipcode || zipcode.length < 5) {
+    return {
+      tuition: college.tuition_in_state || college.tuition_out_state || 'N/A',
+      isInState: null,
+      state: null
+    }
+  }
+  
+  const zipcodeState = getStateFromZipcode(zipcode)
+  const collegeState = college.state
+  
+  const isInState = zipcodeState === collegeState
+  
+  return {
+    tuition: isInState 
+      ? (college.tuition_in_state || college.tuition_out_state || 'N/A')
+      : (college.tuition_out_state || college.tuition_in_state || 'N/A'),
+    isInState,
+    state: zipcodeState
+  }
+}
+
+// Function to get state from zipcode (simplified)
+const getStateFromZipcode = (zipcode: string) => {
+  const prefix = zipcode.substring(0, 2)
+  const stateMap: { [key: string]: string } = {
+    '15': 'PA', '16': 'PA', '17': 'PA', '18': 'PA',
+    '90': 'CA', '91': 'CA', '92': 'CA', '93': 'CA', '94': 'CA', '95': 'CA',
+    '10': 'NY', '11': 'NY', '12': 'NY', '13': 'NY', '14': 'NY',
+    '75': 'TX', '76': 'TX', '77': 'TX', '78': 'TX', '79': 'TX',
+    '60': 'IL', '61': 'IL', '62': 'IL',
+    '43': 'OH', '44': 'OH', '45': 'OH',
+    '48': 'MI', '49': 'MI',
+    '55': 'MN', '56': 'MN',
+    '63': 'MO', '64': 'MO', '65': 'MO',
+    '30': 'GA', '31': 'GA',
+    '32': 'FL', '33': 'FL', '34': 'FL',
+    '27': 'NC', '28': 'NC',
+    '22': 'VA', '23': 'VA', '24': 'VA',
+    '40': 'KY', '41': 'KY', '42': 'KY',
+    '46': 'IN', '47': 'IN',
+    '50': 'IA', '51': 'IA',
+    '66': 'KS', '67': 'KS',
+    '70': 'LA', '71': 'LA',
+    '03': 'ME', '04': 'ME',
+    '20': 'MD', '21': 'MD',
+    '01': 'MA', '02': 'MA',
+    '38': 'MS', '39': 'MS',
+    '59': 'MT',
+    '68': 'NE', '69': 'NE',
+    '89': 'NV',
+    '07': 'NJ', '08': 'NJ',
+    '87': 'NM', '88': 'NM',
+    '58': 'ND',
+    '73': 'OK', '74': 'OK',
+    '97': 'OR',
+    '29': 'SC',
+    '57': 'SD',
+    '37': 'TN',
+    '84': 'UT',
+    '05': 'VT',
+    '98': 'WA',
+    '25': 'WV', '26': 'WV',
+    '53': 'WI', '54': 'WI',
+    '82': 'WY',
+    '35': 'AL', '36': 'AL',
+    '99': 'AK',
+    '85': 'AZ', '86': 'AZ',
+    '80': 'CO', '81': 'CO',
+    '06': 'CT',
+    '19': 'DE',
+    '96': 'HI',
+    '83': 'ID',
+    '72': 'AR'
+  }
+}
+
 // Function to get major relevance information for a college
 // This uses the major_fit_score and major_match from the backend data
 const getMajorRelevanceInfo = (college: any) => {
@@ -340,7 +419,18 @@ export default function CollegeSelectionPage() {
                           {college.selectivity_tier} • {(college.acceptance_rate * 100).toFixed(1)}% acceptance
                         </p>
                         <p className="text-gray-500 text-xs">
-                          {college.city}, {college.state} • ${college.tuition_in_state?.toLocaleString() || 'N/A'} tuition
+                          {college.city}, {college.state} • ${(() => {
+                            const tuitionInfo = getTuitionInfoForZipcode(college, zipcode)
+                            return tuitionInfo.tuition?.toLocaleString() || 'N/A'
+                          })()} tuition {zipcode && zipcode.length >= 5 && (() => {
+                            const tuitionInfo = getTuitionInfoForZipcode(college, zipcode)
+                            if (tuitionInfo.isInState === true) {
+                              return <span className="text-green-400">(In-State)</span>
+                            } else if (tuitionInfo.isInState === false) {
+                              return <span className="text-red-400">(Out-of-State)</span>
+                            }
+                            return null
+                          })()}
                         </p>
                             {/* Major Relevance */}
                             <div className="mt-2">
@@ -442,7 +532,18 @@ export default function CollegeSelectionPage() {
                             </div>
                             <div className="flex items-center gap-2 text-gray-300">
                               <DollarSign className="w-4 h-4 text-yellow-400" />
-                              <span>${college.tuition_in_state?.toLocaleString() || 'N/A'}</span>
+                              <span>${(() => {
+                                const tuitionInfo = getTuitionInfoForZipcode(college, zipcode)
+                                return tuitionInfo.tuition?.toLocaleString() || 'N/A'
+                              })()} {zipcode && zipcode.length >= 5 && (() => {
+                                const tuitionInfo = getTuitionInfoForZipcode(college, zipcode)
+                                if (tuitionInfo.isInState === true) {
+                                  return <span className="text-green-400 text-xs">(In-State)</span>
+                                } else if (tuitionInfo.isInState === false) {
+                                  return <span className="text-red-400 text-xs">(Out-of-State)</span>
+                                }
+                                return null
+                              })()}</span>
                             </div>
                             <div className="flex items-center gap-2 text-gray-300">
                               <Star className="w-4 h-4 text-green-400" />
@@ -547,7 +648,18 @@ export default function CollegeSelectionPage() {
                             </div>
                             <div className="flex items-center gap-2 text-gray-300">
                               <DollarSign className="w-4 h-4 text-yellow-400" />
-                              <span>${college.tuition_in_state?.toLocaleString() || 'N/A'}</span>
+                              <span>${(() => {
+                                const tuitionInfo = getTuitionInfoForZipcode(college, zipcode)
+                                return tuitionInfo.tuition?.toLocaleString() || 'N/A'
+                              })()} {zipcode && zipcode.length >= 5 && (() => {
+                                const tuitionInfo = getTuitionInfoForZipcode(college, zipcode)
+                                if (tuitionInfo.isInState === true) {
+                                  return <span className="text-green-400 text-xs">(In-State)</span>
+                                } else if (tuitionInfo.isInState === false) {
+                                  return <span className="text-red-400 text-xs">(Out-of-State)</span>
+                                }
+                                return null
+                              })()}</span>
                             </div>
                             <div className="flex items-center gap-2 text-gray-300">
                               <Star className="w-4 h-4 text-yellow-400" />
@@ -652,7 +764,18 @@ export default function CollegeSelectionPage() {
                             </div>
                             <div className="flex items-center gap-2 text-gray-300">
                               <DollarSign className="w-4 h-4 text-yellow-400" />
-                              <span>${college.tuition_in_state?.toLocaleString() || 'N/A'}</span>
+                              <span>${(() => {
+                                const tuitionInfo = getTuitionInfoForZipcode(college, zipcode)
+                                return tuitionInfo.tuition?.toLocaleString() || 'N/A'
+                              })()} {zipcode && zipcode.length >= 5 && (() => {
+                                const tuitionInfo = getTuitionInfoForZipcode(college, zipcode)
+                                if (tuitionInfo.isInState === true) {
+                                  return <span className="text-green-400 text-xs">(In-State)</span>
+                                } else if (tuitionInfo.isInState === false) {
+                                  return <span className="text-red-400 text-xs">(Out-of-State)</span>
+                                }
+                                return null
+                              })()}</span>
                             </div>
                             <div className="flex items-center gap-2 text-gray-300">
                               <Star className="w-4 h-4 text-red-400" />
@@ -728,7 +851,7 @@ export default function CollegeSelectionPage() {
             }
             setShowLoader(true)
           }}
-          disabled={selectedColleges.length === 0}
+          disabled={selectedColleges.length === 0 || !zipcode || zipcode.length < 5}
         >
           Calculate My Chances
           <ChevronRight className="w-4 h-4 ml-2" />
