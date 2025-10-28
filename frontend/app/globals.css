@@ -531,30 +531,32 @@
   background-size: 200% 200%;
   border-radius: 12px;
   overflow: hidden;
+  z-index: 1;
 }
 
 .college-card-selected::before,
 .college-card-selected::after {
-  --size: 5px;
+  --size: 8px;
   content: "";
   position: absolute;
   top: calc(var(--size) / -2);
   left: calc(var(--size) / -2);
   width: calc(100% + var(--size));
   height: calc(100% + var(--size));
-  border-radius: 16px;
+  border-radius: 20px;
   pointer-events: none;
-}
-
-.college-card-selected::after {
-  --size: 2px;
   z-index: -1;
 }
 
-.college-card-selected::before {
-  --size: 10px;
+.college-card-selected::after {
+  --size: 4px;
   z-index: -2;
-  filter: blur(2vmin);
+}
+
+.college-card-selected::before {
+  --size: 16px;
+  z-index: -3;
+  filter: blur(3vmin);
   animation: blur-animation 3s ease-in-out alternate infinite;
 }
 
@@ -613,8 +615,8 @@
 /* Faster blur animation */
 @keyframes blur-animation {
   to {
-    filter: blur(3vmin);
-    transform: scale(1.05);
+    filter: blur(4vmin);
+    transform: scale(1.1);
   }
 }
 
