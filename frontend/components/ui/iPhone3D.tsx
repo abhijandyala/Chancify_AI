@@ -1,245 +1,225 @@
 'use client'
 
-import { useRef, useState, useEffect } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { 
-  OrbitControls, 
-  Environment, 
-  RoundedBox, 
-  useTexture,
-  Stars,
-  Sparkles
-} from '@react-three/drei'
+import React, { useRef, useEffect, useState } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { OrbitControls, RoundedBox, Environment, Html } from '@react-three/drei'
 import * as THREE from 'three'
 import { motion } from 'framer-motion'
 
-// iPhone dimensions based on iPhone 15 Pro Max
-const getIPhoneDimensions = (isMobile: boolean) => {
-  if (isMobile) {
-    return {
-      width: 1.8,
-      height: 3.9,
-      depth: 0.25,
-      screenWidth: 1.6,
-      screenHeight: 3.5,
-      dynamicIslandWidth: 0.3,
-      dynamicIslandHeight: 0.1,
-      cameraBumpWidth: 0.4,
-      cameraBumpHeight: 0.4,
-      cameraBumpDepth: 0.08
-    }
-  }
-  return {
-    width: 2.2,
-    height: 4.7,
-    depth: 0.3,
-    screenWidth: 2.0,
-    screenHeight: 4.3,
-    dynamicIslandWidth: 0.35,
-    dynamicIslandHeight: 0.12,
-    cameraBumpWidth: 0.5,
-    cameraBumpHeight: 0.5,
-    cameraBumpDepth: 0.1
-  }
+interface iPhone3DProps {
+  showControls?: boolean;
 }
 
-// Materials matching the image
-const createIPhoneMaterials = (isMobile: boolean) => {
-  const quality = isMobile ? 0.8 : 1.0
-  
-  return {
-    // Screen material with gradient
-    screenMaterial: new THREE.MeshPhysicalMaterial({
-      color: '#000000',
-      metalness: 0.0,
-      roughness: 0.0,
-      transmission: 0.95 * quality,
-      thickness: 0.001,
-      ior: 1.52,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.0,
-      envMapIntensity: 2.0,
-      reflectivity: 0.9
-    }),
-    
-    // Frame material - dark gray/black
-    frameMaterial: new THREE.MeshPhysicalMaterial({
-      color: '#1C1C1E',
-      metalness: 0.8,
-      roughness: 0.2,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.1,
-      envMapIntensity: 2.0,
-      reflectivity: 0.95
-    }),
-    
-    // Back glass material
-    backGlassMaterial: new THREE.MeshPhysicalMaterial({
-      color: '#1C1C1E',
-      metalness: 0.0,
-      roughness: 0.0,
-      transmission: 0.8 * quality,
-      thickness: 0.001,
-      ior: 1.52,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.0,
-      envMapIntensity: 2.5
-    }),
-    
-    // Camera lens material
-    cameraLensMaterial: new THREE.MeshPhysicalMaterial({
-      color: '#000000',
-      metalness: 0.0,
-      roughness: 0.0,
-      transmission: 0.9,
-      thickness: 0.002,
-      ior: 1.6,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.0,
-      envMapIntensity: 1.5
-    }),
-    
-    // Dynamic Island material
-    dynamicIslandMaterial: new THREE.MeshPhysicalMaterial({
-      color: '#000000',
-      metalness: 0.0,
-      roughness: 0.0,
-      transmission: 0.1,
-      thickness: 0.001,
-      ior: 1.52,
-      emissive: '#000000',
-      emissiveIntensity: 0.1
-    })
-  }
+// Realistic iPhone 15 Pro Max dimensions
+const iPhoneDimensions = {
+  width: 0.77, // ~77mm
+  height: 1.6, // ~160mm  
+  depth: 0.083, // ~8.3mm
+  cornerRadius: 0.12, // More rounded corners like real iPhone
+  screenWidth: 0.72,
+  screenHeight: 1.52,
+  dynamicIslandWidth: 0.18,
+  dynamicIslandHeight: 0.035,
+  bezelWidth: 0.025, // Screen bezel
 }
 
-// Screen with gradient (purple to blue as shown in image)
-function IPHoneScreen({ dimensions }: { dimensions: any }) {
+// Create realistic materials
+const createMaterials = () => {
+  // Titanium body material (iPhone 15 Pro Max)
+  const bodyMaterial = new THREE.MeshPhysicalMaterial({
+    color: new THREE.Color('#2C2C2E'), // Space Black
+    roughness: 0.1,
+    metalness: 0.9,
+    clearcoat: 0.2,
+    clearcoatRoughness: 0.1,
+    reflectivity: 0.8,
+  })
+
+  // Ceramic Shield screen material
+  const screenMaterial = new THREE.MeshPhysicalMaterial({
+    color: new THREE.Color('#000000'),
+    roughness: 0.05,
+    metalness: 0.0,
+    transmission: 0.95,
+    transparent: true,
+    opacity: 0.9,
+    ior: 1.52, // Glass IOR
+    thickness: 0.001,
+  })
+
+  // Camera module material
+  const cameraMaterial = new THREE.MeshPhysicalMaterial({
+    color: new THREE.Color('#1A1A1A'),
+    roughness: 0.3,
+    metalness: 0.95,
+    clearcoat: 0.1,
+  })
+
+  // Camera lens material
+  const lensMaterial = new THREE.MeshPhysicalMaterial({
+    color: new THREE.Color('#000000'),
+    roughness: 0.05,
+    metalness: 0.0,
+    transmission: 0.9,
+    transparent: true,
+    opacity: 0.8,
+    ior: 1.5,
+  })
+
+  // Button material
+  const buttonMaterial = new THREE.MeshPhysicalMaterial({
+    color: new THREE.Color('#4A4A4C'),
+    roughness: 0.4,
+    metalness: 0.8,
+  })
+
+  return { bodyMaterial, screenMaterial, cameraMaterial, lensMaterial, buttonMaterial }
+}
+
+// Realistic iPhone Body Component
+function IPhoneBody({ materials }: { materials: ReturnType<typeof createMaterials> }) {
   const meshRef = useRef<THREE.Mesh>(null)
-  
-  useFrame((state) => {
+
+  useFrame(() => {
     if (meshRef.current) {
-      const time = state.clock.getElapsedTime()
-      
       // Subtle breathing animation
-      const breathe = Math.sin(time * 0.5) * 0.001 + 1
+      const time = Date.now() * 0.0005
+      const breathe = Math.sin(time * 0.3) * 0.0005 + 1
       meshRef.current.scale.setScalar(breathe)
     }
   })
 
   return (
     <group>
-      {/* Screen Background */}
-      <mesh ref={meshRef} position={[0, 0, dimensions.depth / 2 + 0.001]}>
-        <planeGeometry args={[dimensions.screenWidth, dimensions.screenHeight]} />
-        <primitive object={createIPhoneMaterials(false).screenMaterial} />
-      </mesh>
-      
-      {/* Gradient overlay */}
-      <mesh position={[0, 0, dimensions.depth / 2 + 0.002]}>
-        <planeGeometry args={[dimensions.screenWidth, dimensions.screenHeight]} />
-        <meshBasicMaterial 
-          color="#FFFFFF" 
-          transparent 
-          opacity={0.3}
-          side={THREE.DoubleSide}
+      {/* Main Body */}
+      <RoundedBox
+        ref={meshRef}
+        args={[iPhoneDimensions.width, iPhoneDimensions.height, iPhoneDimensions.depth, iPhoneDimensions.cornerRadius, 20]}
+        material={materials.bodyMaterial}
+      />
+
+      {/* Camera Module */}
+      <group position={[0.25, 0.55, iPhoneDimensions.depth / 2 + 0.01]}>
+        {/* Camera Bump */}
+        <RoundedBox
+          args={[0.35, 0.35, 0.025, 0.08, 15]}
+          material={materials.cameraMaterial}
         />
-      </mesh>
+        
+        {/* Main Camera Lens */}
+        <mesh position={[-0.1, 0.1, 0.015]}>
+          <cylinderGeometry args={[0.06, 0.06, 0.01, 32]} />
+          <primitive object={materials.lensMaterial} />
+        </mesh>
+        
+        {/* Ultra Wide Camera */}
+        <mesh position={[0.1, 0.1, 0.015]}>
+          <cylinderGeometry args={[0.05, 0.05, 0.01, 32]} />
+          <primitive object={materials.lensMaterial} />
+        </mesh>
+        
+        {/* Telephoto Camera */}
+        <mesh position={[0, -0.1, 0.015]}>
+          <cylinderGeometry args={[0.05, 0.05, 0.01, 32]} />
+          <primitive object={materials.lensMaterial} />
+        </mesh>
+        
+        {/* LiDAR Scanner */}
+        <mesh position={[-0.15, -0.1, 0.015]}>
+          <cylinderGeometry args={[0.03, 0.03, 0.01, 16]} />
+          <meshBasicMaterial color="#FF6B6B" />
+        </mesh>
+        
+        {/* Flash */}
+        <mesh position={[0.15, -0.1, 0.015]}>
+          <cylinderGeometry args={[0.025, 0.025, 0.01, 16]} />
+          <meshBasicMaterial color="#FFFFFF" />
+        </mesh>
+      </group>
+
+      {/* Volume Buttons */}
+      <RoundedBox
+        args={[0.04, 0.25, 0.015, 0.01, 8]}
+        position={[-iPhoneDimensions.width / 2 - 0.015, 0.2, 0]}
+        rotation={[0, 0, Math.PI / 2]}
+        material={materials.buttonMaterial}
+      />
+      <RoundedBox
+        args={[0.04, 0.15, 0.015, 0.01, 8]}
+        position={[-iPhoneDimensions.width / 2 - 0.015, -0.15, 0]}
+        rotation={[0, 0, Math.PI / 2]}
+        material={materials.buttonMaterial}
+      />
+      
+      {/* Power Button */}
+      <RoundedBox
+        args={[0.04, 0.3, 0.015, 0.01, 8]}
+        position={[iPhoneDimensions.width / 2 + 0.015, 0.25, 0]}
+        rotation={[0, 0, Math.PI / 2]}
+        material={materials.buttonMaterial}
+      />
+      
+      {/* Action Button */}
+      <RoundedBox
+        args={[0.04, 0.15, 0.015, 0.01, 8]}
+        position={[iPhoneDimensions.width / 2 + 0.015, -0.2, 0]}
+        rotation={[0, 0, Math.PI / 2]}
+        material={materials.buttonMaterial}
+      />
     </group>
   )
 }
 
-// Dynamic Island
-function DynamicIsland({ dimensions }: { dimensions: any }) {
+// Realistic iPhone Screen Component
+function IPhoneScreen({ materials }: { materials: ReturnType<typeof createMaterials> }) {
   const meshRef = useRef<THREE.Mesh>(null)
-  
-  useFrame((state) => {
+
+  useFrame(() => {
     if (meshRef.current) {
-      const time = state.clock.getElapsedTime()
-      
-      // Subtle pulsing animation
-      const pulse = Math.sin(time * 2) * 0.02 + 1
-      meshRef.current.scale.setScalar(pulse)
-    }
-  })
-
-  return (
-    <mesh ref={meshRef} position={[0, dimensions.screenHeight / 2 - 0.3, dimensions.depth / 2 + 0.002]}>
-      <RoundedBox args={[dimensions.dynamicIslandWidth, dimensions.dynamicIslandHeight, 0.02]} radius={0.01} />
-      <primitive object={createIPhoneMaterials(false).dynamicIslandMaterial} />
-    </mesh>
-  )
-}
-
-// Camera bump
-function CameraBump({ dimensions }: { dimensions: any }) {
-  return (
-    <group position={[0, -dimensions.screenHeight / 2 + 0.4, dimensions.depth / 2 + 0.01]}>
-      {/* Camera bump base */}
-      <mesh>
-        <RoundedBox args={[dimensions.cameraBumpWidth, dimensions.cameraBumpHeight, dimensions.cameraBumpDepth]} radius={0.05} />
-        <primitive object={createIPhoneMaterials(false).frameMaterial} />
-      </mesh>
-      
-      {/* Main camera lens */}
-      <mesh position={[0, 0, dimensions.cameraBumpDepth / 2 + 0.001]}>
-        <circleGeometry args={[0.08, 32]} />
-        <primitive object={createIPhoneMaterials(false).cameraLensMaterial} />
-      </mesh>
-      
-      {/* Ultra-wide lens */}
-      <mesh position={[-0.12, 0, dimensions.cameraBumpDepth / 2 + 0.001]}>
-        <circleGeometry args={[0.06, 32]} />
-        <primitive object={createIPhoneMaterials(false).cameraLensMaterial} />
-      </mesh>
-      
-      {/* Telephoto lens */}
-      <mesh position={[0.12, 0, dimensions.cameraBumpDepth / 2 + 0.001]}>
-        <circleGeometry args={[0.06, 32]} />
-        <primitive object={createIPhoneMaterials(false).cameraLensMaterial} />
-      </mesh>
-    </group>
-  )
-}
-
-// Main iPhone body
-function IPHoneBody({ dimensions }: { dimensions: any }) {
-  const meshRef = useRef<THREE.Mesh>(null)
-  
-  useFrame((state) => {
-    if (meshRef.current) {
-      const time = state.clock.getElapsedTime()
-      
-      // Ultra-subtle breathing animation
-      const breathe = Math.sin(time * 0.8) * 0.0005 + 1
-      meshRef.current.scale.setScalar(breathe)
+      // Subtle screen glow animation
+      const time = Date.now() * 0.0008
+      const glow = Math.sin(time * 0.4) * 0.002 + 1
+      meshRef.current.scale.setScalar(glow)
     }
   })
 
   return (
     <group>
-      {/* Main iPhone body */}
-      <mesh ref={meshRef}>
-        <RoundedBox args={[dimensions.width, dimensions.height, dimensions.depth]} radius={0.1} />
-        <primitive object={createIPhoneMaterials(false).frameMaterial} />
+      {/* Screen Surface */}
+      <mesh ref={meshRef} position={[0, 0, iPhoneDimensions.depth / 2 + 0.001]}>
+        <planeGeometry args={[iPhoneDimensions.screenWidth, iPhoneDimensions.screenHeight]} />
+        <primitive object={materials.screenMaterial} />
       </mesh>
-      
-      {/* Back glass panel */}
-      <mesh position={[0, 0, -dimensions.depth / 2 - 0.001]}>
-        <RoundedBox args={[dimensions.width * 0.95, dimensions.height * 0.95, 0.001]} radius={0.1} />
-        <primitive object={createIPhoneMaterials(false).backGlassMaterial} />
+
+      {/* Dynamic Island */}
+      <mesh position={[0, iPhoneDimensions.screenHeight / 2 - iPhoneDimensions.dynamicIslandHeight / 2 - 0.05, iPhoneDimensions.depth / 2 + 0.002]}>
+        <RoundedBox args={[iPhoneDimensions.dynamicIslandWidth, iPhoneDimensions.dynamicIslandHeight, 0.001, 0.02, 8]} />
+        <meshBasicMaterial color="black" />
+      </mesh>
+
+      {/* Screen Content - Blank with subtle gradient */}
+      <mesh position={[0, 0, iPhoneDimensions.depth / 2 + 0.003]}>
+        <planeGeometry args={[iPhoneDimensions.screenWidth - 0.01, iPhoneDimensions.screenHeight - 0.01]} />
+        <meshBasicMaterial>
+          <gradientTexture
+            attach="map"
+            stops={[0, 0.3, 0.7, 1]}
+            colors={['#1a1a2e', '#16213e', '#0f3460', '#533483']} // Dark gradient
+            rotation={Math.PI / 2}
+          />
+        </meshBasicMaterial>
       </mesh>
     </group>
   )
 }
 
-// Auto-return controls
-function AutoReturnControls({ children }: { children: React.ReactNode }) {
+// Auto-return controls with smooth animation
+function AutoReturnControls({ children, showControls }: { children: React.ReactNode, showControls: boolean }) {
   const controlsRef = useRef<any>(null)
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   const [isUserInteracting, setIsUserInteracting] = useState(false)
   const [returnTimeout, setReturnTimeout] = useState<NodeJS.Timeout | null>(null)
-  
-  // Default position matching the image (tilted angle)
+
   const defaultPosition = {
     azimuth: -0.3, // Left rotation
     polar: 0.4,    // Forward tilt
@@ -269,14 +249,14 @@ function AutoReturnControls({ children }: { children: React.ReactNode }) {
           const startPolar = controls.getPolarAngle()
           const startDistance = controls.getDistance()
           
-          const duration = 1000 // 1 second
+          const duration = 1200 // 1.2 seconds
           const startTime = Date.now()
           
           const animate = () => {
             const elapsed = Date.now() - startTime
             const progress = Math.min(elapsed / duration, 1)
             
-            // Easing function
+            // Smooth easing function
             const easeOutCubic = 1 - Math.pow(1 - progress, 3)
             
             controls.setAzimuthalAngle(
@@ -296,7 +276,7 @@ function AutoReturnControls({ children }: { children: React.ReactNode }) {
           
           animate()
         }
-      }, 2000) // 2 second delay
+      }, 2500) // 2.5 second delay
       
       setReturnTimeout(timeout)
     }
@@ -318,10 +298,10 @@ function AutoReturnControls({ children }: { children: React.ReactNode }) {
       {children}
       <OrbitControls
         ref={controlsRef}
-        enableZoom={false}
+        enableZoom={true}
         enablePan={false}
-        minPolarAngle={0.1}
-        maxPolarAngle={Math.PI / 1.5}
+        minPolarAngle={0}
+        maxPolarAngle={Math.PI / 2}
         minAzimuthAngle={-Math.PI / 2}
         maxAzimuthAngle={Math.PI / 2}
         enableDamping
@@ -330,18 +310,6 @@ function AutoReturnControls({ children }: { children: React.ReactNode }) {
         autoRotate={false}
       />
     </>
-  )
-}
-
-// Main iPhone component
-function IPHone({ dimensions }: { dimensions: any }) {
-  return (
-    <group>
-      <IPHoneBody dimensions={dimensions} />
-      <IPHoneScreen dimensions={dimensions} />
-      <DynamicIsland dimensions={dimensions} />
-      <CameraBump dimensions={dimensions} />
-    </group>
   )
 }
 
@@ -365,38 +333,44 @@ export default function Phone3D({
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  const dimensions = getIPhoneDimensions(isMobile)
+  const materials = createMaterials()
 
   return (
-    <div className={`w-full ${isMobile ? 'h-[200px]' : 'h-[300px]'} bg-gradient-to-br from-gray-900/50 to-black/50 rounded-2xl border border-white/10 backdrop-blur-sm overflow-hidden ${className}`}>
+    <div className={`w-full h-64 sm:h-80 lg:h-96 relative ${className}`}>
       <Canvas
         camera={{
-          position: isMobile ? [0, 0, 5] : [0, 0, 6],
-          fov: isMobile ? 60 : 50,
+          position: [0, 0, 6],
+          fov: 30,
         }}
-        shadows
-        gl={{ 
+        gl={{
           antialias: true,
           alpha: true,
           powerPreference: "high-performance"
         }}
       >
+        {/* Professional lighting setup */}
         <Environment preset="studio" />
-        <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade speed={1} />
-        
-        {/* Lighting */}
-        <ambientLight intensity={0.4} color="#FFFFFF" />
-        <directionalLight
-          position={[5, 5, 5]}
-          intensity={0.8}
+        <ambientLight intensity={0.4} />
+        <directionalLight 
+          position={[10, 10, 5]} 
+          intensity={1.2}
           castShadow
           shadow-mapSize-width={2048}
           shadow-mapSize-height={2048}
         />
-        <pointLight position={[-5, -5, 5]} intensity={0.3} distance={30} decay={2} />
-        
-        <AutoReturnControls>
-          <IPHone dimensions={dimensions} />
+        <directionalLight 
+          position={[-10, -10, -5]} 
+          intensity={0.6}
+        />
+        <pointLight position={[0, 0, 10]} intensity={0.8} />
+
+        <AutoReturnControls showControls={showControls}>
+          <group
+            rotation={[0.4, -0.3, 0]} // Exact tilt angle from your image
+          >
+            <IPhoneBody materials={materials} />
+            <IPhoneScreen materials={materials} />
+          </group>
         </AutoReturnControls>
       </Canvas>
     </div>
