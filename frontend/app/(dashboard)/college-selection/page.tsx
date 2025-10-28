@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Search, Building2, Users, DollarSign, GraduationCap, ChevronRight, Star, MapPin, Loader2, BookOpen } from 'lucide-react'
-import { Checkbox } from '@/components/ui/Checkbox'
 import { Button } from '@/components/ui/Button'
 import { useRouter } from 'next/navigation'
 import { getCollegeSuggestions, searchColleges, type CollegeSuggestionsRequest, type CollegeSuggestion, type CollegeSearchResult } from '@/lib/api'
@@ -297,13 +296,15 @@ export default function CollegeSelectionPage() {
                   <motion.div
                     key={college.college_id}
                     whileHover={{ scale: 1.02 }}
-                    className="flex items-center justify-between p-3 border border-gray-600 rounded-lg hover:border-yellow-400/50 transition-colors"
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => handleCollegeSelect(college.college_id)}
+                    className={`flex items-center justify-between p-3 border rounded-lg transition-all duration-300 cursor-pointer ${
+                      selectedColleges.includes(college.college_id)
+                        ? 'college-card-selected border-yellow-400/50'
+                        : 'border-gray-600 hover:border-yellow-400/50'
+                    }`}
                   >
                     <div className="flex items-center gap-3">
-                      <Checkbox
-                        checked={selectedColleges.includes(college.college_id)}
-                        onChange={() => handleCollegeSelect(college.college_id)}
-                      />
                       <div className="flex-1">
                         <p className="text-white font-medium">{college.name}</p>
                         <p className="text-gray-400 text-sm">
@@ -374,7 +375,14 @@ export default function CollegeSelectionPage() {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.1 }}
-                          className="p-6 border border-green-400/30 bg-green-400/5 rounded-xl hover:border-green-400/50 transition-colors"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => handleCollegeSelect(college.college_id)}
+                          className={`p-6 border rounded-xl transition-all duration-300 cursor-pointer ${
+                            selectedColleges.includes(college.college_id)
+                              ? 'college-card-selected border-green-400/50'
+                              : 'border-green-400/30 bg-green-400/5 hover:border-green-400/50'
+                          }`}
                         >
                           <div className="flex items-start justify-between mb-3">
                             <div>
@@ -438,14 +446,13 @@ export default function CollegeSelectionPage() {
                             </div>
                           
                           <div className="mt-3 flex items-center gap-3">
-                            <Checkbox
-                              checked={selectedColleges.includes(college.college_id)}
-                              onChange={() => handleCollegeSelect(college.college_id)}
-                            />
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => handleAutoFillSearch(college.name)}
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                handleAutoFillSearch(college.name)
+                              }}
                             >
                               Auto-fill Search
                             </Button>
@@ -470,7 +477,14 @@ export default function CollegeSelectionPage() {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.1 }}
-                          className="p-6 border border-yellow-400/30 bg-yellow-400/5 rounded-xl hover:border-yellow-400/50 transition-colors"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => handleCollegeSelect(college.college_id)}
+                          className={`p-6 border rounded-xl transition-all duration-300 cursor-pointer ${
+                            selectedColleges.includes(college.college_id)
+                              ? 'college-card-selected border-yellow-400/50'
+                              : 'border-yellow-400/30 bg-yellow-400/5 hover:border-yellow-400/50'
+                          }`}
                         >
                           <div className="flex items-start justify-between mb-3">
                             <div>
@@ -534,14 +548,13 @@ export default function CollegeSelectionPage() {
                           </div>
                           
                           <div className="mt-3 flex items-center gap-3">
-                            <Checkbox
-                              checked={selectedColleges.includes(college.college_id)}
-                              onChange={() => handleCollegeSelect(college.college_id)}
-                            />
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => handleAutoFillSearch(college.name)}
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                handleAutoFillSearch(college.name)
+                              }}
                             >
                               Auto-fill Search
                             </Button>
@@ -566,7 +579,14 @@ export default function CollegeSelectionPage() {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.1 }}
-                          className="p-6 border border-red-400/30 bg-red-400/5 rounded-xl hover:border-red-400/50 transition-colors"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => handleCollegeSelect(college.college_id)}
+                          className={`p-6 border rounded-xl transition-all duration-300 cursor-pointer ${
+                            selectedColleges.includes(college.college_id)
+                              ? 'college-card-selected border-red-400/50'
+                              : 'border-red-400/30 bg-red-400/5 hover:border-red-400/50'
+                          }`}
                         >
                           <div className="flex items-start justify-between mb-3">
                             <div>
@@ -630,14 +650,13 @@ export default function CollegeSelectionPage() {
                           </div>
                           
                           <div className="mt-3 flex items-center gap-3">
-                            <Checkbox
-                              checked={selectedColleges.includes(college.college_id)}
-                              onChange={() => handleCollegeSelect(college.college_id)}
-                            />
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => handleAutoFillSearch(college.name)}
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                handleAutoFillSearch(college.name)
+                              }}
                             >
                               Auto-fill Search
                             </Button>
