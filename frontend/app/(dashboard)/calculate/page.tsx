@@ -589,32 +589,6 @@ export default function CalculationsPage() {
               </div>
             </motion.div>
 
-            {/* Ethnicity Donut */}
-            <motion.div 
-              className="relative bg-gradient-to-br from-ROX_DARK_GRAY/80 via-ROX_BLACK/60 to-ROX_BLACK/80 border border-ROX_GOLD/30 rounded-3xl p-6 backdrop-blur-xl overflow-hidden group"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-t from-ROX_GOLD/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-              <div className="relative">
-                <h2 className="text-lg font-semibold text-white mb-6">Ethnicity Breakdown</h2>
-                <div className="h-72">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie data={d.ethnicity} dataKey="value" nameKey="label" innerRadius={70} outerRadius={110} paddingAngle={2}>
-                        {d.ethnicity.map((_, i) => (
-                          <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
-                        ))}
-                      </Pie>
-                      <Legend verticalAlign="middle" align="right" layout="vertical" wrapperStyle={{ color: 'white', fontSize: '12px' }} />
-                      <RTooltip contentStyle={{ background: ROX_BLACK, border: '1px solid #F7B500', color: 'white', borderRadius: '12px', boxShadow: '0 20px 25px rgba(0,0,0,0.3)' }} formatter={(v: number) => [`${v}%`, '']} />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </div>
-              </div>
-            </motion.div>
 
             {/* Tuition */}
             <motion.div 
