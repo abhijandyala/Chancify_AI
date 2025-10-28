@@ -4,10 +4,12 @@ import { useState } from 'react'
 import Link from 'next/link'
 import TermsOfServiceModal from './TermsOfServiceModal'
 import PrivacyPolicyModal from './PrivacyPolicyModal'
+import CookiesPolicyModal from './CookiesPolicyModal'
 
 export default function ROXMegaFooter() {
   const [showTermsModal, setShowTermsModal] = useState(false)
   const [showPrivacyModal, setShowPrivacyModal] = useState(false)
+  const [showCookiesModal, setShowCookiesModal] = useState(false)
   return (
     <footer className="border-t border-border bg-background-subtle">
       <div className="border-t border-border py-6">
@@ -33,7 +35,7 @@ export default function ROXMegaFooter() {
                 Terms of Service
               </button>
               <button 
-                onClick={() => setShowPrivacyModal(true)}
+                onClick={() => setShowCookiesModal(true)}
                 className="hover:text-foreground transition-colors"
               >
                 Cookie Policy
@@ -42,6 +44,12 @@ export default function ROXMegaFooter() {
           </div>
         </div>
       </div>
+      
+      {/* Cookies Policy Modal */}
+      <CookiesPolicyModal 
+        isOpen={showCookiesModal} 
+        onClose={() => setShowCookiesModal(false)} 
+      />
       
       {/* Privacy Policy Modal */}
       <PrivacyPolicyModal 
