@@ -16,6 +16,7 @@ import { useRouter } from 'next/navigation'
 import { MajorSelectionModal } from '@/components/ui/MajorSelectionModal'
 import { SaveModal } from '@/components/SaveModal'
 import { PresetStorage } from '@/lib/preset-storage'
+import MobileiPhoneShowcase from '@/components/ui/MobileiPhoneShowcase'
 
 export const dynamic = 'force-dynamic'
 
@@ -480,6 +481,15 @@ export default function HomePage() {
           </div>
         </div>
       </motion.section>
+
+        {/* 3D iPhone Showcase */}
+        <motion.section {...enter} className="mb-8 sm:mb-10 lg:mb-12">
+          <MobileiPhoneShowcase 
+            title="Experience Chancify AI"
+            subtitle="See how our mobile interface brings your college journey to life"
+            variant="featured"
+          />
+        </motion.section>
 
         {/* Course Rigor and Class Info */}
         <motion.section {...enter} className="mb-8 sm:mb-10 lg:mb-12">
