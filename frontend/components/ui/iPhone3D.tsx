@@ -1,8 +1,8 @@
 'use client'
 
-import { useRef, useState, useEffect } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { OrbitControls, Environment, useTexture } from '@react-three/drei'
+import { useRef, useState, useEffect, useMemo } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { OrbitControls, Environment, RoundedBox } from '@react-three/drei'
 import * as THREE from 'three'
 
 // iPhone dimensions (iPhone 14 Pro proportions)
@@ -77,21 +77,47 @@ function AutoReturnControls({ children }: { children: React.ReactNode }) {
   )
 }
 
+// Materials (created outside components for performance)
+const screenMaterial = new THREE.MeshPhysicalMaterial({
+  color: '#000000',
+  metalness: 0.1,
+  roughness: 0.1,
+  transmission: 0.9,
+  thickness: 0.1,
+  ior: 1.5,
+  clearcoat: 1,
+  clearcoatRoughness: 0.1,
+})
+
+const bodyMaterial = new THREE.MeshPhysicalMaterial({
+  color: '#1a1a1a',
+  metalness: 0.9,
+  roughness: 0.1,
+  clearcoat: 1,
+  clearcoatRoughness: 0.1,
+  envMapIntensity: 1,
+})
+
+const buttonMaterial = new THREE.MeshPhysicalMaterial({
+  color: '#2a2a2a',
+  metalness: 0.8,
+  roughness: 0.2,
+  clearcoat: 1,
+  clearcoatRoughness: 0.1,
+})
+
+const islandMaterial = new THREE.MeshPhysicalMaterial({
+  color: '#000000',
+  metalness: 0.8,
+  roughness: 0.2,
+  transmission: 0.1,
+  thickness: 0.05,
+  ior: 1.5,
+})
+
 // iPhone Screen Component
 function iPhoneScreen() {
   const meshRef = useRef<THREE.Mesh>(null)
-  
-  // Create 4K screen material
-  const screenMaterial = new THREE.MeshPhysicalMaterial({
-    color: '#000000',
-    metalness: 0.1,
-    roughness: 0.1,
-    transmission: 0.9,
-    thickness: 0.1,
-    ior: 1.5,
-    clearcoat: 1,
-    clearcoatRoughness: 0.1,
-  })
 
   return (
     <mesh ref={meshRef} position={[0, 0, IPHONE_DEPTH / 2 + 0.001]}>
@@ -104,15 +130,6 @@ function iPhoneScreen() {
 // Dynamic Island Component
 function DynamicIsland() {
   const meshRef = useRef<THREE.Mesh>(null)
-  
-  const islandMaterial = new THREE.MeshPhysicalMaterial({
-    color: '#000000',
-    metalness: 0.8,
-    roughness: 0.2,
-    transmission: 0.1,
-    thickness: 0.05,
-    ior: 1.5,
-  })
 
   return (
     <mesh ref={meshRef} position={[0, SCREEN_HEIGHT / 2 - 0.3, IPHONE_DEPTH / 2 + 0.002]}>
@@ -125,20 +142,10 @@ function DynamicIsland() {
 // iPhone Body Component
 function iPhoneBody() {
   const meshRef = useRef<THREE.Mesh>(null)
-  
-  // Realistic iPhone body material
-  const bodyMaterial = new THREE.MeshPhysicalMaterial({
-    color: '#1a1a1a',
-    metalness: 0.9,
-    roughness: 0.1,
-    clearcoat: 1,
-    clearcoatRoughness: 0.1,
-    envMapIntensity: 1,
-  })
 
   return (
     <mesh ref={meshRef}>
-      <boxGeometry args={[IPHONE_WIDTH, IPHONE_HEIGHT, IPHONE_DEPTH]} />
+      <RoundedBox args={[IPHONE_WIDTH, IPHONE_HEIGHT, IPHONE_DEPTH]} radius={0.1} />
       <primitive object={bodyMaterial} />
     </mesh>
   )
@@ -148,14 +155,6 @@ function iPhoneBody() {
 function VolumeButtons() {
   const upButtonRef = useRef<THREE.Mesh>(null)
   const downButtonRef = useRef<THREE.Mesh>(null)
-  
-  const buttonMaterial = new THREE.MeshPhysicalMaterial({
-    color: '#2a2a2a',
-    metalness: 0.8,
-    roughness: 0.2,
-    clearcoat: 1,
-    clearcoatRoughness: 0.1,
-  })
 
   return (
     <group>
@@ -177,19 +176,11 @@ function VolumeButtons() {
 // Mute Switch Component
 function MuteSwitch() {
   const switchRef = useRef<THREE.Mesh>(null)
-  
-  const switchMaterial = new THREE.MeshPhysicalMaterial({
-    color: '#2a2a2a',
-    metalness: 0.8,
-    roughness: 0.2,
-    clearcoat: 1,
-    clearcoatRoughness: 0.1,
-  })
 
   return (
     <mesh ref={switchRef} position={[-IPHONE_WIDTH / 2 - 0.01, 1.4, 0]}>
       <boxGeometry args={[0.05, 0.15, 0.1]} />
-      <primitive object={switchMaterial} />
+      <primitive object={buttonMaterial} />
     </mesh>
   )
 }
@@ -239,9 +230,7 @@ export default function iPhone3D() {
         <Lighting />
         <Environment preset="studio" />
         <iPhone />
-        <AutoReturnControls>
-          <OrbitControls />
-        </AutoReturnControls>
+        <AutoReturnControls />
       </Canvas>
     </div>
   )
