@@ -4,8 +4,7 @@ import { motion } from 'framer-motion'
 import { ArrowLeft, Mail, MessageCircle, Phone, MapPin, Send, CheckCircle } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
-import { useState, useEffect } from 'react'
-import emailjs from '@emailjs/browser'
+import { useState } from 'react'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -17,67 +16,16 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
 
-  // Initialize EmailJS
-  useEffect(() => {
-    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'igE0hcuIxtFuZMchC'
-    emailjs.init(publicKey)
-  }, [])
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    try {
-      // EmailJS configuration
-      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_gu5ac7e'
-      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_nbpghyb'
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'igE0hcuIxtFuZMchC'
-      
-      console.log('EmailJS Config:', { serviceId, templateId, publicKey })
-      
-      // Prepare template parameters - only use variables that exist in your template
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        subject: formData.subject || 'Contact from Chancify AI Website',
-        message: formData.message
-      }
-
-      console.log('Template Params:', templateParams)
-
-      // Send email using EmailJS
-      const result = await emailjs.send(serviceId, templateId, templateParams, publicKey)
-      console.log('EmailJS Success:', result)
-      
-      // Success
+    // Simulate sending delay
+    setTimeout(() => {
       setIsSubmitted(true)
       setIsSubmitting(false)
       setFormData({ name: '', email: '', subject: '', message: '' })
-      
-    } catch (error) {
-      console.error('Error sending email:', error)
-      console.error('Error details:', (error as any)?.text || (error as any)?.message || error)
-      
-      // Check for specific Gmail API errors
-      const errorMessage = (error as any)?.text || (error as any)?.message || ''
-      if (errorMessage.includes('insufficient authentication scopes')) {
-        console.error('Gmail API Error: Service needs to be reconnected with proper permissions')
-        alert('Email service needs to be reconfigured. Please try again later or contact support.')
-      } else if (errorMessage.includes('412')) {
-        console.error('EmailJS Error 412: Authentication or permission issue')
-        alert('Email service authentication error. Please try again later.')
-      }
-      
-      setIsSubmitting(false)
-      
-      // Fallback to mailto if EmailJS fails
-      const subject = encodeURIComponent(formData.subject || 'Contact from Chancify AI Website')
-      const body = encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-      )
-      const mailtoLink = `mailto:chancifyai@gmail.com?subject=${subject}&body=${body}`
-      window.location.href = mailtoLink
-    }
+    }, 1000)
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
