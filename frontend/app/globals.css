@@ -529,6 +529,8 @@
   background: linear-gradient(135deg, #1e1e24 10%, #050505 60%);
   animation: gradient-shift 5s ease-in-out infinite;
   background-size: 200% 200%;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .college-card-selected::before,
@@ -544,6 +546,8 @@
     radial-gradient(circle at 100% 0, #FFC000, transparent),
     radial-gradient(circle at 0 100%, #FFC000, transparent),
     radial-gradient(circle at 100% 100%, #FFC000, transparent);
+  border-radius: 16px;
+  pointer-events: none;
 }
 
 .college-card-selected::after {

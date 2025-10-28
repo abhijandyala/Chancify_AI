@@ -298,12 +298,13 @@ export default function CollegeSelectionPage() {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => handleCollegeSelect(college.college_id)}
-                    className={`flex items-center justify-between p-3 border rounded-lg transition-all duration-300 cursor-pointer ${
+                    className="relative"
+                  >
+                    <div className={`flex items-center justify-between p-3 border rounded-xl transition-all duration-300 cursor-pointer ${
                       selectedColleges.includes(college.college_id)
                         ? 'college-card-selected border-yellow-400/50'
                         : 'border-gray-600 hover:border-yellow-400/50'
-                    }`}
-                  >
+                    }`}>
                     <div className="flex items-center gap-3">
                       <div className="flex-1">
                         <p className="text-white font-medium">{college.name}</p>
@@ -337,6 +338,7 @@ export default function CollegeSelectionPage() {
                               </div>
                             </div>
                       </div>
+                    </div>
                     </div>
                   </motion.div>
                 ))
@@ -378,12 +380,13 @@ export default function CollegeSelectionPage() {
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           onClick={() => handleCollegeSelect(college.college_id)}
-                          className={`p-6 border rounded-xl transition-all duration-300 cursor-pointer ${
+                          className="relative"
+                        >
+                          <div className={`p-6 border rounded-xl transition-all duration-300 cursor-pointer ${
                             selectedColleges.includes(college.college_id)
                               ? 'college-card-selected border-green-400/50'
                               : 'border-green-400/30 bg-green-400/5 hover:border-green-400/50'
-                          }`}
-                        >
+                          }`}>
                           <div className="flex items-start justify-between mb-3">
                             <div>
                               <h4 className="text-white font-semibold">{college.name}</h4>
@@ -457,6 +460,7 @@ export default function CollegeSelectionPage() {
                               Auto-fill Search
                             </Button>
                           </div>
+                          </div>
                         </motion.div>
                       ))}
                     </div>
@@ -480,12 +484,13 @@ export default function CollegeSelectionPage() {
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           onClick={() => handleCollegeSelect(college.college_id)}
-                          className={`p-6 border rounded-xl transition-all duration-300 cursor-pointer ${
+                          className="relative"
+                        >
+                          <div className={`p-6 border rounded-xl transition-all duration-300 cursor-pointer ${
                             selectedColleges.includes(college.college_id)
                               ? 'college-card-selected border-yellow-400/50'
                               : 'border-yellow-400/30 bg-yellow-400/5 hover:border-yellow-400/50'
-                          }`}
-                        >
+                          }`}>
                           <div className="flex items-start justify-between mb-3">
                             <div>
                               <h4 className="text-white font-semibold">{college.name}</h4>
@@ -558,6 +563,7 @@ export default function CollegeSelectionPage() {
                             >
                               Auto-fill Search
                             </Button>
+                          </div>
                           </div>
                         </motion.div>
                       ))}
@@ -660,6 +666,7 @@ export default function CollegeSelectionPage() {
                             >
                               Auto-fill Search
                             </Button>
+                          </div>
                           </div>
                         </motion.div>
                       ))}
