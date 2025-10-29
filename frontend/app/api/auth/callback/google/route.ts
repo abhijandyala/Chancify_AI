@@ -71,7 +71,7 @@ export async function GET(request: NextRequest) {
 
     // Call backend API to create user in database
     try {
-      const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'https://unsmug-untensely-elroy.ngrok-free.dev'
+      const backendUrl = 'https://unsmug-untensely-elroy.ngrok-free.dev'
       const createUserResponse = await fetch(`${backendUrl}/api/auth/google-oauth`, {
         method: 'POST',
         headers: {
