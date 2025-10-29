@@ -52,6 +52,7 @@ class ImprovementAnalysisService:
         try:
             # Try exact match first
             college_data = self.elite_colleges_data.get(college_name, {})
+            logger.info(f"Direct match for '{college_name}': {len(college_data)} fields")
             
             # If not found, try common variations
             if not college_data:
@@ -59,11 +60,13 @@ class ImprovementAnalysisService:
                 if "University" in college_name:
                     short_name = college_name.replace(" University", "")
                     college_data = self.elite_colleges_data.get(short_name, {})
+                    logger.info(f"After removing 'University' ('{short_name}'): {len(college_data)} fields")
                 
                 # Try without "College" suffix
                 if not college_data and "College" in college_name:
                     short_name = college_name.replace(" College", "")
                     college_data = self.elite_colleges_data.get(short_name, {})
+                    logger.info(f"After removing 'College' ('{short_name}'): {len(college_data)} fields")
                 
                 # Try common abbreviations
                 if not college_data:
@@ -78,11 +81,14 @@ class ImprovementAnalysisService:
                     for full_name, short_name in name_variations.items():
                         if college_name == full_name:
                             college_data = self.elite_colleges_data.get(short_name, {})
+                            logger.info(f"Variation match ('{full_name}' -> '{short_name}'): {len(college_data)} fields")
                             break
             
             if not college_data:
                 logger.warning(f"No data found for college: {college_name}")
                 return self._get_default_improvements()
+            
+            logger.info(f"Using college data with {len(college_data)} fields for analysis")
             
             improvements = []
             
@@ -143,9 +149,18 @@ class ImprovementAnalysisService:
         """Analyze GPA and academic performance with enhanced calculations"""
         improvements = []
         
-        # Get user GPA with multiple scales
+        # Get user GPA with multiple scales - handle string values
         user_gpa_unweighted = profile.get('gpa_unweighted', 0)
         user_gpa_weighted = profile.get('gpa_weighted', 0)
+        
+        # Convert string values to numbers if needed
+        try:
+            user_gpa_unweighted = float(user_gpa_unweighted) if user_gpa_unweighted else 0
+            user_gpa_weighted = float(user_gpa_weighted) if user_gpa_weighted else 0
+        except (ValueError, TypeError):
+            user_gpa_unweighted = 0
+            user_gpa_weighted = 0
+            
         college_avg_gpa = college_data.get('gpa_unweighted_avg', 3.9)
         college_weighted_gpa = college_data.get('gpa_avg', 4.1)
         
@@ -192,9 +207,17 @@ class ImprovementAnalysisService:
         """Analyze SAT/ACT scores with enhanced calculations"""
         improvements = []
         
-        # Get user test scores
-        user_sat = profile.get('sat_total', 0)
-        user_act = profile.get('act_composite', 0)
+        # Get user test scores - handle both field name variations
+        user_sat = profile.get('sat_total', profile.get('sat', 0))
+        user_act = profile.get('act_composite', profile.get('act', 0))
+        
+        # Convert string values to numbers if needed
+        try:
+            user_sat = float(user_sat) if user_sat else 0
+            user_act = float(user_act) if user_act else 0
+        except (ValueError, TypeError):
+            user_sat = 0
+            user_act = 0
         
         # Get college test score ranges
         college_sat_25th = college_data.get('sat_25th', 1400)
