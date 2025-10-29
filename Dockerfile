@@ -18,6 +18,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 
 # Copy backend code (filtered by .dockerignore)
 COPY backend /app/backend
+COPY main.py /app/
 COPY pyproject.toml /app/
 
 # Set environment variables
@@ -29,5 +30,5 @@ EXPOSE 8000
 
 # Start the application
 # Note: Railway handles healthchecks externally, no need for Docker HEALTHCHECK
-CMD uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 1 --log-level info
+CMD uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 1 --log-level info
 

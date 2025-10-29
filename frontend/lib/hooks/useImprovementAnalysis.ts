@@ -39,7 +39,10 @@ export const useImprovementAnalysis = (collegeName: string, userProfile: any) =>
     setError(null)
 
     try {
-      const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://unsmug-untensely-elroy.ngrok-free.dev'
+      const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 
+        (process.env.NODE_ENV === 'production' 
+          ? 'https://chancifyai-backend.up.railway.app' 
+          : 'https://unsmug-untensely-elroy.ngrok-free.dev')
       const headers: HeadersInit = {
         'Content-Type': 'application/json',
       }
