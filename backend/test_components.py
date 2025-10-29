@@ -15,7 +15,7 @@ print()
 print("TEST 1: Module Imports")
 print("-"*60)
 try:
-    from config import settings
+    from .config import settings
     print("  [PASS] Config module imported")
 except Exception as e:
     print(f"  [FAIL] Config module failed: {e}")
