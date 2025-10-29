@@ -195,14 +195,10 @@ class ImprovementAnalysisService:
             # Sort by priority and impact
             improvements.sort(key=lambda x: (x.priority == 'high', x.impact), reverse=True)
             
-            # If we have fewer than 8 improvements, add default ones to ensure comprehensive coverage
-            if len(improvements) < 8:
-                logger.warning(f"Only {len(improvements)} improvements generated, adding defaults")
-                default_improvements = self._get_default_improvements()
-                for default_imp in default_improvements:
-                    # Only add if we don't already have this area
-                    if not any(imp.area == default_imp.area for imp in improvements):
-                        improvements.append(default_imp)
+            # Return improvements (analysis methods should ALWAYS return at least maintenance advice)
+            if len(improvements) == 0:
+                logger.error("NO improvements generated - this should never happen!")
+                return self._get_default_improvements()
             
             return improvements[:20]  # Return up to 20 improvements for comprehensive analysis
             
