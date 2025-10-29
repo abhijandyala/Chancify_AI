@@ -27,11 +27,26 @@ class ImprovementAnalysisService:
         try:
             # Load elite colleges data
             elite_path = os.path.join(os.path.dirname(__file__), 'models', 'elite_colleges_data.json')
+            logger.info(f"Looking for elite colleges data at: {elite_path}")
+            logger.info(f"Current working directory: {os.getcwd()}")
+            logger.info(f"File exists: {os.path.exists(elite_path)}")
+            
             if os.path.exists(elite_path):
                 import json
                 with open(elite_path, 'r') as f:
                     self.elite_colleges_data = json.load(f)
                 logger.info(f"Loaded elite colleges data: {len(self.elite_colleges_data)} colleges")
+            else:
+                logger.error(f"Elite colleges data file not found at: {elite_path}")
+                # Try alternative path
+                alt_path = os.path.join(os.getcwd(), 'backend', 'data', 'models', 'elite_colleges_data.json')
+                logger.info(f"Trying alternative path: {alt_path}")
+                if os.path.exists(alt_path):
+                    with open(alt_path, 'r') as f:
+                        self.elite_colleges_data = json.load(f)
+                    logger.info(f"Loaded elite colleges data from alternative path: {len(self.elite_colleges_data)} colleges")
+                else:
+                    logger.error(f"Alternative path also not found: {alt_path}")
             
             # Load admission factors
             factors_path = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'factors', 'admissions_factors.json')
