@@ -318,10 +318,20 @@ class ImprovementAnalysisService:
         """Analyze extracurricular activities with enhanced depth analysis"""
         improvements = []
         
-        # Get user extracurricular data
+        # Get user extracurricular data with string-to-number conversion
         ec_depth = profile.get('extracurricular_depth', 5)
         leadership = profile.get('leadership_positions', 0)
         passion_projects = profile.get('passion_projects', 0)
+        
+        # Convert string values to numbers if needed
+        try:
+            ec_depth = float(ec_depth) if ec_depth else 5
+            leadership = float(leadership) if leadership else 0
+            passion_projects = float(passion_projects) if passion_projects else 0
+        except (ValueError, TypeError):
+            ec_depth = 5
+            leadership = 0
+            passion_projects = 0
         
         # Calculate current level based on multiple factors
         current_level = (ec_depth + leadership + passion_projects) / 3
@@ -371,6 +381,14 @@ class ImprovementAnalysisService:
         
         leadership = profile.get('leadership_positions', 0)
         awards = profile.get('awards_publications', 0)
+        
+        # Convert string values to numbers if needed
+        try:
+            leadership = float(leadership) if leadership else 0
+            awards = float(awards) if awards else 0
+        except (ValueError, TypeError):
+            leadership = 0
+            awards = 0
         
         # Always provide leadership guidance
         if leadership < 2:
@@ -511,6 +529,14 @@ class ImprovementAnalysisService:
         research = profile.get('research_experience', 0)
         passion_projects = profile.get('passion_projects', 0)
         
+        # Convert string values to numbers if needed
+        try:
+            research = float(research) if research else 0
+            passion_projects = float(passion_projects) if passion_projects else 0
+        except (ValueError, TypeError):
+            research = 0
+            passion_projects = 0
+        
         # Always provide research guidance
         if research < 2:
             improvements.append(ImprovementArea(
@@ -586,6 +612,14 @@ class ImprovementAnalysisService:
         essay_quality = profile.get('essay_quality', 5)
         recommendations = profile.get('recommendations', 5)
         
+        # Convert string values to numbers if needed
+        try:
+            essay_quality = float(essay_quality) if essay_quality else 5
+            recommendations = float(recommendations) if recommendations else 5
+        except (ValueError, TypeError):
+            essay_quality = 5
+            recommendations = 5
+        
         if essay_quality < 7:
             improvements.append(ImprovementArea(
                 area="Essay Quality",
@@ -657,6 +691,12 @@ class ImprovementAnalysisService:
         
         if is_business:
             business_ventures = profile.get('business_ventures', 0)
+            
+            # Convert string values to numbers if needed
+            try:
+                business_ventures = float(business_ventures) if business_ventures else 0
+            except (ValueError, TypeError):
+                business_ventures = 0
             if business_ventures < 4:
                 improvements.append(ImprovementArea(
                     area="Business Experience",
@@ -682,6 +722,14 @@ class ImprovementAnalysisService:
         
         geographic_diversity = profile.get('geographic_diversity', 5)
         firstgen_diversity = profile.get('firstgen_diversity', 5)
+        
+        # Convert string values to numbers if needed
+        try:
+            geographic_diversity = float(geographic_diversity) if geographic_diversity else 5
+            firstgen_diversity = float(firstgen_diversity) if firstgen_diversity else 5
+        except (ValueError, TypeError):
+            geographic_diversity = 5
+            firstgen_diversity = 5
         
         # First-generation college student - ALWAYS provide guidance
         if firstgen_diversity < 7:
@@ -760,6 +808,14 @@ class ImprovementAnalysisService:
         interview_quality = profile.get('interview', 5)
         demonstrated_interest = profile.get('demonstrated_interest', 5)
         
+        # Convert string values to numbers if needed
+        try:
+            interview_quality = float(interview_quality) if interview_quality else 5
+            demonstrated_interest = float(demonstrated_interest) if demonstrated_interest else 5
+        except (ValueError, TypeError):
+            interview_quality = 5
+            demonstrated_interest = 5
+        
         if interview_quality < 7:
             improvements.append(ImprovementArea(
                 area="Interview Skills",
@@ -802,6 +858,12 @@ class ImprovementAnalysisService:
         
         portfolio_audition = profile.get('portfolio_audition', 0)
         
+        # Convert string values to numbers if needed
+        try:
+            portfolio_audition = float(portfolio_audition) if portfolio_audition else 0
+        except (ValueError, TypeError):
+            portfolio_audition = 0
+        
         # Always provide portfolio guidance, regardless of major
         if portfolio_audition < 6:
             improvements.append(ImprovementArea(
@@ -843,6 +905,12 @@ class ImprovementAnalysisService:
         improvements = []
         
         volunteer_work = profile.get('volunteer_work', 5)
+        
+        # Convert string values to numbers if needed
+        try:
+            volunteer_work = float(volunteer_work) if volunteer_work else 5
+        except (ValueError, TypeError):
+            volunteer_work = 5
         
         # Always provide volunteer guidance
         if volunteer_work < 6:
