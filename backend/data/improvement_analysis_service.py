@@ -444,8 +444,14 @@ class ImprovementAnalysisService:
         """Analyze AP courses and academic rigor with enhanced calculations"""
         improvements = []
         
-        # Estimate AP courses from profile data
-        ap_count = int(profile.get('extracurricular_depth', 5) * 0.8)  # Rough estimate
+        # Get actual AP courses from profile data
+        ap_count = profile.get('ap_count', 5)
+        
+        # Convert string values to numbers if needed
+        try:
+            ap_count = int(float(ap_count)) if ap_count else 5
+        except (ValueError, TypeError):
+            ap_count = 5
         hs_reputation = profile.get('hs_reputation', 5)
         
         # Determine target based on college selectivity and high school reputation
@@ -618,7 +624,7 @@ class ImprovementAnalysisService:
         """Analyze major-specific requirements and preparation"""
         improvements = []
         
-        intended_major = profile.get('intended_major', 'General Studies')
+        intended_major = profile.get('intended_major', profile.get('major', 'General Studies'))
         # Always provide major-specific guidance, even if no specific major provided
         
         # STEM majors require strong math/science background
