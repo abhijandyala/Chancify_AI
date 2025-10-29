@@ -247,6 +247,9 @@ class ImprovementAnalysisService:
         
         # Debug logging
         logger.info(f"Academic Performance Debug: user_gpa={user_gpa}, target_gpa={target_gpa}, college_avg_gpa={college_avg_gpa}")
+        logger.info(f"Academic Performance Debug: user_gpa_unweighted={user_gpa_unweighted}, user_gpa_weighted={user_gpa_weighted}")
+        logger.info(f"Academic Performance Debug: college_weighted_gpa={college_weighted_gpa}")
+        logger.info(f"Academic Performance Debug: Comparison user_gpa >= target_gpa: {user_gpa} >= {target_gpa} = {user_gpa >= target_gpa}")
         
         # Check if user already exceeds target significantly
         if user_gpa >= target_gpa:
