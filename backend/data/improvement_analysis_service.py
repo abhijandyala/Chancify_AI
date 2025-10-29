@@ -47,6 +47,15 @@ class ImprovementAnalysisService:
                     logger.info(f"Loaded elite colleges data from alternative path: {len(self.elite_colleges_data)} colleges")
                 else:
                     logger.error(f"Alternative path also not found: {alt_path}")
+                    # Try absolute path
+                    abs_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'models', 'elite_colleges_data.json'))
+                    logger.info(f"Trying absolute path: {abs_path}")
+                    if os.path.exists(abs_path):
+                        with open(abs_path, 'r') as f:
+                            self.elite_colleges_data = json.load(f)
+                        logger.info(f"Loaded elite colleges data from absolute path: {len(self.elite_colleges_data)} colleges")
+                    else:
+                        logger.error(f"Absolute path also not found: {abs_path}")
             
             # Load admission factors
             factors_path = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'factors', 'admissions_factors.json')
