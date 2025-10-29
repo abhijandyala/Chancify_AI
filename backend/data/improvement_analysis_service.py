@@ -101,6 +101,7 @@ class ImprovementAnalysisService:
             
             if not college_data:
                 logger.warning(f"No data found for college: {college_name}")
+                logger.warning(f"Available colleges: {list(self.elite_colleges_data.keys())[:10]}...")
                 return self._get_default_improvements()
             
             logger.info(f"Using college data with {len(college_data)} fields for analysis")
