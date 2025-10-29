@@ -203,7 +203,7 @@ async def search_colleges(q: str = "", limit: int = 20):
         
         # Search for colleges directly in the CSV data (bypass names mapping)
         try:
-            college_df = pd.read_csv('data/raw/real_colleges_integrated.csv')
+            college_df = pd.read_csv('backend/data/raw/real_colleges_integrated.csv')
         except Exception as e:
             logger.error(f"Error loading college data: {e}")
             return {
@@ -512,7 +512,7 @@ def get_college_data(college_name: str) -> Dict[str, Any]:
     
     # Load the integrated college data
     try:
-        df = pd.read_csv('data/raw/real_colleges_integrated.csv')
+        df = pd.read_csv('backend/data/raw/real_colleges_integrated.csv')
         logger.info(f"Loaded college data: {df.shape}")
         
         # Check if the input is a college ID (format: college_XXXXXX)
