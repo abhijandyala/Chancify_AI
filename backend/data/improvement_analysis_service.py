@@ -230,6 +230,9 @@ class ImprovementAnalysisService:
         user_gpa = user_gpa_unweighted if user_gpa_unweighted > 0 else user_gpa_weighted
         target_gpa = college_avg_gpa if user_gpa_unweighted > 0 else college_weighted_gpa
         
+        # Debug logging
+        logger.info(f"Academic Performance Debug: user_gpa={user_gpa}, target_gpa={target_gpa}, college_avg_gpa={college_avg_gpa}")
+        
         # Check if user already exceeds target significantly
         if user_gpa >= target_gpa:
             # User has met or exceeded target - show "Target Met" with 0 impact
