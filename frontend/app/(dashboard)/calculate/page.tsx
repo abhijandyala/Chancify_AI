@@ -196,50 +196,64 @@ function ImprovementCard({ area, current, target, impact, priority, description,
 }) {
   return (
     <motion.div 
-      className="relative group rounded-2xl bg-gradient-to-br from-neutral-900/60 to-neutral-950/60 border border-neutral-700/30 p-5 hover:border-ROX_GOLD/50 transition-all duration-300"
+      className="relative group rounded-2xl bg-gradient-to-br from-neutral-900/60 to-neutral-950/60 border border-neutral-700/30 p-6 hover:border-ROX_GOLD/50 transition-all duration-300 min-h-[280px]"
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
     >
       <div className="absolute inset-0 bg-gradient-to-t from-ROX_GOLD/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
 
-      <div className="relative space-y-4">
+      <div className="relative space-y-5 h-full flex flex-col">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1">
-            <div className="flex items-center gap-2 mb-2">
-              <h3 className="font-semibold text-neutral-100 text-sm">{area}</h3>
+            <div className="flex items-center gap-3 mb-3">
+              <h3 className="font-bold text-neutral-100 text-lg">{area}</h3>
               {priority && (
-                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                  priority === 'high' ? 'bg-red-500/20 text-red-400' :
-                  priority === 'medium' ? 'bg-yellow-500/20 text-yellow-400' :
-                  'bg-green-500/20 text-green-400'
+                <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                  priority === 'high' ? 'bg-red-500/20 text-red-400 border border-red-500/30' :
+                  priority === 'medium' ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30' :
+                  'bg-green-500/20 text-green-400 border border-green-500/30'
                 }`}>
                   {priority}
                 </span>
               )}
             </div>
-            <div className="space-y-2 text-xs">
-              <div className="flex items-center gap-2">
-                <span className="text-neutral-400">Current:</span>
-                <span className="text-neutral-300 font-medium">{current}</span>
+            <div className="space-y-3 text-sm">
+              <div className="flex items-center gap-3">
+                <span className="text-neutral-400 font-medium">Current:</span>
+                <span className="text-neutral-200 font-semibold text-base">{current}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="text-neutral-400">Target:</span>
-                <span className="text-ROX_GOLD font-medium">{target}</span>
+              <div className="flex items-center gap-3">
+                <span className="text-neutral-400 font-medium">Target:</span>
+                <span className="text-ROX_GOLD font-bold text-base">{target}</span>
               </div>
             </div>
             {description && (
-              <p className="text-xs text-neutral-500 mt-2">{description}</p>
+              <p className="text-sm text-neutral-400 mt-3 leading-relaxed">{description}</p>
             )}
           </div>
-          <Target className="h-5 w-5 text-ROX_GOLD flex-shrink-0 mt-1" />
+          <Target className="h-6 w-6 text-ROX_GOLD flex-shrink-0 mt-1" />
         </div>
 
-        <div className="pt-2 border-t border-neutral-700/30">
+        {actionable_steps && actionable_steps.length > 0 && (
+          <div className="flex-1">
+            <h4 className="text-sm font-semibold text-neutral-300 mb-2">Action Steps:</h4>
+            <ul className="space-y-1">
+              {actionable_steps.slice(0, 3).map((step, index) => (
+                <li key={index} className="text-xs text-neutral-500 flex items-start gap-2">
+                  <span className="text-ROX_GOLD mt-1">•</span>
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <div className="pt-3 border-t border-neutral-700/30">
           <div className="flex items-center justify-between gap-2">
-            <span className="text-xs text-neutral-400">Potential impact</span>
-            <div className="flex items-center gap-1">
-              <TrendingDown className="h-4 w-4 text-green-400" />
-              <span className="text-sm font-semibold text-green-400">+{impact}%</span>
+            <span className="text-sm text-neutral-400 font-medium">Potential Impact</span>
+            <div className="flex items-center gap-2">
+              <TrendingUp className="h-5 w-5 text-green-400" />
+              <span className="text-lg font-bold text-green-400">+{impact}%</span>
             </div>
           </div>
         </div>
@@ -486,11 +500,106 @@ export default function CalculationsPage() {
     ...(d.costs?.outStateTuition ? [{ label: 'Out-of-State Tuition', amount: d.costs.outStateTuition }] : []),
   ];
 
+  // Enhanced improvement areas with actual user data
   const improvementAreas = improvementData?.improvements || [
-    { area: 'SAT Score', current: '1470', target: '1530+', impact: 12, priority: 'high', description: 'Improve standardized test scores', actionable_steps: ['Practice regularly', 'Take prep courses'] },
-    { area: 'GPA', current: '3.82', target: '3.95+', impact: 8, priority: 'high', description: 'Maintain strong academic performance', actionable_steps: ['Focus on core subjects', 'Show improvement'] },
-    { area: 'Extracurriculars', current: '3 activities', target: '5+ with leadership', impact: 15, priority: 'medium', description: 'Develop meaningful involvement', actionable_steps: ['Focus on 2-3 activities', 'Take leadership roles'] },
-    { area: 'Essays & Awards', current: 'Standard', target: 'Award-winning', impact: 10, priority: 'medium', description: 'Improve application materials', actionable_steps: ['Write compelling essays', 'Pursue recognition'] },
+    // Academic Performance
+    { 
+      area: 'Academic Performance', 
+      current: userProfile?.gpa_unweighted ? `${userProfile.gpa_unweighted} GPA` : 'Current GPA', 
+      target: '3.9+ GPA', 
+      impact: 12, 
+      priority: 'high', 
+      description: 'Focus on maintaining strong academic performance in core subjects', 
+      actionable_steps: ['Focus on core subjects', 'Show consistent improvement', 'Take challenging courses', 'Maintain high grades in senior year'] 
+    },
+    
+    // Standardized Testing
+    { 
+      area: 'Standardized Testing', 
+      current: userProfile?.sat ? `${userProfile.sat} SAT` : (userProfile?.act ? `${userProfile.act} ACT` : 'Current Test Scores'), 
+      target: '1500+ SAT / 34+ ACT', 
+      impact: 15, 
+      priority: 'high', 
+      description: 'Improve standardized test scores through focused preparation', 
+      actionable_steps: ['Take practice tests regularly', 'Focus on weak areas', 'Consider test prep courses', 'Retake if needed'] 
+    },
+    
+    // Extracurricular Activities
+    { 
+      area: 'Extracurricular Activities', 
+      current: `${userProfile?.extracurricular_depth || 5}/10 depth`, 
+      target: '8+/10 with leadership', 
+      impact: 18, 
+      priority: 'high', 
+      description: 'Develop meaningful involvement in 2-3 key activities', 
+      actionable_steps: ['Focus on 2-3 activities', 'Take leadership roles', 'Show long-term commitment', 'Create impact projects'] 
+    },
+    
+    // Leadership & Awards
+    { 
+      area: 'Leadership & Awards', 
+      current: `${userProfile?.leadership_positions || 5}/10 leadership`, 
+      target: '8+/10 with recognition', 
+      impact: 14, 
+      priority: 'medium', 
+      description: 'Build leadership experience and pursue recognition', 
+      actionable_steps: ['Take on leadership roles', 'Pursue awards and recognition', 'Document achievements', 'Create meaningful impact'] 
+    },
+    
+    // Essays & Recommendations
+    { 
+      area: 'Essays & Recommendations', 
+      current: `${userProfile?.essay_quality || 5}/10 quality`, 
+      target: '9+/10 compelling', 
+      impact: 12, 
+      priority: 'medium', 
+      description: 'Craft compelling essays and secure strong recommendations', 
+      actionable_steps: ['Start essays early', 'Tell unique stories', 'Get strong recommenders', 'Revise multiple times'] 
+    },
+    
+    // Research & Innovation
+    { 
+      area: 'Research & Innovation', 
+      current: `${userProfile?.research_experience || 5}/10 experience`, 
+      target: '8+/10 with projects', 
+      impact: 10, 
+      priority: 'medium', 
+      description: 'Engage in research or innovative projects', 
+      actionable_steps: ['Find research opportunities', 'Work with professors', 'Present findings', 'Publish if possible'] 
+    },
+    
+    // Community Service
+    { 
+      area: 'Community Service', 
+      current: `${userProfile?.volunteer_work || 5}/10 involvement`, 
+      target: '8+/10 meaningful', 
+      impact: 8, 
+      priority: 'low', 
+      description: 'Engage in meaningful community service', 
+      actionable_steps: ['Find causes you care about', 'Commit long-term', 'Take leadership roles', 'Document impact'] 
+    },
+    
+    // Interview & Demonstrated Interest
+    { 
+      area: 'Interview & Interest', 
+      current: `${userProfile?.interview || 5}/10 performance`, 
+      target: '9+/10 compelling', 
+      impact: 6, 
+      priority: 'low', 
+      description: 'Excel in interviews and show genuine interest', 
+      actionable_steps: ['Practice interview skills', 'Research the college', 'Ask thoughtful questions', 'Follow up appropriately'] 
+    },
+    
+    // Portfolio & Creative Work
+    { 
+      area: 'Portfolio & Creative', 
+      current: `${userProfile?.portfolio_audition || 5}/10 quality`, 
+      target: '8+/10 outstanding', 
+      impact: 7, 
+      priority: 'low', 
+      description: 'Develop outstanding creative or technical portfolio', 
+      actionable_steps: ['Create high-quality work', 'Seek feedback', 'Build online presence', 'Showcase best pieces'] 
+    }
   ];
 
   return (
@@ -566,8 +675,8 @@ export default function CalculationsPage() {
 
         {/* Grid */}
         <div className="grid gap-6 lg:grid-cols-12">
-          {/* Main Column */}
-          <div className="lg:col-span-8 space-y-6">
+          {/* Main Column - Expanded */}
+          <div className="lg:col-span-9 space-y-6">
             {/* Outcome Distribution */}
             <motion.div 
               className="relative bg-gradient-to-br from-ROX_DARK_GRAY/80 via-ROX_BLACK/60 to-ROX_BLACK/80 border border-ROX_GOLD/30 rounded-3xl p-6 backdrop-blur-xl overflow-hidden group"
@@ -723,9 +832,9 @@ export default function CalculationsPage() {
               </div>
             </motion.div>
 
-            {/* Areas to Improve */}
+            {/* Areas to Improve - Enhanced */}
             <motion.div 
-              className="relative bg-gradient-to-br from-ROX_DARK_GRAY/80 via-ROX_BLACK/60 to-ROX_BLACK/80 border border-ROX_GOLD/30 rounded-3xl p-6 backdrop-blur-xl overflow-hidden group"
+              className="relative bg-gradient-to-br from-ROX_DARK_GRAY/80 via-ROX_BLACK/60 to-ROX_BLACK/80 border border-ROX_GOLD/30 rounded-3xl p-8 backdrop-blur-xl overflow-hidden group w-full"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
@@ -733,13 +842,13 @@ export default function CalculationsPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-ROX_GOLD/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               <div className="relative">
-                <div className="flex items-center gap-3 mb-6">
-                  <Award className="h-6 w-6 text-ROX_GOLD" />
-                  <h2 className="text-lg font-semibold text-white">Areas to Improve</h2>
+                <div className="flex items-center gap-3 mb-8">
+                  <Award className="h-8 w-8 text-ROX_GOLD" />
+                  <h2 className="text-2xl font-bold text-white">Areas to Improve</h2>
                 </div>
-                <p className="text-sm text-neutral-400 mb-6">Focus on these areas to significantly boost your admission chances:</p>
+                <p className="text-base text-neutral-300 mb-8">Focus on these areas to significantly boost your admission chances:</p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                   {improvementAreas.map((improvement) => (
                     <ImprovementCard
                       key={improvement.area}
@@ -754,12 +863,12 @@ export default function CalculationsPage() {
                   ))}
                 </div>
 
-                <div className="mt-6 p-4 rounded-2xl bg-ROX_GOLD/10 border border-ROX_GOLD/20">
-                  <div className="flex items-start gap-3">
-                    <TrendingUp className="h-5 w-5 text-ROX_GOLD flex-shrink-0 mt-0.5" />
-                    <div className="text-sm">
-                      <p className="font-semibold text-ROX_GOLD mb-1">Combined Improvement Potential</p>
-                      <p className="text-white">By improving all areas above, you could increase your chances by <span className="font-bold text-ROX_GOLD">+{improvementData?.combined_impact || 45}%</span></p>
+                <div className="mt-8 p-6 rounded-2xl bg-ROX_GOLD/10 border border-ROX_GOLD/20">
+                  <div className="flex items-start gap-4">
+                    <TrendingUp className="h-6 w-6 text-ROX_GOLD flex-shrink-0 mt-1" />
+                    <div className="text-base">
+                      <p className="font-bold text-ROX_GOLD mb-2 text-lg">Combined Improvement Potential</p>
+                      <p className="text-white">By improving all areas above, you could increase your chances by <span className="font-bold text-ROX_GOLD text-xl">+{improvementData?.combined_impact || 45}%</span></p>
                     </div>
                   </div>
                 </div>
@@ -767,8 +876,8 @@ export default function CalculationsPage() {
             </motion.div>
           </div>
 
-          {/* Sidebar */}
-          <div className="lg:col-span-4 lg:sticky lg:top-24 h-fit space-y-6">
+          {/* Sidebar - Reduced */}
+          <div className="lg:col-span-3 lg:sticky lg:top-24 h-fit space-y-6">
             {/* Your Chance Card */}
             <motion.div 
               className="relative bg-gradient-to-br from-ROX_DARK_GRAY/80 via-ROX_BLACK/60 to-ROX_BLACK/80 border border-ROX_GOLD/30 rounded-3xl p-8 backdrop-blur-xl overflow-hidden group"
