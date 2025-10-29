@@ -512,7 +512,7 @@ def get_college_data(college_name: str) -> Dict[str, Any]:
     
     # Load the integrated college data
     try:
-        df = pd.read_csv('backend/data/raw/real_colleges_integrated.csv')
+        df = pd.read_csv('data/raw/real_colleges_integrated.csv')
         logger.info(f"Loaded college data: {df.shape}")
         
         # Check if the input is a college ID (format: college_XXXXXX)
