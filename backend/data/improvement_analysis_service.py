@@ -189,11 +189,15 @@ class ImprovementAnalysisService:
             except Exception as e:
                 logger.error(f"Error in volunteer analysis: {e}")
             
+            # Log the number of improvements generated
+            logger.info(f"Total improvements generated: {len(improvements)}")
+            
             # Sort by priority and impact
             improvements.sort(key=lambda x: (x.priority == 'high', x.impact), reverse=True)
             
             # If we have fewer than 8 improvements, add default ones to ensure comprehensive coverage
             if len(improvements) < 8:
+                logger.warning(f"Only {len(improvements)} improvements generated, adding defaults")
                 default_improvements = self._get_default_improvements()
                 for default_imp in default_improvements:
                     # Only add if we don't already have this area
