@@ -125,7 +125,15 @@ class ImprovementAnalysisService:
             # Sort by priority and impact
             improvements.sort(key=lambda x: (x.priority == 'high', x.impact), reverse=True)
             
-            return improvements[:8]  # Return top 8 improvements
+            # If we have fewer than 8 improvements, add default ones to ensure comprehensive coverage
+            if len(improvements) < 8:
+                default_improvements = self._get_default_improvements()
+                for default_imp in default_improvements:
+                    # Only add if we don't already have this area
+                    if not any(imp.area == default_imp.area for imp in improvements):
+                        improvements.append(default_imp)
+            
+            return improvements[:20]  # Return up to 20 improvements for comprehensive analysis
             
         except Exception as e:
             logger.error(f"Error analyzing user profile: {e}")
@@ -145,6 +153,7 @@ class ImprovementAnalysisService:
         user_gpa = user_gpa_unweighted if user_gpa_unweighted > 0 else user_gpa_weighted
         target_gpa = college_avg_gpa if user_gpa_unweighted > 0 else college_weighted_gpa
         
+        # Always provide academic performance guidance, even if GPA is good
         if user_gpa < target_gpa - 0.1:
             gap = target_gpa - user_gpa
             target_gpa_final = min(target_gpa + 0.05, 4.0 if user_gpa_unweighted > 0 else 5.0)
@@ -155,22 +164,27 @@ class ImprovementAnalysisService:
             
             impact = int(gap * 15 * selectivity_multiplier)
             priority = "high" if gap > 0.2 else "medium"
-            
-            improvements.append(ImprovementArea(
-                area="Academic Performance",
-                current=f"{user_gpa:.2f} GPA",
-                target=f"{target_gpa_final:.2f}+ GPA",
-                impact=min(impact, 15),  # Cap at 15%
-                priority=priority,
-                description=f"Your GPA is {gap:.2f} points below the average for admitted students at this selective school",
-                actionable_steps=[
-                    "Focus on improving grades in core academic subjects",
-                    "Consider retaking courses with low grades if possible",
-                    "Maintain strong performance in remaining semesters",
-                    "Highlight upward trend if grades are improving",
-                    "Take challenging courses while maintaining high grades"
-                ]
-            ))
+        else:
+            # Even if GPA is good, provide guidance for maintaining excellence
+            target_gpa_final = min(target_gpa + 0.05, 4.0 if user_gpa_unweighted > 0 else 5.0)
+            impact = 5  # Lower impact since already good
+            priority = "low"
+        
+        improvements.append(ImprovementArea(
+            area="Academic Performance",
+            current=f"{user_gpa:.2f} GPA",
+            target=f"{target_gpa_final:.2f}+ GPA",
+            impact=min(impact, 15),  # Cap at 15%
+            priority=priority,
+            description=f"{'Your GPA is ' + str(round(target_gpa - user_gpa, 2)) + ' points below the average for admitted students at this selective school' if user_gpa < target_gpa - 0.1 else 'Maintain your strong academic performance and aim for even higher grades'}",
+            actionable_steps=[
+                "Focus on improving grades in core academic subjects",
+                "Consider retaking courses with low grades if possible",
+                "Maintain strong performance in remaining semesters",
+                "Highlight upward trend if grades are improving",
+                "Take challenging courses while maintaining high grades"
+            ]
+        ))
         
         return improvements
     
@@ -188,17 +202,24 @@ class ImprovementAnalysisService:
         college_act_25th = college_data.get('act_25th', 30)
         college_act_75th = college_data.get('act_75th', 35)
         
-        # Analyze SAT scores
-        if user_sat > 0 and user_sat < college_sat_25th:
-            gap = college_sat_25th - user_sat
-            target_sat = min(college_sat_75th, user_sat + 100)
-            
-            # Calculate impact based on gap and college selectivity
-            acceptance_rate = college_data.get('acceptance_rate', 0.15)
-            selectivity_multiplier = 1.3 if acceptance_rate < 0.1 else 1.1 if acceptance_rate < 0.2 else 1.0
-            
-            impact = int(gap / 8 * selectivity_multiplier)  # 1% per 8 SAT points
-            priority = "high" if gap > 100 else "medium"
+        # Always provide standardized testing guidance
+        if user_sat > 0:
+            if user_sat < college_sat_25th:
+                gap = college_sat_25th - user_sat
+                target_sat = min(college_sat_75th, user_sat + 100)
+                
+                # Calculate impact based on gap and college selectivity
+                acceptance_rate = college_data.get('acceptance_rate', 0.15)
+                selectivity_multiplier = 1.3 if acceptance_rate < 0.1 else 1.1 if acceptance_rate < 0.2 else 1.0
+                
+                impact = int(gap / 8 * selectivity_multiplier)  # 1% per 8 SAT points
+                priority = "high" if gap > 100 else "medium"
+                description = f"Your SAT score is {gap} points below the 25th percentile for admitted students"
+            else:
+                target_sat = min(college_sat_75th + 50, 1600)
+                impact = 3  # Lower impact since already good
+                priority = "low"
+                description = "Your SAT score is competitive - aim for the 75th percentile to strengthen your application"
             
             improvements.append(ImprovementArea(
                 area="Standardized Testing",
@@ -206,7 +227,7 @@ class ImprovementAnalysisService:
                 target=f"{target_sat}+ SAT",
                 impact=min(impact, 12),  # Cap at 12%
                 priority=priority,
-                description=f"Your SAT score is {gap} points below the 25th percentile for admitted students",
+                description=description,
                 actionable_steps=[
                     "Take practice tests to identify weak areas",
                     "Consider SAT prep course or tutoring",
@@ -216,17 +237,23 @@ class ImprovementAnalysisService:
                 ]
             ))
         
-        # Analyze ACT scores
-        elif user_act > 0 and user_act < college_act_25th:
-            gap = college_act_25th - user_act
-            target_act = min(college_act_75th, user_act + 3)
-            
-            # Calculate impact based on gap and college selectivity
-            acceptance_rate = college_data.get('acceptance_rate', 0.15)
-            selectivity_multiplier = 1.3 if acceptance_rate < 0.1 else 1.1 if acceptance_rate < 0.2 else 1.0
-            
-            impact = int(gap * 2 * selectivity_multiplier)  # 2% per ACT point
-            priority = "high" if gap > 3 else "medium"
+        elif user_act > 0:
+            if user_act < college_act_25th:
+                gap = college_act_25th - user_act
+                target_act = min(college_act_75th, user_act + 3)
+                
+                # Calculate impact based on gap and college selectivity
+                acceptance_rate = college_data.get('acceptance_rate', 0.15)
+                selectivity_multiplier = 1.3 if acceptance_rate < 0.1 else 1.1 if acceptance_rate < 0.2 else 1.0
+                
+                impact = int(gap * 2 * selectivity_multiplier)  # 2% per ACT point
+                priority = "high" if gap > 3 else "medium"
+                description = f"Your ACT score is {gap} points below the 25th percentile for admitted students"
+            else:
+                target_act = min(college_act_75th + 1, 36)
+                impact = 3  # Lower impact since already good
+                priority = "low"
+                description = "Your ACT score is competitive - aim for the 75th percentile to strengthen your application"
             
             improvements.append(ImprovementArea(
                 area="Standardized Testing",
@@ -234,13 +261,31 @@ class ImprovementAnalysisService:
                 target=f"{target_act}+ ACT",
                 impact=min(impact, 12),  # Cap at 12%
                 priority=priority,
-                description=f"Your ACT score is {gap} points below the 25th percentile for admitted students",
+                description=description,
                 actionable_steps=[
                     "Take practice tests to identify weak areas",
                     "Consider ACT prep course or tutoring",
                     "Focus on weak subject areas",
                     "Take the test multiple times for superscoring",
                     "Consider ACT Writing if required"
+                ]
+            ))
+        
+        else:
+            # No test scores provided - provide general guidance
+            improvements.append(ImprovementArea(
+                area="Standardized Testing",
+                current="No test scores provided",
+                target=f"{college_sat_25th}+ SAT or {college_act_25th}+ ACT",
+                impact=8,  # Medium impact for missing scores
+                priority="high",
+                description="Standardized test scores are important for this selective college",
+                actionable_steps=[
+                    "Take practice tests to identify weak areas",
+                    "Consider test prep course or tutoring",
+                    "Focus on weak subject areas",
+                    "Take the test multiple times for superscoring",
+                    "Consider test writing if required"
                 ]
             ))
         
@@ -267,26 +312,33 @@ class ImprovementAnalysisService:
         else:  # Selective
             target_level = 6.5
         
+        # Always provide extracurricular guidance
         if current_level < target_level:
             gap = target_level - current_level
             impact = int(gap * 3)  # 3% per level gap
             priority = "high" if gap > 2 else "medium"
-            
-            improvements.append(ImprovementArea(
-                area="Extracurricular Activities",
-                current=f"{current_level:.1f}/10 overall depth",
-                target=f"{target_level:.1f}/10 with leadership",
-                impact=min(impact, 12),  # Cap at 12%
-                priority=priority,
-                description=f"Increase depth and commitment in extracurricular activities for this competitive school",
-                actionable_steps=[
-                    "Focus on 2-3 activities you're passionate about",
-                    "Take on leadership roles in existing activities",
-                    "Show long-term commitment (2+ years)",
-                    "Document impact and achievements",
-                    "Develop unique projects or initiatives"
-                ]
-            ))
+            description = f"Increase depth and commitment in extracurricular activities for this competitive school"
+        else:
+            gap = 0
+            impact = 2  # Lower impact since already good
+            priority = "low"
+            description = f"Maintain your strong extracurricular involvement and consider taking on more leadership roles"
+        
+        improvements.append(ImprovementArea(
+            area="Extracurricular Activities",
+            current=f"{current_level:.1f}/10 overall depth",
+            target=f"{target_level:.1f}/10 with leadership",
+            impact=min(impact, 12),  # Cap at 12%
+            priority=priority,
+            description=description,
+            actionable_steps=[
+                "Focus on 2-3 activities you're passionate about",
+                "Take on leadership roles in existing activities",
+                "Show long-term commitment (2+ years)",
+                "Document impact and achievements",
+                "Develop unique projects or initiatives"
+            ]
+        ))
         
         return improvements
     
