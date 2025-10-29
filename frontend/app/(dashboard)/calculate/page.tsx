@@ -385,8 +385,18 @@ export default function CalculationsPage() {
         console.log('🔍 Waitlist Rate:', (waitlistRate * 100).toFixed(1) + '%');
         console.log('🔍 Reject Rate:', (rejectRate * 100).toFixed(1) + '%');
 
-      // Set college name for subject emphasis hook
-      const actualCollegeName = result.college_name || collegeName || 'Selected College';
+      // Set college name for subject emphasis hook - map to backend format
+      const backendCollegeName = result.college_name || collegeName || 'Selected College';
+      
+      // Map college names to backend format
+      const collegeNameMapping: { [key: string]: string } = {
+        'Carnegie Mellon University': 'Carnegie Mellon',
+        'Massachusetts Institute of Technology': 'MIT',
+        'University of Pennsylvania': 'Penn',
+        'New York University': 'NYU'
+      };
+      
+      const actualCollegeName = collegeNameMapping[backendCollegeName] || backendCollegeName;
       setCollegeName(actualCollegeName);
       
       // Load zipcode from localStorage
