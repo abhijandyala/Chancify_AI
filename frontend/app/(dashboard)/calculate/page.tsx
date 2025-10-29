@@ -196,63 +196,67 @@ function ImprovementCard({ area, current, target, impact, priority, description,
 }) {
   return (
     <motion.div 
-      className="relative group rounded-2xl bg-gradient-to-br from-neutral-900/60 to-neutral-950/60 border border-neutral-700/30 p-6 hover:border-ROX_GOLD/50 transition-all duration-300 min-h-[280px]"
-      whileHover={{ scale: 1.02 }}
+      className="relative group rounded-xl bg-gradient-to-br from-neutral-800/80 to-neutral-900/80 border border-neutral-600/40 p-6 hover:border-yellow-500/60 transition-all duration-300 min-h-[320px] shadow-lg hover:shadow-xl"
+      whileHover={{ scale: 1.02, y: -2 }}
       whileTap={{ scale: 0.98 }}
     >
-      <div className="absolute inset-0 bg-gradient-to-t from-ROX_GOLD/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+      <div className="absolute inset-0 bg-gradient-to-t from-yellow-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
 
-      <div className="relative space-y-5 h-full flex flex-col">
+      <div className="relative space-y-4 h-full flex flex-col">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-3">
-              <h3 className="font-bold text-neutral-100 text-lg">{area}</h3>
+              <h3 className="font-bold text-white text-lg">{area}</h3>
               {priority && (
-                <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                  priority === 'high' ? 'bg-red-500/20 text-red-400 border border-red-500/30' :
-                  priority === 'medium' ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30' :
-                  'bg-green-500/20 text-green-400 border border-green-500/30'
+                <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                  priority === 'high' ? 'bg-red-500/20 text-red-300 border border-red-500/40' :
+                  priority === 'medium' ? 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/40' :
+                  'bg-green-500/20 text-green-300 border border-green-500/40'
                 }`}>
                   {priority}
                 </span>
               )}
             </div>
-            <div className="space-y-3 text-sm">
+            
+            <div className="space-y-3 mb-4">
               <div className="flex items-center gap-3">
-                <span className="text-neutral-400 font-medium">Current:</span>
-                <span className="text-neutral-200 font-semibold text-base">{current}</span>
+                <span className="text-neutral-400 font-medium text-sm">Current:</span>
+                <span className="text-white font-semibold text-base bg-neutral-700/50 px-3 py-1 rounded-lg">{current}</span>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-neutral-400 font-medium">Target:</span>
-                <span className="text-ROX_GOLD font-bold text-base">{target}</span>
+                <span className="text-neutral-400 font-medium text-sm">Target:</span>
+                <span className="text-yellow-400 font-bold text-base bg-yellow-500/10 px-3 py-1 rounded-lg border border-yellow-500/30">{target}</span>
               </div>
             </div>
+            
             {description && (
-              <p className="text-sm text-neutral-400 mt-3 leading-relaxed">{description}</p>
+              <p className="text-sm text-neutral-300 mb-4 leading-relaxed">{description}</p>
             )}
           </div>
-          <Target className="h-6 w-6 text-ROX_GOLD flex-shrink-0 mt-1" />
+          <div className="p-2 bg-yellow-500/20 rounded-lg">
+            <Target className="h-5 w-5 text-yellow-400" />
+          </div>
         </div>
 
         {actionable_steps && actionable_steps.length > 0 && (
           <div className="flex-1">
-            <h4 className="text-sm font-semibold text-neutral-300 mb-2">Action Steps:</h4>
-            <ul className="space-y-1">
+            <h4 className="text-sm font-semibold text-neutral-200 mb-3">Action Steps:</h4>
+            <ul className="space-y-2">
               {actionable_steps.slice(0, 3).map((step, index) => (
-                <li key={index} className="text-xs text-neutral-500 flex items-start gap-2">
-                  <span className="text-ROX_GOLD mt-1">•</span>
-                  <span>{step}</span>
+                <li key={index} className="text-xs text-neutral-400 flex items-start gap-2">
+                  <span className="text-yellow-400 mt-1 font-bold">•</span>
+                  <span className="leading-relaxed">{step}</span>
                 </li>
               ))}
             </ul>
           </div>
         )}
 
-        <div className="pt-3 border-t border-neutral-700/30">
+        <div className="pt-3 border-t border-neutral-600/40">
           <div className="flex items-center justify-between gap-2">
-            <span className="text-sm text-neutral-400 font-medium">Potential Impact</span>
+            <span className="text-sm text-neutral-400 font-medium">Impact</span>
             <div className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5 text-green-400" />
+              <TrendingUp className="h-4 w-4 text-green-400" />
               <span className="text-lg font-bold text-green-400">+{impact}%</span>
             </div>
           </div>
@@ -500,105 +504,215 @@ export default function CalculationsPage() {
     ...(d.costs?.outStateTuition ? [{ label: 'Out-of-State Tuition', amount: d.costs.outStateTuition }] : []),
   ];
 
-  // Enhanced improvement areas with actual user data
+  // Comprehensive improvement areas with ALL factors from dropdowns
   const improvementAreas = improvementData?.improvements || [
-    // Academic Performance
+    // Academic Performance (25% weight)
     { 
       area: 'Academic Performance', 
-      current: userProfile?.gpa_unweighted ? `${userProfile.gpa_unweighted} GPA` : 'Current GPA', 
-      target: '3.9+ GPA', 
-      impact: 12, 
+      current: userProfile?.gpa_unweighted ? `${userProfile.gpa_unweighted} GPA` : 'No GPA entered', 
+      target: collegeData?.acceptanceRateOfficial ? `${(collegeData.acceptanceRateOfficial * 100).toFixed(1)}% acceptance rate` : '3.9+ GPA', 
+      impact: 25, 
       priority: 'high', 
-      description: 'Focus on maintaining strong academic performance in core subjects', 
-      actionable_steps: ['Focus on core subjects', 'Show consistent improvement', 'Take challenging courses', 'Maintain high grades in senior year'] 
+      description: `Focus on maintaining strong academic performance - ${collegeData?.collegeName || 'this college'} expects high grades`, 
+      actionable_steps: ['Maintain high grades in core subjects', 'Take challenging courses', 'Show improvement over time', 'Focus on areas of weakness'] 
     },
     
-    // Standardized Testing
+    // Curriculum Rigor (12% weight)
+    { 
+      area: 'Curriculum Rigor', 
+      current: userProfile?.rigor ? `${userProfile.rigor}/10 rigor` : 'No rigor entered', 
+      target: '8+/10 maximum rigor', 
+      impact: 12, 
+      priority: 'high', 
+      description: 'Take the most challenging courses available at your school', 
+      actionable_steps: ['Take more AP/IB courses', 'Enroll in honors classes', 'Consider dual enrollment', 'Challenge yourself academically'] 
+    },
+    
+    // Standardized Testing (8% weight)
     { 
       area: 'Standardized Testing', 
-      current: userProfile?.sat ? `${userProfile.sat} SAT` : (userProfile?.act ? `${userProfile.act} ACT` : 'Current Test Scores'), 
-      target: '1500+ SAT / 34+ ACT', 
-      impact: 15, 
+      current: userProfile?.sat ? `${userProfile.sat} SAT` : (userProfile?.act ? `${userProfile.act} ACT` : 'No test scores'), 
+      target: '1500+ SAT', 
+      impact: 8, 
       priority: 'high', 
-      description: 'Improve standardized test scores through focused preparation', 
+      description: 'Improve standardized test scores to meet college expectations', 
       actionable_steps: ['Take practice tests regularly', 'Focus on weak areas', 'Consider test prep courses', 'Retake if needed'] 
     },
     
-    // Extracurricular Activities
+    // Extracurricular Depth (7.5% weight)
     { 
       area: 'Extracurricular Activities', 
-      current: `${userProfile?.extracurricular_depth || 5}/10 depth`, 
-      target: '8+/10 with leadership', 
-      impact: 18, 
+      current: userProfile?.extracurricular_depth ? `${userProfile.extracurricular_depth}/10 depth` : 'No activities entered', 
+      target: '8+/10 exceptional depth', 
+      impact: 8, 
       priority: 'high', 
       description: 'Develop meaningful involvement in 2-3 key activities', 
       actionable_steps: ['Focus on 2-3 activities', 'Take leadership roles', 'Show long-term commitment', 'Create impact projects'] 
     },
     
-    // Leadership & Awards
+    // Leadership Positions (7.5% weight)
     { 
-      area: 'Leadership & Awards', 
-      current: `${userProfile?.leadership_positions || 5}/10 leadership`, 
-      target: '8+/10 with recognition', 
-      impact: 14, 
-      priority: 'medium', 
-      description: 'Build leadership experience and pursue recognition', 
-      actionable_steps: ['Take on leadership roles', 'Pursue awards and recognition', 'Document achievements', 'Create meaningful impact'] 
+      area: 'Leadership Experience', 
+      current: userProfile?.leadership_positions ? `${userProfile.leadership_positions}/10 leadership` : 'No leadership entered', 
+      target: '8+/10 strong leadership', 
+      impact: 8, 
+      priority: 'high', 
+      description: 'Build leadership experience and take on responsibility', 
+      actionable_steps: ['Take on leadership roles', 'Lead projects and initiatives', 'Mentor others', 'Organize events'] 
     },
     
-    // Essays & Recommendations
+    // Essays & Writing (8% weight)
     { 
-      area: 'Essays & Recommendations', 
-      current: `${userProfile?.essay_quality || 5}/10 quality`, 
-      target: '9+/10 compelling', 
-      impact: 12, 
+      area: 'Essays & Writing', 
+      current: userProfile?.essay_quality ? `${userProfile.essay_quality}/10 quality` : 'No essay rating', 
+      target: '9+/10 compelling essays', 
+      impact: 8, 
       priority: 'medium', 
-      description: 'Craft compelling essays and secure strong recommendations', 
-      actionable_steps: ['Start essays early', 'Tell unique stories', 'Get strong recommenders', 'Revise multiple times'] 
+      description: 'Craft compelling essays that tell your unique story', 
+      actionable_steps: ['Start essays early', 'Tell unique stories', 'Get feedback from teachers', 'Revise multiple times'] 
     },
     
-    // Research & Innovation
+    // Recommendations (4% weight)
     { 
-      area: 'Research & Innovation', 
-      current: `${userProfile?.research_experience || 5}/10 experience`, 
-      target: '8+/10 with projects', 
-      impact: 10, 
+      area: 'Recommendation Letters', 
+      current: userProfile?.recommendations ? `${userProfile.recommendations}/10 strength` : 'No rec rating', 
+      target: '9+/10 outstanding letters', 
+      impact: 4, 
       priority: 'medium', 
-      description: 'Engage in research or innovative projects', 
+      description: 'Secure strong recommendation letters from teachers', 
+      actionable_steps: ['Build relationships with teachers', 'Ask early', 'Provide detailed information', 'Choose recommenders wisely'] 
+    },
+    
+    // Awards & Publications (2% weight)
+    { 
+      area: 'Awards & Recognition', 
+      current: userProfile?.awards_publications ? `${userProfile.awards_publications}/10 recognition` : 'No awards entered', 
+      target: '7+/10 notable recognition', 
+      impact: 2, 
+      priority: 'medium', 
+      description: 'Pursue awards, competitions, and recognition', 
+      actionable_steps: ['Enter competitions', 'Apply for scholarships', 'Pursue recognition', 'Document achievements'] 
+    },
+    
+    // Research Experience (2% weight)
+    { 
+      area: 'Research Experience', 
+      current: userProfile?.research_experience ? `${userProfile.research_experience}/10 experience` : 'No research entered', 
+      target: '7+/10 research involvement', 
+      impact: 2, 
+      priority: 'medium', 
+      description: 'Engage in research or academic projects', 
       actionable_steps: ['Find research opportunities', 'Work with professors', 'Present findings', 'Publish if possible'] 
     },
     
-    // Community Service
+    // Passion Projects (2% weight)
+    { 
+      area: 'Passion Projects', 
+      current: userProfile?.passion_projects ? `${userProfile.passion_projects}/10 projects` : 'No projects entered', 
+      target: '7+/10 meaningful projects', 
+      impact: 2, 
+      priority: 'medium', 
+      description: 'Develop personal projects that show initiative', 
+      actionable_steps: ['Start personal projects', 'Show initiative', 'Document progress', 'Create impact'] 
+    },
+    
+    // Business Ventures (2% weight)
+    { 
+      area: 'Entrepreneurship', 
+      current: userProfile?.business_ventures ? `${userProfile.business_ventures}/10 ventures` : 'No ventures entered', 
+      target: '6+/10 business experience', 
+      impact: 2, 
+      priority: 'low', 
+      description: 'Show entrepreneurial spirit and business acumen', 
+      actionable_steps: ['Start small business', 'Create products/services', 'Show leadership', 'Document success'] 
+    },
+    
+    // Volunteer Work (2% weight)
     { 
       area: 'Community Service', 
-      current: `${userProfile?.volunteer_work || 5}/10 involvement`, 
-      target: '8+/10 meaningful', 
-      impact: 8, 
-      priority: 'low', 
+      current: userProfile?.volunteer_work ? `${userProfile.volunteer_work}/10 service` : 'No service entered', 
+      target: '7+/10 meaningful service', 
+      impact: 2, 
+      priority: 'medium', 
       description: 'Engage in meaningful community service', 
       actionable_steps: ['Find causes you care about', 'Commit long-term', 'Take leadership roles', 'Document impact'] 
     },
     
-    // Interview & Demonstrated Interest
+    // Portfolio/Audition (2% weight)
     { 
-      area: 'Interview & Interest', 
-      current: `${userProfile?.interview || 5}/10 performance`, 
-      target: '9+/10 compelling', 
-      impact: 6, 
+      area: 'Portfolio & Creative Work', 
+      current: userProfile?.portfolio_audition ? `${userProfile.portfolio_audition}/10 quality` : 'No portfolio rating', 
+      target: '8+/10 outstanding work', 
+      impact: 2, 
+      priority: 'low', 
+      description: 'Develop outstanding creative or technical portfolio', 
+      actionable_steps: ['Create high-quality work', 'Seek feedback', 'Build online presence', 'Showcase best pieces'] 
+    },
+    
+    // Interview Performance (1% weight)
+    { 
+      area: 'Interview Skills', 
+      current: userProfile?.interview ? `${userProfile.interview}/10 performance` : 'No interview rating', 
+      target: '9+/10 excellent interview', 
+      impact: 1, 
       priority: 'low', 
       description: 'Excel in interviews and show genuine interest', 
       actionable_steps: ['Practice interview skills', 'Research the college', 'Ask thoughtful questions', 'Follow up appropriately'] 
     },
     
-    // Portfolio & Creative Work
+    // Demonstrated Interest (1.5% weight)
     { 
-      area: 'Portfolio & Creative', 
-      current: `${userProfile?.portfolio_audition || 5}/10 quality`, 
-      target: '8+/10 outstanding', 
-      impact: 7, 
+      area: 'Demonstrated Interest', 
+      current: userProfile?.demonstrated_interest ? `${userProfile.demonstrated_interest}/10 interest` : 'No interest rating', 
+      target: '8+/10 strong interest', 
+      impact: 2, 
       priority: 'low', 
-      description: 'Develop outstanding creative or technical portfolio', 
-      actionable_steps: ['Create high-quality work', 'Seek feedback', 'Build online presence', 'Showcase best pieces'] 
+      description: 'Show genuine interest in the college', 
+      actionable_steps: ['Visit campus', 'Attend events', 'Contact admissions', 'Show enthusiasm'] 
+    },
+    
+    // Legacy Status (1.5% weight)
+    { 
+      area: 'Legacy Status', 
+      current: userProfile?.legacy_status ? `${userProfile.legacy_status}/10 legacy` : 'No legacy status', 
+      target: '8+/10 strong legacy', 
+      impact: 2, 
+      priority: 'low', 
+      description: 'Leverage family connections to the college', 
+      actionable_steps: ['Document family connections', 'Highlight legacy status', 'Get family support', 'Show tradition'] 
+    },
+    
+    // Geographic Diversity (3% weight)
+    { 
+      area: 'Geographic Diversity', 
+      current: userProfile?.geographic_diversity ? `${userProfile.geographic_diversity}/10 diversity` : 'No diversity rating', 
+      target: '7+/10 geographic advantage', 
+      impact: 3, 
+      priority: 'medium', 
+      description: 'Highlight unique geographic background', 
+      actionable_steps: ['Emphasize unique background', 'Show cultural perspective', 'Highlight experiences', 'Connect to college mission'] 
+    },
+    
+    // First-Gen Diversity (3% weight)
+    { 
+      area: 'First-Generation Status', 
+      current: userProfile?.firstgen_diversity ? `${userProfile.firstgen_diversity}/10 first-gen` : 'No first-gen status', 
+      target: '8+/10 first-gen advantage', 
+      impact: 3, 
+      priority: 'medium', 
+      description: 'Leverage first-generation college student status', 
+      actionable_steps: ['Highlight first-gen status', 'Show determination', 'Connect to college mission', 'Emphasize resilience'] 
+    },
+    
+    // High School Reputation (2% weight)
+    { 
+      area: 'High School Reputation', 
+      current: userProfile?.hs_reputation ? `${userProfile.hs_reputation}/10 reputation` : 'No school rating', 
+      target: '8+/10 strong school', 
+      impact: 2, 
+      priority: 'low', 
+      description: 'Highlight your high school\'s academic reputation', 
+      actionable_steps: ['Emphasize school strengths', 'Show academic rigor', 'Highlight achievements', 'Connect to college'] 
     }
   ];
 
@@ -832,21 +946,25 @@ export default function CalculationsPage() {
               </div>
             </motion.div>
 
-            {/* Areas to Improve - Enhanced */}
+            {/* Areas to Improve - Professional Design */}
             <motion.div 
-              className="relative bg-gradient-to-br from-ROX_DARK_GRAY/80 via-ROX_BLACK/60 to-ROX_BLACK/80 border border-ROX_GOLD/30 rounded-3xl p-8 backdrop-blur-xl overflow-hidden group w-full"
+              className="relative bg-gradient-to-br from-neutral-900/90 via-neutral-800/80 to-neutral-900/90 border border-neutral-600/50 rounded-2xl p-8 backdrop-blur-xl overflow-hidden group w-full shadow-2xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-ROX_GOLD/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-yellow-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               <div className="relative">
-                <div className="flex items-center gap-3 mb-8">
-                  <Award className="h-8 w-8 text-ROX_GOLD" />
-                  <h2 className="text-2xl font-bold text-white">Areas to Improve</h2>
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="p-3 bg-yellow-500/20 rounded-xl border border-yellow-500/30">
+                    <Award className="h-8 w-8 text-yellow-400" />
+                  </div>
+                  <div>
+                    <h2 className="text-3xl font-bold text-white mb-2">Areas to Improve</h2>
+                    <p className="text-lg text-neutral-300">Comprehensive analysis of all admission factors</p>
+                  </div>
                 </div>
-                <p className="text-base text-neutral-300 mb-8">Focus on these areas to significantly boost your admission chances:</p>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                   {improvementAreas.map((improvement) => (
@@ -863,12 +981,14 @@ export default function CalculationsPage() {
                   ))}
                 </div>
 
-                <div className="mt-8 p-6 rounded-2xl bg-ROX_GOLD/10 border border-ROX_GOLD/20">
-                  <div className="flex items-start gap-4">
-                    <TrendingUp className="h-6 w-6 text-ROX_GOLD flex-shrink-0 mt-1" />
-                    <div className="text-base">
-                      <p className="font-bold text-ROX_GOLD mb-2 text-lg">Combined Improvement Potential</p>
-                      <p className="text-white">By improving all areas above, you could increase your chances by <span className="font-bold text-ROX_GOLD text-xl">+{improvementData?.combined_impact || 45}%</span></p>
+                <div className="mt-8 p-6 rounded-xl bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 border border-yellow-500/30">
+                  <div className="flex items-center gap-4">
+                    <div className="p-2 bg-yellow-500/20 rounded-lg">
+                      <TrendingUp className="h-6 w-6 text-yellow-400" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-yellow-400 text-xl mb-1">Combined Improvement Potential</p>
+                      <p className="text-white text-lg">By improving all areas above, you could increase your chances by <span className="font-bold text-yellow-400 text-2xl">+{improvementData?.combined_impact || 45}%</span></p>
                     </div>
                   </div>
                 </div>
