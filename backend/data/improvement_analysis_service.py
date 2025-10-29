@@ -22,6 +22,10 @@ class ImprovementAnalysisService:
         self.admission_factors = {}
         self.load_data()
         logger.info(f"ImprovementAnalysisService initialized with {len(self.elite_colleges_data)} colleges")
+        if len(self.elite_colleges_data) == 0:
+            logger.error("CRITICAL: Elite colleges data is empty! This will cause all analyses to fail.")
+        else:
+            logger.info(f"Elite colleges data loaded successfully. Sample: {list(self.elite_colleges_data.keys())[:3]}")
     
     def load_data(self):
         """Load all necessary data for improvement analysis"""
