@@ -43,7 +43,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       if (authToken && userEmail) {
         // Verify token with backend
-        const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://unsmug-untensely-elroy.ngrok-free.dev'
+        const API_BASE_URL = 'https://unsmug-untensely-elroy.ngrok-free.dev'
         const headers: HeadersInit = {
           'Authorization': `Bearer ${authToken}`,
           'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       setIsLoading(true)
       
-      const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://unsmug-untensely-elroy.ngrok-free.dev'
+      const API_BASE_URL = 'https://unsmug-untensely-elroy.ngrok-free.dev'
       const headers: HeadersInit = {
         'Content-Type': 'application/json',
       }
@@ -164,7 +164,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       setIsLoading(true)
       
-      const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://unsmug-untensely-elroy.ngrok-free.dev'
+      const API_BASE_URL = 'https://unsmug-untensely-elroy.ngrok-free.dev'
       const headers: HeadersInit = {
         'Content-Type': 'application/json',
       }

@@ -65,7 +65,7 @@ class OpenAICollegeService {
   private baseUrl: string;
 
   constructor() {
-    this.baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://unsmug-untensely-elroy.ngrok-free.dev';
+    this.baseUrl = 'https://unsmug-untensely-elroy.ngrok-free.dev';
   }
 
   private getHeaders() {

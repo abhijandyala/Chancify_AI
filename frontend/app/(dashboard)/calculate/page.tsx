@@ -324,7 +324,7 @@ export default function CalculationsPage() {
         console.log('🔍 User Profile from localStorage:', userProfile);
         
         // Calculate probability using the backend API
-        const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://unsmug-untensely-elroy.ngrok-free.dev';
+        const API_BASE_URL = 'https://unsmug-untensely-elroy.ngrok-free.dev';
         const headers: HeadersInit = {
           'Content-Type': 'application/json',
         };

@@ -40,7 +40,7 @@ export const useTuitionByZipcode = (
       setError(null);
 
       try {
-        const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://unsmug-untensely-elroy.ngrok-free.dev';
+        const API_BASE_URL = 'https://unsmug-untensely-elroy.ngrok-free.dev';
         const headers: HeadersInit = {
           'Content-Type': 'application/json',
         };
