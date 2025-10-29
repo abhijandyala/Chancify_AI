@@ -343,12 +343,13 @@ class ImprovementAnalysisService:
         return improvements
     
     def _analyze_leadership_awards(self, profile: Dict[str, Any], college_data: Dict[str, Any]) -> List[ImprovementArea]:
-        """Analyze leadership positions and awards"""
+        """Analyze leadership positions and awards - ALWAYS provide guidance"""
         improvements = []
         
         leadership = profile.get('leadership_positions', 0)
         awards = profile.get('awards_publications', 0)
         
+        # Always provide leadership guidance
         if leadership < 2:
             improvements.append(ImprovementArea(
                 area="Leadership Experience",
@@ -364,7 +365,24 @@ class ImprovementAnalysisService:
                     "Mentor younger students"
                 ]
             ))
+        else:
+            # Even if good, provide guidance for excellence
+            improvements.append(ImprovementArea(
+                area="Leadership Experience",
+                current=f"{leadership} positions",
+                target="8+ exceptional leadership",
+                impact=3,
+                priority="low",
+                description="Maintain your strong leadership and consider taking on more responsibility",
+                actionable_steps=[
+                    "Take on higher-level leadership roles",
+                    "Mentor others in leadership",
+                    "Lead major projects or initiatives",
+                    "Document your leadership impact"
+                ]
+            ))
         
+        # Always provide awards guidance
         if awards < 3:
             improvements.append(ImprovementArea(
                 area="Awards & Recognition",
@@ -378,6 +396,22 @@ class ImprovementAnalysisService:
                     "Apply for scholarships and recognition programs",
                     "Pursue research or creative projects",
                     "Document all achievements and recognition"
+                ]
+            ))
+        else:
+            # Even if good, provide guidance for excellence
+            improvements.append(ImprovementArea(
+                area="Awards & Recognition",
+                current=f"{awards} awards",
+                target="7+ exceptional recognition",
+                impact=2,
+                priority="low",
+                description="Maintain your strong recognition and pursue higher-level awards",
+                actionable_steps=[
+                    "Apply for national/international competitions",
+                    "Pursue prestigious scholarships",
+                    "Document all achievements professionally",
+                    "Seek recognition in multiple areas"
                 ]
             ))
         
@@ -401,6 +435,7 @@ class ImprovementAnalysisService:
         else:  # Selective
             target_ap = 4 if hs_reputation > 7 else 3
         
+        # Always provide academic rigor guidance
         if ap_count < target_ap:
             gap = target_ap - ap_count
             impact = int(gap * 2)  # 2% per AP course gap
@@ -421,16 +456,33 @@ class ImprovementAnalysisService:
                     "Focus on courses related to your intended major"
                 ]
             ))
+        else:
+            # Even if good, provide guidance for excellence
+            improvements.append(ImprovementArea(
+                area="Academic Rigor",
+                current=f"{ap_count} AP courses",
+                target=f"{target_ap + 2}+ maximum rigor",
+                impact=3,
+                priority="low",
+                description="Maintain your strong academic rigor and consider additional challenging courses",
+                actionable_steps=[
+                    "Take additional AP courses if available",
+                    "Consider dual enrollment or college courses",
+                    "Pursue independent study projects",
+                    "Maintain excellent grades in rigorous coursework"
+                ]
+            ))
         
         return improvements
     
     def _analyze_research_innovation(self, profile: Dict[str, Any], college_data: Dict[str, Any]) -> List[ImprovementArea]:
-        """Analyze research and innovation experience"""
+        """Analyze research and innovation experience - ALWAYS provide guidance"""
         improvements = []
         
         research = profile.get('research_experience', 0)
         passion_projects = profile.get('passion_projects', 0)
         
+        # Always provide research guidance
         if research < 2:
             improvements.append(ImprovementArea(
                 area="Research & Innovation",
@@ -444,6 +496,55 @@ class ImprovementAnalysisService:
                     "Work with teachers on research initiatives",
                     "Participate in science fairs or competitions",
                     "Document your research process and findings"
+                ]
+            ))
+        else:
+            # Even if good, provide guidance for excellence
+            improvements.append(ImprovementArea(
+                area="Research & Innovation",
+                current=f"{research}/10 research experience",
+                target="9+/10 exceptional research",
+                impact=3,
+                priority="low",
+                description="Maintain your strong research experience and pursue advanced projects",
+                actionable_steps=[
+                    "Pursue advanced research opportunities",
+                    "Consider publishing or presenting findings",
+                    "Mentor others in research",
+                    "Document all research achievements"
+                ]
+            ))
+        
+        # Always provide passion projects guidance
+        if passion_projects < 3:
+            improvements.append(ImprovementArea(
+                area="Passion Projects",
+                current=f"{passion_projects}/10 projects",
+                target="7+/10 meaningful projects",
+                impact=4,
+                priority="medium",
+                description="Develop personal projects that show initiative and passion",
+                actionable_steps=[
+                    "Start personal projects in your areas of interest",
+                    "Show initiative and self-direction",
+                    "Document progress and impact",
+                    "Create something meaningful"
+                ]
+            ))
+        else:
+            # Even if good, provide guidance for excellence
+            improvements.append(ImprovementArea(
+                area="Passion Projects",
+                current=f"{passion_projects}/10 projects",
+                target="9+/10 exceptional projects",
+                impact=2,
+                priority="low",
+                description="Maintain your strong passion projects and consider advanced initiatives",
+                actionable_steps=[
+                    "Take on more ambitious projects",
+                    "Share your work with others",
+                    "Mentor others in similar projects",
+                    "Document all project achievements"
                 ]
             ))
         
@@ -494,9 +595,8 @@ class ImprovementAnalysisService:
         """Analyze major-specific requirements and preparation"""
         improvements = []
         
-        intended_major = profile.get('intended_major', '')
-        if not intended_major:
-            return improvements
+        intended_major = profile.get('intended_major', 'General Studies')
+        # Always provide major-specific guidance, even if no specific major provided
         
         # STEM majors require strong math/science background
         stem_majors = ['computer science', 'engineering', 'mathematics', 'physics', 'chemistry', 'biology', 'medicine']
@@ -554,7 +654,7 @@ class ImprovementAnalysisService:
         geographic_diversity = profile.get('geographic_diversity', 5)
         firstgen_diversity = profile.get('firstgen_diversity', 5)
         
-        # First-generation college student
+        # First-generation college student - ALWAYS provide guidance
         if firstgen_diversity < 7:
             improvements.append(ImprovementArea(
                 area="First-Gen Support",
@@ -571,8 +671,24 @@ class ImprovementAnalysisService:
                     "Mention mentoring younger family members"
                 ]
             ))
+        else:
+            # Even if good, provide guidance for excellence
+            improvements.append(ImprovementArea(
+                area="First-Gen Support",
+                current=f"{firstgen_diversity}/10 first-gen factors",
+                target="9+/10 exceptional first-gen profile",
+                impact=2,
+                priority="low",
+                description="Maintain your strong first-generation status and leverage it effectively",
+                actionable_steps=[
+                    "Highlight unique perspective in essays",
+                    "Connect with first-gen alumni networks",
+                    "Mentor other first-gen students",
+                    "Document your educational journey"
+                ]
+            ))
         
-        # Geographic diversity
+        # Geographic diversity - ALWAYS provide guidance
         if geographic_diversity < 6:
             improvements.append(ImprovementArea(
                 area="Geographic Diversity",
@@ -587,6 +703,22 @@ class ImprovementAnalysisService:
                     "Showcase travel or relocation experiences",
                     "Connect with diverse communities",
                     "Highlight multilingual abilities if applicable"
+                ]
+            ))
+        else:
+            # Even if good, provide guidance for excellence
+            improvements.append(ImprovementArea(
+                area="Geographic Diversity",
+                current=f"{geographic_diversity}/10 geographic factors",
+                target="8+/10 exceptional diversity",
+                impact=2,
+                priority="low",
+                description="Maintain your strong geographic diversity and leverage it effectively",
+                actionable_steps=[
+                    "Highlight unique cultural perspective",
+                    "Connect with diverse communities",
+                    "Showcase international experiences",
+                    "Document cultural contributions"
                 ]
             ))
         
@@ -636,41 +768,54 @@ class ImprovementAnalysisService:
         return improvements
     
     def _analyze_portfolio_creative(self, profile: Dict[str, Any], college_data: Dict[str, Any]) -> List[ImprovementArea]:
-        """Analyze portfolio and creative work"""
+        """Analyze portfolio and creative work - ALWAYS provide guidance"""
         improvements = []
         
         portfolio_audition = profile.get('portfolio_audition', 0)
         
-        # Creative majors require strong portfolios
-        creative_majors = ['art', 'design', 'music', 'theater', 'film', 'creative writing', 'architecture']
-        intended_major = profile.get('intended_major', '').lower()
-        
-        if any(major in intended_major for major in creative_majors):
-            if portfolio_audition < 6:
-                improvements.append(ImprovementArea(
-                    area="Creative Portfolio",
-                    current=f"{portfolio_audition}/10 portfolio strength",
-                    target="8+/10 outstanding work",
-                    impact=10,
-                    priority="high",
-                    description="Develop a strong creative portfolio",
-                    actionable_steps=[
-                        "Create diverse, high-quality work samples",
-                        "Seek feedback from professionals in your field",
-                        "Participate in exhibitions, performances, or publications",
-                        "Document your creative process",
-                        "Consider taking advanced courses in your medium"
-                    ]
-                ))
+        # Always provide portfolio guidance, regardless of major
+        if portfolio_audition < 6:
+            improvements.append(ImprovementArea(
+                area="Creative Portfolio",
+                current=f"{portfolio_audition}/10 portfolio strength",
+                target="8+/10 outstanding work",
+                impact=6,
+                priority="medium",
+                description="Develop a strong creative portfolio",
+                actionable_steps=[
+                    "Create diverse, high-quality work samples",
+                    "Seek feedback from teachers and professionals",
+                    "Build an online portfolio or website",
+                    "Document your creative process",
+                    "Showcase your best work"
+                ]
+            ))
+        else:
+            # Even if good, provide guidance for excellence
+            improvements.append(ImprovementArea(
+                area="Creative Portfolio",
+                current=f"{portfolio_audition}/10 portfolio strength",
+                target="9+/10 exceptional work",
+                impact=2,
+                priority="low",
+                description="Maintain your strong creative portfolio and pursue advanced projects",
+                actionable_steps=[
+                    "Create more ambitious projects",
+                    "Seek professional feedback",
+                    "Consider competitions or exhibitions",
+                    "Mentor other creative students"
+                ]
+            ))
         
         return improvements
     
     def _analyze_volunteer_service(self, profile: Dict[str, Any], college_data: Dict[str, Any]) -> List[ImprovementArea]:
-        """Analyze volunteer work and community service"""
+        """Analyze volunteer work and community service - ALWAYS provide guidance"""
         improvements = []
         
         volunteer_work = profile.get('volunteer_work', 5)
         
+        # Always provide volunteer guidance
         if volunteer_work < 6:
             improvements.append(ImprovementArea(
                 area="Community Service",
@@ -685,6 +830,22 @@ class ImprovementAnalysisService:
                     "Take on leadership roles in service organizations",
                     "Document impact and outcomes of your service",
                     "Connect service to your academic and career goals"
+                ]
+            ))
+        else:
+            # Even if good, provide guidance for excellence
+            improvements.append(ImprovementArea(
+                area="Community Service",
+                current=f"{volunteer_work}/10 volunteer work",
+                target="9+/10 exceptional service",
+                impact=2,
+                priority="low",
+                description="Maintain your strong community service and pursue advanced opportunities",
+                actionable_steps=[
+                    "Take on leadership roles in service organizations",
+                    "Start your own service initiatives",
+                    "Mentor other volunteers",
+                    "Document and share your impact"
                 ]
             ))
         
