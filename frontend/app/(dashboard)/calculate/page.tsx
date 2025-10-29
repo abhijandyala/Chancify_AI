@@ -283,6 +283,16 @@ export default function CalculationsPage() {
 
   // Get improvement analysis for the selected college
   const { improvementData, loading: improvementLoading, error: improvementError } = useImprovementAnalysis(collegeName || '', userProfile);
+  
+  // Debug logging for improvement data
+  React.useEffect(() => {
+    console.log('🔍 Improvement Analysis Debug:')
+    console.log('  - College Name:', collegeName)
+    console.log('  - User Profile:', userProfile)
+    console.log('  - Loading:', improvementLoading)
+    console.log('  - Error:', improvementError)
+    console.log('  - Data:', improvementData)
+  }, [collegeName, userProfile, improvementLoading, improvementError, improvementData]);
 
   // Load data from localStorage and calculate probabilities
   React.useEffect(() => {
@@ -966,32 +976,107 @@ export default function CalculationsPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                  {improvementAreas.map((improvement) => (
-                    <ImprovementCard
-                      key={improvement.area}
-                      area={improvement.area}
-                      current={improvement.current}
-                      target={improvement.target}
-                      impact={improvement.impact}
-                      priority={improvement.priority}
-                      description={improvement.description}
-                      actionable_steps={improvement.actionable_steps}
-                    />
-                  ))}
-                </div>
-
-                <div className="mt-8 p-6 rounded-xl bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 border border-yellow-500/30">
-                  <div className="flex items-center gap-4">
-                    <div className="p-2 bg-yellow-500/20 rounded-lg">
-                      <TrendingUp className="h-6 w-6 text-yellow-400" />
-                    </div>
-                    <div>
-                      <p className="font-bold text-yellow-400 text-xl mb-1">Combined Improvement Potential</p>
-                      <p className="text-white text-lg">By improving all areas above, you could increase your chances by <span className="font-bold text-yellow-400 text-2xl">+{improvementData?.combined_impact || 45}%</span></p>
+                {/* Loading State */}
+                {improvementLoading && (
+                  <div className="flex items-center justify-center py-12">
+                    <div className="flex items-center gap-3">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-400"></div>
+                      <span className="text-yellow-400 text-lg">Analyzing improvement areas...</span>
                     </div>
                   </div>
-                </div>
+                )}
+
+                {/* Error State */}
+                {improvementError && !improvementLoading && (
+                  <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-red-500/20 rounded-lg">
+                        <TrendingDown className="h-5 w-5 text-red-400" />
+                      </div>
+                      <div>
+                        <p className="text-red-400 font-semibold">Failed to load improvement analysis</p>
+                        <p className="text-red-300 text-sm mt-1">{improvementError}</p>
+                        <button 
+                          onClick={() => window.location.reload()} 
+                          className="mt-2 px-3 py-1 bg-red-500/20 text-red-400 rounded-lg text-sm hover:bg-red-500/30 transition-colors"
+                        >
+                          Retry
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Success State - Show Real Data */}
+                {improvementData?.improvements && improvementData.improvements.length > 0 && !improvementLoading && (
+                  <>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                      {improvementData.improvements.map((improvement) => (
+                        <ImprovementCard
+                          key={improvement.area}
+                          area={improvement.area}
+                          current={improvement.current}
+                          target={improvement.target}
+                          impact={improvement.impact}
+                          priority={improvement.priority}
+                          description={improvement.description}
+                          actionable_steps={improvement.actionable_steps}
+                        />
+                      ))}
+                    </div>
+
+                    <div className="mt-8 p-6 rounded-xl bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 border border-yellow-500/30">
+                      <div className="flex items-center gap-4">
+                        <div className="p-2 bg-yellow-500/20 rounded-lg">
+                          <TrendingUp className="h-6 w-6 text-yellow-400" />
+                        </div>
+                        <div>
+                          <p className="font-bold text-yellow-400 text-xl mb-1">Combined Improvement Potential</p>
+                          <p className="text-white text-lg">By improving all areas above, you could increase your chances by <span className="font-bold text-yellow-400 text-2xl">+{improvementData.combined_impact}%</span></p>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {/* Fallback State - Show Default Data */}
+                {!improvementData?.improvements && !improvementLoading && !improvementError && (
+                  <>
+                    <div className="mb-4 p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+                      <div className="flex items-center gap-2">
+                        <Info className="h-4 w-4 text-blue-400" />
+                        <p className="text-blue-400 text-sm">Using general improvement recommendations</p>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                      {improvementAreas.slice(0, 6).map((improvement) => (
+                        <ImprovementCard
+                          key={improvement.area}
+                          area={improvement.area}
+                          current={improvement.current}
+                          target={improvement.target}
+                          impact={improvement.impact}
+                          priority={improvement.priority}
+                          description={improvement.description}
+                          actionable_steps={improvement.actionable_steps}
+                        />
+                      ))}
+                    </div>
+
+                    <div className="mt-8 p-6 rounded-xl bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 border border-yellow-500/30">
+                      <div className="flex items-center gap-4">
+                        <div className="p-2 bg-yellow-500/20 rounded-lg">
+                          <TrendingUp className="h-6 w-6 text-yellow-400" />
+                        </div>
+                        <div>
+                          <p className="font-bold text-yellow-400 text-xl mb-1">Combined Improvement Potential</p>
+                          <p className="text-white text-lg">By improving all areas above, you could increase your chances by <span className="font-bold text-yellow-400 text-2xl">+45%</span></p>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </motion.div>
           </div>
