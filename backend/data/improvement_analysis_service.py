@@ -109,40 +109,76 @@ class ImprovementAnalysisService:
             improvements = []
             
             # 1. Academic Performance Analysis
-            improvements.extend(self._analyze_academic_performance(user_profile, college_data))
+            try:
+                improvements.extend(self._analyze_academic_performance(user_profile, college_data))
+            except Exception as e:
+                logger.error(f"Error in academic performance analysis: {e}")
             
             # 2. Standardized Testing Analysis
-            improvements.extend(self._analyze_standardized_testing(user_profile, college_data))
+            try:
+                improvements.extend(self._analyze_standardized_testing(user_profile, college_data))
+            except Exception as e:
+                logger.error(f"Error in standardized testing analysis: {e}")
             
             # 3. Extracurricular Activities Analysis
-            improvements.extend(self._analyze_extracurriculars(user_profile, college_data))
+            try:
+                improvements.extend(self._analyze_extracurriculars(user_profile, college_data))
+            except Exception as e:
+                logger.error(f"Error in extracurricular analysis: {e}")
             
             # 4. Leadership & Awards Analysis
-            improvements.extend(self._analyze_leadership_awards(user_profile, college_data))
+            try:
+                improvements.extend(self._analyze_leadership_awards(user_profile, college_data))
+            except Exception as e:
+                logger.error(f"Error in leadership analysis: {e}")
             
             # 5. Academic Rigor Analysis
-            improvements.extend(self._analyze_academic_rigor(user_profile, college_data))
+            try:
+                improvements.extend(self._analyze_academic_rigor(user_profile, college_data))
+            except Exception as e:
+                logger.error(f"Error in academic rigor analysis: {e}")
             
             # 6. Research & Innovation Analysis
-            improvements.extend(self._analyze_research_innovation(user_profile, college_data))
+            try:
+                improvements.extend(self._analyze_research_innovation(user_profile, college_data))
+            except Exception as e:
+                logger.error(f"Error in research analysis: {e}")
             
             # 7. Essays & Recommendations Analysis
-            improvements.extend(self._analyze_essays_recommendations(user_profile, college_data))
+            try:
+                improvements.extend(self._analyze_essays_recommendations(user_profile, college_data))
+            except Exception as e:
+                logger.error(f"Error in essays analysis: {e}")
             
             # 8. NEW: Major-Specific Analysis
-            improvements.extend(self._analyze_major_specific(user_profile, college_data))
+            try:
+                improvements.extend(self._analyze_major_specific(user_profile, college_data))
+            except Exception as e:
+                logger.error(f"Error in major analysis: {e}")
             
             # 9. NEW: Geographic & Diversity Analysis
-            improvements.extend(self._analyze_geographic_diversity(user_profile, college_data))
+            try:
+                improvements.extend(self._analyze_geographic_diversity(user_profile, college_data))
+            except Exception as e:
+                logger.error(f"Error in geographic analysis: {e}")
             
             # 10. NEW: Interview & Demonstrated Interest Analysis
-            improvements.extend(self._analyze_interview_interest(user_profile, college_data))
+            try:
+                improvements.extend(self._analyze_interview_interest(user_profile, college_data))
+            except Exception as e:
+                logger.error(f"Error in interview analysis: {e}")
             
             # 11. NEW: Portfolio & Creative Analysis
-            improvements.extend(self._analyze_portfolio_creative(user_profile, college_data))
+            try:
+                improvements.extend(self._analyze_portfolio_creative(user_profile, college_data))
+            except Exception as e:
+                logger.error(f"Error in portfolio analysis: {e}")
             
             # 12. NEW: Volunteer & Community Service Analysis
-            improvements.extend(self._analyze_volunteer_service(user_profile, college_data))
+            try:
+                improvements.extend(self._analyze_volunteer_service(user_profile, college_data))
+            except Exception as e:
+                logger.error(f"Error in volunteer analysis: {e}")
             
             # Sort by priority and impact
             improvements.sort(key=lambda x: (x.priority == 'high', x.impact), reverse=True)
