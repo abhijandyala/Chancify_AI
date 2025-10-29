@@ -50,7 +50,36 @@ class ImprovementAnalysisService:
         Analyze user profile against college requirements and return improvement areas
         """
         try:
+            # Try exact match first
             college_data = self.elite_colleges_data.get(college_name, {})
+            
+            # If not found, try common variations
+            if not college_data:
+                # Try without "University" suffix
+                if "University" in college_name:
+                    short_name = college_name.replace(" University", "")
+                    college_data = self.elite_colleges_data.get(short_name, {})
+                
+                # Try without "College" suffix
+                if not college_data and "College" in college_name:
+                    short_name = college_name.replace(" College", "")
+                    college_data = self.elite_colleges_data.get(short_name, {})
+                
+                # Try common abbreviations
+                if not college_data:
+                    name_variations = {
+                        "Massachusetts Institute of Technology": "MIT",
+                        "Carnegie Mellon University": "Carnegie Mellon",
+                        "University of Pennsylvania": "Penn",
+                        "New York University": "NYU",
+                        "University of California-Berkeley": "UC Berkeley",
+                        "University of California-Los Angeles": "UCLA"
+                    }
+                    for full_name, short_name in name_variations.items():
+                        if college_name == full_name:
+                            college_data = self.elite_colleges_data.get(short_name, {})
+                            break
+            
             if not college_data:
                 logger.warning(f"No data found for college: {college_name}")
                 return self._get_default_improvements()
