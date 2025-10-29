@@ -8,6 +8,7 @@ import logging
 import time
 import numpy as np
 import pandas as pd
+from typing import Dict, Any
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from config import settings
@@ -18,6 +19,7 @@ from data.college_names_mapping import college_names_mapping
 from data.college_nickname_mapper import nickname_mapper
 from data.college_subject_emphasis import college_subject_emphasis
 from data.tuition_state_service import tuition_state_service
+from data.improvement_analysis_service import improvement_analysis_service
 
 # Configure logging
 logging.basicConfig(
@@ -428,13 +430,73 @@ async def get_tuition_by_zipcode(college_name: str, zipcode: str):
             "tuition": None
         }
 
+@app.post("/api/improvement-analysis/{college_name}",
+         summary="Get personalized improvement recommendations",
+         description="Analyze user profile against college requirements and provide improvement areas",
+         tags=["Improvement Analysis"])
+async def get_improvement_analysis(college_name: str, user_profile: Dict[str, Any]):
+    """
+    Get personalized improvement recommendations for a specific college.
+    
+    This endpoint analyzes the user's profile against the college's requirements
+    and provides specific, actionable improvement areas.
+    
+    Args:
+        college_name: Name of the college
+        user_profile: User's academic and extracurricular profile
+        
+    Returns:
+        JSON response with improvement areas and recommendations
+    """
+    try:
+        logger.info(f"Getting improvement analysis for {college_name}")
+        
+        # Get improvement recommendations
+        improvements = improvement_analysis_service.analyze_user_profile(user_profile, college_name)
+        
+        # Calculate combined impact
+        combined_impact = improvement_analysis_service.calculate_combined_impact(improvements)
+        
+        # Convert to JSON-serializable format
+        improvements_data = []
+        for imp in improvements:
+            improvements_data.append({
+                "area": imp.area,
+                "current": imp.current,
+                "target": imp.target,
+                "impact": imp.impact,
+                "priority": imp.priority,
+                "description": imp.description,
+                "actionable_steps": imp.actionable_steps
+            })
+        
+        result = {
+            "success": True,
+            "college_name": college_name,
+            "improvements": improvements_data,
+            "combined_impact": combined_impact,
+            "total_improvements": len(improvements)
+        }
+        
+        logger.info(f"Generated {len(improvements)} improvement recommendations for {college_name}")
+        return result
+        
+    except Exception as e:
+        logger.error(f"Error getting improvement analysis for {college_name}: {e}")
+        return {
+            "success": False,
+            "error": str(e),
+            "college_name": college_name,
+            "improvements": [],
+            "combined_impact": 0
+        }
+
 # Include API routes
 from api.routes import calculations, ml_calculations, openai_routes, auth
 from services.openai_service import college_info_service
 from ml.models.predictor import get_predictor
 from ml.preprocessing.feature_extractor import StudentFeatures, CollegeFeatures
 from pydantic import BaseModel
-from typing import Dict, Any
 import pandas as pd
 
 app.include_router(auth.router, prefix="/api/auth", tags=["Authentication"])

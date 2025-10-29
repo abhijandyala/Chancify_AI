@@ -1,0 +1,653 @@
+import pandas as pd
+import os
+import logging
+from typing import Dict, List, Optional, Any, Tuple
+from dataclasses import dataclass
+
+logger = logging.getLogger(__name__)
+
+@dataclass
+class ImprovementArea:
+    area: str
+    current: str
+    target: str
+    impact: int
+    priority: str  # 'high', 'medium', 'low'
+    description: str
+    actionable_steps: List[str]
+
+class ImprovementAnalysisService:
+    def __init__(self):
+        self.elite_colleges_data = {}
+        self.admission_factors = {}
+        self.load_data()
+    
+    def load_data(self):
+        """Load all necessary data for improvement analysis"""
+        try:
+            # Load elite colleges data
+            elite_path = os.path.join(os.path.dirname(__file__), 'models', 'elite_colleges_data.json')
+            if os.path.exists(elite_path):
+                import json
+                with open(elite_path, 'r') as f:
+                    self.elite_colleges_data = json.load(f)
+                logger.info(f"Loaded elite colleges data: {len(self.elite_colleges_data)} colleges")
+            
+            # Load admission factors
+            factors_path = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'factors', 'admissions_factors.json')
+            if os.path.exists(factors_path):
+                import json
+                with open(factors_path, 'r') as f:
+                    factors_data = json.load(f)
+                    self.admission_factors = {factor['id']: factor for factor in factors_data['factors']}
+                logger.info(f"Loaded admission factors: {len(self.admission_factors)} factors")
+            
+        except Exception as e:
+            logger.error(f"Error loading improvement analysis data: {e}")
+    
+    def analyze_user_profile(self, user_profile: Dict[str, Any], college_name: str) -> List[ImprovementArea]:
+        """
+        Analyze user profile against college requirements and return improvement areas
+        """
+        try:
+            college_data = self.elite_colleges_data.get(college_name, {})
+            if not college_data:
+                logger.warning(f"No data found for college: {college_name}")
+                return self._get_default_improvements()
+            
+            improvements = []
+            
+            # 1. Academic Performance Analysis
+            improvements.extend(self._analyze_academic_performance(user_profile, college_data))
+            
+            # 2. Standardized Testing Analysis
+            improvements.extend(self._analyze_standardized_testing(user_profile, college_data))
+            
+            # 3. Extracurricular Activities Analysis
+            improvements.extend(self._analyze_extracurriculars(user_profile, college_data))
+            
+            # 4. Leadership & Awards Analysis
+            improvements.extend(self._analyze_leadership_awards(user_profile, college_data))
+            
+            # 5. Academic Rigor Analysis
+            improvements.extend(self._analyze_academic_rigor(user_profile, college_data))
+            
+            # 6. Research & Innovation Analysis
+            improvements.extend(self._analyze_research_innovation(user_profile, college_data))
+            
+            # 7. Essays & Recommendations Analysis
+            improvements.extend(self._analyze_essays_recommendations(user_profile, college_data))
+            
+            # 8. NEW: Major-Specific Analysis
+            improvements.extend(self._analyze_major_specific(user_profile, college_data))
+            
+            # 9. NEW: Geographic & Diversity Analysis
+            improvements.extend(self._analyze_geographic_diversity(user_profile, college_data))
+            
+            # 10. NEW: Interview & Demonstrated Interest Analysis
+            improvements.extend(self._analyze_interview_interest(user_profile, college_data))
+            
+            # 11. NEW: Portfolio & Creative Analysis
+            improvements.extend(self._analyze_portfolio_creative(user_profile, college_data))
+            
+            # 12. NEW: Volunteer & Community Service Analysis
+            improvements.extend(self._analyze_volunteer_service(user_profile, college_data))
+            
+            # Sort by priority and impact
+            improvements.sort(key=lambda x: (x.priority == 'high', x.impact), reverse=True)
+            
+            return improvements[:8]  # Return top 8 improvements
+            
+        except Exception as e:
+            logger.error(f"Error analyzing user profile: {e}")
+            return self._get_default_improvements()
+    
+    def _analyze_academic_performance(self, profile: Dict[str, Any], college_data: Dict[str, Any]) -> List[ImprovementArea]:
+        """Analyze GPA and academic performance with enhanced calculations"""
+        improvements = []
+        
+        # Get user GPA with multiple scales
+        user_gpa_unweighted = profile.get('gpa_unweighted', 0)
+        user_gpa_weighted = profile.get('gpa_weighted', 0)
+        college_avg_gpa = college_data.get('gpa_unweighted_avg', 3.9)
+        college_weighted_gpa = college_data.get('gpa_avg', 4.1)
+        
+        # Use the more relevant GPA based on what's available
+        user_gpa = user_gpa_unweighted if user_gpa_unweighted > 0 else user_gpa_weighted
+        target_gpa = college_avg_gpa if user_gpa_unweighted > 0 else college_weighted_gpa
+        
+        if user_gpa < target_gpa - 0.1:
+            gap = target_gpa - user_gpa
+            target_gpa_final = min(target_gpa + 0.05, 4.0 if user_gpa_unweighted > 0 else 5.0)
+            
+            # Calculate impact based on gap size and college selectivity
+            acceptance_rate = college_data.get('acceptance_rate', 0.15)
+            selectivity_multiplier = 1.5 if acceptance_rate < 0.1 else 1.2 if acceptance_rate < 0.2 else 1.0
+            
+            impact = int(gap * 15 * selectivity_multiplier)
+            priority = "high" if gap > 0.2 else "medium"
+            
+            improvements.append(ImprovementArea(
+                area="Academic Performance",
+                current=f"{user_gpa:.2f} GPA",
+                target=f"{target_gpa_final:.2f}+ GPA",
+                impact=min(impact, 15),  # Cap at 15%
+                priority=priority,
+                description=f"Your GPA is {gap:.2f} points below the average for admitted students at this selective school",
+                actionable_steps=[
+                    "Focus on improving grades in core academic subjects",
+                    "Consider retaking courses with low grades if possible",
+                    "Maintain strong performance in remaining semesters",
+                    "Highlight upward trend if grades are improving",
+                    "Take challenging courses while maintaining high grades"
+                ]
+            ))
+        
+        return improvements
+    
+    def _analyze_standardized_testing(self, profile: Dict[str, Any], college_data: Dict[str, Any]) -> List[ImprovementArea]:
+        """Analyze SAT/ACT scores with enhanced calculations"""
+        improvements = []
+        
+        # Get user test scores
+        user_sat = profile.get('sat_total', 0)
+        user_act = profile.get('act_composite', 0)
+        
+        # Get college test score ranges
+        college_sat_25th = college_data.get('sat_25th', 1400)
+        college_sat_75th = college_data.get('sat_75th', 1550)
+        college_act_25th = college_data.get('act_25th', 30)
+        college_act_75th = college_data.get('act_75th', 35)
+        
+        # Analyze SAT scores
+        if user_sat > 0 and user_sat < college_sat_25th:
+            gap = college_sat_25th - user_sat
+            target_sat = min(college_sat_75th, user_sat + 100)
+            
+            # Calculate impact based on gap and college selectivity
+            acceptance_rate = college_data.get('acceptance_rate', 0.15)
+            selectivity_multiplier = 1.3 if acceptance_rate < 0.1 else 1.1 if acceptance_rate < 0.2 else 1.0
+            
+            impact = int(gap / 8 * selectivity_multiplier)  # 1% per 8 SAT points
+            priority = "high" if gap > 100 else "medium"
+            
+            improvements.append(ImprovementArea(
+                area="Standardized Testing",
+                current=f"{user_sat} SAT",
+                target=f"{target_sat}+ SAT",
+                impact=min(impact, 12),  # Cap at 12%
+                priority=priority,
+                description=f"Your SAT score is {gap} points below the 25th percentile for admitted students",
+                actionable_steps=[
+                    "Take practice tests to identify weak areas",
+                    "Consider SAT prep course or tutoring",
+                    "Focus on math and reading comprehension",
+                    "Take the test multiple times for superscoring",
+                    "Consider SAT Subject Tests if required"
+                ]
+            ))
+        
+        # Analyze ACT scores
+        elif user_act > 0 and user_act < college_act_25th:
+            gap = college_act_25th - user_act
+            target_act = min(college_act_75th, user_act + 3)
+            
+            # Calculate impact based on gap and college selectivity
+            acceptance_rate = college_data.get('acceptance_rate', 0.15)
+            selectivity_multiplier = 1.3 if acceptance_rate < 0.1 else 1.1 if acceptance_rate < 0.2 else 1.0
+            
+            impact = int(gap * 2 * selectivity_multiplier)  # 2% per ACT point
+            priority = "high" if gap > 3 else "medium"
+            
+            improvements.append(ImprovementArea(
+                area="Standardized Testing",
+                current=f"{user_act} ACT",
+                target=f"{target_act}+ ACT",
+                impact=min(impact, 12),  # Cap at 12%
+                priority=priority,
+                description=f"Your ACT score is {gap} points below the 25th percentile for admitted students",
+                actionable_steps=[
+                    "Take practice tests to identify weak areas",
+                    "Consider ACT prep course or tutoring",
+                    "Focus on weak subject areas",
+                    "Take the test multiple times for superscoring",
+                    "Consider ACT Writing if required"
+                ]
+            ))
+        
+        return improvements
+    
+    def _analyze_extracurriculars(self, profile: Dict[str, Any], college_data: Dict[str, Any]) -> List[ImprovementArea]:
+        """Analyze extracurricular activities with enhanced depth analysis"""
+        improvements = []
+        
+        # Get user extracurricular data
+        ec_depth = profile.get('extracurricular_depth', 5)
+        leadership = profile.get('leadership_positions', 0)
+        passion_projects = profile.get('passion_projects', 0)
+        
+        # Calculate current level based on multiple factors
+        current_level = (ec_depth + leadership + passion_projects) / 3
+        
+        # Determine target based on college selectivity
+        acceptance_rate = college_data.get('acceptance_rate', 0.15)
+        if acceptance_rate < 0.1:  # Ultra-selective
+            target_level = 8.5
+        elif acceptance_rate < 0.2:  # Highly selective
+            target_level = 7.5
+        else:  # Selective
+            target_level = 6.5
+        
+        if current_level < target_level:
+            gap = target_level - current_level
+            impact = int(gap * 3)  # 3% per level gap
+            priority = "high" if gap > 2 else "medium"
+            
+            improvements.append(ImprovementArea(
+                area="Extracurricular Activities",
+                current=f"{current_level:.1f}/10 overall depth",
+                target=f"{target_level:.1f}/10 with leadership",
+                impact=min(impact, 12),  # Cap at 12%
+                priority=priority,
+                description=f"Increase depth and commitment in extracurricular activities for this competitive school",
+                actionable_steps=[
+                    "Focus on 2-3 activities you're passionate about",
+                    "Take on leadership roles in existing activities",
+                    "Show long-term commitment (2+ years)",
+                    "Document impact and achievements",
+                    "Develop unique projects or initiatives"
+                ]
+            ))
+        
+        return improvements
+    
+    def _analyze_leadership_awards(self, profile: Dict[str, Any], college_data: Dict[str, Any]) -> List[ImprovementArea]:
+        """Analyze leadership positions and awards"""
+        improvements = []
+        
+        leadership = profile.get('leadership_positions', 0)
+        awards = profile.get('awards_publications', 0)
+        
+        if leadership < 2:
+            improvements.append(ImprovementArea(
+                area="Leadership Experience",
+                current=f"{leadership} positions",
+                target="2+ leadership roles",
+                impact=8,
+                priority="medium",
+                description="Develop leadership experience in your areas of interest",
+                actionable_steps=[
+                    "Run for student government positions",
+                    "Start a club or organization",
+                    "Take initiative in existing activities",
+                    "Mentor younger students"
+                ]
+            ))
+        
+        if awards < 3:
+            improvements.append(ImprovementArea(
+                area="Awards & Recognition",
+                current=f"{awards} awards",
+                target="3+ significant awards",
+                impact=6,
+                priority="low",
+                description="Pursue recognition in your areas of strength",
+                actionable_steps=[
+                    "Enter competitions in your field of interest",
+                    "Apply for scholarships and recognition programs",
+                    "Pursue research or creative projects",
+                    "Document all achievements and recognition"
+                ]
+            ))
+        
+        return improvements
+    
+    def _analyze_academic_rigor(self, profile: Dict[str, Any], college_data: Dict[str, Any]) -> List[ImprovementArea]:
+        """Analyze AP courses and academic rigor with enhanced calculations"""
+        improvements = []
+        
+        # Estimate AP courses from profile data
+        ap_count = int(profile.get('extracurricular_depth', 5) * 0.8)  # Rough estimate
+        hs_reputation = profile.get('hs_reputation', 5)
+        
+        # Determine target based on college selectivity and high school reputation
+        acceptance_rate = college_data.get('acceptance_rate', 0.15)
+        
+        if acceptance_rate < 0.1:  # Ultra-selective
+            target_ap = 8 if hs_reputation > 7 else 6
+        elif acceptance_rate < 0.2:  # Highly selective
+            target_ap = 6 if hs_reputation > 7 else 4
+        else:  # Selective
+            target_ap = 4 if hs_reputation > 7 else 3
+        
+        if ap_count < target_ap:
+            gap = target_ap - ap_count
+            impact = int(gap * 2)  # 2% per AP course gap
+            priority = "high" if gap > 3 else "medium"
+            
+            improvements.append(ImprovementArea(
+                area="Academic Rigor",
+                current=f"{ap_count} AP courses",
+                target=f"{target_ap}+ AP courses",
+                impact=min(impact, 10),  # Cap at 10%
+                priority=priority,
+                description=f"Increase the rigor of your academic coursework for this competitive school",
+                actionable_steps=[
+                    "Take more AP courses in your areas of strength",
+                    "Consider dual enrollment courses",
+                    "Pursue honors-level coursework",
+                    "Maintain strong grades while increasing rigor",
+                    "Focus on courses related to your intended major"
+                ]
+            ))
+        
+        return improvements
+    
+    def _analyze_research_innovation(self, profile: Dict[str, Any], college_data: Dict[str, Any]) -> List[ImprovementArea]:
+        """Analyze research and innovation experience"""
+        improvements = []
+        
+        research = profile.get('research_experience', 0)
+        passion_projects = profile.get('passion_projects', 0)
+        
+        if research < 2:
+            improvements.append(ImprovementArea(
+                area="Research & Innovation",
+                current=f"{research}/10 research experience",
+                target="7+/10 with projects",
+                impact=8,
+                priority="medium",
+                description="Develop research or innovative project experience",
+                actionable_steps=[
+                    "Pursue independent research projects",
+                    "Work with teachers on research initiatives",
+                    "Participate in science fairs or competitions",
+                    "Document your research process and findings"
+                ]
+            ))
+        
+        return improvements
+    
+    def _analyze_essays_recommendations(self, profile: Dict[str, Any], college_data: Dict[str, Any]) -> List[ImprovementArea]:
+        """Analyze essays and recommendations"""
+        improvements = []
+        
+        essay_quality = profile.get('essay_quality', 5)
+        recommendations = profile.get('recommendations', 5)
+        
+        if essay_quality < 7:
+            improvements.append(ImprovementArea(
+                area="Essay Quality",
+                current=f"{essay_quality}/10 quality",
+                target="8+/10 compelling essays",
+                impact=6,
+                priority="medium",
+                description="Improve the quality and authenticity of your essays",
+                actionable_steps=[
+                    "Start writing essays early and revise multiple times",
+                    "Show, don't tell - use specific examples",
+                    "Be authentic and personal in your writing",
+                    "Get feedback from teachers and mentors"
+                ]
+            ))
+        
+        if recommendations < 7:
+            improvements.append(ImprovementArea(
+                area="Recommendations",
+                current=f"{recommendations}/10 strength",
+                target="8+/10 strong recommendations",
+                impact=5,
+                priority="low",
+                description="Strengthen relationships with teachers and mentors",
+                actionable_steps=[
+                    "Build strong relationships with teachers",
+                    "Participate actively in class discussions",
+                    "Seek opportunities to work closely with faculty",
+                    "Provide recommenders with your resume and goals"
+                ]
+            ))
+        
+        return improvements
+    
+    def _analyze_major_specific(self, profile: Dict[str, Any], college_data: Dict[str, Any]) -> List[ImprovementArea]:
+        """Analyze major-specific requirements and preparation"""
+        improvements = []
+        
+        intended_major = profile.get('intended_major', '')
+        if not intended_major:
+            return improvements
+        
+        # STEM majors require strong math/science background
+        stem_majors = ['computer science', 'engineering', 'mathematics', 'physics', 'chemistry', 'biology', 'medicine']
+        is_stem = any(major in intended_major.lower() for major in stem_majors)
+        
+        if is_stem:
+            # Check for STEM-specific activities
+            research_experience = profile.get('research_experience', 0)
+            if research_experience < 5:
+                improvements.append(ImprovementArea(
+                    area="STEM Preparation",
+                    current=f"{research_experience}/10 research experience",
+                    target="7+/10 with STEM projects",
+                    impact=9,
+                    priority="high",
+                    description="Develop strong STEM background for competitive programs",
+                    actionable_steps=[
+                        "Participate in science fairs and competitions",
+                        "Take advanced math and science courses",
+                        "Pursue independent research projects",
+                        "Join STEM clubs and organizations",
+                        "Consider summer STEM programs"
+                    ]
+                ))
+        
+        # Business/Economics majors
+        business_majors = ['business', 'economics', 'finance', 'marketing', 'management']
+        is_business = any(major in intended_major.lower() for major in business_majors)
+        
+        if is_business:
+            business_ventures = profile.get('business_ventures', 0)
+            if business_ventures < 4:
+                improvements.append(ImprovementArea(
+                    area="Business Experience",
+                    current=f"{business_ventures}/10 business ventures",
+                    target="6+/10 with real projects",
+                    impact=7,
+                    priority="medium",
+                    description="Gain hands-on business experience",
+                    actionable_steps=[
+                        "Start a small business or side project",
+                        "Participate in business competitions",
+                        "Take economics and business courses",
+                        "Join business clubs and organizations",
+                        "Seek internships or shadowing opportunities"
+                    ]
+                ))
+        
+        return improvements
+    
+    def _analyze_geographic_diversity(self, profile: Dict[str, Any], college_data: Dict[str, Any]) -> List[ImprovementArea]:
+        """Analyze geographic diversity factors"""
+        improvements = []
+        
+        geographic_diversity = profile.get('geographic_diversity', 5)
+        firstgen_diversity = profile.get('firstgen_diversity', 5)
+        
+        # First-generation college student
+        if firstgen_diversity < 7:
+            improvements.append(ImprovementArea(
+                area="First-Gen Support",
+                current=f"{firstgen_diversity}/10 first-gen factors",
+                target="8+/10 strong first-gen profile",
+                impact=6,
+                priority="medium",
+                description="Highlight first-generation college student status",
+                actionable_steps=[
+                    "Emphasize family's educational journey in essays",
+                    "Connect with first-gen support programs",
+                    "Highlight overcoming educational barriers",
+                    "Showcase academic achievements despite challenges",
+                    "Mention mentoring younger family members"
+                ]
+            ))
+        
+        # Geographic diversity
+        if geographic_diversity < 6:
+            improvements.append(ImprovementArea(
+                area="Geographic Diversity",
+                current=f"{geographic_diversity}/10 geographic factors",
+                target="7+/10 diverse background",
+                impact=4,
+                priority="low",
+                description="Enhance geographic diversity profile",
+                actionable_steps=[
+                    "Highlight unique geographic background",
+                    "Emphasize cultural experiences and perspectives",
+                    "Showcase travel or relocation experiences",
+                    "Connect with diverse communities",
+                    "Highlight multilingual abilities if applicable"
+                ]
+            ))
+        
+        return improvements
+    
+    def _analyze_interview_interest(self, profile: Dict[str, Any], college_data: Dict[str, Any]) -> List[ImprovementArea]:
+        """Analyze interview performance and demonstrated interest"""
+        improvements = []
+        
+        interview_quality = profile.get('interview', 5)
+        demonstrated_interest = profile.get('demonstrated_interest', 5)
+        
+        if interview_quality < 7:
+            improvements.append(ImprovementArea(
+                area="Interview Skills",
+                current=f"{interview_quality}/10 interview quality",
+                target="8+/10 confident performance",
+                impact=5,
+                priority="medium",
+                description="Improve interview and communication skills",
+                actionable_steps=[
+                    "Practice common interview questions",
+                    "Prepare thoughtful questions about the college",
+                    "Practice articulating your goals and interests",
+                    "Work on public speaking and presentation skills",
+                    "Consider mock interviews with counselors"
+                ]
+            ))
+        
+        if demonstrated_interest < 6:
+            improvements.append(ImprovementArea(
+                area="Demonstrated Interest",
+                current=f"{demonstrated_interest}/10 interest level",
+                target="8+/10 strong engagement",
+                impact=4,
+                priority="low",
+                description="Show strong interest in the college",
+                actionable_steps=[
+                    "Visit campus if possible",
+                    "Attend virtual information sessions",
+                    "Connect with current students or alumni",
+                    "Follow college social media and engage",
+                    "Mention specific programs and opportunities in essays"
+                ]
+            ))
+        
+        return improvements
+    
+    def _analyze_portfolio_creative(self, profile: Dict[str, Any], college_data: Dict[str, Any]) -> List[ImprovementArea]:
+        """Analyze portfolio and creative work"""
+        improvements = []
+        
+        portfolio_audition = profile.get('portfolio_audition', 0)
+        
+        # Creative majors require strong portfolios
+        creative_majors = ['art', 'design', 'music', 'theater', 'film', 'creative writing', 'architecture']
+        intended_major = profile.get('intended_major', '').lower()
+        
+        if any(major in intended_major for major in creative_majors):
+            if portfolio_audition < 6:
+                improvements.append(ImprovementArea(
+                    area="Creative Portfolio",
+                    current=f"{portfolio_audition}/10 portfolio strength",
+                    target="8+/10 outstanding work",
+                    impact=10,
+                    priority="high",
+                    description="Develop a strong creative portfolio",
+                    actionable_steps=[
+                        "Create diverse, high-quality work samples",
+                        "Seek feedback from professionals in your field",
+                        "Participate in exhibitions, performances, or publications",
+                        "Document your creative process",
+                        "Consider taking advanced courses in your medium"
+                    ]
+                ))
+        
+        return improvements
+    
+    def _analyze_volunteer_service(self, profile: Dict[str, Any], college_data: Dict[str, Any]) -> List[ImprovementArea]:
+        """Analyze volunteer work and community service"""
+        improvements = []
+        
+        volunteer_work = profile.get('volunteer_work', 5)
+        
+        if volunteer_work < 6:
+            improvements.append(ImprovementArea(
+                area="Community Service",
+                current=f"{volunteer_work}/10 volunteer work",
+                target="7+/10 meaningful service",
+                impact=6,
+                priority="medium",
+                description="Engage in meaningful community service",
+                actionable_steps=[
+                    "Find volunteer opportunities aligned with your interests",
+                    "Commit to long-term service projects",
+                    "Take on leadership roles in service organizations",
+                    "Document impact and outcomes of your service",
+                    "Connect service to your academic and career goals"
+                ]
+            ))
+        
+        return improvements
+    
+    def _get_default_improvements(self) -> List[ImprovementArea]:
+        """Return default improvements when college data is not available"""
+        return [
+            ImprovementArea(
+                area="Academic Performance",
+                current="Current GPA",
+                target="3.9+ GPA",
+                impact=10,
+                priority="high",
+                description="Focus on maintaining strong academic performance",
+                actionable_steps=["Maintain high grades", "Take challenging courses", "Show improvement over time"]
+            ),
+            ImprovementArea(
+                area="Standardized Testing",
+                current="Current SAT",
+                target="1500+ SAT",
+                impact=12,
+                priority="high",
+                description="Improve standardized test scores",
+                actionable_steps=["Practice regularly", "Take prep courses", "Focus on weak areas"]
+            ),
+            ImprovementArea(
+                area="Extracurricular Activities",
+                current="Current activities",
+                target="Deep involvement",
+                impact=8,
+                priority="medium",
+                description="Develop meaningful extracurricular involvement",
+                actionable_steps=["Focus on 2-3 activities", "Take leadership roles", "Show long-term commitment"]
+            )
+        ]
+    
+    def calculate_combined_impact(self, improvements: List[ImprovementArea]) -> int:
+        """Calculate the combined potential impact of all improvements"""
+        if not improvements:
+            return 0
+        
+        # Cap the combined impact at 35% for realistic expectations
+        total_impact = sum(imp.impact for imp in improvements)
+        return min(total_impact, 35)
+
+improvement_analysis_service = ImprovementAnalysisService()

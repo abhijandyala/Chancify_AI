@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { COLLEGES } from '@/lib/colleges';
 import { useCollegeSubjectEmphasis } from '@/lib/hooks/useCollegeSubjectEmphasis';
 import { useCollegeTuitionByZipcode } from '@/lib/hooks/useCollegeTuitionByZipcode';
+import { useImprovementAnalysis } from '@/lib/hooks/useImprovementAnalysis';
 import {
   ResponsiveContainer,
   BarChart,
@@ -184,7 +185,15 @@ function Money({ n }: { n?: number }) {
   return <span>${n.toLocaleString()}</span>;
 }
 
-function ImprovementCard({ area, current, target, impact }: { area: string; current: string; target: string; impact: number }) {
+function ImprovementCard({ area, current, target, impact, priority, description, actionable_steps }: { 
+  area: string; 
+  current: string; 
+  target: string; 
+  impact: number;
+  priority?: string;
+  description?: string;
+  actionable_steps?: string[];
+}) {
   return (
     <motion.div 
       className="relative group rounded-2xl bg-gradient-to-br from-neutral-900/60 to-neutral-950/60 border border-neutral-700/30 p-5 hover:border-ROX_GOLD/50 transition-all duration-300"
@@ -196,7 +205,18 @@ function ImprovementCard({ area, current, target, impact }: { area: string; curr
       <div className="relative space-y-4">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1">
-            <h3 className="font-semibold text-neutral-100 text-sm mb-2">{area}</h3>
+            <div className="flex items-center gap-2 mb-2">
+              <h3 className="font-semibold text-neutral-100 text-sm">{area}</h3>
+              {priority && (
+                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                  priority === 'high' ? 'bg-red-500/20 text-red-400' :
+                  priority === 'medium' ? 'bg-yellow-500/20 text-yellow-400' :
+                  'bg-green-500/20 text-green-400'
+                }`}>
+                  {priority}
+                </span>
+              )}
+            </div>
             <div className="space-y-2 text-xs">
               <div className="flex items-center gap-2">
                 <span className="text-neutral-400">Current:</span>
@@ -207,6 +227,9 @@ function ImprovementCard({ area, current, target, impact }: { area: string; curr
                 <span className="text-ROX_GOLD font-medium">{target}</span>
               </div>
             </div>
+            {description && (
+              <p className="text-xs text-neutral-500 mt-2">{description}</p>
+            )}
           </div>
           <Target className="h-5 w-5 text-ROX_GOLD flex-shrink-0 mt-1" />
         </div>
@@ -231,6 +254,7 @@ export default function CalculationsPage() {
   const [userChance, setUserChance] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(true);
   const [collegeName, setCollegeName] = React.useState<string | null>(null);
+  const [userProfile, setUserProfile] = React.useState<any>(null);
   const [zipcode, setZipcode] = React.useState<string | null>(null);
 
   // Get tuition data for the selected college based on zipcode
@@ -239,12 +263,18 @@ export default function CalculationsPage() {
   // Get subject emphasis data for the selected college
   const { subjects: subjectEmphasis, loading: subjectsLoading, error: subjectsError } = useCollegeSubjectEmphasis(collegeName);
 
+  // Get improvement analysis for the selected college
+  const { improvementData, loading: improvementLoading, error: improvementError } = useImprovementAnalysis(collegeName || '', userProfile);
+
   // Load data from localStorage and calculate probabilities
   React.useEffect(() => {
     const loadData = async () => {
       try {
         const selectedColleges = JSON.parse(localStorage.getItem('selectedColleges') || '[]');
         const userProfile = JSON.parse(localStorage.getItem('userProfile') || '{}');
+        
+        // Set the user profile state
+        setUserProfile(userProfile);
         
         if (selectedColleges.length === 0) {
           router.push('/college-selection');
@@ -456,11 +486,11 @@ export default function CalculationsPage() {
     ...(d.costs?.outStateTuition ? [{ label: 'Out-of-State Tuition', amount: d.costs.outStateTuition }] : []),
   ];
 
-  const improvementAreas = [
-    { area: 'SAT Score', current: '1470', target: '1530+', impact: 12 },
-    { area: 'GPA', current: '3.82', target: '3.95+', impact: 8 },
-    { area: 'Extracurriculars', current: '3 activities', target: '5+ with leadership', impact: 15 },
-    { area: 'Essays & Awards', current: 'Standard', target: 'Award-winning', impact: 10 },
+  const improvementAreas = improvementData?.improvements || [
+    { area: 'SAT Score', current: '1470', target: '1530+', impact: 12, priority: 'high', description: 'Improve standardized test scores', actionable_steps: ['Practice regularly', 'Take prep courses'] },
+    { area: 'GPA', current: '3.82', target: '3.95+', impact: 8, priority: 'high', description: 'Maintain strong academic performance', actionable_steps: ['Focus on core subjects', 'Show improvement'] },
+    { area: 'Extracurriculars', current: '3 activities', target: '5+ with leadership', impact: 15, priority: 'medium', description: 'Develop meaningful involvement', actionable_steps: ['Focus on 2-3 activities', 'Take leadership roles'] },
+    { area: 'Essays & Awards', current: 'Standard', target: 'Award-winning', impact: 10, priority: 'medium', description: 'Improve application materials', actionable_steps: ['Write compelling essays', 'Pursue recognition'] },
   ];
 
   return (
@@ -717,6 +747,9 @@ export default function CalculationsPage() {
                       current={improvement.current}
                       target={improvement.target}
                       impact={improvement.impact}
+                      priority={improvement.priority}
+                      description={improvement.description}
+                      actionable_steps={improvement.actionable_steps}
                     />
                   ))}
                 </div>
@@ -726,7 +759,7 @@ export default function CalculationsPage() {
                     <TrendingUp className="h-5 w-5 text-ROX_GOLD flex-shrink-0 mt-0.5" />
                     <div className="text-sm">
                       <p className="font-semibold text-ROX_GOLD mb-1">Combined Improvement Potential</p>
-                      <p className="text-white">By improving all areas above, you could increase your chances by <span className="font-bold text-ROX_GOLD">+45%</span></p>
+                      <p className="text-white">By improving all areas above, you could increase your chances by <span className="font-bold text-ROX_GOLD">+{improvementData?.combined_impact || 45}%</span></p>
                     </div>
                   </div>
                 </div>
