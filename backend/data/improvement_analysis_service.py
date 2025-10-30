@@ -233,11 +233,8 @@ class ImprovementAnalysisService:
             except Exception as e:
                 logger.error(f"Error in major analysis: {e}")
             
-            # 9. NEW: Geographic & Diversity Analysis
-            try:
-                improvements.extend(self._analyze_geographic_diversity(user_profile, college_data))
-            except Exception as e:
-                logger.error(f"Error in geographic analysis: {e}")
+            # 9. Geographic & Diversity Analysis (DISABLED per product decision)
+            # Skipped: do not factor first-gen/diversity or geographic diversity in improvement recommendations
             
             # 10. NEW: Interview & Demonstrated Interest Analysis
             try:
@@ -709,17 +706,14 @@ class ImprovementAnalysisService:
             ap_count = int(float(ap_count)) if ap_count else 5
         except (ValueError, TypeError):
             ap_count = 5
-        hs_reputation = profile.get('hs_reputation', 5)
-        
-        # Determine target based on college selectivity and high school reputation
+        # Determine target based solely on college selectivity (ignore HS reputation)
         acceptance_rate = college_data.get('acceptance_rate', 0.15)
-        
         if acceptance_rate < 0.1:  # Ultra-selective
-            target_ap = 8 if hs_reputation > 7 else 6
+            target_ap = 7
         elif acceptance_rate < 0.2:  # Highly selective
-            target_ap = 6 if hs_reputation > 7 else 4
+            target_ap = 5
         else:  # Selective
-            target_ap = 4 if hs_reputation > 7 else 3
+            target_ap = 3
         
         # Always provide academic rigor guidance
         if ap_count < target_ap:
