@@ -800,28 +800,7 @@ export default function CalculationsPage() {
                   </div>
                 </div>
 
-                {/* Debug State - Show Raw Data */}
-                <div className="mb-6 p-4 bg-neutral-900/60 border border-neutral-700/50 rounded-xl">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-blue-500/20 rounded-lg">
-                      <Info className="h-5 w-5 text-blue-400" />
-                    </div>
-                    <div>
-                      <p className="text-neutral-300 font-semibold">Debug: Improvement Analysis Data</p>
-                        <p className="text-neutral-400 text-sm mt-1">
-                        Loading: {improvementLoading ? 'Yes' : 'No'} | 
-                        Error: {improvementError || 'None'} | 
-                        Data: {improvementData ? `${improvementData.improvements?.length || 0} improvements` : 'None'} |
-                        Combined Impact: {improvementData?.combined_impact || 'N/A'}%
-                      </p>
-                      {improvementData?.improvements && (
-                        <p className="text-neutral-500 text-xs mt-1">
-                          Areas: {improvementData.improvements.map(imp => imp.area).join(', ')}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </div>
+                {/* Debug panel removed for production */}
                 {improvementLoading && (
                   <div className="flex items-center justify-center py-12">
                     <div className="flex items-center gap-3">
