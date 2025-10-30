@@ -125,9 +125,18 @@ class ImprovementAnalysisService:
                             break
             
             if not college_data:
-                logger.warning(f"No data found for college: {college_name}")
-                logger.warning(f"Available colleges: {list(self.elite_colleges_data.keys())[:10]}...")
-                return self._get_default_improvements()
+                logger.warning(f"No elite data found for college: {college_name}. Using synthetic 'selective' profile.")
+                # Create a reasonable synthetic profile so we can still generate tailored guidance
+                college_data = {
+                    "acceptance_rate": 0.18,   # selective
+                    "sat_25th": 1350,
+                    "sat_75th": 1500,
+                    "act_25th": 30,
+                    "act_75th": 34,
+                    "gpa_avg": 4.05,
+                    "gpa_unweighted_avg": 3.85,
+                    "category": "selective"
+                }
             
             logger.info(f"Using college data with {len(college_data)} fields for analysis")
             
