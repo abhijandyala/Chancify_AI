@@ -136,10 +136,11 @@ export default function HomePage() {
         const googleAuth = urlParams.get('google_auth')
         const email = urlParams.get('email')
         const name = urlParams.get('name')
+        const token = urlParams.get('token')
         
         if (googleAuth === 'success' && email) {
           // Set auth token and user info
-          localStorage.setItem('auth_token', 'google_oauth_' + Date.now())
+          localStorage.setItem('auth_token', token || ('google_oauth_' + Date.now()))
           localStorage.setItem('user_email', email)
           if (name) localStorage.setItem('user_name', name)
           localStorage.removeItem('trial_mode') // Clear trial mode when signing in

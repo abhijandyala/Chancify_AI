@@ -16,8 +16,14 @@ export async function GET(request: NextRequest) {
   }
 
   try {
+    // Prefer server-side GOOGLE_CLIENT_ID, but fall back to NEXT_PUBLIC_GOOGLE_CLIENT_ID
+    // Rationale: the browser initiates OAuth with NEXT_PUBLIC_*; using the same value here
+    // prevents code-exchange failures and redirect loops caused by ID mismatches.
+    const clientId = process.env.GOOGLE_CLIENT_ID || process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
+    const clientSecret = process.env.GOOGLE_CLIENT_SECRET
+
     // Check if environment variables are set
-    if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+    if (!clientId || !clientSecret) {
       console.error('Missing Google OAuth environment variables')
       return NextResponse.redirect(new URL('/home?error=missing_config', 'https://chancifyai.up.railway.app'))
     }
@@ -29,8 +35,8 @@ export async function GET(request: NextRequest) {
     console.log('=== OAUTH CALLBACK DEBUG ===')
     console.log('ALWAYS using Railway URL:', baseUrl)
     console.log('request.url:', request.url)
-    console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID)
-    console.log('GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET ? 'SET' : 'NOT SET')
+    console.log('GOOGLE_CLIENT_ID (resolved):', clientId)
+    console.log('GOOGLE_CLIENT_SECRET:', clientSecret ? 'SET' : 'NOT SET')
     console.log('============================')
 
     // Exchange code for tokens
@@ -43,8 +49,8 @@ export async function GET(request: NextRequest) {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams({
-        client_id: process.env.GOOGLE_CLIENT_ID,
-        client_secret: process.env.GOOGLE_CLIENT_SECRET,
+        client_id: clientId,
+        client_secret: clientSecret,
         code,
         grant_type: 'authorization_code',
         redirect_uri: redirectUri,
@@ -70,6 +76,7 @@ export async function GET(request: NextRequest) {
     const userInfo = await userResponse.json()
 
     // Call backend API to create user in database
+    let backendAccessToken: string | undefined
     try {
       const backendUrl = 'https://unsmug-untensely-elroy.ngrok-free.dev'
       const createUserResponse = await fetch(`${backendUrl}/api/auth/google-oauth`, {
@@ -88,6 +95,7 @@ export async function GET(request: NextRequest) {
       if (createUserResponse.ok) {
         const userData = await createUserResponse.json()
         console.log('User created in database:', userData)
+        backendAccessToken = userData?.access_token
       } else {
         console.error('Failed to create user in database:', await createUserResponse.text())
       }
@@ -102,6 +110,9 @@ export async function GET(request: NextRequest) {
     successUrl.searchParams.set('email', userInfo.email)
     successUrl.searchParams.set('name', userInfo.name)
     successUrl.searchParams.set('picture', userInfo.picture)
+    if (backendAccessToken) {
+      successUrl.searchParams.set('token', backendAccessToken)
+    }
 
     console.log('Success redirect URL:', successUrl.toString())
     return NextResponse.redirect(successUrl)
