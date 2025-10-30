@@ -4,12 +4,13 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     
-    // Forward the request to the Python backend
-    const backendUrl = process.env.BACKEND_URL || 'http://localhost:8000'
+    // Forward the request to the Python backend (default to active ngrok tunnel)
+    const backendUrl = process.env.BACKEND_URL || 'https://unsmug-untensely-elroy.ngrok-free.dev'
     const response = await fetch(`${backendUrl}/predict`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        ...(backendUrl.includes('ngrok') ? { 'ngrok-skip-browser-warning': 'true' } : {}),
       },
       body: JSON.stringify(body),
     })
