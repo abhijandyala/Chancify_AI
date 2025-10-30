@@ -201,16 +201,20 @@ async def search_colleges(q: str = "", limit: int = 20):
                 "message": "Please provide a search query with at least 2 characters"
             }
         
-        # Search for colleges directly in the CSV data (bypass names mapping)
+        # Use already loaded dataset if available to avoid IO and path issues
         try:
-            college_df = pd.read_csv('backend/data/raw/real_colleges_integrated.csv')
+            college_df = real_college_suggestions.college_df
+            if college_df is None or getattr(college_df, 'empty', False):
+                # Fallback to CSV path relative to this module
+                csv_path = os.path.join(os.path.dirname(__file__), 'data', 'raw', 'real_colleges_integrated.csv')
+                college_df = pd.read_csv(csv_path)
         except Exception as e:
             logger.error(f"Error loading college data: {e}")
             return {
                 "success": False,
                 "colleges": [],
                 "total": 0,
-                "error": "Unable to load college data"
+                "error": f"Unable to load college data: {e}"
             }
         
         # Search for colleges directly in the CSV data
