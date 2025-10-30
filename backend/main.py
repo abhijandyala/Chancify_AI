@@ -99,25 +99,33 @@ app = FastAPI(
     redoc_url="/api/redoc"
 )
 
-# CORS middleware configuration
-# Allow all origins in production (Railway deployment)
-allowed_origins = [
-    "http://localhost:3000",  # Local development
-    "http://localhost:3001",  # Local development (alt port)
-    "https://chancifyai.up.railway.app",  # Railway frontend
-    settings.frontend_url
-]
+"""
+Strict CORS configuration.
+Important: We cannot use allow_origins=["*"] together with allow_credentials=True,
+because browsers will reject credentialed requests (e.g., Authorization headers)
+if Access-Control-Allow-Origin is "*".
 
-# In production, allow Railway domains
-if ENV == "production":
-    allowed_origins.append("*")  # Allow all origins for Railway
+We explicitly list the frontends that are allowed to call the ngrok backend.
+"""
+allowed_origins = list({
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:3001",
+    "https://chancifyai.up.railway.app",
+    settings.frontend_url,
+})
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allowed_origins if ENV == "development" else ["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"],
+    allow_headers=[
+        "*",
+        "Authorization",
+        "Content-Type",
+        "ngrok-skip-browser-warning",
+    ],
 )
 
 # Create database tables on startup

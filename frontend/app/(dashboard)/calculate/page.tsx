@@ -196,55 +196,55 @@ function ImprovementCard({ area, current, target, impact, priority, description,
 }) {
   return (
     <motion.div 
-      className="relative group rounded-xl bg-gradient-to-br from-neutral-800/80 to-neutral-900/80 border border-neutral-600/40 p-6 hover:border-yellow-500/60 transition-all duration-300 min-h-[320px] shadow-lg hover:shadow-xl"
+      className="relative group rounded-2xl bg-black border border-yellow-500/30 p-7 md:p-8 hover:border-yellow-400/60 transition-all duration-300 min-h-[420px] shadow-[0_0_0_1px_rgba(234,179,8,0.08),0_10px_30px_rgba(0,0,0,0.6)] hover:shadow-[0_0_0_1px_rgba(234,179,8,0.25),0_14px_40px_rgba(0,0,0,0.7)]"
       whileHover={{ scale: 1.02, y: -2 }}
       whileTap={{ scale: 0.98 }}
     >
-      <div className="absolute inset-0 bg-gradient-to-t from-yellow-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
+      <div className="absolute inset-0 bg-gradient-to-t from-yellow-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
 
-      <div className="relative space-y-4 h-full flex flex-col">
-        <div className="flex items-start justify-between gap-3">
+      <div className="relative space-y-5 h-full flex flex-col">
+        <div className="flex items-start justify-between gap-4">
           <div className="flex-1">
-            <div className="flex items-center gap-3 mb-3">
-              <h3 className="font-bold text-white text-lg">{area}</h3>
+            <div className="flex items-center gap-3 mb-2">
+              <h3 className="font-semibold text-white text-xl tracking-tight">{area}</h3>
               {priority && (
-                <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                  priority === 'high' ? 'bg-red-500/20 text-red-300 border border-red-500/40' :
-                  priority === 'medium' ? 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/40' :
-                  'bg-green-500/20 text-green-300 border border-green-500/40'
+                <span className={`px-2.5 py-1 rounded-full text-xs font-semibold border ${
+                  priority === 'high' ? 'bg-red-500/15 text-red-300 border-red-500/30' :
+                  priority === 'medium' ? 'bg-yellow-500/15 text-yellow-300 border-yellow-500/30' :
+                  'bg-green-500/15 text-green-300 border-green-500/30'
                 }`}>
                   {priority}
                 </span>
               )}
             </div>
             
-            <div className="space-y-3 mb-4">
-              <div className="flex items-center gap-3">
-                <span className="text-neutral-400 font-medium text-sm">Current:</span>
-                <span className="text-white font-semibold text-base bg-neutral-700/50 px-3 py-1 rounded-lg">{current}</span>
+            <div className="grid grid-cols-2 gap-3 mb-2">
+              <div className="space-y-1">
+                <span className="block text-neutral-400 text-xs">Current</span>
+                <span className="inline-block text-white font-semibold text-sm bg-neutral-800 px-3 py-1.5 rounded-md border border-neutral-700/60">{current}</span>
               </div>
-              <div className="flex items-center gap-3">
-                <span className="text-neutral-400 font-medium text-sm">Target:</span>
-                <span className="text-yellow-400 font-bold text-base bg-yellow-500/10 px-3 py-1 rounded-lg border border-yellow-500/30">{target}</span>
+              <div className="space-y-1">
+                <span className="block text-neutral-400 text-xs">Target</span>
+                <span className="inline-block text-yellow-400 font-semibold text-sm bg-yellow-500/10 px-3 py-1.5 rounded-md border border-yellow-500/30">{target}</span>
               </div>
             </div>
             
             {description && (
-              <p className="text-sm text-neutral-300 mb-4 leading-relaxed">{description}</p>
+              <p className="text-sm text-neutral-300/90 mb-1 leading-relaxed">{description}</p>
             )}
           </div>
-          <div className="p-2 bg-yellow-500/20 rounded-lg">
+          <div className="p-2.5 bg-yellow-500/15 rounded-lg border border-yellow-500/30">
             <Target className="h-5 w-5 text-yellow-400" />
           </div>
         </div>
 
         {actionable_steps && actionable_steps.length > 0 && (
           <div className="flex-1">
-            <h4 className="text-sm font-semibold text-neutral-200 mb-3">Action Steps:</h4>
-            <ul className="space-y-2">
+            <h4 className="text-xs font-semibold tracking-wide text-neutral-300 mb-2 uppercase">Action Steps</h4>
+            <ul className="space-y-2.5">
               {actionable_steps.slice(0, 3).map((step, index) => (
-                <li key={index} className="text-xs text-neutral-400 flex items-start gap-2">
-                  <span className="text-yellow-400 mt-1 font-bold">•</span>
+                <li key={index} className="text-sm text-neutral-300/80 flex items-start gap-2">
+                  <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-yellow-400" />
                   <span className="leading-relaxed">{step}</span>
                 </li>
               ))}
@@ -252,12 +252,12 @@ function ImprovementCard({ area, current, target, impact, priority, description,
           </div>
         )}
 
-        <div className="pt-3 border-t border-neutral-600/40">
+        <div className="mt-auto pt-4 border-t border-yellow-500/20">
           <div className="flex items-center justify-between gap-2">
-            <span className="text-sm text-neutral-400 font-medium">Impact</span>
+            <span className="text-xs text-neutral-400 tracking-wide uppercase">Impact</span>
             <div className="flex items-center gap-2">
               <TrendingUp className="h-4 w-4 text-green-400" />
-              <span className="text-lg font-bold text-green-400">+{impact}%</span>
+              <span className="text-xl font-bold text-green-400">+{impact}%</span>
             </div>
           </div>
         </div>
@@ -527,6 +527,29 @@ export default function CalculationsPage() {
   // Comprehensive improvement areas - NO FALLBACK, force API data
   const improvementAreas = improvementData?.improvements || [];
 
+  // Helper: extract numeric score before '/10' (handles values like '9+/10', '7.5/10')
+  const extractScore = (text: string): number | null => {
+    if (!text) return null;
+    const match = text.match(/([0-9]+(?:\.[0-9]+)?)(?=\s*\/?\s*10)/);
+    if (match) return parseFloat(match[1]);
+    const fallback = parseFloat(text.replace(/[^0-9.]/g, ''));
+    return isNaN(fallback) ? null : fallback;
+  };
+
+  // Filter improvements to only those below target
+  const visibleImprovements = (improvementData?.improvements || []).filter((imp) => {
+    const currentScore = extractScore(imp.current)
+    const targetScore = extractScore(imp.target)
+    if (currentScore == null || targetScore == null) return true
+    return currentScore < targetScore
+  })
+
+  // Compute combined impact based only on visible items, cap at 35% to mirror backend logic
+  const combinedVisibleImpact = Math.min(
+    visibleImprovements.reduce((sum, imp) => sum + (imp.impact || 0), 0),
+    35
+  )
+
   return (
     <div className="min-h-screen bg-ROX_BLACK text-white pt-20 relative overflow-hidden">
       {/* ROX Background Elements */}
@@ -759,40 +782,40 @@ export default function CalculationsPage() {
 
             {/* Areas to Improve - Professional Design */}
             <motion.div 
-              className="relative bg-gradient-to-br from-neutral-900/90 via-neutral-800/80 to-neutral-900/90 border border-neutral-600/50 rounded-2xl p-8 backdrop-blur-xl overflow-hidden group w-full shadow-2xl"
+              className="relative bg-black border border-yellow-500/30 rounded-3xl p-8 backdrop-blur-xl overflow-hidden group w-full shadow-[0_0_0_1px_rgba(234,179,8,0.08),0_20px_60px_rgba(0,0,0,0.7)]"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-yellow-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-yellow-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               <div className="relative">
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="p-3 bg-yellow-500/20 rounded-xl border border-yellow-500/30">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="p-3 bg-yellow-500/15 rounded-xl border border-yellow-500/30">
                     <Award className="h-8 w-8 text-yellow-400" />
                   </div>
                   <div>
-                    <h2 className="text-3xl font-bold text-white mb-2">Areas to Improve</h2>
-                    <p className="text-lg text-neutral-300">Comprehensive analysis of all admission factors</p>
+                    <h2 className="text-3xl font-semibold text-white mb-1 tracking-tight">Areas to Improve</h2>
+                    <p className="text-sm text-neutral-400">Focused recommendations to raise your chances</p>
                   </div>
                 </div>
 
                 {/* Debug State - Show Raw Data */}
-                <div className="mb-6 p-4 bg-blue-500/10 border border-blue-500/20 rounded-xl">
+                <div className="mb-6 p-4 bg-neutral-900/60 border border-neutral-700/50 rounded-xl">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-blue-500/20 rounded-lg">
                       <Info className="h-5 w-5 text-blue-400" />
                     </div>
                     <div>
-                      <p className="text-blue-400 font-semibold">Debug: Improvement Analysis Data</p>
-                      <p className="text-blue-300 text-sm mt-1">
+                      <p className="text-neutral-300 font-semibold">Debug: Improvement Analysis Data</p>
+                        <p className="text-neutral-400 text-sm mt-1">
                         Loading: {improvementLoading ? 'Yes' : 'No'} | 
                         Error: {improvementError || 'None'} | 
                         Data: {improvementData ? `${improvementData.improvements?.length || 0} improvements` : 'None'} |
                         Combined Impact: {improvementData?.combined_impact || 'N/A'}%
                       </p>
                       {improvementData?.improvements && (
-                        <p className="text-blue-300 text-xs mt-1">
+                        <p className="text-neutral-500 text-xs mt-1">
                           Areas: {improvementData.improvements.map(imp => imp.area).join(', ')}
                         </p>
                       )}
@@ -832,32 +855,40 @@ export default function CalculationsPage() {
                 {/* Success State - Show Real Data */}
                 {improvementData?.improvements && improvementData.improvements.length > 0 && !improvementLoading && (
                   <>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                      {improvementData.improvements.map((improvement) => (
-                        <ImprovementCard
-                          key={improvement.area}
-                          area={improvement.area}
-                          current={improvement.current}
-                          target={improvement.target}
-                          impact={improvement.impact}
-                          priority={improvement.priority}
-                          description={improvement.description}
-                          actionable_steps={improvement.actionable_steps}
-                        />
-                      ))}
-                    </div>
+                    {visibleImprovements.length > 0 ? (
+                      <>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 xl-grid-cols-3 gap-6">
+                          {visibleImprovements.map((improvement) => (
+                            <ImprovementCard
+                              key={improvement.area}
+                              area={improvement.area}
+                              current={improvement.current}
+                              target={improvement.target}
+                              impact={improvement.impact}
+                              priority={improvement.priority}
+                              description={improvement.description}
+                              actionable_steps={improvement.actionable_steps}
+                            />
+                          ))}
+                        </div>
 
-                    <div className="mt-8 p-6 rounded-xl bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 border border-yellow-500/30">
-                      <div className="flex items-center gap-4">
-                        <div className="p-2 bg-yellow-500/20 rounded-lg">
-                          <TrendingUp className="h-6 w-6 text-yellow-400" />
+                        <div className="mt-8 p-6 rounded-xl bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 border border-yellow-500/30">
+                          <div className="flex items-center gap-4">
+                            <div className="p-2 bg-yellow-500/20 rounded-lg">
+                              <TrendingUp className="h-6 w-6 text-yellow-400" />
+                            </div>
+                            <div>
+                              <p className="font-bold text-yellow-400 text-xl mb-1">Combined Improvement Potential</p>
+                              <p className="text-white text-lg">By improving all areas above, you could increase your chances by <span className="font-bold text-yellow-400 text-2xl">+{combinedVisibleImpact}%</span></p>
+                            </div>
+                          </div>
                         </div>
-                        <div>
-                          <p className="font-bold text-yellow-400 text-xl mb-1">Combined Improvement Potential</p>
-                          <p className="text-white text-lg">By improving all areas above, you could increase your chances by <span className="font-bold text-yellow-400 text-2xl">+{improvementData.combined_impact}%</span></p>
-                        </div>
+                      </>
+                    ) : (
+                      <div className="p-6 rounded-xl bg-green-500/10 border border-green-500/30">
+                        <p className="text-green-300 font-semibold">You have went above and beyond, there is nothing else needing improvement at this point.</p>
                       </div>
-                    </div>
+                    )}
                   </>
                 )}
 
