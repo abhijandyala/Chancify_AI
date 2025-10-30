@@ -20,6 +20,7 @@ class ImprovementAnalysisService:
     def __init__(self):
         self.elite_colleges_data = {}
         self.admission_factors = {}
+        self.general_colleges_df = None
         self.load_data()
         
         # TEMPORARY: Hardcode Carnegie Mellon data for testing
@@ -73,6 +74,18 @@ class ImprovementAnalysisService:
                     # Initialize empty dict to prevent errors
                     self.elite_colleges_data = {}
             
+            # Load broader college dataset as a secondary source for acceptance rates/metadata
+            try:
+                import pandas as pd  # local import to avoid issues if pandas missing at import-time
+                csv_path = os.path.abspath(os.path.join(os.getcwd(), 'backend', 'data', 'raw', 'real_colleges_integrated.csv'))
+                if os.path.exists(csv_path):
+                    self.general_colleges_df = pd.read_csv(csv_path)
+                    logger.info(f"Loaded general colleges dataset: {self.general_colleges_df.shape}")
+                else:
+                    logger.warning(f"General colleges CSV not found at {csv_path}")
+            except Exception as e:
+                logger.warning(f"Failed to load general colleges dataset: {e}")
+
             # Load admission factors
             factors_path = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'factors', 'admissions_factors.json')
             if os.path.exists(factors_path):
@@ -125,10 +138,40 @@ class ImprovementAnalysisService:
                             break
             
             if not college_data:
-                logger.warning(f"No elite data found for college: {college_name}. Using synthetic 'selective' profile.")
-                # Create a reasonable synthetic profile so we can still generate tailored guidance
+                # Try the broader dataset before falling back
+                if self.general_colleges_df is not None and not self.general_colleges_df.empty:
+                    df = self.general_colleges_df
+                    try:
+                        # Exact, then case-insensitive contains
+                        row = df[df['name'].str.lower() == college_name.lower()]
+                        if row.empty:
+                            row = df[df['name'].str.lower().str.contains(college_name.lower(), na=False)]
+                        if not row.empty:
+                            r = row.iloc[0]
+                            acceptance_rate = None
+                            if 'acceptance_rate' in r and pd.notna(r['acceptance_rate']):
+                                acceptance_rate = float(r['acceptance_rate'])
+                            elif 'acceptance_rate_percent' in r and pd.notna(r['acceptance_rate_percent']):
+                                acceptance_rate = float(r['acceptance_rate_percent']) / 100.0
+
+                            college_data = {
+                                "acceptance_rate": acceptance_rate if acceptance_rate is not None else 0.18,
+                                "sat_25th": int(r.get('sat_25th', 1400)) if 'sat_25th' in r and pd.notna(r['sat_25th']) else 1400,
+                                "sat_75th": int(r.get('sat_75th', 1550)) if 'sat_75th' in r and pd.notna(r['sat_75th']) else 1550,
+                                "act_25th": int(r.get('act_25th', 31)) if 'act_25th' in r and pd.notna(r['act_25th']) else 31,
+                                "act_75th": int(r.get('act_75th', 35)) if 'act_75th' in r and pd.notna(r['act_75th']) else 35,
+                                "gpa_avg": float(r.get('gpa_average', 4.05)) if 'gpa_average' in r and pd.notna(r['gpa_average']) else 4.05,
+                                "gpa_unweighted_avg": float(r.get('gpa_unweighted_avg', 3.85)) if 'gpa_unweighted_avg' in r and pd.notna(r['gpa_unweighted_avg']) else 3.85,
+                                "category": "selective"
+                            }
+                            logger.info(f"General dataset match found for '{college_name}' → using derived metrics")
+                    except Exception as e:
+                        logger.warning(f"Failed matching in general dataset for '{college_name}': {e}")
+
+            if not college_data:
+                logger.warning(f"No data found for '{college_name}' in elite or general datasets; using conservative defaults")
                 college_data = {
-                    "acceptance_rate": 0.18,   # selective
+                    "acceptance_rate": 0.18,
                     "sat_25th": 1350,
                     "sat_75th": 1500,
                     "act_25th": 30,
