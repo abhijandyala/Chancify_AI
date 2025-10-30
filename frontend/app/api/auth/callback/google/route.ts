@@ -16,7 +16,9 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    // Prefer server-side GOOGLE_CLIENT_ID, but fall back to NEXT_PUBLIC_GOOGLE_CLIENT_ID to avoid mismatch
+    // Prefer server-side GOOGLE_CLIENT_ID, but fall back to NEXT_PUBLIC_GOOGLE_CLIENT_ID
+    // Rationale: the browser initiates OAuth with NEXT_PUBLIC_*; using the same value here
+    // prevents code-exchange failures and redirect loops caused by ID mismatches.
     const clientId = process.env.GOOGLE_CLIENT_ID || process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
     const clientSecret = process.env.GOOGLE_CLIENT_SECRET
 
