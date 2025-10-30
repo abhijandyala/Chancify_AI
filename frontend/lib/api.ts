@@ -3,12 +3,8 @@
  */
 
 // Backend URL configuration
-// Use env when available; default to local in dev and Railway in prod
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ||
-  (process.env.NODE_ENV === 'production'
-    ? 'https://chancifyai-backend.up.railway.app'
-    : 'http://localhost:8000');
+// Always use NGROK for backend API per product decision
+const API_BASE_URL = 'https://unsmug-untensely-elroy.ngrok-free.dev';
 
 // Headers for API requests
 const getHeaders = () => {
