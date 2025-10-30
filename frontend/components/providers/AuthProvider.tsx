@@ -263,13 +263,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
       const googleAuth = urlParams.get('google_auth')
       const email = urlParams.get('email')
       const name = urlParams.get('name')
+      const token = urlParams.get('token')
       
       if (googleAuth === 'success' && email) {
         // User just completed Google OAuth
         console.log('Google OAuth success detected:', { email, name })
         
         // Store auth data
-        localStorage.setItem('auth_token', 'google_token_' + Date.now())
+        localStorage.setItem('auth_token', token || ('google_token_' + Date.now()))
         localStorage.setItem('user_email', email)
         if (name) {
           localStorage.setItem('user_name', name)
@@ -291,6 +292,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         newUrl.searchParams.delete('email')
         newUrl.searchParams.delete('name')
         newUrl.searchParams.delete('picture')
+        newUrl.searchParams.delete('token')
         window.history.replaceState({}, '', newUrl.toString())
         
         // Redirect to home page
