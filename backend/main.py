@@ -9,8 +9,9 @@ import time
 import numpy as np
 import pandas as pd
 from typing import Dict, Any
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.responses import Response
 from config import settings
 from database import create_tables
 from data.real_ipeds_major_mapping import get_colleges_for_major, get_major_strength_score, get_major_relevance_info
@@ -114,6 +115,49 @@ allowed_origins = list({
     "https://chancifyai.up.railway.app",
     settings.frontend_url,
 })
+
+allowed_origin_suffixes = (
+    ".ngrok-free.dev",
+    ".railway.app",
+)
+
+
+def is_allowed_origin(origin: str) -> bool:
+    """Check whether the incoming request origin is allowed."""
+    if not origin:
+        return False
+    if origin in allowed_origins:
+        return True
+    return any(origin.endswith(suffix) for suffix in allowed_origin_suffixes)
+
+
+@app.middleware("http")
+async def custom_cors_middleware(request: Request, call_next):
+    """
+    Ensure CORS headers are present for allowed origins (ngrok + Railway).
+    
+    FastAPI's default CORSMiddleware sometimes skips OPTIONS responses when
+    tunneling through ngrok, so we enforce the headers explicitly while still
+    delegating to the built-in middleware for everything else.
+    """
+    origin = request.headers.get("origin")
+    
+    if request.method == "OPTIONS":
+        response = Response(status_code=204)
+    else:
+        response = await call_next(request)
+    
+    if origin and is_allowed_origin(origin):
+        response.headers["Access-Control-Allow-Origin"] = origin
+        response.headers["Access-Control-Allow-Credentials"] = "true"
+        response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,PATCH,DELETE,OPTIONS"
+        response.headers["Access-Control-Allow-Headers"] = (
+            "Authorization,Content-Type,ngrok-skip-browser-warning"
+        )
+        response.headers["Access-Control-Max-Age"] = "86400"
+        response.headers["Vary"] = "Origin"
+    
+    return response
 
 app.add_middleware(
     CORSMiddleware,
