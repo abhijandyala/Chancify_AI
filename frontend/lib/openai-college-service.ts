@@ -1,3 +1,5 @@
+import { getApiBaseUrl, withNgrokHeaders } from '@/lib/config';
+
 /**
  * OpenAI College Information Service
  * Fetches real-world college data using OpenAI API
@@ -65,20 +67,13 @@ class OpenAICollegeService {
   private baseUrl: string;
 
   constructor() {
-    this.baseUrl = 'https://unsmug-untensely-elroy.ngrok-free.dev';
+    this.baseUrl = getApiBaseUrl();
   }
 
   private getHeaders() {
-    const headers: HeadersInit = {
+    return withNgrokHeaders(this.baseUrl, {
       'Content-Type': 'application/json',
-    };
-
-    // Add ngrok skip warning header if using ngrok
-    if (this.baseUrl.includes('ngrok')) {
-      headers['ngrok-skip-browser-warning'] = 'true';
-    }
-
-    return headers;
+    });
   }
 
   /**

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { getApiBaseUrl, withNgrokHeaders } from '@/lib/config';
 
 interface TuitionByZipcodeData {
   success: boolean;
@@ -29,14 +30,10 @@ export function useCollegeTuitionByZipcode(collegeName: string | null, zipcode: 
       setError(null);
 
       try {
-        const API_BASE_URL = 'https://unsmug-untensely-elroy.ngrok-free.dev';
-        const headers: HeadersInit = {
+        const API_BASE_URL = getApiBaseUrl();
+        const headers = withNgrokHeaders(API_BASE_URL, {
           'Content-Type': 'application/json',
-        };
-
-        if (API_BASE_URL.includes('ngrok')) {
-          headers['ngrok-skip-browser-warning'] = 'true';
-        }
+        });
 
         const response = await fetch(
           `${API_BASE_URL}/api/tuition-by-zipcode/${encodeURIComponent(collegeName)}/${zipcode}`,

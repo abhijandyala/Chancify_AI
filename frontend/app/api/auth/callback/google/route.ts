@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getApiBaseUrl, withNgrokHeaders } from '@/lib/config'
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
@@ -78,13 +79,12 @@ export async function GET(request: NextRequest) {
     // Call backend API to create user in database
     let backendAccessToken: string | undefined
     try {
-      const backendUrl = 'https://unsmug-untensely-elroy.ngrok-free.dev'
+      const backendUrl = getApiBaseUrl()
       const createUserResponse = await fetch(`${backendUrl}/api/auth/google-oauth`, {
         method: 'POST',
-        headers: {
+        headers: withNgrokHeaders(backendUrl, {
           'Content-Type': 'application/json',
-          'ngrok-skip-browser-warning': 'true'
-        },
+        }),
         body: JSON.stringify({
           email: userInfo.email,
           name: userInfo.name,

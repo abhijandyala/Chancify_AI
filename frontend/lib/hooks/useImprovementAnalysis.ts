@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
+import { getApiBaseUrl, withNgrokHeaders } from '@/lib/config'
 
 interface ImprovementArea {
   area: string
@@ -39,14 +40,10 @@ export const useImprovementAnalysis = (collegeName: string, userProfile: any) =>
     setError(null)
 
     try {
-      const API_BASE_URL = 'https://unsmug-untensely-elroy.ngrok-free.dev'
-      const headers: HeadersInit = {
+      const API_BASE_URL = getApiBaseUrl()
+      const headers = withNgrokHeaders(API_BASE_URL, {
         'Content-Type': 'application/json',
-      }
-
-      if (API_BASE_URL.includes('ngrok')) {
-        headers['ngrok-skip-browser-warning'] = 'true'
-      }
+      })
 
       const url = `${API_BASE_URL}/api/improvement-analysis/${encodeURIComponent(collegeName)}`
       console.log('🔄 API URL:', url)

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { getApiBaseUrl, withNgrokHeaders } from '@/lib/config'
 
 interface SubjectData {
   label: string
@@ -30,21 +31,16 @@ export function useCollegeSubjectEmphasis(collegeName: string | null) {
 
       try {
         // Get the backend URL from environment or use ngrok URL (same as other API calls)
-        const backendUrl = 'https://unsmug-untensely-elroy.ngrok-free.dev'
+        const backendUrl = getApiBaseUrl()
         const encodedCollegeName = encodeURIComponent(collegeName)
         
         console.log(`🔍 Fetching subject emphasis for: ${collegeName}`)
         console.log(`🔍 Backend URL: ${backendUrl}`)
         console.log(`🔍 Full URL: ${backendUrl}/api/college-subject-emphasis/${encodedCollegeName}`)
         
-        const headers: HeadersInit = {
+        const headers = withNgrokHeaders(backendUrl, {
           'Content-Type': 'application/json',
-        }
-
-        // Add ngrok skip warning header if using ngrok
-        if (backendUrl.includes('ngrok')) {
-          headers['ngrok-skip-browser-warning'] = 'true'
-        }
+        })
 
         const response = await fetch(`${backendUrl}/api/college-subject-emphasis/${encodedCollegeName}`, {
           headers

@@ -8,6 +8,7 @@ import { COLLEGES } from '@/lib/colleges';
 import { useCollegeSubjectEmphasis } from '@/lib/hooks/useCollegeSubjectEmphasis';
 import { useCollegeTuitionByZipcode } from '@/lib/hooks/useCollegeTuitionByZipcode';
 import { useImprovementAnalysis } from '@/lib/hooks/useImprovementAnalysis';
+import { getApiBaseUrl, withNgrokHeaders } from '@/lib/config';
 import {
   ResponsiveContainer,
   BarChart,
@@ -324,15 +325,10 @@ export default function CalculationsPage() {
         console.log('🔍 User Profile from localStorage:', userProfile);
         
         // Calculate probability using the backend API
-        const API_BASE_URL = 'https://unsmug-untensely-elroy.ngrok-free.dev';
-        const headers: HeadersInit = {
+        const API_BASE_URL = getApiBaseUrl();
+        const headers = withNgrokHeaders(API_BASE_URL, {
           'Content-Type': 'application/json',
-        };
-        
-        // Add ngrok skip warning header if using ngrok
-        if (API_BASE_URL.includes('ngrok')) {
-          headers['ngrok-skip-browser-warning'] = 'true';
-        }
+        });
         
         const requestData = {
           ...userProfile,
@@ -538,10 +534,20 @@ export default function CalculationsPage() {
 
   // Filter improvements to only those below target
   const visibleImprovements = (improvementData?.improvements || []).filter((imp) => {
+    // Hide items explicitly marked as Target Met or with zero/negative impact
+    const targetText = (imp.target || '').toLowerCase()
+    const currentText = (imp.current || '').toLowerCase()
+    if (imp.impact <= 0) return false
+    if (targetText.includes('target met') || currentText.includes('target met')) return false
+
+    // For numeric-like strings, compare extracted values
     const currentScore = extractScore(imp.current)
     const targetScore = extractScore(imp.target)
-    if (currentScore == null || targetScore == null) return true
-    return currentScore < targetScore
+    if (currentScore != null && targetScore != null) {
+      return currentScore < targetScore
+    }
+    // If we cannot parse numbers, keep it visible (non-numeric advisories)
+    return true
   })
 
   // Compute combined impact based only on visible items, cap at 35% to mirror backend logic

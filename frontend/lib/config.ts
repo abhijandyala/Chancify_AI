@@ -1,0 +1,56 @@
+export type HeaderMap = Record<string, string>
+
+const DEFAULT_API_URL = 'http://localhost:8000'
+
+declare global {
+  interface Window {
+    __CHANCIFY_API_URL__?: string
+  }
+}
+
+function resolveEnvApiUrl(): string | undefined {
+  return (
+    process.env.NEXT_PUBLIC_API_URL?.trim() ||
+    process.env.API_BASE_URL?.trim()
+  )
+}
+
+function resolveRuntimeOverride(): string | undefined {
+  if (typeof window === 'undefined') {
+    return undefined
+  }
+
+  if (window.__CHANCIFY_API_URL__) {
+    return window.__CHANCIFY_API_URL__
+  }
+
+  try {
+    const stored = window.localStorage?.getItem('api_base_url')
+    return stored?.trim() || undefined
+  } catch {
+    return undefined
+  }
+}
+
+export function getApiBaseUrl(): string {
+  return resolveRuntimeOverride() || resolveEnvApiUrl() || DEFAULT_API_URL
+}
+
+export function withNgrokHeaders(
+  baseUrl: string,
+  headers: HeaderMap = {}
+): HeaderMap {
+  if (baseUrl.includes('ngrok')) {
+    return {
+      ...headers,
+      'ngrok-skip-browser-warning': 'true',
+    }
+  }
+  return headers
+}
+
+export function getBackendUrl(path: string): string {
+  const baseUrl = getApiBaseUrl()
+  return `${baseUrl}${path.startsWith('/') ? path : `/${path}`}`
+}
+

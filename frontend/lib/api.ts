@@ -2,22 +2,18 @@
  * API service for communicating with the ML backend
  */
 
-// Backend URL configuration
-// Always use NGROK for backend API per product decision
-const API_BASE_URL = 'https://unsmug-untensely-elroy.ngrok-free.dev';
+import { getApiBaseUrl, withNgrokHeaders } from '@/lib/config';
+
+// Backend URL configuration (resolved once per module evaluation)
+const API_BASE_URL = getApiBaseUrl();
 
 // Headers for API requests
 const getHeaders = () => {
-  const headers: HeadersInit = {
+  const headers: Record<string, string> = {
     'Content-Type': 'application/json',
   };
 
-  // Add ngrok skip warning header if using ngrok (legacy support)
-  if (API_BASE_URL.includes('ngrok')) {
-    headers['ngrok-skip-browser-warning'] = 'true';
-  }
-
-  return headers;
+  return withNgrokHeaders(API_BASE_URL, headers);
 };
 
 export interface PredictionRequest {

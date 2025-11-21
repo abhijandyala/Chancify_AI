@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react'
 import { useRouter } from 'next/navigation'
+import { getApiBaseUrl, withNgrokHeaders } from '@/lib/config'
 
 interface User {
   id: string
@@ -43,15 +44,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       if (authToken && userEmail) {
         // Verify token with backend
-        const API_BASE_URL = 'https://unsmug-untensely-elroy.ngrok-free.dev'
-        const headers: HeadersInit = {
+        const API_BASE_URL = getApiBaseUrl()
+        const headers = withNgrokHeaders(API_BASE_URL, {
           'Authorization': `Bearer ${authToken}`,
           'Content-Type': 'application/json',
-        }
-        
-        if (API_BASE_URL.includes('ngrok')) {
-          headers['ngrok-skip-browser-warning'] = 'true'
-        }
+        })
 
         try {
           const response = await fetch(`${API_BASE_URL}/api/auth/me`, {
@@ -97,14 +94,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       setIsLoading(true)
       
-      const API_BASE_URL = 'https://unsmug-untensely-elroy.ngrok-free.dev'
-      const headers: HeadersInit = {
+      const API_BASE_URL = getApiBaseUrl()
+      const headers = withNgrokHeaders(API_BASE_URL, {
         'Content-Type': 'application/json',
-      }
-      
-      if (API_BASE_URL.includes('ngrok')) {
-        headers['ngrok-skip-browser-warning'] = 'true'
-      }
+      })
 
       try {
         const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
@@ -164,14 +157,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       setIsLoading(true)
       
-      const API_BASE_URL = 'https://unsmug-untensely-elroy.ngrok-free.dev'
-      const headers: HeadersInit = {
+      const API_BASE_URL = getApiBaseUrl()
+      const headers = withNgrokHeaders(API_BASE_URL, {
         'Content-Type': 'application/json',
-      }
-      
-      if (API_BASE_URL.includes('ngrok')) {
-        headers['ngrok-skip-browser-warning'] = 'true'
-      }
+      })
 
       try {
         const response = await fetch(`${API_BASE_URL}/api/auth/signup`, {
