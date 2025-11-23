@@ -599,20 +599,36 @@ export default function CalculationsPage() {
     // Hide items explicitly marked as Target Met or with zero/negative impact
     const targetText = (imp.target || '').toLowerCase()
     const currentText = (imp.current || '').toLowerCase()
-    if (imp.impact <= 0) return false
-    if (targetText.includes('target met') || currentText.includes('target met')) return false
+    if (imp.impact <= 0) {
+      console.log('🔍 Filtering out improvement (impact <= 0):', imp.area, 'impact:', imp.impact)
+      return false
+    }
+    if (targetText.includes('target met') || currentText.includes('target met')) {
+      console.log('🔍 Filtering out improvement (target met):', imp.area)
+      return false
+    }
 
     // For numeric-like strings, compare extracted values
     const currentScore = extractScore(imp.current)
     const targetScore = extractScore(imp.target)
     if (currentScore != null && targetScore != null) {
       // If current >= target, don't show (user already meets/exceeds target)
-      return currentScore < targetScore
+      const shouldShow = currentScore < targetScore
+      if (!shouldShow) {
+        console.log('🔍 Filtering out improvement (current >= target):', imp.area, 'current:', currentScore, 'target:', targetScore)
+      }
+      return shouldShow
     }
     // If we cannot parse numbers, show it anyway (backend should handle filtering)
     // Only hide if we can verify current >= target
+    console.log('🔍 Keeping improvement (cannot parse numbers):', imp.area, 'current:', imp.current, 'target:', imp.target)
     return true
   })
+  
+  console.log('🔍 Improvement filtering results:')
+  console.log('  - Total improvements from backend:', improvementData?.improvements?.length || 0)
+  console.log('  - Visible improvements after filtering:', visibleImprovements.length)
+  console.log('  - Filtered out:', (improvementData?.improvements?.length || 0) - visibleImprovements.length)
 
   // Compute combined impact based only on visible items, cap at 35% to mirror backend logic
   const combinedVisibleImpact = Math.min(
@@ -951,8 +967,8 @@ export default function CalculationsPage() {
                   </div>
                 )}
 
-                {/* Success State - Show Real Data */}
-                {improvementData?.improvements && improvementData.improvements.length > 0 && !improvementLoading && (
+                {/* Success State - Show Real Data - Only show if we have actual improvement data */}
+                {improvementData && improvementData.improvements && Array.isArray(improvementData.improvements) && improvementData.improvements.length > 0 && !improvementLoading && (
                   <>
                     {visibleImprovements.length > 0 ? (
                       <>
@@ -1002,8 +1018,8 @@ export default function CalculationsPage() {
                   </>
                 )}
 
-                {/* No Data State - Don't show fallback */}
-                {!improvementData?.improvements && !improvementLoading && !improvementError && (
+                {/* No Data State - Only show if we truly have no data */}
+                {!improvementData && !improvementLoading && !improvementError && (
                   <div className="flex flex-col items-center justify-center py-12 px-6 text-center">
                       <div className="mb-4">
                         <Info className="h-12 w-12 text-yellow-400 mx-auto" />
@@ -1013,6 +1029,24 @@ export default function CalculationsPage() {
                       </p>
                       <p className="text-sm text-neutral-400">
                         Please ensure you've selected a college and filled in your academic information.
+                      </p>
+                    </div>
+                )}
+                
+                {/* Debug: Show if we have data but it's being filtered out */}
+                {improvementData?.improvements && improvementData.improvements.length > 0 && visibleImprovements.length === 0 && !improvementLoading && (
+                  <div className="flex flex-col items-center justify-center py-12 px-6 text-center">
+                      <div className="mb-4">
+                        <Info className="h-12 w-12 text-yellow-400 mx-auto" />
+                      </div>
+                      <p className="text-lg text-neutral-300 mb-2">
+                        All improvements have been filtered out.
+                      </p>
+                      <p className="text-sm text-neutral-400">
+                        Total improvements: {improvementData.improvements.length}, Visible: {visibleImprovements.length}
+                      </p>
+                      <p className="text-xs text-neutral-500 mt-2">
+                        Check console for filtering details.
                       </p>
                     </div>
                 )}
