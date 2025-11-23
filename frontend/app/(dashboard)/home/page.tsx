@@ -128,33 +128,8 @@ export default function HomePage() {
     }
   }, [])
 
-  // Handle Google OAuth success and trial mode (only on mount, not on profile changes)
+  // Handle trial mode (OAuth is handled by AuthProvider globally)
   useEffect(() => {
-    const handleGoogleAuthSuccess = () => {
-      if (typeof window !== 'undefined') {
-        const urlParams = new URLSearchParams(window.location.search)
-        const googleAuth = urlParams.get('google_auth')
-        const email = urlParams.get('email')
-        const name = urlParams.get('name')
-        const token = urlParams.get('token')
-        
-        if (googleAuth === 'success' && email) {
-          // Set auth token and user info
-          localStorage.setItem('auth_token', token || ('google_oauth_' + Date.now()))
-          localStorage.setItem('user_email', email)
-          if (name) localStorage.setItem('user_name', name)
-          localStorage.removeItem('trial_mode') // Clear trial mode when signing in
-          
-          // Clean up URL parameters
-          const newUrl = window.location.pathname
-          window.history.replaceState({}, document.title, newUrl)
-          
-          // Trigger a custom event to notify header of auth change (only once)
-          window.dispatchEvent(new CustomEvent('authStateChanged'))
-        }
-      }
-    }
-    
     const handleTrialMode = () => {
       if (typeof window !== 'undefined') {
         const trialMode = localStorage.getItem('trial_mode')
@@ -165,7 +140,6 @@ export default function HomePage() {
       }
     }
     
-    handleGoogleAuthSuccess()
     handleTrialMode()
   }, []) // Only run on mount, not on profile changes
 
