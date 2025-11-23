@@ -785,14 +785,63 @@ export default function CalculationsPage() {
               </div>
               </div>
             </motion.div>
+          </div>
 
-            {/* Areas to Improve - Professional Design */}
+          {/* Sidebar - Reduced */}
+          <div className="lg:col-span-3 lg:sticky lg:top-24 h-fit space-y-6">
+            {/* Your Chance Card */}
             <motion.div 
-              className="relative bg-black border border-yellow-500/30 rounded-3xl p-8 backdrop-blur-xl overflow-hidden group w-full shadow-[0_0_0_1px_rgba(234,179,8,0.08),0_20px_60px_rgba(0,0,0,0.7)] -mx-4 md:-mx-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
+              className="relative bg-gradient-to-br from-ROX_DARK_GRAY/80 via-ROX_BLACK/60 to-ROX_BLACK/80 border border-ROX_GOLD/30 rounded-3xl p-8 backdrop-blur-xl overflow-hidden group"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
             >
+              <div className="absolute inset-0 bg-gradient-to-t from-ROX_GOLD/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-ROX_GOLD/20 via-transparent to-ROX_GOLD/20 rounded-3xl blur opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+
+              <div className="relative space-y-4">
+                <div className="flex items-center gap-2">
+                  <Zap className="h-5 w-5 text-ROX_GOLD" />
+                  <h2 className="text-lg font-semibold text-white">Your Admission Chance</h2>
+                </div>
+                <CircularChance value={userChance} />
+              </div>
+            </motion.div>
+
+
+            {/* Outcome Snapshot Card */}
+            <motion.div 
+              className="relative bg-gradient-to-br from-ROX_DARK_GRAY/80 via-ROX_BLACK/60 to-ROX_BLACK/80 border border-ROX_GOLD/30 rounded-3xl p-6 backdrop-blur-xl overflow-hidden group"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-t from-ROX_GOLD/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+              <div className="relative">
+                <h2 className="text-lg font-semibold text-white mb-5">Outcome Breakdown</h2>
+                <div className="space-y-5">
+                  {outcomeRows.map((r) => (
+                    <StatRow key={r.key} label={r.key} value={r.value} hint={r.hint} />
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+
+            {d.updatedAtISO && (
+              <p className="text-xs text-neutral-500 px-2">Last updated: {new Date(d.updatedAtISO).toLocaleString()}</p>
+            )}
+          </div>
+        </div>
+
+        {/* Areas to Improve - Professional Design - Full Width */}
+        <motion.div 
+          className="relative bg-black border border-yellow-500/30 rounded-3xl p-8 backdrop-blur-xl overflow-hidden group w-full shadow-[0_0_0_1px_rgba(234,179,8,0.08),0_20px_60px_rgba(0,0,0,0.7)] -mx-4 md:-mx-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
               <div className="absolute inset-0 bg-gradient-to-t from-yellow-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               <div className="relative">
@@ -917,55 +966,6 @@ export default function CalculationsPage() {
                 )}
               </div>
             </motion.div>
-          </div>
-
-          {/* Sidebar - Reduced */}
-          <div className="lg:col-span-3 lg:sticky lg:top-24 h-fit space-y-6">
-            {/* Your Chance Card */}
-            <motion.div 
-              className="relative bg-gradient-to-br from-ROX_DARK_GRAY/80 via-ROX_BLACK/60 to-ROX_BLACK/80 border border-ROX_GOLD/30 rounded-3xl p-8 backdrop-blur-xl overflow-hidden group"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-t from-ROX_GOLD/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute -inset-1 bg-gradient-to-r from-ROX_GOLD/20 via-transparent to-ROX_GOLD/20 rounded-3xl blur opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-
-              <div className="relative space-y-4">
-                <div className="flex items-center gap-2">
-                  <Zap className="h-5 w-5 text-ROX_GOLD" />
-                  <h2 className="text-lg font-semibold text-white">Your Admission Chance</h2>
-                </div>
-                <CircularChance value={userChance} />
-              </div>
-            </motion.div>
-
-
-            {/* Outcome Snapshot Card */}
-            <motion.div 
-              className="relative bg-gradient-to-br from-ROX_DARK_GRAY/80 via-ROX_BLACK/60 to-ROX_BLACK/80 border border-ROX_GOLD/30 rounded-3xl p-6 backdrop-blur-xl overflow-hidden group"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-t from-ROX_GOLD/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-              <div className="relative">
-                <h2 className="text-lg font-semibold text-white mb-5">Outcome Breakdown</h2>
-                <div className="space-y-5">
-                  {outcomeRows.map((r) => (
-                    <StatRow key={r.key} label={r.key} value={r.value} hint={r.hint} />
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-
-
-            {d.updatedAtISO && (
-              <p className="text-xs text-neutral-500 px-2">Last updated: {new Date(d.updatedAtISO).toLocaleString()}</p>
-            )}
-          </div>
-        </div>
 
         {/* Footer Meta */}
         <motion.div 
