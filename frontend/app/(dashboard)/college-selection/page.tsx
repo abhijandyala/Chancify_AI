@@ -882,8 +882,10 @@ export default function CollegeSelectionPage() {
           }}
           disabled={selectedColleges.length === 0 || !zipcode || zipcode.length < 5}
         >
-          Calculate My Chances
-          <ChevronRight className="w-4 h-4 ml-2" />
+          <span className="flex items-center gap-2">
+            Calculate My Chances
+            <ChevronRight className="w-4 h-4" />
+          </span>
         </Button>
       </motion.div>
 
