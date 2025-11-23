@@ -283,7 +283,7 @@ export default function CalculationsPage() {
   const { subjects: subjectEmphasis, loading: subjectsLoading, error: subjectsError } = useCollegeSubjectEmphasis(collegeName);
 
   // Get improvement analysis for the selected college
-  const { improvementData, loading: improvementLoading, error: improvementError } = useImprovementAnalysis(collegeName || '', userProfile);
+  const { improvementData, loading: improvementLoading, error: improvementError, refetch: refetchImprovements } = useImprovementAnalysis(collegeName, userProfile);
   
   // Debug logging for improvement data
   React.useEffect(() => {
@@ -293,7 +293,13 @@ export default function CalculationsPage() {
     console.log('  - Loading:', improvementLoading)
     console.log('  - Error:', improvementError)
     console.log('  - Data:', improvementData)
-  }, [collegeName, userProfile, improvementLoading, improvementError, improvementData]);
+    
+    // If we have both collegeName and userProfile but no data and not loading, try to refetch
+    if (collegeName && userProfile && !improvementData && !improvementLoading && !improvementError) {
+      console.log('🔄 Attempting to refetch improvement analysis...')
+      refetchImprovements()
+    }
+  }, [collegeName, userProfile, improvementLoading, improvementError, improvementData, refetchImprovements]);
 
   // Load data from localStorage and calculate probabilities
   React.useEffect(() => {
@@ -384,6 +390,11 @@ export default function CalculationsPage() {
       // Set college name for subject emphasis hook - map to backend format
       const backendCollegeName = result.college_name || collegeName || 'Selected College';
       
+      console.log('🔍 Setting college name for improvement analysis:');
+      console.log('  - result.college_name:', result.college_name);
+      console.log('  - collegeName (from localStorage):', collegeName);
+      console.log('  - backendCollegeName (fallback):', backendCollegeName);
+      
       // Map college names to backend format
       const collegeNameMapping: { [key: string]: string } = {
         'Carnegie Mellon University': 'Carnegie Mellon',
@@ -393,7 +404,10 @@ export default function CalculationsPage() {
       };
       
       const actualCollegeName = collegeNameMapping[backendCollegeName] || backendCollegeName;
+      console.log('  - actualCollegeName (after mapping):', actualCollegeName);
       setCollegeName(actualCollegeName);
+      
+      console.log('🔍 College name set, improvement analysis hook should trigger');
       
       // Load zipcode from localStorage
       const savedZipcode = localStorage.getItem('userZipcode');
@@ -547,8 +561,9 @@ export default function CalculationsPage() {
       // If current >= target, don't show (user already meets/exceeds target)
       return currentScore < targetScore
     }
-    // If we cannot parse numbers, hide it to be safe (only show when we can verify current < target)
-    return false
+    // If we cannot parse numbers, show it anyway (backend should handle filtering)
+    // Only hide if we can verify current >= target
+    return true
   })
 
   // Compute combined impact based only on visible items, cap at 35% to mirror backend logic

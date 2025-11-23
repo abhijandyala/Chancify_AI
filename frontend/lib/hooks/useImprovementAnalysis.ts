@@ -20,20 +20,56 @@ interface ImprovementAnalysisData {
   error?: string
 }
 
-export const useImprovementAnalysis = (collegeName: string, userProfile: any) => {
+export const useImprovementAnalysis = (collegeName: string | null, userProfile: any) => {
   const [improvementData, setImprovementData] = useState<ImprovementAnalysisData | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   const fetchImprovementAnalysis = useCallback(async () => {
-    if (!collegeName || !userProfile) {
-      console.log('🚫 Skipping improvement analysis - missing collegeName or userProfile')
+    console.log('🔍 useImprovementAnalysis hook called with:')
+    console.log('  - collegeName:', collegeName, '(type:', typeof collegeName, ')')
+    console.log('  - userProfile:', userProfile, '(type:', typeof userProfile, ')')
+    
+    // Validate collegeName: must be a non-empty string
+    const trimmedCollegeName = typeof collegeName === 'string' ? collegeName.trim() : ''
+    if (!trimmedCollegeName) {
+      console.log('🚫 Skipping improvement analysis - collegeName is empty or invalid')
+      console.log('  - Original collegeName:', collegeName)
+      console.log('  - Trimmed result:', trimmedCollegeName)
       setImprovementData(null)
       setLoading(false)
       return
     }
 
-    console.log('🔄 Fetching improvement analysis for:', collegeName)
+    // Validate userProfile: must be an object with at least some data
+    if (!userProfile || typeof userProfile !== 'object' || Object.keys(userProfile).length === 0) {
+      console.log('🚫 Skipping improvement analysis - userProfile is missing or empty')
+      console.log('  - userProfile value:', userProfile)
+      console.log('  - userProfile type:', typeof userProfile)
+      console.log('  - userProfile keys:', userProfile ? Object.keys(userProfile) : 'N/A')
+      setImprovementData(null)
+      setLoading(false)
+      return
+    }
+
+    // Check if userProfile has at least one required field (basic validation)
+    // Note: We check for !== undefined, not truthy, because empty strings are valid (user might not have entered data yet)
+    const hasRequiredFields = userProfile.gpa_unweighted !== undefined || 
+                              userProfile.gpa_weighted !== undefined || 
+                              userProfile.sat !== undefined || 
+                              userProfile.act !== undefined ||
+                              userProfile.rigor !== undefined ||
+                              userProfile.extracurricular_depth !== undefined
+    if (!hasRequiredFields) {
+      console.log('🚫 Skipping improvement analysis - userProfile missing required fields')
+      console.log('  - userProfile keys:', Object.keys(userProfile))
+      console.log('  - Checking for: gpa_unweighted, gpa_weighted, sat, act, rigor, extracurricular_depth')
+      setImprovementData(null)
+      setLoading(false)
+      return
+    }
+
+    console.log('🔄 Fetching improvement analysis for:', trimmedCollegeName)
     console.log('🔄 User profile:', userProfile)
     
     setLoading(true)
@@ -45,7 +81,7 @@ export const useImprovementAnalysis = (collegeName: string, userProfile: any) =>
         'Content-Type': 'application/json',
       })
 
-      const url = `${API_BASE_URL}/api/improvement-analysis/${encodeURIComponent(collegeName)}`
+      const url = `${API_BASE_URL}/api/improvement-analysis/${encodeURIComponent(trimmedCollegeName)}`
       console.log('🔄 API URL:', url)
       console.log('🔄 Request body:', userProfile)
 
@@ -65,7 +101,7 @@ export const useImprovementAnalysis = (collegeName: string, userProfile: any) =>
         setError(null)
       } else {
         const errorText = await response.text()
-        console.error(`❌ Error fetching improvement analysis for ${collegeName}:`, {
+        console.error(`❌ Error fetching improvement analysis for ${trimmedCollegeName}:`, {
           status: response.status,
           statusText: response.statusText,
           errorText
@@ -84,13 +120,13 @@ export const useImprovementAnalysis = (collegeName: string, userProfile: any) =>
         setImprovementData(null)
       }
     } catch (err) {
-      console.error(`❌ Network error fetching improvement analysis for ${collegeName}:`, err)
+      console.error(`❌ Network error fetching improvement analysis for ${trimmedCollegeName}:`, err)
       setError((err as Error).message || 'Network error')
       setImprovementData(null)
     } finally {
       setLoading(false)
     }
-  }, [collegeName, userProfile])
+  }, [collegeName, userProfile]) // Note: collegeName can be null, which is fine - the function handles it
 
   useEffect(() => {
     fetchImprovementAnalysis()
