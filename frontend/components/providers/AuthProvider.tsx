@@ -53,6 +53,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
       const userName = localStorage.getItem('user_name')
 
       if (authToken && userEmail) {
+        // IMMEDIATELY set user state from localStorage to prevent redirect loops
+        // This ensures isAuthenticated is true while we verify with backend
+        const isGoogleToken = authToken.startsWith('google_token_')
+        setUser({
+          id: isGoogleToken ? 'google_user' : 'demo_user',
+          email: userEmail,
+          name: userName || undefined
+        })
         // Verify token with backend
         const API_BASE_URL = getApiBaseUrl()
         const headers = withNgrokHeaders(API_BASE_URL, {
