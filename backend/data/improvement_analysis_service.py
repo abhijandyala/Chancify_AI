@@ -302,20 +302,8 @@ class ImprovementAnalysisService:
         
         # Check if user already exceeds target significantly
         if user_gpa >= target_gpa:
-            # User has met or exceeded target - show "Target Met" with 0 impact
-            improvements.append(ImprovementArea(
-                area="Academic Performance",
-                current=f"{user_gpa:.2f} GPA",
-                target=f"{target_gpa:.2f}+ GPA (Target Met)",
-                impact=0,  # No impact since target is met
-                priority="low",
-                description="Excellent! You've already met the target GPA. Continue maintaining this strong performance.",
-                actionable_steps=[
-                    "Continue maintaining excellent grades",
-                    "Consider taking advanced courses to challenge yourself",
-                    "Focus on maintaining consistency across all subjects"
-                ]
-            ))
+            # User has met or exceeded target - don't show this improvement
+            pass
         elif user_gpa < target_gpa - 0.1:
             # User needs significant improvement
             gap = target_gpa - user_gpa
@@ -390,20 +378,8 @@ class ImprovementAnalysisService:
         # Check SAT scores
         if user_sat > 0:
             if user_sat >= college_sat_75th:
-                # User has met or exceeded 75th percentile - show "Target Met"
-                improvements.append(ImprovementArea(
-                    area="Standardized Testing",
-                    current=f"{user_sat} SAT",
-                    target=f"{college_sat_75th}+ SAT (Target Met)",
-                    impact=0,  # No impact since target is met
-                    priority="low",
-                    description="Excellent! You've already met the target SAT score. Your test scores are very competitive.",
-                    actionable_steps=[
-                        "Continue maintaining excellent test performance",
-                        "Consider taking SAT Subject Tests if relevant to your major",
-                        "Focus on other aspects of your application"
-                    ]
-                ))
+                # User has met or exceeded 75th percentile - don't show this improvement
+                pass
             elif user_sat < college_sat_25th:
                 # User needs significant improvement
                 gap = college_sat_25th - user_sat
@@ -452,20 +428,8 @@ class ImprovementAnalysisService:
         
         elif user_act > 0:
             if user_act >= college_act_75th:
-                # User has met or exceeded 75th percentile - show "Target Met"
-                improvements.append(ImprovementArea(
-                    area="Standardized Testing",
-                    current=f"{user_act} ACT",
-                    target=f"{college_act_75th}+ ACT (Target Met)",
-                    impact=0,  # No impact since target is met
-                    priority="low",
-                    description="Excellent! You've already met the target ACT score. Your test scores are very competitive.",
-                    actionable_steps=[
-                        "Continue maintaining excellent test performance",
-                        "Consider taking ACT Subject Tests if relevant to your major",
-                        "Focus on other aspects of your application"
-                    ]
-                ))
+                # User has met or exceeded 75th percentile - don't show this improvement
+                pass
             elif user_act < college_act_25th:
                 # User needs significant improvement
                 gap = college_act_25th - user_act
@@ -565,33 +529,29 @@ class ImprovementAnalysisService:
         else:  # Selective
             target_level = 6.5
         
-        # Always provide extracurricular guidance
+        # Only provide guidance if current is below target
         if current_level < target_level:
             gap = target_level - current_level
             impact = int(gap * 3)  # 3% per level gap
             priority = "high" if gap > 2 else "medium"
             description = f"Increase depth and commitment in extracurricular activities for this competitive school"
-        else:
-            gap = 0
-            impact = 2  # Lower impact since already good
-            priority = "low"
-            description = f"Maintain your strong extracurricular involvement and consider taking on more leadership roles"
-        
-        improvements.append(ImprovementArea(
-            area="Extracurricular Activities",
-            current=f"{current_level:.1f}/10 overall depth",
-            target=f"{target_level:.1f}/10 with leadership",
-            impact=min(impact, 12),  # Cap at 12%
-            priority=priority,
-            description=description,
-            actionable_steps=[
-                "Focus on 2-3 activities you're passionate about",
-                "Take on leadership roles in existing activities",
-                "Show long-term commitment (2+ years)",
-                "Document impact and achievements",
-                "Develop unique projects or initiatives"
-            ]
-        ))
+            
+            improvements.append(ImprovementArea(
+                area="Extracurricular Activities",
+                current=f"{current_level:.1f}/10 overall depth",
+                target=f"{target_level:.1f}/10 with leadership",
+                impact=min(impact, 12),  # Cap at 12%
+                priority=priority,
+                description=description,
+                actionable_steps=[
+                    "Focus on 2-3 activities you're passionate about",
+                    "Take on leadership roles in existing activities",
+                    "Show long-term commitment (2+ years)",
+                    "Document impact and achievements",
+                    "Develop unique projects or initiatives"
+                ]
+            ))
+        # If current >= target, don't show improvement
         
         return improvements
     
@@ -612,20 +572,8 @@ class ImprovementAnalysisService:
         
         # Check leadership positions
         if leadership >= 8:
-            # User has exceptional leadership - show "Target Met"
-            improvements.append(ImprovementArea(
-                area="Leadership Experience",
-                current=f"{leadership} positions",
-                target="8+ exceptional leadership (Target Met)",
-                impact=0,  # No impact since target is met
-                priority="low",
-                description="Excellent! You have exceptional leadership experience. Continue maintaining this strong involvement.",
-                actionable_steps=[
-                    "Continue maintaining excellent leadership roles",
-                    "Consider mentoring others in leadership",
-                    "Focus on quality over quantity in leadership"
-                ]
-            ))
+            # User has exceptional leadership - don't show this improvement
+            pass
         elif leadership < 2:
             # User needs significant improvement
             improvements.append(ImprovementArea(
@@ -659,7 +607,7 @@ class ImprovementAnalysisService:
                 ]
             ))
         
-        # Always provide awards guidance
+        # Only provide awards guidance if below target
         if awards < 3:
             improvements.append(ImprovementArea(
                 area="Awards & Recognition",
@@ -675,8 +623,8 @@ class ImprovementAnalysisService:
                     "Document all achievements and recognition"
                 ]
             ))
-        else:
-            # Even if good, provide guidance for excellence
+        elif awards < 7:
+            # User is between 3 and 7 - provide guidance for excellence
             improvements.append(ImprovementArea(
                 area="Awards & Recognition",
                 current=f"{awards} awards",
@@ -691,6 +639,7 @@ class ImprovementAnalysisService:
                     "Seek recognition in multiple areas"
                 ]
             ))
+        # If awards >= 7, don't show improvement
         
         return improvements
     
@@ -715,7 +664,7 @@ class ImprovementAnalysisService:
         else:  # Selective
             target_ap = 3
         
-        # Always provide academic rigor guidance
+        # Only provide academic rigor guidance if below target
         if ap_count < target_ap:
             gap = target_ap - ap_count
             impact = int(gap * 2)  # 2% per AP course gap
@@ -736,22 +685,7 @@ class ImprovementAnalysisService:
                     "Focus on courses related to your intended major"
                 ]
             ))
-        else:
-            # Even if good, provide guidance for excellence
-            improvements.append(ImprovementArea(
-                area="Academic Rigor",
-                current=f"{ap_count} AP courses",
-                target=f"{target_ap + 2}+ maximum rigor",
-                impact=3,
-                priority="low",
-                description="Maintain your strong academic rigor and consider additional challenging courses",
-                actionable_steps=[
-                    "Take additional AP courses if available",
-                    "Consider dual enrollment or college courses",
-                    "Pursue independent study projects",
-                    "Maintain excellent grades in rigorous coursework"
-                ]
-            ))
+        # If ap_count >= target_ap, don't show improvement
         
         return improvements
     
@@ -786,8 +720,11 @@ class ImprovementAnalysisService:
                     "Document your research process and findings"
                 ]
             ))
+        elif research >= 9:
+            # User has already met or exceeded the target - don't show this improvement
+            pass
         else:
-            # Even if good, provide guidance for excellence
+            # User is between 2 and 9 - provide guidance for excellence
             improvements.append(ImprovementArea(
                 area="Research & Innovation",
                 current=f"{research}/10 research experience",
@@ -819,8 +756,11 @@ class ImprovementAnalysisService:
                     "Create something meaningful"
                 ]
             ))
+        elif passion_projects >= 9:
+            # User has already met or exceeded the target - don't show this improvement
+            pass
         else:
-            # Even if good, provide guidance for excellence
+            # User is between 3 and 9 - provide guidance for excellence
             improvements.append(ImprovementArea(
                 area="Passion Projects",
                 current=f"{passion_projects}/10 projects",
@@ -853,7 +793,7 @@ class ImprovementAnalysisService:
             essay_quality = 5
             recommendations = 5
         
-        if essay_quality < 7:
+        if essay_quality < 8:
             improvements.append(ImprovementArea(
                 area="Essay Quality",
                 current=f"{essay_quality}/10 quality",
@@ -868,8 +808,9 @@ class ImprovementAnalysisService:
                     "Get feedback from teachers and mentors"
                 ]
             ))
+        # If essay_quality >= 8, don't show improvement
         
-        if recommendations < 7:
+        if recommendations < 8:
             improvements.append(ImprovementArea(
                 area="Recommendations",
                 current=f"{recommendations}/10 strength",
@@ -884,6 +825,7 @@ class ImprovementAnalysisService:
                     "Provide recommenders with your resume and goals"
                 ]
             ))
+        # If recommendations >= 8, don't show improvement
         
         return improvements
     
@@ -901,7 +843,11 @@ class ImprovementAnalysisService:
         if is_stem:
             # Check for STEM-specific activities
             research_experience = profile.get('research_experience', 0)
-            if research_experience < 5:
+            try:
+                research_experience = float(research_experience) if research_experience else 0
+            except (ValueError, TypeError):
+                research_experience = 0
+            if research_experience < 7:
                 improvements.append(ImprovementArea(
                     area="STEM Preparation",
                     current=f"{research_experience}/10 research experience",
@@ -917,6 +863,7 @@ class ImprovementAnalysisService:
                         "Consider summer STEM programs"
                     ]
                 ))
+            # If research_experience >= 7, don't show improvement
         
         # Business/Economics majors
         business_majors = ['business', 'economics', 'finance', 'marketing', 'management']
@@ -930,7 +877,7 @@ class ImprovementAnalysisService:
                 business_ventures = float(business_ventures) if business_ventures else 0
             except (ValueError, TypeError):
                 business_ventures = 0
-            if business_ventures < 4:
+            if business_ventures < 6:
                 improvements.append(ImprovementArea(
                     area="Business Experience",
                     current=f"{business_ventures}/10 business ventures",
@@ -946,6 +893,7 @@ class ImprovementAnalysisService:
                         "Seek internships or shadowing opportunities"
                     ]
                 ))
+            # If business_ventures >= 6, don't show improvement
         
         return improvements
     
@@ -1049,7 +997,7 @@ class ImprovementAnalysisService:
             interview_quality = 5
             demonstrated_interest = 5
         
-        if interview_quality < 7:
+        if interview_quality < 8:
             improvements.append(ImprovementArea(
                 area="Interview Skills",
                 current=f"{interview_quality}/10 interview quality",
@@ -1065,8 +1013,9 @@ class ImprovementAnalysisService:
                     "Consider mock interviews with counselors"
                 ]
             ))
+        # If interview_quality >= 8, don't show improvement
         
-        if demonstrated_interest < 6:
+        if demonstrated_interest < 8:
             improvements.append(ImprovementArea(
                 area="Demonstrated Interest",
                 current=f"{demonstrated_interest}/10 interest level",
@@ -1082,6 +1031,7 @@ class ImprovementAnalysisService:
                     "Mention specific programs and opportunities in essays"
                 ]
             ))
+        # If demonstrated_interest >= 8, don't show improvement
         
         return improvements
     
@@ -1097,8 +1047,8 @@ class ImprovementAnalysisService:
         except (ValueError, TypeError):
             portfolio_audition = 0
         
-        # Always provide portfolio guidance, regardless of major
-        if portfolio_audition < 6:
+        # Only provide portfolio guidance if below target
+        if portfolio_audition < 8:
             improvements.append(ImprovementArea(
                 area="Creative Portfolio",
                 current=f"{portfolio_audition}/10 portfolio strength",
@@ -1114,22 +1064,7 @@ class ImprovementAnalysisService:
                     "Showcase your best work"
                 ]
             ))
-        else:
-            # Even if good, provide guidance for excellence
-            improvements.append(ImprovementArea(
-                area="Creative Portfolio",
-                current=f"{portfolio_audition}/10 portfolio strength",
-                target="9+/10 exceptional work",
-                impact=2,
-                priority="low",
-                description="Maintain your strong creative portfolio and pursue advanced projects",
-                actionable_steps=[
-                    "Create more ambitious projects",
-                    "Seek professional feedback",
-                    "Consider competitions or exhibitions",
-                    "Mentor other creative students"
-                ]
-            ))
+        # If portfolio_audition >= 8, don't show improvement
         
         return improvements
     
@@ -1145,8 +1080,8 @@ class ImprovementAnalysisService:
         except (ValueError, TypeError):
             volunteer_work = 5
         
-        # Always provide volunteer guidance
-        if volunteer_work < 6:
+        # Only provide volunteer guidance if below target
+        if volunteer_work < 7:
             improvements.append(ImprovementArea(
                 area="Community Service",
                 current=f"{volunteer_work}/10 volunteer work",
@@ -1162,8 +1097,8 @@ class ImprovementAnalysisService:
                     "Connect service to your academic and career goals"
                 ]
             ))
-        else:
-            # Even if good, provide guidance for excellence
+        elif volunteer_work < 9:
+            # User is between 7 and 9 - provide guidance for excellence
             improvements.append(ImprovementArea(
                 area="Community Service",
                 current=f"{volunteer_work}/10 volunteer work",
@@ -1178,6 +1113,7 @@ class ImprovementAnalysisService:
                     "Document and share your impact"
                 ]
             ))
+        # If volunteer_work >= 9, don't show improvement
         
         return improvements
     

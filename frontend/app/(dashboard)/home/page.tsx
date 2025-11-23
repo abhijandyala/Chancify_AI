@@ -46,10 +46,10 @@ export default function HomePage() {
     
     // Course rigor and class info
     rigor: '5',
-    ap_count: '0',
-    honors_count: '0',
-    class_rank_percentile: '',
-    class_size: '',
+    ap_count: '5',
+    honors_count: '8',
+    class_rank_percentile: '15',
+    class_size: '300',
     
     // Extracurriculars and activities
     extracurricular_depth: '5',

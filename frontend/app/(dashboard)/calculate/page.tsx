@@ -920,8 +920,19 @@ export default function CalculationsPage() {
                         </div>
                       </>
                     ) : (
-                      <div className="p-6 rounded-xl bg-green-500/10 border border-green-500/30">
-                        <p className="text-green-300 font-semibold">You have went above and beyond, there is nothing else needing improvement at this point.</p>
+                      <div className="flex flex-col items-center justify-center py-16 px-6 text-center">
+                        <div className="mb-6">
+                          <Award className="h-16 w-16 text-yellow-400 mx-auto" />
+                        </div>
+                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                          You've Exceeded Our Expectations
+                        </h3>
+                        <p className="text-lg text-neutral-300 max-w-2xl mb-2">
+                          This is the best of the best you can get. Keep reaching for more, but on our part, you have exceeded our expectations.
+                        </p>
+                        <p className="text-base text-neutral-400 max-w-2xl">
+                          Your profile demonstrates exceptional strength across all areas. Continue maintaining this excellence as you pursue your college goals.
+                        </p>
                       </div>
                     )}
                   </>
