@@ -126,9 +126,21 @@ def is_allowed_origin(origin: str) -> bool:
     """Check whether the incoming request origin is allowed."""
     if not origin:
         return False
-    if origin in allowed_origins:
-        return True
-    return any(origin.endswith(suffix) for suffix in allowed_origin_suffixes)
+    
+    # Normalize origin (lowercase for comparison)
+    origin_lower = origin.lower().strip()
+    
+    # Check exact matches (case-insensitive)
+    for allowed in allowed_origins:
+        if allowed.lower() == origin_lower:
+            return True
+    
+    # Check suffix matches
+    for suffix in allowed_origin_suffixes:
+        if origin_lower.endswith(suffix.lower()):
+            return True
+    
+    return False
 
 
 @app.middleware("http")
@@ -142,11 +154,48 @@ async def custom_cors_middleware(request: Request, call_next):
     """
     origin = request.headers.get("origin")
     
+    # Log all requests for debugging (can be removed in production)
     if request.method == "OPTIONS":
-        response = Response(status_code=204)
-    else:
-        response = await call_next(request)
+        logger.info(f"OPTIONS request - Origin: {origin}, Path: {request.url.path}, Allowed: {is_allowed_origin(origin) if origin else False}")
     
+    # Handle preflight OPTIONS requests
+    if request.method == "OPTIONS":
+        # Always check origin first
+        if not origin:
+            logger.warning("OPTIONS request with no origin header")
+            # Still return 204 to avoid breaking browsers, but without CORS headers
+            return Response(status_code=204)
+        
+        # Check if origin is allowed
+        if is_allowed_origin(origin):
+            response = Response(status_code=204)
+            response.headers["Access-Control-Allow-Origin"] = origin
+            response.headers["Access-Control-Allow-Credentials"] = "true"
+            response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,PATCH,DELETE,OPTIONS"
+            # Get requested headers from Access-Control-Request-Headers
+            requested_headers = request.headers.get("access-control-request-headers", "")
+            # Always allow these headers, plus any requested ones
+            allowed_headers = "Authorization,Content-Type,ngrok-skip-browser-warning"
+            if requested_headers:
+                # Add requested headers if they're safe
+                allowed_headers = f"{allowed_headers},{requested_headers}"
+            response.headers["Access-Control-Allow-Headers"] = allowed_headers
+            response.headers["Access-Control-Max-Age"] = "86400"
+            response.headers["Vary"] = "Origin"
+            logger.info(f"CORS preflight allowed for origin: {origin}, path: {request.url.path}")
+            return response
+        else:
+            # Origin not allowed - but still return 204 with no CORS headers
+            # Returning 403 can break some browsers
+            logger.warning(f"CORS preflight rejected for origin: {origin}, path: {request.url.path}")
+            response = Response(status_code=204)
+            # Don't set CORS headers - browser will reject
+            return response
+    
+    # Handle actual requests
+    response = await call_next(request)
+    
+    # Add CORS headers to response if origin is allowed
     if origin and is_allowed_origin(origin):
         response.headers["Access-Control-Allow-Origin"] = origin
         response.headers["Access-Control-Allow-Credentials"] = "true"
@@ -159,9 +208,12 @@ async def custom_cors_middleware(request: Request, call_next):
     
     return response
 
+# Add FastAPI CORSMiddleware - it will handle CORS for exact origin matches
+# Our custom middleware handles suffix-based matching (.railway.app, .ngrok-free.dev)
+# and ensures OPTIONS requests are handled correctly
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allowed_origins,
+    allow_origins=allowed_origins,  # Exact matches
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=[

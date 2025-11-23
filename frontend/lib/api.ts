@@ -4,8 +4,9 @@
 
 import { getApiBaseUrl, withNgrokHeaders } from '@/lib/config';
 
-// Backend URL configuration (resolved once per module evaluation)
-const API_BASE_URL = getApiBaseUrl();
+// Backend URL configuration - call getApiBaseUrl() each time to support runtime changes
+// This allows the URL to be updated via localStorage or window.__CHANCIFY_API_URL__
+const getAPI_BASE_URL = () => getApiBaseUrl();
 
 // Headers for API requests
 const getHeaders = () => {
@@ -13,7 +14,7 @@ const getHeaders = () => {
     'Content-Type': 'application/json',
   };
 
-  return withNgrokHeaders(API_BASE_URL, headers);
+  return withNgrokHeaders(getAPI_BASE_URL(), headers);
 };
 
 export interface PredictionRequest {
@@ -142,6 +143,7 @@ export async function getAdmissionProbability(
   profile: PredictionRequest
 ): Promise<PredictionResponse> {
   try {
+    const API_BASE_URL = getAPI_BASE_URL()
     const response = await fetch(`${API_BASE_URL}/api/predict/frontend`, {
       method: 'POST',
       headers: getHeaders(),
@@ -185,6 +187,7 @@ export async function getCollegeSuggestions(
   profile: CollegeSuggestionsRequest
 ): Promise<CollegeSuggestionsResponse> {
   try {
+    const API_BASE_URL = getAPI_BASE_URL()
     const response = await fetch(`${API_BASE_URL}/api/suggest/colleges`, {
       method: 'POST',
       headers: getHeaders(),
@@ -225,6 +228,7 @@ export async function searchColleges(query: string, limit: number = 20): Promise
   message?: string;
 }> {
   try {
+    const API_BASE_URL = getAPI_BASE_URL()
     const response = await fetch(`${API_BASE_URL}/api/search/colleges?q=${encodeURIComponent(query)}&limit=${limit}`, {
       method: 'GET',
       headers: getHeaders(),
@@ -253,6 +257,7 @@ export async function searchColleges(query: string, limit: number = 20): Promise
  */
 export async function checkMLBackendStatus(): Promise<boolean> {
   try {
+    const API_BASE_URL = getAPI_BASE_URL()
     const response = await fetch(`${API_BASE_URL}/api/health`, {
       method: 'GET',
       headers: getHeaders(),
