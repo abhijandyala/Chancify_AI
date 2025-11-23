@@ -544,10 +544,11 @@ export default function CalculationsPage() {
     const currentScore = extractScore(imp.current)
     const targetScore = extractScore(imp.target)
     if (currentScore != null && targetScore != null) {
+      // If current >= target, don't show (user already meets/exceeds target)
       return currentScore < targetScore
     }
-    // If we cannot parse numbers, keep it visible (non-numeric advisories)
-    return true
+    // If we cannot parse numbers, hide it to be safe (only show when we can verify current < target)
+    return false
   })
 
   // Compute combined impact based only on visible items, cap at 35% to mirror backend logic
@@ -938,43 +939,19 @@ export default function CalculationsPage() {
                   </>
                 )}
 
-                {/* Fallback State - Show Default Data */}
+                {/* No Data State - Don't show fallback */}
                 {!improvementData?.improvements && !improvementLoading && !improvementError && (
-                  <>
-                    <div className="mb-4 p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
-                      <div className="flex items-center gap-2">
-                        <Info className="h-4 w-4 text-blue-400" />
-                        <p className="text-blue-400 text-sm">Using general improvement recommendations</p>
+                  <div className="flex flex-col items-center justify-center py-12 px-6 text-center">
+                      <div className="mb-4">
+                        <Info className="h-12 w-12 text-yellow-400 mx-auto" />
                       </div>
+                      <p className="text-lg text-neutral-300 mb-2">
+                        Improvement analysis will appear here once you select a college and complete your profile.
+                      </p>
+                      <p className="text-sm text-neutral-400">
+                        Please ensure you've selected a college and filled in your academic information.
+                      </p>
                     </div>
-                    
-                    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                      {improvementAreas.slice(0, 6).map((improvement) => (
-                        <ImprovementCard
-                          key={improvement.area}
-                          area={improvement.area}
-                          current={improvement.current}
-                          target={improvement.target}
-                          impact={improvement.impact}
-                          priority={improvement.priority}
-                          description={improvement.description}
-                          actionable_steps={improvement.actionable_steps}
-                        />
-                      ))}
-                    </div>
-
-                    <div className="mt-8 p-6 rounded-xl bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 border border-yellow-500/30">
-                      <div className="flex items-center gap-4">
-                        <div className="p-2 bg-yellow-500/20 rounded-lg">
-                          <TrendingUp className="h-6 w-6 text-yellow-400" />
-                        </div>
-                        <div>
-                          <p className="font-bold text-yellow-400 text-xl mb-1">Combined Improvement Potential</p>
-                          <p className="text-white text-lg">By improving all areas above, you could increase your chances by <span className="font-bold text-yellow-400 text-2xl">+45%</span></p>
-                        </div>
-                      </div>
-                    </div>
-                  </>
                 )}
               </div>
             </motion.div>
