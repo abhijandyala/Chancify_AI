@@ -30,10 +30,30 @@ export const useImprovementAnalysis = (collegeName: string | null, userProfile: 
     console.log('  - collegeName:', collegeName, '(type:', typeof collegeName, ')')
     console.log('  - userProfile:', userProfile, '(type:', typeof userProfile, ')')
     
-    // Validate collegeName: must be a non-empty string
-    const trimmedCollegeName = typeof collegeName === 'string' ? collegeName.trim() : ''
+    // Validate collegeName: must be a non-empty string (can be string or null)
+    // Handle null case explicitly
+    if (collegeName === null || collegeName === undefined) {
+      console.log('🚫 Skipping improvement analysis - collegeName is null/undefined')
+      console.log('  - collegeName value:', collegeName)
+      setImprovementData(null)
+      setLoading(false)
+      return
+    }
+    
+    // Now we know it's not null, check if it's a string
+    if (typeof collegeName !== 'string') {
+      console.log('🚫 Skipping improvement analysis - collegeName is not a string')
+      console.log('  - collegeName type:', typeof collegeName)
+      console.log('  - collegeName value:', collegeName)
+      setImprovementData(null)
+      setLoading(false)
+      return
+    }
+    
+    // Trim and validate it's not empty
+    const trimmedCollegeName = collegeName.trim()
     if (!trimmedCollegeName) {
-      console.log('🚫 Skipping improvement analysis - collegeName is empty or invalid')
+      console.log('🚫 Skipping improvement analysis - collegeName is empty after trim')
       console.log('  - Original collegeName:', collegeName)
       console.log('  - Trimmed result:', trimmedCollegeName)
       setImprovementData(null)

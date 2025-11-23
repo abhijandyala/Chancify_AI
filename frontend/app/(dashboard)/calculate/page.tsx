@@ -288,16 +288,36 @@ export default function CalculationsPage() {
   // Debug logging for improvement data
   React.useEffect(() => {
     console.log('🔍 Improvement Analysis Debug:')
-    console.log('  - College Name:', collegeName)
-    console.log('  - User Profile:', userProfile)
+    console.log('  - College Name:', collegeName, '(type:', typeof collegeName, ')')
+    console.log('  - User Profile:', userProfile ? 'exists' : 'null', userProfile ? `(keys: ${Object.keys(userProfile).length})` : '')
     console.log('  - Loading:', improvementLoading)
     console.log('  - Error:', improvementError)
-    console.log('  - Data:', improvementData)
+    console.log('  - Data:', improvementData ? `exists (${improvementData.improvements?.length || 0} improvements)` : 'null')
     
-    // If we have both collegeName and userProfile but no data and not loading, try to refetch
-    if (collegeName && userProfile && !improvementData && !improvementLoading && !improvementError) {
-      console.log('🔄 Attempting to refetch improvement analysis...')
-      refetchImprovements()
+    // CRITICAL: When collegeName changes from null to a valid value, trigger refetch
+    if (collegeName && typeof collegeName === 'string' && collegeName.trim() && userProfile) {
+      console.log('✅ Valid collegeName and userProfile detected, checking if improvement analysis should run...')
+      
+      // If we have valid data but no improvement data and not currently loading, try to refetch
+      if (!improvementData && !improvementLoading && !improvementError) {
+        console.log('🔄 Triggering improvement analysis refetch...')
+        console.log('  - collegeName:', collegeName)
+        console.log('  - userProfile keys:', Object.keys(userProfile))
+        refetchImprovements()
+      }
+    } else if (collegeName === null) {
+      console.log('⏳ Waiting for collegeName to be set from backend response...')
+    } else if (!userProfile) {
+      console.log('⏳ Waiting for userProfile to be loaded...')
+    }
+    
+    // Also log when we have the data but hook isn't running
+    if (collegeName && userProfile && improvementLoading === false && !improvementData && !improvementError) {
+      console.log('⚠️ WARNING: Have collegeName and userProfile but no improvement data')
+      console.log('  - This might indicate the hook validation is failing')
+      console.log('  - collegeName value:', collegeName)
+      console.log('  - collegeName type:', typeof collegeName)
+      console.log('  - userProfile:', userProfile)
     }
   }, [collegeName, userProfile, improvementLoading, improvementError, improvementData, refetchImprovements]);
 
@@ -354,6 +374,14 @@ export default function CalculationsPage() {
         console.log('🔍 BACKEND RESPONSE DEBUG:', result);
         console.log('🔍 COLLEGE DATA FROM BACKEND:', result.college_data);
         console.log('🔍 COLLEGE NAME FROM BACKEND:', result.college_name);
+        console.log('🔍 COLLEGE DATA NAME:', result.college_data?.name);
+        console.log('🔍 COLLEGE ID:', result.college_id);
+        
+        // CRITICAL: Verify we have a college name from the response
+        if (!result.college_name && !result.college_data?.name) {
+          console.error('❌ ERROR: Backend response missing college_name!');
+          console.error('  - Full result:', JSON.stringify(result, null, 2));
+        }
         console.log('🔍 ACCEPTANCE RATE FROM BACKEND:', result.acceptance_rate);
         console.log('🔍 PROBABILITY FROM BACKEND:', result.probability);
         console.log('🔍 ML PROBABILITY FROM BACKEND:', result.ml_probability);
@@ -388,12 +416,14 @@ export default function CalculationsPage() {
         console.log('🔍 Reject Rate:', (rejectRate * 100).toFixed(1) + '%');
 
       // Set college name for subject emphasis hook - map to backend format
-      const backendCollegeName = result.college_name || collegeName || 'Selected College';
+      // CRITICAL: Use result.college_name from backend response, not the local variable
+      const backendCollegeName = result.college_name || result.college_data?.name || firstCollege || 'Selected College';
       
       console.log('🔍 Setting college name for improvement analysis:');
       console.log('  - result.college_name:', result.college_name);
-      console.log('  - collegeName (from localStorage):', collegeName);
-      console.log('  - backendCollegeName (fallback):', backendCollegeName);
+      console.log('  - result.college_data?.name:', result.college_data?.name);
+      console.log('  - firstCollege (from localStorage):', firstCollege);
+      console.log('  - backendCollegeName (final):', backendCollegeName);
       
       // Map college names to backend format
       const collegeNameMapping: { [key: string]: string } = {
@@ -405,9 +435,27 @@ export default function CalculationsPage() {
       
       const actualCollegeName = collegeNameMapping[backendCollegeName] || backendCollegeName;
       console.log('  - actualCollegeName (after mapping):', actualCollegeName);
-      setCollegeName(actualCollegeName);
       
-      console.log('🔍 College name set, improvement analysis hook should trigger');
+      // CRITICAL: Validate college name before setting
+      if (!actualCollegeName || actualCollegeName === 'Selected College' || actualCollegeName.startsWith('college_')) {
+        console.error('❌ ERROR: Invalid college name detected:', actualCollegeName);
+        console.error('  - This should not happen. Backend should return a valid college name.');
+        console.error('  - result.college_name:', result.college_name);
+        console.error('  - result.college_data?.name:', result.college_data?.name);
+        console.error('  - firstCollege:', firstCollege);
+        // Don't set invalid college name - improvement hook will skip anyway
+      } else {
+        // CRITICAL: Set college name state IMMEDIATELY so improvement hook can use it
+        setCollegeName(actualCollegeName);
+        console.log('✅ College name state updated to:', actualCollegeName);
+        
+        // Trigger improvement analysis refetch after state update
+        // Use setTimeout to ensure state has updated
+        setTimeout(() => {
+          console.log('🔄 Triggering improvement analysis refetch with college name:', actualCollegeName);
+          // The hook should automatically re-run when collegeName changes, but we'll also manually trigger
+        }, 50);
+      }
       
       // Load zipcode from localStorage
       const savedZipcode = localStorage.getItem('userZipcode');
