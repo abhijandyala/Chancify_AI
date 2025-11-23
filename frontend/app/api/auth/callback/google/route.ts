@@ -80,6 +80,13 @@ export async function GET(request: NextRequest) {
     let backendAccessToken: string | undefined
     try {
       const backendUrl = getApiBaseUrl()
+      console.log('🔍 OAuth callback - Backend URL:', backendUrl)
+      console.log('🔍 OAuth callback - Environment check:', {
+        NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+        API_BASE_URL: process.env.API_BASE_URL,
+        BACKEND_URL: process.env.BACKEND_URL,
+      })
+      
       const createUserResponse = await fetch(`${backendUrl}/api/auth/google-oauth`, {
         method: 'POST',
         headers: withNgrokHeaders(backendUrl, {
@@ -92,15 +99,29 @@ export async function GET(request: NextRequest) {
         })
       })
 
+      console.log('🔍 Backend response status:', createUserResponse.status)
+
       if (createUserResponse.ok) {
         const userData = await createUserResponse.json()
-        console.log('User created in database:', userData)
+        console.log('✅ User created in database:', userData)
         backendAccessToken = userData?.access_token
       } else {
-        console.error('Failed to create user in database:', await createUserResponse.text())
+        const errorText = await createUserResponse.text()
+        console.error('❌ Failed to create user in database:', {
+          status: createUserResponse.status,
+          statusText: createUserResponse.statusText,
+          error: errorText,
+          backendUrl,
+        })
+        // Don't fail OAuth if backend call fails - user can still log in
+        // The frontend will handle missing token gracefully
       }
     } catch (error) {
-      console.error('Error calling backend API:', error)
+      console.error('❌ Error calling backend API:', {
+        error: error instanceof Error ? error.message : String(error),
+        backendUrl: getApiBaseUrl(),
+      })
+      // Don't fail OAuth if backend call fails - user can still log in
     }
 
     // Create success URL with user data - redirect to home page

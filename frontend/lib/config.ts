@@ -9,10 +9,18 @@ declare global {
 }
 
 function resolveEnvApiUrl(): string | undefined {
-  return (
-    process.env.NEXT_PUBLIC_API_URL?.trim() ||
-    process.env.API_BASE_URL?.trim()
-  )
+  // Check environment variables (works on both client and server)
+  const envUrl = process.env.NEXT_PUBLIC_API_URL?.trim() || process.env.API_BASE_URL?.trim()
+  if (envUrl) {
+    return envUrl
+  }
+  
+  // On server side, also check for a server-only env var
+  if (typeof window === 'undefined') {
+    return process.env.BACKEND_URL?.trim() || undefined
+  }
+  
+  return undefined
 }
 
 function resolveRuntimeOverride(): string | undefined {

@@ -63,18 +63,32 @@ export function AuthProvider({ children }: AuthProviderProps) {
               email: userEmail,
               name: userName || userData.name
             })
-          } else {
-            // Token is invalid, clear it
+          } else if (response.status === 401 || response.status === 403) {
+            // Only clear token if we get unauthorized/forbidden (token is actually invalid)
+            console.warn('Token is invalid (401/403), clearing auth data')
             localStorage.removeItem('auth_token')
             localStorage.removeItem('user_email')
             localStorage.removeItem('user_name')
             setUser(null)
+          } else {
+            // For other errors (network, 5xx, etc.), backend might be down but token could be valid
+            // Use local storage as fallback to prevent auth loops
+            console.warn('Backend unavailable or error (status:', response.status, '), using local auth data')
+            // Check if token looks like a Google OAuth token
+            const isGoogleToken = authToken.startsWith('google_token_')
+            setUser({
+              id: isGoogleToken ? 'google_user' : 'demo_user',
+              email: userEmail,
+              name: userName || undefined
+            })
           }
         } catch (error) {
-          console.error('Auth verification failed:', error)
-          // For demo purposes, if backend is not available, use local storage
+          console.error('Auth verification failed (network error):', error)
+          // Network error - backend might be unreachable, but token could still be valid
+          // Use local storage as fallback to prevent auth loops
+          const isGoogleToken = authToken.startsWith('google_token_')
           setUser({
-            id: 'demo_user',
+            id: isGoogleToken ? 'google_user' : 'demo_user',
             email: userEmail,
             name: userName || undefined
           })
