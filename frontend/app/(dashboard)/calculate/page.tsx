@@ -595,7 +595,13 @@ export default function CalculationsPage() {
   };
 
   // Filter improvements to only those below target
-  const visibleImprovements = (improvementData?.improvements || []).filter((imp) => {
+  // CRITICAL: Use useMemo to ensure this recalculates when improvementData changes
+  const visibleImprovements = React.useMemo(() => {
+    if (!improvementData?.improvements || !Array.isArray(improvementData.improvements)) {
+      return [];
+    }
+    
+    return improvementData.improvements.filter((imp) => {
     // Hide items explicitly marked as Target Met or with zero/negative impact
     const targetText = (imp.target || '').toLowerCase()
     const currentText = (imp.current || '').toLowerCase()
@@ -621,14 +627,20 @@ export default function CalculationsPage() {
     }
     // If we cannot parse numbers, show it anyway (backend should handle filtering)
     // Only hide if we can verify current >= target
-    console.log('🔍 Keeping improvement (cannot parse numbers):', imp.area, 'current:', imp.current, 'target:', imp.target)
-    return true
-  })
+      console.log('🔍 Keeping improvement (cannot parse numbers):', imp.area, 'current:', imp.current, 'target:', imp.target)
+      return true
+    });
+  }, [improvementData]);
   
-  console.log('🔍 Improvement filtering results:')
-  console.log('  - Total improvements from backend:', improvementData?.improvements?.length || 0)
-  console.log('  - Visible improvements after filtering:', visibleImprovements.length)
-  console.log('  - Filtered out:', (improvementData?.improvements?.length || 0) - visibleImprovements.length)
+  // Log filtering results
+  React.useEffect(() => {
+    if (improvementData?.improvements) {
+      console.log('🔍 Improvement filtering results:')
+      console.log('  - Total improvements from backend:', improvementData.improvements.length)
+      console.log('  - Visible improvements after filtering:', visibleImprovements.length)
+      console.log('  - Filtered out:', improvementData.improvements.length - visibleImprovements.length)
+    }
+  }, [improvementData, visibleImprovements])
 
   // Compute combined impact based only on visible items, cap at 35% to mirror backend logic
   const combinedVisibleImpact = Math.min(
@@ -968,26 +980,14 @@ export default function CalculationsPage() {
                 )}
 
                 {/* Success State - Show Real Data - Only show if we have actual improvement data */}
-                {(() => {
-                  const hasData = improvementData && improvementData.improvements && Array.isArray(improvementData.improvements) && improvementData.improvements.length > 0;
-                  const shouldShow = hasData && !improvementLoading;
-                  const hasVisible = visibleImprovements.length > 0;
-                  
-                  console.log('🔍 RENDERING CHECK:');
-                  console.log('  - hasData:', hasData);
-                  console.log('  - improvementLoading:', improvementLoading);
-                  console.log('  - shouldShow:', shouldShow);
-                  console.log('  - hasVisible:', hasVisible);
-                  console.log('  - visibleImprovements.length:', visibleImprovements.length);
-                  console.log('  - improvementData?.improvements?.length:', improvementData?.improvements?.length);
-                  
-                  if (!shouldShow) {
-                    return null;
-                  }
-                  
-                  return (
-                    <>
-                      {hasVisible ? (
+                {/* CRITICAL: Use direct conditional rendering, not IIFE, to ensure React properly tracks state changes */}
+                {improvementData && 
+                 improvementData.improvements && 
+                 Array.isArray(improvementData.improvements) && 
+                 improvementData.improvements.length > 0 && 
+                 !improvementLoading && (
+                  <>
+                    {visibleImprovements.length > 0 ? (
                       <>
                         <div className="grid grid-cols-1 lg:grid-cols-2 xl-grid-cols-3 gap-6">
                           {visibleImprovements.map((improvement) => (
@@ -1032,12 +1032,14 @@ export default function CalculationsPage() {
                         </p>
                       </div>
                     )}
-                    </>
-                  );
-                })()}
+                  </>
+                )}
 
-                {/* No Data State - Only show if we truly have no data */}
-                {!improvementData && !improvementLoading && !improvementError && (
+                {/* No Data State - Only show if we truly have no data AND not loading AND no error */}
+                {/* CRITICAL: Make sure this doesn't conflict with Success State by checking improvementData.improvements explicitly */}
+                {!improvementLoading && 
+                 !improvementError && 
+                 (!improvementData || !improvementData.improvements || !Array.isArray(improvementData.improvements) || improvementData.improvements.length === 0) && (
                   <div className="flex flex-col items-center justify-center py-12 px-6 text-center">
                       <div className="mb-4">
                         <Info className="h-12 w-12 text-yellow-400 mx-auto" />
@@ -1047,24 +1049,6 @@ export default function CalculationsPage() {
                       </p>
                       <p className="text-sm text-neutral-400">
                         Please ensure you've selected a college and filled in your academic information.
-                      </p>
-                    </div>
-                )}
-                
-                {/* Debug: Show if we have data but it's being filtered out */}
-                {improvementData?.improvements && improvementData.improvements.length > 0 && visibleImprovements.length === 0 && !improvementLoading && (
-                  <div className="flex flex-col items-center justify-center py-12 px-6 text-center">
-                      <div className="mb-4">
-                        <Info className="h-12 w-12 text-yellow-400 mx-auto" />
-                      </div>
-                      <p className="text-lg text-neutral-300 mb-2">
-                        All improvements have been filtered out.
-                      </p>
-                      <p className="text-sm text-neutral-400">
-                        Total improvements: {improvementData.improvements.length}, Visible: {visibleImprovements.length}
-                      </p>
-                      <p className="text-xs text-neutral-500 mt-2">
-                        Check console for filtering details.
                       </p>
                     </div>
                 )}
