@@ -30,5 +30,6 @@ EXPOSE 8000
 
 # Start the application
 # Note: Railway handles healthchecks externally, no need for Docker HEALTHCHECK
-CMD uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 1 --log-level info
+# Use backend.main:app since main.py imports from backend.main
+CMD uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 1 --log-level info
 
