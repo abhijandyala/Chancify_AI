@@ -321,6 +321,65 @@ export default function CalculationsPage() {
     }
   }, [collegeName, userProfile, improvementLoading, improvementError, improvementData, refetchImprovements]);
 
+  // Helper: extract numeric score before '/10' (handles values like '9+/10', '7.5/10')
+  const extractScore = (text: string): number | null => {
+    if (!text) return null;
+    const match = text.match(/([0-9]+(?:\.[0-9]+)?)(?=\s*\/?\s*10)/);
+    if (match) return parseFloat(match[1]);
+    const fallback = parseFloat(text.replace(/[^0-9.]/g, ''));
+    return isNaN(fallback) ? null : fallback;
+  };
+
+  // Filter improvements to only those below target
+  // CRITICAL: Use useMemo to ensure this recalculates when improvementData changes
+  // MUST be called before any early returns (Rules of Hooks)
+  const visibleImprovements = React.useMemo(() => {
+    if (!improvementData?.improvements || !Array.isArray(improvementData.improvements)) {
+      return [];
+    }
+    
+    return improvementData.improvements.filter((imp) => {
+      // Hide items explicitly marked as Target Met or with zero/negative impact
+      const targetText = (imp.target || '').toLowerCase()
+      const currentText = (imp.current || '').toLowerCase()
+      if (imp.impact <= 0) {
+        console.log('🔍 Filtering out improvement (impact <= 0):', imp.area, 'impact:', imp.impact)
+        return false
+      }
+      if (targetText.includes('target met') || currentText.includes('target met')) {
+        console.log('🔍 Filtering out improvement (target met):', imp.area)
+        return false
+      }
+
+      // For numeric-like strings, compare extracted values
+      const currentScore = extractScore(imp.current)
+      const targetScore = extractScore(imp.target)
+      if (currentScore != null && targetScore != null) {
+        // If current >= target, don't show (user already meets/exceeds target)
+        const shouldShow = currentScore < targetScore
+        if (!shouldShow) {
+          console.log('🔍 Filtering out improvement (current >= target):', imp.area, 'current:', currentScore, 'target:', targetScore)
+        }
+        return shouldShow
+      }
+      // If we cannot parse numbers, show it anyway (backend should handle filtering)
+      // Only hide if we can verify current >= target
+      console.log('🔍 Keeping improvement (cannot parse numbers):', imp.area, 'current:', imp.current, 'target:', imp.target)
+      return true
+    })
+  }, [improvementData]);
+  
+  // Log filtering results
+  // MUST be called before any early returns (Rules of Hooks)
+  React.useEffect(() => {
+    if (improvementData?.improvements) {
+      console.log('🔍 Improvement filtering results:')
+      console.log('  - Total improvements from backend:', improvementData.improvements.length)
+      console.log('  - Visible improvements after filtering:', visibleImprovements.length)
+      console.log('  - Filtered out:', improvementData.improvements.length - visibleImprovements.length)
+    }
+  }, [improvementData, visibleImprovements])
+
   // Load data from localStorage and calculate probabilities
   React.useEffect(() => {
     const loadData = async () => {
@@ -536,6 +595,16 @@ export default function CalculationsPage() {
     loadData();
   }, [router]);
 
+  // Compute combined impact based only on visible items, cap at 35% to mirror backend logic
+  // MUST be calculated after hooks but before early returns
+  const combinedVisibleImpact = React.useMemo(() => {
+    return Math.min(
+      visibleImprovements.reduce((sum: number, imp: any) => sum + (imp.impact || 0), 0),
+      35
+    )
+  }, [visibleImprovements])
+
+  // Early returns - MUST come after all hooks
   if (isLoading) {
     return (
       <div className="min-h-screen bg-ROX_BLACK flex items-center justify-center">
@@ -584,69 +653,6 @@ export default function CalculationsPage() {
 
   // Comprehensive improvement areas - NO FALLBACK, force API data
   const improvementAreas = improvementData?.improvements || [];
-
-  // Helper: extract numeric score before '/10' (handles values like '9+/10', '7.5/10')
-  const extractScore = (text: string): number | null => {
-    if (!text) return null;
-    const match = text.match(/([0-9]+(?:\.[0-9]+)?)(?=\s*\/?\s*10)/);
-    if (match) return parseFloat(match[1]);
-    const fallback = parseFloat(text.replace(/[^0-9.]/g, ''));
-    return isNaN(fallback) ? null : fallback;
-  };
-
-  // Filter improvements to only those below target
-  // CRITICAL: Use useMemo to ensure this recalculates when improvementData changes
-  const visibleImprovements = React.useMemo(() => {
-    if (!improvementData?.improvements || !Array.isArray(improvementData.improvements)) {
-      return [];
-    }
-    
-    return improvementData.improvements.filter((imp) => {
-      // Hide items explicitly marked as Target Met or with zero/negative impact
-      const targetText = (imp.target || '').toLowerCase()
-      const currentText = (imp.current || '').toLowerCase()
-      if (imp.impact <= 0) {
-        console.log('🔍 Filtering out improvement (impact <= 0):', imp.area, 'impact:', imp.impact)
-        return false
-      }
-      if (targetText.includes('target met') || currentText.includes('target met')) {
-        console.log('🔍 Filtering out improvement (target met):', imp.area)
-        return false
-      }
-
-      // For numeric-like strings, compare extracted values
-      const currentScore = extractScore(imp.current)
-      const targetScore = extractScore(imp.target)
-      if (currentScore != null && targetScore != null) {
-        // If current >= target, don't show (user already meets/exceeds target)
-        const shouldShow = currentScore < targetScore
-        if (!shouldShow) {
-          console.log('🔍 Filtering out improvement (current >= target):', imp.area, 'current:', currentScore, 'target:', targetScore)
-        }
-        return shouldShow
-      }
-      // If we cannot parse numbers, show it anyway (backend should handle filtering)
-      // Only hide if we can verify current >= target
-    console.log('🔍 Keeping improvement (cannot parse numbers):', imp.area, 'current:', imp.current, 'target:', imp.target)
-    return true
-    })
-  }, [improvementData]);
-  
-  // Log filtering results
-  React.useEffect(() => {
-    if (improvementData?.improvements) {
-      console.log('🔍 Improvement filtering results:')
-      console.log('  - Total improvements from backend:', improvementData.improvements.length)
-      console.log('  - Visible improvements after filtering:', visibleImprovements.length)
-      console.log('  - Filtered out:', improvementData.improvements.length - visibleImprovements.length)
-    }
-  }, [improvementData, visibleImprovements])
-
-  // Compute combined impact based only on visible items, cap at 35% to mirror backend logic
-  const combinedVisibleImpact = Math.min(
-    visibleImprovements.reduce((sum, imp) => sum + (imp.impact || 0), 0),
-    35
-  )
 
   return (
     <div className="min-h-screen bg-ROX_BLACK text-white pt-20 relative overflow-hidden">
