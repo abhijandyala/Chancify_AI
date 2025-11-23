@@ -22,7 +22,9 @@ COPY frontend/ .
 # Set environment variables for build
 ENV NEXT_TELEMETRY_DISABLED 1
 ENV NODE_ENV=production
-ENV NEXT_PUBLIC_API_URL=https://chancifyai-backend.up.railway.app
+# NOTE: NEXT_PUBLIC_API_URL should be set in Railway environment variables to point to ngrok URL
+# Do NOT hardcode here - ngrok URL changes on restart
+# Example: ENV NEXT_PUBLIC_API_URL=https://your-ngrok-url.ngrok-free.dev
 
 # Build the Next.js app
 RUN npm run build
