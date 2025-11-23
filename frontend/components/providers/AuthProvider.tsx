@@ -338,6 +338,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
           name: name || undefined
         })
         
+        // CRITICAL: Set loading to false so the page stops showing loading screen
+        setIsLoading(false)
+        
         // Clean up URL parameters without redirecting (we're already on the right page)
         const newUrl = new URL(window.location.href)
         newUrl.searchParams.delete('google_auth')
@@ -350,7 +353,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         // Trigger auth state change event
         window.dispatchEvent(new CustomEvent('authStateChanged'))
         
-        // Don't call checkAuthStatus() - we've already set the user
+        // Don't call checkAuthStatus() - we've already set the user and loading state
         return
       }
     }
