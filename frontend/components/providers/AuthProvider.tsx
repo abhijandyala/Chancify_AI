@@ -35,12 +35,24 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   // Track if checkAuthStatus is currently running to prevent concurrent calls
   const isCheckingAuthRef = useRef(false)
+  // Track if we just processed OAuth to prevent checkAuthStatus from running immediately after
+  const oauthProcessedRef = useRef(false)
 
   // Check authentication status on mount and when storage changes
   const checkAuthStatus = useCallback(async () => {
     // Prevent concurrent calls
     if (isCheckingAuthRef.current) {
       console.log('Auth check already in progress, skipping...')
+      return
+    }
+
+    // If we just processed OAuth, skip this check to prevent race condition
+    if (oauthProcessedRef.current) {
+      console.log('OAuth just processed, skipping auth check to prevent race condition')
+      // Reset the flag after a short delay to allow normal auth checks later
+      setTimeout(() => {
+        oauthProcessedRef.current = false
+      }, 2000)
       return
     }
 
@@ -321,7 +333,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
       
       if (googleAuth === 'success' && email) {
         // User just completed Google OAuth
-        console.log('Google OAuth success detected:', { email, name })
+        console.log('🔐 Google OAuth success detected:', { email, name })
+        
+        // CRITICAL: Set flag to prevent checkAuthStatus from running immediately after
+        oauthProcessedRef.current = true
         
         // Store auth data IMMEDIATELY
         localStorage.setItem('auth_token', token || ('google_token_' + Date.now()))
@@ -350,10 +365,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
         newUrl.searchParams.delete('token')
         window.history.replaceState({}, '', newUrl.toString())
         
-        // Trigger auth state change event
-        window.dispatchEvent(new CustomEvent('authStateChanged'))
+        console.log('🔐 OAuth processing complete, user authenticated:', { email, name })
+        
+        // Trigger auth state change event (but debounce to prevent rapid checks)
+        setTimeout(() => {
+          window.dispatchEvent(new CustomEvent('authStateChanged'))
+        }, 100)
         
         // Don't call checkAuthStatus() - we've already set the user and loading state
+        // Reset the OAuth flag after a delay to allow normal auth checks later
+        setTimeout(() => {
+          oauthProcessedRef.current = false
+        }, 3000) // 3 seconds should be enough for the page to stabilize
+        
         return
       }
     }
@@ -370,24 +394,34 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const handleStorageChange = (e: StorageEvent) => {
       // Only react to auth-related storage changes
       if (e.key === 'auth_token' || e.key === 'user_email') {
+        // Don't trigger if OAuth was just processed
+        if (oauthProcessedRef.current) {
+          console.log('🔐 Storage change detected but OAuth just processed, skipping auth check')
+          return
+        }
         // Debounce to prevent rapid-fire calls
         if (debounceTimer) {
           clearTimeout(debounceTimer)
         }
         debounceTimer = setTimeout(() => {
           checkAuthStatus()
-        }, 300) // 300ms debounce
+        }, 500) // 500ms debounce (increased to prevent race conditions)
       }
     }
 
     const handleAuthStateChange = () => {
+      // Don't trigger if OAuth was just processed
+      if (oauthProcessedRef.current) {
+        console.log('🔐 Auth state change detected but OAuth just processed, skipping auth check')
+        return
+      }
       // Debounce to prevent rapid-fire calls
       if (debounceTimer) {
         clearTimeout(debounceTimer)
       }
       debounceTimer = setTimeout(() => {
         checkAuthStatus()
-      }, 300) // 300ms debounce
+      }, 500) // 500ms debounce (increased to prevent race conditions)
     }
 
     window.addEventListener('storage', handleStorageChange)

@@ -19,10 +19,27 @@ export default function AuthPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
-  // Redirect if already authenticated
+  // Redirect if already authenticated (but check for OAuth params first)
   useEffect(() => {
+    // CRITICAL: Don't redirect if OAuth is in progress
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search)
+      const googleAuth = urlParams.get('google_auth')
+      
+      // If OAuth is in progress, don't redirect - let AuthProvider handle it
+      if (googleAuth === 'success') {
+        console.log('🔐 Auth page: OAuth in progress, not redirecting')
+        return
+      }
+    }
+    
+    // Only redirect if authenticated and not loading, and not on OAuth callback
     if (isAuthenticated && !authLoading) {
-      router.push('/home')
+      // Check if we're already on /home to prevent redirect loops
+      if (window.location.pathname !== '/home') {
+        console.log('🔐 Auth page: User authenticated, redirecting to /home')
+        router.push('/home')
+      }
     }
     
     // Check for Google OAuth error

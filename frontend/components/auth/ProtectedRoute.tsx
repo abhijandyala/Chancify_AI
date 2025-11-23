@@ -14,11 +14,35 @@ export function ProtectedRoute({ children, fallback }: ProtectedRouteProps) {
   const router = useRouter()
 
   useEffect(() => {
+    // CRITICAL: Check if we're in the middle of processing OAuth
+    // If OAuth params are present, wait a bit before redirecting
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search)
+      const googleAuth = urlParams.get('google_auth')
+      
+      if (googleAuth === 'success') {
+        // OAuth is being processed, wait before checking auth status
+        console.log('🔐 ProtectedRoute: OAuth in progress, waiting...')
+        return
+      }
+    }
+
     if (!isLoading && !isAuthenticated) {
+      // Double-check localStorage in case auth state hasn't synced yet
+      const authToken = localStorage.getItem('auth_token')
+      const userEmail = localStorage.getItem('user_email')
+      
+      if (authToken && userEmail) {
+        // We have auth data but state isn't synced yet, wait a bit
+        console.log('🔐 ProtectedRoute: Auth data exists but state not synced, waiting...')
+        return
+      }
+      
       // Check if user is in trial mode
       const trialMode = localStorage.getItem('trial_mode')
       if (!trialMode) {
-        // Redirect to auth page if not authenticated and not in trial mode
+        // Only redirect if we're sure user is not authenticated
+        console.log('🔐 ProtectedRoute: No auth data, redirecting to /auth')
         router.push('/auth')
       }
     }
