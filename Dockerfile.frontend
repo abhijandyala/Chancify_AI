@@ -20,7 +20,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY frontend/ .
 
 # Set environment variables for build
-ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 # NOTE: NEXT_PUBLIC_API_URL should be set in Railway environment variables to point to ngrok URL
 # Do NOT hardcode here - ngrok URL changes on restart
