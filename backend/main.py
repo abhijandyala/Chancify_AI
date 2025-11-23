@@ -1273,22 +1273,45 @@ async def predict_admission(request: PredictionRequest):
         
     except Exception as e:
         logger.error(f"Prediction error: {e}")
-        # Return mock result for development
-        import random
-        mock_prob = random.uniform(0.2, 0.8)
-        if mock_prob >= 0.7:
+        # Return deterministic fallback based on student profile (NOT random)
+        # Calculate a deterministic probability based on GPA and test scores
+        gpa_unweighted = safe_float(request.gpa_unweighted)
+        gpa_weighted = safe_float(request.gpa_weighted)
+        sat_score = safe_int(request.sat)
+        act_score = safe_int(request.act)
+        
+        # Calculate deterministic base probability from academic metrics
+        if gpa_unweighted > 0:
+            gpa_score = min(1.0, gpa_unweighted / 4.0)  # Normalize to 0-1
+        elif gpa_weighted > 0:
+            gpa_score = min(1.0, gpa_weighted / 5.0)  # Normalize to 0-1
+        else:
+            gpa_score = 0.5  # Default neutral
+        
+        if sat_score > 0:
+            test_score = min(1.0, max(0.0, (sat_score - 1200) / 400))  # 1200-1600 → 0-1
+        elif act_score > 0:
+            test_score = min(1.0, max(0.0, (act_score - 20) / 16))  # 20-36 → 0-1
+        else:
+            test_score = 0.5  # Default neutral
+        
+        # Deterministic probability: average of GPA and test scores, capped at 85%
+        deterministic_prob = (gpa_score + test_score) / 2.0
+        deterministic_prob = max(0.02, min(0.85, deterministic_prob))
+        
+        if deterministic_prob >= 0.7:
             outcome = "Acceptance"
-        elif mock_prob >= 0.3:
+        elif deterministic_prob >= 0.3:
             outcome = "Waitlist"
         else:
             outcome = "Rejection"
             
         return {
-            "probability": mock_prob,
+            "probability": round(deterministic_prob, 4),
             "outcome": outcome,
-            "confidence": 0.85,
-            "model_used": "mock",
-            "explanation": "Mock prediction for development"
+            "confidence": 0.75,
+            "model_used": "deterministic_fallback",
+            "explanation": f"Deterministic fallback calculation based on GPA ({gpa_unweighted or gpa_weighted}) and test scores ({sat_score or act_score})"
         }
 
 # Debug endpoint to force reload predictor
