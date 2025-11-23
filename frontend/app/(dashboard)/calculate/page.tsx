@@ -968,9 +968,26 @@ export default function CalculationsPage() {
                 )}
 
                 {/* Success State - Show Real Data - Only show if we have actual improvement data */}
-                {improvementData && improvementData.improvements && Array.isArray(improvementData.improvements) && improvementData.improvements.length > 0 && !improvementLoading && (
-                  <>
-                    {visibleImprovements.length > 0 ? (
+                {(() => {
+                  const hasData = improvementData && improvementData.improvements && Array.isArray(improvementData.improvements) && improvementData.improvements.length > 0;
+                  const shouldShow = hasData && !improvementLoading;
+                  const hasVisible = visibleImprovements.length > 0;
+                  
+                  console.log('🔍 RENDERING CHECK:');
+                  console.log('  - hasData:', hasData);
+                  console.log('  - improvementLoading:', improvementLoading);
+                  console.log('  - shouldShow:', shouldShow);
+                  console.log('  - hasVisible:', hasVisible);
+                  console.log('  - visibleImprovements.length:', visibleImprovements.length);
+                  console.log('  - improvementData?.improvements?.length:', improvementData?.improvements?.length);
+                  
+                  if (!shouldShow) {
+                    return null;
+                  }
+                  
+                  return (
+                    <>
+                      {hasVisible ? (
                       <>
                         <div className="grid grid-cols-1 lg:grid-cols-2 xl-grid-cols-3 gap-6">
                           {visibleImprovements.map((improvement) => (
@@ -1015,8 +1032,9 @@ export default function CalculationsPage() {
                         </p>
                       </div>
                     )}
-                  </>
-                )}
+                    </>
+                  );
+                })()}
 
                 {/* No Data State - Only show if we truly have no data */}
                 {!improvementData && !improvementLoading && !improvementError && (
