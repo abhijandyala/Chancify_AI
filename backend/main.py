@@ -154,20 +154,19 @@ async def custom_cors_middleware(request: Request, call_next):
     """
     origin = request.headers.get("origin")
     
-    # Log all requests for debugging (can be removed in production)
-    if request.method == "OPTIONS":
-        logger.info(f"OPTIONS request - Origin: {origin}, Path: {request.url.path}, Allowed: {is_allowed_origin(origin) if origin else False}")
-    
     # Handle preflight OPTIONS requests
     if request.method == "OPTIONS":
         # Always check origin first
         if not origin:
-            logger.warning("OPTIONS request with no origin header")
+            logger.warning(f"OPTIONS request with no origin header - Path: {request.url.path}, All headers: {dict(request.headers)}")
             # Still return 204 to avoid breaking browsers, but without CORS headers
             return Response(status_code=204)
         
         # Check if origin is allowed
-        if is_allowed_origin(origin):
+        origin_allowed = is_allowed_origin(origin)
+        logger.info(f"OPTIONS preflight check - Origin: {origin}, Path: {request.url.path}, Allowed: {origin_allowed}")
+        
+        if origin_allowed:
             response = Response(status_code=204)
             response.headers["Access-Control-Allow-Origin"] = origin
             response.headers["Access-Control-Allow-Credentials"] = "true"
@@ -182,29 +181,35 @@ async def custom_cors_middleware(request: Request, call_next):
             response.headers["Access-Control-Allow-Headers"] = allowed_headers
             response.headers["Access-Control-Max-Age"] = "86400"
             response.headers["Vary"] = "Origin"
-            logger.info(f"CORS preflight allowed for origin: {origin}, path: {request.url.path}")
+            logger.info(f"✅ CORS preflight allowed for origin: {origin}, path: {request.url.path}, headers: {allowed_headers}")
             return response
         else:
-            # Origin not allowed - but still return 204 with no CORS headers
-            # Returning 403 can break some browsers
-            logger.warning(f"CORS preflight rejected for origin: {origin}, path: {request.url.path}")
+            # Origin not allowed - log for debugging
+            logger.warning(f"❌ CORS preflight rejected for origin: {origin}, path: {request.url.path}")
+            logger.warning(f"   Allowed origins: {allowed_origins}")
+            logger.warning(f"   Allowed suffixes: {allowed_origin_suffixes}")
+            # Still return 204 but without CORS headers - browser will reject
             response = Response(status_code=204)
-            # Don't set CORS headers - browser will reject
             return response
     
-    # Handle actual requests
+    # Handle actual requests (non-OPTIONS)
     response = await call_next(request)
     
     # Add CORS headers to response if origin is allowed
-    if origin and is_allowed_origin(origin):
-        response.headers["Access-Control-Allow-Origin"] = origin
-        response.headers["Access-Control-Allow-Credentials"] = "true"
-        response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,PATCH,DELETE,OPTIONS"
-        response.headers["Access-Control-Allow-Headers"] = (
-            "Authorization,Content-Type,ngrok-skip-browser-warning"
-        )
-        response.headers["Access-Control-Max-Age"] = "86400"
-        response.headers["Vary"] = "Origin"
+    if origin:
+        origin_allowed = is_allowed_origin(origin)
+        if origin_allowed:
+            response.headers["Access-Control-Allow-Origin"] = origin
+            response.headers["Access-Control-Allow-Credentials"] = "true"
+            response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,PATCH,DELETE,OPTIONS"
+            response.headers["Access-Control-Allow-Headers"] = (
+                "Authorization,Content-Type,ngrok-skip-browser-warning"
+            )
+            response.headers["Access-Control-Max-Age"] = "86400"
+            response.headers["Vary"] = "Origin"
+        else:
+            # Log rejected origins for debugging (but don't block the request)
+            logger.warning(f"❌ CORS rejected for origin: {origin}, path: {request.url.path}, method: {request.method}")
     
     return response
 
