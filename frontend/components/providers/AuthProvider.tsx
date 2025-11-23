@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react'
+import React, { createContext, useContext, useEffect, useState, useCallback, useRef, ReactNode } from 'react'
 import { useRouter } from 'next/navigation'
 import { getApiBaseUrl, withNgrokHeaders } from '@/lib/config'
 
@@ -33,11 +33,21 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const isAuthenticated = !!user
 
+  // Track if checkAuthStatus is currently running to prevent concurrent calls
+  const isCheckingAuthRef = useRef(false)
+
   // Check authentication status on mount and when storage changes
-  const checkAuthStatus = async () => {
+  const checkAuthStatus = useCallback(async () => {
+    // Prevent concurrent calls
+    if (isCheckingAuthRef.current) {
+      console.log('Auth check already in progress, skipping...')
+      return
+    }
+
     try {
       if (typeof window === 'undefined') return
 
+      isCheckingAuthRef.current = true
       const authToken = localStorage.getItem('auth_token')
       const userEmail = localStorage.getItem('user_email')
       const userName = localStorage.getItem('user_name')
@@ -51,10 +61,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
         })
 
         try {
-          const response = await fetch(`${API_BASE_URL}/api/auth/me`, {
-            method: 'GET',
-            headers,
-          })
+          // Create abort controller for timeout
+          const controller = new AbortController()
+          const timeoutId = setTimeout(() => controller.abort(), 10000) // 10 second timeout
+          
+          let response: Response
+          try {
+            response = await fetch(`${API_BASE_URL}/api/auth/me`, {
+              method: 'GET',
+              headers,
+              signal: controller.signal,
+            })
+          } finally {
+            clearTimeout(timeoutId)
+          }
 
           if (response.ok) {
             const userData = await response.json()
@@ -82,8 +102,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
               name: userName || undefined
             })
           }
-        } catch (error) {
-          console.error('Auth verification failed (network error):', error)
+        } catch (error: any) {
+          // Handle AbortError from timeout
+          if (error?.name === 'AbortError') {
+            console.warn('Auth check timed out, using local auth data')
+          } else {
+            console.error('Auth verification failed (network error):', error)
+          }
           // Network error - backend might be unreachable, but token could still be valid
           // Use local storage as fallback to prevent auth loops
           const isGoogleToken = authToken.startsWith('google_token_')
@@ -94,15 +119,34 @@ export function AuthProvider({ children }: AuthProviderProps) {
           })
         }
       } else {
+        // No token or email in localStorage - user is not authenticated
         setUser(null)
       }
     } catch (error) {
-      console.error('Auth check failed:', error)
-      setUser(null)
+      // Only clear user if we don't have valid localStorage data
+      // This prevents clearing auth state on unexpected errors
+      const authToken = localStorage.getItem('auth_token')
+      const userEmail = localStorage.getItem('user_email')
+      
+      if (!authToken || !userEmail) {
+        console.error('Auth check failed and no valid localStorage data:', error)
+        setUser(null)
+      } else {
+        // We have valid localStorage data, preserve user state even on error
+        console.warn('Auth check error but preserving user state from localStorage:', error)
+        const userName = localStorage.getItem('user_name')
+        const isGoogleToken = authToken.startsWith('google_token_')
+        setUser({
+          id: isGoogleToken ? 'google_user' : 'demo_user',
+          email: userEmail,
+          name: userName || undefined
+        })
+      }
     } finally {
+      isCheckingAuthRef.current = false
       setIsLoading(false)
     }
-  }
+  }, [])
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
@@ -306,24 +350,42 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   // Listen for storage changes (e.g., from other tabs)
   useEffect(() => {
+    let debounceTimer: NodeJS.Timeout | null = null
+
     const handleStorageChange = (e: StorageEvent) => {
+      // Only react to auth-related storage changes
       if (e.key === 'auth_token' || e.key === 'user_email') {
-        checkAuthStatus()
+        // Debounce to prevent rapid-fire calls
+        if (debounceTimer) {
+          clearTimeout(debounceTimer)
+        }
+        debounceTimer = setTimeout(() => {
+          checkAuthStatus()
+        }, 300) // 300ms debounce
       }
     }
 
     const handleAuthStateChange = () => {
-      checkAuthStatus()
+      // Debounce to prevent rapid-fire calls
+      if (debounceTimer) {
+        clearTimeout(debounceTimer)
+      }
+      debounceTimer = setTimeout(() => {
+        checkAuthStatus()
+      }, 300) // 300ms debounce
     }
 
     window.addEventListener('storage', handleStorageChange)
     window.addEventListener('authStateChanged', handleAuthStateChange)
 
     return () => {
+      if (debounceTimer) {
+        clearTimeout(debounceTimer)
+      }
       window.removeEventListener('storage', handleStorageChange)
       window.removeEventListener('authStateChanged', handleAuthStateChange)
     }
-  }, [])
+  }, [checkAuthStatus])
 
   const value: AuthContextType = {
     user,

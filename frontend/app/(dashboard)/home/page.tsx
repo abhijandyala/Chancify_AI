@@ -128,7 +128,7 @@ export default function HomePage() {
     }
   }, [])
 
-  // Handle Google OAuth success and trial mode
+  // Handle Google OAuth success and trial mode (only on mount, not on profile changes)
   useEffect(() => {
     const handleGoogleAuthSuccess = () => {
       if (typeof window !== 'undefined') {
@@ -149,7 +149,7 @@ export default function HomePage() {
           const newUrl = window.location.pathname
           window.history.replaceState({}, document.title, newUrl)
           
-          // Trigger a custom event to notify header of auth change
+          // Trigger a custom event to notify header of auth change (only once)
           window.dispatchEvent(new CustomEvent('authStateChanged'))
         }
       }
@@ -167,9 +167,13 @@ export default function HomePage() {
     
     handleGoogleAuthSuccess()
     handleTrialMode()
-    
-    // Save initial profile to localStorage
+  }, []) // Only run on mount, not on profile changes
+
+  // Save profile to localStorage separately (without triggering auth checks)
+  useEffect(() => {
     localStorage.setItem('userProfile', JSON.stringify(profile))
+    // Dispatch profileUpdated event for college selection page, but NOT authStateChanged
+    window.dispatchEvent(new CustomEvent('profileUpdated'))
   }, [profile])
 
   // Validation function to check if all required fields are filled
