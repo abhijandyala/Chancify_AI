@@ -602,34 +602,34 @@ export default function CalculationsPage() {
     }
     
     return improvementData.improvements.filter((imp) => {
-    // Hide items explicitly marked as Target Met or with zero/negative impact
-    const targetText = (imp.target || '').toLowerCase()
-    const currentText = (imp.current || '').toLowerCase()
-    if (imp.impact <= 0) {
-      console.log('🔍 Filtering out improvement (impact <= 0):', imp.area, 'impact:', imp.impact)
-      return false
-    }
-    if (targetText.includes('target met') || currentText.includes('target met')) {
-      console.log('🔍 Filtering out improvement (target met):', imp.area)
-      return false
-    }
-
-    // For numeric-like strings, compare extracted values
-    const currentScore = extractScore(imp.current)
-    const targetScore = extractScore(imp.target)
-    if (currentScore != null && targetScore != null) {
-      // If current >= target, don't show (user already meets/exceeds target)
-      const shouldShow = currentScore < targetScore
-      if (!shouldShow) {
-        console.log('🔍 Filtering out improvement (current >= target):', imp.area, 'current:', currentScore, 'target:', targetScore)
+      // Hide items explicitly marked as Target Met or with zero/negative impact
+      const targetText = (imp.target || '').toLowerCase()
+      const currentText = (imp.current || '').toLowerCase()
+      if (imp.impact <= 0) {
+        console.log('🔍 Filtering out improvement (impact <= 0):', imp.area, 'impact:', imp.impact)
+        return false
       }
-      return shouldShow
-    }
-    // If we cannot parse numbers, show it anyway (backend should handle filtering)
-    // Only hide if we can verify current >= target
-      console.log('🔍 Keeping improvement (cannot parse numbers):', imp.area, 'current:', imp.current, 'target:', imp.target)
-      return true
-    });
+      if (targetText.includes('target met') || currentText.includes('target met')) {
+        console.log('🔍 Filtering out improvement (target met):', imp.area)
+        return false
+      }
+
+      // For numeric-like strings, compare extracted values
+      const currentScore = extractScore(imp.current)
+      const targetScore = extractScore(imp.target)
+      if (currentScore != null && targetScore != null) {
+        // If current >= target, don't show (user already meets/exceeds target)
+        const shouldShow = currentScore < targetScore
+        if (!shouldShow) {
+          console.log('🔍 Filtering out improvement (current >= target):', imp.area, 'current:', currentScore, 'target:', targetScore)
+        }
+        return shouldShow
+      }
+      // If we cannot parse numbers, show it anyway (backend should handle filtering)
+      // Only hide if we can verify current >= target
+    console.log('🔍 Keeping improvement (cannot parse numbers):', imp.area, 'current:', imp.current, 'target:', imp.target)
+    return true
+    })
   }, [improvementData]);
   
   // Log filtering results
