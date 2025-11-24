@@ -30,22 +30,13 @@ ENV NODE_ENV=production
 # Increase Node.js memory limit for large builds
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 
-# Build with detailed output
+# Build with detailed output - simplified to ensure errors are visible
 RUN echo "=== Starting Next.js build ===" && \
-    echo "Node version: $(node --version)" && \
-    echo "NPM version: $(npm --version)" && \
-    echo "Working directory: $(pwd)" && \
-    echo "Contents: $(ls -la)" && \
-    echo "Memory limit: $NODE_OPTIONS" && \
-    npm run build && \
-    echo "=== Build completed ===" && \
-    echo "Checking build output..." && \
-    ls -la .next/ 2>/dev/null || (echo "ERROR: .next directory not found!" && exit 1) && \
-    ls -la .next/standalone 2>/dev/null || (echo "ERROR: .next/standalone not found!" && exit 1) && \
-    test -f .next/standalone/server.js || (echo "ERROR: server.js not found in standalone build!" && ls -la .next/standalone/ && exit 1) && \
-    echo "=== Build verification successful ===" && \
-    echo "Standalone build structure:" && \
-    ls -la .next/standalone/ | head -20
+    node --version && \
+    npm --version && \
+    pwd && \
+    echo "Memory: $NODE_OPTIONS" && \
+    npm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
