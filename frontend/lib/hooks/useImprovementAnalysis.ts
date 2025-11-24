@@ -26,49 +26,43 @@ export const useImprovementAnalysis = (collegeName: string | null, userProfile: 
   const [error, setError] = useState<string | null>(null)
 
   const fetchImprovementAnalysis = useCallback(async () => {
-    console.log('🔍 useImprovementAnalysis hook called with:')
-    console.log('  - collegeName:', collegeName, '(type:', typeof collegeName, ')')
-    console.log('  - userProfile:', userProfile, '(type:', typeof userProfile, ')')
-    
     // Validate collegeName: must be a non-empty string (can be string or null)
-    // Handle null case explicitly
+    // Silently wait if collegeName is null/undefined (it will be set later)
     if (collegeName === null || collegeName === undefined) {
-      console.log('🚫 Skipping improvement analysis - collegeName is null/undefined')
-      console.log('  - collegeName value:', collegeName)
+      // Don't log - this is expected during initial render
       setImprovementData(null)
       setLoading(false)
+      setError(null)
       return
     }
     
     // Now we know it's not null, check if it's a string
     if (typeof collegeName !== 'string') {
-      console.log('🚫 Skipping improvement analysis - collegeName is not a string')
-      console.log('  - collegeName type:', typeof collegeName)
-      console.log('  - collegeName value:', collegeName)
+      // Only log actual errors, not expected null states
+      console.warn('⚠️ useImprovementAnalysis: collegeName is not a string', { type: typeof collegeName, value: collegeName })
       setImprovementData(null)
       setLoading(false)
+      setError('Invalid college name type')
       return
     }
     
     // Trim and validate it's not empty
     const trimmedCollegeName = collegeName.trim()
     if (!trimmedCollegeName) {
-      console.log('🚫 Skipping improvement analysis - collegeName is empty after trim')
-      console.log('  - Original collegeName:', collegeName)
-      console.log('  - Trimmed result:', trimmedCollegeName)
+      // Only log actual errors
+      console.warn('⚠️ useImprovementAnalysis: collegeName is empty after trim', { original: collegeName })
       setImprovementData(null)
       setLoading(false)
+      setError('College name is empty')
       return
     }
 
     // Validate userProfile: must be an object with at least some data
     if (!userProfile || typeof userProfile !== 'object' || Object.keys(userProfile).length === 0) {
-      console.log('🚫 Skipping improvement analysis - userProfile is missing or empty')
-      console.log('  - userProfile value:', userProfile)
-      console.log('  - userProfile type:', typeof userProfile)
-      console.log('  - userProfile keys:', userProfile ? Object.keys(userProfile) : 'N/A')
+      // Silently wait if userProfile is not ready yet
       setImprovementData(null)
       setLoading(false)
+      setError(null)
       return
     }
 
@@ -81,17 +75,14 @@ export const useImprovementAnalysis = (collegeName: string | null, userProfile: 
                               userProfile.rigor !== undefined ||
                               userProfile.extracurricular_depth !== undefined
     if (!hasRequiredFields) {
-      console.log('🚫 Skipping improvement analysis - userProfile missing required fields')
-      console.log('  - userProfile keys:', Object.keys(userProfile))
-      console.log('  - Checking for: gpa_unweighted, gpa_weighted, sat, act, rigor, extracurricular_depth')
+      // Silently wait if required fields are not ready yet
       setImprovementData(null)
       setLoading(false)
+      setError(null)
       return
     }
 
-    console.log('🔄 Fetching improvement analysis for:', trimmedCollegeName)
-    console.log('🔄 User profile:', userProfile)
-    
+    // All validations passed - proceed with fetching
     setLoading(true)
     setError(null)
 
@@ -102,8 +93,6 @@ export const useImprovementAnalysis = (collegeName: string | null, userProfile: 
       })
 
       const url = `${API_BASE_URL}/api/improvement-analysis/${encodeURIComponent(trimmedCollegeName)}`
-      console.log('🔄 API URL:', url)
-      console.log('🔄 Request body:', userProfile)
 
       const response = await fetch(url, {
         method: 'POST',
@@ -111,12 +100,8 @@ export const useImprovementAnalysis = (collegeName: string | null, userProfile: 
         body: JSON.stringify(userProfile),
       })
 
-      console.log('🔄 Response status:', response.status)
-      console.log('🔄 Response headers:', Object.fromEntries(response.headers.entries()))
-
       if (response.ok) {
         const data: ImprovementAnalysisData = await response.json()
-        console.log('✅ Improvement analysis data received:', data)
         setImprovementData(data)
         setError(null)
       } else {

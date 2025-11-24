@@ -285,39 +285,14 @@ export default function CalculationsPage() {
   // Get improvement analysis for the selected college
   const { improvementData, loading: improvementLoading, error: improvementError, refetch: refetchImprovements } = useImprovementAnalysis(collegeName, userProfile);
   
-  // Debug logging for improvement data
+  // Trigger refetch when collegeName becomes available (changes from null to valid string)
   React.useEffect(() => {
-    console.log('🔍 Improvement Analysis Debug:')
-    console.log('  - College Name:', collegeName, '(type:', typeof collegeName, ')')
-    console.log('  - User Profile:', userProfile ? 'exists' : 'null', userProfile ? `(keys: ${Object.keys(userProfile).length})` : '')
-    console.log('  - Loading:', improvementLoading)
-    console.log('  - Error:', improvementError)
-    console.log('  - Data:', improvementData ? `exists (${improvementData.improvements?.length || 0} improvements)` : 'null')
-    
-    // CRITICAL: When collegeName changes from null to a valid value, trigger refetch
+    // Only trigger refetch if we have valid data but no improvement data yet
     if (collegeName && typeof collegeName === 'string' && collegeName.trim() && userProfile) {
-      console.log('✅ Valid collegeName and userProfile detected, checking if improvement analysis should run...')
-      
       // If we have valid data but no improvement data and not currently loading, try to refetch
       if (!improvementData && !improvementLoading && !improvementError) {
-        console.log('🔄 Triggering improvement analysis refetch...')
-        console.log('  - collegeName:', collegeName)
-        console.log('  - userProfile keys:', Object.keys(userProfile))
         refetchImprovements()
       }
-    } else if (collegeName === null) {
-      console.log('⏳ Waiting for collegeName to be set from backend response...')
-    } else if (!userProfile) {
-      console.log('⏳ Waiting for userProfile to be loaded...')
-    }
-    
-    // Also log when we have the data but hook isn't running
-    if (collegeName && userProfile && improvementLoading === false && !improvementData && !improvementError) {
-      console.log('⚠️ WARNING: Have collegeName and userProfile but no improvement data')
-      console.log('  - This might indicate the hook validation is failing')
-      console.log('  - collegeName value:', collegeName)
-      console.log('  - collegeName type:', typeof collegeName)
-      console.log('  - userProfile:', userProfile)
     }
   }, [collegeName, userProfile, improvementLoading, improvementError, improvementData, refetchImprovements]);
 
