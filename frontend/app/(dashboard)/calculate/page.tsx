@@ -283,18 +283,8 @@ export default function CalculationsPage() {
   const { subjects: subjectEmphasis, loading: subjectsLoading, error: subjectsError } = useCollegeSubjectEmphasis(collegeName);
 
   // Get improvement analysis for the selected college
-  const { improvementData, loading: improvementLoading, error: improvementError, refetch: refetchImprovements } = useImprovementAnalysis(collegeName, userProfile);
-  
-  // Trigger refetch when collegeName becomes available (changes from null to valid string)
-  React.useEffect(() => {
-    // Only trigger refetch if we have valid data but no improvement data yet
-    if (collegeName && typeof collegeName === 'string' && collegeName.trim() && userProfile) {
-      // If we have valid data but no improvement data and not currently loading, try to refetch
-      if (!improvementData && !improvementLoading && !improvementError) {
-        refetchImprovements()
-      }
-    }
-  }, [collegeName, userProfile, improvementLoading, improvementError, improvementData, refetchImprovements]);
+  // Hook automatically fetches when collegeName and userProfile become available
+  const { improvementData, loading: improvementLoading, error: improvementError } = useImprovementAnalysis(collegeName, userProfile);
 
   // Helper: extract numeric score before '/10' (handles values like '9+/10', '7.5/10')
   const extractScore = (text: string): number | null => {
@@ -479,16 +469,9 @@ export default function CalculationsPage() {
         console.error('  - firstCollege:', firstCollege);
         // Don't set invalid college name - improvement hook will skip anyway
       } else {
-        // CRITICAL: Set college name state IMMEDIATELY so improvement hook can use it
+        // CRITICAL: Set college name state - hook will automatically fetch when this changes
         setCollegeName(actualCollegeName);
         console.log('✅ College name state updated to:', actualCollegeName);
-        
-        // Trigger improvement analysis refetch after state update
-        // Use setTimeout to ensure state has updated
-        setTimeout(() => {
-          console.log('🔄 Triggering improvement analysis refetch with college name:', actualCollegeName);
-          // The hook should automatically re-run when collegeName changes, but we'll also manually trigger
-        }, 50);
       }
       
       // Load zipcode from localStorage

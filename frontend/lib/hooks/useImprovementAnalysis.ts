@@ -25,49 +25,28 @@ export const useImprovementAnalysis = (collegeName: string | null, userProfile: 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const fetchImprovementAnalysis = useCallback(async () => {
-    // Validate collegeName: must be a non-empty string (can be string or null)
-    // Silently wait if collegeName is null/undefined (it will be set later)
+  // Helper function to validate inputs
+  const isValidInput = (collegeName: string | null, userProfile: any): { valid: boolean; trimmedCollegeName?: string } => {
+    // Validate collegeName: must be a non-empty string
     if (collegeName === null || collegeName === undefined) {
-      // Don't log - this is expected during initial render
-      setImprovementData(null)
-      setLoading(false)
-      setError(null)
-      return
+      return { valid: false }
     }
     
-    // Now we know it's not null, check if it's a string
     if (typeof collegeName !== 'string') {
-      // Only log actual errors, not expected null states
-      console.warn('⚠️ useImprovementAnalysis: collegeName is not a string', { type: typeof collegeName, value: collegeName })
-      setImprovementData(null)
-      setLoading(false)
-      setError('Invalid college name type')
-      return
+      return { valid: false }
     }
     
-    // Trim and validate it's not empty
     const trimmedCollegeName = collegeName.trim()
     if (!trimmedCollegeName) {
-      // Only log actual errors
-      console.warn('⚠️ useImprovementAnalysis: collegeName is empty after trim', { original: collegeName })
-      setImprovementData(null)
-      setLoading(false)
-      setError('College name is empty')
-      return
+      return { valid: false }
     }
 
     // Validate userProfile: must be an object with at least some data
     if (!userProfile || typeof userProfile !== 'object' || Object.keys(userProfile).length === 0) {
-      // Silently wait if userProfile is not ready yet
-      setImprovementData(null)
-      setLoading(false)
-      setError(null)
-      return
+      return { valid: false }
     }
 
-    // Check if userProfile has at least one required field (basic validation)
-    // Note: We check for !== undefined, not truthy, because empty strings are valid (user might not have entered data yet)
+    // Check if userProfile has at least one required field
     const hasRequiredFields = userProfile.gpa_unweighted !== undefined || 
                               userProfile.gpa_weighted !== undefined || 
                               userProfile.sat !== undefined || 
@@ -75,12 +54,25 @@ export const useImprovementAnalysis = (collegeName: string | null, userProfile: 
                               userProfile.rigor !== undefined ||
                               userProfile.extracurricular_depth !== undefined
     if (!hasRequiredFields) {
-      // Silently wait if required fields are not ready yet
+      return { valid: false }
+    }
+
+    return { valid: true, trimmedCollegeName }
+  }
+
+  // Main fetch function
+  const fetchImprovementAnalysis = useCallback(async (collegeNameToFetch: string, userProfileToFetch: any) => {
+    const validation = isValidInput(collegeNameToFetch, userProfileToFetch)
+    
+    if (!validation.valid || !validation.trimmedCollegeName) {
+      // Silently wait - inputs not ready yet
       setImprovementData(null)
       setLoading(false)
       setError(null)
       return
     }
+
+    const trimmedCollegeName = validation.trimmedCollegeName
 
     // All validations passed - proceed with fetching
     setLoading(true)
@@ -97,7 +89,7 @@ export const useImprovementAnalysis = (collegeName: string | null, userProfile: 
       const response = await fetch(url, {
         method: 'POST',
         headers,
-        body: JSON.stringify(userProfile),
+        body: JSON.stringify(userProfileToFetch),
       })
 
       if (response.ok) {
@@ -117,7 +109,6 @@ export const useImprovementAnalysis = (collegeName: string | null, userProfile: 
           const errorData = JSON.parse(errorText)
           errorMessage = errorData.error || errorMessage
         } catch {
-          // Use the text error if JSON parsing fails
           errorMessage = errorText || errorMessage
         }
         
@@ -131,11 +122,33 @@ export const useImprovementAnalysis = (collegeName: string | null, userProfile: 
     } finally {
       setLoading(false)
     }
-  }, [collegeName, userProfile]) // Note: collegeName can be null, which is fine - the function handles it
+  }, [])
 
+  // Watch for changes in collegeName and userProfile and fetch when both are ready
   useEffect(() => {
-    fetchImprovementAnalysis()
-  }, [fetchImprovementAnalysis])
+    const validation = isValidInput(collegeName, userProfile)
+    
+    if (!validation.valid) {
+      // Inputs not ready - clear state but don't set error
+      if (collegeName === null && userProfile === null) {
+        // Both are null - initial state, do nothing
+        return
+      }
+      // One or both are invalid - clear data but don't log errors
+      setImprovementData(null)
+      setLoading(false)
+      setError(null)
+      return
+    }
 
-  return { improvementData, loading, error, refetch: fetchImprovementAnalysis }
+    // Both inputs are valid - fetch the data
+    fetchImprovementAnalysis(collegeName, userProfile)
+  }, [collegeName, userProfile, fetchImprovementAnalysis])
+
+  // Refetch function that can be called manually
+  const refetch = useCallback(() => {
+    fetchImprovementAnalysis(collegeName, userProfile)
+  }, [collegeName, userProfile, fetchImprovementAnalysis])
+
+  return { improvementData, loading, error, refetch }
 }
