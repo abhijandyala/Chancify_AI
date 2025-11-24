@@ -22,21 +22,31 @@ COPY frontend/ .
 # Set environment variables for build
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
-# NOTE: NEXT_PUBLIC_API_URL should be set in Railway environment variables to point to ngrok URL
-# Do NOT hardcode here - ngrok URL changes on restart
-# Example: ENV NEXT_PUBLIC_API_URL=https://your-ngrok-url.ngrok-free.dev
+# Set a default for NEXT_PUBLIC_API_URL (can be overridden in Railway)
+# This prevents build-time errors if the env var is missing
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+# NOTE: Override NEXT_PUBLIC_API_URL in Railway environment variables to point to your backend URL
 
-# Build the Next.js app with verbose output
-# Show build progress and fail clearly if build fails
-RUN echo "Starting Next.js build..." && \
-    npm run build 2>&1 | tee /tmp/build.log || \
-    (echo "Build failed! Last 50 lines of build output:" && \
-     tail -50 /tmp/build.log && \
-     echo "Full build log saved to /tmp/build.log" && \
-     exit 1) && \
-    echo "Build completed successfully!" && \
-    ls -la .next/standalone 2>/dev/null && \
-    echo "Verifying standalone build structure..."
+# Build the Next.js app with verbose output and better error handling
+# Increase Node.js memory limit for large builds
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+
+# Build with detailed output
+RUN echo "=== Starting Next.js build ===" && \
+    echo "Node version: $(node --version)" && \
+    echo "NPM version: $(npm --version)" && \
+    echo "Working directory: $(pwd)" && \
+    echo "Contents: $(ls -la)" && \
+    echo "Memory limit: $NODE_OPTIONS" && \
+    npm run build && \
+    echo "=== Build completed ===" && \
+    echo "Checking build output..." && \
+    ls -la .next/ 2>/dev/null || (echo "ERROR: .next directory not found!" && exit 1) && \
+    ls -la .next/standalone 2>/dev/null || (echo "ERROR: .next/standalone not found!" && exit 1) && \
+    test -f .next/standalone/server.js || (echo "ERROR: server.js not found in standalone build!" && ls -la .next/standalone/ && exit 1) && \
+    echo "=== Build verification successful ===" && \
+    echo "Standalone build structure:" && \
+    ls -la .next/standalone/ | head -20
 
 # Production image, copy all the files and run next
 FROM base AS runner
