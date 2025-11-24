@@ -22,10 +22,9 @@ COPY frontend/ .
 # Set environment variables for build
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
-# Set a default for NEXT_PUBLIC_API_URL (can be overridden in Railway)
-# This prevents build-time errors if the env var is missing
-ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8000}
-# NOTE: Override NEXT_PUBLIC_API_URL in Railway environment variables to point to your backend URL
+# NEXT_PUBLIC_API_URL should be set in Railway environment variables
+# If not set, Next.js will use relative URLs which works for same-domain deployments
+# NOTE: Set NEXT_PUBLIC_API_URL in Railway to point to your backend URL if needed
 
 # Build the Next.js app with verbose output and better error handling
 # Increase Node.js memory limit for large builds
