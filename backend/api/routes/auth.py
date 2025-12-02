@@ -247,9 +247,18 @@ async def get_current_user(
     """
     Get current user's complete profile.
     Returns user data if authenticated, or null if not authenticated.
+    Handles database errors gracefully.
     """
-    if current_user is None:
+    try:
+        if current_user is None:
+            return {"detail": "Not authenticated", "authenticated": False}
+        
+        from database.schemas import CompleteProfileResponse
+        return CompleteProfileResponse.from_orm(current_user)
+    except Exception as e:
+        # Log error but return graceful response
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error(f"Error in /api/auth/me: {e}", exc_info=True)
+        # Return unauthenticated response instead of 500
         return {"detail": "Not authenticated", "authenticated": False}
-    
-    from database.schemas import CompleteProfileResponse
-    return CompleteProfileResponse.from_orm(current_user)

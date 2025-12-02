@@ -77,12 +77,24 @@ class ImprovementAnalysisService:
             # Load broader college dataset as a secondary source for acceptance rates/metadata
             try:
                 import pandas as pd  # local import to avoid issues if pandas missing at import-time
-                csv_path = os.path.abspath(os.path.join(os.getcwd(), 'backend', 'data', 'raw', 'real_colleges_integrated.csv'))
-                if os.path.exists(csv_path):
+                # Try multiple possible paths
+                possible_paths = [
+                    os.path.join(os.path.dirname(__file__), 'raw', 'real_colleges_integrated.csv'),  # Relative to this file
+                    os.path.abspath(os.path.join(os.getcwd(), 'backend', 'data', 'raw', 'real_colleges_integrated.csv')),  # From project root
+                    os.path.abspath(os.path.join(os.getcwd(), 'data', 'raw', 'real_colleges_integrated.csv')),  # From backend directory
+                ]
+                
+                csv_path = None
+                for path in possible_paths:
+                    if os.path.exists(path):
+                        csv_path = path
+                        break
+                
+                if csv_path and os.path.exists(csv_path):
                     self.general_colleges_df = pd.read_csv(csv_path)
-                    logger.info(f"Loaded general colleges dataset: {self.general_colleges_df.shape}")
+                    logger.info(f"Loaded general colleges dataset: {self.general_colleges_df.shape} from {csv_path}")
                 else:
-                    logger.warning(f"General colleges CSV not found at {csv_path}")
+                    logger.warning(f"General colleges CSV not found. Tried paths: {possible_paths}")
             except Exception as e:
                 logger.warning(f"Failed to load general colleges dataset: {e}")
 

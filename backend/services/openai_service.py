@@ -14,12 +14,23 @@ logger = logging.getLogger(__name__)
 class CollegeInfoService:
     def __init__(self):
         """Initialize OpenAI client with API key"""
-        # Use environment variable for API key
+        # Try to get API key from environment variable first, then from settings
         api_key = os.getenv("OPENAI_API_KEY")
         if not api_key:
+            # Fallback to settings if environment variable not set
+            try:
+                from config import settings
+                api_key = settings.openai_api_key
+            except (ImportError, AttributeError):
+                api_key = None
+        
+        if not api_key:
             logger.warning("OPENAI_API_KEY not set - OpenAI service will be disabled")
-            api_key = None
-        openai.api_key = api_key
+            self.api_key = None
+        else:
+            self.api_key = api_key
+            openai.api_key = api_key
+            logger.info("OpenAI API key configured successfully")
     
     async def get_college_info(self, college_name: str) -> Dict[str, Any]:
         """

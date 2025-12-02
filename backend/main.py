@@ -205,20 +205,31 @@ async def custom_cors_middleware(request: Request, call_next):
                 return Response(status_code=204)
         
         # Handle actual requests (GET, POST, etc.)
-        response = await call_next(request)
+        # Wrap in try/except to ensure CORS headers are ALWAYS added for allowed origins
+        try:
+            response = await call_next(request)
+        except Exception as inner_e:
+            logger.error(f"❌ Error processing request: {inner_e}", exc_info=True)
+            # Create error response
+            response = Response(
+                status_code=500,
+                content='{"detail": "Internal server error"}',
+                media_type="application/json"
+            )
         
-        # Add CORS headers to ALL responses if origin is allowed
+        # CRITICAL: Add CORS headers to ALL responses (including errors) if origin is allowed
+        # This ensures the browser can read the error response
         if origin:
             origin_allowed = is_allowed_origin(origin)
             if origin_allowed:
-                # Add ALL required CORS headers
+                # Add ALL required CORS headers - even for error responses
                 response.headers["Access-Control-Allow-Origin"] = origin
                 response.headers["Access-Control-Allow-Credentials"] = "true"
                 response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,PATCH,DELETE,OPTIONS"
                 response.headers["Access-Control-Allow-Headers"] = "Authorization,Content-Type,ngrok-skip-browser-warning"
                 response.headers["Access-Control-Max-Age"] = "86400"
                 response.headers["Vary"] = "Origin"
-                logger.info(f"✅ CORS headers added - Origin: {origin}, Path: {path}, Method: {method}")
+                logger.info(f"✅ CORS headers added - Origin: {origin}, Path: {path}, Method: {method}, Status: {response.status_code}")
             else:
                 logger.warning(f"❌ CORS rejected - Origin: {origin}, Path: {path}, Method: {method}")
         else:
@@ -229,19 +240,21 @@ async def custom_cors_middleware(request: Request, call_next):
         
     except Exception as e:
         logger.error(f"❌ CORS middleware EXCEPTION: {e}", exc_info=True)
-        # Try to process request even if middleware has error
-        try:
-            response = await call_next(request)
-        except Exception as inner_e:
-            logger.error(f"❌ Error processing request after CORS error: {inner_e}")
-            response = Response(status_code=500, content="Internal server error")
+        # Create error response with CORS headers
+        response = Response(
+            status_code=500,
+            content='{"detail": "Internal server error"}',
+            media_type="application/json"
+        )
         
-        # Try to add CORS headers even after error
+        # CRITICAL: Always add CORS headers for allowed origins, even on middleware errors
         if origin and is_allowed_origin(origin):
             response.headers["Access-Control-Allow-Origin"] = origin
             response.headers["Access-Control-Allow-Credentials"] = "true"
             response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,PATCH,DELETE,OPTIONS"
-            logger.info(f"✅ CORS headers added after error - Origin: {origin}")
+            response.headers["Access-Control-Allow-Headers"] = "Authorization,Content-Type,ngrok-skip-browser-warning"
+            response.headers["Vary"] = "Origin"
+            logger.info(f"✅ CORS headers added after middleware error - Origin: {origin}")
         
         return response
 
@@ -335,9 +348,23 @@ async def search_colleges(q: str = "", limit: int = 20):
         try:
             college_df = real_college_suggestions.college_df
             if college_df is None or getattr(college_df, 'empty', False):
-                # Fallback to CSV path relative to this module
-                csv_path = os.path.join(os.path.dirname(__file__), 'data', 'raw', 'real_colleges_integrated.csv')
-                college_df = pd.read_csv(csv_path)
+                # Fallback to CSV path - try multiple locations
+                possible_paths = [
+                    os.path.join(os.path.dirname(__file__), 'data', 'raw', 'real_colleges_integrated.csv'),  # Relative to main.py
+                    os.path.join(os.getcwd(), 'backend', 'data', 'raw', 'real_colleges_integrated.csv'),  # From project root
+                    'data/raw/real_colleges_integrated.csv',  # Relative to current working directory
+                ]
+                
+                csv_path = None
+                for path in possible_paths:
+                    if os.path.exists(path):
+                        csv_path = path
+                        break
+                
+                if csv_path:
+                    college_df = pd.read_csv(csv_path)
+                else:
+                    logger.warning(f"Could not find real_colleges_integrated.csv. Tried: {possible_paths}")
         except Exception as e:
             logger.error(f"Error loading college data: {e}")
             return {
@@ -646,8 +673,24 @@ def get_college_data(college_name: str) -> Dict[str, Any]:
     
     # Load the integrated college data
     try:
-        df = pd.read_csv('data/raw/real_colleges_integrated.csv')
-        logger.info(f"Loaded college data: {df.shape}")
+        # Try multiple possible paths
+        possible_paths = [
+            os.path.join(os.path.dirname(__file__), 'data', 'raw', 'real_colleges_integrated.csv'),  # Relative to main.py
+            'data/raw/real_colleges_integrated.csv',  # Relative to current working directory
+            os.path.join(os.getcwd(), 'backend', 'data', 'raw', 'real_colleges_integrated.csv'),  # From project root
+        ]
+        
+        csv_path = None
+        for path in possible_paths:
+            if os.path.exists(path):
+                csv_path = path
+                break
+        
+        if csv_path:
+            df = pd.read_csv(csv_path)
+            logger.info(f"Loaded college data: {df.shape} from {csv_path}")
+        else:
+            raise FileNotFoundError(f"Could not find real_colleges_integrated.csv. Tried: {possible_paths}")
         
         # Check if the input is a college ID (format: college_XXXXXX)
         college_row = None

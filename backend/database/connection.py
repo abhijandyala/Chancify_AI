@@ -41,22 +41,27 @@ except Exception as e:
     SessionLocal = None
 
 
-def get_db() -> Generator[Session, None, None]:
+def get_db() -> Generator[Optional[Session], None, None]:
     """
     Dependency to get database session.
     
     Yields:
-        Session: SQLAlchemy database session
+        Optional[Session]: SQLAlchemy database session, or None if database unavailable
     """
     if SessionLocal is None:
-        logger.error("Database not initialized")
-        raise RuntimeError("Database connection not available")
+        logger.error("Database not initialized, returning None for session.")
+        yield None
+        return
     
     db = SessionLocal()
     try:
         yield db
+    except Exception as e:
+        logger.error(f"Database session error: {e}", exc_info=True)
+        yield None
     finally:
-        db.close()
+        if db:
+            db.close()
 
 
 def get_supabase() -> Client:

@@ -20,6 +20,8 @@ class Settings(BaseSettings):
     supabase_service_key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3dnFmZWxscmh4em5lc2FpZndlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MDI3NTY2NCwiZXhwIjoyMDc1ODUxNjY0fQ.zVtdMf9Z5gklqfmkjUdMeALE3AGqVlGz1efoNHqSiK4"
     
     # Database - Railway PostgreSQL
+    # IMPORTANT: Use DATABASE_PUBLIC_URL for local development (works from your PC)
+    # Use DATABASE_URL (postgres.railway.internal) only when deployed on Railway
     database_url: str = "postgresql://postgres:aLrUyIYMFZrWalrETCKLmhHN1TKCyfvU@shuttle.proxy.rlwy.net:22500/railway"
     
     # API Configuration
@@ -37,6 +39,9 @@ class Settings(BaseSettings):
     
     # ML Model Path
     ml_model_path: str = "../models/trained/"
+    
+    # OpenAI Configuration
+    openai_api_key: str = "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"
     
     class Config:
         env_file = ".env"
