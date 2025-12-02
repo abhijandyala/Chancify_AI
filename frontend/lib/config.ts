@@ -1,5 +1,8 @@
 export type HeaderMap = Record<string, string>
 
+// PRIMARY: Use ngrok URL for backend (user's requirement)
+// FALLBACK: localhost for local development only
+const NGROK_API_URL = 'https://unsmug-untensely-elroy.ngrok-free.dev'
 const DEFAULT_API_URL = 'http://localhost:8000'
 
 declare global {
@@ -41,7 +44,12 @@ function resolveRuntimeOverride(): string | undefined {
 }
 
 export function getApiBaseUrl(): string {
-  return resolveRuntimeOverride() || resolveEnvApiUrl() || DEFAULT_API_URL
+  // Priority order:
+  // 1. Runtime override (window.__CHANCIFY_API_URL__ or localStorage)
+  // 2. Environment variable (NEXT_PUBLIC_API_URL)
+  // 3. Ngrok URL (PRIMARY - user's requirement)
+  // 4. Localhost (FALLBACK only)
+  return resolveRuntimeOverride() || resolveEnvApiUrl() || NGROK_API_URL || DEFAULT_API_URL
 }
 
 export function withNgrokHeaders(
