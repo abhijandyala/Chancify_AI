@@ -17,7 +17,8 @@
       "pythonVersion": "3.11",
       "pythonPlatform": "All",
       "extraPaths": [
-        "backend"
+        "backend",
+        "${workspaceFolder}/backend"
       ]
     }
   ],
