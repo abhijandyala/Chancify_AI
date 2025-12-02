@@ -6,11 +6,11 @@
     "**/__pycache__",
     "**/node_modules",
     "**/.next",
-    "**/venv",
-    "**/.venv",
     "**/env",
     "**/.env"
   ],
+  "venvPath": ".",
+  "venv": ".venv",
   "executionEnvironments": [
     {
       "root": "backend",
@@ -18,7 +18,8 @@
       "pythonPlatform": "All",
       "extraPaths": [
         "backend"
-      ]
+      ],
+      "pythonPlatform": "All"
     }
   ],
   "typeCheckingMode": "basic",

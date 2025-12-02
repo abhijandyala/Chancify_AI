@@ -3,7 +3,6 @@ Configuration settings for Chancify AI backend.
 """
 
 import os
-from typing import Optional
 try:
     from pydantic_settings import BaseSettings  # type: ignore
 except ImportError:

@@ -7,11 +7,9 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from database import get_db, College, UserProfile, AcademicData, Extracurricular
 from database.schemas import (
-    FactorScoresRequest,
     BatchCalculationRequest,
     CalculationResponse,
     BatchCalculationResponse,
-    ProbabilityCalculationCreate,
     ProbabilityCalculationResponse
 )
 from api.dependencies import get_current_user_profile
@@ -304,7 +302,7 @@ async def calculate_batch_probabilities(
                 db=db
             )
             results.append(result)
-        except HTTPException as e:
+        except HTTPException:
             # Skip colleges that cause errors, log them
             continue
     
