@@ -53,9 +53,9 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 # Copy static assets
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-# Copy public directory (Next.js standalone build should include public assets in .next/standalone)
-# If public directory exists in builder, copy it; otherwise create empty directory
-RUN mkdir -p ./public
+# Copy public directory explicitly (Next.js standalone should include it, but copy explicitly for safety)
+# The public directory should exist since we copied the entire frontend directory in builder stage
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 
 # Verify standalone build exists and show directory structure if it fails
 RUN if [ ! -f server.js ]; then \
@@ -71,7 +71,10 @@ USER nextjs
 
 EXPOSE 3000
 
+# Railway sets PORT automatically via environment variable
+# Next.js standalone server will use PORT env var if set, otherwise defaults to 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["node", "server.js"]
+# Next.js standalone server automatically uses PORT environment variable
+CMD node server.js
