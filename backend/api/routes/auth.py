@@ -2,7 +2,7 @@
 Authentication routes for user signup, login, and profile management.
 """
 
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from database import get_db, get_supabase, UserProfile, AcademicData, Extracurricular, SavedCollege
@@ -15,7 +15,7 @@ from database.schemas import (
     Token,
     CompleteProfileResponse
 )
-from api.dependencies import get_current_user_profile
+from api.dependencies import get_current_user_profile, get_optional_user_profile
 
 router = APIRouter()
 
@@ -240,11 +240,16 @@ async def logout():
     return {"message": "Logged out successfully"}
 
 
-@router.get("/me", response_model=CompleteProfileResponse)
+@router.get("/me")
 async def get_current_user(
-    current_user: UserProfile = Depends(get_current_user_profile)
+    current_user: Optional[UserProfile] = Depends(get_optional_user_profile)
 ):
     """
     Get current user's complete profile.
+    Returns user data if authenticated, or null if not authenticated.
     """
-    return current_user
+    if current_user is None:
+        return {"detail": "Not authenticated", "authenticated": False}
+    
+    from database.schemas import CompleteProfileResponse
+    return CompleteProfileResponse.from_orm(current_user)
