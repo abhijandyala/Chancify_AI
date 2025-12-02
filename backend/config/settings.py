@@ -4,7 +4,11 @@ Configuration settings for Chancify AI backend.
 
 import os
 from typing import Optional
-from pydantic_settings import BaseSettings
+try:
+    from pydantic_settings import BaseSettings  # type: ignore
+except ImportError:
+    # Fallback for older pydantic versions
+    from pydantic import BaseSettings  # type: ignore
 
 
 class Settings(BaseSettings):
@@ -15,8 +19,8 @@ class Settings(BaseSettings):
     supabase_anon_key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3dnFmZWxscmh4em5lc2FpZndlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAyNzU2NjQsImV4cCI6MjA3NTg1MTY2NH0.TBYg6XEy1cmsPePkT2Q5tSSDcEqi0AWNCTt7pGT2ZBc"
     supabase_service_key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3dnFmZWxscmh4em5lc2FpZndlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MDI3NTY2NCwiZXhwIjoyMDc1ODUxNjY0fQ.zVtdMf9Z5gklqfmkjUdMeALE3AGqVlGz1efoNHqSiK4"
     
-    # Database
-    database_url: str = "postgresql://postgres:Chanifcy123%23%40%21@db.vwvqfellrhxznesaifwe.supabase.co:5432/postgres"
+    # Database - Railway PostgreSQL
+    database_url: str = "postgresql://postgres:aLrUyIYMFZrWalrETCKLmhHN1TKCyfvU@shuttle.proxy.rlwy.net:22500/railway"
     
     # API Configuration
     api_host: str = "0.0.0.0"

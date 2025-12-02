@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getApiBaseUrl } from '@/lib/config'
+import { getApiBaseUrl, withNgrokHeaders } from '@/lib/config'
 
 export async function POST(request: NextRequest) {
   try {
@@ -8,38 +8,48 @@ export async function POST(request: NextRequest) {
     // Forward the request to the Python backend
     // Use getApiBaseUrl() which prioritizes ngrok URL (PRIMARY), localhost (FALLBACK)
     const backendUrl = getApiBaseUrl()
-    const response = await fetch(`${backendUrl}/predict`, {
+    
+    // CRITICAL: Use the correct endpoint that uses ML models
+    // This endpoint is /api/predict/frontend, not /predict
+    const headers = withNgrokHeaders(backendUrl, {
+      'Content-Type': 'application/json',
+    })
+    
+    const response = await fetch(`${backendUrl}/api/predict/frontend`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers,
       body: JSON.stringify(body),
     })
     
     if (!response.ok) {
+      const errorText = await response.text()
+      console.error(`Backend error (${response.status}):`, errorText)
       throw new Error(`Backend responded with status: ${response.status}`)
     }
     
     const result = await response.json()
+    
+    // Verify ML models are being used
+    if (result.model_used === 'formula_only' || result.prediction_method === 'deterministic_fallback') {
+      console.warn('⚠️ WARNING: Backend returned fallback prediction. ML models may not be loaded.')
+    }
     
     return NextResponse.json(result)
     
   } catch (error) {
     console.error('Error in predict API route:', error)
     
-    // Return a mock response for development
-    const mockResult = {
-      probability: Math.random() * 0.4 + 0.3, // Random between 0.3 and 0.7
-      outcome: Math.random() > 0.5 ? 'Acceptance' : 'Waitlist',
-      confidence: 0.85,
-      factors: {
-        academic_strength: 0.8,
-        extracurricular_impact: 0.7,
-        essay_quality: 0.6,
-        recommendations: 0.75
-      }
-    }
-    
-    return NextResponse.json(mockResult)
+    // Return error response instead of mock - let frontend handle it
+    return NextResponse.json(
+      {
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error',
+        message: 'Failed to get prediction from backend',
+        probability: 0,
+        outcome: 'Error',
+        // Don't return mock data - this causes fallback issues
+      },
+      { status: 500 }
+    )
   }
 }
