@@ -1,0 +1,60 @@
+# ============================================================================
+# COPY AND PASTE THESE COMMANDS INTO YOUR MACBOOK TERMINAL
+# Run them ONE AT A TIME, wait for each to finish before running the next
+# ============================================================================
+
+# Step 1: Navigate to your project folder
+cd ~/Desktop/Chancify_AI
+
+# Step 2: Pull latest code from GitHub
+git pull origin main
+
+# Step 3: Remove old virtual environment (if it exists)
+rm -rf .venv
+
+# Step 4: Create new Mac-compatible virtual environment
+python3 -m venv .venv
+
+# Step 5: Activate the virtual environment
+source .venv/bin/activate
+
+# Step 6: Upgrade pip to latest version
+pip install --upgrade pip
+
+# Step 7: Install essential requirements (fastapi, sqlalchemy, pandas, etc.)
+pip install -r backend/requirements-essential.txt
+
+# Step 8: Install full requirements (includes ML libraries, dev tools)
+pip install -r backend/requirements.txt
+
+# Step 9: Verify packages are installed (should see success message)
+python -c "import fastapi; import sqlalchemy; import pandas; import numpy; import sklearn; print('✅ All essential packages installed successfully!')"
+
+# Step 10: Verify more packages
+python -c "import pydantic; import supabase; import uvicorn; print('✅ All web framework packages installed!')"
+
+# Step 11: Verify ML packages
+python -c "import xgboost; import lightgbm; print('✅ All ML packages installed!')" 2>/dev/null || echo "⚠️  Some ML packages may not be installed (this is okay)"
+
+# Step 12: Show installed packages (verify everything)
+pip list
+
+# ============================================================================
+# DONE! Now open Cursor and configure it:
+# ============================================================================
+# 
+# 1. Open Cursor:
+#    code .
+#
+# 2. Select Python Interpreter:
+#    - Press Cmd + Shift + P
+#    - Type: "Python: Select Interpreter"
+#    - Choose: ".venv/bin/python"
+#
+# 3. Reload Window:
+#    - Press Cmd + Shift + P
+#    - Type: "Reload Window"
+#
+# 4. Check Problems Panel - should see < 50 errors instead of 406!
+# ============================================================================
+
