@@ -17,11 +17,15 @@
       "pythonVersion": "3.11",
       "pythonPlatform": "All",
       "extraPaths": [
-        "backend"
-      ],
-      "pythonPlatform": "All"
+        "backend",
+        ".venv/Lib/site-packages",
+        ".venv/lib/python3.11/site-packages"
+      ]
     }
   ],
+  "pythonVersion": "3.11",
+  "pythonPlatform": "All",
+  "reportMissingImports": "warning"
   "typeCheckingMode": "basic",
   "reportMissingImports": true,
   "reportMissingTypeStubs": false,

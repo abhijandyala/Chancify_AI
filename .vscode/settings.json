@@ -1,9 +1,15 @@
 {
-  // Python settings
+  // Python settings - cross-platform compatible
   "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
   "python.analysis.typeCheckingMode": "basic",
   "python.analysis.autoImportCompletions": true,
   "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/backend"
+  ],
+  
+  // Pyright settings - ensure it finds venv on both Windows and Mac
+  "pyrightconfig.json": "${workspaceFolder}/pyrightconfig.json",
   
   // Editor settings - consistent across platforms
   "files.eol": "\n",
@@ -26,8 +32,8 @@
     "**/*.pyc": true,
     "**/.pytest_cache": true,
     "**/.mypy_cache": true,
-    "**/.venv": true,
-    "**/venv": true,
+    "**/.venv": false,
+    "**/venv": false,
     "**/node_modules": true,
     "**/.next": true
   },
@@ -37,9 +43,7 @@
     "**/__pycache__": true,
     "**/*.pyc": true,
     "**/node_modules": true,
-    "**/.next": true,
-    "**/venv": true,
-    "**/.venv": true
+    "**/.next": true
   },
   
   // Python formatting
