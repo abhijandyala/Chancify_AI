@@ -47,7 +47,7 @@ ruff==0.1.14
 mypy==1.8.0
 
 # API Documentation
-pydantic[email]==2.5.3
+# Note: pydantic[email] features are included in pydantic==2.12.2 above
 
 # OpenAI Integration
 openai>=1.0.0
