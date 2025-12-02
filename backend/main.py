@@ -146,107 +146,109 @@ def is_allowed_origin(origin: str) -> bool:
 @app.middleware("http")
 async def custom_cors_middleware(request: Request, call_next):
     """
-    Ensure CORS headers are present for allowed origins (ngrok + Railway).
+    CORS middleware - handles ALL CORS requests including preflight OPTIONS.
     
-    FastAPI's default CORSMiddleware sometimes skips OPTIONS responses when
-    tunneling through ngrok, so we enforce the headers explicitly while still
-    delegating to the built-in middleware for everything else.
-    
-    CRITICAL: This middleware MUST run first to handle OPTIONS preflight requests.
+    CRITICAL: This is the ONLY CORS middleware - FastAPI's CORSMiddleware was removed
+    to prevent conflicts. This middleware handles:
+    - OPTIONS preflight requests
+    - Actual API requests
+    - Exact origin matches
+    - Suffix-based origin matches (.railway.app, .ngrok-free.dev)
     """
+    origin = request.headers.get("origin")
+    method = request.method
+    path = request.url.path
+    
+    # Log all CORS-related requests for debugging
+    if origin or method == "OPTIONS":
+        logger.info(f"🌐 CORS request - Method: {method}, Origin: {origin}, Path: {path}")
+    
     try:
-        origin = request.headers.get("origin")
-        
-        # Handle preflight OPTIONS requests
-        if request.method == "OPTIONS":
-            # Always check origin first
+        # Handle preflight OPTIONS requests FIRST
+        if method == "OPTIONS":
             if not origin:
-                logger.warning(f"OPTIONS request with no origin header - Path: {request.url.path}")
-                # Return 204 with minimal CORS headers to avoid breaking browsers
+                logger.warning(f"⚠️ OPTIONS request with no origin header - Path: {path}")
+                # Return 204 with basic CORS headers
                 response = Response(status_code=204)
                 response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,PATCH,DELETE,OPTIONS"
+                response.headers["Access-Control-Allow-Headers"] = "Authorization,Content-Type,ngrok-skip-browser-warning"
                 return response
             
             # Check if origin is allowed
             origin_allowed = is_allowed_origin(origin)
-            logger.info(f"🔍 OPTIONS preflight - Origin: {origin}, Path: {request.url.path}, Allowed: {origin_allowed}")
+            logger.info(f"🔍 OPTIONS preflight check - Origin: {origin}, Allowed: {origin_allowed}")
             
             if origin_allowed:
+                # Create response with ALL required CORS headers
                 response = Response(status_code=204)
                 response.headers["Access-Control-Allow-Origin"] = origin
                 response.headers["Access-Control-Allow-Credentials"] = "true"
                 response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,PATCH,DELETE,OPTIONS"
-                # Get requested headers from Access-Control-Request-Headers
+                
+                # Handle requested headers
                 requested_headers = request.headers.get("access-control-request-headers", "")
-                # Always allow these headers, plus any requested ones
                 allowed_headers = "Authorization,Content-Type,ngrok-skip-browser-warning"
                 if requested_headers:
-                    # Add requested headers if they're safe
                     allowed_headers = f"{allowed_headers},{requested_headers}"
                 response.headers["Access-Control-Allow-Headers"] = allowed_headers
                 response.headers["Access-Control-Max-Age"] = "86400"
                 response.headers["Vary"] = "Origin"
-                logger.info(f"✅ CORS preflight ALLOWED - Origin: {origin}, Path: {request.url.path}")
+                
+                logger.info(f"✅ CORS preflight ALLOWED - Origin: {origin}, Path: {path}, Headers: {allowed_headers}")
                 return response
             else:
-                # Origin not allowed - log for debugging
-                logger.warning(f"❌ CORS preflight REJECTED - Origin: {origin}, Path: {request.url.path}")
+                # Origin not allowed
+                logger.warning(f"❌ CORS preflight REJECTED - Origin: {origin}, Path: {path}")
                 logger.warning(f"   Allowed origins: {allowed_origins}")
                 logger.warning(f"   Allowed suffixes: {allowed_origin_suffixes}")
-                # Still return 204 but without CORS headers - browser will reject
-                response = Response(status_code=204)
-                return response
+                # Return 204 without CORS headers - browser will block
+                return Response(status_code=204)
         
-        # Handle actual requests (non-OPTIONS)
+        # Handle actual requests (GET, POST, etc.)
         response = await call_next(request)
         
-        # Add CORS headers to response if origin is allowed
+        # Add CORS headers to ALL responses if origin is allowed
         if origin:
             origin_allowed = is_allowed_origin(origin)
             if origin_allowed:
+                # Add ALL required CORS headers
                 response.headers["Access-Control-Allow-Origin"] = origin
                 response.headers["Access-Control-Allow-Credentials"] = "true"
                 response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,PATCH,DELETE,OPTIONS"
-                response.headers["Access-Control-Allow-Headers"] = (
-                    "Authorization,Content-Type,ngrok-skip-browser-warning"
-                )
+                response.headers["Access-Control-Allow-Headers"] = "Authorization,Content-Type,ngrok-skip-browser-warning"
                 response.headers["Access-Control-Max-Age"] = "86400"
                 response.headers["Vary"] = "Origin"
-                logger.debug(f"✅ CORS headers added for origin: {origin}, path: {request.url.path}")
+                logger.info(f"✅ CORS headers added - Origin: {origin}, Path: {path}, Method: {method}")
             else:
-                # Log rejected origins for debugging (but don't block the request)
-                logger.warning(f"❌ CORS rejected for origin: {origin}, path: {request.url.path}, method: {request.method}")
+                logger.warning(f"❌ CORS rejected - Origin: {origin}, Path: {path}, Method: {method}")
         else:
-            # No origin header - might be same-origin request, which is fine
-            logger.debug(f"Request with no origin header - Path: {request.url.path}, Method: {request.method}")
+            # No origin - might be same-origin or direct request
+            logger.debug(f"Request without origin header - Path: {path}, Method: {method}")
         
         return response
+        
     except Exception as e:
-        logger.error(f"❌ CORS middleware error: {e}", exc_info=True)
-        # If middleware fails, still try to process request but log error
-        response = await call_next(request)
-        # Try to add CORS headers even if there was an error
-        origin = request.headers.get("origin")
+        logger.error(f"❌ CORS middleware EXCEPTION: {e}", exc_info=True)
+        # Try to process request even if middleware has error
+        try:
+            response = await call_next(request)
+        except Exception as inner_e:
+            logger.error(f"❌ Error processing request after CORS error: {inner_e}")
+            response = Response(status_code=500, content="Internal server error")
+        
+        # Try to add CORS headers even after error
         if origin and is_allowed_origin(origin):
             response.headers["Access-Control-Allow-Origin"] = origin
             response.headers["Access-Control-Allow-Credentials"] = "true"
+            response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,PATCH,DELETE,OPTIONS"
+            logger.info(f"✅ CORS headers added after error - Origin: {origin}")
+        
         return response
 
-# Add FastAPI CORSMiddleware - it will handle CORS for exact origin matches
-# Our custom middleware handles suffix-based matching (.railway.app, .ngrok-free.dev)
-# and ensures OPTIONS requests are handled correctly
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=allowed_origins,  # Exact matches
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=[
-        "*",
-        "Authorization",
-        "Content-Type",
-        "ngrok-skip-browser-warning",
-    ],
-)
+# REMOVED FastAPI CORSMiddleware - using ONLY custom middleware
+# FastAPI's CORSMiddleware was interfering with our custom CORS handling
+# Our custom middleware handles ALL CORS including exact matches and suffix-based matching
+# This ensures OPTIONS preflight requests are handled correctly with proper headers
 
 # Create database tables on startup
 @app.on_event("startup")
