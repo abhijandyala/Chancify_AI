@@ -10,8 +10,8 @@ import numpy as np
 import pandas as pd
 from typing import Dict, Any
 from fastapi import FastAPI, Request
-from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import Response
+# CORSMiddleware import removed - using ONLY custom middleware
 from config import settings
 from database import create_tables
 from data.real_ipeds_major_mapping import get_colleges_for_major, get_major_strength_score, get_major_relevance_info
