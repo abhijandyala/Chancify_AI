@@ -1,28 +1,70 @@
 {
-    "python.defaultInterpreterPath": "C:\\Users\\abhij\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
-    "python.terminal.activateEnvironment": true,
-    "python.analysis.autoImportCompletions": true,
-    "python.analysis.typeCheckingMode": "basic",
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
-    "python.formatting.provider": "black",
-    "python.analysis.extraPaths": [
-        "./backend",
-        "./backend/config",
-        "./backend/database",
-        "./backend/api",
-        "./backend/core",
-        "./backend/ml"
-    ],
-    "python.analysis.autoSearchPaths": true,
-    "python.analysis.diagnosticMode": "workspace",
-    "python.analysis.stubPath": "./backend",
-    "python.analysis.include": [
-        "./backend/**"
-    ],
-    "python.analysis.exclude": [
-        "**/node_modules",
-        "**/__pycache__"
-    ]
+  // Python settings
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.diagnosticMode": "workspace",
+  
+  // Editor settings - consistent across platforms
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "files.encoding": "utf8",
+  
+  // TypeScript/JavaScript settings
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "javascript.preferences.importModuleSpecifier": "relative",
+  
+  // File associations
+  "files.associations": {
+    "*.py": "python"
+  },
+  
+  // Exclude patterns
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "**/.pytest_cache": true,
+    "**/.mypy_cache": true,
+    "**/.venv": true,
+    "**/venv": true,
+    "**/node_modules": true,
+    "**/.next": true
+  },
+  
+  // Search exclude
+  "search.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/venv": true,
+    "**/.venv": true
+  },
+  
+  // Python formatting
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "editor.rulers": [88]
+  },
+  
+  // TypeScript/JavaScript formatting
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  
+  // JSON formatting
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  }
 }
