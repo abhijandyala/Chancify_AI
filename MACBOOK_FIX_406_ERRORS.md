@@ -52,7 +52,7 @@ pip install -r backend/requirements-essential.txt
 ```
 **This is the most important step!** It installs:
 - fastapi
-- sqlalchemy  
+- sqlalchemy
 - pandas
 - numpy
 - scikit-learn
