@@ -77,4 +77,5 @@ ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
 # Next.js standalone server automatically uses PORT environment variable
-CMD node server.js
+# Using JSON format for CMD to prevent signal handling issues
+CMD ["node", "server.js"]

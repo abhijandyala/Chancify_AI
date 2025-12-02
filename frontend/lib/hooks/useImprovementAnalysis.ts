@@ -142,12 +142,18 @@ export const useImprovementAnalysis = (collegeName: string | null, userProfile: 
     }
 
     // Both inputs are valid - fetch the data
-    fetchImprovementAnalysis(collegeName, userProfile)
+    // validation.trimmedCollegeName is guaranteed to be a string when validation.valid is true
+    if (validation.trimmedCollegeName) {
+      fetchImprovementAnalysis(validation.trimmedCollegeName, userProfile)
+    }
   }, [collegeName, userProfile, fetchImprovementAnalysis])
 
   // Refetch function that can be called manually
   const refetch = useCallback(() => {
-    fetchImprovementAnalysis(collegeName, userProfile)
+    const validation = isValidInput(collegeName, userProfile)
+    if (validation.valid && validation.trimmedCollegeName) {
+      fetchImprovementAnalysis(validation.trimmedCollegeName, userProfile)
+    }
   }, [collegeName, userProfile, fetchImprovementAnalysis])
 
   return { improvementData, loading, error, refetch }
