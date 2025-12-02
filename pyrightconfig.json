@@ -1,0 +1,45 @@
+{
+  "include": [
+    "backend"
+  ],
+  "exclude": [
+    "**/__pycache__",
+    "**/node_modules",
+    "**/.next",
+    "**/venv",
+    "**/.venv",
+    "**/env",
+    "**/.env"
+  ],
+  "executionEnvironments": [
+    {
+      "root": "backend",
+      "pythonVersion": "3.11",
+      "pythonPlatform": "All",
+      "extraPaths": [
+        "backend"
+      ]
+    }
+  ],
+  "typeCheckingMode": "basic",
+  "reportMissingImports": true,
+  "reportMissingTypeStubs": false,
+  "reportUnusedImport": "warning",
+  "reportUnusedClass": "warning",
+  "reportUnusedFunction": "warning",
+  "reportUnusedVariable": "warning",
+  "reportDuplicateImport": "warning",
+  "reportOptionalSubscript": "warning",
+  "reportOptionalMemberAccess": "warning",
+  "reportOptionalCall": "warning",
+  "reportOptionalIterable": "warning",
+  "reportOptionalContextManager": "warning",
+  "reportOptionalOperand": "warning",
+  "reportGeneralTypeIssues": "warning",
+  "reportPrivateImportUsage": "warning",
+  "reportConstantRedefinition": "warning",
+  "reportIncompatibleMethodOverride": "warning",
+  "reportIncompatibleVariableOverride": "warning",
+  "reportOverlappingOverload": "error"
+}
+
