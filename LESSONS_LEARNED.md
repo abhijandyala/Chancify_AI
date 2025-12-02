@@ -8,9 +8,21 @@
 **Fix:** Fixed TypeScript type mismatch in `useImprovementAnalysis.ts` first, then Dockerfile CMD format
 
 ### 2. Set Timeouts on Commands That Might Hang
-**Mistake:** Used `curl` or commands without timeouts, causing tool calls to hang  
-**Lesson:** Always add timeouts or use alternative methods for checking services  
-**Fix:** Use `timeout` command or check if service is already running before attempting operations
+**Mistake:** Used `curl` or commands without timeouts, causing tool calls to hang infinitely  
+**Lesson:** Always add timeouts to ALL commands - never run commands without timeouts  
+**Fix:** Use `timeout /t <seconds> >nul 2>&1 && <command>` pattern for Windows  
+**Pattern:**
+```cmd
+# Quick checks: 1-2 seconds
+timeout /t 2 >nul 2>&1 && netstat -ano | findstr :8000
+
+# Network requests: 5-10 seconds  
+timeout /t 5 >nul 2>&1 && <network-command>
+
+# PowerShell with timeout
+powershell -Command "Invoke-WebRequest -Uri '<url>' -TimeoutSec 10"
+```
+**Rule:** Every command MUST have a timeout - no exceptions!
 
 ### 3. Ngrok URL is PRIMARY, Not Fallback
 **Mistake:** Used localhost as primary backend URL  
@@ -95,9 +107,11 @@ const headers = withNgrokHeaders(API_BASE_URL, {
 1. **Ngrok is PRIMARY** - Always use ngrok URL as primary backend URL
 2. **Localhost is FALLBACK** - Only use localhost for local development
 3. **Check actual errors first** - Read build logs, don't assume
-4. **Set command timeouts** - Prevent hanging commands
-5. **OAuth must work** - Ensure OAuth works with ngrok URL changes
-6. **Use getApiBaseUrl()** - All API calls should use this function for consistency
+4. **ALWAYS set command timeouts** - Every command MUST have timeout, no exceptions
+5. **CORS middleware needs error handling** - Wrap in try-catch to prevent breaking CORS
+6. **OAuth must work** - Ensure OAuth works with ngrok URL changes
+7. **Use getApiBaseUrl()** - All API calls should use this function for consistency
+8. **Backend must be running** - CORS only works if backend is active
 
 ## 🔄 When Ngrok URL Changes
 
