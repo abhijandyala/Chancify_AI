@@ -25,9 +25,8 @@
   ],
   "pythonVersion": "3.11",
   "pythonPlatform": "All",
-  "reportMissingImports": "warning"
   "typeCheckingMode": "basic",
-  "reportMissingImports": true,
+  "reportMissingImports": "warning",
   "reportMissingTypeStubs": false,
   "reportUnusedImport": "warning",
   "reportUnusedClass": "warning",
