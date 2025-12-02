@@ -1,0 +1,44 @@
+# ============================================================================
+# INSTALL HOMEBREW AND PYTHON 3.11 ON MACBOOK
+# Copy and paste these commands ONE AT A TIME
+# ============================================================================
+
+# STEP 1: Install Homebrew (takes 5-10 minutes)
+# Copy this ENTIRE line and paste into terminal:
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# After Homebrew installs, it will show you commands to run.
+# Usually you need to run these (copy-paste what the installer tells you):
+# For Apple Silicon Macs (M1/M2/M3):
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# For Intel Macs:
+# echo 'eval "$(/usr/local/bin/brew shellenv)"' >> ~/.zprofile
+# eval "$(/usr/local/bin/brew shellenv)"
+
+# STEP 2: Verify Homebrew works
+brew --version
+
+# STEP 3: Install Python 3.11
+brew install python@3.11
+
+# STEP 4: Verify Python 3.11 is installed
+python3.11 --version
+
+# STEP 5: Now you can proceed with the main installation
+# Go back to COPY_PASTE_MAC_COMMANDS.txt and use python3.11 instead of python3
+# OR create an alias:
+alias python3=python3.11
+
+# ============================================================================
+# AFTER THIS, CONTINUE WITH THE MAIN INSTALLATION:
+# ============================================================================
+# cd ~/Desktop/Chancify_AI
+# python3.11 -m venv .venv
+# source .venv/bin/activate
+# pip install --upgrade pip
+# pip install -r backend/requirements-essential.txt
+# pip install -r backend/requirements.txt
+# ============================================================================
+

@@ -15,9 +15,13 @@ That's it! The script will:
 
 ## 📋 What You Need
 
-1. **Python 3.11+** installed
+1. **Homebrew** (package manager for Mac)
+   - Check: `brew --version`
+   - If missing, install it first (see below)
+
+2. **Python 3.11+** installed
    - Check: `python3 --version`
-   - If missing: `brew install python@3.11`
+   - If you have Python 3.9 or 3.10, you need to upgrade (see below)
 
 2. **Terminal** (built into Mac)
 
@@ -46,9 +50,45 @@ code .
 
 ## 🐛 Troubleshooting
 
-### "command not found: python3"
+### "command not found: brew" (Homebrew not installed)
+
+**Install Homebrew first:**
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+This will take 5-10 minutes. Follow the prompts and enter your Mac password when asked.
+
+After installation, you may need to add Homebrew to your PATH. The installer will tell you what to do, but usually it's:
+```bash
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+```
+
+Then verify it works:
+```bash
+brew --version
+```
+
+### "command not found: python3" or Python version is too old (3.9, 3.10)
+
+**If you have Python 3.9.6 (like you do), you need to install Python 3.11+:**
+
+First, make sure Homebrew is installed (see above), then:
 ```bash
 brew install python@3.11
+```
+
+After installation, verify:
+```bash
+python3.11 --version
+```
+
+You should see: `Python 3.11.x`
+
+**Note:** You can use `python3.11` instead of `python3` in all commands, or create an alias:
+```bash
+alias python3=python3.11
 ```
 
 ### "pip: command not found"
