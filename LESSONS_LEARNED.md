@@ -1,5 +1,13 @@
 # Lessons Learned - Important Patterns to Remember
 
+> **⚠️ CRITICAL: Always check this file before making any changes or fixes!**
+> 
+> This file contains all the mistakes we've made and patterns we've learned.
+> Review relevant sections before starting any task to avoid repeating past mistakes.
+
+## 📖 Quick Reference
+See `QUICK_REFERENCE.md` for a condensed version of critical patterns.
+
 ## 🚨 Critical Mistakes to Avoid
 
 ### 1. Always Check Actual Build Errors First
