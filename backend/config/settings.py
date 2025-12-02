@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     # Database - Railway PostgreSQL
     # IMPORTANT: Use DATABASE_PUBLIC_URL for local development (works from your PC)
     # Use DATABASE_URL (postgres.railway.internal) only when deployed on Railway
-    database_url: str = "postgresql://postgres:aLrUyIYMFZrWalrETCKLmhHN1TKCyfvU@shuttle.proxy.rlwy.net:22500/railway"
+    database_url: str = "postgresql://postgres:aLrUyIYMFZrWalrETCKLmhHNlTKCyfvU@shuttle.proxy.rlwy.net:22500/railway"
     
     # API Configuration
     api_host: str = "0.0.0.0"
@@ -41,7 +41,8 @@ class Settings(BaseSettings):
     ml_model_path: str = "../models/trained/"
     
     # OpenAI Configuration
-    openai_api_key: str = "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"
+    # Load from environment variable (.env file) - never commit API keys to git
+    openai_api_key: str = os.getenv("OPENAI_API_KEY", "")
     
     class Config:
         env_file = ".env"
