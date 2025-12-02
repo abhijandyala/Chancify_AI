@@ -130,20 +130,26 @@ def get_optional_user_id(
 
 def get_optional_user_profile(
     credentials: Optional[HTTPAuthorizationCredentials] = Depends(optional_security),
-    db: Session = Depends(get_db)
+    db: Optional[Session] = Depends(get_db)
 ) -> Optional[UserProfile]:
     """
     Get current user's profile if authenticated, None otherwise.
     This allows endpoints to work with or without authentication.
+    Handles database errors gracefully.
     
     Args:
         credentials: Optional JWT token from Authorization header
-        db: Database session
+        db: Database session (may be None if database unavailable)
         
     Returns:
         Optional[UserProfile]: User's profile or None
     """
+    # If no credentials, return None (not authenticated)
     if credentials is None:
+        return None
+    
+    # If database is unavailable, return None
+    if db is None:
         return None
     
     token = credentials.credentials
@@ -175,5 +181,6 @@ def get_optional_user_profile(
     try:
         profile = db.query(UserProfile).filter(UserProfile.user_id == user_id).first()
         return profile
-    except:
+    except Exception:
+        # Database error - return None gracefully
         return None
