@@ -27,7 +27,6 @@
   "typeCheckingMode": "basic",
   "reportMissingImports": "warning",
   "reportMissingTypeStubs": false,
-  "reportMissingTypeStubs": false,
   "reportUnusedImport": "warning",
   "reportUnusedClass": "warning",
   "reportUnusedFunction": "warning",
