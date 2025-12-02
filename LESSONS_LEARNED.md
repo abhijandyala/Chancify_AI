@@ -39,36 +39,41 @@ powershell -Command "Invoke-WebRequest -Uri '<url>' -TimeoutSec 10"
 **Solution:** OAuth callback uses `getApiBaseUrl()` which automatically uses ngrok URL  
 **Pattern:** All API calls should use `getApiBaseUrl()` for consistency
 
-### 5. CORS Errors: Always Add Error Handling to Middleware
-**Problem:** CORS errors blocking frontend requests - "No 'Access-Control-Allow-Origin' header"  
+### 5. CORS Errors: NEVER Use Multiple CORS Middlewares
+**Problem:** CORS errors persisted - "No 'Access-Control-Allow-Origin' header"  
 **Root Cause:** 
-- Backend CORS middleware might throw exceptions, preventing CORS headers from being added
-- Middleware must handle OPTIONS preflight requests correctly
-- Backend must be running and middleware must execute properly
+- FastAPI's CORSMiddleware was conflicting with custom CORS middleware
+- FastAPI's middleware handled OPTIONS first, preventing custom middleware from running
+- FastAPI's middleware doesn't support suffix-based origin matching (`.railway.app`)
+- Multiple middlewares caused headers to not be added properly
 
 **Lesson:** 
-- CORS middleware MUST have try-catch to prevent exceptions from breaking CORS
-- Always log CORS decisions for debugging
-- Ensure CORS headers are added even if errors occur
-- Backend must be running for CORS to work
+- **NEVER use multiple CORS middlewares** - They conflict and break CORS
+- If using custom CORS middleware, REMOVE FastAPI's CORSMiddleware
+- Custom middleware must handle ALL CORS (OPTIONS preflight + actual requests)
+- FastAPI's CORSMiddleware only supports exact origin matches, not suffixes
+- Always use ONE CORS middleware solution
 
-**Fix:** Enhanced CORS middleware in `backend/main.py`:
-- Added try-catch block around entire middleware
-- Improved logging for debugging CORS issues
-- Ensured CORS headers are added when origin is allowed
-- Better error handling for edge cases
+**Fix:** 
+1. **Removed FastAPI's CORSMiddleware** - Was causing conflicts
+2. **Enhanced custom CORS middleware** - Now handles everything
+3. **Added comprehensive logging** - See all CORS decisions
+4. **Improved error handling** - Never fails silently
 
 **Pattern:**
 ```python
+# ❌ WRONG - Don't do this:
+app.add_middleware(CORSMiddleware, ...)  # FastAPI's
+@app.middleware("http")
+async def custom_cors_middleware(...):  # Custom
+    # They conflict!
+
+# ✅ CORRECT - Use ONLY one:
 @app.middleware("http")
 async def custom_cors_middleware(request: Request, call_next):
-    try:
-        # Handle OPTIONS preflight
-        # Add CORS headers
-        # Process request
-    except Exception as e:
-        # Log error but still try to add CORS headers
-        # Don't let middleware exceptions break CORS
+    # Handle ALL CORS here - OPTIONS and actual requests
+    # Support exact and suffix-based origin matching
+    # Always add CORS headers when origin is allowed
 ```
 
 ## ✅ Correct Patterns
