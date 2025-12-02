@@ -17,9 +17,7 @@
       "pythonVersion": "3.11",
       "pythonPlatform": "All",
       "extraPaths": [
-        "backend",
-        ".venv/Lib/site-packages",
-        ".venv/lib/python3.11/site-packages"
+        "backend"
       ]
     }
   ],
@@ -27,6 +25,7 @@
   "pythonPlatform": "All",
   "typeCheckingMode": "basic",
   "reportMissingImports": "warning",
+  "reportMissingTypeStubs": false,
   "reportMissingTypeStubs": false,
   "reportUnusedImport": "warning",
   "reportUnusedClass": "warning",
