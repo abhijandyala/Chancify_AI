@@ -14,7 +14,7 @@
 3. Add this content:
 
 ```
-OPENAI_API_KEY=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
+OPENAI_API_KEY=your-openai-api-key-here
 ```
 
 ## ✅ How It Works
